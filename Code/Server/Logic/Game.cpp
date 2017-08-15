@@ -122,6 +122,7 @@ void Game::Loop()
 	this->Update(nullptr);
 	this->Realse(nullptr);
 	this->Destroy(nullptr);
+	m_game_state = EGameState_Max;
 }
 
 void Game::Quit()
