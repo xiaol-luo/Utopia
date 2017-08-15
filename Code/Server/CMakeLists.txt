@@ -13,7 +13,6 @@ FUNCTION(SourceGroupByDir base_path file_paths prefix_source_group)
 		ENDIF(is_no_group)
 		string(REPLACE "/"  "\\" group_name "${group_name}")
 		SOURCE_GROUP("${prefix_source_group}\\${group_name}" FILES ${file_path})
-		MESSAGE(STATUS "${prefix_source_group}\\${group_name} => ${file_path}")
 	ENDFOREACH(file_path ${file_paths})
 ENDFUNCTION(SourceGroupByDir)
 
