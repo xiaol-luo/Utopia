@@ -32,7 +32,7 @@ SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 
-INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs)
+INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Logic)
 ADD_EXECUTABLE(${ProjectName} ${SourceFiles} "main.cpp")
 
 #SET_PROPERTIES(PROPERTIES FOLDER "examples")
