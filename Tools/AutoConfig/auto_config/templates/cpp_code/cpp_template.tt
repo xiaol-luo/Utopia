@@ -1,0 +1,104 @@
+#include "{{ head_file_path }}.h"
+#include "CsvParser/csv.h"
+
+namespace Config
+{
+{%- for  field in fields %}
+     static const char * {{ field.column_name_tag }} = "{{ field.field_name }}";
+{%- endfor %}
+
+    bool {{ class_name }}::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
+    {
+        bool all_ok = true;
+    {%- for  field in fields %}
+        all_ok = all_ok && kvPairs.count({{ field.column_name_tag }}) > 0 && {{ field.convert_func }} (kvPairs[{{ field.column_name_tag }}], {{ field.field_name }});
+    {%- endfor %}
+    {%- for  field in extra_fields %}
+        all_ok = all_ok && {{ field.field_name }}.Init(*this);
+    {%- endfor %}
+        if (all_ok && nullptr != func)
+            all_ok &= func(this);
+        return all_ok;
+    }
+
+    {{ class_name }}Set::~{{ class_name }}Set()
+    {
+        for (auto cfg : cfg_vec)
+        {
+            delete cfg;
+        }
+    }
+
+    bool {{ class_name }}Set::Load(std::string file_path)
+    {
+        io::CSVReader<{{ fields|length }}, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
+        csv_reader.read_header(io::ignore_extra_column,
+    {%- for  field in fields %}
+            {{ field.column_name_tag }}{%- if fields|last != field %}, {%- endif %}
+    {%- endfor %}
+            );
+
+        std::map<std::string, std::string> kvParis;
+    {%- for  field in fields %}
+        kvParis[{{ field.column_name_tag }}] = "";
+    {%- endfor %}
+
+        bool all_ok = true;
+        int curr_row = 0;
+        while (csv_reader.read_row(
+    {%- for  field in fields %}
+            kvParis[{{ field.column_name_tag }}] {%- if fields|last != field %}, {%- endif %}
+    {%- endfor %}
+            ))
+        {            
+            if (++ curr_row <= 1)
+                continue;
+            {{ class_name }} *cfg = new {{ class_name }}();
+            all_ok &= cfg->Init(kvParis, cfg_check_fun);
+            if (!all_ok)
+                break;
+            cfg_vec.push_back(cfg);
+        }
+        if (all_ok)
+        {
+            // gen key
+            for (auto cfg : cfg_vec)
+            {
+{%- for  field in fields %}
+    {%- if field.has_key_set %}
+                {
+                    if ({{ field.key_set_name }}.count(cfg->{{ field.field_name }}) > 0)
+                    {
+                        all_ok = false;
+                        break;
+                    }
+                    {{ field.key_set_name }}[cfg->{{ field.field_name }}] = cfg;
+                }
+    {%- endif %}
+    {%- if field.has_group_set %}
+                {
+                    auto it = {{ field.group_set_name }}.find(cfg->{{ field.field_name }});
+                    if ({{ field.group_set_name }}.end() == it)
+                    {
+                        auto ret_it = {{ field.group_set_name }}.insert(std::make_pair(cfg->{{ field.field_name }}, std::vector<{{ class_name }} *>()));
+                        if (!ret_it.second)
+                        {
+                            all_ok = false;
+                            break;
+                        }
+                        it = ret_it.first;
+                    }
+                    it->second.push_back(cfg);
+                }
+    {%- endif %}
+{%- endfor %}
+            }
+        }
+        if (nullptr != cfg_set_check_fun)
+        {
+            all_ok = all_ok && cfg_set_check_fun((void *)this);
+        }
+        return all_ok;
+    }
+}
+

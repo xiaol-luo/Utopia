@@ -1,0 +1,5 @@
+prof,name,hp,gongji,moveSpeed
+int,string,int,int,int
+1,战士,1000,30,50
+2,法师,300,100,50
+3,射手,300,100,50

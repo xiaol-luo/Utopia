@@ -1,0 +1,46 @@
+#pragma once
+#include <string>
+#include <vector>
+#include <map>
+#include "Utils/ConfigUtil.h"
+
+{#- extra field inlcude head file #}
+{%- for  extra_field in extra_fields %}
+#include "{{ extra_field.head_file }}"
+{%- endfor %}
+
+namespace Config
+{
+    struct {{ class_name }} // 
+    {
+    {#- field declaration #}
+    {%- for  field in fields %}
+        {{ field.field_type }} {{ field.field_name }} {%- if field.default_value %} = {{ field.default_value }} {% endif %};
+    {%- endfor %}
+
+    {#- extra field declaration #}
+    {%- for  field in extra_fields %}
+        {{ field.field_type }} {{ field.field_name }};
+    {%- endfor %}
+
+        bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
+    };
+
+    struct {{ class_name }}Set
+    {
+        ~{{ class_name }}Set();
+        ConfigCheckFunc cfg_check_fun = nullptr;
+        ConfigSetCheckFunc cfg_set_check_fun = nullptr;
+        bool Load(std::string file_path);
+        
+        std::vector<{{ class_name }} *> cfg_vec;
+{%- for  field in fields %}
+    {%- if field.has_key_set %}
+        {{ field.key_set_type }} {{ field.key_set_name }};
+    {%- endif %}
+    {%- if field.has_group_set %}
+        {{ field.group_set_type }} {{ field.group_set_name }};
+    {%- endif %}
+{%- endfor %}
+    };
+}

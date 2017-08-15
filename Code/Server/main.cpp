@@ -10,8 +10,6 @@ int main(int argc, char **argv)
 	ConfigUtil::Str2BaseValue("123", a);
 
 	Game game;
-	game.Init(nullptr);
-	game.Awake(nullptr);
-	game.Update(nullptr);
-	game.Realse(nullptr);
+	game.SetParam(nullptr);
+	game.Loop();
 }

@@ -1,0 +1,19 @@
+#include <string>
+
+namespace Config
+{
+{%- for load_info in load_infos %}
+    struct {{ load_info.type_name }};
+{%- endfor %}
+
+    struct CsvConfigSets
+    {
+    {%- for load_info in load_infos %}
+        {{ load_info.type_name }} *{{ load_info.field_name }} = nullptr;
+    {%- endfor %}
+
+        ~CsvConfigSets();
+        bool Load(std::string root_path);
+    };
+}
+

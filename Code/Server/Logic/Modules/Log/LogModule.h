@@ -1,12 +1,12 @@
 #pragma once
 
-#include "IConfigModule.h"
+#include "ILogModule.h"
 
-class ConfigModule : public IConfigModule
+class LogModule : public ILogModule
 {
 public:
-	ConfigModule(std::shared_ptr<ModuleMgr> module_mgr);
-	virtual ~ConfigModule();
+	LogModule(std::shared_ptr<ModuleMgr> module_mgr);
+	virtual ~LogModule();
 	virtual EModuleRetCode Init(void *param);
 	virtual EModuleRetCode Awake(void *param);
 	virtual EModuleRetCode Update(void *param);

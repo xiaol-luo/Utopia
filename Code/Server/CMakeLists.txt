@@ -37,6 +37,6 @@ ADD_EXECUTABLE(${ProjectName} ${SourceFiles} "main.cpp")
 
 #SET_PROPERTIES(PROPERTIES FOLDER "examples")
 #LINK_LIBRARIES(event_extra event_core ws2_32 common)
-#ADD_COMPILE_OPTIONS(-g -std=c++11)
+ADD_COMPILE_OPTIONS(-g -std=c++11)
 #ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS /wd4267 /wd4244)
 #INCLUDE_DIRECTORIES(.)

@@ -1,0 +1,46 @@
+#include "{{ save_file_name }}.h"
+
+{%- for load_info in load_infos %}
+#include "{{ load_info.head_file_path }}"
+{%- endfor %}
+
+namespace Config
+{
+    CsvConfigSets::~CsvConfigSets()
+    {
+    {%- for load_info in load_infos %}
+        delete {{ load_info.field_name }};
+    {%- endfor %}
+    }
+
+    bool CsvConfigSets::Load(std::string root_path)
+    {
+        while (!root_path.empty())
+        {
+            if (root_path.back() != '\\' && root_path.back() != '/' && root_path.back() != ' ')
+                break;
+            root_path.pop_back();
+        }
+
+    {%- for load_info in load_infos %}
+        {{ load_info.field_name }} = new {{ load_info.type_name }};
+    {%- endfor %}
+
+        bool all_ok = true;
+    {%- for load_info in load_infos %}
+        if (all_ok)
+        {
+            all_ok = {{ load_info.field_name }}->Load(root_path + '/' + "{{ load_info.csv_file_path }}");
+        }
+    {%- endfor %}
+
+        if (!all_ok)
+        {
+    {%- for load_info in load_infos %}
+            delete {{ load_info.field_name }}; {{ load_info.field_name }} = nullptr;
+    {%- endfor %}
+        }
+
+        return all_ok;
+    }
+}
