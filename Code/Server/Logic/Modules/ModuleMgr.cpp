@@ -28,7 +28,7 @@ EModuleRetCode ModuleMgr::Init(void *param)
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
-		if (EModuleRetCode_Failed == ret)
+		if (EModuleRetCode_Pending == ret)
 		{
 			retCode = EModuleRetCode_Pending;
 		}
@@ -50,7 +50,7 @@ EModuleRetCode ModuleMgr::Awake(void *param)
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
-		if (EModuleRetCode_Failed == ret)
+		if (EModuleRetCode_Pending == ret)
 		{
 			retCode = EModuleRetCode_Pending;
 		}
@@ -78,7 +78,7 @@ EModuleRetCode ModuleMgr::Update(void *param)
 
 EModuleRetCode ModuleMgr::Realse(void *param)
 {
-	EModuleRetCode retCode = EModuleRetCode_Pending;
+	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
 		if (nullptr == module)
@@ -90,13 +90,17 @@ EModuleRetCode ModuleMgr::Realse(void *param)
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
+		if (EModuleRetCode_Pending == ret)
+		{
+			retCode = EModuleRetCode_Pending;
+		}
 	}
 	return retCode;
 }
 
 EModuleRetCode ModuleMgr::Destroy(void *param)
 {
-	EModuleRetCode retCode = EModuleRetCode_Pending;
+	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
 		if (nullptr == module)
@@ -107,6 +111,10 @@ EModuleRetCode ModuleMgr::Destroy(void *param)
 		{
 			retCode = EModuleRetCode_Failed;
 			break;
+		}
+		if (EModuleRetCode_Pending == ret)
+		{
+			retCode = EModuleRetCode_Pending;
 		}
 	}
 	return retCode;

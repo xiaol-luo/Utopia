@@ -81,7 +81,7 @@ void Game::Update(void *param)
 		retCode = m_module_mgr->Update(param);
 		if (EModuleRetCode_Failed == retCode)
 			this->Quit();
-	} while (EGameState_Update != m_game_state );
+	} while (EGameState_Update == m_game_state );
 }
 
 void Game::Realse(void *param)
