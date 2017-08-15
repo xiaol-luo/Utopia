@@ -2,6 +2,11 @@
 
 #include "IConfigModule.h"
 
+namespace Config
+{
+	struct CsvConfigSets;
+}
+
 class ConfigModule : public IConfigModule
 {
 public:
@@ -12,4 +17,7 @@ public:
 	virtual EModuleRetCode Update(void *param);
 	virtual EModuleRetCode Release(void *param);
 	virtual EModuleRetCode Destroy(void *param);
+
+private:
+	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
 };

@@ -33,10 +33,10 @@ SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 
 INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Logic)
+INCLUDE_DIRECTORIES(./Logic/Modules/Config/AutoCsvCode)
 ADD_EXECUTABLE(${ProjectName} ${SourceFiles} "main.cpp")
+ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS /wd4267 /wd4244)
+ADD_COMPILE_OPTIONS(-g -std=c++11)
 
 #SET_PROPERTIES(PROPERTIES FOLDER "examples")
 #LINK_LIBRARIES(event_extra event_core ws2_32 common)
-ADD_COMPILE_OPTIONS(-g -std=c++11)
-#ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS /wd4267 /wd4244)
-#INCLUDE_DIRECTORIES(.)

@@ -21,6 +21,6 @@ public:
 	EModuleState GetState() { return m_modules_state; }
 
 private:
-	EModuleState m_modules_state;
+	EModuleState m_modules_state = EModuleState_Free;
 	std::shared_ptr<IModule> m_modules[EMoudleName_Max];
 };

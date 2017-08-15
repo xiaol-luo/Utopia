@@ -28,6 +28,7 @@ enum EModuleState
 	EModuleState_Quited,
 	EModuleState_Destroying,
 	EModuleState_Destroyed,
+	EModuleState_Error,
 	EModuleState_Max,
 };
 
@@ -55,8 +56,10 @@ public:
 	virtual EModuleRetCode Release(void *param) = 0;
 	virtual EModuleRetCode Destroy(void *param) = 0;
 	EMoudleName ModuleName() { return m_module_name; }
+	EModuleState GetState() { return m_state; }
 
 protected:
 	EMoudleName m_module_name = EMoudleName_Invalid;
 	std::shared_ptr<ModuleMgr> m_module_mgr = nullptr;
+	EModuleState m_state;
 };

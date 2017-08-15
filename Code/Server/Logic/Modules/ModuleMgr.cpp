@@ -16,27 +16,100 @@ ModuleMgr::~ModuleMgr()
 
 EModuleRetCode ModuleMgr::Init(void *param)
 {
-	return EModuleRetCode_Succ;
+	EModuleRetCode retCode = EModuleRetCode_Succ;
+	for (auto module : m_modules)
+	{
+		if (nullptr == module)
+			continue;
+
+		EModuleRetCode ret = module->Init(param);
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Failed;
+			break;
+		}
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Pending;
+		}
+	}
+	return retCode;
 }
 
 EModuleRetCode ModuleMgr::Awake(void *param)
 {
-	return EModuleRetCode_Succ;
+	EModuleRetCode retCode = EModuleRetCode_Succ;
+	for (auto module : m_modules)
+	{
+		if (nullptr == module)
+			continue;
+
+		EModuleRetCode ret = module->Awake(param);
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Failed;
+			break;
+		}
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Pending;
+		}
+	}
+	return retCode;
 }
 
 EModuleRetCode ModuleMgr::Update(void *param)
 {
-	return EModuleRetCode_Succ;
+	EModuleRetCode retCode = EModuleRetCode_Pending;
+	for (auto module : m_modules)
+	{
+		if (nullptr == module)
+			continue;
+
+		EModuleRetCode ret = module->Update(param);
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Failed;
+			break;
+		}
+	}
+	return retCode;
 }
 
 EModuleRetCode ModuleMgr::Realse(void *param)
 {
-	return EModuleRetCode_Succ;
+	EModuleRetCode retCode = EModuleRetCode_Pending;
+	for (auto module : m_modules)
+	{
+		if (nullptr == module)
+			continue;
+
+		EModuleRetCode ret = module->Release(param);
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Failed;
+			break;
+		}
+	}
+	return retCode;
 }
 
 EModuleRetCode ModuleMgr::Destroy(void *param)
 {
-	return EModuleRetCode_Succ;
+	EModuleRetCode retCode = EModuleRetCode_Pending;
+	for (auto module : m_modules)
+	{
+		if (nullptr == module)
+			continue;
+
+		EModuleRetCode ret = module->Destroy(param);
+		if (EModuleRetCode_Failed == ret)
+		{
+			retCode = EModuleRetCode_Failed;
+			break;
+		}
+	}
+	return retCode;
 }
 
 bool ModuleMgr::SetModule(std::shared_ptr<IModule> module)

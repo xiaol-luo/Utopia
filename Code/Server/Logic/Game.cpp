@@ -78,8 +78,10 @@ void Game::Update(void *param)
 		{
 			std::this_thread::sleep_for(std::chrono::microseconds(m_ms_per_frame));
 		}
-		retCode = m_module_mgr->Awake(param);
-	} while (EModuleRetCode_Pending != retCode || EGameState_Update != m_game_state );
+		retCode = m_module_mgr->Update(param);
+		if (EModuleRetCode_Failed == retCode)
+			this->Quit();
+	} while (EGameState_Update != m_game_state );
 }
 
 void Game::Realse(void *param)
