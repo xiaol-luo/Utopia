@@ -64,11 +64,13 @@ protected:
 	EModuleState m_state = EModuleState_Free;
 };
 
-#define WaitModuleState(module_name, wait_state) do									\
+#define WaitModuleState(module_name, wait_state, tolerate_nullptr) do				\
 {																					\
 	std::shared_ptr<IModule> module = m_module_mgr->GetModule(module_name);			\
-	if (nullptr == module || EModuleState_Error == module->GetState())				\
+	if (nullptr == module && !tolerate_nullptr)										\
 		return EModuleRetCode_Failed;												\
-	if (wait_state != module->GetState())											\
+	if (nullptr != module && EModuleState_Error == module->GetState())				\
+		return EModuleRetCode_Failed;												\
+	if (nullptr != module && wait_state != module->GetState())											\
 		return EModuleRetCode_Pending;												\
 } while(false)

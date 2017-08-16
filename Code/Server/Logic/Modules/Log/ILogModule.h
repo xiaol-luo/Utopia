@@ -1,6 +1,17 @@
 #pragma once
 
 #include "Modules/IModule.h"
+#include "spdlog/spdlog.h"
+
+enum ELogLevel
+{
+	ELogLevel_Invalid = 0,
+	ELogLevel_Debug,
+	ELogLevel_Info,
+	ELogLevel_Warn,
+	ELogLevel_Err,
+	ELogLevel_Max
+};
 
 class ILogModule : public IModule
 {
@@ -13,4 +24,5 @@ public:
 	virtual EModuleRetCode Update() = 0;
 	virtual EModuleRetCode Release() = 0;
 	virtual EModuleRetCode Destroy() = 0;
+
 };

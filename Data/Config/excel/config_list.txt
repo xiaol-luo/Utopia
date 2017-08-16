@@ -5,9 +5,9 @@ out_config_dir = auto-csv/AutoCsvConfig
 out_code_dir = auto-csv/AutoCsvCode
 
 
-[excel2csv-hero.hero-define]
-file_path = hero/hero.xlsx
-sheet_name = 英雄定义
+[excel2csv-log.log-config]
+file_path = log/log.xlsx
+sheet_name = 日志配置
 out_csv_file_path = Log/CsvLogConfig.csv
 class_name = CsvLogConfig
 out_cs_file_path = Log/CsvLogConfig.cs
