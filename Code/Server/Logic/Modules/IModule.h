@@ -51,15 +51,24 @@ public:
 	virtual ~IModule() {}
 
 	virtual EModuleRetCode Init(void *param) = 0;
-	virtual EModuleRetCode Awake(void *param) = 0;
-	virtual EModuleRetCode Update(void *param) = 0;
-	virtual EModuleRetCode Release(void *param) = 0;
-	virtual EModuleRetCode Destroy(void *param) = 0;
+	virtual EModuleRetCode Awake() = 0;
+	virtual EModuleRetCode Update() = 0;
+	virtual EModuleRetCode Release() = 0;
+	virtual EModuleRetCode Destroy() = 0;
 	EMoudleName ModuleName() { return m_module_name; }
 	EModuleState GetState() { return m_state; }
 
 protected:
 	EMoudleName m_module_name = EMoudleName_Invalid;
 	std::shared_ptr<ModuleMgr> m_module_mgr = nullptr;
-	EModuleState m_state;
+	EModuleState m_state = EModuleState_Free;
 };
+
+#define WaitModuleState(module_name, wait_state) do									\
+{																					\
+	std::shared_ptr<IModule> module = m_module_mgr->GetModule(module_name);			\
+	if (nullptr == module || EModuleState_Error == module->GetState())				\
+		return EModuleRetCode_Failed;												\
+	if (wait_state != module->GetState())											\
+		return EModuleRetCode_Pending;												\
+} while(false)

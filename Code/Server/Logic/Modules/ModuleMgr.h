@@ -9,15 +9,16 @@ public:
 	ModuleMgr();
 	~ModuleMgr();
 
-	EModuleRetCode Init(void *param);
-	EModuleRetCode Awake(void *param);
-	EModuleRetCode Update(void *param);
-	EModuleRetCode Realse(void *param);
-	EModuleRetCode Destroy(void *param);
+	EModuleRetCode Init(void * init_params[EMoudleName_Max]);
+	EModuleRetCode Awake();
+	EModuleRetCode Update();
+	EModuleRetCode Realse();
+	EModuleRetCode Destroy();
 
 	bool SetModule(std::shared_ptr<IModule> module);
 	template <typename T>
 	T GetModule();
+	std::shared_ptr<IModule> GetModule(EMoudleName module_name);
 	EModuleState GetState() { return m_modules_state; }
 
 private:

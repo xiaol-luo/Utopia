@@ -14,11 +14,13 @@ ModuleMgr::~ModuleMgr()
 	}
 }
 
-EModuleRetCode ModuleMgr::Init(void *param)
+EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
 {
 	EModuleRetCode retCode = EModuleRetCode_Succ;
-	for (auto module : m_modules)
+	for (int i = EMoudleName_Invalid + 1; i < EMoudleName_Max; ++ i)
 	{
+		auto module = m_modules[i];
+		void *param = init_params[i];
 		if (nullptr == module)
 			continue;
 
@@ -36,7 +38,7 @@ EModuleRetCode ModuleMgr::Init(void *param)
 	return retCode;
 }
 
-EModuleRetCode ModuleMgr::Awake(void *param)
+EModuleRetCode ModuleMgr::Awake()
 {
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
@@ -44,7 +46,7 @@ EModuleRetCode ModuleMgr::Awake(void *param)
 		if (nullptr == module)
 			continue;
 
-		EModuleRetCode ret = module->Awake(param);
+		EModuleRetCode ret = module->Awake();
 		if (EModuleRetCode_Failed == ret)
 		{
 			retCode = EModuleRetCode_Failed;
@@ -58,7 +60,7 @@ EModuleRetCode ModuleMgr::Awake(void *param)
 	return retCode;
 }
 
-EModuleRetCode ModuleMgr::Update(void *param)
+EModuleRetCode ModuleMgr::Update()
 {
 	EModuleRetCode retCode = EModuleRetCode_Pending;
 	for (auto module : m_modules)
@@ -66,7 +68,7 @@ EModuleRetCode ModuleMgr::Update(void *param)
 		if (nullptr == module)
 			continue;
 
-		EModuleRetCode ret = module->Update(param);
+		EModuleRetCode ret = module->Update();
 		if (EModuleRetCode_Failed == ret)
 		{
 			retCode = EModuleRetCode_Failed;
@@ -76,7 +78,7 @@ EModuleRetCode ModuleMgr::Update(void *param)
 	return retCode;
 }
 
-EModuleRetCode ModuleMgr::Realse(void *param)
+EModuleRetCode ModuleMgr::Realse()
 {
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
@@ -84,7 +86,7 @@ EModuleRetCode ModuleMgr::Realse(void *param)
 		if (nullptr == module)
 			continue;
 
-		EModuleRetCode ret = module->Release(param);
+		EModuleRetCode ret = module->Release();
 		if (EModuleRetCode_Failed == ret)
 		{
 			retCode = EModuleRetCode_Failed;
@@ -98,7 +100,7 @@ EModuleRetCode ModuleMgr::Realse(void *param)
 	return retCode;
 }
 
-EModuleRetCode ModuleMgr::Destroy(void *param)
+EModuleRetCode ModuleMgr::Destroy()
 {
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
@@ -106,7 +108,7 @@ EModuleRetCode ModuleMgr::Destroy(void *param)
 		if (nullptr == module)
 			continue;
 
-		EModuleRetCode ret = module->Destroy(param);
+		EModuleRetCode ret = module->Destroy();
 		if (EModuleRetCode_Failed == ret)
 		{
 			retCode = EModuleRetCode_Failed;
@@ -138,9 +140,14 @@ bool ModuleMgr::SetModule(std::shared_ptr<IModule> module)
 template <typename T>
 T ModuleMgr::GetModule()
 {
-	EMoudleName module_name = T::MODULE_NAME;
-	assert(module_name > EMoudleName_Invalid \
-		&& module_name < EMoudleName_Max);
-	assert(nullptr != m_modules[module_name]);
-	return m_modules[module_name];
+	return this->GetModule(T::MODULE_NAME);
+}
+
+std::shared_ptr<IModule> ModuleMgr::GetModule(EMoudleName module_name)
+{
+	if (module_name > EMoudleName_Invalid && module_name < EMoudleName_Max)
+	{
+		return m_modules[module_name];
+	}
+	return nullptr;
 }
