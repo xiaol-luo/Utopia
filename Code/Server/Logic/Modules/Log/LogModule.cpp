@@ -1,6 +1,7 @@
 #include "LogModule.h"
 #include "Modules/ModuleMgr.h"
 #include "log/CsvLogConfig.h"
+#include "Modules/Config/ConfigModule.h"
 
 LogModule::LogModule(std::shared_ptr<ModuleMgr> module_mgr) : ILogModule(module_mgr)
 {
@@ -19,6 +20,7 @@ EModuleRetCode LogModule::Init(void *param)
 	if (EModuleState_Inited == m_state)
 		return EModuleRetCode_Succ;
 
+	std::shared_ptr<ConfigModule> xx = m_module_mgr->GetModule<ConfigModule>();
 	Config::CsvLogConfigSet log_cfg;
 	std::string *file_path = (std::string *)param;
 	bool ret = log_cfg.Load(*file_path);

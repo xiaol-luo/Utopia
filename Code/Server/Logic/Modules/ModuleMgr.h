@@ -16,8 +16,7 @@ public:
 	EModuleRetCode Destroy();
 
 	bool SetModule(std::shared_ptr<IModule> module);
-	template <typename T>
-	T GetModule();
+	template <typename T> std::shared_ptr<T> ModuleMgr::GetModule() { return std::static_pointer_cast<T>(this->GetModule(T::MODULE_NAME)); }
 	std::shared_ptr<IModule> GetModule(EMoudleName module_name);
 	EModuleState GetState() { return m_modules_state; }
 
