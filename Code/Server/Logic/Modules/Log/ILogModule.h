@@ -25,4 +25,6 @@ public:
 	virtual EModuleRetCode Release() = 0;
 	virtual EModuleRetCode Destroy() = 0;
 
+	virtual void Record(ELogLevel log_level, int log_id, std::string msg) = 0;
+	virtual void Record(ELogLevel log_level, int log_id, const char *msg) = 0;
 };

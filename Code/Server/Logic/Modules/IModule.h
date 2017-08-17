@@ -40,7 +40,7 @@ enum EModuleRetCode
 	EModuleRetCode_Max,
 };
 
-class IModule : ObjectBase
+class IModule : public ObjectBase
 {
 public:
 	IModule(std::shared_ptr<ModuleMgr> module_mgr, EMoudleName module_name) 

@@ -17,6 +17,7 @@ public:
 	virtual EModuleRetCode Update();
 	virtual EModuleRetCode Release();
 	virtual EModuleRetCode Destroy();
+	virtual void * GetCfg() { return m_csv_cfg_sets; }
 
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;

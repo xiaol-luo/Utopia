@@ -14,6 +14,9 @@ public:
 	virtual EModuleRetCode Release();
 	virtual EModuleRetCode Destroy();
 
+	virtual void Record(ELogLevel log_level, int log_id, std::string msg);
+	virtual void Record(ELogLevel log_level, int log_id, const char *msg);
+
 public:
 	template <typename... Args>
 	void Debug(int log_id, const char* fmt, const Args&... args)
@@ -72,6 +75,7 @@ protected:
 	};
 
 	LogData *m_log_datas = nullptr;
+	long long m_last_flush_log_ts = 0;
 
 private:
 

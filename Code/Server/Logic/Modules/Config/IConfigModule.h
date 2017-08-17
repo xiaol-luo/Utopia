@@ -13,4 +13,5 @@ public:
 	virtual EModuleRetCode Update() = 0;
 	virtual EModuleRetCode Release() = 0;
 	virtual EModuleRetCode Destroy() = 0;
+	virtual void * GetCfg() = 0;
 };
