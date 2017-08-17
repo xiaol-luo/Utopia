@@ -21,4 +21,6 @@ public:
 
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
+
+	std::shared_ptr<ObjectBase> m_test_timer;
 };

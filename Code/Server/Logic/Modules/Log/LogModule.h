@@ -58,6 +58,11 @@ public:
 					logger->log((spdlog::level::level_enum)log_level, fmt, args...);
 				}
 			}
+
+			if (log_level >= ELogLevel_Err)
+			{
+				m_loggers[LOGGER_ID_STDERR]->log((spdlog::level::level_enum)log_level, fmt, args...);
+			}
 		}
 	}
 

@@ -1,9 +1,10 @@
 #include "GameServerLogic.h"
-#include "Modules/Log/LogModule.h"
-#include "Modules/Config/ConfigModule.h"
 #include <memory>
 #include <vector>
 #include <string>
+#include "Modules/Log/LogModule.h"
+#include "Modules/Config/ConfigModule.h"
+#include "Modules/Timer/TimerModule.h"
 
 GameServerLogic::GameServerLogic() : ServerLogic()
 {
@@ -43,4 +44,5 @@ void GameServerLogic::SetupModules()
 {
 	m_module_mgr->SetModule(std::make_shared<LogModule>(m_module_mgr));
 	m_module_mgr->SetModule(std::make_shared<ConfigModule>(m_module_mgr));
+	m_module_mgr->SetModule(std::make_shared<TimerModule>(m_module_mgr));
 }

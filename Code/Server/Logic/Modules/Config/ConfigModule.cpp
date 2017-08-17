@@ -1,7 +1,8 @@
 #include "ConfigModule.h"
 #include "CsvConfigSets.h"
 #include "Modules/ModuleMgr.h"
-#include "modules/Log/LogModule.h"
+#include "Modules/Log/LogModule.h"
+#include "Modules/Timer/ITimerModule.h"
 
 ConfigModule::ConfigModule(std::shared_ptr<ModuleMgr> module_mgr) : IConfigModule(module_mgr)
 {
@@ -27,7 +28,6 @@ EModuleRetCode ConfigModule::Init(void *param)
 	m_state = ret ? EModuleState_Inited : EModuleState_Error;
 
 	std::shared_ptr<LogModule> log_module = m_module_mgr->GetModule<LogModule>();
-	for (int k = 0; k < 01000; ++k)
 	for (int i = 0; i < 10; ++i)
 	{
 		log_module->Debug(i, "i= {0}, {1} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", i, "Debug");
@@ -43,11 +43,20 @@ EModuleRetCode ConfigModule::Init(void *param)
 
 EModuleRetCode ConfigModule::Awake()
 {
+	m_test_timer = std::make_shared<ObjectBase>();
 	return EModuleRetCode_Succ;
+}
+
+void TestTimer()
+{
+
 }
 
 EModuleRetCode ConfigModule::Update()
 {
+	std::shared_ptr<ITimerModule> timer_module = m_module_mgr->GetModule<ITimerModule>();
+	timer_module->AddNext(m_test_timer, TestTimer, 0);
+	timer_module->AddFirm(m_test_timer, TestTimer, 100, 3);
 	return EModuleRetCode_Succ;
 }
 
