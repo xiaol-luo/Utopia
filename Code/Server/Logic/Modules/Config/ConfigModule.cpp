@@ -16,11 +16,6 @@ ConfigModule::~ConfigModule()
 
 EModuleRetCode ConfigModule::Init(void *param)
 {
-	if (EModuleState_Error == m_state)
-		return EModuleRetCode_Failed;
-	if (EModuleState_Inited == m_state)
-		return EModuleRetCode_Succ;
-
 	WaitModuleState(EMoudleName_Log, EModuleState_Inited, false);
 
 	std::string *file_path = (std::string *)param;

@@ -42,6 +42,7 @@ enum EModuleRetCode
 
 class IModule : public ObjectBase
 {
+	friend class ModuleMgr;
 public:
 	IModule(std::shared_ptr<ModuleMgr> module_mgr, EMoudleName module_name) 
 	{ 
@@ -62,6 +63,7 @@ protected:
 	EMoudleName m_module_name = EMoudleName_Invalid;
 	std::shared_ptr<ModuleMgr> m_module_mgr = nullptr;
 	EModuleState m_state = EModuleState_Free;
+	void SetState(EModuleState state) { m_state = state; }
 };
 
 #define WaitModuleState(module_name, wait_state, tolerate_nullptr) do				\

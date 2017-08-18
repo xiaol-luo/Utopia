@@ -16,16 +16,7 @@ TimerModule::~TimerModule()
 
 EModuleRetCode TimerModule::Init(void *param)
 {
-	long long old_ms = m_now_ms;
-	m_now_ms = this->RealNowMs();
-	m_now_sec = m_now_ms / 1000;
-	m_delta_ms = m_now_ms - old_ms;
-
-	if (EModuleState_Error == m_state)
-		return EModuleRetCode_Failed;
-	if (EModuleState_Inited == m_state)
-		return EModuleRetCode_Succ;
-
+	this->UpdateTime();
 	m_rbtree_sentinel_node = new srv_rbtree_node_t;
 	memset(m_rbtree_sentinel_node, 0, sizeof(srv_rbtree_node_t));
 	m_rbtree_timer_items = new srv_rbtree_t;
@@ -38,6 +29,7 @@ EModuleRetCode TimerModule::Init(void *param)
 
 EModuleRetCode TimerModule::Awake()
 {
+	this->UpdateTime();
 	return EModuleRetCode_Succ;
 }
 
@@ -87,11 +79,6 @@ void TimerModule::TryExecuteNode(srv_rbtree_node_t *node)
 
 EModuleRetCode TimerModule::Update()
 {
-	long long old_ms = m_now_ms;
-	m_now_ms = this->RealNowMs();
-	m_now_sec = m_now_ms / 1000;
-	m_delta_ms = m_now_ms - old_ms;
-
 	this->ChekRemoveNodes();
 
 	if (!m_nodes_execute_now.empty())
@@ -129,6 +116,7 @@ EModuleRetCode TimerModule::Update()
 
 EModuleRetCode TimerModule::Release()
 {
+	this->UpdateTime();
 	std::queue<srv_rbtree_node_t *> node_queue;
 	if (m_rbtree_timer_items->root != m_rbtree_timer_items->sentinel)
 		node_queue.push(m_rbtree_timer_items->root);
@@ -153,6 +141,7 @@ EModuleRetCode TimerModule::Release()
 
 EModuleRetCode TimerModule::Destroy()
 {
+	m_now_ms = this->RealNowMs();
 	return EModuleRetCode_Succ;
 }
 
@@ -255,4 +244,12 @@ void TimerModule::ChekRemoveNodes()
 		++ m_remove_times;
 	}
 	m_to_remove_nodes.clear();
+}
+
+void TimerModule::UpdateTime()
+{
+	long long old_ms = m_now_ms;
+	m_now_ms = this->RealNowMs();
+	m_now_sec = m_now_ms / 1000;
+	m_delta_ms = m_now_ms - old_ms;
 }

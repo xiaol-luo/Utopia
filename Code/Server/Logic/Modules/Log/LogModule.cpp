@@ -36,11 +36,6 @@ void LogModule::Record(ELogLevel log_level, int log_id, const char *msg)
 
 EModuleRetCode LogModule::Init(void *param)
 {
-	if (EModuleState_Error == m_state)
-		return EModuleRetCode_Failed;
-	if (EModuleState_Inited == m_state)
-		return EModuleRetCode_Succ;
-
 	bool ret = true;
 	do 
 	{

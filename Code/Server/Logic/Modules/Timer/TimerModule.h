@@ -40,6 +40,7 @@ private:
 	srv_rbtree_node_t *m_rbtree_sentinel_node;
 	srv_rbtree_t *m_rbtree_timer_items;
 
+	void UpdateTime();
 	long long m_now_ms = 0;
 	long long m_now_sec = 0;
 	long long m_delta_ms = 0;

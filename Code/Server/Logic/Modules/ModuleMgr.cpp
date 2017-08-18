@@ -21,7 +21,7 @@ EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
 	{
 		auto module = m_modules[i];
 		void *param = init_params[i];
-		if (nullptr == module)
+		if (nullptr == module || EModuleState_Initing != module->GetState())
 			continue;
 
 		EModuleRetCode ret = module->Init(param);
@@ -31,9 +31,9 @@ EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
 			break;
 		}
 		if (EModuleRetCode_Pending == ret)
-		{
 			retCode = EModuleRetCode_Pending;
-		}
+		if (EModuleRetCode_Succ == ret)
+			module->SetState(EModuleState_Inited);
 	}
 	return retCode;
 }
@@ -43,7 +43,7 @@ EModuleRetCode ModuleMgr::Awake()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
-		if (nullptr == module)
+		if (nullptr == module || EModuleState_Awaking != module->GetState())
 			continue;
 
 		EModuleRetCode ret = module->Awake();
@@ -53,9 +53,9 @@ EModuleRetCode ModuleMgr::Awake()
 			break;
 		}
 		if (EModuleRetCode_Pending == ret)
-		{
 			retCode = EModuleRetCode_Pending;
-		}
+		if (EModuleRetCode_Succ == ret)
+			module->SetState(EModuleState_Awaked);
 	}
 	return retCode;
 }
@@ -65,7 +65,7 @@ EModuleRetCode ModuleMgr::Update()
 	EModuleRetCode retCode = EModuleRetCode_Pending;
 	for (auto module : m_modules)
 	{
-		if (nullptr == module)
+		if (nullptr == module || EModuleState_Updating != module->GetState())
 			continue;
 
 		EModuleRetCode ret = module->Update();
@@ -83,7 +83,7 @@ EModuleRetCode ModuleMgr::Realse()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
-		if (nullptr == module)
+		if (nullptr == module || EModuleState_Quiting != module->GetState())
 			continue;
 
 		EModuleRetCode ret = module->Release();
@@ -93,9 +93,9 @@ EModuleRetCode ModuleMgr::Realse()
 			break;
 		}
 		if (EModuleRetCode_Pending == ret)
-		{
 			retCode = EModuleRetCode_Pending;
-		}
+		if (EModuleRetCode_Succ == ret)
+			module->SetState(EModuleState_Quited);
 	}
 	return retCode;
 }
@@ -105,7 +105,7 @@ EModuleRetCode ModuleMgr::Destroy()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
-		if (nullptr == module)
+		if (nullptr == module || EModuleState_Destroying != module->GetState())
 			continue;
 
 		EModuleRetCode ret = module->Destroy();
@@ -115,9 +115,9 @@ EModuleRetCode ModuleMgr::Destroy()
 			break;
 		}
 		if (EModuleRetCode_Pending == ret)
-		{
 			retCode = EModuleRetCode_Pending;
-		}
+		if (EModuleRetCode_Succ == ret)
+			module->SetState(EModuleState_Destroyed);
 	}
 	return retCode;
 }
