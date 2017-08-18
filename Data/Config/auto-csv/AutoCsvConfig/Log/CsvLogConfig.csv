@@ -1,7 +1,7 @@
 id,alsoWritetoMe,logger_type,name,log_level,save_file,rorating_max_size,rorating_max_files,daily_hour,daily_min
 int;key,[int],int,string,int,string,int,int,int,int
 1,,1,stderr,1,Log/Stderr.txt,1024000,1024000,1,0
-2,-1,2,stdout,1,Log/Stdout.txt,1024000,1024000,1,0
+2,,2,stdout,1,Log/Stdout.txt,1024000,1024000,1,0
 3,4;5,3,all_log,1,Log/All.txt,1024000,1024000,1,0
 4,,4,test_rorating1,2,Log/TestRorating1.txt,1024000,1024000,1,0
 5,,4,test_rorating2,2,Log/TestRorating2.txt,1024000,1024000,1,0

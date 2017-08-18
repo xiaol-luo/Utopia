@@ -188,6 +188,10 @@ EModuleRetCode LogModule::Awake()
 
 EModuleRetCode LogModule::Update()
 {
+	for (int i = 0; i < m_logger_num; ++i)
+	{
+		// if (nullptr != m_loggers[i]) m_loggers[i]->flush();
+	}
 	return EModuleRetCode_Succ;
 }
 

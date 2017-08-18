@@ -47,16 +47,16 @@ EModuleRetCode ConfigModule::Awake()
 	return EModuleRetCode_Succ;
 }
 
-void TestTimer()
-{
-
-}
-
 EModuleRetCode ConfigModule::Update()
 {
 	std::shared_ptr<ITimerModule> timer_module = m_module_mgr->GetModule<ITimerModule>();
-	timer_module->AddNext(m_test_timer, TestTimer, 0);
-	timer_module->AddFirm(m_test_timer, TestTimer, 100, 3);
+	// timer_module->AddNext(TestTimer, 0);
+	for (int i = 0; i < 1; ++ i)
+	{
+		timer_module->AddFirm([this]() { for (int i = 0; i < 1000; ++i); }, 100 * 1, -1);
+		// timer_module->AddFirm([this]() { m_module_mgr->GetModule<LogModule>()->Info(7, "TestTimer"); }, 1000 * 1, -1);
+		// timer_module->AddNext([this]() { m_module_mgr->GetModule<LogModule>()->Info(7, "TestTimer"); }, 0);
+	}
 	return EModuleRetCode_Succ;
 }
 

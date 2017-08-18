@@ -1,8 +1,9 @@
 #include "TimerModule.h"
 #include <chrono>
 #include <queue>
+#include "Modules/ModuleMgr.h"
+#include "Modules/Log/LogModule.h"
 
-long long GetNowMs();
 TimerModule::TimerModule(std::shared_ptr<ModuleMgr> module_mgr) : ITimerModule(module_mgr)
 {
 
@@ -16,7 +17,7 @@ TimerModule::~TimerModule()
 EModuleRetCode TimerModule::Init(void *param)
 {
 	long long old_ms = m_now_ms;
-	m_now_ms = GetNowMs();
+	m_now_ms = this->RealNowMs();
 	m_now_sec = m_now_ms / 1000;
 	m_delta_ms = m_now_ms - old_ms;
 
@@ -42,19 +43,36 @@ EModuleRetCode TimerModule::Awake()
 
 void TimerModule::TryExecuteNode(srv_rbtree_node_t *node)
 {
+	++m_execute_times;
+
+	// 每个进入到这里的node，只被m_id_to_timer_node有效引用
 	TimerItem *timer_item = (TimerItem *)node->data;
 	if (nullptr == timer_item)
 	{
-		delete node;
+		long long timer_id = INVALID_TIMER_ID;
+		for (auto kvPair : m_id_to_timer_node)
+		{
+			if (kvPair.second == node)
+			{
+				timer_id = kvPair.first;
+				break;
+			}
+		}
+		if (INVALID_TIMER_ID != timer_id)
+			m_to_remove_nodes.insert(timer_id);
+		else
+			delete node;
 		return;
 	}
-	if (!timer_item->who.expired())
-		timer_item->action();
+	if (m_to_remove_nodes.count(timer_item->id) > 0)
+		return;
+
+	// timer_item->action();
 	if (!timer_item->is_firm)
 		--timer_item->execute_times;
-	if (!timer_item->who.expired() && (timer_item->is_firm || timer_item->execute_times > 0))
+	if (timer_item->is_firm || timer_item->execute_times > 0)
 	{
-		timer_item->execute_ms += timer_item->span_ms;
+		timer_item->execute_ms = m_now_ms + timer_item->span_ms;
 		node->key = timer_item->execute_ms;
 		srv_rbtree_insert(m_rbtree_timer_items, node);
 	}
@@ -70,9 +88,11 @@ void TimerModule::TryExecuteNode(srv_rbtree_node_t *node)
 EModuleRetCode TimerModule::Update()
 {
 	long long old_ms = m_now_ms;
-	m_now_ms = GetNowMs();
+	m_now_ms = this->RealNowMs();
 	m_now_sec = m_now_ms / 1000;
 	m_delta_ms = m_now_ms - old_ms;
+
+	this->ChekRemoveNodes();
 
 	if (!m_nodes_execute_now.empty())
 	{
@@ -98,6 +118,11 @@ EModuleRetCode TimerModule::Update()
 			this->TryExecuteNode(node);
 		}
 	}
+	this->ChekRemoveNodes();
+
+	m_module_mgr->GetModule<LogModule>()->Debug(2, "{0} {1} {2} {3} {4} {5}"
+		, m_now_ms, m_delta_ms, m_add_times, m_remove_times, m_id_to_timer_node.size(), m_execute_times);
+	m_execute_times = 0;
 
 	return EModuleRetCode_Pending;
 }
@@ -138,7 +163,7 @@ long long TimerModule::NowSec()
 
 long long TimerModule::NowMs()
 {
-	return m_delta_ms;
+	return m_now_ms;
 }
 
 long long TimerModule::DeltaMs()
@@ -146,19 +171,26 @@ long long TimerModule::DeltaMs()
 	return m_delta_ms;
 }
 
-long long TimerModule::Add(std::shared_ptr<ObjectBase> who, TimerAction action, long start_ts_ms, long long execute_span_ms, long long execute_times)
+long long TimerModule::RealNowMs()
 {
-	if (nullptr == who || nullptr == action || execute_span_ms < 0)
+	std::chrono::high_resolution_clock::time_point tp = std::chrono::high_resolution_clock::now();
+	long long now = std::chrono::duration_cast<std::chrono::milliseconds>(tp.time_since_epoch()).count();
+	return now;
+}
+
+long long TimerModule::Add(TimerAction action, long start_ts_ms, long long execute_span_ms, long long execute_times)
+{
+	if (nullptr == action || execute_span_ms < 0)
 		return INVALID_TIMER_ID;
 	if (execute_times == EXECUTE_UNLIMIT_TIMES && execute_span_ms <= 0)
 		return INVALID_TIMER_ID;
 	if (execute_times != EXECUTE_UNLIMIT_TIMES && execute_times < 0)
 		return INVALID_TIMER_ID;
 
-	std::weak_ptr<ObjectBase> weak_who(who);
+	++ m_add_times;
+
 	TimerItem *timer_item = new TimerItem();
 	timer_item->id = this->GenTimerId();
-	timer_item->who = who;
 	timer_item->span_ms = execute_span_ms;
 	timer_item->execute_times = execute_times;
 	timer_item->is_firm = execute_times == EXECUTE_UNLIMIT_TIMES;
@@ -176,35 +208,20 @@ long long TimerModule::Add(std::shared_ptr<ObjectBase> who, TimerAction action, 
 	return timer_item->id;
 }
 
-long long TimerModule::AddNext(std::shared_ptr<ObjectBase> who, TimerAction action, long long start_ts_ms)
+long long TimerModule::AddNext(TimerAction action, long long start_ts_ms)
 {
-	return this->Add(who, action, start_ts_ms, 0, 1);
+	return this->Add(action, start_ts_ms, 0, 1);
 }
 
-long long TimerModule::AddFirm(std::shared_ptr<ObjectBase> who, TimerAction action, long long execute_span_ms, long long execute_times)
+long long TimerModule::AddFirm(TimerAction action, long long execute_span_ms, long long execute_times)
 {
 
-	return this->Add(who, action, m_now_sec + execute_span_ms, execute_span_ms, execute_times);
+	return this->Add(action, m_now_ms + execute_span_ms, execute_span_ms, execute_times);
 }
 
 void TimerModule::Remove(long long timer_id)
 {
-	auto it = m_id_to_timer_node.find(timer_id);
-	if (m_id_to_timer_node.end() == it)
-		return;
-	srv_rbtree_node_t *node = it->second;
-	if (node->parent)
-		srv_rbtree_delete(m_rbtree_timer_items, node);
-	delete (TimerItem *)node->data;
-	delete node;
-	m_id_to_timer_node.erase(it);
-}
-
-long long GetNowMs()
-{
-	std::chrono::high_resolution_clock::time_point tp = std::chrono::high_resolution_clock::now();
-	long long now = std::chrono::duration_cast<std::chrono::milliseconds>(tp.time_since_epoch()).count();
-	return now;
+	m_to_remove_nodes.insert(timer_id);
 }
 
 long long TimerModule::GenTimerId() 
@@ -217,4 +234,25 @@ long long TimerModule::GenTimerId()
 	} while(m_id_to_timer_node.count(m_last_timer_id) > 0);
 
 	return m_last_timer_id;
+}
+
+void TimerModule::ChekRemoveNodes()
+{
+	if (m_to_remove_nodes.empty())
+		return;
+
+	for (long long timer_id : m_to_remove_nodes)
+	{
+		auto it = m_id_to_timer_node.find(timer_id);
+		if (m_id_to_timer_node.end() == it)
+			continue;;
+		srv_rbtree_node_t *node = it->second;
+		if (node->parent)
+			srv_rbtree_delete(m_rbtree_timer_items, node);
+		delete (TimerItem *)node->data;
+		delete node;
+		m_id_to_timer_node.erase(it);
+		++ m_remove_times;
+	}
+	m_to_remove_nodes.clear();
 }

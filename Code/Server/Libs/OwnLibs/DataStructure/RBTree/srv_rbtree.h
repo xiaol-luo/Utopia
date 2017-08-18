@@ -7,7 +7,9 @@ extern "C" {
 
 typedef unsigned int uint;
 typedef unsigned char u_char;
-typedef long long srv_rbtree_key_t;
+
+typedef uint srv_rbtree_key_t;
+typedef int srv_rbtree_key_int_t;
 
 typedef struct srv_rbtree_node_s srv_rbtree_node_t;
 struct srv_rbtree_node_s 
@@ -40,9 +42,9 @@ struct srv_rbtree_s
 #define srv_rbtree_sentinel_init(node)  srv_rbt_black(node)
 
 #define srv_rbtree_init(tree, s, i) \
-	srv_rbtree_sentinel_init(s);	\
-	(tree)->root = s;				\
-	(tree)->sentinel = s;			\
+	srv_rbtree_sentinel_init(s); \
+	(tree)->root = s; \
+	(tree)->sentinel = s; \
 	(tree)->insert = i;
 
 void srv_rbtree_insert(srv_rbtree_t *tree, srv_rbtree_node_t *node);

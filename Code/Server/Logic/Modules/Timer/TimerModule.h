@@ -4,6 +4,7 @@
 #include "DataStructure/RBTree/srv_rbtree.h"
 #include <vector>
 #include <map>
+#include <set>
 
 class TimerModule : public ITimerModule
 {
@@ -19,9 +20,10 @@ public:
 	virtual long long NowSec();
 	virtual long long NowMs();
 	virtual long long DeltaMs();
-	virtual long long Add(std::shared_ptr<ObjectBase> who, TimerAction action, long start_ts_ms, long long execute_span_ms, long long execute_times);
-	virtual long long AddNext(std::shared_ptr<ObjectBase> who, TimerAction action, long long start_ts_ms);
-	virtual long long AddFirm(std::shared_ptr<ObjectBase> who, TimerAction action, long long execute_span_ms, long long execute_times);
+	virtual long long RealNowMs();
+	virtual long long Add(TimerAction action, long start_ts_ms, long long execute_span_ms, long long execute_times);
+	virtual long long AddNext(TimerAction action, long long start_ts_ms);
+	virtual long long AddFirm(TimerAction action, long long execute_span_ms, long long execute_times);
 	virtual void Remove(long long timer_id);
 
 private:
@@ -32,7 +34,6 @@ private:
 		long long execute_ms = 0;
 		long long span_ms = 0;
 		long long execute_times = 0;
-		std::weak_ptr<ObjectBase> who;
 		TimerAction action = nullptr;
 	};
 
@@ -48,4 +49,11 @@ private:
 	std::map<long long, srv_rbtree_node_t *> m_id_to_timer_node;
 	long long m_last_timer_id = 0;
 	long long GenTimerId();
+
+	std::set<long long> m_to_remove_nodes;
+	void ChekRemoveNodes();
+
+	long long m_add_times = 0;
+	long long m_remove_times = 0;
+	long long m_execute_times = 0;
 };

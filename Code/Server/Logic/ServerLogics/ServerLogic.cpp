@@ -2,6 +2,7 @@
 #include <thread>
 #include <chrono>
 #include <ctime>
+#include <Modules/Timer/ITimerModule.h>
 
 const int TRY_MAX_TIMES = 100000;
 
@@ -23,17 +24,17 @@ bool ServerLogic::Init()
 
 	this->SetupModules();
 
+	m_timer_module = m_module_mgr->GetModule<ITimerModule>();
+
 	m_state = EServerLogicState_Init;
 	int loop_times = 0;
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	do
 	{
-		if (loop_times++ > 0)
-		{
-			std::this_thread::sleep_for(std::chrono::microseconds(m_loop_span_ms));
-		}
+		if (loop_times > 0)
+			std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span_ms));
 		retCode = m_module_mgr->Init(m_init_params);
-	} while (EModuleRetCode_Pending == retCode && loop_times < TRY_MAX_TIMES);
+	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
 	bool ret = EModuleRetCode_Succ == retCode;
 	if (!ret) this->Quit();
@@ -50,12 +51,10 @@ bool ServerLogic::Awake()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	do
 	{
-		if (loop_times++ > 0)
-		{
-			std::this_thread::sleep_for(std::chrono::microseconds(m_loop_span_ms));
-		}
+		if (loop_times > 0)
+			std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span_ms));
 		retCode = m_module_mgr->Awake();
-	} while (EModuleRetCode_Pending == retCode && loop_times < TRY_MAX_TIMES);
+	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
 	bool ret = EModuleRetCode_Succ == retCode;
 	if (!ret) this->Quit();
@@ -72,13 +71,14 @@ void ServerLogic::Update()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	do
 	{
-		if (loop_times++ > 0)
-		{
-			std::this_thread::sleep_for(std::chrono::microseconds(m_loop_span_ms));
-		}
 		retCode = m_module_mgr->Update();
 		if (EModuleRetCode_Failed == retCode)
 			this->Quit();
+
+		long long consume_ms = m_timer_module->RealNowMs() - m_timer_module->NowMs();
+		long long sleep_time = m_loop_span_ms - consume_ms;
+		if (sleep_time > 0)
+			std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
 	} while (EServerLogicState_Update == m_state );
 }
 
@@ -89,12 +89,10 @@ void ServerLogic::Realse()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	do
 	{
-		if (loop_times++ > 0)
-		{
-			std::this_thread::sleep_for(std::chrono::microseconds(m_loop_span_ms));
-		}
+		if (loop_times > 0)
+			std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span_ms));
 		retCode = m_module_mgr->Realse();
-	} while (EModuleRetCode_Pending == retCode && loop_times < TRY_MAX_TIMES);
+	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 }
 
 void ServerLogic::Destroy()
@@ -104,12 +102,10 @@ void ServerLogic::Destroy()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	do
 	{
-		if (loop_times++ > 0)
-		{
-			std::this_thread::sleep_for(std::chrono::microseconds(m_loop_span_ms));
-		}
+		if (loop_times > 0)
+			std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span_ms));
 		retCode = m_module_mgr->Destroy();
-	} while (EModuleRetCode_Pending == retCode && loop_times < TRY_MAX_TIMES);
+	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
 	this->ClearInitParams();
 }

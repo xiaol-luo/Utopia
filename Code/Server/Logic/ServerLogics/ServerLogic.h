@@ -2,6 +2,8 @@
 
 #include "Modules/ModuleMgr.h"
 
+class ITimerModule;
+
 enum EServerLogicState
 {
 	EServerLogicState_Free,
@@ -34,6 +36,8 @@ protected:
 
 	EServerLogicState m_state = EServerLogicState_Free;
 	std::shared_ptr<ModuleMgr> m_module_mgr = nullptr;
-	int m_loop_span_ms = 100;
+	int m_loop_span_ms = 2;
 	void * m_init_params[EMoudleName_Max];
+
+	std::shared_ptr<ITimerModule> m_timer_module;
 };
