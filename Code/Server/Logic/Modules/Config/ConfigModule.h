@@ -6,6 +6,8 @@ namespace Config
 {
 	struct CsvConfigSets;
 }
+class NetListenHanderTest;
+class NetConnectHanderTest;
 
 class ConfigModule : public IConfigModule
 {
@@ -22,5 +24,7 @@ public:
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
 
-	std::shared_ptr<ObjectBase> m_test_timer;
+	std::shared_ptr<ObjectBase> m_test_timer = nullptr;
+	std::shared_ptr<NetListenHanderTest> m_test_listen_handler = nullptr;
+	std::shared_ptr<NetConnectHanderTest> m_test_cnn_handler = nullptr;
 };

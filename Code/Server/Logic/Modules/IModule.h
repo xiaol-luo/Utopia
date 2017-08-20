@@ -23,7 +23,6 @@ enum EModuleState
 	EModuleState_Awaking,
 	EModuleState_Awaked,
 	EModuleState_Updating,
-	EModuleState_Updated,
 	EModuleState_Quiting,
 	EModuleState_Quited,
 	EModuleState_Destroying,

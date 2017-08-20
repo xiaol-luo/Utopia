@@ -21,6 +21,8 @@ EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
 	{
 		auto module = m_modules[i];
 		void *param = init_params[i];
+		if (nullptr != module && EModuleState_Free == module->GetState())
+			module->SetState(EModuleState_Initing);
 		if (nullptr == module || EModuleState_Initing != module->GetState())
 			continue;
 
@@ -43,6 +45,8 @@ EModuleRetCode ModuleMgr::Awake()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
+		if (nullptr != module && EModuleState_Inited == module->GetState())
+			module->SetState(EModuleState_Awaking);
 		if (nullptr == module || EModuleState_Awaking != module->GetState())
 			continue;
 
@@ -62,9 +66,12 @@ EModuleRetCode ModuleMgr::Awake()
 
 EModuleRetCode ModuleMgr::Update()
 {
+
 	EModuleRetCode retCode = EModuleRetCode_Pending;
 	for (auto module : m_modules)
 	{
+		if (nullptr != module && EModuleState_Awaked == module->GetState())
+			module->SetState(EModuleState_Updating);
 		if (nullptr == module || EModuleState_Updating != module->GetState())
 			continue;
 
@@ -83,6 +90,8 @@ EModuleRetCode ModuleMgr::Realse()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
+		if (nullptr != module && EModuleState_Updating == module->GetState())
+			module->SetState(EModuleState_Quiting);
 		if (nullptr == module || EModuleState_Quiting != module->GetState())
 			continue;
 
@@ -105,6 +114,8 @@ EModuleRetCode ModuleMgr::Destroy()
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (auto module : m_modules)
 	{
+		if (nullptr != module && EModuleState_Quited == module->GetState())
+			module->SetState(EModuleState_Destroying);
 		if (nullptr == module || EModuleState_Destroying != module->GetState())
 			continue;
 

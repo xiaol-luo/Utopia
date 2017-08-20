@@ -3,6 +3,7 @@
 #include "Modules/ModuleMgr.h"
 #include "Modules/Log/LogModule.h"
 #include "Modules/Timer/ITimerModule.h"
+#include "Modules/Network/INetworkModule.h"
 
 ConfigModule::ConfigModule(std::shared_ptr<ModuleMgr> module_mgr) : IConfigModule(module_mgr)
 {
@@ -36,9 +37,41 @@ EModuleRetCode ConfigModule::Init(void *param)
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 
+class NetConnectHanderTest : public NetConnectHander
+{
+public:
+	virtual void OnError(NetId netid, int errnu) {}
+	virtual void OnSucc(NetId netid) {}
+	virtual void OnClose(NetId netid) {}
+	virtual void OnRecvData(NetId netid, char *data, uint32_t len) {}
+};
+
+class NetListenHanderTest : public NetListenHander
+{
+public:
+	virtual void OnError(NetId netid, int errnu) {}
+	virtual void OnSucc(NetId netid) {}
+	virtual void OnClose(NetId netid) {}
+	virtual void OnNewConnect(NetId netid) 
+	{
+
+	}
+
+	virtual std::shared_ptr<NetConnectHander>  GenConnectorHandler()
+	{
+		return std::make_shared<NetConnectHanderTest>();
+	}
+};
+
 EModuleRetCode ConfigModule::Awake()
 {
+	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
+
 	m_test_timer = std::make_shared<ObjectBase>();
+	m_test_listen_handler = std::make_shared<NetListenHanderTest>();
+	m_test_cnn_handler = std::make_shared<NetConnectHanderTest>();
+	std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
+	net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
 	return EModuleRetCode_Succ;
 }
 
@@ -48,9 +81,14 @@ EModuleRetCode ConfigModule::Update()
 	// timer_module->AddNext(TestTimer, 0);
 	for (int i = 0; i < 1; ++ i)
 	{
-		timer_module->AddFirm([this]() { for (int i = 0; i < 1000; ++i); }, 100 * 1, -1);
+		// timer_module->AddFirm([this]() { for (int i = 0; i < 1000; ++i); }, 100 * 1, -1);
 		// timer_module->AddFirm([this]() { m_module_mgr->GetModule<LogModule>()->Info(7, "TestTimer"); }, 1000 * 1, -1);
 		// timer_module->AddNext([this]() { m_module_mgr->GetModule<LogModule>()->Info(7, "TestTimer"); }, 0);
+	}
+
+	{
+		std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
+		net_module->Connect("127.0.0.1", 10240, nullptr, m_test_cnn_handler);
 	}
 	return EModuleRetCode_Succ;
 }
