@@ -79,8 +79,11 @@ void CnnTaskWorker(ConnectTaskThread *task_thread)
 		Net::ConnectTask *task = nullptr;
 		if (task_mutex->try_lock())
 		{
-			Net::ConnectTask *task = cnn_tasks->front();
-			cnn_tasks->pop();
+			if (!cnn_tasks->empty())
+			{
+				task = cnn_tasks->front();
+				cnn_tasks->pop();
+			}
 			task_mutex->unlock();
 		}
 		if (nullptr == task)
@@ -217,7 +220,7 @@ NetId NetworkModule::Listen(std::string ip, uint16_t port, void *opt, std::weak_
 	if (nullptr == sp_handler) return 0;
 
 	NetId netid = 0;
-	Net::ConnectTaskListen task(0, ip, port, opt, nullptr);
+	Net::ConnectTaskListen task(0, ip, port, opt);
 	task.Process();
 	const Net::ConnectResult &ret = task.GetResult();
 	int err_num = ret.err_num;
@@ -251,7 +254,7 @@ NetId NetworkModule::Connect(std::string ip, uint16_t port, void *opt, std::weak
 	if (nullptr == sp_handler) return 0;
 
 	NetId netid = 0;
-	Net::ConnectTaskConnect task(0, ip, port, opt, nullptr);
+	Net::ConnectTaskConnect task(0, ip, port, opt);
 	task.Process();
 	const Net::ConnectResult &ret = task.GetResult();
 	int err_num = ret.err_num;
@@ -284,30 +287,28 @@ void NetworkModule::Close(NetId netid)
 	this->ChoseWorker(netid)->RemoveCnn(netid);
 }
 
-int64_t NetworkModule::ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler,
-	std::function<void(NetId, int)> retCb)
+int64_t NetworkModule::ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler)
 {
 	if (nullptr == handler.lock()) return 0;
 
 	int64_t async_id = this->GenAsyncId();
 	m_async_network_handlers[async_id] = handler;
 	Net::ConnectTaskListen *task = new Net::ConnectTaskListen(
-		async_id, ip, port, opt, retCb);
+		async_id, ip, port, opt);
 	m_cnn_task_mutex->lock();
 	m_cnn_tasks.push(task);
 	m_cnn_task_mutex->unlock();
 	return async_id;
 }
 
-int64_t NetworkModule::ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler,
-	std::function<void(NetId, int)> retCb)
+int64_t NetworkModule::ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler)
 {
 	if (nullptr == handler.lock()) return 0;
 
 	int64_t async_id = this->GenAsyncId();
 	m_async_network_handlers[async_id] = handler;
 	Net::ConnectTaskConnect *task = new Net::ConnectTaskConnect(
-		async_id, ip, port, opt, retCb);
+		async_id, ip, port, opt);
 	m_cnn_task_mutex->lock();
 	m_cnn_tasks.push(task);
 	m_cnn_task_mutex->unlock();
@@ -399,7 +400,7 @@ void NetworkModule::ProcessNetDatas()
 	for (int i = 0; i < m_net_worker_num; ++i)
 	{
 		std::queue<NetWorkData> *net_datas = nullptr;
-		if (!m_net_workers[i]->GetNetDatas(net_datas))
+		if (m_net_workers[i]->GetNetDatas(net_datas))
 		{
 			while (!net_datas->empty())
 			{
@@ -428,28 +429,25 @@ void NetworkModule::ProcessNetDatas()
 					if (ENetworkHandler_Listen == handler->HandlerType())
 					{
 						std::shared_ptr<INetListenHander> tmp_handler = std::dynamic_pointer_cast<INetListenHander>(handler);
+						if (ENetWorkDataAction_Error == data.action)
+							tmp_handler->OnError(data.err_num);
+						if (ENetWorkDataAction_Close == data.action)
+							tmp_handler->OnClose();
 						if (ENetWorkDataAction_Read == data.action)
 						{
-							if (ENetWorkDataAction_Error == data.action)
-								tmp_handler->OnError(data.err_num);
-							if (ENetWorkDataAction_Close == data.action)
-								tmp_handler->OnClose();
-							if (ENetWorkDataAction_Read == data.action)
+							NetId netid = this->GenNetId();
+							std::shared_ptr<INetConnectHander> new_handler = tmp_handler->GenConnectorHandler(netid);
+							bool is_ok = false;
+							if (nullptr != new_handler && ChoseWorker(netid)->AddCnn(netid, data.new_fd, new_handler))
 							{
-								NetId netid = this->GenNetId();
-								std::shared_ptr<INetConnectHander> new_handler = tmp_handler->GenConnectorHandler(netid);
-								bool is_ok = false;
-								if (nullptr != new_handler && ChoseWorker(netid)->AddCnn(netid, data.new_fd, handler))
-								{
-									is_ok = true;
-									new_handler->OnSucc();
-								}
-								if (!is_ok)
-								{
-									close(data.new_fd);
-									if (nullptr != new_handler)
-										new_handler->OnError(1);
-								}
+								is_ok = true;
+								new_handler->OnSucc();
+							}
+							if (!is_ok)
+							{
+								close(data.new_fd);
+								if (nullptr != new_handler)
+									new_handler->OnError(1);
 							}
 						}
 					}

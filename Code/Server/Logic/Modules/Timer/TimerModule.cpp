@@ -77,6 +77,7 @@ void TimerModule::TryExecuteNode(srv_rbtree_node_t *node)
 
 EModuleRetCode TimerModule::Update()
 {
+	this->UpdateTime();
 	this->ChekRemoveNodes();
 
 	if (!m_nodes_execute_now.empty())
@@ -89,19 +90,15 @@ EModuleRetCode TimerModule::Update()
 	}
 
 	int loop = 0;
-	while (++ loop < 10000000)
+	while (loop ++ < 10000000 && m_rbtree_timer_items->root != m_rbtree_timer_items->sentinel)
 	{
-		if (m_rbtree_timer_items->root != m_rbtree_timer_items->sentinel)
-		{
-			srv_rbtree_node_t *node = srv_rbtree_min(m_rbtree_timer_items->root, m_rbtree_timer_items->sentinel);
-			if (m_rbtree_timer_items->sentinel == node)
-				break;
-			if (node->key > m_now_ms)
-				break;
-			srv_rbtree_delete(m_rbtree_timer_items, node);
-
-			this->TryExecuteNode(node);
-		}
+		srv_rbtree_node_t *node = srv_rbtree_min(m_rbtree_timer_items->root, m_rbtree_timer_items->sentinel);
+		if (m_rbtree_timer_items->sentinel == node)
+			break;
+		if (node->key > m_now_ms)
+			break;
+		srv_rbtree_delete(m_rbtree_timer_items, node);
+		this->TryExecuteNode(node);
 	}
 	this->ChekRemoveNodes();
 

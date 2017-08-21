@@ -59,7 +59,7 @@ namespace Net
 		std::thread *m_loop_thread = nullptr;
 		bool m_is_runing = false;
 		bool m_is_done = false;
-		int m_loop_span = 100;
+		int m_loop_span = 1250;
 
 	protected:
 		static void CnnEventCb(struct bufferevent *bev, short events, void *ptr);
@@ -67,5 +67,6 @@ namespace Net
 		static void CnnWriteCb(struct bufferevent *bev, void *ctx);
 		static void ListenAcceptCb(struct evconnlistener *listener, evutil_socket_t fd, struct sockaddr *address, int socklen, void *ctx);
 		static void ListenErrorCb(struct evconnlistener *listener, void *ctx);
+		int m_event_cb_times = 0;
 	};
 }

@@ -2,11 +2,10 @@
 
 namespace Net
 {
-	ConnectTask::ConnectTask(EConnectTaskType task_type, int64_t id, std::function<void(NetId, int)> retCb)
+	ConnectTask::ConnectTask(EConnectTaskType task_type, int64_t id)
 	{
 		m_task_type = task_type;
 		m_id = id;
-		m_retCb = retCb;
 		m_result.id = m_id;
 		m_result.task_type = m_task_type;
 	}
@@ -16,10 +15,8 @@ namespace Net
 
 	}
 
-	ConnectTaskConnect::ConnectTaskConnect(int64_t id, std::string ip, 
-		uint16_t port, void *opt, std::function<void(NetId, int)> retCb)
-		: ConnectTask(EConnectTask_Connect, id, retCb), 
-		m_ip(ip), m_port(port), m_opt(opt)
+	ConnectTaskConnect::ConnectTaskConnect(int64_t id, std::string ip, uint16_t port, void *opt)
+		: ConnectTask(EConnectTask_Connect, id), m_ip(ip), m_port(port), m_opt(opt)
 	{
 	}
 
@@ -28,10 +25,8 @@ namespace Net
 
 	}
 
-	ConnectTaskListen::ConnectTaskListen(int64_t id, std::string ip, 
-		uint16_t port, void *opt, std::function<void(NetId, int)> retCb)
-		: ConnectTask(EConnectTask_Listen, id, retCb),
-		m_ip(ip), m_port(port), m_opt(opt)
+	ConnectTaskListen::ConnectTaskListen(int64_t id, std::string ip, uint16_t port, void *opt)
+		: ConnectTask(EConnectTask_Listen, id), m_ip(ip), m_port(port), m_opt(opt)
 	{
 
 	}
@@ -76,7 +71,7 @@ namespace Net
 				break;
 			}
 
-			Net:u_long ret = 0;
+			Net::u_long ret = 0;
 			ioctlsocket(sock, FIONBIO, &ret);
 			m_result.fd = sock;
 
@@ -123,7 +118,7 @@ namespace Net
 				m_result.err_msg = "listen socket fail";
 				break;
 			}
-			Net:u_long ret = 0;
+			Net::u_long ret = 0;
 			ioctlsocket(sock, FIONBIO, &ret);
 			m_result.fd = sock;
 

@@ -54,10 +54,8 @@ public:
 	virtual NetId Listen(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler);
 	virtual NetId Connect(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler);
 	virtual void Close(NetId netid);
-	virtual int64_t ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler,
-		std::function<void(NetId, int)> retCb);
-	virtual int64_t ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler,
-		std::function<void(NetId, int)> retCb);
+	virtual int64_t ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler);
+	virtual int64_t ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler);
 	virtual void CancelAsync(uint64_t async_id);
 	virtual bool Send(NetId netId, char *buffer, uint32_t len);
 	int LogId() { return m_log_Id; }
@@ -68,7 +66,7 @@ protected:
 	std::mutex *m_cnn_results_mutex = nullptr;
 	std::queue<Net::ConnectResult> m_cnn_results;
 	std::queue<Net::ConnectResult> m_cnn_results_swap;
-	int m_cnn_task_thread_num = 3;
+	int m_cnn_task_thread_num = 2;
 	ConnectTaskThread **m_cnn_task_threads = nullptr;
 	void ProcessConnectResult();
 
@@ -81,7 +79,7 @@ protected:
 	int m_log_Id = 3;
 
 protected:
-	int m_net_worker_num = 3;
+	int m_net_worker_num = 2;
 	Net::INetWorker **m_net_workers;
 	Net::INetWorker * ChoseWorker(NetId netid);
 	void ProcessNetDatas();

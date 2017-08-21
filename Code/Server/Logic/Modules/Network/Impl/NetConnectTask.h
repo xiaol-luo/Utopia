@@ -34,7 +34,7 @@ namespace Net
 	class ConnectTask
 	{
 	public:
-		ConnectTask(EConnectTaskType task_type, int64_t id, std::function<void(NetId, int)> retCb);
+		ConnectTask(EConnectTaskType task_type, int64_t id);
 		virtual ~ConnectTask();
 		virtual void Process() = 0;
 		EConnectTaskType TaskType() { return m_task_type; }
@@ -47,13 +47,12 @@ namespace Net
 		EConnectTaskState m_task_state = EConnectTask_Ready;
 		int64_t m_id = 0;
 		ConnectResult m_result;
-		std::function<void(NetId, int)> m_retCb = nullptr;
 	};
 
 	class ConnectTaskConnect : public ConnectTask
 	{
 	public:
-		ConnectTaskConnect(int64_t id, std::string ip, uint16_t port, void *opt, std::function<void(NetId, int)> retCb);
+		ConnectTaskConnect(int64_t id, std::string ip, uint16_t port, void *opt);
 		virtual ~ConnectTaskConnect();
 		virtual void Process();
 
@@ -66,7 +65,7 @@ namespace Net
 	class ConnectTaskListen : public ConnectTask
 	{
 	public:
-		ConnectTaskListen(int64_t id, std::string ip, uint16_t port, void *opt, std::function<void(NetId, int)> retCb);
+		ConnectTaskListen(int64_t id, std::string ip, uint16_t port, void *opt);
 		virtual ~ConnectTaskListen();
 		virtual void Process();
 

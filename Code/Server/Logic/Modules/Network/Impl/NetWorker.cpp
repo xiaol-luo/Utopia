@@ -4,11 +4,6 @@
 #include "event2/listener.h"
 #include "event2/buffer.h"
 
-#ifdef WIN32
-#include <winsock2.h>
-#define close closesocket
-#endif
-
 namespace Net
 {
 	NetWorker::NetWorker()
@@ -25,6 +20,10 @@ namespace Net
 	{
 		if (!m_is_runing)
 			return false;
+		std::shared_ptr<INetworkHandler> sp_handler = handler.lock();
+		if (nullptr == sp_handler)
+			return false;
+		sp_handler->SetNetId(id);
 
 		bool ret = false;
 		m_cnn_data_mutex.lock();
@@ -110,6 +109,7 @@ namespace Net
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
+		++net_worker->m_event_cb_times;
 
 		if (events & BEV_EVENT_CONNECTED) 
 		{
@@ -117,13 +117,13 @@ namespace Net
 		}
 		else if (events & BEV_EVENT_ERROR) 
 		{
-			net_worker->m_internal_wait_remove_netids.insert(cnn_data->fd);
+			net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Error, -1, 0, nullptr, 0);
 			net_worker->PushNetworkData(data);
 		}
 		else if (events & BEV_EVENT_EOF)
 		{
-			net_worker->m_internal_wait_remove_netids.insert(cnn_data->fd);
+			net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
 			net_worker->PushNetworkData(data);
 		}
@@ -133,6 +133,7 @@ namespace Net
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
+		++net_worker->m_event_cb_times;
 
 		struct evbuffer *in_buffer = bufferevent_get_input(bev);
 		size_t len = evbuffer_get_length(in_buffer);
@@ -147,13 +148,17 @@ namespace Net
 
 	void NetWorker::CnnWriteCb(struct bufferevent *bev, void *ctx)
 	{
-
+		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
+		NetWorker *net_worker = cnn_data->net_worker;
+		++net_worker->m_event_cb_times;
 	}
 
 	void NetWorker::ListenAcceptCb(struct evconnlistener *listener, evutil_socket_t fd, struct sockaddr *address, int addresslen, void *ctx)
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
+		++net_worker->m_event_cb_times;
+
 		NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Read, 0, fd, nullptr, 0);
 		net_worker->PushNetworkData(data);
 	}
@@ -162,11 +167,11 @@ namespace Net
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
+		++ net_worker->m_event_cb_times;
 
-		net_worker->m_internal_wait_remove_netids.insert(cnn_data->fd);
+		net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 		NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
 		net_worker->PushNetworkData(data);
-		net_worker->m_internal_wait_remove_netids.insert(cnn_data->fd);
 	}
 
 	void NetWorker::Loop()
@@ -181,18 +186,19 @@ namespace Net
 			while (loop_times ++ < 1000000)
 			{
 				int ret = event_base_loop(base, EVLOOP_NONBLOCK);
-				if (0 == ret)
+				if (-1 != ret)
 				{
-					continue;
-				}
-				if (1 == ret)
-				{
-					if (loop_times <= 1)
+					if (0 == m_event_cb_times)
+					{
 						std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span));
-					continue;
+						break;
+					}
+					m_event_cb_times = 0;
 				}
-				if (-1 == ret)
+				else
 				{
+					int err_num = GetLastError();
+					break;
 					// do something ?
 				}
 			}
@@ -213,38 +219,78 @@ namespace Net
 
 	void NetWorker::CheckAddCnnDatas(event_base *base)
 	{
-		if (!m_wait_add_cnn_datas.empty())
+		std::unordered_map<NetId, NetConnectionData *> swap_cnn_datas;
+		m_cnn_data_mutex.lock();
+		swap_cnn_datas.swap(m_wait_add_cnn_datas);
+		m_cnn_data_mutex.unlock();
+
+		if (!swap_cnn_datas.empty())
 		{
-			for (auto kv_pair : m_wait_add_cnn_datas)
+			for (auto kv_pair : swap_cnn_datas)
 			{
 				NetId netid = kv_pair.first;
 				NetConnectionData *cnn_data = kv_pair.second;
 
-				if (cnn_data->handler.expired())
+				bool is_ok = true;
+				do 
 				{
-					close(cnn_data->fd);
+					if (0 != evutil_make_socket_nonblocking(cnn_data->fd))
+					{
+						cnn_data->fd = -1;
+						is_ok = false;
+						break;
+					}
+					if (cnn_data->handler.expired())
+					{
+						is_ok = false;
+						break;
+					}
+
+					std::shared_ptr<INetworkHandler> handler = cnn_data->handler.lock();
+					if (ENetworkHandler_Connect == handler->HandlerType())
+					{
+						bufferevent *bev = bufferevent_socket_new(base, cnn_data->fd, BEV_OPT_CLOSE_ON_FREE);
+						if (nullptr == bev)
+						{
+							is_ok = false;
+							break;
+						}
+						bufferevent_setcb(bev, CnnReadCb, CnnWriteCb, CnnEventCb, cnn_data);
+						bufferevent_enable(bev, EV_READ);
+						// bufferevent_enable(bev, EV_WRITE);
+						cnn_data->buffer_ev = bev;
+					}
+					if (ENetworkHandler_Listen == handler->HandlerType())
+					{
+						evconnlistener *listener = evconnlistener_new(base, ListenAcceptCb, cnn_data,
+							LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, 64, cnn_data->fd);
+						if (nullptr == listener)
+						{
+							is_ok = false;
+							break;
+						}
+						evconnlistener_set_error_cb(listener, ListenErrorCb);
+						cnn_data->listen_ev = listener;
+					}
+				} while (false);
+
+				if (is_ok)
+				{
+					m_cnn_data_mutex.lock();
+					m_cnn_datas[netid] = cnn_data;
+					m_cnn_data_mutex.unlock();
+				}
+				else
+				{
+					NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
+					this->PushNetworkData(data);
+					if (cnn_data->fd >= 0)
+						evutil_closesocket(cnn_data->fd);
 					delete cnn_data;
 					continue;
 				}
-				std::shared_ptr<INetworkHandler> handler = cnn_data->handler.lock();
-				if (ENetworkHandler_Connect == handler->HandlerType())
-				{
-					bufferevent *bev = bufferevent_socket_new(base, cnn_data->fd, BEV_OPT_CLOSE_ON_FREE);
-					bufferevent_setcb(bev, CnnReadCb, CnnWriteCb, CnnEventCb, cnn_data);
-					bufferevent_enable(bev, EV_READ);
-					bufferevent_enable(bev, EV_WRITE);
-					cnn_data->buffer_ev = bev;
-				}
-				if (ENetworkHandler_Listen == handler->HandlerType())
-				{
-					evconnlistener *listener = evconnlistener_new(base, ListenAcceptCb, cnn_data,
-						LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, 64, cnn_data->fd);
-					evconnlistener_set_error_cb(listener, ListenErrorCb);
-					cnn_data->listen_ev = listener;
-				}
-				m_cnn_datas[netid] = cnn_data;
 			}
-			m_wait_add_cnn_datas.clear();
+			swap_cnn_datas.clear();
 		}
 	}
 
@@ -261,7 +307,7 @@ namespace Net
 					auto it = m_wait_add_cnn_datas.find(netid);
 					if (m_wait_add_cnn_datas.end() != it)
 					{
-						close(it->second->fd);
+						evutil_closesocket(it->second->fd);
 						delete it->second;
 						m_wait_add_cnn_datas.erase(netid);
 					}
@@ -270,7 +316,7 @@ namespace Net
 					auto it = m_cnn_datas.find(netid);
 					if (m_cnn_datas.end() != it)
 					{
-						close(it->second->fd);
+						evutil_closesocket(it->second->fd);
 						if (nullptr != it->second->buffer_ev)
 							bufferevent_free(it->second->buffer_ev);
 						if (nullptr != it->second->listen_ev)
