@@ -2,6 +2,14 @@
 
 #include "ServerLogics/ServerLogic.h"
 
+namespace GameLogic
+{
+	enum LogId
+	{
+		LogId_Network = 2,
+	};
+}
+
 class GameServerLogic : public ServerLogic
 {
 public:

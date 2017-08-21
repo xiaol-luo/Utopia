@@ -6,8 +6,8 @@
 enum ELoggerType
 {
 	ELoggerType_Invalid = 0,
-	ELoggerType_Stderr,
 	ELoggerType_Stdout,
+	ELoggerType_Stderr,
 	ELoggerType_Common,
 	ELoggerType_Rotating,
 	ELoggerType_Daily,
@@ -137,33 +137,28 @@ EModuleRetCode LogModule::Init(void *param)
 			m_log_datas[logger_id].log_level = (ELogLevel)cfg->log_level;
 		}
 
-		for (int i = 0; i < m_logger_num; ++i)
+		for (int i = LOGGER_ID_STDERR + 1; i < m_logger_num; ++i)
 		{
 			LogData &data = m_log_datas[i];
 			data.log_id = i;
 			std::shared_ptr<spdlog::logger> logger = m_loggers[i];
 			if (nullptr == logger)
 				continue;
-			data.write_loggers.insert(logger);
-			for (auto kv_pair : cfg_map)
+			data.write_loggers.insert(logger); // 把内容写入自己的loggger
+			for (auto kv_pair : cfg_map) // 检查是否需要把内容写入其他loggger
 			{
 				int logger_id = kv_pair.first;
-				Config::CsvLogConfig *cfg = kv_pair.second;
 				if (logger_id == data.log_id)
 					continue;
 				std::shared_ptr<spdlog::logger> tmp_logger = m_loggers[logger_id];
 				if (nullptr == tmp_logger)
 					continue;
+
+				Config::CsvLogConfig *cfg = kv_pair.second;
 				for (int writer_id : cfg->alsoWritetoMe)
 				{
 					if (-1 == writer_id || data.log_id == writer_id)
 					{
-						// 写到标准错误的内容不要同时写到标准输出
-						if (data.log_id == LOGGER_ID_STDERR && cfg->id == LOGGER_ID_STDOUT)
-							continue;
-						// 写到标准输出的内容不要同时写到标准错误
-						if (data.log_id == LOGGER_ID_STDOUT && cfg->id == LOGGER_ID_STDERR)
-							continue;
 						data.write_loggers.insert(tmp_logger);
 						break;
 					}
@@ -172,7 +167,6 @@ EModuleRetCode LogModule::Init(void *param)
 		}
 	} while (false);
 
-	m_state = ret ? EModuleState_Inited : EModuleState_Error;
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 

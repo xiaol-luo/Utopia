@@ -22,8 +22,6 @@ EModuleRetCode TimerModule::Init(void *param)
 	m_rbtree_timer_items = new srv_rbtree_t;
 	memset(m_rbtree_timer_items, 0, sizeof(srv_rbtree_t));
 	srv_rbtree_init(m_rbtree_timer_items, m_rbtree_sentinel_node, srv_rbtree_insert_value);
-
-	m_state = EModuleState_Inited;
 	return EModuleRetCode_Succ;
 }
 
@@ -134,7 +132,6 @@ EModuleRetCode TimerModule::Release()
 	}
 	delete m_rbtree_sentinel_node; m_rbtree_sentinel_node = nullptr;
 	delete m_rbtree_timer_items; m_rbtree_timer_items = nullptr;
-
 
 	return EModuleRetCode_Succ;
 }

@@ -150,11 +150,6 @@ NetworkModule::~NetworkModule()
 
 EModuleRetCode NetworkModule::Init(void *param)
 {
-#ifdef WIN32
-	WSADATA wsa_data;
-	WSAStartup(0x0201, &wsa_data);
-#endif
-
 	return EModuleRetCode_Succ;
 }
 
@@ -216,9 +211,9 @@ EModuleRetCode NetworkModule::Destroy()
 	return EModuleRetCode_Succ;
 }
 
-NetId NetworkModule::Listen(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetListenHander> handler)
+NetId NetworkModule::Listen(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler)
 {
-	std::shared_ptr<NetworkHandler> sp_handler = handler.lock();
+	std::shared_ptr<INetworkHandler> sp_handler = handler.lock();
 	if (nullptr == sp_handler) return 0;
 
 	NetId netid = 0;
@@ -232,7 +227,7 @@ NetId NetworkModule::Listen(std::string ip, uint16_t port, void *opt, std::weak_
 		netid = this->GenNetId();
 		if (ChoseWorker(netid)->AddCnn(netid, ret.fd, handler))
 		{
-			sp_handler->OnSucc(netid);
+			sp_handler->OnSucc();
 		}
 		else
 		{
@@ -243,16 +238,16 @@ NetId NetworkModule::Listen(std::string ip, uint16_t port, void *opt, std::weak_
 	}
 	if (0 != err_num)
 	{
-		sp_handler->OnError(netid, err_num);
+		sp_handler->OnError(err_num);
 		std::shared_ptr<LogModule> log = m_module_mgr->GetModule<LogModule>();
 		log->Error(this->LogId(), "NetworkModule::Listen {0}:{1} fail, errno {2}", ip, port, err_num);
 	}
 	return netid;
 }
 
-NetId NetworkModule::Connect(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetConnectHander> handler)
+NetId NetworkModule::Connect(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler)
 {
-	std::shared_ptr<NetworkHandler> sp_handler = handler.lock();
+	std::shared_ptr<INetworkHandler> sp_handler = handler.lock();
 	if (nullptr == sp_handler) return 0;
 
 	NetId netid = 0;
@@ -266,7 +261,7 @@ NetId NetworkModule::Connect(std::string ip, uint16_t port, void *opt, std::weak
 		netid = this->GenNetId();
 		if (ChoseWorker(netid)->AddCnn(netid, ret.fd, handler))
 		{
-			sp_handler->OnSucc(netid);
+			sp_handler->OnSucc();
 		}
 		else
 		{
@@ -277,7 +272,7 @@ NetId NetworkModule::Connect(std::string ip, uint16_t port, void *opt, std::weak
 	}
 	if (0 != err_num)
 	{
-		sp_handler->OnError(netid, err_num);
+		sp_handler->OnError(err_num);
 		std::shared_ptr<LogModule> log = m_module_mgr->GetModule<LogModule>();
 		log->Error(this->LogId(), "NetworkModule::Connect {0}:{1} fail, errno {2}", ip, port, err_num);
 	}
@@ -289,7 +284,7 @@ void NetworkModule::Close(NetId netid)
 	this->ChoseWorker(netid)->RemoveCnn(netid);
 }
 
-int64_t NetworkModule::ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetListenHander> handler,
+int64_t NetworkModule::ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler,
 	std::function<void(NetId, int)> retCb)
 {
 	if (nullptr == handler.lock()) return 0;
@@ -304,7 +299,7 @@ int64_t NetworkModule::ListenAsync(std::string ip, uint16_t port, void *opt, std
 	return async_id;
 }
 
-int64_t NetworkModule::ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetConnectHander> handler,
+int64_t NetworkModule::ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler,
 	std::function<void(NetId, int)> retCb)
 {
 	if (nullptr == handler.lock()) return 0;
@@ -370,7 +365,7 @@ void NetworkModule::ProcessConnectResult()
 		}
 		else
 		{
-			std::shared_ptr<NetworkHandler> handler = it->second.lock();
+			std::shared_ptr<INetworkHandler> handler = it->second.lock();
 			int err_num = ret.err_num;
 			std::string err_msg = ret.err_msg;
 			if (0 == err_num)
@@ -378,7 +373,7 @@ void NetworkModule::ProcessConnectResult()
 				NetId netid = this->GenNetId();
 				if (ChoseWorker(netid)->AddCnn(netid, ret.fd, handler))
 				{
-					handler->OnSucc(netid);
+					handler->OnSucc();
 				}
 				else
 				{
@@ -389,7 +384,7 @@ void NetworkModule::ProcessConnectResult()
 			}
 			if (0 != err_num)
 			{
-				handler->OnError(0, err_num);
+				handler->OnError(err_num);
 				std::shared_ptr<LogModule> log = m_module_mgr->GetModule<LogModule>();
 				log->Error(this->LogId(), "NetworkModule::ProcessConnectResult errno {0}", err_num);
 			}
@@ -409,7 +404,7 @@ void NetworkModule::ProcessNetDatas()
 			while (!net_datas->empty())
 			{
 				NetWorkData &data = net_datas->front();
-				std::shared_ptr<NetworkHandler> handler = data.handler.lock();
+				std::shared_ptr<INetworkHandler> handler = data.handler.lock();
 				if (nullptr == handler)
 				{
 					to_remove_netids.insert(data.netid);
@@ -418,35 +413,44 @@ void NetworkModule::ProcessNetDatas()
 				{
 					if (ENetworkHandler_Connect == handler->HandlerType())
 					{
-						std::shared_ptr<NetConnectHander> tmp_handler = std::dynamic_pointer_cast<NetConnectHander>(handler);
-						if (0 == data.err_num)
+						std::shared_ptr<INetConnectHander> tmp_handler = std::dynamic_pointer_cast<INetConnectHander>(handler);
+						if (ENetWorkDataAction_Error == data.action)
+							tmp_handler->OnError(data.err_num);
+						if (ENetWorkDataAction_Close == data.action)
+							tmp_handler->OnClose();
+						if (ENetWorkDataAction_Read == data.action)
 						{
-							tmp_handler->OnRecvData(data.netid, data.binary, data.binary_len);
-						}
-						else 
-						{
-							tmp_handler->OnError(data.netid, data.err_num);
+							tmp_handler->OnRecvData(data.binary, data.binary_len);
+							free(data.binary); data.binary = nullptr; 
+							data.binary_len = 0;
 						}
 					}
 					if (ENetworkHandler_Listen == handler->HandlerType())
 					{
-						std::shared_ptr<NetListenHander> tmp_handler = std::dynamic_pointer_cast<NetListenHander>(handler);
-						if (0 == data.err_num)
+						std::shared_ptr<INetListenHander> tmp_handler = std::dynamic_pointer_cast<INetListenHander>(handler);
+						if (ENetWorkDataAction_Read == data.action)
 						{
-							NetId netid = this->GenNetId();
-							std::shared_ptr<NetConnectHander> new_handler = tmp_handler->GenConnectorHandler();
-							if (ChoseWorker(netid)->AddCnn(netid, data.new_fd, handler))
+							if (ENetWorkDataAction_Error == data.action)
+								tmp_handler->OnError(data.err_num);
+							if (ENetWorkDataAction_Close == data.action)
+								tmp_handler->OnClose();
+							if (ENetWorkDataAction_Read == data.action)
 							{
-								tmp_handler->OnNewConnect(netid);
+								NetId netid = this->GenNetId();
+								std::shared_ptr<INetConnectHander> new_handler = tmp_handler->GenConnectorHandler(netid);
+								bool is_ok = false;
+								if (nullptr != new_handler && ChoseWorker(netid)->AddCnn(netid, data.new_fd, handler))
+								{
+									is_ok = true;
+									new_handler->OnSucc();
+								}
+								if (!is_ok)
+								{
+									close(data.new_fd);
+									if (nullptr != new_handler)
+										new_handler->OnError(1);
+								}
 							}
-							else
-							{
-								close(data.new_fd);
-							}
-						}
-						else
-						{
-							tmp_handler->OnError(data.netid, data.err_num);
 						}
 					}
 				}

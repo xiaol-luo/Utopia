@@ -14,33 +14,40 @@ enum ENetworkHandlerType
 	ENetworkHandlerType_Max,
 };
 
-class NetworkHandler
+class INetConnectHander;
+class INetListenHander;
+
+class INetworkHandler
 {
 public:
-	NetworkHandler(ENetworkHandlerType handler_type) : m_handler_type(handler_type) {}
-	virtual ~NetworkHandler() {}
-	virtual void OnError(NetId netid, int errnu) = 0;
-	virtual void OnSucc(NetId netid) = 0;
-	virtual void OnClose(NetId netid) = 0;
+	INetworkHandler(ENetworkHandlerType handler_type, NetId netid) : m_handler_type(handler_type) {}
+	virtual ~INetworkHandler() {}
+	virtual void OnError(int err_num) = 0;
+	virtual void OnSucc() = 0;
+	virtual void OnClose() = 0;
 	ENetworkHandlerType HandlerType() { return m_handler_type; }
+	NetId GetNetId() { return m_netid; }
 
 protected:
 	ENetworkHandlerType m_handler_type;
+	NetId m_netid;
 };
-class NetConnectHander : public NetworkHandler
+class INetConnectHander : public INetworkHandler
 {
 public:
-	NetConnectHander() : NetworkHandler(ENetworkHandler_Connect) {}
-	virtual ~NetConnectHander() {}
-	virtual void OnRecvData(NetId netid, char *data, uint32_t len) = 0;
+	INetConnectHander(NetId netid) : INetworkHandler(ENetworkHandler_Connect, netid) {}
+	virtual ~INetConnectHander() {}
+	virtual void OnRecvData(char *data, uint32_t len) = 0;
+	void SetListenHandler(std::weak_ptr<INetListenHander> listen_handler) { m_relate_listen_handler = listen_handler; }
+private:
+	std::weak_ptr<INetListenHander> m_relate_listen_handler;
 };
-class NetListenHander : public NetworkHandler
+class INetListenHander : public INetworkHandler
 {
 public:
-	NetListenHander() : NetworkHandler(ENetworkHandler_Listen) {}
-	virtual ~NetListenHander() {}
-	virtual void OnNewConnect(NetId netid) = 0;
-	virtual std::shared_ptr<NetConnectHander> GenConnectorHandler() = 0;
+	INetListenHander(NetId netid) : INetworkHandler(ENetworkHandler_Listen, netid) {}
+	virtual ~INetListenHander() {}
+	virtual std::shared_ptr<INetConnectHander> GenConnectorHandler(NetId netid) = 0;
 };
 
 class INetworkModule : public IModule
@@ -56,12 +63,12 @@ public:
 	virtual EModuleRetCode Destroy() = 0;
 
 public:
-	virtual NetId Listen(std::string ip, uint16_t port,  void *opt, std::weak_ptr<NetListenHander> handler) = 0;
-	virtual NetId Connect(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetConnectHander> handler) = 0;
+	virtual NetId Listen(std::string ip, uint16_t port,  void *opt, std::weak_ptr<INetListenHander> handler) = 0;
+	virtual NetId Connect(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler) = 0;
 	virtual void Close(NetId netid) = 0;
-	virtual int64_t ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetListenHander> handler,
+	virtual int64_t ListenAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetListenHander> handler,
 		std::function<void(NetId, int)> retCb) = 0;
-	virtual int64_t ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<NetConnectHander> handler,
+	virtual int64_t ConnectAsync(std::string ip, uint16_t port, void *opt, std::weak_ptr<INetConnectHander> handler,
 		std::function<void(NetId, int)> retCb) = 0;
 	virtual void CancelAsync(uint64_t async_id) = 0;
 	virtual bool Send(NetId netId, char *buffer, uint32_t len) = 0;

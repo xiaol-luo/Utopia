@@ -36,8 +36,8 @@ EModuleRetCode ConfigModule::Init(void *param)
 
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
-
-class NetConnectHanderTest : public NetConnectHander
+/*
+class NetConnectHanderTest : public INetConnectHander
 {
 public:
 	virtual void OnError(NetId netid, int errnu) {}
@@ -46,7 +46,7 @@ public:
 	virtual void OnRecvData(NetId netid, char *data, uint32_t len) {}
 };
 
-class NetListenHanderTest : public NetListenHander
+class NetListenHanderTest : public INetListenHander
 {
 public:
 	virtual void OnError(NetId netid, int errnu) {}
@@ -57,21 +57,22 @@ public:
 
 	}
 
-	virtual std::shared_ptr<NetConnectHander>  GenConnectorHandler()
+	virtual std::shared_ptr<INetConnectHander>  GenConnectorHandler(NetId netid)
 	{
 		return std::make_shared<NetConnectHanderTest>();
 	}
 };
+*/
 
 EModuleRetCode ConfigModule::Awake()
 {
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
 
 	m_test_timer = std::make_shared<ObjectBase>();
-	m_test_listen_handler = std::make_shared<NetListenHanderTest>();
-	m_test_cnn_handler = std::make_shared<NetConnectHanderTest>();
+	// m_test_listen_handler = std::make_shared<NetListenHanderTest>();
+	// m_test_cnn_handler = std::make_shared<NetConnectHanderTest>();
 	std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
-	net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
+	// net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
 	return EModuleRetCode_Succ;
 }
 
@@ -88,7 +89,7 @@ EModuleRetCode ConfigModule::Update()
 
 	{
 		std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
-		net_module->Connect("127.0.0.1", 10240, nullptr, m_test_cnn_handler);
+		// net_module->Connect("127.0.0.1", 10240, nullptr, m_test_cnn_handler);
 	}
 	return EModuleRetCode_Succ;
 }

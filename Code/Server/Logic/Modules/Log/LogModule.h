@@ -67,8 +67,8 @@ public:
 	}
 
 protected:
-	static const int LOGGER_ID_STDERR = 1;
-	static const int LOGGER_ID_STDOUT = 2;
+	static const int LOGGER_ID_STDERR = 2;
+	static const int LOGGER_ID_STDOUT = 1;
 	int m_logger_num = 0;
 	std::shared_ptr<spdlog::logger> *m_loggers = nullptr;
 

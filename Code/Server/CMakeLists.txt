@@ -32,12 +32,18 @@ SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 
-INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Logic)
+INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Logic ./Libs/3rdpartLibs/Libevent)
 INCLUDE_DIRECTORIES(./Logic/Modules/Config/AutoCsvCode)
+IF (WIN32)
+	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/win-libs)
+ELSE ()
+ENDIF (WIN32)
+LINK_LIBRARIES(event event_core event_extra)
+
 ADD_EXECUTABLE(${ProjectName} ${SourceFiles})
 ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS /wd4267 /wd4244 /wd4996 /D _WINSOCK_DEPRECATED_NO_WARNINGS)
-
 ADD_COMPILE_OPTIONS(-g -std=c++11)
 
 #SET_PROPERTIES(PROPERTIES FOLDER "examples")
-#LINK_LIBRARIES(event_extra event_core ws2_32 common)
+
+

@@ -29,6 +29,7 @@ EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
 		EModuleRetCode ret = module->Init(param);
 		if (EModuleRetCode_Failed == ret)
 		{
+			module->SetState(EModuleState_Error);
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
@@ -53,6 +54,7 @@ EModuleRetCode ModuleMgr::Awake()
 		EModuleRetCode ret = module->Awake();
 		if (EModuleRetCode_Failed == ret)
 		{
+			module->SetState(EModuleState_Error);
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
@@ -78,6 +80,7 @@ EModuleRetCode ModuleMgr::Update()
 		EModuleRetCode ret = module->Update();
 		if (EModuleRetCode_Failed == ret)
 		{
+			module->SetState(EModuleState_Error);
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
@@ -98,6 +101,7 @@ EModuleRetCode ModuleMgr::Realse()
 		EModuleRetCode ret = module->Release();
 		if (EModuleRetCode_Failed == ret)
 		{
+			module->SetState(EModuleState_Error);
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
@@ -122,6 +126,7 @@ EModuleRetCode ModuleMgr::Destroy()
 		EModuleRetCode ret = module->Destroy();
 		if (EModuleRetCode_Failed == ret)
 		{
+			module->SetState(EModuleState_Error);
 			retCode = EModuleRetCode_Failed;
 			break;
 		}
