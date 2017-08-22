@@ -11,6 +11,7 @@
 struct bufferevent;
 struct evconnlistener;
 struct event_base;
+struct evbuffer;
 
 namespace Net
 {
@@ -45,14 +46,16 @@ namespace Net
 			bufferevent *buffer_ev = nullptr;
 			evconnlistener *listen_ev = nullptr;
 			NetWorker *net_worker = nullptr;
-			struct evbuffer *send_buf = nullptr;
 		};
 		std::unordered_map<NetId, NetConnectionData *> m_cnn_datas;
 		std::unordered_map<NetId, NetConnectionData *> m_wait_add_cnn_datas;
 		std::set<NetId> m_wait_remove_netids;
 		std::mutex m_cnn_data_mutex;
 		std::set<NetId> m_internal_wait_remove_netids;
-		std::set<NetConnectionData *> m_need_send_cnns;
+
+		std::mutex m_need_send_bufs_mutex;
+		std::unordered_map<NetId, evbuffer *> m_need_send_bufs;
+
 	protected:
 		void CheckAddCnnDatas(event_base *base);
 		void CheckRemoveCnnDatas();

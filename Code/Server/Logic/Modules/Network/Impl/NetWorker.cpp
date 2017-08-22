@@ -70,28 +70,28 @@ namespace Net
 		m_cnn_data_mutex.unlock();
 	}
 
-	bool NetWorker::Send(NetId netId, char *buffer, uint32_t len)
+	bool NetWorker::Send(NetId netid, char *buffer, uint32_t len)
 	{
-		if (netId <= 0 || nullptr == buffer || len <= 0)
+		if (netid <= 0 || nullptr == buffer || len <= 0)
 			return false;
 
 		bool ret = false;
-		m_network_data_mutex.lock();
-		auto it = m_cnn_datas.find(netId);
-		if (m_cnn_datas.end() != it)
+		m_need_send_bufs_mutex.lock();
+		auto it = m_need_send_bufs.find(netid);
+		if (m_need_send_bufs.end() == it)
 		{
-			NetConnectionData *cnn_data = it->second;
-			if (!cnn_data->is_expired && ENetworkHandler_Connect == cnn_data->handler_type)
-			{
-				ret = true;
-				m_need_send_cnns.insert(cnn_data);
-				if (nullptr == cnn_data->send_buf)
-					cnn_data->send_buf = evbuffer_new();
-				evbuffer_add(cnn_data->send_buf, buffer, len);
-			}
+			struct evbuffer *buf = evbuffer_new();
+			auto ret_it = m_need_send_bufs.insert(std::make_pair(netid, buf));
+			if (ret_it.second)
+				it = ret_it.first;
 		}
-		m_network_data_mutex.unlock();
-		return true;
+		if (m_need_send_bufs.end() != it)
+		{
+			if (0 == evbuffer_add(it->second, buffer, len))
+				ret = true;
+		}
+		m_need_send_bufs_mutex.unlock();
+		return ret;
 	}
 
 	bool NetWorker::GetNetDatas(std::queue<NetWorkData> *&out_datas)
@@ -243,12 +243,12 @@ namespace Net
 
 			this->CheckRemoveCnnDatas();
 		} 
-		m_need_send_cnns.clear();
 		for (auto kv_pair : m_cnn_datas)
 			m_internal_wait_remove_netids.insert(kv_pair.first);
 		for (auto kv_pair : m_wait_add_cnn_datas)
 			m_internal_wait_remove_netids.insert(kv_pair.first);
 		this->CheckRemoveCnnDatas();
+		this->CheckSendDatas();
 		event_base_free(base);
 		base = nullptr;
 	}
@@ -358,7 +358,6 @@ namespace Net
 						if (it->second->fd >= 0)
 							evutil_closesocket(it->second->fd);
 						delete it->second;
-						m_need_send_cnns.erase(it->second);
 						m_wait_add_cnn_datas.erase(it);
 					}
 				}
@@ -370,10 +369,7 @@ namespace Net
 							bufferevent_free(it->second->buffer_ev);
 						if (nullptr != it->second->listen_ev)
 							evconnlistener_free(it->second->listen_ev);
-						if (nullptr != it->second->send_buf)
-							evbuffer_free(it->second->send_buf);
 						delete it->second;
-						m_need_send_cnns.erase(it->second);
 						m_cnn_datas.erase(it);
 					}
 				}
@@ -385,24 +381,70 @@ namespace Net
 
 	void NetWorker::CheckSendDatas()
 	{
-		if (m_need_send_cnns.empty())
+		if (m_need_send_bufs.empty())
 			return;
 
-		m_network_data_mutex.lock();
-		std::vector<NetConnectionData *> done_cnns;
-		for (NetConnectionData *cnn_data : m_need_send_cnns)
+		std::unordered_map<NetId, evbuffer *> swap_need_send_bufs;
+		m_need_send_bufs_mutex.lock();
+		swap_need_send_bufs.swap(m_need_send_bufs);
+		m_need_send_bufs_mutex.unlock();
+
+		std::unordered_map <NetId, std::pair<evbuffer *, bufferevent *>> send_infos;
+		m_cnn_data_mutex.lock();
+		for (auto kv_pair : swap_need_send_bufs)
 		{
-			if (0 != bufferevent_write_buffer(cnn_data->buffer_ev, cnn_data->send_buf))
+			bufferevent *bev = nullptr;
 			{
-				// do something ? 
-				int test = 0;
-				test++;
+				auto it = m_cnn_datas.find(kv_pair.first);
+				if (m_cnn_datas.end() != it)
+					bev = it->second->buffer_ev;
 			}
-			if (evbuffer_get_length(cnn_data->send_buf) <= 0)
-				done_cnns.push_back(cnn_data);
+			send_infos[kv_pair.first] = std::make_pair(kv_pair.second, bev);
 		}
-		for (NetConnectionData *cnn_data : done_cnns)
-			m_need_send_cnns.erase(cnn_data);
-		m_network_data_mutex.unlock();
+		m_cnn_data_mutex.unlock();
+
+		std::vector<NetId> undone_netids;
+		for (auto kv_pair : send_infos)
+		{
+			std::pair<evbuffer *, bufferevent *> send_info = kv_pair.second;
+			evbuffer *buf = send_info.first;
+			bufferevent *bev = send_info.second;
+			bool is_ok = false;
+			if (nullptr != bev)
+				is_ok = (0 == bufferevent_write_buffer(bev, buf));
+			if (!is_ok || evbuffer_get_length(buf) <= 0)
+				evbuffer_free(buf);
+			else
+				undone_netids.push_back(kv_pair.first);
+		}
+		if (!undone_netids.empty())
+		{
+			m_need_send_bufs_mutex.lock();
+			for (NetId netid : undone_netids)
+			{
+				evbuffer *old_buf = nullptr;
+				{
+					auto it = swap_need_send_bufs.find(netid);
+					if (swap_need_send_bufs.end() != it)
+						old_buf = it->second;
+				}
+				if (nullptr == old_buf)
+					continue;
+
+				evbuffer *new_buf = nullptr;
+				{
+					auto it = m_need_send_bufs.find(netid);
+					if (m_need_send_bufs.end() != it)
+						new_buf = it->second;
+				}
+				if (nullptr != new_buf)
+				{
+					evbuffer_add_buffer(old_buf, new_buf);
+					evbuffer_free(new_buf);
+				}
+				m_need_send_bufs[netid] = old_buf;
+			}
+			m_need_send_bufs_mutex.unlock();
+		}
 	}
 }
