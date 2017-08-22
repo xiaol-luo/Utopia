@@ -21,6 +21,7 @@ namespace Net
 		virtual ~NetWorker();
 		virtual bool AddCnn(NetId id, int fd, std::weak_ptr<INetworkHandler> handler);
 		virtual void RemoveCnn(NetId id);
+		virtual bool Send(NetId netId, char *buffer, uint32_t len);
 		virtual bool GetNetDatas(std::queue<NetWorkData> *&out_datas);
 		virtual bool Start();
 		virtual void Stop();
@@ -42,12 +43,16 @@ namespace Net
 			bufferevent *buffer_ev = nullptr;
 			evconnlistener *listen_ev = nullptr;
 			NetWorker *net_worker = nullptr;
+			std::vector<std::string> m_send_datas;
 		};
 		std::unordered_map<NetId, NetConnectionData *> m_cnn_datas;
 		std::unordered_map<NetId, NetConnectionData *> m_wait_add_cnn_datas;
 		std::set<NetId> m_wait_remove_netids;
 		std::mutex m_cnn_data_mutex;
 		std::set<NetId> m_internal_wait_remove_netids;
+		std::set<NetConnectionData *> m_need_send_cnns;
+	protected:
+		void IntervalRemoveCnn(NetId netid, NetConnectionData *cnn_data);
 		void CheckAddCnnDatas(event_base *base);
 		void CheckRemoveCnnDatas();
 

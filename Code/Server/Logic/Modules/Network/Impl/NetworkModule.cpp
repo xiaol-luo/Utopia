@@ -341,7 +341,10 @@ void NetworkModule::CancelAsync(uint64_t async_id)
 
 bool NetworkModule::Send(NetId netId, char *buffer, uint32_t len)
 {
-	return 0;
+	if (netId <= 0 || nullptr == buffer || len <= 0)
+		return false;
+
+	return true;
 }
 
 NetId NetworkModule::GenNetId()

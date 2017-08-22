@@ -58,14 +58,34 @@ namespace Net
 		}
 		if (nullptr != cnn_data)
 		{
-			if (m_wait_remove_netids.count(id) <= 0 && m_internal_wait_remove_netids.count(id) <= 0)
+			if (!cnn_data->is_expired)
 			{
 				NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
 				this->PushNetworkData(data);
 			}
+			cnn_data->is_expired = true;
 			m_wait_remove_netids.insert(id);
 		}
 		m_cnn_data_mutex.unlock();
+	}
+
+	bool NetWorker::Send(NetId netId, char *buffer, uint32_t len)
+	{
+		bool ret = false;
+		m_network_data_mutex.lock();
+		auto it = m_cnn_datas.find(netId);
+		if (m_cnn_datas.end() != it)
+		{
+			NetConnectionData *cnn_data = it->second;
+			if (!cnn_data->is_expired)
+			{
+				cnn_data->m_send_datas.push_back(std::string(buffer, len));
+				m_need_send_cnns.insert(cnn_data);
+			}
+			
+		}
+		m_network_data_mutex.unlock();
+		return true;
 	}
 
 	bool NetWorker::GetNetDatas(std::queue<NetWorkData> *&out_datas)
@@ -133,12 +153,14 @@ namespace Net
 		}
 		else if (events & BEV_EVENT_ERROR) 
 		{
+			cnn_data->is_expired = true;
 			net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, -1, 0, nullptr, 0);
 			net_worker->PushNetworkData(data);
 		}
 		else if (events & BEV_EVENT_EOF)
 		{
+			cnn_data->is_expired = true;
 			net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
 			net_worker->PushNetworkData(data);
@@ -181,6 +203,7 @@ namespace Net
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
 
+		cnn_data->is_expired = true;
 		net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 		NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
 		net_worker->PushNetworkData(data);
@@ -230,6 +253,11 @@ namespace Net
 		m_network_data_mutex.unlock();
 	}
 
+	void NetWorker::IntervalRemoveCnn(NetId netid, NetConnectionData *cnn_data)
+	{
+
+	}
+
 	void NetWorker::CheckAddCnnDatas(event_base *base)
 	{
 		if (m_wait_add_cnn_datas.empty())
@@ -273,7 +301,7 @@ namespace Net
 						}
 						bufferevent_setcb(bev, CnnReadCb, CnnWriteCb, CnnEventCb, cnn_data);
 						bufferevent_enable(bev, EV_READ);
-						// bufferevent_enable(bev, EV_WRITE);
+						bufferevent_enable(bev, EV_WRITE);
 						cnn_data->buffer_ev = bev;
 					}
 					if (ENetworkHandler_Listen == handler->HandlerType())
