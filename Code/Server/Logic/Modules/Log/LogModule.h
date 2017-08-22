@@ -80,7 +80,7 @@ protected:
 	};
 
 	LogData *m_log_datas = nullptr;
-	long long m_last_flush_log_ts = 0;
+	int m_async_queue_size =  1024 * 128;
 
 private:
 

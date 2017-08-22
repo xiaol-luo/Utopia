@@ -39,6 +39,9 @@ EModuleRetCode LogModule::Init(void *param)
 	bool ret = true;
 	do 
 	{
+		spdlog::set_async_mode(m_async_queue_size);
+		spdlog::set_level(spdlog::level::debug);
+
 		Config::CsvLogConfigSet cfg_set;
 		std::string *file_path = (std::string *)param;
 		ret = cfg_set.Load(*file_path);
@@ -68,11 +71,6 @@ EModuleRetCode LogModule::Init(void *param)
 			ret = false;
 			break;
 		}
-
-		// static const int QUEUE_SIZE = 1024 * 64;
-		static const int QUEUE_SIZE = 32;
-		spdlog::set_async_mode(QUEUE_SIZE);
-		spdlog::set_level(spdlog::level::debug);
 
 		m_logger_num = max_log_id + 1;
 		m_log_datas = new LogData[m_logger_num];
@@ -177,10 +175,6 @@ EModuleRetCode LogModule::Awake()
 
 EModuleRetCode LogModule::Update()
 {
-	for (int i = 0; i < m_logger_num; ++i)
-	{
-		// if (nullptr != m_loggers[i]) m_loggers[i]->flush();
-	}
 	return EModuleRetCode_Succ;
 }
 

@@ -5,6 +5,7 @@
 
 #ifdef WIN32
 #include <winsock2.h>
+#define close closesocket
 #endif
 
 struct ConnectTaskThread
@@ -73,7 +74,8 @@ void CnnTaskWorker(ConnectTaskThread *task_thread)
 	{
 		if (cnn_tasks->empty())
 		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(250));
+			static const int SLEEP_SPAN = 25;
+			std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_SPAN));
 			continue;
 		}
 		Net::ConnectTask *task = nullptr;
@@ -343,8 +345,7 @@ bool NetworkModule::Send(NetId netId, char *buffer, uint32_t len)
 {
 	if (netId <= 0 || nullptr == buffer || len <= 0)
 		return false;
-
-	return true;
+	return this->ChoseWorker(netId)->Send(netId, buffer, len);
 }
 
 NetId NetworkModule::GenNetId()

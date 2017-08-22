@@ -21,23 +21,9 @@ ConfigModule::~ConfigModule()
 
 EModuleRetCode ConfigModule::Init(void *param)
 {
-	WaitModuleState(EMoudleName_Log, EModuleState_Inited, false);
-
 	std::string *file_path = (std::string *)param;
 	bool ret = m_csv_cfg_sets->Load(*file_path);
 	m_state = ret ? EModuleState_Inited : EModuleState_Error;
-
-	std::shared_ptr<LogModule> log_module = m_module_mgr->GetModule<LogModule>();
-	for (int i = 0; i < 10; ++i)
-	{
-		log_module->Debug(i, "i= {0}, {1} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", i, "Debug");
-		log_module->Info(i, "i= {0}, {1} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", i, "Info");
-		log_module->Warn(i, "i= {0}, {1} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", i, "Warn");
-		log_module->Error(i, "i= {0}, {1} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", i, "Error");
-		log_module->Log((ELogLevel)3, i, "i= {0}, {1} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", i, "Error");
-		log_module->Record((ELogLevel)3, i, "i= {0}, {Record} : 123xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-	}
-
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 
@@ -76,7 +62,15 @@ public:
 			m_listen_handler->handlers.erase(this->GetNetId());
 		}
 	}
-	virtual void OnRecvData(char *data, uint32_t len) {}
+	virtual void OnRecvData(char *data, uint32_t len) 
+	{
+		if (len > 2)
+		{
+			data[len - 2] = '\n';
+			data[len - 1] = 0;
+			printf("%lld ---- %u \n %s", m_netid, len, data); 
+		}
+	}
 	NetListenHanderTest *m_listen_handler = nullptr;
 };
 
@@ -113,12 +107,14 @@ EModuleRetCode ConfigModule::Update()
 
 	{
 		std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
+		std::shared_ptr<LogModule> log_module = m_module_mgr->GetModule<LogModule>();
+
 		if (m_test_cnn_handlers.size() < 200)
 		{
 			std::shared_ptr<NetConnectHanderTest> handler = nullptr;
-			//handler = std::make_shared<NetConnectHanderTest>();
-			//m_test_cnn_handlers.push(handler);
-			//net_module->Connect("127.0.0.1", 10240, nullptr, handler);
+			// handler = std::make_shared<NetConnectHanderTest>();
+			// m_test_cnn_handlers.push(handler);
+			// net_module->Connect("127.0.0.1", 10240, nullptr, handler);
 			for (int i = 0; i < 20; ++i)
 			{
 				handler = std::make_shared<NetConnectHanderTest>();
@@ -128,16 +124,14 @@ EModuleRetCode ConfigModule::Update()
 		}
 		else
 		{
-			for (int i = 0; i < 10; ++i)
+			for (int i = 0; i < 200; ++i)
 			{
-				if (m_test_cnn_handlers.empty())
-					break;
 				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
 				m_test_cnn_handlers.pop();
-				if (handler->GetNetId() > 0)
-				{
-					net_module->Close(handler->GetNetId());
-				}
+				m_test_cnn_handlers.push(handler);
+				char *tmp = "hello world  \n ";
+				net_module->Send(handler->GetNetId(), tmp, strlen(tmp));
+				log_module->Debug(3, tmp);
 			}
 		}
 	}

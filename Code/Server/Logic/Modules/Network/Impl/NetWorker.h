@@ -32,18 +32,20 @@ namespace Net
 	protected:
 		struct NetConnectionData
 		{
+			// 这个数据结构的字段可以考虑分成2个结构体：
+			// 一个结构体包含会竞争的字段，另一个包含不会竞争的字段
 			NetConnectionData() {}
 			NetConnectionData(NetWorker *_networker, NetId _netid, int _fd, std::weak_ptr<INetworkHandler> _handler)
 				: netid(_netid), fd(_fd), handler(_handler), net_worker(_networker) {}
-
 			NetId netid = 0;
 			int fd = 0;
 			std::weak_ptr<INetworkHandler> handler;
+			ENetworkHandlerType handler_type = ENetworkHandlerType_Max;
 			bool is_expired = false;
 			bufferevent *buffer_ev = nullptr;
 			evconnlistener *listen_ev = nullptr;
 			NetWorker *net_worker = nullptr;
-			std::vector<std::string> m_send_datas;
+			struct evbuffer *send_buf = nullptr;
 		};
 		std::unordered_map<NetId, NetConnectionData *> m_cnn_datas;
 		std::unordered_map<NetId, NetConnectionData *> m_wait_add_cnn_datas;
@@ -52,9 +54,9 @@ namespace Net
 		std::set<NetId> m_internal_wait_remove_netids;
 		std::set<NetConnectionData *> m_need_send_cnns;
 	protected:
-		void IntervalRemoveCnn(NetId netid, NetConnectionData *cnn_data);
 		void CheckAddCnnDatas(event_base *base);
 		void CheckRemoveCnnDatas();
+		void CheckSendDatas();
 
 		static const int NETWORK_DATA_QUEUE_LEN = 2;
 		int m_working_network_data_queue = 0;
