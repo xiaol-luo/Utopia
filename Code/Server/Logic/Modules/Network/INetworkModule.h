@@ -22,9 +22,8 @@ class INetworkHandler
 public:
 	INetworkHandler(ENetworkHandlerType handler_type) : m_handler_type(handler_type) {}
 	virtual ~INetworkHandler() {}
-	virtual void OnError(int err_num) = 0;
-	virtual void OnSucc() = 0;
-	virtual void OnClose() = 0;
+	virtual void OnClose(int err_num) = 0;
+	virtual void OnOpen(int err_num) = 0;
 	ENetworkHandlerType HandlerType() { return m_handler_type; }
 	NetId GetNetId() { return m_netid; }
 	void SetNetId(NetId netid) { m_netid = netid; }
@@ -39,9 +38,6 @@ public:
 	INetConnectHander() : INetworkHandler(ENetworkHandler_Connect) {}
 	virtual ~INetConnectHander() {}
 	virtual void OnRecvData(char *data, uint32_t len) = 0;
-	void SetListenHandler(std::weak_ptr<INetListenHander> listen_handler) { m_relate_listen_handler = listen_handler; }
-private:
-	std::weak_ptr<INetListenHander> m_relate_listen_handler;
 };
 class INetListenHander : public INetworkHandler
 {

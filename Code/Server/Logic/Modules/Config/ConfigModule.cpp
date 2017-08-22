@@ -41,9 +41,8 @@ class NetConnectHanderTest;
 class NetListenHanderTest : public INetListenHander
 {
 public:
-	virtual void OnError(int errnu) {}
-	virtual void OnSucc() {}
-	virtual void OnClose() {}
+	virtual void OnClose(int errnu) {}
+	virtual void OnOpen(int errnu) {}
 	NetListenHanderTest() : INetListenHander() {}
 	virtual ~NetListenHanderTest() {}
 	virtual std::shared_ptr<INetConnectHander> GenConnectorHandler(NetId netid);
@@ -55,22 +54,19 @@ class NetConnectHanderTest : public INetConnectHander
 public:
 	NetConnectHanderTest() : INetConnectHander() {}
 	virtual ~NetConnectHanderTest() {}
-	virtual void OnError(int errnu) 
+	virtual void OnClose(int errnu) 
 	{
 		if (nullptr != m_listen_handler)
 			m_listen_handler->handlers.erase(this->GetNetId());
 	}
-	virtual void OnSucc() 
+	virtual void OnOpen(int errnu) 
 	{
-
-	}
-	virtual void OnClose() 
-	{
-		if (nullptr != m_listen_handler)
+		if (0 != errnu && nullptr != m_listen_handler)
+		{
 			m_listen_handler->handlers.erase(this->GetNetId());
+		}
 	}
 	virtual void OnRecvData(char *data, uint32_t len) {}
-
 	NetListenHanderTest *m_listen_handler = nullptr;
 };
 
@@ -83,7 +79,6 @@ std::shared_ptr<INetConnectHander> NetListenHanderTest::GenConnectorHandler(NetI
 	return handler;
 }
 
-
 EModuleRetCode ConfigModule::Awake()
 {
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
@@ -92,8 +87,6 @@ EModuleRetCode ConfigModule::Awake()
 	m_test_listen_handler = std::make_shared<NetListenHanderTest>();
 	std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
 	net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
-	net_module->Listen("0.0.0.0", 10241, nullptr, m_test_listen_handler);
-	net_module->Listen("0.0.0.0", 10242, nullptr, m_test_listen_handler);
 	return EModuleRetCode_Succ;
 }
 
@@ -110,22 +103,25 @@ EModuleRetCode ConfigModule::Update()
 
 	{
 		std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
-		if (m_test_cnn_handlers.size() < 64)
+		if (m_test_cnn_handlers.size() < 1024)
 		{
 			std::shared_ptr<NetConnectHanderTest> handler = nullptr;
-			// handler = std::make_shared<NetConnectHanderTest>();
-			// m_test_cnn_handlers.push(handler);
-			// net_module->Connect("127.0.0.1", 10240, nullptr, handler);
-			handler = std::make_shared<NetConnectHanderTest>();
-			m_test_cnn_handlers.push(handler);
-			net_module->ConnectAsync("127.0.0.1", 10240, nullptr, handler);
+			//handler = std::make_shared<NetConnectHanderTest>();
+			//m_test_cnn_handlers.push(handler);
+			//net_module->Connect("127.0.0.1", 10240, nullptr, handler);
+			for (int i = 0; i < 20; ++i)
+			{
+				handler = std::make_shared<NetConnectHanderTest>();
+				m_test_cnn_handlers.push(handler);
+				net_module->ConnectAsync("127.0.0.1", 10240, nullptr, handler);
+			}
 		}
 		else
 		{
 			std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
+			m_test_cnn_handlers.pop();
 			if (handler->GetNetId() > 0)
 			{
-				m_test_cnn_handlers.pop();
 				net_module->Close(handler->GetNetId());
 			}
 		}

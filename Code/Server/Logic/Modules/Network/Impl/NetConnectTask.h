@@ -28,7 +28,7 @@ namespace Net
 		int err_num = 0;
 		std::string err_msg;
 		long long id = 0;
-		int fd = 0;
+		int fd = -1;
 	};
 
 	class ConnectTask

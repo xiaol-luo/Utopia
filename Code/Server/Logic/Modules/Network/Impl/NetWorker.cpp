@@ -103,13 +103,38 @@ namespace Net
 			delete m_loop_thread;
 			m_loop_thread = nullptr;
 		}
+
+		for (auto kv_pair : m_cnn_datas)
+		{
+			m_internal_wait_remove_netids.insert(kv_pair.first);
+		}
+		for (auto kv_pair : m_wait_add_cnn_datas)
+		{
+			m_internal_wait_remove_netids.insert(kv_pair.first);
+		}
+		this->CheckRemoveCnnDatas();
+
+		for (int i = 0; i < NETWORK_DATA_QUEUE_LEN; ++i)
+		{
+			std::queue<NetWorkData> data_queue = m_network_data_queues[i];
+			while (!data_queue.empty())
+			{
+				NetWorkData &data = data_queue.front();
+				if (nullptr != data.binary)
+				{
+					free(data.binary);
+					data.binary = nullptr;
+					data.binary_len = 0;
+				}
+				data_queue.pop();
+			}
+		}
 	}
 
 	void NetWorker::CnnEventCb(struct bufferevent *bev, short events, void *ctx)
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
-		++net_worker->m_event_cb_times;
 
 		if (events & BEV_EVENT_CONNECTED) 
 		{
@@ -118,7 +143,7 @@ namespace Net
 		else if (events & BEV_EVENT_ERROR) 
 		{
 			net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
-			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Error, -1, 0, nullptr, 0);
+			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, -1, 0, nullptr, 0);
 			net_worker->PushNetworkData(data);
 		}
 		else if (events & BEV_EVENT_EOF)
@@ -133,7 +158,6 @@ namespace Net
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
-		++net_worker->m_event_cb_times;
 
 		struct evbuffer *in_buffer = bufferevent_get_input(bev);
 		size_t len = evbuffer_get_length(in_buffer);
@@ -150,14 +174,12 @@ namespace Net
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
-		++net_worker->m_event_cb_times;
 	}
 
 	void NetWorker::ListenAcceptCb(struct evconnlistener *listener, evutil_socket_t fd, struct sockaddr *address, int addresslen, void *ctx)
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
-		++net_worker->m_event_cb_times;
 
 		NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Read, 0, fd, nullptr, 0);
 		net_worker->PushNetworkData(data);
@@ -167,7 +189,6 @@ namespace Net
 	{
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
-		++ net_worker->m_event_cb_times;
 
 		net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
 		NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
@@ -182,25 +203,14 @@ namespace Net
 			this->CheckRemoveCnnDatas();
 			this->CheckAddCnnDatas(base);
 
-			int loop_times = 0;
-			while (loop_times ++ < 1000000)
 			{
 				int ret = event_base_loop(base, EVLOOP_NONBLOCK);
-				if (-1 != ret)
-				{
-					if (0 == m_event_cb_times)
-					{
-						std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span));
-						break;
-					}
-					m_event_cb_times = 0;
-				}
-				else
+				if (-1 == ret)
 				{
 					int err_num = GetLastError();
-					break;
-					// do something ?
+					err_num = err_num;
 				}
+				std::this_thread::sleep_for(std::chrono::milliseconds(m_loop_span));
 			}
 
 			this->CheckRemoveCnnDatas();
@@ -219,6 +229,9 @@ namespace Net
 
 	void NetWorker::CheckAddCnnDatas(event_base *base)
 	{
+		if (m_wait_add_cnn_datas.empty())
+			return;
+
 		std::unordered_map<NetId, NetConnectionData *> swap_cnn_datas;
 		m_cnn_data_mutex.lock();
 		swap_cnn_datas.swap(m_wait_add_cnn_datas);
@@ -284,8 +297,7 @@ namespace Net
 				{
 					NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Close, 0, 0, nullptr, 0);
 					this->PushNetworkData(data);
-					if (cnn_data->fd >= 0)
-						evutil_closesocket(cnn_data->fd);
+					m_internal_wait_remove_netids.insert(netid);
 					delete cnn_data;
 					continue;
 				}
@@ -296,6 +308,9 @@ namespace Net
 
 	void NetWorker::CheckRemoveCnnDatas()
 	{
+		if (m_internal_wait_remove_netids.empty() && m_wait_remove_netids.empty())
+			return;
+
 		m_cnn_data_mutex.lock();
 		m_internal_wait_remove_netids.insert(m_wait_remove_netids.begin(), m_wait_remove_netids.end());
 		m_wait_remove_netids.clear();
@@ -307,7 +322,8 @@ namespace Net
 					auto it = m_wait_add_cnn_datas.find(netid);
 					if (m_wait_add_cnn_datas.end() != it)
 					{
-						evutil_closesocket(it->second->fd);
+						if (it->second->fd >= 0)
+							evutil_closesocket(it->second->fd);
 						delete it->second;
 						m_wait_add_cnn_datas.erase(netid);
 					}
@@ -316,7 +332,6 @@ namespace Net
 					auto it = m_cnn_datas.find(netid);
 					if (m_cnn_datas.end() != it)
 					{
-						evutil_closesocket(it->second->fd);
 						if (nullptr != it->second->buffer_ev)
 							bufferevent_free(it->second->buffer_ev);
 						if (nullptr != it->second->listen_ev)

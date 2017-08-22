@@ -78,7 +78,8 @@ namespace Net
 		} while (false);
 		if (0 != m_result.err_num)
 		{
-			closesocket(sock);
+			if (sock >= 0)
+				closesocket(sock);
 		}
 		m_task_state = EConnectTask_Done;
 	}
@@ -125,7 +126,8 @@ namespace Net
 		} while (false);
 		if (0 != m_result.err_num)
 		{
-			closesocket(sock);
+			if (sock >= 0)
+				closesocket(sock);
 		}
 		m_task_state = EConnectTask_Done;
 	}

@@ -16,9 +16,8 @@ namespace Net
 
 enum ENetWorkDataAction
 {
-	ENetWorkDataAction_Close = 0,
-	ENetWorkDataAction_Read,
-	ENetWorkDataAction_Error,
+	ENetWorkDataAction_Read = 0,
+	ENetWorkDataAction_Close,
 	ENetWorkDataAction_Max,
 };
 
@@ -30,11 +29,11 @@ struct NetWorkData
 		: netid(_netid), fd(_fd), handler(_handle), action(_action), err_num(_err_num), 
 		new_fd(_new_fd), binary(_binary), binary_len(_binary_len) {}
 	NetId netid = 0;
-	int fd = 0;
+	int fd = -1;
 	std::weak_ptr<INetworkHandler> handler;
 	ENetWorkDataAction action = ENetWorkDataAction_Max;
 	int err_num = 0;
-	int new_fd = 0;
+	int new_fd = -1;
 	char *binary = nullptr;
 	uint32_t binary_len = 0;
 };
@@ -65,7 +64,6 @@ protected:
 	std::queue<Net::ConnectTask *> m_cnn_tasks;
 	std::mutex *m_cnn_results_mutex = nullptr;
 	std::queue<Net::ConnectResult> m_cnn_results;
-	std::queue<Net::ConnectResult> m_cnn_results_swap;
 	int m_cnn_task_thread_num = 2;
 	ConnectTaskThread **m_cnn_task_threads = nullptr;
 	void ProcessConnectResult();
