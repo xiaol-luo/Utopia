@@ -12,7 +12,11 @@ ConfigModule::ConfigModule(std::shared_ptr<ModuleMgr> module_mgr) : IConfigModul
 
 ConfigModule::~ConfigModule()
 {
-
+	delete m_csv_cfg_sets;
+	m_test_timer = nullptr;
+	m_test_listen_handler = nullptr;
+	while (!m_test_cnn_handlers.empty())
+		m_test_cnn_handlers.pop();
 }
 
 EModuleRetCode ConfigModule::Init(void *param)
@@ -44,7 +48,10 @@ public:
 	virtual void OnClose(int errnu) {}
 	virtual void OnOpen(int errnu) {}
 	NetListenHanderTest() : INetListenHander() {}
-	virtual ~NetListenHanderTest() {}
+	virtual ~NetListenHanderTest() 
+	{
+		handlers.clear();
+	}
 	virtual std::shared_ptr<INetConnectHander> GenConnectorHandler(NetId netid);
 	std::map<NetId, std::shared_ptr<INetConnectHander>> handlers;
 };
@@ -53,7 +60,10 @@ class NetConnectHanderTest : public INetConnectHander
 {
 public:
 	NetConnectHanderTest() : INetConnectHander() {}
-	virtual ~NetConnectHanderTest() {}
+	virtual ~NetConnectHanderTest() 
+	{
+		m_listen_handler = nullptr;
+	}
 	virtual void OnClose(int errnu) 
 	{
 		if (nullptr != m_listen_handler)
@@ -103,7 +113,7 @@ EModuleRetCode ConfigModule::Update()
 
 	{
 		std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
-		if (m_test_cnn_handlers.size() < 1024)
+		if (m_test_cnn_handlers.size() < 200)
 		{
 			std::shared_ptr<NetConnectHanderTest> handler = nullptr;
 			//handler = std::make_shared<NetConnectHanderTest>();
@@ -118,11 +128,16 @@ EModuleRetCode ConfigModule::Update()
 		}
 		else
 		{
-			std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
-			m_test_cnn_handlers.pop();
-			if (handler->GetNetId() > 0)
+			for (int i = 0; i < 10; ++i)
 			{
-				net_module->Close(handler->GetNetId());
+				if (m_test_cnn_handlers.empty())
+					break;
+				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
+				m_test_cnn_handlers.pop();
+				if (handler->GetNetId() > 0)
+				{
+					net_module->Close(handler->GetNetId());
+				}
 			}
 		}
 	}

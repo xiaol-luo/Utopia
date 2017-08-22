@@ -16,6 +16,8 @@ ModuleMgr::~ModuleMgr()
 
 EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
 {
+	m_is_free = false;
+
 	EModuleRetCode retCode = EModuleRetCode_Succ;
 	for (int i = EMoudleName_Invalid + 1; i < EMoudleName_Max; ++ i)
 	{
@@ -135,12 +137,17 @@ EModuleRetCode ModuleMgr::Destroy()
 		if (EModuleRetCode_Succ == ret)
 			module->SetState(EModuleState_Destroyed);
 	}
+	if (EModuleRetCode_Succ == retCode)
+	{
+		for (int i = EMoudleName_Invalid + 1; i < EMoudleName_Max; ++i)
+			m_modules[i] = nullptr;		
+	}
 	return retCode;
 }
 
 bool ModuleMgr::SetModule(std::shared_ptr<IModule> module)
 {
-	if (EModuleState_Free == m_modules_state)
+	if (m_is_free)
 	{
 		EMoudleName module_name = module->ModuleName();
 		assert(module_name > EMoudleName_Invalid && module_name < EMoudleName_Max);

@@ -31,12 +31,12 @@ void GameServerLogic::ClearInitParams()
 {
 	if (nullptr != m_init_params[EMoudleName_Log])
 	{
-		delete m_init_params[EMoudleName_Log];
+		delete (std::string *)m_init_params[EMoudleName_Log];
 		m_init_params[EMoudleName_Log] = nullptr;
 	}
 	if (nullptr != m_init_params[EMoudleName_Config])
 	{
-		delete m_init_params[EMoudleName_Config];
+		delete (std::string *)m_init_params[EMoudleName_Config];
 		m_init_params[EMoudleName_Config] = nullptr;
 	}
 }

@@ -92,6 +92,7 @@ void CnnTaskWorker(ConnectTaskThread *task_thread)
 		result_mutex->lock();
 		cnn_results->push(task->GetResult());
 		result_mutex->unlock();
+		delete task; task = nullptr;
 	}
 }
 

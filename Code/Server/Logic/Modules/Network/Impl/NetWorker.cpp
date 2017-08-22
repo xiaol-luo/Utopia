@@ -3,6 +3,7 @@
 #include "event2/bufferevent.h"
 #include "event2/listener.h"
 #include "event2/buffer.h"
+#include <signal.h>
 
 namespace Net
 {
@@ -104,16 +105,6 @@ namespace Net
 			m_loop_thread = nullptr;
 		}
 
-		for (auto kv_pair : m_cnn_datas)
-		{
-			m_internal_wait_remove_netids.insert(kv_pair.first);
-		}
-		for (auto kv_pair : m_wait_add_cnn_datas)
-		{
-			m_internal_wait_remove_netids.insert(kv_pair.first);
-		}
-		this->CheckRemoveCnnDatas();
-
 		for (int i = 0; i < NETWORK_DATA_QUEUE_LEN; ++i)
 		{
 			std::queue<NetWorkData> data_queue = m_network_data_queues[i];
@@ -195,6 +186,13 @@ namespace Net
 		net_worker->PushNetworkData(data);
 	}
 
+	void SignalIgnore(evutil_socket_t fd, short sig_num, void *arg)
+	{
+		int a = fd;
+		a++;
+	}
+
+
 	void NetWorker::Loop()
 	{
 		event_base *base = event_base_new();
@@ -215,7 +213,12 @@ namespace Net
 
 			this->CheckRemoveCnnDatas();
 		} 
-
+		for (auto kv_pair : m_cnn_datas)
+			m_internal_wait_remove_netids.insert(kv_pair.first);
+		for (auto kv_pair : m_wait_add_cnn_datas)
+			m_internal_wait_remove_netids.insert(kv_pair.first);
+		this->CheckRemoveCnnDatas();
+		// evsignal_del(signal_event);
 		event_base_free(base);
 		base = nullptr;
 	}

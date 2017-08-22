@@ -2,6 +2,16 @@
 #include "Utils/ConfigUtil.h"
 #include "ServerLogics/Game/GameServerLogic.h"
 #include "event2/event.h"
+#include <vld.h>
+#include <signal.h>
+
+ServerLogic *game = nullptr;
+
+void QuitGame(int signal)
+{
+	if (nullptr != game)
+		game->Quit();
+}
 
 int main(int argc, char **argv)
 {
@@ -14,6 +24,11 @@ int main(int argc, char **argv)
 #ifdef WIN32
 	WSADATA wsa_data;
 	WSAStartup(0x0201, &wsa_data);
+	signal(SIGINT, QuitGame);
+	signal(SIGBREAK, QuitGame);
+#else
+	signal(SIGINT, QuitGame);
+	signal(SIGPIPE, SIG_IGN);
 #endif
 
 	std::vector<std::string> params;
@@ -21,7 +36,8 @@ int main(int argc, char **argv)
 	// params.push_back("F:/git-dir/Utopia/Data/Config/auto-csv/AutoCsvConfig");
 	params.push_back(argv[1]);
 	params.push_back(argv[2]);
-	ServerLogic *game = new GameServerLogic();
+	game = new GameServerLogic();
 	game->SetInitParams(&params);
 	game->Loop();
+	delete game;
 }

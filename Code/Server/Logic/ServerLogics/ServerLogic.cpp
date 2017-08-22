@@ -14,7 +14,7 @@ ServerLogic::ServerLogic()
 
 ServerLogic::~ServerLogic()
 {
-
+	m_module_mgr = nullptr;
 }
 
 bool ServerLogic::Init()
@@ -107,6 +107,7 @@ void ServerLogic::Destroy()
 		retCode = m_module_mgr->Destroy();
 	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
+	m_timer_module = nullptr;
 	this->ClearInitParams();
 }
 
