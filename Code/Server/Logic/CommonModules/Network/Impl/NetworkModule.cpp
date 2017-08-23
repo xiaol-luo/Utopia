@@ -1,6 +1,6 @@
 #include "NetworkModule.h"
-#include "Modules/ModuleMgr.h"
-#include "Modules/Log/LogModule.h"
+#include "ModuleDef/ModuleMgr.h"
+#include "CommonModules/Log/LogModule.h"
 #include "NetWorker.h"
 
 #ifdef WIN32

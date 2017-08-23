@@ -32,8 +32,9 @@ SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 
-INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Logic ./Libs/3rdpartLibs/Libevent)
-INCLUDE_DIRECTORIES(./Logic/Modules/Config/AutoCsvCode)
+INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libevent)
+INCLUDE_DIRECTORIES(./Logic)
+INCLUDE_DIRECTORIES(./Logic/LogicModules/GameLogic/AutoCsvCode)
 IF (WIN32)
 	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/win-libs)
 ELSE ()

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "Modules/IModule.h"
+#include "ModuleDef/IModule.h"
 
 class ModuleMgr : ObjectBase
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Modules/IModule.h"
+#include "ModuleDef/IModule.h"
 #include <stdint.h>
 #include <string>
 #include <functional>

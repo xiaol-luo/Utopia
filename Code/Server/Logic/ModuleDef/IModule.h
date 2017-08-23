@@ -9,9 +9,9 @@ enum EMoudleName
 {
 	EMoudleName_Invalid,
 	EMoudleName_TIMER,
-	EMoudleName_Config,
-	EMoudleName_Network,
 	EMoudleName_Log,
+	EMoudleName_Network,
+	EMoudleName_GameLogic,
 	EMoudleName_Max,
 };
 

@@ -5,7 +5,7 @@
 #include <thread>
 #include <mutex>
 #include <unordered_map>
-#include "Modules/Network/INetworkModule.h"
+#include "CommonModules/Network/INetworkModule.h"
 #include "NetConnectTask.h"
 
 struct ConnectTaskThread;

@@ -32,8 +32,6 @@ int main(int argc, char **argv)
 #endif
 
 	std::vector<std::string> params;
-	// params.push_back("F:/git-dir/Utopia/Data/Config/auto-csv/AutoCsvConfig/Log/CsvLogConfig.csv");
-	// params.push_back("F:/git-dir/Utopia/Data/Config/auto-csv/AutoCsvConfig");
 	params.push_back(argv[1]);
 	params.push_back(argv[2]);
 	game = new GameServerLogic();

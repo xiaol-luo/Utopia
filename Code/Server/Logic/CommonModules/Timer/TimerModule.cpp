@@ -1,8 +1,8 @@
 #include "TimerModule.h"
 #include <chrono>
 #include <queue>
-#include "Modules/ModuleMgr.h"
-#include "Modules/Log/LogModule.h"
+#include "ModuleDef/ModuleMgr.h"
+#include "CommonModules/Log/LogModule.h"
 
 TimerModule::TimerModule(std::shared_ptr<ModuleMgr> module_mgr) : ITimerModule(module_mgr)
 {

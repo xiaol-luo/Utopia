@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IConfigModule.h"
+#include "IGameLogicModule.h"
 #include <vector>
 #include <queue>
 
@@ -11,7 +11,7 @@ namespace Config
 class NetListenHanderTest;
 class NetConnectHanderTest;
 
-class ConfigModule : public IConfigModule
+class ConfigModule : public IGameLogicModule
 {
 public:
 	ConfigModule(std::shared_ptr<ModuleMgr> module_mgr);
@@ -21,7 +21,6 @@ public:
 	virtual EModuleRetCode Update();
 	virtual EModuleRetCode Release();
 	virtual EModuleRetCode Destroy();
-	virtual void * GetCfg() { return m_csv_cfg_sets; }
 
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;

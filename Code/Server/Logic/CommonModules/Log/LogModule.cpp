@@ -1,7 +1,6 @@
 #include "LogModule.h"
-#include "Modules/ModuleMgr.h"
+#include "ModuleDef/ModuleMgr.h"
 #include "log/CsvLogConfig.h"
-#include "Modules/Config/ConfigModule.h"
 
 enum ELoggerType
 {

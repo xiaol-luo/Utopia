@@ -1,11 +1,11 @@
-#include "ConfigModule.h"
+#include "GameLogicModule.h"
 #include "CsvConfigSets.h"
-#include "Modules/ModuleMgr.h"
-#include "Modules/Log/LogModule.h"
-#include "Modules/Timer/ITimerModule.h"
-#include "Modules/Network/INetworkModule.h"
+#include "ModuleDef/ModuleMgr.h"
+#include "CommonModules/Log/LogModule.h"
+#include "CommonModules/Timer/ITimerModule.h"
+#include "CommonModules/Network/INetworkModule.h"
 
-ConfigModule::ConfigModule(std::shared_ptr<ModuleMgr> module_mgr) : IConfigModule(module_mgr)
+ConfigModule::ConfigModule(std::shared_ptr<ModuleMgr> module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 }
@@ -68,7 +68,7 @@ public:
 		{
 			data[len - 2] = '\n';
 			data[len - 1] = 0;
-			printf("%lld ---- %u \n %s", m_netid, len, data); 
+			// printf("%lld ---- %u \n %s", m_netid, len, data); 
 		}
 	}
 	NetListenHanderTest *m_listen_handler = nullptr;

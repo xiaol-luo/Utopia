@@ -80,7 +80,7 @@ protected:
 	};
 
 	LogData *m_log_datas = nullptr;
-	int m_async_queue_size =  1024 * 128;
+	int m_async_queue_size =  1024 * 16;
 
 private:
 

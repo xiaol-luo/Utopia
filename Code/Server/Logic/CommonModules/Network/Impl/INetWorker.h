@@ -1,5 +1,5 @@
 #pragma once
-#include "Modules/Network/Impl/NetworkModule.h"
+#include "CommonModules/Network/Impl/NetworkModule.h"
 
 namespace Net
 {
