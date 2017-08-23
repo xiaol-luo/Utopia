@@ -13,7 +13,7 @@ enum ELoggerType
 	ELoggerType_Max,
 };
 
-LogModule::LogModule(std::shared_ptr<ModuleMgr> module_mgr) : ILogModule(module_mgr)
+LogModule::LogModule(ModuleMgr *module_mgr) : ILogModule(module_mgr)
 {
 
 }

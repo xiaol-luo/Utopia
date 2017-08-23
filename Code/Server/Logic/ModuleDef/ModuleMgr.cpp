@@ -1,17 +1,20 @@
 #include "ModuleMgr.h"
 #include <assert.h>
+#include "ServerLogics/ServerLogic.h"
 
-ModuleMgr::ModuleMgr()
+ModuleMgr::ModuleMgr(ServerLogic *server_logic) : m_server_logic(server_logic)
 {
-
+	memset(m_modules, 0, sizeof(m_modules));
 }
 
 ModuleMgr::~ModuleMgr()
 {
 	for (int i = 0; i < EMoudleName_Max; ++ i)
 	{
+		delete m_modules[i];
 		m_modules[i] = nullptr;
 	}
+	m_server_logic = nullptr;
 }
 
 EModuleRetCode ModuleMgr::Init(void * init_params[EMoudleName_Max])
@@ -145,7 +148,7 @@ EModuleRetCode ModuleMgr::Destroy()
 	return retCode;
 }
 
-bool ModuleMgr::SetModule(std::shared_ptr<IModule> module)
+bool ModuleMgr::SetModule(IModule *module)
 {
 	if (m_is_free)
 	{
@@ -160,11 +163,16 @@ bool ModuleMgr::SetModule(std::shared_ptr<IModule> module)
 	return false;
 }
 
-std::shared_ptr<IModule> ModuleMgr::GetModule(EMoudleName module_name)
+IModule *ModuleMgr::GetModule(EMoudleName module_name)
 {
 	if (module_name > EMoudleName_Invalid && module_name < EMoudleName_Max)
 	{
 		return m_modules[module_name];
 	}
 	return nullptr;
+}
+
+void ModuleMgr::Quit()
+{ 
+	m_server_logic->Quit();
 }

@@ -43,8 +43,8 @@ void GameServerLogic::ClearInitParams()
 
 void GameServerLogic::SetupModules()
 {
-	m_module_mgr->SetModule(std::make_shared<LogModule>(m_module_mgr));
-	m_module_mgr->SetModule(std::make_shared<GameLogicModule>(m_module_mgr));
-	m_module_mgr->SetModule(std::make_shared<TimerModule>(m_module_mgr));
-	m_module_mgr->SetModule(std::make_shared<NetworkModule>(m_module_mgr));
+	m_module_mgr->SetModule(new LogModule(m_module_mgr));
+	m_module_mgr->SetModule(new GameLogicModule(m_module_mgr));
+	m_module_mgr->SetModule(new TimerModule(m_module_mgr));
+	m_module_mgr->SetModule(new NetworkModule(m_module_mgr));
 }

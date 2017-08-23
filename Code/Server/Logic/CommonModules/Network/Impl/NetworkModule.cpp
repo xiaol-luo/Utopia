@@ -98,7 +98,7 @@ void CnnTaskWorker(ConnectTaskThread *task_thread)
 	}
 }
 
-NetworkModule::NetworkModule(std::shared_ptr<ModuleMgr> module_mgr) : INetworkModule(module_mgr)
+NetworkModule::NetworkModule(ModuleMgr *module_mgr) : INetworkModule(module_mgr)
 {
 	m_cnn_task_mutex = new std::mutex();
 	m_cnn_results_mutex = new std::mutex();
@@ -264,7 +264,7 @@ NetId NetworkModule::Listen(std::string ip, uint16_t port, void *opt, std::weak_
 	if (0 != err_num)
 	{
 		netid = 0;
-		std::shared_ptr<LogModule> log = m_module_mgr->GetModule<LogModule>();
+		auto log = m_module_mgr->GetModule<LogModule>();
 		log->Error(this->LogId(), "NetworkModule::Listen {0}:{1} fail, errno {2}", ip, port, err_num);
 	}
 	return netid;
@@ -297,7 +297,7 @@ NetId NetworkModule::Connect(std::string ip, uint16_t port, void *opt, std::weak
 	if (0 != err_num)
 	{
 		netid = 0;
-		std::shared_ptr<LogModule> log = m_module_mgr->GetModule<LogModule>();
+		auto log = m_module_mgr->GetModule<LogModule>();
 		log->Error(this->LogId(), "NetworkModule::Connect {0}:{1} fail, errno {2}", ip, port, err_num);
 	}
 	return netid;
@@ -405,7 +405,7 @@ void NetworkModule::ProcessConnectResult()
 			if (0 != err_num)
 			{
 				handler->OnOpen(err_num);
-				std::shared_ptr<LogModule> log = m_module_mgr->GetModule<LogModule>();
+				auto log = m_module_mgr->GetModule<LogModule>();
 				log->Error(this->LogId(), "NetworkModule::ProcessConnectResult errno {0}", err_num);
 			}
 		}

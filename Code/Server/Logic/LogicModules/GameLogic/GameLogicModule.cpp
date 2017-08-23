@@ -5,7 +5,7 @@
 #include "CommonModules/Timer/ITimerModule.h"
 #include "CommonModules/Network/INetworkModule.h"
 
-GameLogicModule::GameLogicModule(std::shared_ptr<ModuleMgr> module_mgr) : IGameLogicModule(module_mgr)
+GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 }
@@ -89,14 +89,14 @@ EModuleRetCode GameLogicModule::Awake()
 
 	m_test_timer = std::make_shared<ObjectBase>();
 	m_test_listen_handler = std::make_shared<NetListenHanderTest>();
-	std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
+	auto net_module = m_module_mgr->GetModule<INetworkModule>();
 	net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
 	return EModuleRetCode_Succ;
 }
 
 EModuleRetCode GameLogicModule::Update()
 {
-	std::shared_ptr<ITimerModule> timer_module = m_module_mgr->GetModule<ITimerModule>();
+	auto timer_module = m_module_mgr->GetModule<ITimerModule>();
 	// timer_module->AddNext(TestTimer, 0);
 	for (int i = 0; i < 1; ++ i)
 	{
@@ -106,8 +106,8 @@ EModuleRetCode GameLogicModule::Update()
 	}
 
 	{
-		std::shared_ptr<INetworkModule> net_module = m_module_mgr->GetModule<INetworkModule>();
-		std::shared_ptr<LogModule> log_module = m_module_mgr->GetModule<LogModule>();
+		auto net_module = m_module_mgr->GetModule<INetworkModule>();
+		auto log_module = m_module_mgr->GetModule<LogModule>();
 
 		if (m_test_cnn_handlers.size() < 200)
 		{
@@ -124,7 +124,7 @@ EModuleRetCode GameLogicModule::Update()
 		}
 		else
 		{
-			for (int i = 0; i < 200; ++i)
+			for (int i = 0; i < 2; ++i)
 			{
 				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
 				m_test_cnn_handlers.pop();

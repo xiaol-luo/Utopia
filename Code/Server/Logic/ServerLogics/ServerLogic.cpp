@@ -8,12 +8,13 @@ const int TRY_MAX_TIMES = 100000;
 
 ServerLogic::ServerLogic()
 {
-	m_module_mgr = std::make_shared<ModuleMgr>();
+	m_module_mgr = new ModuleMgr(this);
 	memset(m_init_params, 0, sizeof(m_init_params));
 }
 
 ServerLogic::~ServerLogic()
 {
+	delete m_module_mgr;
 	m_module_mgr = nullptr;
 }
 

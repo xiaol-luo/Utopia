@@ -51,7 +51,7 @@ class INetworkModule : public IModule
 {
 public:
 	const static EMoudleName MODULE_NAME = EMoudleName_Network;
-	INetworkModule(std::shared_ptr<ModuleMgr> module_mgr) : IModule(module_mgr , MODULE_NAME) {}
+	INetworkModule(ModuleMgr *module_mgr) : IModule(module_mgr , MODULE_NAME) {}
 	virtual ~INetworkModule() {}
 	virtual EModuleRetCode Init(void *param) = 0;
 	virtual EModuleRetCode Awake() = 0;

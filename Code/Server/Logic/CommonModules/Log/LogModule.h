@@ -6,7 +6,7 @@
 class LogModule : public ILogModule
 {
 public:
-	LogModule(std::shared_ptr<ModuleMgr> module_mgr);
+	LogModule(ModuleMgr *module_mgr);
 	virtual ~LogModule();
 	virtual EModuleRetCode Init(void *param);
 	virtual EModuleRetCode Awake();

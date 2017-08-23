@@ -25,7 +25,7 @@ public:
 	void Loop();
 	void Quit();
 	EServerLogicState GetState() { return m_state; }
-	std::shared_ptr<ModuleMgr> GetModuleMgr() { return m_module_mgr; }
+	ModuleMgr * GetModuleMgr() { return m_module_mgr; }
 
 protected:
 	virtual void SetupModules() = 0;
@@ -37,9 +37,9 @@ protected:
 	void Destroy();
 
 	EServerLogicState m_state = EServerLogicState_Free;
-	std::shared_ptr<ModuleMgr> m_module_mgr = nullptr;
+	ModuleMgr *m_module_mgr = nullptr;
 	int m_loop_span_ms = 50;
 	void * m_init_params[EMoudleName_Max];
 
-	std::shared_ptr<ITimerModule> m_timer_module;
+	ITimerModule *m_timer_module;
 };

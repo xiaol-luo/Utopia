@@ -41,7 +41,7 @@ struct NetWorkData
 class NetworkModule : public INetworkModule
 {
 public:
-	NetworkModule(std::shared_ptr<ModuleMgr> module_mgr);
+	NetworkModule(ModuleMgr *module_mgr);
 	virtual ~NetworkModule();
 	virtual EModuleRetCode Init(void *param);
 	virtual EModuleRetCode Awake();

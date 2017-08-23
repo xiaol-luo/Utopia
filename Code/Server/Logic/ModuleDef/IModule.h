@@ -43,7 +43,7 @@ class IModule : public ObjectBase
 {
 	friend class ModuleMgr;
 public:
-	IModule(std::shared_ptr<ModuleMgr> module_mgr, EMoudleName module_name) 
+	IModule(ModuleMgr *module_mgr, EMoudleName module_name) 
 	{ 
 		m_module_mgr = module_mgr;  
 		m_module_name = module_name; 
@@ -60,14 +60,14 @@ public:
 
 protected:
 	EMoudleName m_module_name = EMoudleName_Invalid;
-	std::shared_ptr<ModuleMgr> m_module_mgr = nullptr;
+	ModuleMgr *m_module_mgr = nullptr;
 	EModuleState m_state = EModuleState_Free;
 	void SetState(EModuleState state) { m_state = state; }
 };
 
 #define WaitModuleState(module_name, wait_state, tolerate_nullptr) do				\
 {																					\
-	std::shared_ptr<IModule> module = m_module_mgr->GetModule(module_name);			\
+	auto module = m_module_mgr->GetModule(module_name);			\
 	if (nullptr == module && !tolerate_nullptr)										\
 		return EModuleRetCode_Failed;												\
 	if (nullptr != module && EModuleState_Error == module->GetState())				\

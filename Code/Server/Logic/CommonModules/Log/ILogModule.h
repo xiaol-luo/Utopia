@@ -17,7 +17,7 @@ class ILogModule : public IModule
 {
 public:
 	const static EMoudleName MODULE_NAME = EMoudleName_Log;
-	ILogModule(std::shared_ptr<ModuleMgr> module_mgr) : IModule(module_mgr, MODULE_NAME) {}
+	ILogModule(ModuleMgr *module_mgr) : IModule(module_mgr, MODULE_NAME) {}
 	virtual ~ILogModule() {}
 	virtual EModuleRetCode Init(void *param) = 0;
 	virtual EModuleRetCode Awake() = 0;

@@ -2,7 +2,7 @@
 #include "Utils/ConfigUtil.h"
 #include "ServerLogics/Game/GameServerLogic.h"
 #include "event2/event.h"
-#include <vld.h>
+// #include <vld.h>
 #include <signal.h>
 
 ServerLogic *server_logic = nullptr;

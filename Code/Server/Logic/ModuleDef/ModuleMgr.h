@@ -3,10 +3,12 @@
 #include <memory>
 #include "ModuleDef/IModule.h"
 
+class ServerLogic;
+
 class ModuleMgr : ObjectBase
 {
 public:
-	ModuleMgr();
+	ModuleMgr(ServerLogic *server_logic);
 	~ModuleMgr();
 
 	EModuleRetCode Init(void * init_params[EMoudleName_Max]);
@@ -14,12 +16,18 @@ public:
 	EModuleRetCode Update();
 	EModuleRetCode Realse();
 	EModuleRetCode Destroy();
+	void Quit();
 
-	bool SetModule(std::shared_ptr<IModule> module);
-	template <typename T> std::shared_ptr<T> ModuleMgr::GetModule() { return std::static_pointer_cast<T>(this->GetModule(T::MODULE_NAME)); }
-	std::shared_ptr<IModule> GetModule(EMoudleName module_name);
+	bool SetModule(IModule *module);
+	template <typename T> T * ModuleMgr::GetModule() 
+	{ 
+		IModule *module = this->GetModule(T::MODULE_NAME);
+		return dynamic_cast<T *>(module);
+	}
+	IModule *GetModule(EMoudleName module_name);
 
 private:
 	bool m_is_free = true;
-	std::shared_ptr<IModule> m_modules[EMoudleName_Max];
+	IModule *m_modules[EMoudleName_Max];
+	ServerLogic *m_server_logic;
 };

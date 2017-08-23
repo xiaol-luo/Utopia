@@ -9,7 +9,7 @@
 class TimerModule : public ITimerModule
 {
 public:
-	TimerModule(std::shared_ptr<ModuleMgr> module_mgr);
+	TimerModule(ModuleMgr *module_mgr);
 	virtual ~TimerModule();
 	virtual EModuleRetCode Init(void *param);
 	virtual EModuleRetCode Awake();

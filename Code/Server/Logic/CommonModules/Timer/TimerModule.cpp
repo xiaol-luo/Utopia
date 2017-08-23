@@ -4,7 +4,7 @@
 #include "ModuleDef/ModuleMgr.h"
 #include "CommonModules/Log/LogModule.h"
 
-TimerModule::TimerModule(std::shared_ptr<ModuleMgr> module_mgr) : ITimerModule(module_mgr)
+TimerModule::TimerModule(ModuleMgr *module_mgr) : ITimerModule(module_mgr)
 {
 
 }

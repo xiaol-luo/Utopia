@@ -14,7 +14,7 @@ class NetConnectHanderTest;
 class GameLogicModule : public IGameLogicModule
 {
 public:
-	GameLogicModule(std::shared_ptr<ModuleMgr> module_mgr);
+	GameLogicModule(ModuleMgr *module_mgr);
 	virtual ~GameLogicModule();
 	virtual EModuleRetCode Init(void *param);
 	virtual EModuleRetCode Awake();
