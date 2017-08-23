@@ -25,6 +25,8 @@ public:
 	void Loop();
 	void Quit();
 	EServerLogicState GetState() { return m_state; }
+	std::shared_ptr<ModuleMgr> GetModuleMgr() { return m_module_mgr; }
+
 protected:
 	virtual void SetupModules() = 0;
 	virtual void ClearInitParams() = 0;

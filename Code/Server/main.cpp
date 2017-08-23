@@ -5,12 +5,12 @@
 #include <vld.h>
 #include <signal.h>
 
-ServerLogic *game = nullptr;
+ServerLogic *server_logic = nullptr;
 
 void QuitGame(int signal)
 {
-	if (nullptr != game)
-		game->Quit();
+	if (nullptr != server_logic)
+		server_logic->Quit();
 }
 
 int main(int argc, char **argv)
@@ -34,8 +34,8 @@ int main(int argc, char **argv)
 	std::vector<std::string> params;
 	params.push_back(argv[1]);
 	params.push_back(argv[2]);
-	game = new GameServerLogic();
-	game->SetInitParams(&params);
-	game->Loop();
-	delete game;
+	server_logic = new GameServerLogic();
+	server_logic->SetInitParams(&params);
+	server_logic->Loop();
+	delete server_logic;
 }
