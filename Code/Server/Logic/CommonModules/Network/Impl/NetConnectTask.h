@@ -2,8 +2,7 @@
 
 #include <string>
 #include <functional>
-
-using NetId = uint64_t;
+#include "Common/Define/NetworkDefine.h"
 
 namespace Net
 {

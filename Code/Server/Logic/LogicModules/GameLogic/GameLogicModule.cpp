@@ -4,6 +4,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Timer/ITimerModule.h"
 #include "CommonModules/Network/INetworkModule.h"
+#include "Network/Utils/NetProtocolParser.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
@@ -42,13 +43,19 @@ public:
 	std::map<NetId, std::shared_ptr<INetConnectHander>> handlers;
 };
 
+static char NetConnectHanderTestBuffer[302400];
+
 class NetConnectHanderTest : public INetConnectHander
 {
 public:
-	NetConnectHanderTest() : INetConnectHander() {}
+	NetConnectHanderTest() : INetConnectHander(), parser(nullptr)
+	{
+		parser = new NetProtocolParser(NetConnectHanderTestBuffer, sizeof(NetConnectHanderTestBuffer));
+	}
 	virtual ~NetConnectHanderTest() 
 	{
 		m_listen_handler = nullptr;
+		delete(parser);
 	}
 	virtual void OnClose(int errnu) 
 	{
@@ -64,14 +71,19 @@ public:
 	}
 	virtual void OnRecvData(char *data, uint32_t len) 
 	{
-		if (len > 2)
+		uint32_t test_int = 0;
+		char *test_data = nullptr;
+		parser->Parse(data, len);
+		std::shared_ptr<IMessage> msg = nullptr;
+		while (nullptr != (msg = parser->NextResult()))
 		{
-			data[len - 2] = '\n';
-			data[len - 1] = 0;
-			// printf("%lld ---- %u \n %s", m_netid, len, data); 
+			test_int = msg->len;
+			test_data = msg->data;
 		}
 	}
+
 	NetListenHanderTest *m_listen_handler = nullptr;
+	NetProtocolParser *parser = nullptr;
 };
 
 std::shared_ptr<INetConnectHander> NetListenHanderTest::GenConnectorHandler(NetId netid)
@@ -129,9 +141,11 @@ EModuleRetCode GameLogicModule::Update()
 				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
 				m_test_cnn_handlers.pop();
 				m_test_cnn_handlers.push(handler);
-				char *tmp = "hello world  \n ";
-				net_module->Send(handler->GetNetId(), tmp, strlen(tmp));
-				log_module->Debug(3, tmp);
+				char buff[102400];
+				uint32_t len = 1 + std::rand() % (sizeof(buff) - sizeof(uint32_t));
+				*(uint32_t *)buff = len;
+				sprintf(buff + sizeof(uint32_t), " say %s", "hello world !"); 
+				net_module->Send(handler->GetNetId(), buff, len + sizeof(uint32_t));
 			}
 		}
 	}

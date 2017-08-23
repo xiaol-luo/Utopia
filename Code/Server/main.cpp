@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 	signal(SIGPIPE, SIG_IGN);
 #endif
 
+	std::srand(time(NULL));
 	std::vector<std::string> params;
 	params.push_back(argv[1]);
 	params.push_back(argv[2]);
