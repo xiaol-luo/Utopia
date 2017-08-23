@@ -5,12 +5,12 @@
 #include "CommonModules/Timer/ITimerModule.h"
 #include "CommonModules/Network/INetworkModule.h"
 
-ConfigModule::ConfigModule(std::shared_ptr<ModuleMgr> module_mgr) : IGameLogicModule(module_mgr)
+GameLogicModule::GameLogicModule(std::shared_ptr<ModuleMgr> module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 }
 
-ConfigModule::~ConfigModule()
+GameLogicModule::~GameLogicModule()
 {
 	delete m_csv_cfg_sets;
 	m_test_timer = nullptr;
@@ -19,7 +19,7 @@ ConfigModule::~ConfigModule()
 		m_test_cnn_handlers.pop();
 }
 
-EModuleRetCode ConfigModule::Init(void *param)
+EModuleRetCode GameLogicModule::Init(void *param)
 {
 	std::string *file_path = (std::string *)param;
 	bool ret = m_csv_cfg_sets->Load(*file_path);
@@ -83,7 +83,7 @@ std::shared_ptr<INetConnectHander> NetListenHanderTest::GenConnectorHandler(NetI
 	return handler;
 }
 
-EModuleRetCode ConfigModule::Awake()
+EModuleRetCode GameLogicModule::Awake()
 {
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
 
@@ -94,7 +94,7 @@ EModuleRetCode ConfigModule::Awake()
 	return EModuleRetCode_Succ;
 }
 
-EModuleRetCode ConfigModule::Update()
+EModuleRetCode GameLogicModule::Update()
 {
 	std::shared_ptr<ITimerModule> timer_module = m_module_mgr->GetModule<ITimerModule>();
 	// timer_module->AddNext(TestTimer, 0);
@@ -138,12 +138,12 @@ EModuleRetCode ConfigModule::Update()
 	return EModuleRetCode_Succ;
 }
 
-EModuleRetCode ConfigModule::Release()
+EModuleRetCode GameLogicModule::Release()
 {
 	return EModuleRetCode_Succ;
 }
 
-EModuleRetCode ConfigModule::Destroy()
+EModuleRetCode GameLogicModule::Destroy()
 {
 	return EModuleRetCode_Succ;
 }

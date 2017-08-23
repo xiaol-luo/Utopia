@@ -11,11 +11,11 @@ namespace Config
 class NetListenHanderTest;
 class NetConnectHanderTest;
 
-class ConfigModule : public IGameLogicModule
+class GameLogicModule : public IGameLogicModule
 {
 public:
-	ConfigModule(std::shared_ptr<ModuleMgr> module_mgr);
-	virtual ~ConfigModule();
+	GameLogicModule(std::shared_ptr<ModuleMgr> module_mgr);
+	virtual ~GameLogicModule();
 	virtual EModuleRetCode Init(void *param);
 	virtual EModuleRetCode Awake();
 	virtual EModuleRetCode Update();
