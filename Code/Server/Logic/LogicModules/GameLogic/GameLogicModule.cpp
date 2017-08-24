@@ -73,12 +73,11 @@ public:
 	{
 		uint32_t test_int = 0;
 		char *test_data = nullptr;
-		parser->Parse(data, len);
-		std::shared_ptr<IMessage> msg = nullptr;
-		while (nullptr != (msg = parser->NextResult()))
+		parser->AppendBuffer(data, len);
+		while (parser->ParseNext())
 		{
-			test_int = msg->len;
-			test_data = msg->data;
+			test_int = parser->ContentLen();
+			test_data = parser->Content();
 		}
 	}
 
@@ -121,13 +120,13 @@ EModuleRetCode GameLogicModule::Update()
 		auto net_module = m_module_mgr->GetModule<INetworkModule>();
 		auto log_module = m_module_mgr->GetModule<LogModule>();
 
-		if (m_test_cnn_handlers.size() < 200)
+		if (m_test_cnn_handlers.size() < 100)
 		{
 			std::shared_ptr<NetConnectHanderTest> handler = nullptr;
 			// handler = std::make_shared<NetConnectHanderTest>();
 			// m_test_cnn_handlers.push(handler);
 			// net_module->Connect("127.0.0.1", 10240, nullptr, handler);
-			for (int i = 0; i < 20; ++i)
+			for (int i = 0; i < 10; ++i)
 			{
 				handler = std::make_shared<NetConnectHanderTest>();
 				m_test_cnn_handlers.push(handler);
@@ -136,16 +135,34 @@ EModuleRetCode GameLogicModule::Update()
 		}
 		else
 		{
-			for (int i = 0; i < 2; ++i)
+			char buff[Net::PROTOCOL_MAX_SIZE];
+
+			sprintf(buff + sizeof(uint32_t), " say %s", "hello world !");
+
+			for (int i = 0; i < 100; ++i)
 			{
 				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
 				m_test_cnn_handlers.pop();
 				m_test_cnn_handlers.push(handler);
-				char buff[102400];
 				uint32_t len = 1 + std::rand() % (sizeof(buff) - sizeof(uint32_t));
+				// len = 3;
 				*(uint32_t *)buff = len;
-				sprintf(buff + sizeof(uint32_t), " say %s", "hello world !"); 
 				net_module->Send(handler->GetNetId(), buff, len + sizeof(uint32_t));
+
+				continue;
+
+				uint32_t total_len = len + sizeof(uint32_t);
+				uint32_t sended_len = 0;
+				while (total_len - sended_len > 0)
+				{
+					uint32_t randVal = 1 + std::rand() % (total_len - sended_len + 1);
+					// randVal = 3;
+					if (sended_len + randVal > total_len)
+						randVal = total_len - sended_len;
+					handler->parser->AppendBuffer(buff + sended_len, randVal);
+					while (handler->parser->ParseNext());
+					sended_len += randVal;
+				}
 			}
 		}
 	}

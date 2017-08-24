@@ -143,7 +143,10 @@ EModuleRetCode ModuleMgr::Destroy()
 	if (EModuleRetCode_Succ == retCode)
 	{
 		for (int i = EMoudleName_Invalid + 1; i < EMoudleName_Max; ++i)
-			m_modules[i] = nullptr;		
+		{
+			delete m_modules[i];
+			m_modules[i] = nullptr;
+		}
 	}
 	return retCode;
 }
