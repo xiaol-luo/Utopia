@@ -22,7 +22,7 @@ class NetProtocolParser
 public:
 	NetProtocolParser(char *parse_buffer, uint32_t parse_buffer_len);
 	~NetProtocolParser();
-	void AppendBuffer(char *data, uint32_t data_len);
+	bool AppendBuffer(char *data, uint32_t data_len);
 	bool ParseNext();
 	char * Content() { return m_parse_result; }
 	uint32_t ContentLen() { return m_parse_result_len; }
@@ -39,11 +39,11 @@ protected:
 	char *m_parse_buffer = nullptr;		// 外部提供的用于作为解析数据的临时数组
 	uint32_t m_parse_buffer_capacity = 0;
 
-	char *data_p = nullptr;
-	char *data_q = nullptr;
+	char *m_input_data_p = nullptr;
+	char *m_input_data_q = nullptr;
 
-	char *m_last_input_data = nullptr;
-	uint32_t m_last_input_len = 0;
+	char *m_last_input_data = nullptr;	// for debug
+	uint32_t m_last_input_len = 0;		// for debug
 
 	char *m_parse_result = nullptr;
 	uint32_t m_parse_result_len = 0;
