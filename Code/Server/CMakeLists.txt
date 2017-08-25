@@ -1,7 +1,7 @@
 ﻿CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 SET(ProjectName Utopia)
-PROJECT(${ProjectName})
+PROJECT(${ProjectName}) 
 
 FUNCTION(SourceGroupByDir base_path file_paths prefix_source_group)
 	FOREACH (file_path ${file_paths})
@@ -32,13 +32,14 @@ SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 
-INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libevent)
-INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode)
+INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libevent ./Libs/3rdpartLibs/protobuf/include)
+INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode ./Logic/LogicModules)
 IF (WIN32)
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/win-libs)
+	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/win-libs ${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/protobuf/win-libs)
 ELSE ()
 ENDIF (WIN32)
 LINK_LIBRARIES(event event_core event_extra)
+LINK_LIBRARIES(libprotocd libprotobufd) 
 
 ADD_EXECUTABLE(${ProjectName} ${SourceFiles})
 ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS /wd4267 /wd4244 /wd4996 /D _WINSOCK_DEPRECATED_NO_WARNINGS)

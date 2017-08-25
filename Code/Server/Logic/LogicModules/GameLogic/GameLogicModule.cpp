@@ -5,10 +5,15 @@
 #include "CommonModules/Timer/ITimerModule.h"
 #include "CommonModules/Network/INetworkModule.h"
 #include "Network/Utils/NetProtocolParser.h"
+#include "Player/PlayerMgr.h"
+#include "ModuleDef/IModule.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
+	m_player_mgr = new GameLogic::PlayerMgr(this);
+
+	testClientMsgHandleDesc = new GameLogic::ClientMsgHandleDescript<Ping>(this, 0, &GameLogicModule::OnTestHandlePlayerMsg);
 }
 
 GameLogicModule::~GameLogicModule()
@@ -22,6 +27,14 @@ GameLogicModule::~GameLogicModule()
 
 EModuleRetCode GameLogicModule::Init(void *param)
 {
+	WaitModuleState(EMoudleName_TIMER, EModuleState_Inited, false);
+	WaitModuleState(EMoudleName_Log, EModuleState_Inited, false);
+	WaitModuleState(EMoudleName_Network, EModuleState_Inited, false);
+
+	m_log_module = m_module_mgr->GetModule<LogModule>();
+	m_network_module = m_module_mgr->GetModule<INetworkModule>();
+	m_timer_module = m_module_mgr->GetModule<ITimerModule>();
+
 	std::string *file_path = (std::string *)param;
 	bool ret = m_csv_cfg_sets->Load(*file_path);
 	m_state = ret ? EModuleState_Inited : EModuleState_Error;
@@ -166,6 +179,9 @@ EModuleRetCode GameLogicModule::Update()
 			}
 		}
 	}
+
+	Ping ping;
+	testClientMsgHandleDesc->Handle(0, &ping, nullptr);
 	return EModuleRetCode_Succ;
 }
 

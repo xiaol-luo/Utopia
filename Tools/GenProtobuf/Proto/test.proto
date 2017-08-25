@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message Pong
+{
+	int32 msgID = 1;
+	int32 userid = 2;
+	string username = 3;
+}
+
