@@ -402,9 +402,9 @@ void NetworkModule::ProcessConnectResult()
 					err_msg = "NetWorker::Add fail";
 				}
 			}
+			handler->OnOpen(err_num);
 			if (0 != err_num)
 			{
-				handler->OnOpen(err_num);
 				auto log = m_module_mgr->GetModule<LogModule>();
 				log->Error(this->LogId(), "NetworkModule::ProcessConnectResult errno {0}", err_num);
 			}
@@ -456,10 +456,10 @@ void NetworkModule::ProcessNetDatas()
 							if (nullptr == new_handler || 
 								!ChoseWorker(netid)->AddCnn(netid, data.new_fd, new_handler))
 								err_num = 1;
+							if (nullptr != new_handler)
+								new_handler->OnOpen(err_num);
 							if (0 != err_num)
 							{
-								if (nullptr != new_handler)
-									new_handler->OnOpen(err_num);
 								if (data.new_fd >= 0)
 									close(data.new_fd);
 							}

@@ -22,7 +22,7 @@ bool NetProtocolParser::AppendBuffer(char *data, uint32_t data_len)
 	m_last_input_data = data;
 	m_last_input_len = data_len;
 
-	if (this->ParseNext())
+	if (m_input_data_p != m_input_data_q)
 		return false;
 
 	m_input_data_p = m_input_data_q = nullptr;

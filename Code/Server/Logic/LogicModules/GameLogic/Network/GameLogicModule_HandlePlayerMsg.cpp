@@ -33,19 +33,7 @@ void GameLogicModule::UnInitClientMsgHandlerDescript()
 	}
 }
 
-void GameLogicModule::TestClientMsgHandler()
-{
-	for (int i = 0; i < GameLogic::PlayerMsgProtocol_Max; ++ i)
-	{
-		GameLogic::IClientMsgHandlerDescript *handle_descript = m_client_msg_handler_descripts[i];
-		if (nullptr != handle_descript)
-		{
-			handle_descript->Handle(handle_descript->Id(), handle_descript->Msg(), nullptr);
-		}
-	}
-}
-
-void GameLogicModule::HandlePlayerMsg(Player *player, int protocol_id, char *data, uint32_t data_len)
+void GameLogicModule::HandlePlayerMsg(int protocol_id, char *data, uint32_t data_len, GameLogic::Player *player)
 {
 	if (protocol_id <= GameLogic::PlayerMsgProtocol_Invalid || protocol_id >= GameLogic::PlayerMsgProtocol_Max)
 		return;
@@ -53,17 +41,18 @@ void GameLogicModule::HandlePlayerMsg(Player *player, int protocol_id, char *dat
 	GameLogic::IClientMsgHandlerDescript *handler_descript = m_client_msg_handler_descripts[protocol_id];
 	if (nullptr == handler_descript)
 		return;
+
+	handler_descript->Msg()->ParseFromArray(data, data_len);
+	handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
 }
 
-void GameLogicModule::OnHandlePlayerPingMsg(int protocol_id, Ping *msg, Player *player)
+void GameLogicModule::OnHandlePlayerPingMsg(int protocol_id, Ping *msg, GameLogic::Player *player)
 {
-	int a = 0;
-	++a;
+	msg->set_msgid(protocol_id);
 }
 
-void GameLogicModule::OnHandlePlayerPongMsg(int protocol_id, Pong *msg, Player *player)
+void GameLogicModule::OnHandlePlayerPongMsg(int protocol_id, Pong *msg, GameLogic::Player *player)
 {
-	int a = 0;
-	++a;
+	msg->set_msgid(protocol_id);
 }
 

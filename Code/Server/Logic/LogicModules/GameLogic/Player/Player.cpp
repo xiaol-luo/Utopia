@@ -1,14 +1,92 @@
 #include "player.h"
+#include "PlayerMgr.h"
+#include "CommonModules/Network/INetworkHandler.h"
+#include "Network/Utils/LenCtxStreamParser.h"
 
 namespace GameLogic
 {
-	Player::Player()
-	{
+	static char PlayerCnnHandler_Parser_Buffer[Net::PROTOCOL_MAX_SIZE];
 
+	class PlayerCnnHandler : public INetConnectHander
+	{
+	public:
+		PlayerCnnHandler(NetId netid, GameLogic::Player *player);
+		virtual ~PlayerCnnHandler();
+		virtual void OnClose(int err_num);
+		virtual void OnOpen(int err_num);
+		virtual void OnRecvData(char *data, uint32_t len);
+
+	protected:
+		GameLogic::Player *m_player = nullptr;
+		LenCtxStreamParser m_parser;
+	};
+
+	PlayerCnnHandler::PlayerCnnHandler(NetId netid, GameLogic::Player *player)
+		: m_player(player), m_parser(Net::PROTOCOL_MAX_SIZE)
+	{
+		this->SetNetId(netid);
+	}
+
+	PlayerCnnHandler::~PlayerCnnHandler()
+	{
+		m_player = nullptr;
+	}
+
+	void PlayerCnnHandler::OnClose(int err_num)
+	{
+		m_player->OnNetClose(err_num);
+	}
+
+	void PlayerCnnHandler::OnOpen(int err_num)
+	{
+		m_player->OnNetOpen(err_num);
+	}
+
+	void PlayerCnnHandler::OnRecvData(char *data, uint32_t len)
+	{
+		if (m_parser.AppendBuffer(data, len))
+		{
+			while (m_parser.ParseNext())
+				m_player->OnNetRecv(m_parser.Content(), m_parser.ContentLen());
+			if (m_parser.IsFail())
+				m_player->m_player_mgr->RemovePlayer(this->GetNetId());
+		}
+	}
+
+	Player::Player(PlayerMgr *player_mgr, NetId netid) 
+		: m_player_mgr(player_mgr)
+	{
+		m_cnn_handler = std::make_shared<PlayerCnnHandler>(netid, this);
 	}
 
 	Player::~Player()
 	{
+		m_player_mgr = nullptr;
+		m_cnn_handler = nullptr;
+	}
 
+	std::shared_ptr<INetConnectHander> Player::GetCnnHandler()
+	{
+		return m_cnn_handler;
+	}
+
+	NetId Player::GetNetId()
+	{
+		return m_cnn_handler ? m_cnn_handler->GetNetId() : 0;
+	}
+
+	void Player::OnNetClose(int err_num)
+	{
+		m_player_mgr->OnCnnClose(err_num, this);
+	}
+
+	void Player::OnNetOpen(int err_num)
+	{
+		m_player_mgr->OnCnnOpen(err_num, this);
+	}
+
+	void Player::OnNetRecv(char *data, uint32_t len)
+	{
+		m_player_mgr->OnCnnRecv(data, len, this);
 	}
 }

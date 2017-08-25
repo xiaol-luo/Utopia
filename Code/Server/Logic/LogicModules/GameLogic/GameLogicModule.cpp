@@ -8,6 +8,9 @@
 #include "Player/PlayerMgr.h"
 #include "ModuleDef/IModule.h"
 
+#include "Network/Protobuf/msg.pb.h"
+#include "Network/Protobuf/test.pb.h"
+
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
@@ -114,7 +117,9 @@ EModuleRetCode GameLogicModule::Awake()
 	m_test_timer = std::make_shared<ObjectBase>();
 	m_test_listen_handler = std::make_shared<NetListenHanderTest>();
 	auto net_module = m_module_mgr->GetModule<INetworkModule>();
-	net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
+	//net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
+
+	m_player_mgr->Awake("0.0.0.0", 10240);
 	return EModuleRetCode_Succ;
 }
 
@@ -148,39 +153,48 @@ EModuleRetCode GameLogicModule::Update()
 		}
 		else
 		{
+			net_module->Close(m_test_cnn_handlers.front()->GetNetId());
+			m_test_cnn_handlers.pop();
+				
 			char buff[Net::PROTOCOL_MAX_SIZE];
-
-			sprintf(buff + sizeof(uint32_t), " say %s", "hello world !");
+			Ping ping;
+			ping.set_msgid(1);
+			Pong pong;
+			pong.set_msgid(2);
 
 			for (int i = 0; i < 100; ++i)
 			{
 				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
 				m_test_cnn_handlers.pop();
 				m_test_cnn_handlers.push(handler);
-				uint32_t len = 1 + std::rand() % (sizeof(buff) - sizeof(uint32_t));
-				// len = 3;
-				*(uint32_t *)buff = len;
-				net_module->Send(handler->GetNetId(), buff, len + sizeof(uint32_t));
 
-				continue;
-
-				uint32_t total_len = len + sizeof(uint32_t);
-				uint32_t sended_len = 0;
-				while (total_len - sended_len > 0)
 				{
-					uint32_t randVal = 1 + std::rand() % (total_len - sended_len + 1);
-					// randVal = 3;
-					if (sended_len + randVal > total_len)
-						randVal = total_len - sended_len;
-					handler->parser->AppendBuffer(buff + sended_len, randVal);
-					while (handler->parser->ParseNext());
-					sended_len += randVal;
+					char *p = buff;
+					*(int32_t *)buff = ping.ByteSizeLong() + sizeof(int);
+					p += sizeof(uint32_t);
+					*(int *)p = ping.msgid();
+					p += sizeof(int);
+					ping.SerializeToArray(p, ping.ByteSizeLong());
+					uint32_t send_len = ping.ByteSizeLong() + p - buff;
+					net_module->Send(handler->GetNetId(), buff, send_len);
+				}
+
+				{
+					char *p = buff;
+					*(int32_t *)buff = pong.ByteSizeLong() + sizeof(int);
+					p += sizeof(uint32_t);
+					*(int *)p = pong.msgid();
+					p += sizeof(int);
+					pong.SerializeToArray(p, pong.ByteSizeLong());
+					uint32_t send_len = pong.ByteSizeLong() + p - buff;
+					*(int32_t *)buff = send_len - sizeof(uint32_t);
+					net_module->Send(handler->GetNetId(), buff, send_len);
 				}
 			}
 		}
 	}
 
-	this->TestClientMsgHandler();
+	m_player_mgr->Update(m_timer_module->NowMs());
 
 	return EModuleRetCode_Succ;
 }
