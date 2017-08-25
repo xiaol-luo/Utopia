@@ -13,7 +13,7 @@ GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(modul
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 	m_player_mgr = new GameLogic::PlayerMgr(this);
 
-	testClientMsgHandleDesc = new GameLogic::ClientMsgHandleDescript<Ping>(this, 0, &GameLogicModule::OnTestHandlePlayerMsg);
+	this->InitClientMsgHandlerDescript();
 }
 
 GameLogicModule::~GameLogicModule()
@@ -180,8 +180,8 @@ EModuleRetCode GameLogicModule::Update()
 		}
 	}
 
-	Ping ping;
-	testClientMsgHandleDesc->Handle(0, &ping, nullptr);
+	this->TestClientMsgHandler();
+
 	return EModuleRetCode_Succ;
 }
 
@@ -192,5 +192,6 @@ EModuleRetCode GameLogicModule::Release()
 
 EModuleRetCode GameLogicModule::Destroy()
 {
+	this->UnInitClientMsgHandlerDescript();
 	return EModuleRetCode_Succ;
 }
