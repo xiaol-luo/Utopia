@@ -48,7 +48,7 @@ namespace GameLogic
 
 	bool PlayerMgr::Awake(std::string ip, uint16_t port)
 	{
-		NetId netid = m_logic_module->Network()->Listen(ip, port, nullptr, m_net_listen_handler);
+		NetId netid = m_logic_module->GetNetwork()->Listen(ip, port, nullptr, m_net_listen_handler);
 		return netid > 0;
 	}
 
@@ -109,7 +109,7 @@ namespace GameLogic
 		auto it = m_players.find(netid);
 		if (m_players.end() != it)
 		{
-			m_logic_module->Network()->Close(netid);
+			m_logic_module->GetNetwork()->Close(netid);
 			m_to_remove_players.insert(it->second);
 			m_players.erase(it);
 			it = m_players.end();

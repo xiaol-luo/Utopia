@@ -18,7 +18,7 @@ LenCtxStreamParser::~LenCtxStreamParser()
 
 bool LenCtxStreamParser::AppendBuffer(char *data, uint32_t data_len)
 {
-	if (m_is_fail)
+	if (m_input_data_p != m_input_data_q || m_is_fail)
 		return false;
 
 	m_input_data_p = m_input_data_q = nullptr;
@@ -56,7 +56,18 @@ bool LenCtxStreamParser::ParseNext()
 			m_input_data_p = m_input_data_q = nullptr;
 			break;
 		}
-		
+		if (m_buffer_len <= 0)
+		{
+			uint32_t ctx_len = *(uint32_t *)m_input_data_p;
+			if (uint32_t(m_input_data_q - m_input_data_p) >= ctx_len + PROTOCOL_LEN_DESCRIPT_SIZE)
+			{
+				is_ok = true;
+				m_parse_result = m_input_data_p + PROTOCOL_LEN_DESCRIPT_SIZE;
+				m_parse_result_len = ctx_len;
+				m_input_data_p += (ctx_len + PROTOCOL_LEN_DESCRIPT_SIZE);
+				break;
+			}
+		}
 		if (m_buffer_len < PROTOCOL_LEN_DESCRIPT_SIZE)
 		{
 			uint32_t copy_data_len = PROTOCOL_LEN_DESCRIPT_SIZE - m_buffer_len;
@@ -92,12 +103,12 @@ bool LenCtxStreamParser::ParseNext()
 			m_input_data_p += copy_data_len;
 			is_ok = true;
 			m_parse_result = m_buffer + PROTOCOL_LEN_DESCRIPT_SIZE;
-			m_parse_result_len = m_buffer_len - PROTOCOL_LEN_DESCRIPT_SIZE;
+			m_parse_result_len = ctx_len;
 			m_buffer_len = 0;
 		}
 	} while (false);
 
-	if (m_input_data_p != m_input_data_q)
+	if (!is_ok && m_input_data_p != m_input_data_q)
 		m_is_fail = true;
 
 	return is_ok;

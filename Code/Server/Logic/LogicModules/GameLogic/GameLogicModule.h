@@ -23,6 +23,7 @@ class LogModule;
 class GameLogicModule;
 class Ping;
 class Pong;
+class NetworkAgent;
 
 namespace GameLogic
 {
@@ -85,9 +86,10 @@ public:
 	virtual EModuleRetCode Destroy();
 
 	void HandlePlayerMsg(int protocol_id, char *data, uint32_t data_len, GameLogic::Player *player);
-	LogModule * Log() { return m_log_module; }
-	ITimerModule * Timer() { return m_timer_module; }
-	INetworkModule * Network() { return m_network_module; }
+	LogModule * GetLog() { return m_log_module; }
+	ITimerModule * GetTimer() { return m_timer_module; }
+	INetworkModule * GetNetwork() { return m_network_module; }
+	NetworkAgent *GetNetAgent() { return m_network_agent; }
 
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
@@ -99,6 +101,7 @@ private:
 	LogModule *m_log_module = nullptr;
 	ITimerModule *m_timer_module = nullptr;
 	INetworkModule *m_network_module = nullptr;
+	NetworkAgent *m_network_agent = nullptr;
 
 private:
 	GameLogic::IClientMsgHandlerDescript **m_client_msg_handler_descripts = nullptr;

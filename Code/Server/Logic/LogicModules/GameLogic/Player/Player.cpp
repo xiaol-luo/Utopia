@@ -2,27 +2,26 @@
 #include "PlayerMgr.h"
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Utils/LenCtxStreamParser.h"
+#include "Network/Handlers/LenCtxNetStreamCnnHandler.h"
 
 namespace GameLogic
 {
-	static char PlayerCnnHandler_Parser_Buffer[Net::PROTOCOL_MAX_SIZE];
-
-	class PlayerCnnHandler : public INetConnectHander
+	class PlayerCnnHandler : public LenCtxNetStreamCnnHandler
 	{
 	public:
 		PlayerCnnHandler(NetId netid, GameLogic::Player *player);
 		virtual ~PlayerCnnHandler();
 		virtual void OnClose(int err_num);
 		virtual void OnOpen(int err_num);
-		virtual void OnRecvData(char *data, uint32_t len);
 
 	protected:
+		virtual void OnParseSuccess(char *data, uint32_t len);
+		virtual void OnParseFail();
 		GameLogic::Player *m_player = nullptr;
-		LenCtxStreamParser m_parser;
 	};
 
 	PlayerCnnHandler::PlayerCnnHandler(NetId netid, GameLogic::Player *player)
-		: m_player(player), m_parser(Net::PROTOCOL_MAX_SIZE)
+		: LenCtxNetStreamCnnHandler(Net::PROTOCOL_MAX_SIZE), m_player(player)
 	{
 		this->SetNetId(netid);
 	}
@@ -42,15 +41,14 @@ namespace GameLogic
 		m_player->OnNetOpen(err_num);
 	}
 
-	void PlayerCnnHandler::OnRecvData(char *data, uint32_t len)
+	void PlayerCnnHandler::OnParseSuccess(char *data, uint32_t len)
 	{
-		if (m_parser.AppendBuffer(data, len))
-		{
-			while (m_parser.ParseNext())
-				m_player->OnNetRecv(m_parser.Content(), m_parser.ContentLen());
-			if (m_parser.IsFail())
-				m_player->m_player_mgr->RemovePlayer(this->GetNetId());
-		}
+		m_player->OnNetRecv(m_parser.Content(), m_parser.ContentLen());
+	}
+
+	void PlayerCnnHandler::OnParseFail()
+	{
+		m_player->m_player_mgr->RemovePlayer(this->GetNetId());
 	}
 
 	Player::Player(PlayerMgr *player_mgr, NetId netid) 

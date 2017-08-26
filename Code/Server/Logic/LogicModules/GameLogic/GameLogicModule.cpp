@@ -4,19 +4,17 @@
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Timer/ITimerModule.h"
 #include "CommonModules/Network/INetworkModule.h"
-#include "Network/Utils/NetProtocolParser.h"
 #include "Player/PlayerMgr.h"
 #include "ModuleDef/IModule.h"
-
+#include "Network/Utils/LenCtxStreamParser.h"
 #include "Network/Protobuf/msg.pb.h"
 #include "Network/Protobuf/test.pb.h"
+#include "Network/Utils/NetworkAgent.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 	m_player_mgr = new GameLogic::PlayerMgr(this);
-
-	this->InitClientMsgHandlerDescript();
 }
 
 GameLogicModule::~GameLogicModule()
@@ -26,6 +24,12 @@ GameLogicModule::~GameLogicModule()
 	m_test_listen_handler = nullptr;
 	while (!m_test_cnn_handlers.empty())
 		m_test_cnn_handlers.pop();
+
+	if (nullptr != m_player_mgr)
+	{
+		delete m_player_mgr;
+		m_player_mgr = nullptr;
+	}
 }
 
 EModuleRetCode GameLogicModule::Init(void *param)
@@ -37,6 +41,9 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	m_log_module = m_module_mgr->GetModule<LogModule>();
 	m_network_module = m_module_mgr->GetModule<INetworkModule>();
 	m_timer_module = m_module_mgr->GetModule<ITimerModule>();
+
+	this->InitClientMsgHandlerDescript();
+	m_network_agent = new NetworkAgent(m_network_module);
 
 	std::string *file_path = (std::string *)param;
 	bool ret = m_csv_cfg_sets->Load(*file_path);
@@ -64,14 +71,12 @@ static char NetConnectHanderTestBuffer[302400];
 class NetConnectHanderTest : public INetConnectHander
 {
 public:
-	NetConnectHanderTest() : INetConnectHander(), parser(nullptr)
+	NetConnectHanderTest() : INetConnectHander(), parser(102400)
 	{
-		parser = new NetProtocolParser(NetConnectHanderTestBuffer, sizeof(NetConnectHanderTestBuffer));
 	}
 	virtual ~NetConnectHanderTest() 
 	{
 		m_listen_handler = nullptr;
-		delete(parser);
 	}
 	virtual void OnClose(int errnu) 
 	{
@@ -89,16 +94,16 @@ public:
 	{
 		uint32_t test_int = 0;
 		char *test_data = nullptr;
-		parser->AppendBuffer(data, len);
-		while (parser->ParseNext())
+		parser.AppendBuffer(data, len);
+		while (parser.ParseNext())
 		{
-			test_int = parser->ContentLen();
-			test_data = parser->Content();
+			test_int = parser.ContentLen();
+			test_data = parser.Content();
 		}
 	}
 
 	NetListenHanderTest *m_listen_handler = nullptr;
-	NetProtocolParser *parser = nullptr;
+	LenCtxStreamParser parser;
 };
 
 std::shared_ptr<INetConnectHander> NetListenHanderTest::GenConnectorHandler(NetId netid)
@@ -207,5 +212,10 @@ EModuleRetCode GameLogicModule::Release()
 EModuleRetCode GameLogicModule::Destroy()
 {
 	this->UnInitClientMsgHandlerDescript();
+	if (nullptr != m_network_agent)
+	{
+		delete m_network_agent;
+		m_network_agent = nullptr;
+	}
 	return EModuleRetCode_Succ;
 }
