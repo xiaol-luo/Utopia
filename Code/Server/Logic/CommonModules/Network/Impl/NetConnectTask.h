@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include "Common/Define/NetworkDefine.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 namespace Net
 {
@@ -32,6 +33,7 @@ namespace Net
 
 	class ConnectTask
 	{
+		NewDelOperaDeclaration;
 	public:
 		ConnectTask(EConnectTaskType task_type, int64_t id);
 		virtual ~ConnectTask();
@@ -50,6 +52,7 @@ namespace Net
 
 	class ConnectTaskConnect : public ConnectTask
 	{
+		NewDelOperaDeclaration;
 	public:
 		ConnectTaskConnect(int64_t id, std::string ip, uint16_t port, void *opt);
 		virtual ~ConnectTaskConnect();
@@ -63,6 +66,7 @@ namespace Net
 
 	class ConnectTaskListen : public ConnectTask
 	{
+		NewDelOperaDeclaration;
 	public:
 		ConnectTaskListen(int64_t id, std::string ip, uint16_t port, void *opt);
 		virtual ~ConnectTaskListen();

@@ -1,9 +1,11 @@
 #pragma once
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Utils/LenCtxStreamParser.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 class LenCtxNetStreamCnnHandler : public INetConnectHander
 {
+	NewDelOperaDeclaration;
 public:
 	LenCtxNetStreamCnnHandler(uint32_t max_per_ctx_len) 
 		: m_parser(max_per_ctx_len) {}

@@ -1,6 +1,7 @@
 #pragma  once 
 
 #include "Common/Define/NetworkDefine.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 #include <unordered_map>
 #include <memory>
 
@@ -19,7 +20,7 @@ namespace GameLogic
 	{
 		friend class GameLogic::PlayerCnnHandler;
 		using NetOpenCbFun = void (GameLogic::PlayerMgr::*)(int err_num);
-
+		NewDelOperaDeclaration;
 	public:
 		Player(PlayerMgr *player_mgr, NetId netid);
 		~Player();

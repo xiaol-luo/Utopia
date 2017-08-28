@@ -2,11 +2,13 @@
 
 #include <memory>
 #include "ModuleDef/IModule.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 class ServerLogic;
 
 class ModuleMgr : ObjectBase
 {
+	NewDelOperaDeclaration;
 public:
 	ModuleMgr(ServerLogic *server_logic);
 	~ModuleMgr();

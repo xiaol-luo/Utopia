@@ -27,7 +27,8 @@ MemoryPool::MemoryPool(uint32_t block_size, uint32_t memory_page_size) : m_block
 MemoryPool::MemoryPool(uint32_t block_size, uint32_t memory_page_size, uint32_t expect_working_block_set_num, uint32_t min_block_num_per_block_set)
 	: m_block_size(block_size), m_memory_page_size(memory_page_size), m_expect_working_block_set_num(expect_working_block_set_num), m_min_block_num_per_block_set(min_block_num_per_block_set)
 {
-
+	m_block_sets.clear();
+	m_block_sets.push_back(nullptr);
 }
 
 MemoryPool::~MemoryPool()

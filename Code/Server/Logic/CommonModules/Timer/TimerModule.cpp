@@ -3,6 +3,7 @@
 #include <queue>
 #include "ModuleDef/ModuleMgr.h"
 #include "CommonModules/Log/LogModule.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 TimerModule::TimerModule(ModuleMgr *module_mgr) : ITimerModule(module_mgr)
 {
@@ -179,7 +180,7 @@ long long TimerModule::Add(TimerAction action, long start_ts_ms, long long execu
 	timer_item->is_firm = execute_times == EXECUTE_UNLIMIT_TIMES;
 	timer_item->action = action;
 	timer_item->execute_ms = (start_ts_ms >= m_now_ms) ? start_ts_ms : m_now_ms;
-	srv_rbtree_node_t *node = new srv_rbtree_node_t();
+	srv_rbtree_node_t *node = (srv_rbtree_node_t *)Malloc(sizeof(srv_rbtree_node_t));
 	memset(node, 0, sizeof(srv_rbtree_node_t));
 	node->key = timer_item->execute_ms;
 	node->data = timer_item;
@@ -233,7 +234,7 @@ void TimerModule::ChekRemoveNodes()
 		if (node->parent)
 			srv_rbtree_delete(m_rbtree_timer_items, node);
 		delete (TimerItem *)node->data;
-		delete node;
+		Free(node);
 		m_id_to_timer_node.erase(it);
 		++ m_remove_times;
 	}
@@ -247,3 +248,5 @@ void TimerModule::UpdateTime()
 	m_now_sec = m_now_ms / 1000;
 	m_delta_ms = m_now_ms - old_ms;
 }
+
+NewDelOperaImplement(TimerModule::TimerItem);

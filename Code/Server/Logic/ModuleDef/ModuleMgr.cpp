@@ -1,6 +1,9 @@
 #include "ModuleMgr.h"
 #include <assert.h>
 #include "ServerLogics/ServerLogic.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
+
+NewDelOperaImplement(ModuleMgr);
 
 ModuleMgr::ModuleMgr(ServerLogic *server_logic) : m_server_logic(server_logic)
 {

@@ -1,5 +1,6 @@
 #include "NetworkAgent.h"
 #include "CommonModules/Network/INetworkModule.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 // field-size	       4                       4                   4	
 // field		     ctx_len			   protocol_id		      msg
@@ -20,7 +21,42 @@ bool NetworkAgent::Send(NetId netid, int protocol_id, char *msg, uint32_t msg_le
 	return ret;
 }
 
+bool NetworkAgent::Send(NetId netid, int protocol_id, google::protobuf::Message *msg)
+{
+	uint32_t msg_len = msg->ByteSize();
+	if (!this->CheckExpendBuffer(msg_len))
+		return false;
+	msg->SerializePartialToArray(m_buffer, msg_len);
+	return this->Send(netid, protocol_id, m_buffer, msg_len);
+}
+
 void NetworkAgent::Close(NetId netid)
 {
 	m_network->Close(netid);
 }
+
+bool NetworkAgent::CheckExpendBuffer(uint32_t lower_limit)
+{
+	if (m_buffer_capacity >= lower_limit)
+		return true;
+	if (m_buffer_capacity <= 0) m_buffer_capacity = BUFFER_INIT_SIZE;
+	while (m_buffer_capacity < lower_limit)
+		m_buffer_capacity += BUFFER_INCREASE_STEP;
+	if (nullptr == m_buffer)
+		m_buffer = (char *)Malloc(m_buffer_capacity);
+	else
+		m_buffer = (char *)Realloc(m_buffer, m_buffer_capacity);
+	assert(m_buffer);
+	return NULL != m_buffer;
+}
+
+NetworkAgent::~NetworkAgent()
+{
+	if (nullptr != m_buffer)
+	{
+		Free(m_buffer);
+		m_buffer = nullptr;
+	}
+}
+#include "Common/Utils/GlobalMemoryMgr.h"
+NewDelOperaImplement(NetworkAgent);

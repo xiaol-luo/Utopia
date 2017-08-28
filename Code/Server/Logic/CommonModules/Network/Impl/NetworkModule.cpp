@@ -2,6 +2,7 @@
 #include "ModuleDef/ModuleMgr.h"
 #include "CommonModules/Log/LogModule.h"
 #include "NetWorker.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -10,6 +11,7 @@
 
 struct ConnectTaskThread
 {
+	NewDelOperaDeclaration;
 	using ThreadAction = void(*)(ConnectTaskThread *);
 	ConnectTaskThread(std::function<void(ConnectTaskThread *)> _action, std::mutex *_task_mutex,
 		std::queue<Net::ConnectTask *> *_cnn_tasks, std::mutex *_result_mutex,
@@ -106,7 +108,7 @@ NetworkModule::NetworkModule(ModuleMgr *module_mgr) : INetworkModule(module_mgr)
 	if (m_cnn_task_thread_num <= 0)
 		m_cnn_task_thread_num = 1;
 	int malloc_size = sizeof(ConnectTaskThread *) * m_cnn_task_thread_num;
-	m_cnn_task_threads = (ConnectTaskThread **)malloc(malloc_size);
+	m_cnn_task_threads = (ConnectTaskThread **)Malloc(malloc_size);
 	memset(m_cnn_task_threads, 0, malloc_size);
 	for (int i = 0; i < m_cnn_task_thread_num; ++i)
 	{
@@ -118,7 +120,7 @@ NetworkModule::NetworkModule(ModuleMgr *module_mgr) : INetworkModule(module_mgr)
 	if (m_net_worker_num <= 0)
 		m_net_worker_num = 1;
 	malloc_size = sizeof(Net::INetWorker *) * m_net_worker_num;
-	m_net_workers = (Net::INetWorker **)malloc(malloc_size);
+	m_net_workers = (Net::INetWorker **)Malloc(malloc_size);
 	memset(m_net_workers, 0, malloc_size);
 	for (int i = 0; i < m_net_worker_num; ++i)
 	{
@@ -138,7 +140,7 @@ NetworkModule::~NetworkModule()
 				m_cnn_task_threads[i] = nullptr;
 			}
 		}
-		free(m_cnn_task_threads); 
+		Free(m_cnn_task_threads); 
 		m_cnn_task_threads = nullptr;
 	}
 
@@ -159,7 +161,7 @@ NetworkModule::~NetworkModule()
 			delete m_net_workers[i];
 			m_net_workers[i] = nullptr;
 		}
-		free(m_net_workers);
+		Free(m_net_workers);
 		m_net_workers = nullptr;
 	}
 }
@@ -439,7 +441,7 @@ void NetworkModule::ProcessNetDatas()
 						if (ENetWorkDataAction_Read == data.action)
 						{
 							tmp_handler->OnRecvData(data.binary, data.binary_len);
-							free(data.binary); data.binary = nullptr; 
+							Free(data.binary); data.binary = nullptr; 
 							data.binary_len = 0;
 						}
 					}
@@ -475,3 +477,9 @@ void NetworkModule::ProcessNetDatas()
 		}
 	}
 }
+
+NewDelOperaImplement(NetWorkData);
+NewDelOperaImplement(ConnectTaskThread);
+NewDelOperaImplement(INetworkHandler);
+NewDelOperaImplement(INetConnectHander);
+NewDelOperaImplement(INetListenHander);

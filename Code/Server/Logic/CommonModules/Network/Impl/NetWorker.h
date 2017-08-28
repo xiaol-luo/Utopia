@@ -7,6 +7,7 @@
 #include <mutex>
 #include "INetWorker.h"
 #include "event2/util.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 struct bufferevent;
 struct evconnlistener;
@@ -17,6 +18,7 @@ namespace Net
 {
 	class NetWorker : public INetWorker
 	{
+		NewDelOperaDeclaration;
 	public:
 		NetWorker();
 		virtual ~NetWorker();
@@ -33,6 +35,7 @@ namespace Net
 	protected:
 		struct NetConnectionData
 		{
+			NewDelOperaDeclaration;
 			// 这个数据结构的字段可以考虑分成2个结构体：
 			// 一个结构体包含会竞争的字段，另一个包含不会竞争的字段
 			NetConnectionData() {}

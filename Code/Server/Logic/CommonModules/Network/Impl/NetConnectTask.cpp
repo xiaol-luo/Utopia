@@ -1,7 +1,12 @@
 #include "NetConnectTask.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 namespace Net
 {
+	NewDelOperaImplement(ConnectTask);
+	NewDelOperaImplement(ConnectTaskConnect);
+	NewDelOperaImplement(ConnectTaskListen);
+
 	ConnectTask::ConnectTask(EConnectTaskType task_type, int64_t id)
 	{
 		m_task_type = task_type;

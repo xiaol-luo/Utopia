@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include "Common/Macro/MemoryPoolMacro.h"
 
 class TimerModule : public ITimerModule
 {
@@ -29,6 +30,7 @@ public:
 private:
 	struct TimerItem
 	{
+		NewDelOperaDeclaration;
 		long long id = INVALID_TIMER_ID;
 		bool is_firm = false;
 		long long execute_ms = 0;

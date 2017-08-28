@@ -2,9 +2,11 @@
 
 #include <memory>
 #include <queue>
+#include "Common/Macro/MemoryPoolMacro.h"
 
 class LenCtxStreamParser
 {
+	NewDelOperaDeclaration;
 public:
 	LenCtxStreamParser(uint32_t max_buffer_size);
 	~LenCtxStreamParser();

@@ -1,5 +1,6 @@
 #include "LenCtxStreamParser.h"
 #include <assert.h>
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 LenCtxStreamParser::LenCtxStreamParser(uint32_t max_buffer_size)
 	: m_max_buffer_size(max_buffer_size)
@@ -11,7 +12,7 @@ LenCtxStreamParser::~LenCtxStreamParser()
 {
 	if (nullptr != m_buffer)
 	{
-		free(m_buffer);
+		Free(m_buffer);
 		m_buffer = nullptr;
 	}
 }
@@ -124,12 +125,12 @@ bool LenCtxStreamParser::CheckExpendBuffer(uint32_t lower_limit)
 	while (m_buffer_capacity < lower_limit)
 		m_buffer_capacity += BUFFER_INCREASE_STEP;
 	if (nullptr == m_buffer)
-		m_buffer = (char *)malloc(m_buffer_capacity);
+		m_buffer = (char *)Malloc(m_buffer_capacity);
 	else
-		m_buffer = (char *)realloc(m_buffer, m_buffer_capacity);
+		m_buffer = (char *)Realloc(m_buffer, m_buffer_capacity);
 	assert(m_buffer);
 	return NULL != m_buffer;
 }
 
-
+NewDelOperaImplement(LenCtxStreamParser);
 

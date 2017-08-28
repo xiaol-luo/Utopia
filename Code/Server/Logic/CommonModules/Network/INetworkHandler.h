@@ -2,6 +2,7 @@
 
 #include "Common/Define/NetworkDefine.h"
 #include <memory>
+#include "Common/Macro/MemoryPoolMacro.h"
 
 enum ENetworkHandlerType
 {
@@ -12,6 +13,7 @@ enum ENetworkHandlerType
 
 class INetworkHandler
 {
+	NewDelOperaDeclaration;
 public:
 	INetworkHandler(ENetworkHandlerType handler_type) : m_handler_type(handler_type) {}
 	virtual ~INetworkHandler() {}
@@ -27,6 +29,7 @@ protected:
 };
 class INetConnectHander : public INetworkHandler
 {
+	NewDelOperaDeclaration;
 public:
 	INetConnectHander() : INetworkHandler(ENetworkHandler_Connect) {}
 	virtual ~INetConnectHander() {}
@@ -34,6 +37,7 @@ public:
 };
 class INetListenHander : public INetworkHandler
 {
+	NewDelOperaDeclaration;
 public:
 	INetListenHander() : INetworkHandler(ENetworkHandler_Listen) {}
 	virtual ~INetListenHander() {}

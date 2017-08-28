@@ -3,11 +3,13 @@
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Utils/LenCtxStreamParser.h"
 #include "Network/Handlers/LenCtxNetStreamCnnHandler.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 namespace GameLogic
 {
 	class PlayerCnnHandler : public LenCtxNetStreamCnnHandler
 	{
+		NewDelOperaDeclaration;
 	public:
 		PlayerCnnHandler(NetId netid, GameLogic::Player *player);
 		virtual ~PlayerCnnHandler();
@@ -19,6 +21,8 @@ namespace GameLogic
 		virtual void OnParseFail();
 		GameLogic::Player *m_player = nullptr;
 	};
+
+	NewDelOperaImplement(PlayerCnnHandler);
 
 	PlayerCnnHandler::PlayerCnnHandler(NetId netid, GameLogic::Player *player)
 		: LenCtxNetStreamCnnHandler(Net::PROTOCOL_MAX_SIZE), m_player(player)

@@ -5,6 +5,7 @@
 #include <vector>
 #include <queue>
 #include <functional>
+#include "Common/Macro/MemoryPoolMacro.h"
 
 namespace GameLogic 
 {
@@ -47,7 +48,6 @@ namespace GameLogic
 	{
 	public:
 		using ProcessFuncType = void (GameLogicModule::*)(int, MsgType *, Player *);
-		//using ProcessFuncType = std::function<void(int, MsgType *, Player *)>;
 		ClientMsgHandlerDescript(GameLogicModule *_game_module, int _protocol_id, ProcessFuncType _process)
 		{
 			game_module = _game_module;
@@ -76,6 +76,7 @@ namespace GameLogic
 
 class GameLogicModule : public IGameLogicModule
 {
+	NewDelOperaDeclaration;
 public:
 	GameLogicModule(ModuleMgr *module_mgr);
 	virtual ~GameLogicModule();

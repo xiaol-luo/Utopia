@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ServerLogics/ServerLogic.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 namespace GameLogic
 {

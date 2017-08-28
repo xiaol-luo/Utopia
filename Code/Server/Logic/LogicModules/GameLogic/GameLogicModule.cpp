@@ -10,6 +10,7 @@
 #include "Network/Protobuf/msg.pb.h"
 #include "Network/Protobuf/test.pb.h"
 #include "Network/Utils/NetworkAgent.h"
+#include "GameLogic/Network/GamePlayerMsgDefine.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
@@ -130,15 +131,6 @@ EModuleRetCode GameLogicModule::Awake()
 
 EModuleRetCode GameLogicModule::Update()
 {
-	auto timer_module = m_module_mgr->GetModule<ITimerModule>();
-	// timer_module->AddNext(TestTimer, 0);
-	for (int i = 0; i < 1; ++ i)
-	{
-		// timer_module->AddFirm([this]() { for (int i = 0; i < 1000; ++i); }, 100 * 1, -1);
-		// timer_module->AddFirm([this]() { m_module_mgr->GetModule<LogModule>()->Info(7, "TestTimer"); }, 1000 * 1, -1);
-		// timer_module->AddNext([this]() { m_module_mgr->GetModule<LogModule>()->Info(7, "TestTimer"); }, 0);
-	}
-
 	{
 		auto net_module = m_module_mgr->GetModule<INetworkModule>();
 		auto log_module = m_module_mgr->GetModule<LogModule>();
@@ -146,9 +138,6 @@ EModuleRetCode GameLogicModule::Update()
 		if (m_test_cnn_handlers.size() < 100)
 		{
 			std::shared_ptr<NetConnectHanderTest> handler = nullptr;
-			// handler = std::make_shared<NetConnectHanderTest>();
-			// m_test_cnn_handlers.push(handler);
-			// net_module->Connect("127.0.0.1", 10240, nullptr, handler);
 			for (int i = 0; i < 10; ++i)
 			{
 				handler = std::make_shared<NetConnectHanderTest>();
@@ -160,8 +149,6 @@ EModuleRetCode GameLogicModule::Update()
 		{
 			net_module->Close(m_test_cnn_handlers.front()->GetNetId());
 			m_test_cnn_handlers.pop();
-				
-			char buff[Net::PROTOCOL_MAX_SIZE];
 			Ping ping;
 			ping.set_msgid(1);
 			Pong pong;
@@ -173,28 +160,8 @@ EModuleRetCode GameLogicModule::Update()
 				m_test_cnn_handlers.pop();
 				m_test_cnn_handlers.push(handler);
 
-				{
-					char *p = buff;
-					*(int32_t *)buff = ping.ByteSizeLong() + sizeof(int);
-					p += sizeof(uint32_t);
-					*(int *)p = ping.msgid();
-					p += sizeof(int);
-					ping.SerializeToArray(p, ping.ByteSizeLong());
-					uint32_t send_len = ping.ByteSizeLong() + p - buff;
-					net_module->Send(handler->GetNetId(), buff, send_len);
-				}
-
-				{
-					char *p = buff;
-					*(int32_t *)buff = pong.ByteSizeLong() + sizeof(int);
-					p += sizeof(uint32_t);
-					*(int *)p = pong.msgid();
-					p += sizeof(int);
-					pong.SerializeToArray(p, pong.ByteSizeLong());
-					uint32_t send_len = pong.ByteSizeLong() + p - buff;
-					*(int32_t *)buff = send_len - sizeof(uint32_t);
-					net_module->Send(handler->GetNetId(), buff, send_len);
-				}
+				m_network_agent->Send(handler->GetNetId(), GameLogic::PlayerMsgProtocol_Ping, &ping);
+				m_network_agent->Send(handler->GetNetId(), GameLogic::PlayerMsgProtocol_Pong, &pong);
 			}
 		}
 	}

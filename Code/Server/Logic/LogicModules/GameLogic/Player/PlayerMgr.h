@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "Common/Define/NetworkDefine.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 class GameLogicModule;
 class INetListenHander;
@@ -18,6 +19,7 @@ namespace GameLogic
 	class PlayerMgr
 	{
 		friend GameLogic::PlayerListenHandler;
+		NewDelOperaDeclaration;
 	public: 
 		PlayerMgr(GameLogicModule *logic_module);
 		~PlayerMgr();

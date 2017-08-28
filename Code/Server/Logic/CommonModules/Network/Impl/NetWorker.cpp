@@ -4,9 +4,13 @@
 #include "event2/listener.h"
 #include "event2/buffer.h"
 #include <signal.h>
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 namespace Net
 {
+	NewDelOperaImplement(NetWorker);
+	NewDelOperaImplement(NetWorker::NetConnectionData);
+
 	NetWorker::NetWorker()
 	{
 
@@ -139,7 +143,7 @@ namespace Net
 				NetWorkData &data = data_queue.front();
 				if (nullptr != data.binary)
 				{
-					free(data.binary);
+					Free(data.binary);
 					data.binary = nullptr;
 					data.binary_len = 0;
 				}
@@ -182,7 +186,7 @@ namespace Net
 		size_t len = evbuffer_get_length(in_buffer);
 		if (len > 0)
 		{
-			char *msg = (char *)malloc(len);
+			char *msg = (char *)Malloc(len);
 			evbuffer_remove(in_buffer, msg, len);
 			NetWorkData data(cnn_data->netid, cnn_data->fd, cnn_data->handler, ENetWorkDataAction_Read, 0, 0, msg, len);
 			net_worker->PushNetworkData(data);

@@ -6,6 +6,7 @@
 #include "CommonModules/Timer/TimerModule.h"
 #include "CommonModules/Network/Impl/NetworkModule.h"
 #include "LogicModules/GameLogic/GameLogicModule.h"
+#include "Common/Utils/GlobalMemoryMgr.h"
 
 GameServerLogic::GameServerLogic() : ServerLogic()
 {

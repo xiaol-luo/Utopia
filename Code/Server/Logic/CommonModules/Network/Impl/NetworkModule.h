@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include "CommonModules/Network/INetworkModule.h"
 #include "NetConnectTask.h"
+#include "Common/Macro/MemoryPoolMacro.h"
 
 struct ConnectTaskThread;
 namespace Net
@@ -23,6 +24,8 @@ enum ENetWorkDataAction
 
 struct NetWorkData
 {
+	NewDelOperaDeclaration;
+
 	NetWorkData() {}
 	NetWorkData(NetId _netid, int _fd, std::weak_ptr<INetworkHandler> _handle, 
 		ENetWorkDataAction _action, int _err_num, int _new_fd, char *_binary, uint32_t _binary_len) 
