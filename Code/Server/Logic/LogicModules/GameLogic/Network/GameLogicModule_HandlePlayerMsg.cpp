@@ -29,6 +29,7 @@ void GameLogicModule::UnInitClientMsgHandlerDescript()
 	{
 		for (int i = 0; i < GameLogic::PlayerMsgProtocol_Max; ++i)
 			delete m_client_msg_handler_descripts[i];
+		free(m_client_msg_handler_descripts);
 		m_client_msg_handler_descripts = nullptr;
 	}
 }

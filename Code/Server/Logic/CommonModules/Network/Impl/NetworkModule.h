@@ -78,7 +78,7 @@ protected:
 
 protected:
 	int m_net_worker_num = 2;
-	Net::INetWorker **m_net_workers;
+	Net::INetWorker **m_net_workers = nullptr;
 	Net::INetWorker * ChoseWorker(NetId netid);
 	void ProcessNetDatas();
 };

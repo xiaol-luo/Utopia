@@ -26,11 +26,14 @@ FUNCTION(FileGlobRecurse search_dir file_patterns out_files)
 	SET(${out_files} ${all_files} PARENT_SCOPE)
 ENDFUNCTION(FileGlobRecurse)
 
-
 FileGlobRecurse(${CMAKE_CURRENT_SOURCE_DIR} "${Cpp_File_Pattern}" dir_files)
 SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
+SET(Protobuf_File_Pattern "*.h" "*.cc")
+FileGlobRecurse("${CMAKE_CURRENT_SOURCE_DIR}/Logic/ShareCode/Network/Protobuf" "${Protobuf_File_Pattern}" dir_files)
+SET(SourceFiles ${SourceFiles} ${dir_files})
+SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libevent ./Libs/3rdpartLibs/protobuf/include)
 INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode ./Logic/LogicModules)

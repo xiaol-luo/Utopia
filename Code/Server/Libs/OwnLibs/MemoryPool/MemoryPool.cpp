@@ -8,7 +8,6 @@ struct BlockLink
 
 struct BlockSet
 {
-	static const uint32_t MIN_BLOCK_NUM = 16;
 	static const uint32_t ID_DESCRIPT_LEN = sizeof(uint32_t);
 
 	uint32_t id = 0;
@@ -19,10 +18,16 @@ struct BlockSet
 	char blocks_begin[0];
 };
 
-MemoryPool::MemoryPool(uint32_t block_size) : m_block_size(block_size)
+MemoryPool::MemoryPool(uint32_t block_size, uint32_t memory_page_size) : m_block_size(block_size), m_memory_page_size(memory_page_size)
 {
 	m_block_sets.clear();
 	m_block_sets.push_back(nullptr);
+}
+
+MemoryPool::MemoryPool(uint32_t block_size, uint32_t memory_page_size, uint32_t expect_working_block_set_num, uint32_t min_block_num_per_block_set)
+	: m_block_size(block_size), m_memory_page_size(memory_page_size), m_expect_working_block_set_num(expect_working_block_set_num), m_min_block_num_per_block_set(min_block_num_per_block_set)
+{
+
 }
 
 MemoryPool::~MemoryPool()
@@ -61,10 +66,10 @@ void * MemoryPool::Malloc()
 		uint32_t malloc_size = 0;
 		uint32_t real_block_size = BlockSet::ID_DESCRIPT_LEN + m_block_size;
 		{
-			uint32_t tmp_malloc_size = sizeof(BlockSet) + real_block_size * BlockSet::MIN_BLOCK_NUM;
-			uint32_t page_num = tmp_malloc_size / PAGE_SIZE;
-			page_num += tmp_malloc_size % PAGE_SIZE > 0 ? 1 : 0;
-			malloc_size = page_num * PAGE_SIZE;
+			uint32_t tmp_malloc_size = sizeof(BlockSet) + real_block_size * m_min_block_num_per_block_set;
+			uint32_t page_num = tmp_malloc_size / m_memory_page_size;
+			page_num += tmp_malloc_size % m_memory_page_size > 0 ? 1 : 0;
+			malloc_size = page_num * m_memory_page_size;
 		}
 
 		block_set = (BlockSet *)malloc(malloc_size);
@@ -124,7 +129,7 @@ void MemoryPool::Free(void *ptr)
 	real_ptr = nullptr;
 	--block_set->used_num;
 
-	if (m_working_block_set_num > EXPECT_WORKING_BLOCK_SET_NUM)
+	if (m_working_block_set_num > m_expect_working_block_set_num)
 	{
 		if (block_set->used_num <= 0)
 		{
