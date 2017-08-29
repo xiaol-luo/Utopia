@@ -21,11 +21,6 @@ GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(modul
 GameLogicModule::~GameLogicModule()
 {
 	delete m_csv_cfg_sets;
-	m_test_timer = nullptr;
-	m_test_listen_handler = nullptr;
-	while (!m_test_cnn_handlers.empty())
-		m_test_cnn_handlers.pop();
-
 	if (nullptr != m_player_mgr)
 	{
 		delete m_player_mgr;
@@ -52,122 +47,17 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 
-class NetConnectHanderTest;
-class NetListenHanderTest : public INetListenHander
-{
-public:
-	virtual void OnClose(int errnu) {}
-	virtual void OnOpen(int errnu) {}
-	NetListenHanderTest() : INetListenHander() {}
-	virtual ~NetListenHanderTest() 
-	{
-		handlers.clear();
-	}
-	virtual std::shared_ptr<INetConnectHander> GenConnectorHandler(NetId netid);
-	std::map<NetId, std::shared_ptr<INetConnectHander>> handlers;
-};
-
-static char NetConnectHanderTestBuffer[302400];
-
-class NetConnectHanderTest : public INetConnectHander
-{
-public:
-	NetConnectHanderTest() : INetConnectHander(), parser(102400)
-	{
-	}
-	virtual ~NetConnectHanderTest() 
-	{
-		m_listen_handler = nullptr;
-	}
-	virtual void OnClose(int errnu) 
-	{
-		if (nullptr != m_listen_handler)
-			m_listen_handler->handlers.erase(this->GetNetId());
-	}
-	virtual void OnOpen(int errnu) 
-	{
-		if (0 != errnu && nullptr != m_listen_handler)
-		{
-			m_listen_handler->handlers.erase(this->GetNetId());
-		}
-	}
-	virtual void OnRecvData(char *data, uint32_t len) 
-	{
-		uint32_t test_int = 0;
-		char *test_data = nullptr;
-		parser.AppendBuffer(data, len);
-		while (parser.ParseNext())
-		{
-			test_int = parser.ContentLen();
-			test_data = parser.Content();
-		}
-	}
-
-	NetListenHanderTest *m_listen_handler = nullptr;
-	LenCtxStreamParser parser;
-};
-
-std::shared_ptr<INetConnectHander> NetListenHanderTest::GenConnectorHandler(NetId netid)
-{
-	std::shared_ptr<NetConnectHanderTest> handler = std::make_shared<NetConnectHanderTest>();
-	handler->SetNetId(netid);
-	handler->m_listen_handler = this;
-	handlers[netid] = handler;
-	return handler;
-}
-
 EModuleRetCode GameLogicModule::Awake()
 {
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
 
-	m_test_timer = std::make_shared<ObjectBase>();
-	m_test_listen_handler = std::make_shared<NetListenHanderTest>();
-	auto net_module = m_module_mgr->GetModule<INetworkModule>();
-	//net_module->Listen("0.0.0.0", 10240, nullptr, m_test_listen_handler);
-
-	m_player_mgr->Awake("0.0.0.0", 10240);
-	return EModuleRetCode_Succ;
+	bool ret = m_player_mgr->Awake("0.0.0.0", 10240);
+	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 
 EModuleRetCode GameLogicModule::Update()
 {
-	{
-		auto net_module = m_module_mgr->GetModule<INetworkModule>();
-		auto log_module = m_module_mgr->GetModule<LogModule>();
-
-		if (m_test_cnn_handlers.size() < 100)
-		{
-			std::shared_ptr<NetConnectHanderTest> handler = nullptr;
-			for (int i = 0; i < 10; ++i)
-			{
-				handler = std::make_shared<NetConnectHanderTest>();
-				m_test_cnn_handlers.push(handler);
-				net_module->ConnectAsync("127.0.0.1", 10240, nullptr, handler);
-			}
-		}
-		else
-		{
-			net_module->Close(m_test_cnn_handlers.front()->GetNetId());
-			m_test_cnn_handlers.pop();
-			Ping ping;
-			ping.set_msgid(1);
-			Pong pong;
-			pong.set_msgid(2);
-
-			for (int i = 0; i < 100; ++i)
-			{
-				std::shared_ptr<NetConnectHanderTest> handler = m_test_cnn_handlers.front();
-				m_test_cnn_handlers.pop();
-				m_test_cnn_handlers.push(handler);
-
-				m_network_agent->Send(handler->GetNetId(), GameLogic::PlayerMsgProtocol_Ping, &ping);
-				m_network_agent->Send(handler->GetNetId(), GameLogic::PlayerMsgProtocol_Pong, &pong);
-			}
-		}
-	}
-
 	m_player_mgr->Update(m_timer_module->NowMs());
-
 	return EModuleRetCode_Succ;
 }
 
@@ -184,5 +74,9 @@ EModuleRetCode GameLogicModule::Destroy()
 		delete m_network_agent;
 		m_network_agent = nullptr;
 	}
+
+	m_log_module = nullptr;
+	m_timer_module = nullptr;
+	m_network_module = nullptr;
 	return EModuleRetCode_Succ;
 }

@@ -94,10 +94,6 @@ public:
 
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
-	std::shared_ptr<ObjectBase> m_test_timer = nullptr;
-	std::shared_ptr<NetListenHanderTest> m_test_listen_handler = nullptr;
-	std::queue<std::shared_ptr<NetConnectHanderTest>> m_test_cnn_handlers;
-
 	GameLogic::PlayerMgr *m_player_mgr = nullptr;
 	LogModule *m_log_module = nullptr;
 	ITimerModule *m_timer_module = nullptr;
