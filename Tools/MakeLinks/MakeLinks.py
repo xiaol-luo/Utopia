@@ -44,11 +44,20 @@ if __name__ == "__main__":
         os.remove(exist_link)
     if is_unlink:
         sys.exit(0)
+    all_ok = True
     for key, val in link_maps.items():
-        real_path = os.path.join(root_dir_path, val)
-        link_path = os.path.join(root_dir_path, key)
-        os.symlink(real_path, link_path)
-        log.debug("{0}=>{1}".format(link_path, real_path))
-
+        try:
+            real_path = os.path.join(root_dir_path, val)
+            link_path = os.path.join(root_dir_path, key)
+            if (not os.path.exists(os.path.dirname(link_path))):
+                os.makedirs(os.path.dirname(link_path))
+            os.symlink(real_path, link_path)
+        except FileExistsError as e:
+            log.error(e)
+        except FileNotFoundError as e:
+            log.error(e)
+            all_ok = False
+    log.debug(all_ok and "All Ok" or "Some Fail")
+    sys.exit(all_ok and 0 or -1)
 
 
