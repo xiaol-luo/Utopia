@@ -15,4 +15,5 @@ cmd_format = "protoc.exe --proto_path=./proto {0} {1}"
 
 subprocess.call(shlex.split(cmd_format.format(cpp_out, proto_files_str)), shell=True)
 subprocess.call(shlex.split(cmd_format.format(python_out, proto_files_str)), shell=True)
+subprocess.call(shlex.split(cmd_format.format(csharp_out, proto_files_str)), shell=True)
  
