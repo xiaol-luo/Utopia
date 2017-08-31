@@ -1,6 +1,6 @@
 #include "NetworkAgent.h"
 #include "CommonModules/Network/INetworkModule.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 // field-size	       4                       4                   4	
 // field		     ctx_len			   protocol_id		      msg
@@ -58,5 +58,5 @@ NetworkAgent::~NetworkAgent()
 		m_buffer = nullptr;
 	}
 }
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 NewDelOperaImplement(NetworkAgent);

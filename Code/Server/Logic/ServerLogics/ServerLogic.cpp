@@ -3,6 +3,7 @@
 #include <chrono>
 #include <ctime>
 #include "CommonModules/Timer/ITimerModule.h"
+#include "Common/Utils/LogUtil.h"
 
 const int TRY_MAX_TIMES = 100000;
 
@@ -39,6 +40,10 @@ bool ServerLogic::Init()
 
 	bool ret = EModuleRetCode_Succ == retCode;
 	if (!ret) this->Quit();
+	else
+	{
+		LogUtil::Init(m_module_mgr->GetModule<LogModule>());
+	}
 	return ret;
 }
 

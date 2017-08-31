@@ -3,7 +3,7 @@
 #include <queue>
 #include "ModuleDef/ModuleMgr.h"
 #include "CommonModules/Log/LogModule.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 TimerModule::TimerModule(ModuleMgr *module_mgr) : ITimerModule(module_mgr)
 {

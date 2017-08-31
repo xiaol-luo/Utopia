@@ -1,6 +1,6 @@
 #include "LenCtxStreamParser.h"
 #include <assert.h>
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 LenCtxStreamParser::LenCtxStreamParser(uint32_t max_buffer_size)
 	: m_max_buffer_size(max_buffer_size)
@@ -33,10 +33,11 @@ bool LenCtxStreamParser::AppendBuffer(char *data, uint32_t data_len)
 
 bool LenCtxStreamParser::ParseNext()
 {
+
 	m_parse_result = nullptr;
 	m_parse_result_len = 0;
 
-	if (nullptr == m_input_data_p || m_input_data_p == m_input_data_q)
+	if (nullptr == m_input_data_p || m_input_data_p == m_input_data_q || m_is_fail)
 	{
 		m_input_data_p = m_input_data_q = nullptr;
 		return false;
@@ -50,7 +51,10 @@ bool LenCtxStreamParser::ParseNext()
 		if (m_buffer_len + m_input_data_q - m_input_data_p < PROTOCOL_LEN_DESCRIPT_SIZE)
 		{
 			if (!this->CheckExpendBuffer(PROTOCOL_LEN_DESCRIPT_SIZE))
+			{
+				m_is_fail = true;
 				break;
+			}
 			uint32_t copy_data_len = m_input_data_q - m_input_data_p;
 			memcpy(m_buffer + m_buffer_len, m_input_data_p, copy_data_len);
 			m_buffer_len += copy_data_len;
@@ -60,6 +64,11 @@ bool LenCtxStreamParser::ParseNext()
 		if (m_buffer_len <= 0)
 		{
 			uint32_t ctx_len = *(uint32_t *)m_input_data_p;
+			if (ctx_len <= 0)
+			{
+				m_is_fail = true;
+				break;
+			}
 			if (uint32_t(m_input_data_q - m_input_data_p) >= ctx_len + PROTOCOL_LEN_DESCRIPT_SIZE)
 			{
 				is_ok = true;
@@ -73,7 +82,10 @@ bool LenCtxStreamParser::ParseNext()
 		{
 			uint32_t copy_data_len = PROTOCOL_LEN_DESCRIPT_SIZE - m_buffer_len;
 			if (!this->CheckExpendBuffer(PROTOCOL_LEN_DESCRIPT_SIZE))
+			{
+				m_is_fail = true;
 				break;
+			}
 
 			memcpy(m_buffer + m_buffer_len, m_input_data_p, copy_data_len);
 			m_buffer_len += copy_data_len;
@@ -86,8 +98,11 @@ bool LenCtxStreamParser::ParseNext()
 		{
 			uint32_t ctx_len = *(uint32_t *)m_buffer;
 			uint32_t protocol_len = PROTOCOL_LEN_DESCRIPT_SIZE + ctx_len;
-			if (!this->CheckExpendBuffer(protocol_len))
+			if (!this->CheckExpendBuffer(protocol_len) || ctx_len <= 0)
+			{
+				m_is_fail = true;
 				break;
+			}
 
 			uint32_t data_left_len = m_input_data_q - m_input_data_p;
 			if (m_buffer_len + data_left_len < protocol_len)

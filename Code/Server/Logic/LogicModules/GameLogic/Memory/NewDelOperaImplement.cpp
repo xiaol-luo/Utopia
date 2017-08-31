@@ -1,5 +1,5 @@
 #include "Common/Macro/MemoryPoolMacro.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 #include "GameLogic/GameLogicModule.h"
 NewDelOperaImplement(GameLogicModule);

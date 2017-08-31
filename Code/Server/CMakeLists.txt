@@ -1,7 +1,7 @@
 ﻿CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
 SET(ProjectName Utopia)
-PROJECT(${ProjectName}) 
+PROJECT(${ProjectName})
 
 FUNCTION(SourceGroupByDir base_path file_paths prefix_source_group)
 	FOREACH (file_path ${file_paths})

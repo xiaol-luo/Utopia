@@ -4,7 +4,7 @@
 #include "event2/listener.h"
 #include "event2/buffer.h"
 #include <signal.h>
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 namespace Net
 {

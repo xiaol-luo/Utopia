@@ -2,7 +2,7 @@
 #include "ModuleDef/ModuleMgr.h"
 #include "CommonModules/Log/LogModule.h"
 #include "NetWorker.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 #ifdef WIN32
 #include <winsock2.h>

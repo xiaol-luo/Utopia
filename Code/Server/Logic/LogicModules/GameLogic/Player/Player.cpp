@@ -3,7 +3,8 @@
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Utils/LenCtxStreamParser.h"
 #include "Network/Handlers/LenCtxNetStreamCnnHandler.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
+#include "Common/Utils/LogUtil.h"
 
 namespace GameLogic
 {
@@ -79,6 +80,7 @@ namespace GameLogic
 
 	void Player::OnNetClose(int err_num)
 	{
+		LogUtil::Debug(1, "{0} is close, errno {1}", this->m_cnn_handler->GetNetId(), err_num);
 		m_player_mgr->OnCnnClose(err_num, this);
 	}
 

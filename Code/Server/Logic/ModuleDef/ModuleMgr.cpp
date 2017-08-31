@@ -1,7 +1,7 @@
 #include "ModuleMgr.h"
 #include <assert.h>
 #include "ServerLogics/ServerLogic.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 NewDelOperaImplement(ModuleMgr);
 

@@ -1,5 +1,5 @@
 #include "NetConnectTask.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 namespace Net
 {

@@ -2,10 +2,10 @@
 #include "Utils/ConfigUtil.h"
 #include "ServerLogics/Game/GameServerLogic.h"
 #include "event2/event.h"
-// #include <vld.h>
+#include <vld.h>
 #include <signal.h>
 #include "MemoryPool/MemoryPoolMgr.h"
-#include "Common/Utils/GlobalMemoryMgr.h"
+#include "Common/Utils/MemoryUtil.h"
 
 ServerLogic *server_logic = nullptr;
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 	signal(SIGPIPE, SIG_IGN);
 #endif
 
-	InitGlobalMemoryPool();
+	MemoryUtil::Init();
 	std::srand(time(NULL));
 	std::vector<std::string> params;
 	params.push_back(argv[1]);
@@ -45,5 +45,5 @@ int main(int argc, char **argv)
 	server_logic->SetInitParams(&params);
 	server_logic->Loop();
 	delete server_logic;
-	DestoryGlobalMemoryPool();
+	MemoryUtil::Destroy();
 }
