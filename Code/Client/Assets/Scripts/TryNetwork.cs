@@ -39,14 +39,14 @@ public class TryNetwork : MonoBehaviour {
         {
             if (null != socket)
             {
-                uint ctx_len = (uint)(sizeof(int) + ping.CalculateSize());
+                int ctx_len = (sizeof(int) + ping.CalculateSize());
                 byte[] sendBuffer = new byte[ctx_len + sizeof(uint)];
-                byte[] tmpBuffer = BitConverter.GetBytes(ctx_len);
+                byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(ctx_len));
                 int offset = 0;
                 Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
                 offset += tmpBuffer.Length;
 
-                tmpBuffer = BitConverter.GetBytes(1);
+                tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(1));
                 Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
                 offset += tmpBuffer.Length;
 

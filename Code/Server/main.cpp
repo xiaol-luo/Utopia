@@ -6,7 +6,7 @@
 #include <signal.h>
 #include "MemoryPool/MemoryPoolMgr.h"
 #include "Common/Utils/MemoryUtil.h"
-#include "ShareCode/Network/Handlers/TryTemplate.hpp"
+#include "ShareCode/Network/Utils/LenCtxStreamParserEx.h"
 #include <stdint.h>
 
 ServerLogic *server_logic = nullptr;
@@ -19,38 +19,6 @@ void QuitGame(int signal)
 
 int main(int argc, char **argv)
 {
-	{
-		UseLenPraser<uint32_t> xxx;
-		UseLenPraser<uint32_t, NetSteamLenPraser<uint32_t, sizeof(uint32_t)>> yyy;
-		char buffer[256];
-		*(uint32_t *)buffer = 123;
-
-		for (int i = 3; i < 9; ++i)
-		{
-			uint32_t len = 0;
-			len = xxx.ParseNext(buffer, i);
-			len = yyy.ParseNext(buffer, i);
-			++len;
-		}
-	}
-
-	{
-		UseLenPraser<uint64_t> xxx;
-		UseLenPraser<uint64_t, NetSteamLenPraser<uint64_t, sizeof(uint64_t)>> yyy;
-		char buffer[256];
-		*(uint64_t *)buffer = 123;
-
-		for (int i = 3; i < 9; ++i)
-		{
-			uint64_t len = 0;
-			len = xxx.ParseNext(buffer, i);
-			len = yyy.ParseNext(buffer, i);
-			++len;
-		}
-	}
-
-
-
 	if (argc <= 2)
 	{
 		printf("cmd foramt : executable log_cfg_file cfg_dir\n");

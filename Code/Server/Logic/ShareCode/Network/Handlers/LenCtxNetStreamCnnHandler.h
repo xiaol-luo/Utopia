@@ -1,6 +1,6 @@
 #pragma once
 #include "CommonModules/Network/INetworkHandler.h"
-#include "Network/Utils/LenCtxStreamParser.h"
+#include "Network/Utils/LenCtxStreamParserEx.h"
 #include "Common/Macro/MemoryPoolMacro.h"
 
 class LenCtxNetStreamCnnHandler : public INetConnectHander
@@ -26,5 +26,5 @@ public:
 protected:
 	virtual void OnParseSuccess(char *data, uint32_t len) = 0;
 	virtual void OnParseFail() = 0;
-	LenCtxStreamParser m_parser;
+	LenCtxStreamParserEx<uint32_t, NetSteamLenPraser<uint32_t, sizeof(uint32_t)>> m_parser;
 };

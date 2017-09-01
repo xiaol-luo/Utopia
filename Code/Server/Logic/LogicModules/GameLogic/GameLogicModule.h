@@ -86,7 +86,7 @@ public:
 	virtual EModuleRetCode Release();
 	virtual EModuleRetCode Destroy();
 
-	void HandlePlayerMsg(int protocol_id, char *data, uint32_t data_len, GameLogic::Player *player);
+	void HandlePlayerMsg(char *data, uint32_t data_len, GameLogic::Player *player);
 	LogModule * GetLog() { return m_log_module; }
 	ITimerModule * GetTimer() { return m_timer_module; }
 	INetworkModule * GetNetwork() { return m_network_module; }
