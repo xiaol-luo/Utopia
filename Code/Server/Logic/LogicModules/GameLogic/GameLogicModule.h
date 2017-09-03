@@ -2,8 +2,6 @@
 
 #include "google/protobuf/message.h"
 #include "IGameLogicModule.h"
-#include <vector>
-#include <queue>
 #include <functional>
 #include "Common/Macro/MemoryPoolMacro.h"
 

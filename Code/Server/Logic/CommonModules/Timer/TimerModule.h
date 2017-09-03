@@ -6,6 +6,7 @@
 #include <map>
 #include <set>
 #include "Common/Macro/MemoryPoolMacro.h"
+#include "MemoryPool/StlAllocator.h"
 
 class TimerModule : public ITimerModule
 {
@@ -46,14 +47,14 @@ private:
 	long long m_now_ms = 0;
 	long long m_now_sec = 0;
 	long long m_delta_ms = 0;
-	std::vector<srv_rbtree_node_t *> m_nodes_execute_now;
+	std::vector<srv_rbtree_node_t *, StlAllocator<srv_rbtree_node_t *>> m_nodes_execute_now;
 	void TryExecuteNode(srv_rbtree_node_t *node);
 
-	std::map<long long, srv_rbtree_node_t *> m_id_to_timer_node;
+	std::map<long long, srv_rbtree_node_t *, std::less<long long>, StlAllocator<std::pair<long long const, srv_rbtree_node_t *>>> m_id_to_timer_node;
 	long long m_last_timer_id = 0;
 	long long GenTimerId();
 
-	std::set<long long> m_to_remove_nodes;
+	std::set<long long, std::less<long long>, StlAllocator<long long>> m_to_remove_nodes;
 	void ChekRemoveNodes();
 
 	long long m_add_times = 0;

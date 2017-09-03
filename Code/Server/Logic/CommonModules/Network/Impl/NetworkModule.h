@@ -8,6 +8,7 @@
 #include "CommonModules/Network/INetworkModule.h"
 #include "NetConnectTask.h"
 #include "Common/Macro/MemoryPoolMacro.h"
+#include "MemoryPool/StlAllocator.h"
 
 struct ConnectTaskThread;
 namespace Net
@@ -64,9 +65,9 @@ public:
 
 protected:
 	std::mutex *m_cnn_task_mutex = nullptr;
-	std::queue<Net::ConnectTask *> m_cnn_tasks;
+	std::queue<Net::ConnectTask *, std::deque<Net::ConnectTask *, StlAllocator<Net::ConnectTask *>>> m_cnn_tasks;
 	std::mutex *m_cnn_results_mutex = nullptr;
-	std::queue<Net::ConnectResult> m_cnn_results;
+	std::queue<Net::ConnectResult, std::deque<Net::ConnectResult, StlAllocator<Net::ConnectResult>>> m_cnn_results;
 	int m_cnn_task_thread_num = 2;
 	ConnectTaskThread **m_cnn_task_threads = nullptr;
 	void ProcessConnectResult();

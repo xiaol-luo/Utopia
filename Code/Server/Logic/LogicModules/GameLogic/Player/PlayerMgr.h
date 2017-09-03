@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include "Common/Define/NetworkDefine.h"
 #include "Common/Macro/MemoryPoolMacro.h"
+#include "MemoryPool/StlAllocator.h"
 
 class GameLogicModule;
 class INetListenHander;
@@ -35,10 +36,10 @@ namespace GameLogic
 	protected:
 		GameLogicModule *m_logic_module = nullptr;
 		std::shared_ptr<INetListenHander> m_net_listen_handler = nullptr;
-		std::unordered_map<NetId, GameLogic::Player *> m_players;
+		std::unordered_map<NetId, Player *, std::hash<NetId>, std::equal_to<NetId>, StlAllocator<std::pair<const NetId, Player *>>> m_players;
 		void OnListenClose(int err_num);
 		void OnListenOpen(int err_num);
 
-		std::unordered_set<Player *> m_to_remove_players;
+		std::unordered_set<Player *, std::hash<Player *>, std::equal_to<Player *>, StlAllocator<Player *>> m_to_remove_players;
 	};
 }
