@@ -25,7 +25,7 @@ namespace Net
 		virtual bool AddCnn(NetId id, int fd, std::weak_ptr<INetworkHandler> handler);
 		virtual void RemoveCnn(NetId id);
 		virtual bool Send(NetId netId, char *buffer, uint32_t len);
-		virtual bool GetNetDatas(std::queue<NetWorkData> *&out_datas);
+		virtual bool GetNetDatas(std::queue<NetWorkData, std::deque<NetWorkData, StlAllocator<NetWorkData>>> *&out_datas);
 		virtual bool Start();
 		virtual void Stop();
 
@@ -50,11 +50,12 @@ namespace Net
 			evconnlistener *listen_ev = nullptr;
 			NetWorker *net_worker = nullptr;
 		};
-		std::unordered_map<NetId, NetConnectionData *> m_cnn_datas;
-		std::unordered_map<NetId, NetConnectionData *> m_wait_add_cnn_datas;
-		std::set<NetId> m_wait_remove_netids;
+
+		std::unordered_map<NetId, NetConnectionData *,std::hash<NetId>, std::equal_to<NetId>, StlAllocator<std::pair<const NetId, NetConnectionData *>>> m_cnn_datas;
+		std::unordered_map<NetId, NetConnectionData *, std::hash<NetId>, std::equal_to<NetId>, StlAllocator<std::pair<const NetId, NetConnectionData *>>> m_wait_add_cnn_datas;
+		std::set<NetId, std::less<NetId>, StlAllocator<NetId>> m_wait_remove_netids;
 		std::mutex m_cnn_data_mutex;
-		std::set<NetId> m_internal_wait_remove_netids;
+		std::set < NetId, std::less<NetId>, StlAllocator<NetId >> m_internal_wait_remove_netids;
 
 		std::mutex m_need_send_bufs_mutex;
 		std::unordered_map<NetId, evbuffer *> m_need_send_bufs;
@@ -66,7 +67,8 @@ namespace Net
 
 		static const int NETWORK_DATA_QUEUE_LEN = 2;
 		int m_working_network_data_queue = 0;
-		std::queue<NetWorkData> m_network_data_queues[NETWORK_DATA_QUEUE_LEN];
+		
+		std::queue<NetWorkData, std::deque<NetWorkData, StlAllocator<NetWorkData>>> m_network_data_queues[NETWORK_DATA_QUEUE_LEN];
 		std::mutex m_network_data_mutex;
 
 		std::thread *m_loop_thread = nullptr;

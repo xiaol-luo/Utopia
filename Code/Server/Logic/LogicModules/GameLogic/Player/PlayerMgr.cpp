@@ -73,13 +73,7 @@ namespace GameLogic
 
 	void PlayerMgr::OnCnnRecv(char *data, uint32_t len, Player *player)
 	{
-		const uint32_t LEN_DESCRIPT_LEN = sizeof(int);
-		if (nullptr == data || len < LEN_DESCRIPT_LEN || nullptr == player)
-			return;
-
-		int protocol_id = *(int *)data;
-		m_logic_module->HandlePlayerMsg(protocol_id, data + LEN_DESCRIPT_LEN, 
-			len - LEN_DESCRIPT_LEN, player);
+		m_logic_module->HandlePlayerMsg(data, len, player);
 	}
 
 	void PlayerMgr::OnCnnOpen(int err_num, Player *player)

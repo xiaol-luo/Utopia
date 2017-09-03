@@ -2,6 +2,9 @@
 #include "Network/Protobuf/msg.pb.h"
 #include "Network/Protobuf/test.pb.h"
 #include "GamePlayerMsgDefine.h"
+#include "Utils/PlatformCompat.h"
+#include "Network/Utils/NetworkAgent.h"
+#include "GameLogic/Player/Player.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, id, &GameLogicModule::func))
@@ -34,17 +37,40 @@ void GameLogicModule::UnInitClientMsgHandlerDescript()
 	}
 }
 
-void GameLogicModule::HandlePlayerMsg(int protocol_id, char *data, uint32_t data_len, GameLogic::Player *player)
+void GameLogicModule::HandlePlayerMsg(char *data, uint32_t data_len, GameLogic::Player *player)
 {
-	if (protocol_id <= GameLogic::PlayerMsgProtocol_Invalid || protocol_id >= GameLogic::PlayerMsgProtocol_Max)
-		return;
+	static const uint32_t PROTOCOL_LEN_DESCRIPT_SIZE = sizeof(int);
+	assert(nullptr != player);
 
-	GameLogic::IClientMsgHandlerDescript *handler_descript = m_client_msg_handler_descripts[protocol_id];
-	if (nullptr == handler_descript)
-		return;
+	bool is_ok = true;
+	do 
+	{
+		if (nullptr == data || data_len < PROTOCOL_LEN_DESCRIPT_SIZE)
+		{
+			is_ok = false;
+			break;
+		}
+		int protocol_id = ntohl(*(int *)data);
+		if (protocol_id <= GameLogic::PlayerMsgProtocol_Invalid || protocol_id >= GameLogic::PlayerMsgProtocol_Max)
+		{
+			is_ok = false;
+			break;
+		}
+		GameLogic::IClientMsgHandlerDescript *handler_descript = m_client_msg_handler_descripts[protocol_id];
+		if (nullptr == handler_descript)
+		{
+			is_ok = false;
+			break;
+		}
+		char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;
+		handler_descript->Msg()->ParseFromArray(protobuf_data, data_len);
+		handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
 
-	handler_descript->Msg()->ParseFromArray(data, data_len);
-	handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
+	} while (false);
+	if (!is_ok)
+	{
+		m_network_agent->Close(player->GetNetId());
+	}
 }
 
 void GameLogicModule::OnHandlePlayerPingMsg(int protocol_id, Ping *msg, GameLogic::Player *player)

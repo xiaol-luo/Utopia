@@ -98,7 +98,7 @@ namespace Net
 		return ret;
 	}
 
-	bool NetWorker::GetNetDatas(std::queue<NetWorkData> *&out_datas)
+	bool NetWorker::GetNetDatas(std::queue<NetWorkData, std::deque<NetWorkData, StlAllocator<NetWorkData>>> *&out_datas)
 	{
 		out_datas = &m_network_data_queues[m_working_network_data_queue];
 		m_network_data_mutex.lock();
@@ -137,7 +137,7 @@ namespace Net
 
 		for (int i = 0; i < NETWORK_DATA_QUEUE_LEN; ++i)
 		{
-			std::queue<NetWorkData> data_queue = m_network_data_queues[i];
+			auto data_queue = m_network_data_queues[i];
 			while (!data_queue.empty())
 			{
 				NetWorkData &data = data_queue.front();
@@ -269,7 +269,7 @@ namespace Net
 		if (m_wait_add_cnn_datas.empty())
 			return;
 
-		std::unordered_map<NetId, NetConnectionData *> swap_cnn_datas;
+		std::unordered_map<NetId, NetConnectionData *, std::hash<NetId>, std::equal_to<NetId>, StlAllocator<std::pair<const NetId, NetConnectionData *>>> swap_cnn_datas;
 		m_cnn_data_mutex.lock();
 		swap_cnn_datas.swap(m_wait_add_cnn_datas);
 		m_cnn_data_mutex.unlock();

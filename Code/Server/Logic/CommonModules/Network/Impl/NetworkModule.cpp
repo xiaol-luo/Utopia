@@ -3,6 +3,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "NetWorker.h"
 #include "Common/Utils/MemoryUtil.h"
+#include "MemoryPool/StlAllocator.h"
 
 #ifdef WIN32
 #include <winsock2.h>
@@ -14,8 +15,9 @@ struct ConnectTaskThread
 	NewDelOperaDeclaration;
 	using ThreadAction = void(*)(ConnectTaskThread *);
 	ConnectTaskThread(std::function<void(ConnectTaskThread *)> _action, std::mutex *_task_mutex,
-		std::queue<Net::ConnectTask *> *_cnn_tasks, std::mutex *_result_mutex,
-		std::queue<Net::ConnectResult> *_cnn_results) :
+		std::queue<Net::ConnectTask *, std::deque<Net::ConnectTask *, StlAllocator<Net::ConnectTask *>>> *_cnn_tasks, 
+		std::mutex *_result_mutex,
+		std::queue<Net::ConnectResult, std::deque<Net::ConnectResult, StlAllocator<Net::ConnectResult>>> *_cnn_results) :
 		task_mutex(_task_mutex), cnn_tasks(_cnn_tasks), result_mutex(_result_mutex),
 		cnn_results(_cnn_results), action(_action)
 	{
@@ -55,9 +57,9 @@ struct ConnectTaskThread
 
 	bool is_exit = false;
 	std::mutex *task_mutex;
-	std::queue<Net::ConnectTask *> *cnn_tasks;
+	std::queue<Net::ConnectTask *, std::deque<Net::ConnectTask *, StlAllocator<Net::ConnectTask *>>> *cnn_tasks;
 	std::mutex *result_mutex;
-	std::queue<Net::ConnectResult> *cnn_results;
+	std::queue<Net::ConnectResult, std::deque<Net::ConnectResult, StlAllocator<Net::ConnectResult>>> *cnn_results;
 	std::function<void(ConnectTaskThread *)> action = nullptr;
 	std::thread *self_thread = nullptr;
 };
@@ -68,9 +70,9 @@ void CnnTaskWorker(ConnectTaskThread *task_thread)
 
 	bool is_exit = false;
 	std::mutex *task_mutex = task_thread->task_mutex;
-	std::queue<Net::ConnectTask *> *cnn_tasks = task_thread->cnn_tasks;
+	std::queue<Net::ConnectTask *, std::deque<Net::ConnectTask *, StlAllocator<Net::ConnectTask *>>> *cnn_tasks = task_thread->cnn_tasks;
 	std::mutex *result_mutex = task_thread->result_mutex;
-	std::queue<Net::ConnectResult> *cnn_results = task_thread->cnn_results;
+	std::queue<Net::ConnectResult, std::deque<Net::ConnectResult, StlAllocator<Net::ConnectResult>>> *cnn_results = task_thread->cnn_results;
 
 	while (!task_thread->is_exit)
 	{
@@ -371,7 +373,7 @@ Net::INetWorker * NetworkModule::ChoseWorker(NetId netid)
 
 void NetworkModule::ProcessConnectResult()
 {
-	std::queue<Net::ConnectResult> cnn_results_swap;
+	std::queue<Net::ConnectResult, std::deque<Net::ConnectResult, StlAllocator<Net::ConnectResult>>> cnn_results_swap;
 	m_cnn_results_mutex->lock();
 	cnn_results_swap.swap(m_cnn_results);
 	m_cnn_results_mutex->unlock();
@@ -419,8 +421,8 @@ void NetworkModule::ProcessNetDatas()
 {
 	for (int i = 0; i < m_net_worker_num; ++i)
 	{
-		std::set<NetId> to_remove_netids;
-		std::queue<NetWorkData> *net_datas = nullptr;
+		std::set<NetId, std::less<NetId>, StlAllocator<NetId>> to_remove_netids;
+		std::queue<NetWorkData, std::deque<NetWorkData, StlAllocator<NetWorkData>>> *net_datas = nullptr;
 		if (m_net_workers[i]->GetNetDatas(net_datas))
 		{
 			while (!net_datas->empty())
