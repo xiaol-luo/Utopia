@@ -16,8 +16,11 @@ public class TryNetwork : MonoBehaviour {
 
     Ping ping;
 
+    ClientSocket client_socket;
+
     void Start ()
     {
+        host = "192.168.5.103";
         port = 10240;
         ping = new Ping();
         ping.Userid = 1;
@@ -26,27 +29,31 @@ public class TryNetwork : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        if (null != client_socket)
         {
-            if (null != socket)
-                socket.Close();
-            IPAddress ip = IPAddress.Parse(host);
-            IPEndPoint ipe = new IPEndPoint(ip, port);
-            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect(ipe);
+            client_socket.UpdateIO();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (null == client_socket)
+            {
+                client_socket = new ClientSocket(host, port);
+                client_socket.ConnectAsync(null);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (null != socket)
+            if (null != client_socket)
             {
-                uint ctx_len = (uint)(sizeof(int) + ping.CalculateSize());
+                int ctx_len = (sizeof(int) + ping.CalculateSize());
                 byte[] sendBuffer = new byte[ctx_len + sizeof(uint)];
-                byte[] tmpBuffer = BitConverter.GetBytes(ctx_len);
+                byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(ctx_len));
                 int offset = 0;
                 Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
                 offset += tmpBuffer.Length;
 
-                tmpBuffer = BitConverter.GetBytes(1);
+                tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(1));
                 Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
                 offset += tmpBuffer.Length;
 
@@ -58,13 +65,16 @@ public class TryNetwork : MonoBehaviour {
                 Array.Copy(mms2.GetBuffer(), 0, sendBuffer, offset, mms2.Position);
                 offset += (int)mms2.Position;
 
-                socket.Send(sendBuffer);
+                client_socket.Send(sendBuffer, 0, sendBuffer.Length);
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (null != socket)
-                socket.Close();
+            if (null != client_socket)
+            {
+                client_socket.Close();
+                client_socket = null;
+            }
         }
     }
 }
