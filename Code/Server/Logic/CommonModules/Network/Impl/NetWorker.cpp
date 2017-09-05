@@ -13,7 +13,7 @@ namespace Net
 
 	NetWorker::NetWorker()
 	{
-
+		
 	}
 
 	NetWorker::~NetWorker()
@@ -228,6 +228,8 @@ namespace Net
 
 	void NetWorker::Loop()
 	{
+		event_set_mem_functions(Malloc, Realloc, Free);
+
 		event_base *base = event_base_new();
 		while (m_is_runing)
 		{

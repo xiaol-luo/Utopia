@@ -76,6 +76,9 @@ void GameLogicModule::HandlePlayerMsg(char *data, uint32_t data_len, GameLogic::
 void GameLogicModule::OnHandlePlayerPingMsg(int protocol_id, Ping *msg, GameLogic::Player *player)
 {
 	msg->set_msgid(protocol_id);
+	Pong pong;
+	pong.set_userid(2);
+	m_network_agent->Send(player->GetNetId(), 2, &pong);
 }
 
 void GameLogicModule::OnHandlePlayerPongMsg(int protocol_id, Pong *msg, GameLogic::Player *player)

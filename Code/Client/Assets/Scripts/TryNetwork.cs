@@ -7,7 +7,7 @@ using System.IO;
 using System;
 using Google.Protobuf;
 
-public class TryNetwork : MonoBehaviour {
+public class TryNetwork : MonoBehaviour, NetAgentHandler {
 
     public string host = "127.0.0.1";
     public int port = 10240;
@@ -17,64 +17,66 @@ public class TryNetwork : MonoBehaviour {
     Ping ping;
 
     ClientSocket client_socket;
+    NetAgent netAgent = new NetAgent();
+
+    public void OnClose(int errno, string errMsg)
+    {
+
+    }
+
+    public void OnOPen(bool isSucc)
+    {
+    }
+
+    public void OnRecvData(int protocolId, byte[] data, int dataBegin, int dataLen)
+    {
+        CodedInputStream cis = new CodedInputStream(data, dataBegin, dataLen);
+        Pong pong = new Pong();
+        pong.MergeFrom(cis);
+        int userId = pong.Userid;
+    }
 
     void Start ()
     {
-        host = "192.168.5.103";
+        // host = "192.168.5.103";
         port = 10240;
         ping = new Ping();
         ping.Userid = 1;
+
+        netAgent.SetHandler(this);
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (null != client_socket)
-        {
-            client_socket.UpdateIO();
-        }
+        netAgent.UpdateIO();
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (null == client_socket)
-            {
-                client_socket = new ClientSocket(host, port);
-                client_socket.ConnectAsync(null);
-            }
+            netAgent.Connect(host, port);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (null != client_socket)
-            {
-                int ctx_len = (sizeof(int) + ping.CalculateSize());
-                byte[] sendBuffer = new byte[ctx_len + sizeof(uint)];
-                byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(ctx_len));
-                int offset = 0;
-                Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
-                offset += tmpBuffer.Length;
+            int ctx_len = sizeof(uint) + ping.CalculateSize();
+            byte[] sendBuffer = new byte[ctx_len];
 
-                tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(1));
-                Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
-                offset += tmpBuffer.Length;
+            int offset = 0;
+            byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(1));
+            Array.Copy(tmpBuffer, 0, sendBuffer, offset, tmpBuffer.Length);
+            offset += tmpBuffer.Length;
 
-                MemoryStream mms2 = new MemoryStream();
-                CodedOutputStream output = new CodedOutputStream(mms2, true);
-                ping.WriteTo(output);
-                output.Flush();
+            MemoryStream mms2 = new MemoryStream();
+            CodedOutputStream output = new CodedOutputStream(mms2, true);
+            ping.WriteTo(output);
+            output.Flush();
+            Array.Copy(mms2.GetBuffer(), 0, sendBuffer, offset, mms2.Position);
+            offset += (int)mms2.Position;
 
-                Array.Copy(mms2.GetBuffer(), 0, sendBuffer, offset, mms2.Position);
-                offset += (int)mms2.Position;
-
-                client_socket.Send(sendBuffer, 0, sendBuffer.Length);
-            }
+            netAgent.Send(sendBuffer, 0, sendBuffer.Length);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (null != client_socket)
-            {
-                client_socket.Close();
-                client_socket = null;
-            }
+            netAgent.Close();
         }
     }
 }

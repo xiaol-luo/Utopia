@@ -35,6 +35,8 @@ public class ClientSocket
     public int errno { get { return m_threadParam.errno; } }
     public string errmsg { get { return m_threadParam.errmsg; } }
     private System.Action m_asyncDoCnnCb;
+    private System.Action<List<byte[]>> m_recvDataCb;
+    private System.Action m_closeCb;
 
     public ClientSocket() : this(string.Empty, 0)
     {
@@ -59,9 +61,13 @@ public class ClientSocket
             m_thread = null;
         }
 
-        this.m_tmpCnnCb = null;
-        this.m_tmpSocket = null;
-        this.m_asyncDoCnnCb = null;
+        if (null != m_closeCb)
+            m_closeCb();
+        m_closeCb = null;
+        m_recvDataCb = null;
+        m_tmpCnnCb = null;
+        m_tmpSocket = null;
+        m_asyncDoCnnCb = null;
         m_threadParam.state = state;
         if (null != m_threadParam.socket)
             m_threadParam.socket.Close();
@@ -73,34 +79,44 @@ public class ClientSocket
         m_threadParam.errno = 0;
         m_threadParam.errmsg = string.Empty;
     }
-    protected void ConnectResult(IAsyncResult ar)
+    protected static void ConnectResult(IAsyncResult ar)
     {
         if (ar.IsCompleted)
         {
-            Socket socket = ar.AsyncState as Socket;
-            if (this.m_tmpSocket != socket)
+            object[] param = ar.AsyncState as object[];
+            ClientSocket pThis = param[0] as ClientSocket;
+            Socket socket = param[1] as Socket;
+            
+
+            if (pThis.m_tmpSocket != socket)
             {
                 socket.Close();
                 socket = null;
             }
             else
             {
-                if (this.m_tmpSocket.Connected)
+                if (pThis.m_tmpSocket.Connected)
                 {
-                    m_threadParam.isExit = false;
-                    m_threadParam.socket = this.m_tmpSocket;
-                    if (null != this.m_tmpCnnCb)
-                        this.m_asyncDoCnnCb = ()=> { this.m_tmpCnnCb(this.m_tmpSocket.Connected); };
-                    this.m_tmpSocket = null;
-                    this.m_tmpCnnCb = null;
-                    m_threadParam.state = State.Connected;
-                    m_threadParam.recvBytes = m_recvBytesArray[0];
-                    m_threadParam.sendBytes = m_sendBytesArray[0];
-                    m_thread = new Thread(new ParameterizedThreadStart(ClientSocket.Loop));
-                    m_thread.Start(m_threadParam);
+                    pThis.m_threadParam.isExit = false;
+                    pThis.m_threadParam.socket = pThis.m_tmpSocket;
+                    if (null != pThis.m_tmpCnnCb)
+                    {
+                        bool isSucc = pThis.m_tmpSocket.Connected;
+                        System.Action<bool> tmpCnnCb = pThis.m_tmpCnnCb;
+                        pThis.m_asyncDoCnnCb = () => { tmpCnnCb(isSucc); };
+                    }
+                    
+                    pThis.m_tmpSocket = null;
+                    pThis.m_tmpCnnCb = null;
+                    pThis.m_threadParam.state = State.Connected;
+                    pThis.m_threadParam.recvBytes = pThis.m_recvBytesArray[0];
+                    pThis.m_threadParam.sendBytes = pThis.m_sendBytesArray[0];
+                    pThis.m_thread = new Thread(new ParameterizedThreadStart(ClientSocket.Loop));
+                    pThis.m_thread.Start(pThis.m_threadParam);
                 }
             }
-            this.m_tmpSocket.EndConnect(ar);
+
+            pThis.m_tmpSocket.EndConnect(ar);
         }
     }
     
@@ -122,7 +138,7 @@ public class ClientSocket
     Socket m_tmpSocket = null;
     System.Action<bool> m_tmpCnnCb = null;
 
-    public bool ConnectAsync(System.Action<bool> cb)
+    public bool ConnectAsync(System.Action<bool> cnnCb, System.Action<List<byte[]>> recvDataCb, System.Action closeCb)
     {
         if (State.Free != m_threadParam.state)
             return false;
@@ -132,9 +148,12 @@ public class ClientSocket
             m_threadParam.state = State.Connecting;
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Blocking = true;
-            socket.ReceiveTimeout = 50;
-            socket.SendTimeout = 50;
-            socket.BeginConnect(host, port, this.ConnectResult, socket);
+            socket.ReceiveTimeout = 10;
+            socket.SendTimeout = 10;
+            object[] param = new object[2];
+            param[0] = this;
+            param[1] = socket;
+            socket.BeginConnect(host, port, ConnectResult, param);
         }
         catch (Exception)
         {
@@ -143,13 +162,15 @@ public class ClientSocket
         }
         if (null == socket)
         {
-            if (null != cb)
-                cb(false);
+            if (null != cnnCb)
+                cnnCb(false);
         }
         else
         {
             m_tmpSocket = socket;
-            m_tmpCnnCb = cb;
+            m_tmpCnnCb = cnnCb;
+            m_closeCb = closeCb;
+            m_recvDataCb = recvDataCb;
         }
         return null != socket;
     }
@@ -165,7 +186,6 @@ public class ClientSocket
         }
         if (0 != m_threadParam.errno)
         {
-            // call error cb
             this.Close(State.Error);
         }
         else
@@ -188,7 +208,8 @@ public class ClientSocket
             m_threadParam.mtx.ReleaseMutex();
             if (null != recvBytes && recvBytes.Count > 0)
             {
-                // call receive cb
+                if (null != m_recvDataCb)
+                    m_recvDataCb(recvBytes);
                 recvBytes.Clear();
             }
         }
@@ -270,7 +291,7 @@ public class ClientSocket
                 }
             }
 
-            Thread.Sleep(10);
+            Thread.Sleep(50);
         }
     }
 }
