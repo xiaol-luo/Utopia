@@ -1,5 +1,5 @@
 
-public interface NetAgentHandler
+public interface INetAgentHandler
 {
     void OnOPen(bool isSucc);
     void OnRecvData(int protocolId, byte[]data, int dataBegin, int dataLen);

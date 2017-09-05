@@ -230,12 +230,22 @@ public class ClientSocket
                 do
                 {
                     recvLen = threadParam.socket.Receive(recvBuffer, 0, recvBuffer.Length, SocketFlags.None);
-                    byte[] bytes = new byte[recvLen];
-                    Array.Copy(recvBuffer, bytes, recvLen);
-                    threadParam.mtx.WaitOne();
-                    threadParam.recvBytes.Add(bytes);
-                    threadParam.mtx.ReleaseMutex();
+                    if (recvLen <= 0)
+                    {
+                        threadParam.errno = 2;
+                        threadParam.errmsg = "remote close socket"; 
+                    }
+                    else
+                    {
+                        byte[] bytes = new byte[recvLen];
+                        Array.Copy(recvBuffer, bytes, recvLen);
+                        threadParam.mtx.WaitOne();
+                        threadParam.recvBytes.Add(bytes);
+                        threadParam.mtx.ReleaseMutex();
+                    }
                 } while (recvLen > 0);
+                if (!threadParam.isExit && 0 == threadParam.errno && State.Connected == threadParam.state)
+                    break;
             }
             catch (Exception e)
             {

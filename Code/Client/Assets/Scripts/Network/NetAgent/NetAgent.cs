@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class NetAgent
 {
-    NetAgentHandler m_handler;
-    public void SetHandler(NetAgentHandler handler) { m_handler = handler; }
+    INetAgentHandler m_handler;
+    public void SetHandler(INetAgentHandler handler) { m_handler = handler; }
 
     public string host { get; protected set; }
     public int port { get; protected set; }
