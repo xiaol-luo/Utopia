@@ -5,3 +5,4 @@ public interface NetAgentHandler
     void OnRecvData(int protocolId, byte[]data, int dataBegin, int dataLen);
     void OnClose(int errno, string errMsg);
 }
+

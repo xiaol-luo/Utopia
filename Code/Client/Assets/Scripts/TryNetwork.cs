@@ -18,6 +18,7 @@ public class TryNetwork : MonoBehaviour, NetAgentHandler {
 
     ClientSocket client_socket;
     NetAgent netAgent = new NetAgent();
+    ProtocolHandler protocolHandler = new ProtocolHandler();
 
     public void OnClose(int errno, string errMsg)
     {
@@ -30,10 +31,7 @@ public class TryNetwork : MonoBehaviour, NetAgentHandler {
 
     public void OnRecvData(int protocolId, byte[] data, int dataBegin, int dataLen)
     {
-        CodedInputStream cis = new CodedInputStream(data, dataBegin, dataLen);
-        Pong pong = new Pong();
-        pong.MergeFrom(cis);
-        int userId = pong.Userid;
+        protocolHandler.OnMessage(protocolId, data, dataBegin, dataLen);
     }
 
     void Start ()
@@ -44,13 +42,20 @@ public class TryNetwork : MonoBehaviour, NetAgentHandler {
         ping.Userid = 1;
 
         netAgent.SetHandler(this);
-	}
+        protocolHandler.Add<Ping>(1, (int id, Ping msg)=> 
+        {
+            Debug.Log("Ping " + msg.ToString());
+        });
+
+        protocolHandler.Add<Pong>(2, (int id, Pong msg) =>
+        {
+            Debug.Log("Pong " + msg.ToString());
+        });
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        netAgent.UpdateIO();
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             netAgent.Connect(host, port);
@@ -78,5 +83,10 @@ public class TryNetwork : MonoBehaviour, NetAgentHandler {
         {
             netAgent.Close();
         }
+    }
+
+    void FixedUpdate()
+    {
+        netAgent.UpdateIO();
     }
 }

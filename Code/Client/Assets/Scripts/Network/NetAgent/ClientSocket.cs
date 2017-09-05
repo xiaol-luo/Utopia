@@ -148,8 +148,8 @@ public class ClientSocket
             m_threadParam.state = State.Connecting;
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Blocking = true;
-            socket.ReceiveTimeout = 10;
-            socket.SendTimeout = 10;
+            socket.ReceiveTimeout = 1;
+            socket.SendTimeout = 1;
             object[] param = new object[2];
             param[0] = this;
             param[1] = socket;
@@ -291,7 +291,7 @@ public class ClientSocket
                 }
             }
 
-            Thread.Sleep(50);
+            // Thread.Sleep(1);
         }
     }
 }
