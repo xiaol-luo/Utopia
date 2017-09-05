@@ -141,7 +141,7 @@ public:
 			}
 			if (m_buffer_len >= PROTOCOL_LEN_DESCRIPT_SIZE)
 			{
-				uint32_t ctx_len = LenParseType::Prase(m_input_data_p, m_input_data_q - m_input_data_p);
+				uint32_t ctx_len = LenParseType::Prase(m_buffer, m_buffer_len);
 				uint32_t protocol_len = PROTOCOL_LEN_DESCRIPT_SIZE + ctx_len;
 				if (!this->CheckExpendBuffer(protocol_len) || ctx_len <= 0)
 				{
