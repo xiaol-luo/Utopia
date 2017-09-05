@@ -15,7 +15,6 @@ public class NetMsgHandler : INetMsgHandler
         m_actioin(protocolId);
     }
 }
-
 public class NetMsgHandler<T> : INetMsgHandler where T : IMessage, new()
 {
     System.Action<int, T> m_actioin;

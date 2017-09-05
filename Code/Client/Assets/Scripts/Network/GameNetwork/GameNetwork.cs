@@ -26,6 +26,10 @@ public class GameNetwork : INetAgentHandler
     {
         return m_netAgent.Send(data, offset, len);
     }
+    public bool Send(int protocolId, IMessage msg)
+    {
+        return m_netAgent.Send(protocolId, msg);
+    }
     public void UpdateIO()
     {
         m_netAgent.UpdateIO();

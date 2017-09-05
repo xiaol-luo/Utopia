@@ -1,7 +1,9 @@
 
 
+using Google.Protobuf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using UnityEngine;
 
@@ -35,13 +37,37 @@ public class NetAgent
     }
     public bool Send(byte[] data, int offset, int len)
     {
-        bool isOk = false;
         if (null != socket && null != data && offset >= 0 && len > 0 && offset + len <= data.Length)
         {
-            isOk = true;
-            byte[] lenBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(len));
-            isOk = isOk && socket.Send(lenBuffer, 0, lenBuffer.Length);
-            isOk = isOk && socket.Send(data, offset, len);
+            return socket.Send(data, offset, len);
+
+        }
+        return false;
+    }
+    public bool Send(int protocolId, IMessage msg)
+    {
+        if (protocolId <= 0 || null == msg)
+            return false;
+
+        bool isOk = true;
+        if (isOk)
+        {
+            int ctxLen = sizeof(int) + msg.CalculateSize();
+            byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(ctxLen));
+            isOk = this.Send(tmpBuffer, 0, tmpBuffer.Length);
+        }
+        if(isOk)
+        {
+            byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(protocolId));
+            isOk = this.Send(tmpBuffer, 0, tmpBuffer.Length);
+        }
+        if (isOk)
+        {
+            MemoryStream mstream = new MemoryStream();
+            CodedOutputStream cops = new CodedOutputStream(mstream, false);
+            msg.WriteTo(cops);
+            cops.Flush();
+            isOk = this.Send(mstream.GetBuffer(), 0, (int)mstream.Position);
         }
         return isOk;
     }
