@@ -1,5 +1,5 @@
 [env]
-data_dir = D:/2017code/git-dir/Utopia/Data/Config
+data_dir = ../../Data/Config
 excel_dir = excel
 out_config_dir = auto-csv/AutoCsvConfig
 out_code_dir = auto-csv/AutoCsvCode

@@ -25,18 +25,26 @@ class Excel2CsvDescript(object):
         if file_path:
             if os.path.isabs(file_path): ret = file_path
             else: ret = os.path.join(dir_path, file_path)
-        return ret
+        return os.path.abspath(ret) 
      
+    CPP_CODE_PREFIX = "Cpp"
+    LUA_CODE_PREFIX = "Lua"
+    CSHARP_CODE_PREFIX = "CSharp"
+
+
     def init(self, cfg_section):
         self.file_path = Excel2CsvDescript._build_path(self._owner.excel_dir, cfg_section["file_path"])
         self.sheet_name = cfg_section["sheet_name"]
         self.original_out_csv_file_path = cfg_section["out_csv_file_path"]
         self.out_csv_file_path = self._build_path(self._owner.out_config_dir, cfg_section["out_csv_file_path"])
         self.class_name = cfg_section["class_name"]
-        self.out_cs_file_path = Excel2CsvDescript._build_path(self._owner.out_code_dir, cfg_section["out_cs_file_path"])
+        self.out_cs_file_path = Excel2CsvDescript._build_path(\
+               os.path.join(self._owner.out_code_dir, Excel2CsvDescript.CSHARP_CODE_PREFIX), cfg_section["out_cs_file_path"])
         self.original_out_cpp_file_path = cfg_section["out_cpp_file_path"]
-        self.out_cpp_file_path = Excel2CsvDescript._build_path(self._owner.out_code_dir, cfg_section["out_cpp_file_path"])
-        self.out_lua_file_path = Excel2CsvDescript._build_path(self._owner.out_code_dir, cfg_section["out_lua_file_path"])
+        self.out_cpp_file_path = Excel2CsvDescript._build_path(\
+                os.path.join(self._owner.out_code_dir, Excel2CsvDescript.CPP_CODE_PREFIX), cfg_section["out_cpp_file_path"])
+        self.out_lua_file_path = Excel2CsvDescript._build_path(\
+                os.path.join(self._owner.out_code_dir, Excel2CsvDescript.LUA_CODE_PREFIX), cfg_section["out_lua_file_path"])
         self.excel_desc = ExcelDescript.load(self.file_path, self.sheet_name)
         return self.excel_desc != None
 
@@ -67,7 +75,7 @@ class ConfigListDescript(object):
                 continue
             excel2csv_desc = Excel2CsvDescript(self)
             if not excel2csv_desc.init(cfg_praser[section_name]):
-                print("cfg_path - {0} error {1}".format(section_name, cfg_praser.sections[section_name]))
+                print("cfg_path - {0} error".format(section_name))
             else:
                 self.excel2csv_descs.append(excel2csv_desc)
         return True

@@ -8,5 +8,7 @@ from .define import *
 from .config_list import * 
 from .excel_list import *
 from .csv_generator import CsvGenerator
+from .csharp_generator import CSharpGenerator, CSharpLoaderGenerator
 from .cpp_generator import CppGenerator, CppLoaderGenerator
+
 

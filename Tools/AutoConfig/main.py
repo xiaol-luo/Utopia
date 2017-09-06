@@ -7,6 +7,7 @@ import subprocess
 import shlex
 import jinja2
 from auto_config import *
+import auto_config.csharp_generator as csharp_generator
 
 log = logging
 
@@ -27,8 +28,15 @@ def run(cfg_path):
             log.error("CppGenerator gen fail, file %s:%s->%s", excel2csv_desc.file_path, 
                 excel2csv_desc.sheet_name, excel2csv_desc.out_csv_file_path)
             return False
+        if not CSharpGenerator.gen(excel2csv_desc, template_env, log):
+            log.error("CSharpGenerator gen fail, file %s:%s->%s", excel2csv_desc.file_path, 
+                excel2csv_desc.sheet_name, excel2csv_desc.out_csv_file_path)
+            return False
     if not CppLoaderGenerator.gen(cfg_list_desc, template_env, log):
         log.error("CppLoaderGenerator.load fail")
+        return False
+    if not CSharpLoaderGenerator.gen(cfg_list_desc, template_env, log):
+        log.error("CSharpLoaderGenerator.load fail")
         return False
     return True
 

@@ -1,6 +1,7 @@
 import jinja2
 import os
 from .excel_list import EnumFieldType
+from .config_list import Excel2CsvDescript
 
 class _CppExtraField(object):
     def __init__(self, field_desc, **kwargs):
@@ -219,10 +220,10 @@ class CppLoaderGenerator(object):
         h_code, cpp_code = self.gen_code(log)
         if not h_code or not cpp_code:
             return False
-        out_h_file_path = os.path.join(
-            self._cfg_list.out_code_dir, "{0}.h".format(CppLoaderGenerator.Save_File_Name))
-        out_cpp_file_path = os.path.join(
-            self._cfg_list.out_code_dir, "{0}.cpp".format(CppLoaderGenerator.Save_File_Name))
+        out_h_file_path = os.path.join(self._cfg_list.out_code_dir, \
+            Excel2CsvDescript.CPP_CODE_PREFIX, "{0}.h".format(CppLoaderGenerator.Save_File_Name))
+        out_cpp_file_path = os.path.join(self._cfg_list.out_code_dir, \
+            Excel2CsvDescript.CPP_CODE_PREFIX, "{0}.cpp".format(CppLoaderGenerator.Save_File_Name))
         file_paths = [out_h_file_path, out_cpp_file_path]
         codes = [h_code, cpp_code]
         for i in range(0, len(file_paths)):

@@ -242,6 +242,8 @@ class ExcelDescript(object):
     @staticmethod
     def load(file_path, sheet_name):
         excel_desc = None
+        ret = os.path.exists(file_path)
+        ret = os.path.isfile(file_path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
             xls_data = openpyxl.load_workbook(file_path)
             if xls_data and sheet_name in xls_data.sheetnames:

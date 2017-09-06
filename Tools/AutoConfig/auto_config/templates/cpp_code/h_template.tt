@@ -23,13 +23,15 @@ namespace Config
         {{ field.field_type }} {{ field.field_name }};
     {%- endfor %}
 
+        using ConfigCheckFunc = bool(*)({{ class_name }} *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
     struct {{ class_name }}Set
     {
         ~{{ class_name }}Set();
-        ConfigCheckFunc cfg_check_fun = nullptr;
+        {{ class_name }}::ConfigCheckFunc cfg_check_fun = nullptr;
+        using ConfigSetCheckFunc = bool(*)({{ class_name }}Set *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         
