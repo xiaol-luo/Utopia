@@ -108,7 +108,7 @@ namespace Config
         }
         if (nullptr != cfg_set_check_fun)
         {
-            all_ok = all_ok && cfg_set_check_fun((void *)this);
+            all_ok = all_ok && cfg_set_check_fun(this);
         }
         return all_ok;
     }

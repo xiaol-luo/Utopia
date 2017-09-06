@@ -19,13 +19,15 @@ namespace Config
         int daily_hour = 0 ;
         int daily_min = 0 ;
 
+		using ConfigCheckFunc = bool(*)(CsvLogConfig* item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
     struct CsvLogConfigSet
     {
         ~CsvLogConfigSet();
-        ConfigCheckFunc cfg_check_fun = nullptr;
+		CsvLogConfig::ConfigCheckFunc cfg_check_fun = nullptr;
+		using ConfigSetCheckFunc = bool(*)(CsvLogConfigSet* items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         
