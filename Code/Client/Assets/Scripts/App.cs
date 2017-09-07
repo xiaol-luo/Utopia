@@ -29,6 +29,7 @@ public class App : MonoBehaviour
 
     private void Awake()
     {
+
     }
     void Start ()
     {
@@ -55,6 +56,11 @@ public class App : MonoBehaviour
             Ping ping = new Ping();
             ping.Userid = 1;
             gameNetwork.Send(1, ping);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Config.CsvConfigSets cfgSets = new Config.CsvConfigSets();
+            cfgSets.Load(Path.Combine(Application.dataPath, "Resources/Config/AutoCsvConfig"));
         }
     }
 
