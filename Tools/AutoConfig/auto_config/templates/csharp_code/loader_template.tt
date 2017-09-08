@@ -1,1 +1,27 @@
-111
+using System;
+using System.IO;
+
+namespace Config
+{
+    public class CsvConfigSets
+    {
+        public string errMsg = string.Empty;
+
+    {%- for load_info in load_infos %}
+        public {{ load_info.type_name }} {{ load_info.field_name }} = new {{ load_info.type_name }}();
+    {%- endfor %}
+
+        public bool Load(string root_path)
+        {
+		{%- for load_info in load_infos %}
+            if (!{{ load_info.field_name }}.Load(Path.Combine(root_path, "{{ load_info.csv_file_path }}")))
+            {
+                errMsg = "Load {{ load_info.field_name }} fail";
+                return false;
+            }
+		{%- endfor %}
+
+            return true;
+        }
+    }
+}

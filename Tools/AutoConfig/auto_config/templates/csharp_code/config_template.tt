@@ -1,1 +1,138 @@
-111
+using System;
+using System.Collections.Generic;
+using LumenWorks.Framework.IO.Csv;
+using System.IO;
+
+namespace Config
+{
+    internal class FieldName_{{ class_name }}
+    {
+{%- for  field in fields %}
+        public const string {{ field.column_name_tag }} = "{{ field.field_name }}";
+{%- endfor %}
+    }
+
+    public class {{ class_name }}
+    {
+    {#- field declaration #}
+    {%- for  field in fields %}
+        public {{ field.field_type }} {{ field.field_name }} {%- if field.default_value %} = {{ field.default_value }}{% endif %};
+    {%- endfor %}
+
+    {#- extra field declaration #}
+    {%- for  field in extra_fields %}
+        {{ field.field_type }} {{ field.field_name }} = new {{ field.field_type }}();
+    {%- endfor %}
+
+        public delegate bool ConfigCheckFunc({{ class_name }} cfg);
+        public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
+        {
+            bool all_ok = true;
+    {%- for  field in fields %}
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_{{ class_name }}.{{ field.column_name_tag }}) && {{ field.convert_func }} (kvPairs[FieldName_{{ class_name }}.{{ field.column_name_tag }}], ref {{ field.field_name }});
+    {%- endfor %}
+    {%- for  field in extra_fields %}
+            all_ok = all_ok && {{ field.field_name }}.Init(this);
+    {%- endfor %}
+            if (all_ok && null != func)
+                all_ok &= func(this);
+            return all_ok;
+        }
+    }
+
+    public class {{ class_name }}Set
+    {
+        public string errMsg = string.Empty;
+
+        public {{ class_name }}.ConfigCheckFunc cfg_check_fun = null;
+        public delegate bool ConfigSetCheckFunc({{ class_name }}Set items);
+        public ConfigSetCheckFunc cfg_set_check_fun = null;
+        public List<{{ class_name }}> cfg_vec = new List<{{ class_name }}> ();
+
+{%- for  field in fields %}
+    {%- if field.has_key_set %}
+        public {{ field.key_set_type }} {{ field.key_set_name }} = new {{ field.key_set_type }}();
+    {%- endif %}
+    {%- if field.has_group_set %}
+        public {{ field.group_set_type }} {{ field.group_set_name }} = new {{ field.group_set_type }}();
+    {%- endif %}
+{%- endfor %}
+
+        public bool Load(string file_path)
+        {
+            using (CsvReader csv = new CsvReader(new StreamReader(file_path), true))
+            {
+                csv.MissingFieldAction = MissingFieldAction.ReplaceByEmpty;
+                string[] headers = csv.GetFieldHeaders();
+                string[] fieldHeaders = csv.GetFieldHeaders();
+                List<int> fieldIdxList = new List<int>();
+                try
+                {
+            {%- for  field in fields %}
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_{{ class_name }}.{{ field.column_name_tag }}));
+            {%- endfor %}
+                }
+                catch (Exception e)
+                {
+                    errMsg = e.Message;
+                    return false;
+                }
+                csv.ReadNextRecord();
+                while (csv.ReadNextRecord())
+                {
+                    Dictionary<string, string> kvPairs = new Dictionary<string, string>();
+                    foreach (int fieldIdx in fieldIdxList)
+                    {
+                        kvPairs[headers[fieldIdx]] = csv[fieldIdx];
+                        
+                    }
+                    {{ class_name }} cfg = new {{ class_name }}();
+                    if (!cfg.Init(kvPairs, cfg_check_fun))
+                    {
+                        errMsg = string.Format("{{ class_name }} Init Fail, row {0}", csv.CurrentRecordIndex);
+                        return false;
+                    }
+                    cfg_vec.Add(cfg);
+                }
+            }
+
+            foreach (var cfg in cfg_vec)
+            {
+{%- for  field in fields %}
+    {%- if field.has_key_set %}
+                {
+                    if ({{ field.key_set_name }}.ContainsKey(cfg.{{ field.field_name }}))
+                    {
+                        errMsg = string.Format("{{ class_name }}Set repeated key id = {0}", cfg.id);
+                        return false;
+                    }
+                    {{ field.key_set_name }}[cfg.{{ field.field_name }}] = cfg;
+                }
+    {%- endif %}
+    {%- if field.has_group_set %}
+                {
+                    List<{{ class_name }}> vec = null;
+                    if (!{{ field.group_set_name }}.TryGetValue(cfg.{{ field.field_name }}, out vec))
+                    {
+                        vec = new List<{{ class_name }}>();
+                        id_to_group[cfg.{{ field.field_name }}] = vec;
+                    }
+                    vec.Add(cfg);
+                }
+    {%- endif %}
+{%- endfor %}
+            }
+
+            if (null != cfg_set_check_fun)
+            {
+                if (!cfg_set_check_fun(this))
+                {
+                    errMsg = "{{ class_name }}Set cfg_set_check_fun fail";
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+}

@@ -71,8 +71,11 @@ class _CSharpField(object):
 
     @property 
     def default_value(self):
-        if EnumFieldType.is_base_type(self._field_desc.type_desc.field_type):
-            return "0"
+        field_type = self._field_desc.type_desc.field_type
+        if EnumFieldType.String == field_type:
+            return "string.Empty"
+        if EnumFieldType.is_collection_type(field_type):
+            return "new {0}()".format(self.field_type)
         return ""
 
     @property 
