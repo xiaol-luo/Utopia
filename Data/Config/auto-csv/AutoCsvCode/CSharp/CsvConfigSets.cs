@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Config
@@ -6,7 +6,6 @@ namespace Config
     public class CsvConfigSets
     {
         public string errMsg = string.Empty;
-
         public CsvLogConfigSet csv_CsvLogConfigSet = new CsvLogConfigSet();
 
         public bool Load(string root_path)

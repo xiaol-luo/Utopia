@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using LumenWorks.Framework.IO.Csv;
 using System.IO;
@@ -21,31 +21,31 @@ namespace Config
 
     public class CsvLogConfig
     {
-        public int id = 0;
+        public int id;
         public List<int> alsoWritetoMe = new List<int>();
-        public int logger_type = 0;
+        public int logger_type;
         public string name = string.Empty;
+        public int log_level;
         public string save_file = string.Empty;
-        public int log_level = 0;
-        public int rorating_max_size = 0;
-        public int rorating_max_files = 0;
-        public int daily_hour = 0;
-        public int daily_min = 0;
+        public int rorating_max_size;
+        public int rorating_max_files;
+        public int daily_hour;
+        public int daily_min;
 
         public delegate bool ConfigCheckFunc(CsvLogConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_id) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_id], ref id);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_alsoWritetoMe) && ConfigUtil.Str2Vec(kvPairs[FieldName_CsvLogConfig.Field_Name_alsoWritetoMe], ref alsoWritetoMe);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_logger_type) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_logger_type], ref logger_type);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_name) && ConfigUtil.Str2Str(kvPairs[FieldName_CsvLogConfig.Field_Name_name], ref name);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_log_level) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_log_level], ref log_level);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_save_file) && ConfigUtil.Str2Str(kvPairs[FieldName_CsvLogConfig.Field_Name_save_file], ref save_file);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_rorating_max_size) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_rorating_max_size], ref rorating_max_size);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_rorating_max_files) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_rorating_max_files], ref rorating_max_files);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_daily_hour) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_daily_hour], ref daily_hour);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_daily_min) && ConfigUtil.Str2BaseValue(kvPairs[FieldName_CsvLogConfig.Field_Name_daily_min], ref daily_min);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_id], ref id);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_alsoWritetoMe) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvLogConfig.Field_Name_alsoWritetoMe], ref alsoWritetoMe);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_logger_type) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_logger_type], ref logger_type);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvLogConfig.Field_Name_name], ref name);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_log_level) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_log_level], ref log_level);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_save_file) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvLogConfig.Field_Name_save_file], ref save_file);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_rorating_max_size) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_rorating_max_size], ref rorating_max_size);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_rorating_max_files) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_rorating_max_files], ref rorating_max_files);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_daily_hour) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_daily_hour], ref daily_hour);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvLogConfig.Field_Name_daily_min) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvLogConfig.Field_Name_daily_min], ref daily_min);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -112,17 +112,18 @@ namespace Config
                 {
                     if (id_to_key.ContainsKey(cfg.id))
                     {
-                        errMsg = string.Format("repeated key id = {0}", cfg.id);
+                        errMsg = string.Format("CsvLogConfigSet repeated key id = {0}", cfg.id);
                         return false;
                     }
                     id_to_key[cfg.id] = cfg;
                 }
             }
+
             if (null != cfg_set_check_fun)
             {
                 if (!cfg_set_check_fun(this))
                 {
-                    errMsg = "cfg_set_check_fun fail";
+                    errMsg = "CsvLogConfigSet cfg_set_check_fun fail";
                     return false;
                 }
             }
