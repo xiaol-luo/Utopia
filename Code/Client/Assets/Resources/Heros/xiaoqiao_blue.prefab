@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 493412}
   - component: {fileID: 11110114}
   - component: {fileID: 13660266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: xiaoqiao_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

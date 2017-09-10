@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 425506}
   - component: {fileID: 11167854}
   - component: {fileID: 13624388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: zhaoyun_blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1539,7 +1539,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195830}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.00026858522, z: 0.009735173}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8943945, y: 0.8943945, z: 0.8943945}
   m_Children: []
   m_Father: {fileID: 425506}

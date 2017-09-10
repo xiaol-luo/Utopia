@@ -30,7 +30,7 @@ class CameraThirdViewLookAround : MonoBehaviour
     void LateUpdate()
     {
         Vector3 mousePos = Input.mousePosition;
-        Debug.Log(string.Format("mouse pos {0} : sceen{1}:{2}", mousePos, Screen.width, Screen.height));
+        // Debug.Log(string.Format("mouse pos {0} : sceen{1}:{2}", mousePos, Screen.width, Screen.height));
 
         if (Input.GetKeyDown(KeyCode.Z))
             isDisableMouse = !isDisableMouse;
