@@ -1,10 +1,13 @@
 
 using SharpNav;
 using SharpNav.Geometry;
+using SharpNav.IO.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NavMesh
 {
@@ -36,6 +39,51 @@ namespace NavMesh
         UnityEngine.Vector3 ConvertVector3(SharpNav.Geometry.Vector3 vector3)
         {
             return new UnityEngine.Vector3(vector3.X, vector3.Y, vector3.Z);
+        }
+
+        string NavMeshPath
+        {
+            get
+            {
+                string path = Path.Combine(Application.dataPath, "Resources/Levels/NavMesh",
+                                    string.Format("{0}.json", SceneManager.GetActiveScene().name));
+                return path;
+            }
+        }
+
+        public void SaveNavMesh()
+        {
+            if (null == tiledNavMesh)
+            {
+                this.GenNavMesh();
+            }
+
+            try
+            {
+                new NavMeshJsonSerializer().Serialize(NavMeshPath, tiledNavMesh);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Navmesh saving failed with exception:" + Environment.NewLine + e.ToString());
+                return;
+            }
+
+            Debug.Log("SaveNavMesh Done");
+        }
+        public void LoadNavMesh()
+        {
+            try
+            {
+                tiledNavMesh = new NavMeshJsonSerializer().Deserialize(NavMeshPath);
+                this.GenDrawMesh();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Navmesh loading failed with exception:" + Environment.NewLine + e.ToString());
+                return;
+            }
+
+            Debug.Log("LoadNavMesh Done");
         }
 
         public void GenNavMesh()
@@ -116,47 +164,52 @@ namespace NavMesh
                     regionColors[i] = new Color((byte)r.Next(0, 255), (byte)r.Next(0, 255), (byte)r.Next(0, 255), 255);
             }
 
-            {
-                drawMeshs.Clear();
-                var tile = tiledNavMesh.GetTileAt(0, 0, 0);
-                if (null != tile)
-                {
-                    for (int i = 0; i < tile.Polys.Length; i++)
-                    {
-                        Mesh mesh = new Mesh();
-                        drawMeshs.Add(mesh);
-                        {
-                            List<UnityEngine.Vector3> vertices = new List<UnityEngine.Vector3>();
-                            List<int> triangles = new List<int>();
-                            for (int j = 0; j < settings.VertsPerPoly; ++j)
-                            {
-                                int vertIndex = tile.Polys[i].Verts[j];
-                                if (0 == vertIndex)
-                                    break;
-                                vertices.Add(ConvertVector3(tile.Verts[vertIndex]));
-                            }
-                            mesh.vertices = vertices.ToArray();
-
-                            int idx_1 = 1;
-                            int idx_2 = 2;
-                            while (idx_2 < mesh.vertices.Length)
-                            {
-                                triangles.Add(0);
-                                triangles.Add(idx_1);
-                                triangles.Add(idx_2);
-                                ++idx_1;
-                                ++idx_2;
-                            }
-                            mesh.triangles = triangles.ToArray();
-                            Gizmos.color = Color.green;
-                            mesh.RecalculateNormals();
-                            mesh.RecalculateBounds();
-                        }
-                    }
-                }
-            }
+            this.GenDrawMesh();
 
             Debug.Log("GenNavMesh Done!");
+        }
+
+        private void GenDrawMesh()
+        {
+            drawMeshs.Clear();
+            var tile = tiledNavMesh.GetTileAt(0, 0, 0);
+            if (null != tile)
+            {
+                for (int i = 0; i < tile.Polys.Length; i++)
+                {
+                    Mesh mesh = new Mesh();
+                    {
+                        List<UnityEngine.Vector3> vertices = new List<UnityEngine.Vector3>();
+                        List<int> triangles = new List<int>();
+                        for (int j = 0; j < settings.VertsPerPoly; ++j)
+                        {
+                            int vertIndex = tile.Polys[i].Verts[j];
+                            if (0 == vertIndex)
+                                break;
+                            vertices.Add(ConvertVector3(tile.Verts[vertIndex]));
+                        }
+                        if (vertices.Count < 3)
+                            continue;
+                        mesh.vertices = vertices.ToArray();
+
+                        int idx_1 = 1;
+                        int idx_2 = 2;
+                        while (idx_2 < mesh.vertices.Length)
+                        {
+                            triangles.Add(0);
+                            triangles.Add(idx_1);
+                            triangles.Add(idx_2);
+                            ++idx_1;
+                            ++idx_2;
+                        }
+                        mesh.triangles = triangles.ToArray();
+                        Gizmos.color = Color.green;
+                        mesh.RecalculateNormals();
+                        mesh.RecalculateBounds();
+                    }
+                    drawMeshs.Add(mesh);
+                }
+            }
         }
 
         public void OnDrawGizmos()
@@ -216,12 +269,18 @@ namespace NavMesh
             generator = target as SharpNavGenerator;
 
             base.DrawDefaultInspector();
-            //将target转化为我们需要的脚本  
-            //增加一个按钮  
+
             if (GUILayout.Button("GenNavMesh"))
             {
-                Debug.Log(string.Format("Test Button {0}", generator.test));
                 generator.GenNavMesh();
+            }
+            if (GUILayout.Button("SaveNavMesh"))
+            {
+                generator.SaveNavMesh();
+            }
+            if (GUILayout.Button("LoadNavMesh"))
+            {
+                generator.LoadNavMesh();
             }
         }
     }
