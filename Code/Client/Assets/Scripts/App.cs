@@ -6,8 +6,23 @@ using System.IO;
 using System.Net;
 using UnityEngine;
 
-public class App : MonoBehaviour
+public class App 
 {
+    public static App my { get { return m_my; } }
+    protected static App m_my = null;
+    public static void GenInstance(MonoBehaviour _owner)
+    {
+        if (null == m_my)
+            m_my = new App(_owner);
+    }
+
+    protected App(MonoBehaviour mono)
+    {
+        owner = mono;
+    }
+
+    public MonoBehaviour owner { get; protected set; }
+
     [SerializeField]
     string host = "192.168.5.105";
     [SerializeField]
@@ -27,11 +42,11 @@ public class App : MonoBehaviour
     GameNetwork m_gameNetwork = new GameNetwork();
     public GameNetwork gameNetwork { get { return m_gameNetwork; } }
 
-    private void Awake()
+    public void Awake()
     {
 
     }
-    void Start ()
+    public void Start ()
     {
         gameNetwork.Add(1, (int id, Ping msg) =>
         {
@@ -43,7 +58,7 @@ public class App : MonoBehaviour
         });
     }
 
-	void Update ()
+	public void Update ()
     {
         this.CheckCnnInfoChange();
 
@@ -64,7 +79,12 @@ public class App : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    public void LateUpdate()
+    {
+
+    }
+
+    public void FixedUpdate()
     {
         gameNetwork.UpdateIO();
     }
