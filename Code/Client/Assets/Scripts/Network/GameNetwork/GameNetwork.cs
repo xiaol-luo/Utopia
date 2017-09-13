@@ -49,9 +49,15 @@ public class GameNetwork : INetAgentHandler
     {
         handlers.Remove(protocolId);
     }
-    void INetAgentHandler.OnOPen(bool isSucc)
-    {
 
+    public delegate void OpenCb(bool isSucc);
+    public event OpenCb openCb;
+    public delegate void CloseCb(int errno, string errMsg);
+    public event CloseCb closeCb;
+    void INetAgentHandler.OnOpen(bool isSucc)
+    {
+        if (null != openCb)
+            openCb(isSucc);
     }
     void INetAgentHandler.OnRecvData(int protocolId, byte[] data, int dataBegin, int dataLen)
     {
@@ -64,7 +70,8 @@ public class GameNetwork : INetAgentHandler
     }
     void INetAgentHandler.OnClose(int errno, string errMsg)
     {
-
+        if (null != closeCb)
+            closeCb(errno, errMsg);
     }
 }
 

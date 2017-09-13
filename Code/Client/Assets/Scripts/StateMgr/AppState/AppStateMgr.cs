@@ -5,5 +5,6 @@ public class AppStateMgr : StateMgr<IAppState>
     {
         this.AddState(new AppStateLaunch(this));
         this.AddState(new AppStateLoading(this));
+        this.AddState(new AppStateSelectHero(this));
     }
 }

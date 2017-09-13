@@ -4,6 +4,7 @@ public class IAppState : IState
     public enum StateName
     {
         Launch,
+        SelectHero,
         Loading,
 
         Max,

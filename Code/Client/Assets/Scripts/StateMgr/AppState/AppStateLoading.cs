@@ -9,7 +9,7 @@ public class AppStateLoading : IAppState
     public override void Enter(params object[] objs)
     {
        
-    }
+    }   
 
     public override void Exit(params object[] objs)
     {

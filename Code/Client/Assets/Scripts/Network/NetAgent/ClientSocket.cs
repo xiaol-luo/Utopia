@@ -95,28 +95,31 @@ public class ClientSocket
             }
             else
             {
-                if (pThis.m_tmpSocket.Connected)
+                pThis.m_tmpSocket = null;
+                pThis.m_threadParam.socket = socket;
+                if (null != pThis.m_tmpCnnCb)
                 {
-                    pThis.m_threadParam.isExit = false;
-                    pThis.m_threadParam.socket = pThis.m_tmpSocket;
-                    if (null != pThis.m_tmpCnnCb)
-                    {
-                        bool isSucc = pThis.m_tmpSocket.Connected;
-                        System.Action<bool> tmpCnnCb = pThis.m_tmpCnnCb;
-                        pThis.m_asyncDoCnnCb = () => { tmpCnnCb(isSucc); };
-                    }
-                    
-                    pThis.m_tmpSocket = null;
+                    bool isSucc = socket.Connected;
+                    System.Action<bool> tmpCnnCb = pThis.m_tmpCnnCb;
+                    pThis.m_asyncDoCnnCb = () => { tmpCnnCb(isSucc); };
                     pThis.m_tmpCnnCb = null;
+                }
+                if (socket.Connected)
+                {
                     pThis.m_threadParam.state = State.Connected;
                     pThis.m_threadParam.recvBytes = pThis.m_recvBytesArray[0];
                     pThis.m_threadParam.sendBytes = pThis.m_sendBytesArray[0];
+                    pThis.m_threadParam.isExit = false;
                     pThis.m_thread = new Thread(new ParameterizedThreadStart(ClientSocket.Loop));
                     pThis.m_thread.Start(pThis.m_threadParam);
                 }
+                else
+                {
+                    pThis.m_threadParam.state = State.Error;
+                }
             }
 
-            pThis.m_tmpSocket.EndConnect(ar);
+            socket.EndConnect(ar);
         }
     }
     
@@ -176,14 +179,15 @@ public class ClientSocket
     }
     public void UpdateIO()
     {
-        if (State.Connected != m_threadParam.state)
-            return;
-            
         if (null != this.m_asyncDoCnnCb)
         {
-            this.m_asyncDoCnnCb();
+            System.Action asyncDoCnnCb = this.m_asyncDoCnnCb;
             this.m_asyncDoCnnCb = null;
+            asyncDoCnnCb();
         }
+
+        if (State.Connected != m_threadParam.state)
+            return;
         if (0 != m_threadParam.errno)
         {
             this.Close(State.Error);

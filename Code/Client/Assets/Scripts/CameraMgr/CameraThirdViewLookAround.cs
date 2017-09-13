@@ -2,19 +2,19 @@ using UnityEngine;
 
 class CameraThirdViewLookAround : MonoBehaviour
 {
-    private Camera camera = null;
+    private Camera m_camera = null;
     public float moveSpeed = 300.0f;
     public float angel = 60.0f;
     public float height = 200.0f;
     public float edgeThick = 20.0f;
     void Start()
     {
-        Vector3 cameraPos = camera.transform.position;
-        camera.transform.position = new Vector3(cameraPos.x, height, cameraPos.z);
+        Vector3 cameraPos = m_camera.transform.position;
+        m_camera.transform.position = new Vector3(cameraPos.x, height, cameraPos.z);
     }
     private void Awake()
     {
-        camera = this.GetComponent<Camera>();
+        m_camera = this.GetComponent<Camera>();
     }
 
     const int MOVE_LEFT = -1;
@@ -78,9 +78,9 @@ class CameraThirdViewLookAround : MonoBehaviour
             float sideMoveSpeed = moveSpeed / (System.Math.Abs(move_hor) + System.Math.Abs(move_veg));
             float move_x = sideMoveSpeed * move_hor * Time.deltaTime;
             float move_y = sideMoveSpeed * move_veg * Time.deltaTime;
-            camera.transform.eulerAngles = new Vector3(angel, 0, 0);
-            Vector3 cameraPos = camera.transform.position;
-            camera.transform.position = new Vector3(cameraPos.x + move_x, height, cameraPos.z + move_y);
+            m_camera.transform.eulerAngles = new Vector3(angel, 0, 0);
+            Vector3 cameraPos = m_camera.transform.position;
+            m_camera.transform.position = new Vector3(cameraPos.x + move_x, height, cameraPos.z + move_y);
             isMoved = true;
         }
         return isMoved;

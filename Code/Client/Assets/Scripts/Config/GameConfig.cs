@@ -1,4 +1,7 @@
 
+using System.IO;
+using UnityEngine;
+
 public class GameConfig
 {
     public Config.CsvConfigSets csvCfgSet { get; protected set; }
@@ -24,7 +27,7 @@ public class GameConfig
         bool ret = false;
         do
         {
-            if (!csvCfgSet.Load("Resources/Config/AutoCsvConfig"))
+            if (!csvCfgSet.Load(Path.Combine(Application.dataPath, "Resources/Config/AutoCsvConfig")))
             {
                 errno = 1;
                 errMsg = csvCfgSet.errMsg;

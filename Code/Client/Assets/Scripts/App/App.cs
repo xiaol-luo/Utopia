@@ -18,8 +18,10 @@ public class App
     protected App(MonoBehaviour mono)
     {
         owner = mono;
+        uiRoot = mono.transform.Find("UIRoot").transform;
     }
     public MonoBehaviour owner { get; protected set; }
+    public Transform uiRoot { get; protected set; }
     public GameNetwork gameNetwork { get; protected set; }
     public GameConfig gameConfig { get; protected set; }
     public AppStateMgr stateMgr { get; protected set; }

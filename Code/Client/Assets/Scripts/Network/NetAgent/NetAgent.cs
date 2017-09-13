@@ -80,7 +80,7 @@ public class NetAgent
     void OnSocketOpen(bool isSucc)
     {
         if (null != m_handler)
-            m_handler.OnOPen(isSucc);
+            m_handler.OnOpen(isSucc);
         if (!isSucc)
             this.Close();
 
