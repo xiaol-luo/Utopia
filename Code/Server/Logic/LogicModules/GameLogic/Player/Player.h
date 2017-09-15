@@ -11,8 +11,8 @@ namespace GameLogic
 { 
 	class PlayerCnnHandler; 
 	class PlayerMgr;
+	class Hero;
 }
-
 
 namespace GameLogic
 {
@@ -34,5 +34,12 @@ namespace GameLogic
 		void OnNetClose(int err_num);
 		void OnNetOpen(int err_num);
 		void OnNetRecv(char *data, uint32_t len);
+
+	public:
+		std::weak_ptr<Hero> GetHero() { return m_hero; }
+		void SetHero(std::weak_ptr<Hero> hero) { m_hero = hero; }
+
+	private:
+		std::weak_ptr<Hero> m_hero;
 	};
 }
