@@ -1,7 +1,7 @@
 
-public class AppStateLoading : IAppState
+public class AppStateInBattle : IAppState
 {
-    public AppStateLoading(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.Loading)
+    public AppStateInBattle(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.InBattle)
     {
 
     }
@@ -9,7 +9,7 @@ public class AppStateLoading : IAppState
     public override void Enter(params object[] objs)
     {
 
-    }   
+    }
 
     public override void Exit(params object[] objs)
     {

@@ -20,7 +20,7 @@ public class AppStateLaunch : IAppState
             Object prefab = Resources.Load("Art/UI/Prefabs/UIConnectServer");
             GameObject go = GameObject.Instantiate(prefab) as GameObject;
             m_mono = go.GetComponent<UIConnectServer>();
-            m_mono.transform.parent = App.my.uiRoot;
+            m_mono.transform.SetParent(App.my.uiRoot);
             m_mono.transform.localPosition = Vector3.zero;
             m_mono.transform.localScale = Vector3.one;
         }

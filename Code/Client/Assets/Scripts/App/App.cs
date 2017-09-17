@@ -66,4 +66,9 @@ public class App
     {
         gameNetwork.UpdateIO();
     }
+
+    public void Quit()
+    {
+        gameNetwork.Close();
+    }
 }

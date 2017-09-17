@@ -9,6 +9,7 @@ class GameLogicModule;
 class Ping;
 class Pong;
 class Empty;
+class SelectHeroReq;
 
 namespace GameLogic
 {
@@ -96,5 +97,6 @@ namespace GameLogic
 		void OnHandlePlayerPingMsg(int protocol_id, Ping *msg, GameLogic::Player *player);
 		void OnHandlePlayerPongMsg(int protocol_id, Pong *msg, GameLogic::Player *player);
 		void OnQueryFreeHero(int protocol_id, GameLogic::Player *player);
+		void OnSelectHeroReq(int protocol_id, SelectHeroReq *msg, GameLogic::Player *player);
 	};
 }

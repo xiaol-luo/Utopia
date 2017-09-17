@@ -5,6 +5,8 @@ public class IAppState : IState
     {
         Launch,
         SelectHero,
+        LoadingScene,
+        InBattle,
         Loading,
 
         Max,

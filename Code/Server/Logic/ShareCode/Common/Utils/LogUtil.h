@@ -4,6 +4,9 @@
 
 class LogUtil
 {
+public: 
+	static const int STDOUT = LogModule::LOGGER_ID_STDOUT;
+	static const int STDERR = LogModule::LOGGER_ID_STDERR;
 public:
 	static bool Init(LogModule *_log_module);
 	static void Destroy() { log_module = nullptr; }

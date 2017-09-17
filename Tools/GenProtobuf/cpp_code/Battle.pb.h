@@ -150,17 +150,17 @@ class RspFreeHero : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // repeated uint64 free_hero_ids = 1;
-  int free_hero_ids_size() const;
-  void clear_free_hero_ids();
-  static const int kFreeHeroIdsFieldNumber = 1;
-  ::google::protobuf::uint64 free_hero_ids(int index) const;
-  void set_free_hero_ids(int index, ::google::protobuf::uint64 value);
-  void add_free_hero_ids(::google::protobuf::uint64 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
-      free_hero_ids() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
-      mutable_free_hero_ids();
+  // uint64 red_hero_id = 1;
+  void clear_red_hero_id();
+  static const int kRedHeroIdFieldNumber = 1;
+  ::google::protobuf::uint64 red_hero_id() const;
+  void set_red_hero_id(::google::protobuf::uint64 value);
+
+  // uint64 blue_hero_id = 2;
+  void clear_blue_hero_id();
+  static const int kBlueHeroIdFieldNumber = 2;
+  ::google::protobuf::uint64 blue_hero_id() const;
+  void set_blue_hero_id(::google::protobuf::uint64 value);
 
   // @@protoc_insertion_point(class_scope:RspFreeHero)
  private:
@@ -169,8 +169,8 @@ class RspFreeHero : public ::google::protobuf::Message /* @@protoc_insertion_poi
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > free_hero_ids_;
-  mutable int _free_hero_ids_cached_byte_size_;
+  ::google::protobuf::uint64 red_hero_id_;
+  ::google::protobuf::uint64 blue_hero_id_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -381,9 +381,15 @@ class SelectHeroRsp : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // bool is_succ = 1;
+  // uint64 hero_id = 1;
+  void clear_hero_id();
+  static const int kHeroIdFieldNumber = 1;
+  ::google::protobuf::uint64 hero_id() const;
+  void set_hero_id(::google::protobuf::uint64 value);
+
+  // bool is_succ = 2;
   void clear_is_succ();
-  static const int kIsSuccFieldNumber = 1;
+  static const int kIsSuccFieldNumber = 2;
   bool is_succ() const;
   void set_is_succ(bool value);
 
@@ -394,6 +400,7 @@ class SelectHeroRsp : public ::google::protobuf::Message /* @@protoc_insertion_p
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::google::protobuf::uint64 hero_id_;
   bool is_succ_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
@@ -410,34 +417,32 @@ class SelectHeroRsp : public ::google::protobuf::Message /* @@protoc_insertion_p
 #endif  // __GNUC__
 // RspFreeHero
 
-// repeated uint64 free_hero_ids = 1;
-inline int RspFreeHero::free_hero_ids_size() const {
-  return free_hero_ids_.size();
+// uint64 red_hero_id = 1;
+inline void RspFreeHero::clear_red_hero_id() {
+  red_hero_id_ = GOOGLE_ULONGLONG(0);
 }
-inline void RspFreeHero::clear_free_hero_ids() {
-  free_hero_ids_.Clear();
+inline ::google::protobuf::uint64 RspFreeHero::red_hero_id() const {
+  // @@protoc_insertion_point(field_get:RspFreeHero.red_hero_id)
+  return red_hero_id_;
 }
-inline ::google::protobuf::uint64 RspFreeHero::free_hero_ids(int index) const {
-  // @@protoc_insertion_point(field_get:RspFreeHero.free_hero_ids)
-  return free_hero_ids_.Get(index);
+inline void RspFreeHero::set_red_hero_id(::google::protobuf::uint64 value) {
+  
+  red_hero_id_ = value;
+  // @@protoc_insertion_point(field_set:RspFreeHero.red_hero_id)
 }
-inline void RspFreeHero::set_free_hero_ids(int index, ::google::protobuf::uint64 value) {
-  free_hero_ids_.Set(index, value);
-  // @@protoc_insertion_point(field_set:RspFreeHero.free_hero_ids)
+
+// uint64 blue_hero_id = 2;
+inline void RspFreeHero::clear_blue_hero_id() {
+  blue_hero_id_ = GOOGLE_ULONGLONG(0);
 }
-inline void RspFreeHero::add_free_hero_ids(::google::protobuf::uint64 value) {
-  free_hero_ids_.Add(value);
-  // @@protoc_insertion_point(field_add:RspFreeHero.free_hero_ids)
+inline ::google::protobuf::uint64 RspFreeHero::blue_hero_id() const {
+  // @@protoc_insertion_point(field_get:RspFreeHero.blue_hero_id)
+  return blue_hero_id_;
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
-RspFreeHero::free_hero_ids() const {
-  // @@protoc_insertion_point(field_list:RspFreeHero.free_hero_ids)
-  return free_hero_ids_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
-RspFreeHero::mutable_free_hero_ids() {
-  // @@protoc_insertion_point(field_mutable_list:RspFreeHero.free_hero_ids)
-  return &free_hero_ids_;
+inline void RspFreeHero::set_blue_hero_id(::google::protobuf::uint64 value) {
+  
+  blue_hero_id_ = value;
+  // @@protoc_insertion_point(field_set:RspFreeHero.blue_hero_id)
 }
 
 // -------------------------------------------------------------------
@@ -462,7 +467,21 @@ inline void SelectHeroReq::set_hero_id(::google::protobuf::uint64 value) {
 
 // SelectHeroRsp
 
-// bool is_succ = 1;
+// uint64 hero_id = 1;
+inline void SelectHeroRsp::clear_hero_id() {
+  hero_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SelectHeroRsp::hero_id() const {
+  // @@protoc_insertion_point(field_get:SelectHeroRsp.hero_id)
+  return hero_id_;
+}
+inline void SelectHeroRsp::set_hero_id(::google::protobuf::uint64 value) {
+  
+  hero_id_ = value;
+  // @@protoc_insertion_point(field_set:SelectHeroRsp.hero_id)
+}
+
+// bool is_succ = 2;
 inline void SelectHeroRsp::clear_is_succ() {
   is_succ_ = false;
 }

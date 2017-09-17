@@ -37,9 +37,8 @@ namespace GameLogic
 
 	public:
 		std::weak_ptr<Hero> GetHero() { return m_hero; }
-		void SetHero(std::weak_ptr<Hero> hero) { m_hero = hero; }
-
-	private:
+		void SetHero(std::shared_ptr<Hero> hero);
+	protected:
 		std::weak_ptr<Hero> m_hero;
 	};
 }

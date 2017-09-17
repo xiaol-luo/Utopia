@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='Battle.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\"$\n\x0bRspFreeHero\x12\x15\n\rfree_hero_ids\x18\x01 \x03(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\" \n\rSelectHeroRsp\x12\x0f\n\x07is_succ\x18\x01 \x01(\x08\x42\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\x42\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 
@@ -33,9 +33,16 @@ _RSPFREEHERO = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='free_hero_ids', full_name='RspFreeHero.free_hero_ids', index=0,
-      number=1, type=4, cpp_type=4, label=3,
-      has_default_value=False, default_value=[],
+      name='red_hero_id', full_name='RspFreeHero.red_hero_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='blue_hero_id', full_name='RspFreeHero.blue_hero_id', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -52,7 +59,7 @@ _RSPFREEHERO = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=16,
-  serialized_end=52,
+  serialized_end=72,
 )
 
 
@@ -82,8 +89,8 @@ _SELECTHEROREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=54,
-  serialized_end=86,
+  serialized_start=74,
+  serialized_end=106,
 )
 
 
@@ -95,8 +102,15 @@ _SELECTHERORSP = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='is_succ', full_name='SelectHeroRsp.is_succ', index=0,
-      number=1, type=8, cpp_type=7, label=1,
+      name='hero_id', full_name='SelectHeroRsp.hero_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_succ', full_name='SelectHeroRsp.is_succ', index=1,
+      number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -113,8 +127,8 @@ _SELECTHERORSP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=88,
-  serialized_end=120,
+  serialized_start=108,
+  serialized_end=157,
 )
 
 DESCRIPTOR.message_types_by_name['RspFreeHero'] = _RSPFREEHERO

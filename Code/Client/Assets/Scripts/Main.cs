@@ -30,4 +30,9 @@ class Main : MonoBehaviour
     {
         App.my.FixedUpdate();
     }
+
+    void OnApplicationQuit()
+    {
+        App.my.Quit();
+    }
 }

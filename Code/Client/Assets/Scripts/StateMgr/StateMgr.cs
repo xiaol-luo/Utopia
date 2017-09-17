@@ -7,12 +7,12 @@ using UnityEngine;
 public abstract class IStateMgr
 {
     protected abstract IState GetStateHelp(int stateId);
-    public void ChangeState<T>(T stateId, bool isForce = false)
+    public void ChangeState<T>(T stateId, params object[] objs)
     {
-        this.ChangeState((int)Convert.ChangeType(stateId, typeof(int)), isForce);
+        this.ChangeState((int)Convert.ChangeType(stateId, typeof(int)), objs);
     }
 
-    public void ChangeState(int stateId, bool isForce = false)
+    public void ChangeState(int stateId, params object[] objs)
     {
         IState nextState = this.GetStateHelp(stateId);
         if (null == nextState)
@@ -20,13 +20,11 @@ public abstract class IStateMgr
             Debug.LogError(string.Format("stateId {0} is null", stateId));
             return;
         }
-        if (!isForce && null != m_activeState && m_activeState.Id == stateId)
-            return;
 
         if (null != m_activeState)
             m_activeState.Exit();
         m_activeState = nextState;
-        m_activeState.Enter();
+        m_activeState.Enter(objs);
     }
 
     public void UpdateState()

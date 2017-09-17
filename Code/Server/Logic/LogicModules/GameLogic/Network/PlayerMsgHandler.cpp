@@ -12,6 +12,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Common/Utils/AutoReleaseUtil.h"
 #include "GameLogic/Scene/SceneObject/Hero.h"
+#include "Common/Utils/LogUtil.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -44,6 +45,7 @@ namespace GameLogic
 		RegPlayerMsgHandler(PID_Ping, Ping, OnHandlePlayerPingMsg);
 		RegPlayerMsgHandler(PID_Pong, Pong, OnHandlePlayerPongMsg);
 		RegPlayerHandler(PID_QueryFreeHero, OnQueryFreeHero);
+		RegPlayerMsgHandler(PID_SelectHeroReq, SelectHeroReq, OnSelectHeroReq);
 
 		for (auto desc : msg_handle_descripts)
 		{
@@ -86,6 +88,7 @@ namespace GameLogic
 			if (nullptr == handler_descript)
 			{
 				is_ok = false;
+				LogUtil::Error(LogUtil::STDERR, "not handler function for protocol id {}", protocol_id);
 				break;
 			}
 			char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;
@@ -125,10 +128,40 @@ namespace GameLogic
 
 		RspFreeHero *rsp_msg = google::protobuf::Arena::CreateMessage<RspFreeHero>(m_protobuf_arena);
 		if (nullptr == red_hero->GetPlayer())
-			rsp_msg->add_free_hero_ids(red_hero->GetId());
+			rsp_msg->set_red_hero_id(red_hero->GetId());
 		if (nullptr == blue_hero->GetPlayer())
-			rsp_msg->add_free_hero_ids(blue_hero->GetId());
+			rsp_msg->set_blue_hero_id(blue_hero->GetId());
 
 		m_logic_module->m_network_agent->Send(player->GetNetId(), PID_RspFreeHero, rsp_msg);
+	}
+
+	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, SelectHeroReq *msg, GameLogic::Player *player)
+	{
+		std::shared_ptr<Hero> red_hero = m_logic_module->m_scene->GetRedHero();
+		std::shared_ptr<Hero> blue_hero = m_logic_module->m_scene->GetBlueHero();
+		SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<SelectHeroRsp>(m_protobuf_arena);
+		
+		auto hero = player->GetHero();
+		if (hero.expired())
+		{
+			rsp_msg->set_hero_id(msg->hero_id());
+			if (msg->hero_id() == red_hero->GetId())
+			{
+				if (nullptr == red_hero->GetPlayer())
+				{
+					player->SetHero(red_hero);
+					rsp_msg->set_is_succ(true);
+				}
+			}
+			if (msg->hero_id() == blue_hero->GetId())
+			{
+				if (nullptr == blue_hero->GetPlayer())
+				{
+					player->SetHero(blue_hero);
+					rsp_msg->set_is_succ(true);
+				}
+			}
+		}
+		m_logic_module->m_network_agent->Send(player->GetNetId(), PID_SelectHeroRsp, rsp_msg);
 	}
 }

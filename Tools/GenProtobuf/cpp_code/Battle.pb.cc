@@ -63,7 +63,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RspFreeHero, free_hero_ids_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RspFreeHero, red_hero_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RspFreeHero, blue_hero_id_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SelectHeroReq, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -75,12 +76,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SelectHeroRsp, hero_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SelectHeroRsp, is_succ_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(RspFreeHero)},
-  { 6, -1, sizeof(SelectHeroReq)},
-  { 12, -1, sizeof(SelectHeroRsp)},
+  { 7, -1, sizeof(SelectHeroReq)},
+  { 13, -1, sizeof(SelectHeroRsp)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -131,13 +133,14 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\014Battle.proto\"$\n\013RspFreeHero\022\025\n\rfree_he"
-      "ro_ids\030\001 \003(\004\" \n\rSelectHeroReq\022\017\n\007hero_id"
-      "\030\001 \001(\004\" \n\rSelectHeroRsp\022\017\n\007is_succ\030\001 \001(\010"
-      "B\003\370\001\001b\006proto3"
+      "\n\014Battle.proto\"8\n\013RspFreeHero\022\023\n\013red_her"
+      "o_id\030\001 \001(\004\022\024\n\014blue_hero_id\030\002 \001(\004\" \n\rSele"
+      "ctHeroReq\022\017\n\007hero_id\030\001 \001(\004\"1\n\rSelectHero"
+      "Rsp\022\017\n\007hero_id\030\001 \001(\004\022\017\n\007is_succ\030\002 \001(\010B\003\370"
+      "\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 133);
+      descriptor, 170);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
 }
@@ -160,7 +163,8 @@ struct StaticDescriptorInitializer {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int RspFreeHero::kFreeHeroIdsFieldNumber;
+const int RspFreeHero::kRedHeroIdFieldNumber;
+const int RspFreeHero::kBlueHeroIdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 RspFreeHero::RspFreeHero()
@@ -173,8 +177,7 @@ RspFreeHero::RspFreeHero()
 }
 RspFreeHero::RspFreeHero(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
-  _internal_metadata_(arena),
-  free_hero_ids_(arena) {
+  _internal_metadata_(arena) {
   protobuf_Battle_2eproto::InitDefaults();
   SharedCtor();
   RegisterArenaDtor(arena);
@@ -183,13 +186,18 @@ RspFreeHero::RspFreeHero(::google::protobuf::Arena* arena)
 RspFreeHero::RspFreeHero(const RspFreeHero& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      free_hero_ids_(from.free_hero_ids_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&red_hero_id_, &from.red_hero_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&blue_hero_id_) -
+    reinterpret_cast<char*>(&red_hero_id_)) + sizeof(blue_hero_id_));
   // @@protoc_insertion_point(copy_constructor:RspFreeHero)
 }
 
 void RspFreeHero::SharedCtor() {
+  ::memset(&red_hero_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&blue_hero_id_) -
+      reinterpret_cast<char*>(&red_hero_id_)) + sizeof(blue_hero_id_));
   _cached_size_ = 0;
 }
 
@@ -238,7 +246,9 @@ void RspFreeHero::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  free_hero_ids_.Clear();
+  ::memset(&red_hero_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&blue_hero_id_) -
+      reinterpret_cast<char*>(&red_hero_id_)) + sizeof(blue_hero_id_));
   _internal_metadata_.Clear();
 }
 
@@ -252,19 +262,28 @@ bool RspFreeHero::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated uint64 free_hero_ids = 1;
+      // uint64 red_hero_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, this->mutable_free_hero_ids())));
-        } else if (
-            static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 1, 10u, input, this->mutable_free_hero_ids())));
+                 input, &red_hero_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint64 blue_hero_id = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &blue_hero_id_)));
         } else {
           goto handle_unusual;
         }
@@ -297,15 +316,14 @@ void RspFreeHero::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated uint64 free_hero_ids = 1;
-  if (this->free_hero_ids_size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteTag(1, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
-    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
-        _free_hero_ids_cached_byte_size_));
+  // uint64 red_hero_id = 1;
+  if (this->red_hero_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->red_hero_id(), output);
   }
-  for (int i = 0, n = this->free_hero_ids_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64NoTag(
-      this->free_hero_ids(i), output);
+
+  // uint64 blue_hero_id = 2;
+  if (this->blue_hero_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->blue_hero_id(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -322,17 +340,14 @@ void RspFreeHero::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated uint64 free_hero_ids = 1;
-  if (this->free_hero_ids_size() > 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
-      1,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
-        static_cast< ::google::protobuf::uint32>(
-            _free_hero_ids_cached_byte_size_), target);
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteUInt64NoTagToArray(this->free_hero_ids_, target);
+  // uint64 red_hero_id = 1;
+  if (this->red_hero_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->red_hero_id(), target);
+  }
+
+  // uint64 blue_hero_id = 2;
+  if (this->blue_hero_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->blue_hero_id(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -352,20 +367,18 @@ size_t RspFreeHero::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated uint64 free_hero_ids = 1;
-  {
-    size_t data_size = ::google::protobuf::internal::WireFormatLite::
-      UInt64Size(this->free_hero_ids_);
-    if (data_size > 0) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-            static_cast< ::google::protobuf::int32>(data_size));
-    }
-    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
-    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-    _free_hero_ids_cached_byte_size_ = cached_size;
-    GOOGLE_SAFE_CONCURRENT_WRITES_END();
-    total_size += data_size;
+  // uint64 red_hero_id = 1;
+  if (this->red_hero_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->red_hero_id());
+  }
+
+  // uint64 blue_hero_id = 2;
+  if (this->blue_hero_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->blue_hero_id());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -397,7 +410,12 @@ void RspFreeHero::MergeFrom(const RspFreeHero& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  free_hero_ids_.MergeFrom(from.free_hero_ids_);
+  if (from.red_hero_id() != 0) {
+    set_red_hero_id(from.red_hero_id());
+  }
+  if (from.blue_hero_id() != 0) {
+    set_blue_hero_id(from.blue_hero_id());
+  }
 }
 
 void RspFreeHero::CopyFrom(const ::google::protobuf::Message& from) {
@@ -439,7 +457,8 @@ void RspFreeHero::UnsafeArenaSwap(RspFreeHero* other) {
 }
 void RspFreeHero::InternalSwap(RspFreeHero* other) {
   using std::swap;
-  free_hero_ids_.InternalSwap(&other->free_hero_ids_);
+  swap(red_hero_id_, other->red_hero_id_);
+  swap(blue_hero_id_, other->blue_hero_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -452,34 +471,32 @@ void RspFreeHero::InternalSwap(RspFreeHero* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // RspFreeHero
 
-// repeated uint64 free_hero_ids = 1;
-int RspFreeHero::free_hero_ids_size() const {
-  return free_hero_ids_.size();
+// uint64 red_hero_id = 1;
+void RspFreeHero::clear_red_hero_id() {
+  red_hero_id_ = GOOGLE_ULONGLONG(0);
 }
-void RspFreeHero::clear_free_hero_ids() {
-  free_hero_ids_.Clear();
+::google::protobuf::uint64 RspFreeHero::red_hero_id() const {
+  // @@protoc_insertion_point(field_get:RspFreeHero.red_hero_id)
+  return red_hero_id_;
 }
-::google::protobuf::uint64 RspFreeHero::free_hero_ids(int index) const {
-  // @@protoc_insertion_point(field_get:RspFreeHero.free_hero_ids)
-  return free_hero_ids_.Get(index);
+void RspFreeHero::set_red_hero_id(::google::protobuf::uint64 value) {
+  
+  red_hero_id_ = value;
+  // @@protoc_insertion_point(field_set:RspFreeHero.red_hero_id)
 }
-void RspFreeHero::set_free_hero_ids(int index, ::google::protobuf::uint64 value) {
-  free_hero_ids_.Set(index, value);
-  // @@protoc_insertion_point(field_set:RspFreeHero.free_hero_ids)
+
+// uint64 blue_hero_id = 2;
+void RspFreeHero::clear_blue_hero_id() {
+  blue_hero_id_ = GOOGLE_ULONGLONG(0);
 }
-void RspFreeHero::add_free_hero_ids(::google::protobuf::uint64 value) {
-  free_hero_ids_.Add(value);
-  // @@protoc_insertion_point(field_add:RspFreeHero.free_hero_ids)
+::google::protobuf::uint64 RspFreeHero::blue_hero_id() const {
+  // @@protoc_insertion_point(field_get:RspFreeHero.blue_hero_id)
+  return blue_hero_id_;
 }
-const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
-RspFreeHero::free_hero_ids() const {
-  // @@protoc_insertion_point(field_list:RspFreeHero.free_hero_ids)
-  return free_hero_ids_;
-}
-::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
-RspFreeHero::mutable_free_hero_ids() {
-  // @@protoc_insertion_point(field_mutable_list:RspFreeHero.free_hero_ids)
-  return &free_hero_ids_;
+void RspFreeHero::set_blue_hero_id(::google::protobuf::uint64 value) {
+  
+  blue_hero_id_ = value;
+  // @@protoc_insertion_point(field_set:RspFreeHero.blue_hero_id)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -772,6 +789,7 @@ void SelectHeroReq::set_hero_id(::google::protobuf::uint64 value) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int SelectHeroRsp::kHeroIdFieldNumber;
 const int SelectHeroRsp::kIsSuccFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -796,12 +814,16 @@ SelectHeroRsp::SelectHeroRsp(const SelectHeroRsp& from)
       _internal_metadata_(NULL),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  is_succ_ = from.is_succ_;
+  ::memcpy(&hero_id_, &from.hero_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&is_succ_) -
+    reinterpret_cast<char*>(&hero_id_)) + sizeof(is_succ_));
   // @@protoc_insertion_point(copy_constructor:SelectHeroRsp)
 }
 
 void SelectHeroRsp::SharedCtor() {
-  is_succ_ = false;
+  ::memset(&hero_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&is_succ_) -
+      reinterpret_cast<char*>(&hero_id_)) + sizeof(is_succ_));
   _cached_size_ = 0;
 }
 
@@ -850,7 +872,9 @@ void SelectHeroRsp::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  is_succ_ = false;
+  ::memset(&hero_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&is_succ_) -
+      reinterpret_cast<char*>(&hero_id_)) + sizeof(is_succ_));
   _internal_metadata_.Clear();
 }
 
@@ -864,10 +888,24 @@ bool SelectHeroRsp::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // bool is_succ = 1;
+      // uint64 hero_id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &hero_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool is_succ = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -904,9 +942,14 @@ void SelectHeroRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool is_succ = 1;
+  // uint64 hero_id = 1;
+  if (this->hero_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->hero_id(), output);
+  }
+
+  // bool is_succ = 2;
   if (this->is_succ() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->is_succ(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->is_succ(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -923,9 +966,14 @@ void SelectHeroRsp::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool is_succ = 1;
+  // uint64 hero_id = 1;
+  if (this->hero_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->hero_id(), target);
+  }
+
+  // bool is_succ = 2;
   if (this->is_succ() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->is_succ(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->is_succ(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -945,7 +993,14 @@ size_t SelectHeroRsp::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // bool is_succ = 1;
+  // uint64 hero_id = 1;
+  if (this->hero_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->hero_id());
+  }
+
+  // bool is_succ = 2;
   if (this->is_succ() != 0) {
     total_size += 1 + 1;
   }
@@ -979,6 +1034,9 @@ void SelectHeroRsp::MergeFrom(const SelectHeroRsp& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.hero_id() != 0) {
+    set_hero_id(from.hero_id());
+  }
   if (from.is_succ() != 0) {
     set_is_succ(from.is_succ());
   }
@@ -1023,6 +1081,7 @@ void SelectHeroRsp::UnsafeArenaSwap(SelectHeroRsp* other) {
 }
 void SelectHeroRsp::InternalSwap(SelectHeroRsp* other) {
   using std::swap;
+  swap(hero_id_, other->hero_id_);
   swap(is_succ_, other->is_succ_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
@@ -1036,7 +1095,21 @@ void SelectHeroRsp::InternalSwap(SelectHeroRsp* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // SelectHeroRsp
 
-// bool is_succ = 1;
+// uint64 hero_id = 1;
+void SelectHeroRsp::clear_hero_id() {
+  hero_id_ = GOOGLE_ULONGLONG(0);
+}
+::google::protobuf::uint64 SelectHeroRsp::hero_id() const {
+  // @@protoc_insertion_point(field_get:SelectHeroRsp.hero_id)
+  return hero_id_;
+}
+void SelectHeroRsp::set_hero_id(::google::protobuf::uint64 value) {
+  
+  hero_id_ = value;
+  // @@protoc_insertion_point(field_set:SelectHeroRsp.hero_id)
+}
+
+// bool is_succ = 2;
 void SelectHeroRsp::clear_is_succ() {
   is_succ_ = false;
 }

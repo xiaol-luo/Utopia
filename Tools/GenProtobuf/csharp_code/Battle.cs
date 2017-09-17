@@ -20,15 +20,16 @@ public static partial class BattleReflection {
   static BattleReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "CgxCYXR0bGUucHJvdG8iJAoLUnNwRnJlZUhlcm8SFQoNZnJlZV9oZXJvX2lk",
-          "cxgBIAMoBCIgCg1TZWxlY3RIZXJvUmVxEg8KB2hlcm9faWQYASABKAQiIAoN",
-          "U2VsZWN0SGVyb1JzcBIPCgdpc19zdWNjGAEgASgIQgP4AQFiBnByb3RvMw=="));
+          "CgxCYXR0bGUucHJvdG8iOAoLUnNwRnJlZUhlcm8SEwoLcmVkX2hlcm9faWQY",
+          "ASABKAQSFAoMYmx1ZV9oZXJvX2lkGAIgASgEIiAKDVNlbGVjdEhlcm9SZXES",
+          "DwoHaGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQY",
+          "ASABKAQSDwoHaXNfc3VjYxgCIAEoCEID+AEBYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::RspFreeHero), global::RspFreeHero.Parser, new[]{ "FreeHeroIds" }, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::RspFreeHero), global::RspFreeHero.Parser, new[]{ "RedHeroId", "BlueHeroId" }, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::SelectHeroReq), global::SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::SelectHeroRsp), global::SelectHeroRsp.Parser, new[]{ "IsSucc" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::SelectHeroRsp), global::SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null)
         }));
   }
   #endregion
@@ -59,7 +60,8 @@ public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public RspFreeHero(RspFreeHero other) : this() {
-    freeHeroIds_ = other.freeHeroIds_.Clone();
+    redHeroId_ = other.redHeroId_;
+    blueHeroId_ = other.blueHeroId_;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -67,14 +69,26 @@ public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
     return new RspFreeHero(this);
   }
 
-  /// <summary>Field number for the "free_hero_ids" field.</summary>
-  public const int FreeHeroIdsFieldNumber = 1;
-  private static readonly pb::FieldCodec<ulong> _repeated_freeHeroIds_codec
-      = pb::FieldCodec.ForUInt64(10);
-  private readonly pbc::RepeatedField<ulong> freeHeroIds_ = new pbc::RepeatedField<ulong>();
+  /// <summary>Field number for the "red_hero_id" field.</summary>
+  public const int RedHeroIdFieldNumber = 1;
+  private ulong redHeroId_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<ulong> FreeHeroIds {
-    get { return freeHeroIds_; }
+  public ulong RedHeroId {
+    get { return redHeroId_; }
+    set {
+      redHeroId_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "blue_hero_id" field.</summary>
+  public const int BlueHeroIdFieldNumber = 2;
+  private ulong blueHeroId_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public ulong BlueHeroId {
+    get { return blueHeroId_; }
+    set {
+      blueHeroId_ = value;
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -90,14 +104,16 @@ public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if(!freeHeroIds_.Equals(other.freeHeroIds_)) return false;
+    if (RedHeroId != other.RedHeroId) return false;
+    if (BlueHeroId != other.BlueHeroId) return false;
     return true;
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    hash ^= freeHeroIds_.GetHashCode();
+    if (RedHeroId != 0UL) hash ^= RedHeroId.GetHashCode();
+    if (BlueHeroId != 0UL) hash ^= BlueHeroId.GetHashCode();
     return hash;
   }
 
@@ -108,13 +124,25 @@ public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    freeHeroIds_.WriteTo(output, _repeated_freeHeroIds_codec);
+    if (RedHeroId != 0UL) {
+      output.WriteRawTag(8);
+      output.WriteUInt64(RedHeroId);
+    }
+    if (BlueHeroId != 0UL) {
+      output.WriteRawTag(16);
+      output.WriteUInt64(BlueHeroId);
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    size += freeHeroIds_.CalculateSize(_repeated_freeHeroIds_codec);
+    if (RedHeroId != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(RedHeroId);
+    }
+    if (BlueHeroId != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BlueHeroId);
+    }
     return size;
   }
 
@@ -123,7 +151,12 @@ public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
     if (other == null) {
       return;
     }
-    freeHeroIds_.Add(other.freeHeroIds_);
+    if (other.RedHeroId != 0UL) {
+      RedHeroId = other.RedHeroId;
+    }
+    if (other.BlueHeroId != 0UL) {
+      BlueHeroId = other.BlueHeroId;
+    }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -134,9 +167,12 @@ public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
         default:
           input.SkipLastField();
           break;
-        case 10:
         case 8: {
-          freeHeroIds_.AddEntriesFrom(input, _repeated_freeHeroIds_codec);
+          RedHeroId = input.ReadUInt64();
+          break;
+        }
+        case 16: {
+          BlueHeroId = input.ReadUInt64();
           break;
         }
       }
@@ -286,6 +322,7 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public SelectHeroRsp(SelectHeroRsp other) : this() {
+    heroId_ = other.heroId_;
     isSucc_ = other.isSucc_;
   }
 
@@ -294,8 +331,19 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
     return new SelectHeroRsp(this);
   }
 
+  /// <summary>Field number for the "hero_id" field.</summary>
+  public const int HeroIdFieldNumber = 1;
+  private ulong heroId_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public ulong HeroId {
+    get { return heroId_; }
+    set {
+      heroId_ = value;
+    }
+  }
+
   /// <summary>Field number for the "is_succ" field.</summary>
-  public const int IsSuccFieldNumber = 1;
+  public const int IsSuccFieldNumber = 2;
   private bool isSucc_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public bool IsSucc {
@@ -318,6 +366,7 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
     if (ReferenceEquals(other, this)) {
       return true;
     }
+    if (HeroId != other.HeroId) return false;
     if (IsSucc != other.IsSucc) return false;
     return true;
   }
@@ -325,6 +374,7 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
+    if (HeroId != 0UL) hash ^= HeroId.GetHashCode();
     if (IsSucc != false) hash ^= IsSucc.GetHashCode();
     return hash;
   }
@@ -336,8 +386,12 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    if (IsSucc != false) {
+    if (HeroId != 0UL) {
       output.WriteRawTag(8);
+      output.WriteUInt64(HeroId);
+    }
+    if (IsSucc != false) {
+      output.WriteRawTag(16);
       output.WriteBool(IsSucc);
     }
   }
@@ -345,6 +399,9 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
+    if (HeroId != 0UL) {
+      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(HeroId);
+    }
     if (IsSucc != false) {
       size += 1 + 1;
     }
@@ -355,6 +412,9 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
   public void MergeFrom(SelectHeroRsp other) {
     if (other == null) {
       return;
+    }
+    if (other.HeroId != 0UL) {
+      HeroId = other.HeroId;
     }
     if (other.IsSucc != false) {
       IsSucc = other.IsSucc;
@@ -370,6 +430,10 @@ public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
           input.SkipLastField();
           break;
         case 8: {
+          HeroId = input.ReadUInt64();
+          break;
+        }
+        case 16: {
           IsSucc = input.ReadBool();
           break;
         }

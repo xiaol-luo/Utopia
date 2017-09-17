@@ -3,7 +3,8 @@ option cc_enable_arenas = true;
 
 message RspFreeHero
 {
-	repeated uint64 free_hero_ids = 1;
+	uint64 red_hero_id = 1;
+	uint64 blue_hero_id = 2;
 }
 
 message SelectHeroReq
@@ -13,5 +14,6 @@ message SelectHeroReq
 
 message SelectHeroRsp
 {
-	bool is_succ = 1;
+	uint64 hero_id = 1;
+	bool is_succ = 2;
 }
