@@ -21,7 +21,7 @@ public static partial class MsgReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "Cgltc2cucHJvdG8iNwoEUGluZxINCgVtc2dJRBgBIAEoBRIOCgZ1c2VyaWQY",
-          "AiABKAUSEAoIdXNlcm5hbWUYAyABKAliBnByb3RvMw=="));
+          "AiABKAUSEAoIdXNlcm5hbWUYAyABKAlCA/gBAWIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

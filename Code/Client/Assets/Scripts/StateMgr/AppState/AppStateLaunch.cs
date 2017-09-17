@@ -58,6 +58,11 @@ public class AppStateLaunch : IAppState
                 m_mono.errMsg = "AppStateLaunch OnConnected Fail!";
             }
         }
+        else
+        {
+            // Ping ping = new Ping();
+            // App.my.gameNetwork.Send((int)ProtoId.PidPing, ping);
+        }
 
         m_stateMgr.ChangeState(IAppState.StateName.SelectHero);
     }

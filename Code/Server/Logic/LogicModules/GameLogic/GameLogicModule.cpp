@@ -9,12 +9,15 @@
 #include "Network/Protobuf/msg.pb.h"
 #include "Network/Protobuf/test.pb.h"
 #include "Network/Utils/NetworkAgent.h"
-#include "GameLogic/Network/GamePlayerMsgDefine.h"
+#include "GameLogic/Scene/Scene.h"
+#include "Network/PlayerMsgHandler.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 	m_player_mgr = new GameLogic::PlayerMgr(this);
+	m_scene = new GameLogic::Scene(this);
+	m_player_msg_handler = new GameLogic::PlayerMsgHandler(this);
 }
 
 GameLogicModule::~GameLogicModule()
@@ -37,7 +40,7 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	m_network_module = m_module_mgr->GetModule<INetworkModule>();
 	m_timer_module = m_module_mgr->GetModule<ITimerModule>();
 
-	this->InitClientMsgHandlerDescript();
+	m_player_msg_handler->Init();
 	m_network_agent = new NetworkAgent(m_network_module);
 
 	std::string *file_path = (std::string *)param;
@@ -51,12 +54,15 @@ EModuleRetCode GameLogicModule::Awake()
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
 
 	bool ret = m_player_mgr->Awake("0.0.0.0", 10240);
+	ret = ret && m_scene->Awake(nullptr);
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 
 EModuleRetCode GameLogicModule::Update()
 {
-	m_player_mgr->Update(m_timer_module->NowMs());
+	long long now_ms = m_timer_module->NowMs();
+	m_player_mgr->Update(now_ms);
+	m_scene->Update(now_ms);
 	return EModuleRetCode_Succ;
 }
 
@@ -67,15 +73,22 @@ EModuleRetCode GameLogicModule::Release()
 
 EModuleRetCode GameLogicModule::Destroy()
 {
-	this->UnInitClientMsgHandlerDescript();
 	if (nullptr != m_network_agent)
 	{
 		delete m_network_agent;
 		m_network_agent = nullptr;
 	}
 
+	m_player_msg_handler->Uninit();
+
 	m_log_module = nullptr;
 	m_timer_module = nullptr;
 	m_network_module = nullptr;
 	return EModuleRetCode_Succ;
 }
+
+void GameLogicModule::HandlePlayerMsg(char *data, uint32_t data_len, GameLogic::Player *player)
+{
+	m_player_msg_handler->HandlePlayerMsg(data, data_len, player);
+}
+

@@ -21,7 +21,7 @@ public static partial class TestReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "Cgp0ZXN0LnByb3RvIjcKBFBvbmcSDQoFbXNnSUQYASABKAUSDgoGdXNlcmlk",
-          "GAIgASgFEhAKCHVzZXJuYW1lGAMgASgJYgZwcm90bzM="));
+          "GAIgASgFEhAKCHVzZXJuYW1lGAMgASgJQgP4AQFiBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {

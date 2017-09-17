@@ -1,0 +1,7 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+message Empty
+{
+}
+

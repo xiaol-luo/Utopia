@@ -1,0 +1,17 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+message RspFreeHero
+{
+	repeated uint64 free_hero_ids = 1;
+}
+
+message SelectHeroReq
+{
+	uint64 hero_id = 1;
+}
+
+message SelectHeroRsp
+{
+	bool is_succ = 1;
+}

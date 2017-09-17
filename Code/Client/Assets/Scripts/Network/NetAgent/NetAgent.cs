@@ -71,6 +71,27 @@ public class NetAgent
         }
         return isOk;
     }
+
+    public bool Send(int protocolId)
+    {
+        if (protocolId <= 0)
+            return false;
+
+        bool isOk = true;
+        if (isOk)
+        {
+            int ctxLen = sizeof(int);
+            byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(ctxLen));
+            isOk = this.Send(tmpBuffer, 0, tmpBuffer.Length);
+        }
+        if (isOk)
+        {
+            byte[] tmpBuffer = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(protocolId));
+            isOk = this.Send(tmpBuffer, 0, tmpBuffer.Length);
+        }
+        return isOk;
+    }
+
     public void UpdateIO()
     {
         if (null != socket)

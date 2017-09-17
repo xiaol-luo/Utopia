@@ -12,3 +12,10 @@ void * class_name::operator new(size_t size) {	return MemoryUtil::Malloc(size); 
 void class_name::operator delete(void *ptr) { MemoryUtil::Free(ptr); } \
 void * class_name::operator new[](size_t size) { return MemoryUtil::Malloc(size); } \
 void class_name::operator delete[](void *ptr) { MemoryUtil::Free(ptr); } 
+
+#define NewDelDeclarationForTemplate	\
+public:									\
+	void * operator new(size_t size) {	return MemoryUtil::Malloc(size); }	\
+	void operator delete(void *ptr) { MemoryUtil::Free(ptr); }	\
+	void * operator new[](size_t size) { return MemoryUtil::Malloc(size); } \
+	void operator delete[](void *ptr) { MemoryUtil::Free(ptr); } 

@@ -3,6 +3,11 @@
 
 static MemoryPoolMgr *memory_pool_mgr = nullptr;
 
+void WrapFree(void *ptr, size_t size)
+{
+	MemoryUtil::Free(ptr);
+}
+
 bool MemoryUtil::Init(MemoryPoolMgr * _memory_pool_mgr)
 {
 	if (nullptr != memory_pool_mgr)
@@ -36,7 +41,7 @@ bool MemoryUtil::Init()
 
 void MemoryUtil::Destroy()
 {
-	delete memory_pool_mgr;
+	delete memory_pool_mgr; memory_pool_mgr = nullptr;
 	memory_pool_mgr = nullptr;
 }
 
@@ -62,6 +67,14 @@ void * MemoryUtil::Realloc(void * ptr, size_t size)
 		memory_pool_mgr->Free(ptr);
 	}
 	return new_ptr;
+}
+
+google::protobuf::Arena * MemoryUtil::NewArena()
+{
+	google::protobuf::ArenaOptions option;
+	option.block_alloc = MemoryUtil::Malloc;
+	option.block_dealloc = WrapFree;
+	return new google::protobuf::Arena(option);
 }
 
 void * Malloc(size_t size)

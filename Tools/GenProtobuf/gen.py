@@ -7,7 +7,11 @@ log.basicConfig(level=log.DEBUG)
 
 proto_files = [
 	"msg.proto",
-	"test.proto"
+	"test.proto",
+	"Battle.proto",
+	"ProtoId.proto",
+	"Common.proto",
+	"Empty.proto"
 ]
 
 out_options = [

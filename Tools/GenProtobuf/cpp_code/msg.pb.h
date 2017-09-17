@@ -77,6 +77,12 @@ class Ping : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
     return *this;
   }
   #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
   static const ::google::protobuf::Descriptor* descriptor();
   static const Ping& default_instance();
 
@@ -87,6 +93,7 @@ class Ping : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
     0;
 
+  void UnsafeArenaSwap(Ping* other);
   void Swap(Ping* other);
   friend void swap(Ping& a, Ping& b) {
     a.Swap(&b);
@@ -117,12 +124,17 @@ class Ping : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
   void InternalSwap(Ping* other);
+  protected:
+  explicit Ping(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
+    return _internal_metadata_.arena();
   }
   inline void* MaybeArenaPtr() const {
-    return NULL;
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
@@ -145,6 +157,9 @@ class Ping : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::std::string* mutable_username();
   ::std::string* release_username();
   void set_allocated_username(::std::string* username);
+  ::std::string* unsafe_arena_release_username();
+  void unsafe_arena_set_allocated_username(
+      ::std::string* username);
 
   // int32 msgID = 1;
   void clear_msgid();
@@ -162,6 +177,9 @@ class Ping : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
   ::google::protobuf::internal::ArenaStringPtr username_;
   ::google::protobuf::int32 msgid_;
   ::google::protobuf::int32 userid_;
@@ -210,46 +228,55 @@ inline void Ping::set_userid(::google::protobuf::int32 value) {
 
 // string username = 3;
 inline void Ping::clear_username() {
-  username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  username_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 inline const ::std::string& Ping::username() const {
   // @@protoc_insertion_point(field_get:Ping.username)
-  return username_.GetNoArena();
+  return username_.Get();
 }
 inline void Ping::set_username(const ::std::string& value) {
   
-  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:Ping.username)
 }
 #if LANG_CXX11
 inline void Ping::set_username(::std::string&& value) {
   
-  username_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  username_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:Ping.username)
 }
 #endif
 inline void Ping::set_username(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:Ping.username)
 }
-inline void Ping::set_username(const char* value, size_t size) {
+inline void Ping::set_username(const char* value,
+    size_t size) {
   
-  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:Ping.username)
 }
 inline ::std::string* Ping::mutable_username() {
   
   // @@protoc_insertion_point(field_mutable:Ping.username)
-  return username_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return username_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 inline ::std::string* Ping::release_username() {
   // @@protoc_insertion_point(field_release:Ping.username)
   
-  return username_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return username_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* Ping::unsafe_arena_release_username() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Ping.username)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return username_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 inline void Ping::set_allocated_username(::std::string* username) {
   if (username != NULL) {
@@ -257,8 +284,21 @@ inline void Ping::set_allocated_username(::std::string* username) {
   } else {
     
   }
-  username_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username);
+  username_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:Ping.username)
+}
+inline void Ping::unsafe_arena_set_allocated_username(
+    ::std::string* username) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (username != NULL) {
+    
+  } else {
+    
+  }
+  username_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      username, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Ping.username)
 }
 
 #ifdef __GNUC__

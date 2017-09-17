@@ -102,10 +102,11 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\ntest.proto\"7\n\004Pong\022\r\n\005msgID\030\001 \001(\005\022\016\n\006u"
-      "serid\030\002 \001(\005\022\020\n\010username\030\003 \001(\tb\006proto3"
+      "serid\030\002 \001(\005\022\020\n\010username\030\003 \001(\tB\003\370\001\001b\006prot"
+      "o3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 77);
+      descriptor, 82);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "test.proto", &protobuf_RegisterTypes);
 }
@@ -141,6 +142,14 @@ Pong::Pong()
   SharedCtor();
   // @@protoc_insertion_point(constructor:Pong)
 }
+Pong::Pong(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_test_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Pong)
+}
 Pong::Pong(const Pong& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
@@ -148,7 +157,8 @@ Pong::Pong(const Pong& from)
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.username().size() > 0) {
-    username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+    username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username(),
+      GetArenaNoVirtual());
   }
   ::memcpy(&msgid_, &from.msgid_,
     static_cast<size_t>(reinterpret_cast<char*>(&userid_) -
@@ -170,9 +180,21 @@ Pong::~Pong() {
 }
 
 void Pong::SharedDtor() {
-  username_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  username_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), arena);
 }
 
+void Pong::ArenaDtor(void* object) {
+  Pong* _this = reinterpret_cast< Pong* >(object);
+  (void)_this;
+}
+void Pong::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
 void Pong::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
@@ -189,11 +211,7 @@ const Pong& Pong::default_instance() {
 }
 
 Pong* Pong::New(::google::protobuf::Arena* arena) const {
-  Pong* n = new Pong;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
+  return ::google::protobuf::Arena::CreateMessage<Pong>(arena);
 }
 
 void Pong::Clear() {
@@ -202,7 +220,7 @@ void Pong::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  username_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   ::memset(&msgid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&userid_) -
       reinterpret_cast<char*>(&msgid_)) + sizeof(userid_));
@@ -412,8 +430,7 @@ void Pong::MergeFrom(const Pong& from) {
   (void) cached_has_bits;
 
   if (from.username().size() > 0) {
-
-    username_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.username_);
+    set_username(from.username());
   }
   if (from.msgid() != 0) {
     set_msgid(from.msgid());
@@ -443,6 +460,21 @@ bool Pong::IsInitialized() const {
 
 void Pong::Swap(Pong* other) {
   if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    Pong* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void Pong::UnsafeArenaSwap(Pong* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
 void Pong::InternalSwap(Pong* other) {
@@ -492,46 +524,55 @@ void Pong::set_userid(::google::protobuf::int32 value) {
 
 // string username = 3;
 void Pong::clear_username() {
-  username_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  username_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& Pong::username() const {
   // @@protoc_insertion_point(field_get:Pong.username)
-  return username_.GetNoArena();
+  return username_.Get();
 }
 void Pong::set_username(const ::std::string& value) {
   
-  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set:Pong.username)
 }
 #if LANG_CXX11
 void Pong::set_username(::std::string&& value) {
   
-  username_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  username_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_rvalue:Pong.username)
 }
 #endif
 void Pong::set_username(const char* value) {
   GOOGLE_DCHECK(value != NULL);
   
-  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_char:Pong.username)
 }
-void Pong::set_username(const char* value, size_t size) {
+void Pong::set_username(const char* value,
+    size_t size) {
   
-  username_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
+  username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_pointer:Pong.username)
 }
 ::std::string* Pong::mutable_username() {
   
   // @@protoc_insertion_point(field_mutable:Pong.username)
-  return username_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return username_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Pong::release_username() {
   // @@protoc_insertion_point(field_release:Pong.username)
   
-  return username_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return username_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+::std::string* Pong::unsafe_arena_release_username() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:Pong.username)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return username_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
 }
 void Pong::set_allocated_username(::std::string* username) {
   if (username != NULL) {
@@ -539,8 +580,21 @@ void Pong::set_allocated_username(::std::string* username) {
   } else {
     
   }
-  username_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username);
+  username_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username,
+      GetArenaNoVirtual());
   // @@protoc_insertion_point(field_set_allocated:Pong.username)
+}
+void Pong::unsafe_arena_set_allocated_username(
+    ::std::string* username) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (username != NULL) {
+    
+  } else {
+    
+  }
+  username_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      username, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Pong.username)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

@@ -20,6 +20,9 @@ public class AppStateSelectHero : IAppState
             m_mono.transform.localPosition = Vector3.zero;
             m_mono.transform.localScale = Vector3.one;
         }
+
+        App.my.gameNetwork.Add<RspFreeHero>((int)ProtoId.PidRspFreeHero, this.RspFreeHero);
+        App.my.gameNetwork.Send((int)ProtoId.PidQueryFreeHero);
     }
 
     public override void Exit(params object[] objs)
@@ -29,10 +32,17 @@ public class AppStateSelectHero : IAppState
             GameObject.Destroy(m_mono.gameObject);
         }
         m_mono = null;
+        App.my.gameNetwork.Remove((int)ProtoId.PidRspFreeHero);
     }
 
     public override void Update(params object[] objs)
     {
 
+    }
+
+    void RspFreeHero(int id, RspFreeHero msg)
+    {
+        int a = 10;
+        ++a;
     }
 }

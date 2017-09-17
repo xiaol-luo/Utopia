@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='test.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\ntest.proto\"7\n\x04Pong\x12\r\n\x05msgID\x18\x01 \x01(\x05\x12\x0e\n\x06userid\x18\x02 \x01(\x05\x12\x10\n\x08username\x18\x03 \x01(\tb\x06proto3')
+  serialized_pb=_b('\n\ntest.proto\"7\n\x04Pong\x12\r\n\x05msgID\x18\x01 \x01(\x05\x12\x0e\n\x06userid\x18\x02 \x01(\x05\x12\x10\n\x08username\x18\x03 \x01(\tB\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 
@@ -80,4 +80,6 @@ Pong = _reflection.GeneratedProtocolMessageType('Pong', (_message.Message,), dic
 _sym_db.RegisterMessage(Pong)
 
 
+DESCRIPTOR.has_options = True
+DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\370\001\001'))
 # @@protoc_insertion_point(module_scope)

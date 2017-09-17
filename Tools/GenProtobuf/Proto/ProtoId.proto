@@ -1,0 +1,16 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+enum ProtoId
+{
+	PID_Min = 0;
+	PID_Ping = 1;
+	PID_Pong = 2;
+	
+	PID_QueryFreeHero = 100;
+	PID_RspFreeHero = 101;
+	PID_SelectHeroReq = 102;
+	PID_SelectHeroRsp = 103;
+	
+	PID_Max = 5120;
+}

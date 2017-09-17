@@ -39,6 +39,7 @@ INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libev
 INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode ./Logic/LogicModules)
 IF (WIN32)
 	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/libs ${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/protobuf/libs)
+	ADD_DEFINITIONS(/D NOMINMAX)
 ELSE ()
 ENDIF (WIN32)
 LINK_LIBRARIES(event event_core event_extra)

@@ -5,6 +5,8 @@ namespace GameLogic
 {
 	class MoveObject : public SceneObject
 	{
-
+	public:
+		MoveObject();
+		virtual ~MoveObject();
 	};
 }

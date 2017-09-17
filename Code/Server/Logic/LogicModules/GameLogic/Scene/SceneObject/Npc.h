@@ -4,10 +4,12 @@
 
 namespace GameLogic
 {
+	class Scene;
+
 	class Npc : public MoveObject
 	{
 	public:
-		Npc() {}
-		virtual ~Npc() {}
+		Npc();
+		virtual ~Npc();
 	};
 }

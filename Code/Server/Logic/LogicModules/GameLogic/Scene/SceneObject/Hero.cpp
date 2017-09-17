@@ -3,9 +3,8 @@
 
 namespace GameLogic
 {
-	Hero::Hero(Player *player) : m_Player(player)
+	Hero::Hero()
 	{
-		
 	}
 
 	Hero::~Hero()
