@@ -1,17 +1,24 @@
 #include "Scene.h"
 #include "SceneObject/SceneObject.h"
 #include "SceneObject/Hero.h"
+#include "Common/Utils/MemoryUtil.h"
+#include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
+#include "GameLogic/Player/Player.h"
+#include "GameLogic/GameLogicModule.h"
+#include "Network/Utils/NetworkAgent.h"
 
 namespace GameLogic
 {
 	Scene::Scene(GameLogicModule *logic_module) : m_logic_module(logic_module)
 	{
-
+		m_protobuf_arena = MemoryUtil::NewArena();
 	}
 	
 	Scene::~Scene()
 	{
-
+		delete m_protobuf_arena;
+		m_protobuf_arena = nullptr;
 	}
 
 	bool Scene::Awake(void *param)
@@ -34,6 +41,8 @@ namespace GameLogic
 				scene_obj->Update(now_ms);
 		}
 		this->CheckSceneObjectsCache();
+
+		m_protobuf_arena->Reset();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)
@@ -54,7 +63,6 @@ namespace GameLogic
 		m_scene_objs_cache[m_last_scene_objid] = scene_obj;
 		return m_last_scene_objid;
 	}
-
 
 	void Scene::RemoveObject(int64_t objid)
 	{
@@ -82,5 +90,12 @@ namespace GameLogic
 				m_scene_objs_cache.erase(objid);
 			m_removed_scene_objids.clear();
 		}
+	}
+
+	void Scene::PullAllSceneInfo(Player * player)
+	{
+		NetProto::AllSceneObject *msg = google::protobuf::Arena::CreateMessage<NetProto::AllSceneObject>(m_protobuf_arena);
+		// NetProto::SceneObject *so = msg->add_objs();
+		m_logic_module->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_PullAllSceneInfoRsp, msg);
 	}
 }

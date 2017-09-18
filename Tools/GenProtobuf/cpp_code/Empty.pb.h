@@ -30,9 +30,13 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
+namespace NetProto {
 class Empty;
 class EmptyDefaultTypeInternal;
 extern EmptyDefaultTypeInternal _Empty_default_instance_;
+}  // namespace NetProto
+
+namespace NetProto {
 
 namespace protobuf_Empty_2eproto {
 // Internal implementation detail -- do not call these.
@@ -51,7 +55,7 @@ void InitDefaults();
 
 // ===================================================================
 
-class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Empty) */ {
+class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.Empty) */ {
  public:
   Empty();
   virtual ~Empty();
@@ -144,7 +148,7 @@ class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:Empty)
+  // @@protoc_insertion_point(class_scope:NetProto.Empty)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -173,6 +177,8 @@ class Empty : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
 // @@protoc_insertion_point(namespace_scope)
 
+
+}  // namespace NetProto
 
 // @@protoc_insertion_point(global_scope)
 

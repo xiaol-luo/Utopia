@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <google/protobuf/arena.h>
+
 class GameLogicModule;
 
 namespace GameLogic
@@ -28,6 +30,7 @@ namespace GameLogic
 		std::shared_ptr<Hero> m_blue_hero;
 		uint64_t m_last_scene_objid = 0;
 		std::unordered_map<uint64_t, std::shared_ptr<SceneObject>> m_scene_objs;
+		google::protobuf::Arena *m_protobuf_arena = nullptr;
 
 	public:
 		static const uint64_t INVALID_SCENE_OBJID = 0;
@@ -38,5 +41,8 @@ namespace GameLogic
 		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> m_scene_objs_cache;
 		std::unordered_set<uint64_t> m_removed_scene_objids;
 		void CheckSceneObjectsCache();
+
+	public:
+		void PullAllSceneInfo(Player *player);
 	};
 }

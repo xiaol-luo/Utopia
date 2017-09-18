@@ -6,10 +6,14 @@
 #include "Common/Utils/MemoryUtil.h"
 
 class GameLogicModule;
-class Ping;
-class Pong;
-class Empty;
-class SelectHeroReq;
+
+namespace NetProto
+{
+	class Ping;
+	class Pong;
+	class Empty;
+	class SelectHeroReq;
+}
 
 namespace GameLogic
 {
@@ -94,9 +98,12 @@ namespace GameLogic
 		google::protobuf::Arena *m_protobuf_arena = nullptr;
 
 	protected:
-		void OnHandlePlayerPingMsg(int protocol_id, Ping *msg, GameLogic::Player *player);
-		void OnHandlePlayerPongMsg(int protocol_id, Pong *msg, GameLogic::Player *player);
+		void OnHandlePlayerPingMsg(int protocol_id, NetProto::Ping *msg, GameLogic::Player *player);
+		void OnHandlePlayerPongMsg(int protocol_id, NetProto::Pong *msg, GameLogic::Player *player);
 		void OnQueryFreeHero(int protocol_id, GameLogic::Player *player);
-		void OnSelectHeroReq(int protocol_id, SelectHeroReq *msg, GameLogic::Player *player);
+		void OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player);
+		void OnLoadSceneComplete(int id, GameLogic::Player *player);
+		void OnLeaveScene(int id, GameLogic::Player *player);
+		void OnPullAllSceneInfo(int id, GameLogic::Player *player);
 	};
 }

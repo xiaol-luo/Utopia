@@ -16,6 +16,8 @@
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
+
+namespace NetProto {
 class EmptyDefaultTypeInternal {
 public:
  ::google::protobuf::internal::ExplicitlyConstructed<Empty>
@@ -98,10 +100,11 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\013Empty.proto\"\007\n\005EmptyB\003\370\001\001b\006proto3"
+      "\n\013Empty.proto\022\010NetProto\"\007\n\005EmptyB\003\370\001\001b\006p"
+      "roto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 35);
+      descriptor, 45);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Empty.proto", &protobuf_RegisterTypes);
 }
@@ -132,7 +135,7 @@ Empty::Empty()
     protobuf_Empty_2eproto::InitDefaults();
   }
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Empty)
+  // @@protoc_insertion_point(constructor:NetProto.Empty)
 }
 Empty::Empty(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
@@ -140,14 +143,14 @@ Empty::Empty(::google::protobuf::Arena* arena)
   protobuf_Empty_2eproto::InitDefaults();
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:Empty)
+  // @@protoc_insertion_point(arena_constructor:NetProto.Empty)
 }
 Empty::Empty(const Empty& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:Empty)
+  // @@protoc_insertion_point(copy_constructor:NetProto.Empty)
 }
 
 void Empty::SharedCtor() {
@@ -155,7 +158,7 @@ void Empty::SharedCtor() {
 }
 
 Empty::~Empty() {
-  // @@protoc_insertion_point(destructor:Empty)
+  // @@protoc_insertion_point(destructor:NetProto.Empty)
   SharedDtor();
 }
 
@@ -194,7 +197,7 @@ Empty* Empty::New(::google::protobuf::Arena* arena) const {
 }
 
 void Empty::Clear() {
-// @@protoc_insertion_point(message_clear_start:Empty)
+// @@protoc_insertion_point(message_clear_start:NetProto.Empty)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -206,7 +209,7 @@ bool Empty::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Empty)
+  // @@protoc_insertion_point(parse_start:NetProto.Empty)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -219,17 +222,17 @@ bool Empty::MergePartialFromCodedStream(
           input, tag, _internal_metadata_.mutable_unknown_fields()));
   }
 success:
-  // @@protoc_insertion_point(parse_success:Empty)
+  // @@protoc_insertion_point(parse_success:NetProto.Empty)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Empty)
+  // @@protoc_insertion_point(parse_failure:NetProto.Empty)
   return false;
 #undef DO_
 }
 
 void Empty::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Empty)
+  // @@protoc_insertion_point(serialize_start:NetProto.Empty)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -237,13 +240,13 @@ void Empty::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:Empty)
+  // @@protoc_insertion_point(serialize_end:NetProto.Empty)
 }
 
 ::google::protobuf::uint8* Empty::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:Empty)
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.Empty)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -251,12 +254,12 @@ void Empty::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Empty)
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.Empty)
   return target;
 }
 
 size_t Empty::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Empty)
+// @@protoc_insertion_point(message_byte_size_start:NetProto.Empty)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -272,22 +275,22 @@ size_t Empty::ByteSizeLong() const {
 }
 
 void Empty::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Empty)
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.Empty)
   GOOGLE_DCHECK_NE(&from, this);
   const Empty* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const Empty>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Empty)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.Empty)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Empty)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.Empty)
     MergeFrom(*source);
   }
 }
 
 void Empty::MergeFrom(const Empty& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Empty)
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.Empty)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -296,14 +299,14 @@ void Empty::MergeFrom(const Empty& from) {
 }
 
 void Empty::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Empty)
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.Empty)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Empty::CopyFrom(const Empty& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Empty)
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.Empty)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -349,5 +352,7 @@ void Empty::InternalSwap(Empty* other) {
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace NetProto
 
 // @@protoc_insertion_point(global_scope)

@@ -17,9 +17,9 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='Empty.proto',
-  package='',
+  package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0b\x45mpty.proto\"\x07\n\x05\x45mptyB\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0b\x45mpty.proto\x12\x08NetProto\"\x07\n\x05\x45mptyB\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 
@@ -27,7 +27,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _EMPTY = _descriptor.Descriptor(
   name='Empty',
-  full_name='Empty',
+  full_name='NetProto.Empty',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -44,8 +44,8 @@ _EMPTY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15,
-  serialized_end=22,
+  serialized_start=25,
+  serialized_end=32,
 )
 
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
@@ -54,7 +54,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
   __module__ = 'Empty_pb2'
-  # @@protoc_insertion_point(class_scope:Empty)
+  # @@protoc_insertion_point(class_scope:NetProto.Empty)
   ))
 _sym_db.RegisterMessage(Empty)
 

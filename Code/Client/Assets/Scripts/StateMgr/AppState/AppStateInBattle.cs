@@ -8,7 +8,8 @@ public class AppStateInBattle : IAppState
 
     public override void Enter(params object[] objs)
     {
-
+        string sceneName = objs[0] as string;
+        App.my.scene.EnterScene(sceneName);
     }
 
     public override void Exit(params object[] objs)

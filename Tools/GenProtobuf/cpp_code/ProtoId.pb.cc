@@ -17,6 +17,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace NetProto {
+
 namespace protobuf_ProtoId_2eproto {
 
 
@@ -78,14 +80,17 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rProtoId.proto*\232\001\n\007ProtoId\022\013\n\007PID_Min\020\000"
-      "\022\014\n\010PID_Ping\020\001\022\014\n\010PID_Pong\020\002\022\025\n\021PID_Quer"
-      "yFreeHero\020d\022\023\n\017PID_RspFreeHero\020e\022\025\n\021PID_"
-      "SelectHeroReq\020f\022\025\n\021PID_SelectHeroRsp\020g\022\014"
-      "\n\007PID_Max\020\200(B\003\370\001\001b\006proto3"
+      "\n\rProtoId.proto\022\010NetProto*\200\002\n\007ProtoId\022\013\n"
+      "\007PID_Min\020\000\022\014\n\010PID_Ping\020\001\022\014\n\010PID_Pong\020\002\022\025"
+      "\n\021PID_QueryFreeHero\020d\022\023\n\017PID_RspFreeHero"
+      "\020e\022\025\n\021PID_SelectHeroReq\020f\022\025\n\021PID_SelectH"
+      "eroRsp\020g\022\031\n\025PID_LoadSceneComplete\020h\022\022\n\016P"
+      "ID_LeaveScene\020i\022\030\n\024PID_PullAllSceneInfo\020"
+      "j\022\033\n\027PID_PullAllSceneInfoRsp\020k\022\014\n\007PID_Ma"
+      "x\020\200(B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 185);
+      descriptor, 297);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ProtoId.proto", &protobuf_RegisterTypes);
 }
@@ -117,6 +122,10 @@ bool ProtoId_IsValid(int value) {
     case 101:
     case 102:
     case 103:
+    case 104:
+    case 105:
+    case 106:
+    case 107:
     case 5120:
       return true;
     default:
@@ -126,5 +135,7 @@ bool ProtoId_IsValid(int value) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace NetProto
 
 // @@protoc_insertion_point(global_scope)

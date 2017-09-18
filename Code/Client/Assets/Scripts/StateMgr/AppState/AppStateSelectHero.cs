@@ -1,3 +1,4 @@
+using NetProto;
 using UnityEngine;
 
 public class AppStateSelectHero : IAppState
@@ -78,7 +79,8 @@ public class AppStateSelectHero : IAppState
 
     void EnterStateInBattle(AppStateLoadingScene.LoadResult ret, string sceneName)
     {
-        m_stateMgr.ChangeState(IAppState.StateName.InBattle);
+        if (AppStateLoadingScene.LoadResult.Success == ret)
+            m_stateMgr.ChangeState(IAppState.StateName.InBattle, sceneName);
     }
 
     void UpdateUI()

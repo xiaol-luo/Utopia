@@ -1,5 +1,6 @@
 syntax = "proto3";
 option cc_enable_arenas = true;
+package NetProto;
 
 message RspFreeHero
 {
@@ -16,4 +17,25 @@ message SelectHeroRsp
 {
 	uint64 hero_id = 1;
 	bool is_succ = 2;
+}
+
+enum SceneObjectType
+{
+	Building = 0;
+	Hero = 1;
+	Npc = 2;
+	
+	MAX = 3;
+}
+
+message SceneObject
+{
+	uint64 objid = 1;
+	SceneObjectType obj_type = 2;
+	int32 model_id = 3;
+}
+
+message AllSceneObject
+{
+	repeated SceneObject objs = 1;
 }

@@ -7,443 +7,745 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-/// <summary>Holder for reflection information generated from Battle.proto</summary>
-public static partial class BattleReflection {
+namespace NetProto {
 
-  #region Descriptor
-  /// <summary>File descriptor for Battle.proto</summary>
-  public static pbr::FileDescriptor Descriptor {
-    get { return descriptor; }
-  }
-  private static pbr::FileDescriptor descriptor;
+  /// <summary>Holder for reflection information generated from Battle.proto</summary>
+  public static partial class BattleReflection {
 
-  static BattleReflection() {
-    byte[] descriptorData = global::System.Convert.FromBase64String(
-        string.Concat(
-          "CgxCYXR0bGUucHJvdG8iOAoLUnNwRnJlZUhlcm8SEwoLcmVkX2hlcm9faWQY",
-          "ASABKAQSFAoMYmx1ZV9oZXJvX2lkGAIgASgEIiAKDVNlbGVjdEhlcm9SZXES",
-          "DwoHaGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQY",
-          "ASABKAQSDwoHaXNfc3VjYxgCIAEoCEID+AEBYgZwcm90bzM="));
-    descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-        new pbr::FileDescriptor[] { },
-        new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::RspFreeHero), global::RspFreeHero.Parser, new[]{ "RedHeroId", "BlueHeroId" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::SelectHeroReq), global::SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
-          new pbr::GeneratedClrTypeInfo(typeof(global::SelectHeroRsp), global::SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null)
-        }));
+    #region Descriptor
+    /// <summary>File descriptor for Battle.proto</summary>
+    public static pbr::FileDescriptor Descriptor {
+      get { return descriptor; }
+    }
+    private static pbr::FileDescriptor descriptor;
+
+    static BattleReflection() {
+      byte[] descriptorData = global::System.Convert.FromBase64String(
+          string.Concat(
+            "CgxCYXR0bGUucHJvdG8SCE5ldFByb3RvIjgKC1JzcEZyZWVIZXJvEhMKC3Jl",
+            "ZF9oZXJvX2lkGAEgASgEEhQKDGJsdWVfaGVyb19pZBgCIAEoBCIgCg1TZWxl",
+            "Y3RIZXJvUmVxEg8KB2hlcm9faWQYASABKAQiMQoNU2VsZWN0SGVyb1JzcBIP",
+            "CgdoZXJvX2lkGAEgASgEEg8KB2lzX3N1Y2MYAiABKAgiWwoLU2NlbmVPYmpl",
+            "Y3QSDQoFb2JqaWQYASABKAQSKwoIb2JqX3R5cGUYAiABKA4yGS5OZXRQcm90",
+            "by5TY2VuZU9iamVjdFR5cGUSEAoIbW9kZWxfaWQYAyABKAUiNQoOQWxsU2Nl",
+            "bmVPYmplY3QSIwoEb2JqcxgBIAMoCzIVLk5ldFByb3RvLlNjZW5lT2JqZWN0",
+            "KjsKD1NjZW5lT2JqZWN0VHlwZRIMCghCdWlsZGluZxAAEggKBEhlcm8QARIH",
+            "CgNOcGMQAhIHCgNNQVgQA0ID+AEBYgZwcm90bzM="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
+          new pbr::FileDescriptor[] { },
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.SceneObjectType), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.RspFreeHero), global::NetProto.RspFreeHero.Parser, new[]{ "RedHeroId", "BlueHeroId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroReq), global::NetProto.SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObject), global::NetProto.SceneObject.Parser, new[]{ "Objid", "ObjType", "ModelId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.AllSceneObject), global::NetProto.AllSceneObject.Parser, new[]{ "Objs" }, null, null, null)
+          }));
+    }
+    #endregion
+
   }
+  #region Enums
+  public enum SceneObjectType {
+    [pbr::OriginalName("Building")] Building = 0,
+    [pbr::OriginalName("Hero")] Hero = 1,
+    [pbr::OriginalName("Npc")] Npc = 2,
+    [pbr::OriginalName("MAX")] Max = 3,
+  }
+
+  #endregion
+
+  #region Messages
+  public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
+    private static readonly pb::MessageParser<RspFreeHero> _parser = new pb::MessageParser<RspFreeHero>(() => new RspFreeHero());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RspFreeHero> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RspFreeHero() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RspFreeHero(RspFreeHero other) : this() {
+      redHeroId_ = other.redHeroId_;
+      blueHeroId_ = other.blueHeroId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RspFreeHero Clone() {
+      return new RspFreeHero(this);
+    }
+
+    /// <summary>Field number for the "red_hero_id" field.</summary>
+    public const int RedHeroIdFieldNumber = 1;
+    private ulong redHeroId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong RedHeroId {
+      get { return redHeroId_; }
+      set {
+        redHeroId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "blue_hero_id" field.</summary>
+    public const int BlueHeroIdFieldNumber = 2;
+    private ulong blueHeroId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong BlueHeroId {
+      get { return blueHeroId_; }
+      set {
+        blueHeroId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RspFreeHero);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RspFreeHero other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RedHeroId != other.RedHeroId) return false;
+      if (BlueHeroId != other.BlueHeroId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RedHeroId != 0UL) hash ^= RedHeroId.GetHashCode();
+      if (BlueHeroId != 0UL) hash ^= BlueHeroId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RedHeroId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(RedHeroId);
+      }
+      if (BlueHeroId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(BlueHeroId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RedHeroId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(RedHeroId);
+      }
+      if (BlueHeroId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BlueHeroId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RspFreeHero other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RedHeroId != 0UL) {
+        RedHeroId = other.RedHeroId;
+      }
+      if (other.BlueHeroId != 0UL) {
+        BlueHeroId = other.BlueHeroId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            RedHeroId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            BlueHeroId = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SelectHeroReq : pb::IMessage<SelectHeroReq> {
+    private static readonly pb::MessageParser<SelectHeroReq> _parser = new pb::MessageParser<SelectHeroReq>(() => new SelectHeroReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SelectHeroReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SelectHeroReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SelectHeroReq(SelectHeroReq other) : this() {
+      heroId_ = other.heroId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SelectHeroReq Clone() {
+      return new SelectHeroReq(this);
+    }
+
+    /// <summary>Field number for the "hero_id" field.</summary>
+    public const int HeroIdFieldNumber = 1;
+    private ulong heroId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong HeroId {
+      get { return heroId_; }
+      set {
+        heroId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SelectHeroReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SelectHeroReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (HeroId != other.HeroId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HeroId != 0UL) hash ^= HeroId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (HeroId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(HeroId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (HeroId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(HeroId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SelectHeroReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HeroId != 0UL) {
+        HeroId = other.HeroId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            HeroId = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
+    private static readonly pb::MessageParser<SelectHeroRsp> _parser = new pb::MessageParser<SelectHeroRsp>(() => new SelectHeroRsp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SelectHeroRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SelectHeroRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SelectHeroRsp(SelectHeroRsp other) : this() {
+      heroId_ = other.heroId_;
+      isSucc_ = other.isSucc_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SelectHeroRsp Clone() {
+      return new SelectHeroRsp(this);
+    }
+
+    /// <summary>Field number for the "hero_id" field.</summary>
+    public const int HeroIdFieldNumber = 1;
+    private ulong heroId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong HeroId {
+      get { return heroId_; }
+      set {
+        heroId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_succ" field.</summary>
+    public const int IsSuccFieldNumber = 2;
+    private bool isSucc_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsSucc {
+      get { return isSucc_; }
+      set {
+        isSucc_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SelectHeroRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SelectHeroRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (HeroId != other.HeroId) return false;
+      if (IsSucc != other.IsSucc) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (HeroId != 0UL) hash ^= HeroId.GetHashCode();
+      if (IsSucc != false) hash ^= IsSucc.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (HeroId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(HeroId);
+      }
+      if (IsSucc != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsSucc);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (HeroId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(HeroId);
+      }
+      if (IsSucc != false) {
+        size += 1 + 1;
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SelectHeroRsp other) {
+      if (other == null) {
+        return;
+      }
+      if (other.HeroId != 0UL) {
+        HeroId = other.HeroId;
+      }
+      if (other.IsSucc != false) {
+        IsSucc = other.IsSucc;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            HeroId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            IsSucc = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SceneObject : pb::IMessage<SceneObject> {
+    private static readonly pb::MessageParser<SceneObject> _parser = new pb::MessageParser<SceneObject>(() => new SceneObject());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneObject> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneObject() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneObject(SceneObject other) : this() {
+      objid_ = other.objid_;
+      objType_ = other.objType_;
+      modelId_ = other.modelId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneObject Clone() {
+      return new SceneObject(this);
+    }
+
+    /// <summary>Field number for the "objid" field.</summary>
+    public const int ObjidFieldNumber = 1;
+    private ulong objid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong Objid {
+      get { return objid_; }
+      set {
+        objid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "obj_type" field.</summary>
+    public const int ObjTypeFieldNumber = 2;
+    private global::NetProto.SceneObjectType objType_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.SceneObjectType ObjType {
+      get { return objType_; }
+      set {
+        objType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "model_id" field.</summary>
+    public const int ModelIdFieldNumber = 3;
+    private int modelId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ModelId {
+      get { return modelId_; }
+      set {
+        modelId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneObject);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneObject other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Objid != other.Objid) return false;
+      if (ObjType != other.ObjType) return false;
+      if (ModelId != other.ModelId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Objid != 0UL) hash ^= Objid.GetHashCode();
+      if (ObjType != 0) hash ^= ObjType.GetHashCode();
+      if (ModelId != 0) hash ^= ModelId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Objid != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(Objid);
+      }
+      if (ObjType != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) ObjType);
+      }
+      if (ModelId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(ModelId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Objid != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Objid);
+      }
+      if (ObjType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ObjType);
+      }
+      if (ModelId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ModelId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneObject other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Objid != 0UL) {
+        Objid = other.Objid;
+      }
+      if (other.ObjType != 0) {
+        ObjType = other.ObjType;
+      }
+      if (other.ModelId != 0) {
+        ModelId = other.ModelId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Objid = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            objType_ = (global::NetProto.SceneObjectType) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            ModelId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class AllSceneObject : pb::IMessage<AllSceneObject> {
+    private static readonly pb::MessageParser<AllSceneObject> _parser = new pb::MessageParser<AllSceneObject>(() => new AllSceneObject());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<AllSceneObject> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AllSceneObject() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AllSceneObject(AllSceneObject other) : this() {
+      objs_ = other.objs_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public AllSceneObject Clone() {
+      return new AllSceneObject(this);
+    }
+
+    /// <summary>Field number for the "objs" field.</summary>
+    public const int ObjsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::NetProto.SceneObject> _repeated_objs_codec
+        = pb::FieldCodec.ForMessage(10, global::NetProto.SceneObject.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.SceneObject> objs_ = new pbc::RepeatedField<global::NetProto.SceneObject>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.SceneObject> Objs {
+      get { return objs_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as AllSceneObject);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(AllSceneObject other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!objs_.Equals(other.objs_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= objs_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      objs_.WriteTo(output, _repeated_objs_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += objs_.CalculateSize(_repeated_objs_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(AllSceneObject other) {
+      if (other == null) {
+        return;
+      }
+      objs_.Add(other.objs_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            objs_.AddEntriesFrom(input, _repeated_objs_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   #endregion
 
 }
-#region Messages
-public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
-  private static readonly pb::MessageParser<RspFreeHero> _parser = new pb::MessageParser<RspFreeHero>(() => new RspFreeHero());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<RspFreeHero> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::BattleReflection.Descriptor.MessageTypes[0]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public RspFreeHero() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public RspFreeHero(RspFreeHero other) : this() {
-    redHeroId_ = other.redHeroId_;
-    blueHeroId_ = other.blueHeroId_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public RspFreeHero Clone() {
-    return new RspFreeHero(this);
-  }
-
-  /// <summary>Field number for the "red_hero_id" field.</summary>
-  public const int RedHeroIdFieldNumber = 1;
-  private ulong redHeroId_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ulong RedHeroId {
-    get { return redHeroId_; }
-    set {
-      redHeroId_ = value;
-    }
-  }
-
-  /// <summary>Field number for the "blue_hero_id" field.</summary>
-  public const int BlueHeroIdFieldNumber = 2;
-  private ulong blueHeroId_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ulong BlueHeroId {
-    get { return blueHeroId_; }
-    set {
-      blueHeroId_ = value;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as RspFreeHero);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(RspFreeHero other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (RedHeroId != other.RedHeroId) return false;
-    if (BlueHeroId != other.BlueHeroId) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (RedHeroId != 0UL) hash ^= RedHeroId.GetHashCode();
-    if (BlueHeroId != 0UL) hash ^= BlueHeroId.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (RedHeroId != 0UL) {
-      output.WriteRawTag(8);
-      output.WriteUInt64(RedHeroId);
-    }
-    if (BlueHeroId != 0UL) {
-      output.WriteRawTag(16);
-      output.WriteUInt64(BlueHeroId);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (RedHeroId != 0UL) {
-      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(RedHeroId);
-    }
-    if (BlueHeroId != 0UL) {
-      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(BlueHeroId);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(RspFreeHero other) {
-    if (other == null) {
-      return;
-    }
-    if (other.RedHeroId != 0UL) {
-      RedHeroId = other.RedHeroId;
-    }
-    if (other.BlueHeroId != 0UL) {
-      BlueHeroId = other.BlueHeroId;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 8: {
-          RedHeroId = input.ReadUInt64();
-          break;
-        }
-        case 16: {
-          BlueHeroId = input.ReadUInt64();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class SelectHeroReq : pb::IMessage<SelectHeroReq> {
-  private static readonly pb::MessageParser<SelectHeroReq> _parser = new pb::MessageParser<SelectHeroReq>(() => new SelectHeroReq());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<SelectHeroReq> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::BattleReflection.Descriptor.MessageTypes[1]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public SelectHeroReq() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public SelectHeroReq(SelectHeroReq other) : this() {
-    heroId_ = other.heroId_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public SelectHeroReq Clone() {
-    return new SelectHeroReq(this);
-  }
-
-  /// <summary>Field number for the "hero_id" field.</summary>
-  public const int HeroIdFieldNumber = 1;
-  private ulong heroId_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ulong HeroId {
-    get { return heroId_; }
-    set {
-      heroId_ = value;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as SelectHeroReq);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(SelectHeroReq other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (HeroId != other.HeroId) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (HeroId != 0UL) hash ^= HeroId.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (HeroId != 0UL) {
-      output.WriteRawTag(8);
-      output.WriteUInt64(HeroId);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (HeroId != 0UL) {
-      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(HeroId);
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(SelectHeroReq other) {
-    if (other == null) {
-      return;
-    }
-    if (other.HeroId != 0UL) {
-      HeroId = other.HeroId;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 8: {
-          HeroId = input.ReadUInt64();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-public sealed partial class SelectHeroRsp : pb::IMessage<SelectHeroRsp> {
-  private static readonly pb::MessageParser<SelectHeroRsp> _parser = new pb::MessageParser<SelectHeroRsp>(() => new SelectHeroRsp());
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pb::MessageParser<SelectHeroRsp> Parser { get { return _parser; } }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public static pbr::MessageDescriptor Descriptor {
-    get { return global::BattleReflection.Descriptor.MessageTypes[2]; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  pbr::MessageDescriptor pb::IMessage.Descriptor {
-    get { return Descriptor; }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public SelectHeroRsp() {
-    OnConstruction();
-  }
-
-  partial void OnConstruction();
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public SelectHeroRsp(SelectHeroRsp other) : this() {
-    heroId_ = other.heroId_;
-    isSucc_ = other.isSucc_;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public SelectHeroRsp Clone() {
-    return new SelectHeroRsp(this);
-  }
-
-  /// <summary>Field number for the "hero_id" field.</summary>
-  public const int HeroIdFieldNumber = 1;
-  private ulong heroId_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public ulong HeroId {
-    get { return heroId_; }
-    set {
-      heroId_ = value;
-    }
-  }
-
-  /// <summary>Field number for the "is_succ" field.</summary>
-  public const int IsSuccFieldNumber = 2;
-  private bool isSucc_;
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool IsSucc {
-    get { return isSucc_; }
-    set {
-      isSucc_ = value;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override bool Equals(object other) {
-    return Equals(other as SelectHeroRsp);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public bool Equals(SelectHeroRsp other) {
-    if (ReferenceEquals(other, null)) {
-      return false;
-    }
-    if (ReferenceEquals(other, this)) {
-      return true;
-    }
-    if (HeroId != other.HeroId) return false;
-    if (IsSucc != other.IsSucc) return false;
-    return true;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override int GetHashCode() {
-    int hash = 1;
-    if (HeroId != 0UL) hash ^= HeroId.GetHashCode();
-    if (IsSucc != false) hash ^= IsSucc.GetHashCode();
-    return hash;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public override string ToString() {
-    return pb::JsonFormatter.ToDiagnosticString(this);
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void WriteTo(pb::CodedOutputStream output) {
-    if (HeroId != 0UL) {
-      output.WriteRawTag(8);
-      output.WriteUInt64(HeroId);
-    }
-    if (IsSucc != false) {
-      output.WriteRawTag(16);
-      output.WriteBool(IsSucc);
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public int CalculateSize() {
-    int size = 0;
-    if (HeroId != 0UL) {
-      size += 1 + pb::CodedOutputStream.ComputeUInt64Size(HeroId);
-    }
-    if (IsSucc != false) {
-      size += 1 + 1;
-    }
-    return size;
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(SelectHeroRsp other) {
-    if (other == null) {
-      return;
-    }
-    if (other.HeroId != 0UL) {
-      HeroId = other.HeroId;
-    }
-    if (other.IsSucc != false) {
-      IsSucc = other.IsSucc;
-    }
-  }
-
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public void MergeFrom(pb::CodedInputStream input) {
-    uint tag;
-    while ((tag = input.ReadTag()) != 0) {
-      switch(tag) {
-        default:
-          input.SkipLastField();
-          break;
-        case 8: {
-          HeroId = input.ReadUInt64();
-          break;
-        }
-        case 16: {
-          IsSucc = input.ReadBool();
-          break;
-        }
-      }
-    }
-  }
-
-}
-
-#endregion
-
 
 #endregion Designer generated code

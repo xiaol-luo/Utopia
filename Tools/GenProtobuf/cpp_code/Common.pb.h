@@ -30,9 +30,13 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
+namespace NetProto {
 class TestCommon;
 class TestCommonDefaultTypeInternal;
 extern TestCommonDefaultTypeInternal _TestCommon_default_instance_;
+}  // namespace NetProto
+
+namespace NetProto {
 
 namespace protobuf_Common_2eproto {
 // Internal implementation detail -- do not call these.
@@ -51,7 +55,7 @@ void InitDefaults();
 
 // ===================================================================
 
-class TestCommon : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:TestCommon) */ {
+class TestCommon : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.TestCommon) */ {
  public:
   TestCommon();
   virtual ~TestCommon();
@@ -144,7 +148,7 @@ class TestCommon : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:TestCommon)
+  // @@protoc_insertion_point(class_scope:NetProto.TestCommon)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -173,6 +177,8 @@ class TestCommon : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
 // @@protoc_insertion_point(namespace_scope)
 
+
+}  // namespace NetProto
 
 // @@protoc_insertion_point(global_scope)
 

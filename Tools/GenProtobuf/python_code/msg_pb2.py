@@ -17,9 +17,9 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='msg.proto',
-  package='',
+  package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\tmsg.proto\"7\n\x04Ping\x12\r\n\x05msgID\x18\x01 \x01(\x05\x12\x0e\n\x06userid\x18\x02 \x01(\x05\x12\x10\n\x08username\x18\x03 \x01(\tB\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\tmsg.proto\x12\x08NetProto\"7\n\x04Ping\x12\r\n\x05msgID\x18\x01 \x01(\x05\x12\x0e\n\x06userid\x18\x02 \x01(\x05\x12\x10\n\x08username\x18\x03 \x01(\tB\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 
@@ -27,27 +27,27 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _PING = _descriptor.Descriptor(
   name='Ping',
-  full_name='Ping',
+  full_name='NetProto.Ping',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='msgID', full_name='Ping.msgID', index=0,
+      name='msgID', full_name='NetProto.Ping.msgID', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='userid', full_name='Ping.userid', index=1,
+      name='userid', full_name='NetProto.Ping.userid', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='username', full_name='Ping.username', index=2,
+      name='username', full_name='NetProto.Ping.username', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -65,8 +65,8 @@ _PING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13,
-  serialized_end=68,
+  serialized_start=23,
+  serialized_end=78,
 )
 
 DESCRIPTOR.message_types_by_name['Ping'] = _PING
@@ -75,7 +75,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 Ping = _reflection.GeneratedProtocolMessageType('Ping', (_message.Message,), dict(
   DESCRIPTOR = _PING,
   __module__ = 'msg_pb2'
-  # @@protoc_insertion_point(class_scope:Ping)
+  # @@protoc_insertion_point(class_scope:NetProto.Ping)
   ))
 _sym_db.RegisterMessage(Ping)
 

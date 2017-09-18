@@ -25,12 +25,14 @@ public class App
     public GameNetwork gameNetwork { get; protected set; }
     public GameConfig gameConfig { get; protected set; }
     public AppStateMgr stateMgr { get; protected set; }
+    public Scene scene { get; protected set; }
 
     public void Awake()
     {
         stateMgr = new AppStateMgr();
         gameNetwork = new GameNetwork();
         gameConfig = new GameConfig();
+        scene = new Scene();
         gameConfig.Awake();
     }
     public void Start ()

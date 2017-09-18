@@ -16,6 +16,8 @@
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
+
+namespace NetProto {
 class PongDefaultTypeInternal {
 public:
  ::google::protobuf::internal::ExplicitlyConstructed<Pong>
@@ -101,12 +103,12 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\ntest.proto\"7\n\004Pong\022\r\n\005msgID\030\001 \001(\005\022\016\n\006u"
-      "serid\030\002 \001(\005\022\020\n\010username\030\003 \001(\tB\003\370\001\001b\006prot"
-      "o3"
+      "\n\ntest.proto\022\010NetProto\"7\n\004Pong\022\r\n\005msgID\030"
+      "\001 \001(\005\022\016\n\006userid\030\002 \001(\005\022\020\n\010username\030\003 \001(\tB"
+      "\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 82);
+      descriptor, 92);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "test.proto", &protobuf_RegisterTypes);
 }
@@ -140,7 +142,7 @@ Pong::Pong()
     protobuf_test_2eproto::InitDefaults();
   }
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Pong)
+  // @@protoc_insertion_point(constructor:NetProto.Pong)
 }
 Pong::Pong(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
@@ -148,7 +150,7 @@ Pong::Pong(::google::protobuf::Arena* arena)
   protobuf_test_2eproto::InitDefaults();
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:Pong)
+  // @@protoc_insertion_point(arena_constructor:NetProto.Pong)
 }
 Pong::Pong(const Pong& from)
   : ::google::protobuf::Message(),
@@ -163,7 +165,7 @@ Pong::Pong(const Pong& from)
   ::memcpy(&msgid_, &from.msgid_,
     static_cast<size_t>(reinterpret_cast<char*>(&userid_) -
     reinterpret_cast<char*>(&msgid_)) + sizeof(userid_));
-  // @@protoc_insertion_point(copy_constructor:Pong)
+  // @@protoc_insertion_point(copy_constructor:NetProto.Pong)
 }
 
 void Pong::SharedCtor() {
@@ -175,7 +177,7 @@ void Pong::SharedCtor() {
 }
 
 Pong::~Pong() {
-  // @@protoc_insertion_point(destructor:Pong)
+  // @@protoc_insertion_point(destructor:NetProto.Pong)
   SharedDtor();
 }
 
@@ -215,7 +217,7 @@ Pong* Pong::New(::google::protobuf::Arena* arena) const {
 }
 
 void Pong::Clear() {
-// @@protoc_insertion_point(message_clear_start:Pong)
+// @@protoc_insertion_point(message_clear_start:NetProto.Pong)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -231,7 +233,7 @@ bool Pong::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Pong)
+  // @@protoc_insertion_point(parse_start:NetProto.Pong)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -274,7 +276,7 @@ bool Pong::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->username().data(), static_cast<int>(this->username().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Pong.username"));
+            "NetProto.Pong.username"));
         } else {
           goto handle_unusual;
         }
@@ -293,17 +295,17 @@ bool Pong::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Pong)
+  // @@protoc_insertion_point(parse_success:NetProto.Pong)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Pong)
+  // @@protoc_insertion_point(parse_failure:NetProto.Pong)
   return false;
 #undef DO_
 }
 
 void Pong::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Pong)
+  // @@protoc_insertion_point(serialize_start:NetProto.Pong)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -322,7 +324,7 @@ void Pong::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->username().data(), static_cast<int>(this->username().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Pong.username");
+      "NetProto.Pong.username");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->username(), output);
   }
@@ -331,13 +333,13 @@ void Pong::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:Pong)
+  // @@protoc_insertion_point(serialize_end:NetProto.Pong)
 }
 
 ::google::protobuf::uint8* Pong::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:Pong)
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.Pong)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -356,7 +358,7 @@ void Pong::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->username().data(), static_cast<int>(this->username().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Pong.username");
+      "NetProto.Pong.username");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->username(), target);
@@ -366,12 +368,12 @@ void Pong::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Pong)
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.Pong)
   return target;
 }
 
 size_t Pong::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Pong)
+// @@protoc_insertion_point(message_byte_size_start:NetProto.Pong)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -408,22 +410,22 @@ size_t Pong::ByteSizeLong() const {
 }
 
 void Pong::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Pong)
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.Pong)
   GOOGLE_DCHECK_NE(&from, this);
   const Pong* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const Pong>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Pong)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.Pong)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Pong)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.Pong)
     MergeFrom(*source);
   }
 }
 
 void Pong::MergeFrom(const Pong& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Pong)
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.Pong)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -441,14 +443,14 @@ void Pong::MergeFrom(const Pong& from) {
 }
 
 void Pong::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Pong)
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.Pong)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Pong::CopyFrom(const Pong& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Pong)
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.Pong)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -499,13 +501,13 @@ void Pong::clear_msgid() {
   msgid_ = 0;
 }
 ::google::protobuf::int32 Pong::msgid() const {
-  // @@protoc_insertion_point(field_get:Pong.msgID)
+  // @@protoc_insertion_point(field_get:NetProto.Pong.msgID)
   return msgid_;
 }
 void Pong::set_msgid(::google::protobuf::int32 value) {
   
   msgid_ = value;
-  // @@protoc_insertion_point(field_set:Pong.msgID)
+  // @@protoc_insertion_point(field_set:NetProto.Pong.msgID)
 }
 
 // int32 userid = 2;
@@ -513,13 +515,13 @@ void Pong::clear_userid() {
   userid_ = 0;
 }
 ::google::protobuf::int32 Pong::userid() const {
-  // @@protoc_insertion_point(field_get:Pong.userid)
+  // @@protoc_insertion_point(field_get:NetProto.Pong.userid)
   return userid_;
 }
 void Pong::set_userid(::google::protobuf::int32 value) {
   
   userid_ = value;
-  // @@protoc_insertion_point(field_set:Pong.userid)
+  // @@protoc_insertion_point(field_set:NetProto.Pong.userid)
 }
 
 // string username = 3;
@@ -527,20 +529,20 @@ void Pong::clear_username() {
   username_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& Pong::username() const {
-  // @@protoc_insertion_point(field_get:Pong.username)
+  // @@protoc_insertion_point(field_get:NetProto.Pong.username)
   return username_.Get();
 }
 void Pong::set_username(const ::std::string& value) {
   
   username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:Pong.username)
+  // @@protoc_insertion_point(field_set:NetProto.Pong.username)
 }
 #if LANG_CXX11
 void Pong::set_username(::std::string&& value) {
   
   username_.Set(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_rvalue:Pong.username)
+  // @@protoc_insertion_point(field_set_rvalue:NetProto.Pong.username)
 }
 #endif
 void Pong::set_username(const char* value) {
@@ -548,27 +550,27 @@ void Pong::set_username(const char* value) {
   
   username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
               GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:Pong.username)
+  // @@protoc_insertion_point(field_set_char:NetProto.Pong.username)
 }
 void Pong::set_username(const char* value,
     size_t size) {
   
   username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
       reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:Pong.username)
+  // @@protoc_insertion_point(field_set_pointer:NetProto.Pong.username)
 }
 ::std::string* Pong::mutable_username() {
   
-  // @@protoc_insertion_point(field_mutable:Pong.username)
+  // @@protoc_insertion_point(field_mutable:NetProto.Pong.username)
   return username_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Pong::release_username() {
-  // @@protoc_insertion_point(field_release:Pong.username)
+  // @@protoc_insertion_point(field_release:NetProto.Pong.username)
   
   return username_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Pong::unsafe_arena_release_username() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Pong.username)
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.Pong.username)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   
   return username_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -582,7 +584,7 @@ void Pong::set_allocated_username(::std::string* username) {
   }
   username_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username,
       GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:Pong.username)
+  // @@protoc_insertion_point(field_set_allocated:NetProto.Pong.username)
 }
 void Pong::unsafe_arena_set_allocated_username(
     ::std::string* username) {
@@ -594,11 +596,13 @@ void Pong::unsafe_arena_set_allocated_username(
   }
   username_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       username, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Pong.username)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NetProto.Pong.username)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace NetProto
 
 // @@protoc_insertion_point(global_scope)

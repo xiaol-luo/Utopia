@@ -29,6 +29,10 @@
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/generated_enum_reflection.h>
 // @@protoc_insertion_point(includes)
+namespace NetProto {
+}  // namespace NetProto
+
+namespace NetProto {
 
 namespace protobuf_ProtoId_2eproto {
 // Internal implementation detail -- do not call these.
@@ -53,6 +57,10 @@ enum ProtoId {
   PID_RspFreeHero = 101,
   PID_SelectHeroReq = 102,
   PID_SelectHeroRsp = 103,
+  PID_LoadSceneComplete = 104,
+  PID_LeaveScene = 105,
+  PID_PullAllSceneInfo = 106,
+  PID_PullAllSceneInfoRsp = 107,
   PID_Max = 5120,
   ProtoId_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ProtoId_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
@@ -93,13 +101,15 @@ inline bool ProtoId_Parse(
 // @@protoc_insertion_point(namespace_scope)
 
 
+}  // namespace NetProto
+
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::ProtoId> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::NetProto::ProtoId> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::ProtoId>() {
-  return ::ProtoId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ProtoId>() {
+  return ::NetProto::ProtoId_descriptor();
 }
 
 }  // namespace protobuf

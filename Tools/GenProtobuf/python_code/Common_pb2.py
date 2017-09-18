@@ -17,9 +17,9 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='Common.proto',
-  package='',
+  package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x43ommon.proto\"\x0c\n\nTestCommonB\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x43ommon.proto\x12\x08NetProto\"\x0c\n\nTestCommonB\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 
@@ -27,7 +27,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _TESTCOMMON = _descriptor.Descriptor(
   name='TestCommon',
-  full_name='TestCommon',
+  full_name='NetProto.TestCommon',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -44,8 +44,8 @@ _TESTCOMMON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16,
-  serialized_end=28,
+  serialized_start=26,
+  serialized_end=38,
 )
 
 DESCRIPTOR.message_types_by_name['TestCommon'] = _TESTCOMMON
@@ -54,7 +54,7 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 TestCommon = _reflection.GeneratedProtocolMessageType('TestCommon', (_message.Message,), dict(
   DESCRIPTOR = _TESTCOMMON,
   __module__ = 'Common_pb2'
-  # @@protoc_insertion_point(class_scope:TestCommon)
+  # @@protoc_insertion_point(class_scope:NetProto.TestCommon)
   ))
 _sym_db.RegisterMessage(TestCommon)
 

@@ -37,15 +37,18 @@ namespace GameLogic
 
 	void PlayerMsgHandler::Init()
 	{
-		uint32_t malloc_size = sizeof(GameLogic::IClientMsgHandlerDescript *) * PID_Max;
+		uint32_t malloc_size = sizeof(GameLogic::IClientMsgHandlerDescript *) * NetProto::PID_Max;
 		m_client_msg_handler_descripts = (GameLogic::IClientMsgHandlerDescript **)malloc(malloc_size);
 		memset(m_client_msg_handler_descripts, 0, malloc_size);
 
 		std::vector<GameLogic::IClientMsgHandlerDescript *> msg_handle_descripts;
-		RegPlayerMsgHandler(PID_Ping, Ping, OnHandlePlayerPingMsg);
-		RegPlayerMsgHandler(PID_Pong, Pong, OnHandlePlayerPongMsg);
-		RegPlayerHandler(PID_QueryFreeHero, OnQueryFreeHero);
-		RegPlayerMsgHandler(PID_SelectHeroReq, SelectHeroReq, OnSelectHeroReq);
+		RegPlayerMsgHandler(NetProto::PID_Ping, NetProto::Ping, OnHandlePlayerPingMsg);
+		RegPlayerMsgHandler(NetProto::PID_Pong, NetProto::Pong, OnHandlePlayerPongMsg);
+		RegPlayerHandler(NetProto::PID_QueryFreeHero, OnQueryFreeHero);
+		RegPlayerMsgHandler(NetProto::PID_SelectHeroReq, NetProto::SelectHeroReq, OnSelectHeroReq);
+		RegPlayerHandler(NetProto::PID_LoadSceneComplete, OnLoadSceneComplete);
+		RegPlayerHandler(NetProto::PID_LeaveScene, OnLeaveScene);
+		RegPlayerHandler(NetProto::PID_PullAllSceneInfo, OnPullAllSceneInfo);
 
 		for (auto desc : msg_handle_descripts)
 		{
@@ -58,7 +61,7 @@ namespace GameLogic
 	{
 		if (nullptr != m_client_msg_handler_descripts)
 		{
-			for (int i = PID_Min + 1; i < PID_Max; ++i)
+			for (int i = NetProto::PID_Min + 1; i < NetProto::PID_Max; ++i)
 				delete m_client_msg_handler_descripts[i];
 			free(m_client_msg_handler_descripts);
 			m_client_msg_handler_descripts = nullptr;
@@ -79,7 +82,7 @@ namespace GameLogic
 				break;
 			}
 			int protocol_id = ntohl(*(int *)data);
-			if (protocol_id <= PID_Min || protocol_id >= PID_Max)
+			if (protocol_id <= NetProto::PID_Min || protocol_id >= NetProto::PID_Max)
 			{
 				is_ok = false;
 				break;
@@ -105,18 +108,13 @@ namespace GameLogic
 		}
 	}
 
-	void PlayerMsgHandler::OnHandlePlayerPingMsg(int protocol_id, Ping *msg, GameLogic::Player *player)
+	void PlayerMsgHandler::OnHandlePlayerPingMsg(int protocol_id, NetProto::Ping *msg, GameLogic::Player *player)
 	{
-		Pong *pong = google::protobuf::Arena::CreateMessage<Pong>(m_protobuf_arena);
-		m_logic_module->GetNetAgent()->Send(player->GetNetId(), PID_Pong, pong);
-
-
-		AutoReleaseUtil aru;
-		Ping *xxx = new Ping();
-		aru.Add(xxx);
+		NetProto::Pong *pong = google::protobuf::Arena::CreateMessage<NetProto::Pong>(m_protobuf_arena);
+		m_logic_module->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_Pong, pong);
 	}
 
-	void PlayerMsgHandler::OnHandlePlayerPongMsg(int protocol_id, Pong *msg, GameLogic::Player *player)
+	void PlayerMsgHandler::OnHandlePlayerPongMsg(int protocol_id, NetProto::Pong *msg, GameLogic::Player *player)
 	{
 		
 	}
@@ -126,20 +124,20 @@ namespace GameLogic
 		std::shared_ptr<Hero> red_hero = m_logic_module->m_scene->GetRedHero();
 		std::shared_ptr<Hero> blue_hero = m_logic_module->m_scene->GetBlueHero();
 
-		RspFreeHero *rsp_msg = google::protobuf::Arena::CreateMessage<RspFreeHero>(m_protobuf_arena);
+		NetProto::RspFreeHero *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::RspFreeHero>(m_protobuf_arena);
 		if (nullptr == red_hero->GetPlayer())
 			rsp_msg->set_red_hero_id(red_hero->GetId());
 		if (nullptr == blue_hero->GetPlayer())
 			rsp_msg->set_blue_hero_id(blue_hero->GetId());
 
-		m_logic_module->m_network_agent->Send(player->GetNetId(), PID_RspFreeHero, rsp_msg);
+		m_logic_module->m_network_agent->Send(player->GetNetId(), NetProto::PID_RspFreeHero, rsp_msg);
 	}
 
-	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, SelectHeroReq *msg, GameLogic::Player *player)
+	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player)
 	{
 		std::shared_ptr<Hero> red_hero = m_logic_module->m_scene->GetRedHero();
 		std::shared_ptr<Hero> blue_hero = m_logic_module->m_scene->GetBlueHero();
-		SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<SelectHeroRsp>(m_protobuf_arena);
+		NetProto::SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::SelectHeroRsp>(m_protobuf_arena);
 		
 		auto hero = player->GetHero();
 		if (hero.expired())
@@ -162,6 +160,22 @@ namespace GameLogic
 				}
 			}
 		}
-		m_logic_module->m_network_agent->Send(player->GetNetId(), PID_SelectHeroRsp, rsp_msg);
+		m_logic_module->m_network_agent->Send(player->GetNetId(), NetProto::PID_SelectHeroRsp, rsp_msg);
+	}
+
+	void PlayerMsgHandler::OnLoadSceneComplete(int id, GameLogic::Player * player)
+	{
+		player->SetCanRecvSceneMsg(true);
+	}
+
+	void PlayerMsgHandler::OnLeaveScene(int id, GameLogic::Player * player)
+	{
+		player->SetCanRecvSceneMsg(false);
+		player->SetHero(nullptr);
+	}
+
+	void PlayerMsgHandler::OnPullAllSceneInfo(int id, GameLogic::Player * player)
+	{
+		m_logic_module->m_scene->PullAllSceneInfo(player);
 	}
 }

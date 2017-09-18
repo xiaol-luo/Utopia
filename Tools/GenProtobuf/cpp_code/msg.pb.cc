@@ -16,6 +16,8 @@
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
+
+namespace NetProto {
 class PingDefaultTypeInternal {
 public:
  ::google::protobuf::internal::ExplicitlyConstructed<Ping>
@@ -101,12 +103,12 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\tmsg.proto\"7\n\004Ping\022\r\n\005msgID\030\001 \001(\005\022\016\n\006us"
-      "erid\030\002 \001(\005\022\020\n\010username\030\003 \001(\tB\003\370\001\001b\006proto"
-      "3"
+      "\n\tmsg.proto\022\010NetProto\"7\n\004Ping\022\r\n\005msgID\030\001"
+      " \001(\005\022\016\n\006userid\030\002 \001(\005\022\020\n\010username\030\003 \001(\tB\003"
+      "\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 81);
+      descriptor, 91);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "msg.proto", &protobuf_RegisterTypes);
 }
@@ -140,7 +142,7 @@ Ping::Ping()
     protobuf_msg_2eproto::InitDefaults();
   }
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Ping)
+  // @@protoc_insertion_point(constructor:NetProto.Ping)
 }
 Ping::Ping(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
@@ -148,7 +150,7 @@ Ping::Ping(::google::protobuf::Arena* arena)
   protobuf_msg_2eproto::InitDefaults();
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:Ping)
+  // @@protoc_insertion_point(arena_constructor:NetProto.Ping)
 }
 Ping::Ping(const Ping& from)
   : ::google::protobuf::Message(),
@@ -163,7 +165,7 @@ Ping::Ping(const Ping& from)
   ::memcpy(&msgid_, &from.msgid_,
     static_cast<size_t>(reinterpret_cast<char*>(&userid_) -
     reinterpret_cast<char*>(&msgid_)) + sizeof(userid_));
-  // @@protoc_insertion_point(copy_constructor:Ping)
+  // @@protoc_insertion_point(copy_constructor:NetProto.Ping)
 }
 
 void Ping::SharedCtor() {
@@ -175,7 +177,7 @@ void Ping::SharedCtor() {
 }
 
 Ping::~Ping() {
-  // @@protoc_insertion_point(destructor:Ping)
+  // @@protoc_insertion_point(destructor:NetProto.Ping)
   SharedDtor();
 }
 
@@ -215,7 +217,7 @@ Ping* Ping::New(::google::protobuf::Arena* arena) const {
 }
 
 void Ping::Clear() {
-// @@protoc_insertion_point(message_clear_start:Ping)
+// @@protoc_insertion_point(message_clear_start:NetProto.Ping)
   ::google::protobuf::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -231,7 +233,7 @@ bool Ping::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Ping)
+  // @@protoc_insertion_point(parse_start:NetProto.Ping)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -274,7 +276,7 @@ bool Ping::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->username().data(), static_cast<int>(this->username().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Ping.username"));
+            "NetProto.Ping.username"));
         } else {
           goto handle_unusual;
         }
@@ -293,17 +295,17 @@ bool Ping::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Ping)
+  // @@protoc_insertion_point(parse_success:NetProto.Ping)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Ping)
+  // @@protoc_insertion_point(parse_failure:NetProto.Ping)
   return false;
 #undef DO_
 }
 
 void Ping::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Ping)
+  // @@protoc_insertion_point(serialize_start:NetProto.Ping)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -322,7 +324,7 @@ void Ping::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->username().data(), static_cast<int>(this->username().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Ping.username");
+      "NetProto.Ping.username");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->username(), output);
   }
@@ -331,13 +333,13 @@ void Ping::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
   }
-  // @@protoc_insertion_point(serialize_end:Ping)
+  // @@protoc_insertion_point(serialize_end:NetProto.Ping)
 }
 
 ::google::protobuf::uint8* Ping::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:Ping)
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.Ping)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -356,7 +358,7 @@ void Ping::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->username().data(), static_cast<int>(this->username().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Ping.username");
+      "NetProto.Ping.username");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->username(), target);
@@ -366,12 +368,12 @@ void Ping::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Ping)
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.Ping)
   return target;
 }
 
 size_t Ping::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Ping)
+// @@protoc_insertion_point(message_byte_size_start:NetProto.Ping)
   size_t total_size = 0;
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -408,22 +410,22 @@ size_t Ping::ByteSizeLong() const {
 }
 
 void Ping::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Ping)
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.Ping)
   GOOGLE_DCHECK_NE(&from, this);
   const Ping* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const Ping>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Ping)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.Ping)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Ping)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.Ping)
     MergeFrom(*source);
   }
 }
 
 void Ping::MergeFrom(const Ping& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Ping)
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.Ping)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::google::protobuf::uint32 cached_has_bits = 0;
@@ -441,14 +443,14 @@ void Ping::MergeFrom(const Ping& from) {
 }
 
 void Ping::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Ping)
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.Ping)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Ping::CopyFrom(const Ping& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Ping)
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.Ping)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -499,13 +501,13 @@ void Ping::clear_msgid() {
   msgid_ = 0;
 }
 ::google::protobuf::int32 Ping::msgid() const {
-  // @@protoc_insertion_point(field_get:Ping.msgID)
+  // @@protoc_insertion_point(field_get:NetProto.Ping.msgID)
   return msgid_;
 }
 void Ping::set_msgid(::google::protobuf::int32 value) {
   
   msgid_ = value;
-  // @@protoc_insertion_point(field_set:Ping.msgID)
+  // @@protoc_insertion_point(field_set:NetProto.Ping.msgID)
 }
 
 // int32 userid = 2;
@@ -513,13 +515,13 @@ void Ping::clear_userid() {
   userid_ = 0;
 }
 ::google::protobuf::int32 Ping::userid() const {
-  // @@protoc_insertion_point(field_get:Ping.userid)
+  // @@protoc_insertion_point(field_get:NetProto.Ping.userid)
   return userid_;
 }
 void Ping::set_userid(::google::protobuf::int32 value) {
   
   userid_ = value;
-  // @@protoc_insertion_point(field_set:Ping.userid)
+  // @@protoc_insertion_point(field_set:NetProto.Ping.userid)
 }
 
 // string username = 3;
@@ -527,20 +529,20 @@ void Ping::clear_username() {
   username_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 const ::std::string& Ping::username() const {
-  // @@protoc_insertion_point(field_get:Ping.username)
+  // @@protoc_insertion_point(field_get:NetProto.Ping.username)
   return username_.Get();
 }
 void Ping::set_username(const ::std::string& value) {
   
   username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:Ping.username)
+  // @@protoc_insertion_point(field_set:NetProto.Ping.username)
 }
 #if LANG_CXX11
 void Ping::set_username(::std::string&& value) {
   
   username_.Set(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_rvalue:Ping.username)
+  // @@protoc_insertion_point(field_set_rvalue:NetProto.Ping.username)
 }
 #endif
 void Ping::set_username(const char* value) {
@@ -548,27 +550,27 @@ void Ping::set_username(const char* value) {
   
   username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
               GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:Ping.username)
+  // @@protoc_insertion_point(field_set_char:NetProto.Ping.username)
 }
 void Ping::set_username(const char* value,
     size_t size) {
   
   username_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
       reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:Ping.username)
+  // @@protoc_insertion_point(field_set_pointer:NetProto.Ping.username)
 }
 ::std::string* Ping::mutable_username() {
   
-  // @@protoc_insertion_point(field_mutable:Ping.username)
+  // @@protoc_insertion_point(field_mutable:NetProto.Ping.username)
   return username_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Ping::release_username() {
-  // @@protoc_insertion_point(field_release:Ping.username)
+  // @@protoc_insertion_point(field_release:NetProto.Ping.username)
   
   return username_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 ::std::string* Ping::unsafe_arena_release_username() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:Ping.username)
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.Ping.username)
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   
   return username_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
@@ -582,7 +584,7 @@ void Ping::set_allocated_username(::std::string* username) {
   }
   username_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), username,
       GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:Ping.username)
+  // @@protoc_insertion_point(field_set_allocated:NetProto.Ping.username)
 }
 void Ping::unsafe_arena_set_allocated_username(
     ::std::string* username) {
@@ -594,11 +596,13 @@ void Ping::unsafe_arena_set_allocated_username(
   }
   username_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       username, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Ping.username)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NetProto.Ping.username)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace NetProto
 
 // @@protoc_insertion_point(global_scope)

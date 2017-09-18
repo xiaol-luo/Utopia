@@ -38,7 +38,10 @@ namespace GameLogic
 	public:
 		std::weak_ptr<Hero> GetHero() { return m_hero; }
 		void SetHero(std::shared_ptr<Hero> hero);
+		bool CanRecvSceneMsg() { return m_can_recv_scene_msg; }
+		void SetCanRecvSceneMsg(bool value) { m_can_recv_scene_msg = value; }
 	protected:
 		std::weak_ptr<Hero> m_hero;
+		bool m_can_recv_scene_msg = false;
 	};
 }
