@@ -6,7 +6,7 @@ namespace GameLogic
 	class MoveObject : public SceneObject
 	{
 	public:
-		MoveObject();
+		MoveObject(ESceneObjectType obj_type);
 		virtual ~MoveObject();
 	};
 }

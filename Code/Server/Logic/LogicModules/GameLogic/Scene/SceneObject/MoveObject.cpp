@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-	MoveObject::MoveObject()
+	MoveObject::MoveObject(ESceneObjectType obj_type) : SceneObject(obj_type)
 	{
 
 	}

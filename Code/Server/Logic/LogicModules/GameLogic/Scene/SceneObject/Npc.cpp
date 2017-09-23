@@ -2,7 +2,7 @@
 
 namespace GameLogic
 {
-	Npc::Npc()
+	Npc::Npc() : MoveObject(ESOT_Npc)
 	{
 
 	}

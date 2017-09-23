@@ -4,7 +4,7 @@
 
 namespace GameLogic
 {
-	SceneObject::SceneObject() : m_scene(nullptr), m_id(Scene::INVALID_SCENE_OBJID)
+	SceneObject::SceneObject(ESceneObjectType obj_type) : m_scene(nullptr), m_id(Scene::INVALID_SCENE_OBJID), m_obj_type(obj_type)
 	{
 	}
 
