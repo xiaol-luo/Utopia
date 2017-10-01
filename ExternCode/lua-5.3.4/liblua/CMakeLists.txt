@@ -1,6 +1,6 @@
 ﻿CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-SET(ProjectName Utopia)
+SET(ProjectName liblua)
 PROJECT(${ProjectName})
 
 FUNCTION(SourceGroupByDir base_path file_paths prefix_source_group)
@@ -16,8 +16,6 @@ FUNCTION(SourceGroupByDir base_path file_paths prefix_source_group)
 	ENDFOREACH(file_path ${file_paths})
 ENDFUNCTION(SourceGroupByDir)
 
-SET(Cpp_File_Pattern "*.hpp" "*.cpp" "*.h" "*.c")
-
 FUNCTION(FileGlobRecurse search_dir file_patterns out_files)
 	FOREACH (file_pattern ${file_patterns})
 		FILE(GLOB_RECURSE tmp_files "${search_dir}/${file_pattern}")
@@ -26,33 +24,19 @@ FUNCTION(FileGlobRecurse search_dir file_patterns out_files)
 	SET(${out_files} ${all_files} PARENT_SCOPE)
 ENDFUNCTION(FileGlobRecurse)
 
+SET(Cpp_File_Pattern "*.hpp" "*.cpp" "*.h" "*.c")
+
 FileGlobRecurse(${CMAKE_CURRENT_SOURCE_DIR} "${Cpp_File_Pattern}" dir_files)
 SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
-SET(Protobuf_File_Pattern "*.h" "*.cc")
-FileGlobRecurse("${CMAKE_CURRENT_SOURCE_DIR}/Logic/ShareCode/Network/Protobuf" "${Protobuf_File_Pattern}" dir_files)
-SET(SourceFiles ${SourceFiles} ${dir_files})
-SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
+INCLUDE_DIRECTORIES(.)
+#LINK_LIBRARIES(event event_core event_extra)
 
-INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libevent ./Libs/3rdpartLibs/protobuf/include)
-INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode ./Logic/LogicModules)
-INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/lua)
-INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/sol)
-
-IF (WIN32)
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/libs)
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/protobuf/libs)
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/lua/libs)
-	ADD_DEFINITIONS(/D NOMINMAX)
-ELSE ()
-ENDIF (WIN32)
-LINK_LIBRARIES(event event_core event_extra)
-LINK_LIBRARIES(libprotocd libprotobufd liblua) 
-
-ADD_EXECUTABLE(${ProjectName} ${SourceFiles})
+#ADD_EXECUTABLE(${ProjectName} ${SourceFiles})
+ADD_LIBRARY(${ProjectName} ${SourceFiles})
 ADD_DEFINITIONS(/D _CRT_SECURE_NO_WARNINGS /wd4267 /wd4244 /wd4996 /wd4800 /D _WINSOCK_DEPRECATED_NO_WARNINGS)
-ADD_COMPILE_OPTIONS(-g -std=c++11)
+#ADD_COMPILE_OPTIONS(-g -std=c++11)
 
 #SET_PROPERTIES(PROPERTIES FOLDER "examples")
 

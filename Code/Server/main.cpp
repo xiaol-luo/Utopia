@@ -10,6 +10,8 @@
 #include <stdint.h>
 #include "MemoryPool/StlAllocator.h"
 
+#include <sol.hpp>
+
 ServerLogic *server_logic = nullptr;
 
 void QuitGame(int signal)
