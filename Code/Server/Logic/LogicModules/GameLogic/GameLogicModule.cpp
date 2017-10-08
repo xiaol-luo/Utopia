@@ -43,8 +43,12 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	m_player_msg_handler->Init();
 	m_network_agent = new NetworkAgent(m_network_module);
 
-	std::string *file_path = (std::string *)param;
-	bool ret = m_csv_cfg_sets->Load(*file_path);
+	m_cfg_root_path = *(std::string *)param;
+	while ('/' == m_cfg_root_path.back() || '\\' == m_cfg_root_path.back())
+		m_cfg_root_path.pop_back();
+
+	std::string csv_cfg_path = m_cfg_root_path + "/auto-csv/AutoCsvConfig";
+	bool ret = m_csv_cfg_sets->Load(csv_cfg_path);
 	m_state = ret ? EModuleState_Inited : EModuleState_Error;
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }

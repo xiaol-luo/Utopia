@@ -20,8 +20,30 @@ void QuitGame(int signal)
 		server_logic->Quit();
 }
 
+lua_State *L;
+
+void TestSol(lua_State *l)
+{
+	sol::state_view lua(l);
+	sol::protected_function_result ret;
+	lua.open_libraries(sol::lib::base, sol::lib::debug);
+	{
+		int x = 0;
+		lua.set_function("beep", [&x] { ++x; });
+		lua.script("beep()");
+		printf("c++ beep result %d\n", x);
+		ret = lua.script_file("LuaScript/test_export_function.lua");
+	}
+	
+	ret = lua.script_file("LuaScript/test_sol.lua");
+}
+
 int main(int argc, char **argv)
 {
+	L = luaL_newstate();
+	TestSol(L);
+	lua_close(L); L = nullptr;
+
 	if (argc <= 2)
 	{
 		printf("cmd foramt : executable log_cfg_file cfg_dir\n");

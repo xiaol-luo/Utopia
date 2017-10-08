@@ -48,6 +48,8 @@ public:
 	ITimerModule * GetTimer() { return m_timer_module; }
 	INetworkModule * GetNetwork() { return m_network_module; }
 	NetworkAgent *GetNetAgent() { return m_network_agent; }
+	const std::string & GetCfgRootPath() { return m_cfg_root_path; }
+	Config::CsvConfigSets * GetCsvCfgSet() { return m_csv_cfg_sets; }
 
 private:
 	LogModule *m_log_module = nullptr;
@@ -58,5 +60,7 @@ private:
 	GameLogic::PlayerMgr *m_player_mgr = nullptr;
 	GameLogic::Scene *m_scene = nullptr;
 	GameLogic::PlayerMsgHandler *m_player_msg_handler = nullptr;
+
+	std::string m_cfg_root_path;
 };
 

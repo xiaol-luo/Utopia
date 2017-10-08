@@ -68,7 +68,6 @@ namespace Config
             {
                 csv.MissingFieldAction = MissingFieldAction.ReplaceByEmpty;
                 string[] headers = csv.GetFieldHeaders();
-                string[] fieldHeaders = csv.GetFieldHeaders();
                 List<int> fieldIdxList = new List<int>();
                 try
                 {

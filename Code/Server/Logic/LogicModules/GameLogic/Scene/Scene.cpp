@@ -7,12 +7,19 @@
 #include "GameLogic/Player/Player.h"
 #include "GameLogic/GameLogicModule.h"
 #include "Network/Utils/NetworkAgent.h"
+#include "Navigation/NavMesh.h"
+#include "MoveMgr/MoveMgr.h"
+#include "GameLogic/GameLogicModule.h"
+#include "CsvConfigSets.h"
+#include "Scene/CsvSceneConfig.h"
 
 namespace GameLogic
 {
 	Scene::Scene(GameLogicModule *logic_module) : m_logic_module(logic_module)
 	{
 		m_protobuf_arena = MemoryUtil::NewArena();
+		m_navMesh = new GameLogic::NavMesh(this);
+		m_moveMgr = new GameLogic::MoveMgr(this);
 	}
 	
 	Scene::~Scene()
@@ -22,7 +29,17 @@ namespace GameLogic
 	}
 
 	bool Scene::Awake(void *param)
-	{
+	{ 
+		assert(m_logic_module->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
+		m_sceneCfg = m_logic_module->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
+
+		bool ret;
+		ret = m_navMesh->LoadTerrain(m_logic_module->GetCfgRootPath() + "/" + m_sceneCfg->terrain_file_path);
+		assert(ret);
+
+		ret = m_moveMgr->Awake();
+		assert(ret);
+
 		m_red_hero = std::make_shared<Hero>();
 		this->AddObject(m_red_hero);
 		m_blue_hero = std::make_shared<Hero>();
@@ -41,8 +58,10 @@ namespace GameLogic
 				scene_obj->Update(now_ms);
 		}
 		this->CheckSceneObjectsCache();
-
 		m_protobuf_arena->Reset();
+
+		m_navMesh->Update();
+		m_moveMgr->Update();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)
@@ -61,6 +80,11 @@ namespace GameLogic
 		scene_obj->OnEnterScene(this);
 		m_scene_objs[m_last_scene_objid] = scene_obj;
 		m_scene_objs_cache[m_last_scene_objid] = scene_obj;
+		{
+			std::shared_ptr<MoveObject> move_ptr = std::dynamic_pointer_cast<MoveObject>(scene_obj);
+			if (nullptr != move_ptr)
+				m_move_objs[m_last_scene_objid] = move_ptr;
+		}
 		return m_last_scene_objid;
 	}
 
@@ -87,7 +111,10 @@ namespace GameLogic
 		if (!m_removed_scene_objids.empty())
 		{
 			for (uint64_t objid : m_removed_scene_objids)
+			{
 				m_scene_objs_cache.erase(objid);
+				m_move_objs.erase(objid);
+			}
 			m_removed_scene_objids.clear();
 		}
 	}

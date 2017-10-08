@@ -14,6 +14,15 @@ out_cs_file_path = Log/CsvLogConfig.cs
 out_cpp_file_path = log/CsvLogConfig
 out_lua_file_path = log/CsvLogConfig.lua
 
+[excel2csv-scene.scene-config]
+file_path = scene/scene.xlsx
+sheet_name = ≥°æ∞≈‰÷√
+out_csv_file_path = scene/CsvSceneConfig.csv
+class_name = CsvSceneConfig
+out_cs_file_path = Scene/CsvSceneConfig.cs
+out_cpp_file_path = Scene/CsvSceneConfig
+out_lua_file_path = Scene/CsvSceneConfig.lua
+
 
 
 

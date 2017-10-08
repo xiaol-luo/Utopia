@@ -21,13 +21,12 @@ namespace GameLogic
 		virtual ~SceneObject();
 
 	public:
-
-		void LeaveScene();
-		void OnEnterScene(Scene *scene);
-		void OnLeaveScene(Scene *scene);
-		void Update(long long now_ms);
+		virtual void OnEnterScene(Scene *scene);
+		virtual void OnLeaveScene(Scene *scene);
+		virtual void Update(long long now_ms);
 
 	public:
+		void LeaveScene();
 		void SetScene(Scene *scene) { m_scene = scene; }
 		Scene * GetScene() { return m_scene; }
 		uint64_t GetId() { return m_id; }

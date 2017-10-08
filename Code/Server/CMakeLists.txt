@@ -39,6 +39,12 @@ INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libev
 INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode ./Logic/LogicModules)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/lua)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/sol)
+INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/DebugUtils/Include)
+INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/Detour/Include)
+INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/DetourCrowd/Include)
+INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/DetourTileCache/Include)
+INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/Recast/Include)
+INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/RecastDemo/Include)
 
 IF (WIN32)
 	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/libs)

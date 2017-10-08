@@ -4,6 +4,7 @@
 #include <ctime>
 #include "CommonModules/Timer/ITimerModule.h"
 #include "Common/Utils/LogUtil.h"
+#include "Common/Utils/TimerUtil.h"
 
 const int TRY_MAX_TIMES = 100000;
 
@@ -43,6 +44,7 @@ bool ServerLogic::Init()
 	else
 	{
 		LogUtil::Init(m_module_mgr->GetModule<LogModule>());
+		TimerUtil::Init(m_timer_module);
 	}
 	return ret;
 }
@@ -103,6 +105,9 @@ void ServerLogic::Realse()
 
 void ServerLogic::Destroy()
 {
+	LogUtil::Destroy();
+	TimerUtil::Destroy();
+
 	m_state = EServerLogicState_Destroy;
 	int loop_times = 0;
 	EModuleRetCode retCode = EModuleRetCode_Succ;
