@@ -268,7 +268,7 @@ namespace GameLogic
 
 			{
 				// navmesh query
-				status = m_dtNavMeshQuery->init(m_dtNavMesh, 2048);
+				status = m_dtNavMeshQuery->init(m_dtNavMesh, 512);
 				if (dtStatusFailed(status))
 				{
 					ret = false;

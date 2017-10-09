@@ -12,5 +12,17 @@ namespace GameLogic
 	{
 
 	}
+	void MoveObject::OnEnterScene(Scene * scene)
+	{
+		SceneObject::OnLeaveScene(scene);
+	}
+	void MoveObject::OnLeaveScene(Scene * scene)
+	{
+		SceneObject::OnLeaveScene(scene);
+	}
+	void MoveObject::Update(long long now_ms)
+	{
+		SceneObject::Update(now_ms);
+	}
 }
 

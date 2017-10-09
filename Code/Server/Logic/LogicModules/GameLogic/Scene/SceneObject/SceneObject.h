@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "Common/Math/Vector3.h"
 
 namespace GameLogic
 {
@@ -32,10 +33,15 @@ namespace GameLogic
 		uint64_t GetId() { return m_id; }
 		void SetId(uint64_t id) { m_id = id; }
 		ESceneObjectType GetObjectType() { return m_obj_type; }
-
+		inline Vector3 GetPosition() { return m_position; }
+		inline void setPosition(const Vector3 &val) { m_position = val; }
+		inline float getRotation() { return m_rotation; }
+		inline void setRotation(float val) { m_rotation = val; }
 	protected:
 		Scene *m_scene = nullptr;
 		uint64_t m_id = 0;
 		ESceneObjectType m_obj_type = ESOT_Max;
+		Vector3 m_position;
+		float m_rotation;
 	};
 }

@@ -32,7 +32,6 @@ void TestSol(lua_State *l)
 		lua.set_function("beep", [&x] { ++x; });
 		lua.script("beep()");
 		printf("c++ beep result %d\n", x);
-		ret = lua.script_file("LuaScript/test_export_function.lua");
 	}
 	
 	ret = lua.script_file("LuaScript/test_sol.lua");
