@@ -77,14 +77,15 @@ namespace GameLogic
 		scene_obj->LeaveScene();
 		scene_obj->SetScene(this);
 		scene_obj->SetId(m_last_scene_objid);
-		scene_obj->OnEnterScene(this);
-		m_scene_objs[m_last_scene_objid] = scene_obj;
-		m_scene_objs_cache[m_last_scene_objid] = scene_obj;
 		{
 			std::shared_ptr<MoveObject> move_ptr = std::dynamic_pointer_cast<MoveObject>(scene_obj);
 			if (nullptr != move_ptr)
-				m_move_objs[m_last_scene_objid] = move_ptr;
+				m_moveMgr->OnMoveObjectEnterScene(move_ptr);
 		}
+		scene_obj->OnEnterScene(this);
+		m_scene_objs[m_last_scene_objid] = scene_obj;
+		m_scene_objs_cache[m_last_scene_objid] = scene_obj;
+
 		return m_last_scene_objid;
 	}
 
@@ -98,6 +99,11 @@ namespace GameLogic
 			return;
 
 		std::shared_ptr<SceneObject> scene_obj = it->second;
+		{
+			std::shared_ptr<MoveObject> move_ptr = std::dynamic_pointer_cast<MoveObject>(scene_obj);
+			if (nullptr != move_ptr)
+				m_moveMgr->OnMoveObjectEnterScene(move_ptr);
+		}
 		scene_obj->OnLeaveScene(this);
 		scene_obj->SetScene(nullptr);
 		scene_obj->SetId(INVALID_SCENE_OBJID);
@@ -113,7 +119,6 @@ namespace GameLogic
 			for (uint64_t objid : m_removed_scene_objids)
 			{
 				m_scene_objs_cache.erase(objid);
-				m_move_objs.erase(objid);
 			}
 			m_removed_scene_objids.clear();
 		}

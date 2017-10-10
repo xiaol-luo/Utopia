@@ -25,12 +25,14 @@ namespace GameLogic
 		float GetSpeed() const { return m_speed; }
 		void SetMass(float mass) { m_mass = mass; }
 		float GetMass() const { return m_mass; }
+		uint64_t GetNavAgentId() { return m_nav_agent_id; }
+		void SetNavAgentId(uint64_t val) { m_nav_agent_id = val; }
 
 	protected:
-		NavAgent *m_navAgent = nullptr;
 		float m_speed = 6.0f;
 		float m_radius = 0.4f;
 		float m_height = 2.0f;
 		float m_mass = 100.0f;
+		uint64_t m_nav_agent_id = 0;
 	};
 }

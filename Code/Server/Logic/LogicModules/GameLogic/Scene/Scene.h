@@ -50,7 +50,6 @@ namespace GameLogic
 		MoveMgr * MoveMgr() { return m_moveMgr; }
 
 	protected:
-		std::unordered_map<uint64_t, std::weak_ptr<MoveObject>> m_move_objs;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> m_scene_objs_cache;
 		std::unordered_set<uint64_t> m_removed_scene_objids;
 		void CheckSceneObjectsCache();

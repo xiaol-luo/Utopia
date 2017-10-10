@@ -16,6 +16,9 @@ namespace GameLogic
 		bool Init(NavMesh *navMesh);
 		void Update();
 
+		dtCrowd * GetCrowd() { return m_dtCrowd; }
+		dtNavMeshQuery GetNavMeshQuery() {}
+
 	protected:
 		dtCrowd *m_dtCrowd = nullptr;
 		dtNavMeshQuery *m_dtNavMeshQuery = nullptr;
