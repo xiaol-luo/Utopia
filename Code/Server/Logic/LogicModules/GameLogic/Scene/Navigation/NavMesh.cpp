@@ -92,7 +92,7 @@ namespace GameLogic
 		m_geom = nullptr;
 	}
 
-	void NavMesh::Update()
+	void NavMesh::UpdateTerrian()
 	{
 		if (nullptr != m_dtTileCache && nullptr != m_dtNavMesh)
 		{

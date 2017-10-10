@@ -60,7 +60,7 @@ namespace GameLogic
 		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
 
-		m_navMesh->Update();
+		m_navMesh->UpdateTerrian();
 		m_moveMgr->Update();
 	}
 

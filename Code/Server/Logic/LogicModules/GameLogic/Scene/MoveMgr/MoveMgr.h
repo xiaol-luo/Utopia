@@ -4,7 +4,7 @@
 namespace GameLogic
 {
 	class MoveObject;
-	class NavMgr;
+	class NavMesh;
 	class Scene;
 	class NavAgent;
 
@@ -23,7 +23,7 @@ namespace GameLogic
 
 	protected:
 		Scene *m_scene = nullptr;
-		NavMgr *m_navMgr = nullptr;
+		NavMesh *m_nav_mesh = nullptr;
 		std::unordered_map<uint64_t, std::weak_ptr<MoveObject>> m_move_objs;
 		std::unordered_map<uint64_t, NavAgent *> m_nav_agents;
 

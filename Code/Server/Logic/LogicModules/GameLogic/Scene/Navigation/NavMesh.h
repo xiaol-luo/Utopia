@@ -22,7 +22,7 @@ namespace GameLogic
 		NavMesh(Scene *scene);
 		virtual ~NavMesh();
 
-		void Update();
+		void UpdateTerrian();
 		bool LoadTerrain(std::string file_path);
 		dtCrowd * GetCrowd() { return m_dtCrowd; }
 		dtNavMeshQuery * GetNavMeshQuery() { return m_dtNavMeshQuery; }

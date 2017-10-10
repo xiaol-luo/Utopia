@@ -4,26 +4,27 @@
 #include "GameLogic/Scene/Scene.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "GameLogic/Scene/SceneObject/MoveObject.h"
+#include "Common/Utils/TimerUtil.h"
 
 GameLogic::MoveMgr::MoveMgr(Scene * scene) : m_scene(scene)
 {
-	m_navMgr = new NavMgr();
+	m_nav_mesh = scene->NavMesh();
 }
 
 GameLogic::MoveMgr::~MoveMgr()
 {
-	delete m_navMgr; m_navMgr = nullptr;
+
 }
 
 bool GameLogic::MoveMgr::Awake()
 {
-	bool ret = m_navMgr->Init(m_scene->NavMesh());
-	return ret;
+	return true;
 }
 
 void GameLogic::MoveMgr::Update()
 {
-	m_navMgr->Update();
+	long deltaMs = TimerUtil::DeltaMs();
+	m_nav_mesh->GetCrowd()->update(deltaMs * 0.001, nullptr);
 }
 
 void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj)
