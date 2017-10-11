@@ -78,11 +78,13 @@ EModuleRetCode LogModule::Init(void *param)
 			m_loggers[LOGGER_ID_STDERR] = spdlog::stderr_color_mt(stderr_cfg->name);
 			m_loggers[LOGGER_ID_STDERR]->set_level((spdlog::level::level_enum)stderr_cfg->log_level);
 			m_log_datas[LOGGER_ID_STDERR].log_level = (ELogLevel)stderr_cfg->log_level;
+			m_log_datas[LOGGER_ID_STDERR].write_loggers.insert(m_loggers[LOGGER_ID_STDERR]);
 		}
 		{
 			m_loggers[LOGGER_ID_STDOUT] = spdlog::stderr_color_mt(stdout_cfg->name);
 			m_loggers[LOGGER_ID_STDOUT]->set_level((spdlog::level::level_enum)stdout_cfg->log_level);
 			m_log_datas[LOGGER_ID_STDOUT].log_level = (ELogLevel)stdout_cfg->log_level;
+			m_log_datas[LOGGER_ID_STDOUT].write_loggers.insert(m_loggers[LOGGER_ID_STDOUT]);
 		}
 
 		for (auto kv_pair : cfg_map)

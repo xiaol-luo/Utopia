@@ -103,8 +103,8 @@ EModuleRetCode TimerModule::Update()
 	}
 	this->ChekRemoveNodes();
 
-	m_module_mgr->GetModule<LogModule>()->Debug(2, "{0} {1} {2} {3} {4} {5}"
-		, m_now_ms, m_delta_ms, m_add_times, m_remove_times, m_id_to_timer_node.size(), m_execute_times);
+	// m_module_mgr->GetModule<LogModule>()->Debug(2, "{0} {1} {2} {3} {4} {5}"
+	// 	, m_now_ms, m_delta_ms, m_add_times, m_remove_times, m_id_to_timer_node.size(), m_execute_times);
 	m_execute_times = 0;
 
 	return EModuleRetCode_Pending;

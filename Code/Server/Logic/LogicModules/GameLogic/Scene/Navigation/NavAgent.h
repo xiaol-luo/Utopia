@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "DetourCrowd.h"
 #include "Common/Math/Vector3.h"
+#include <functional>
 
 namespace GameLogic
 {
@@ -13,10 +14,10 @@ namespace GameLogic
 	public:
 		const static uint64_t INVALID_ID = 0;
 	public:
-		NavAgent(NavMesh *nav_mgr);
+		NavAgent(NavMesh *nav_mesh, uint64_t id);
 		virtual ~NavAgent();
 
-		void SetMovedCb(MovedCallback cb) { m_moved_cb = cb; }
+		void SetMovedCb(std::function<void(NavAgent *)> cb) { m_moved_cb = cb; }
 		void OnMoved();
 
 	public:
@@ -27,13 +28,14 @@ namespace GameLogic
 		void Enable();
 		void Disable();
 		bool IsEnable() { return DT_AGENT_INVALID_ID != m_dt_agent_id; }
-
+		uint64_t GetId() { return m_id; }
 
 	private:
+		uint64_t m_id = INVALID_ID;
 		NavMesh *m_nav_mesh = nullptr;
 		dtCrowd *m_crowd = nullptr;
 		dtNavMeshQuery *m_nav_mesh_query = nullptr;
-		MovedCallback m_moved_cb = nullptr;
+		std::function<void(NavAgent *)> m_moved_cb = nullptr;
 
 		static const int DT_AGENT_INVALID_ID = -1;
 		int m_dt_agent_id = DT_AGENT_INVALID_ID;

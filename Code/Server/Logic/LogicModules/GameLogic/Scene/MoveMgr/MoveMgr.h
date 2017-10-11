@@ -20,6 +20,7 @@ namespace GameLogic
 	public:
 		void OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj);
 		void OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move_obj);
+		void OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObject> weak_move_obj);
 
 	protected:
 		Scene *m_scene = nullptr;

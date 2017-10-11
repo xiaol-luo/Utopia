@@ -3,7 +3,7 @@
 
 namespace GameLogic
 {
-	NavAgent::NavAgent(NavMesh *nav_mgr) : m_nav_mesh(nav_mgr)
+	NavAgent::NavAgent(NavMesh *nav_mesh, uint64_t id) : m_nav_mesh(nav_mesh), m_id(id)
 	{
 		m_crowd = m_nav_mesh->GetCrowd();
 		m_nav_mesh_query = m_nav_mesh->GetNavMeshQuery();
@@ -11,12 +11,21 @@ namespace GameLogic
 
 	NavAgent::~NavAgent()
 	{
-
+		this->Disable();
 	}
 
 	void NavAgent::OnMoved()
 	{
-		if (IsEnable() && m_moved_cb)
+		if (!IsEnable())
+			return;
+
+		const dtCrowdAgent *dt_agent = m_crowd->getAgent(m_dt_agent_id);
+		if (nullptr != dt_agent)
+		{
+			m_pos = Vector3(dt_agent->npos);
+		}
+
+		if (m_moved_cb)
 			m_moved_cb(this);
 	}
 
