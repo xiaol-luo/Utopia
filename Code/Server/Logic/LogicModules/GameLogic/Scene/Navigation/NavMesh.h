@@ -12,6 +12,9 @@ struct TileCacheData;
 class dtCrowd;
 class dtNavMeshQuery;
 
+#include "DetourNavMesh.h"
+#include "Common/Math/Vector3.h"
+
 namespace GameLogic
 {
 	class Scene;
@@ -26,6 +29,9 @@ namespace GameLogic
 		bool LoadTerrain(std::string file_path);
 		dtCrowd * GetCrowd() { return m_dtCrowd; }
 		dtNavMeshQuery * GetNavMeshQuery() { return m_dtNavMeshQuery; }
+
+		void FindNearestPoint(const Vector3 & pos, int filter, dtPolyRef * target_ref, Vector3 *target_pos);
+		Vector3 Raycast(const Vector3 &start_pos, const Vector3 &endPos);
 
 	protected:
 		Scene *m_scene = nullptr;

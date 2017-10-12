@@ -318,6 +318,21 @@ namespace GameLogic
 		return ret;
 	}
 
+	void NavMesh::FindNearestPoint(const Vector3 &pos, int filter, dtPolyRef *target_ref, Vector3 *target_pos)
+	{
+		const dtNavMeshQuery *navquery = m_dtCrowd->getNavMeshQuery();
+		const dtQueryFilter *dt_filter = m_dtCrowd->getFilter(filter);
+		const float *ext = m_dtCrowd->getQueryExtents();
+		float tmp_pos[3];
+		navquery->findNearestPoly(pos.toPointer(), ext, dt_filter, target_ref, tmp_pos);
+		*target_pos = Vector3(tmp_pos);
+	}
+
+	Vector3 NavMesh::Raycast(const Vector3 & start_pos, const Vector3 & endPos)
+	{
+		return Vector3();
+	}
+
 	int NavMesh::rasterizeTileLayers(const int tx, const int ty, const rcConfig& cfg, TileCacheData* tiles, const int maxTiles)
 	{
 		if (!m_geom || !m_geom->getMesh() || !m_geom->getChunkyMesh())

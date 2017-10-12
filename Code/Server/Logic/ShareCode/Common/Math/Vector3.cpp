@@ -3,9 +3,7 @@
 #include "Vector2.h"
 #include "MathUtils.h"
 #include <math.h>
-#include <float.h>
-
-static const float float_epsilon = 0.00001F;
+#include <cfloat>
 
 const Vector3 Vector3::back(0, 0, -1);		//	Shorthand for writing Vector3(0, 0, -1).
 const Vector3 Vector3::down(0, -1, 0);		//	Shorthand for writing Vector3(0, -1, 0).
@@ -124,7 +122,7 @@ Vector3 Vector3::moveTowards(const Vector3 &lhs, const Vector3 &rhs, float clamp
 	float sqrClampedDistance = clampedDistance * clampedDistance;
 	if (sqrDelta > sqrClampedDistance) {
 		float deltaMag = sqrt(sqrDelta);
-		if (deltaMag > float_epsilon)
+		if (deltaMag > FLT_EPSILON)
 			return lhs + delta / deltaMag * clampedDistance;
 		else
 			return lhs;

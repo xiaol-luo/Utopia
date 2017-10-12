@@ -21,14 +21,17 @@ namespace GameLogic
 		void OnMoved();
 
 	public:
-		Vector3 GetPos() { return m_pos; }
+		const Vector3 & GetPos() { return m_pos; }
 		void SetPos(Vector3 val);
-		dtCrowdAgentParams GetAgentParams() { return m_agent_params; }
+		const dtCrowdAgentParams & GetAgentParams() { return m_agent_params; }
 		void SetAgentParams(dtCrowdAgentParams val);
 		void Enable();
 		void Disable();
 		bool IsEnable() { return DT_AGENT_INVALID_ID != m_dt_agent_id; }
 		uint64_t GetId() { return m_id; }
+		const Vector3 & GetVelocity() { return m_velocity; }
+		const float GetMaxSpeed() { return m_agent_params.maxSpeed; }
+		void SetMaxSpeed(float val);
 
 	private:
 		uint64_t m_id = INVALID_ID;
@@ -41,5 +44,24 @@ namespace GameLogic
 		int m_dt_agent_id = DT_AGENT_INVALID_ID;
 		dtCrowdAgentParams m_agent_params;
 		Vector3 m_pos;
+		Vector3 m_velocity;
+
+	public:
+		void TryMoveToPos(const Vector3 &pos);
+		void TryMoveToDir(float angle);
+		void StopMove();
+		void TryResumeMove();
+
+		enum MoveType
+		{
+			MoveType_None = 0,
+			MoveType_Pos,
+			MoveType_Dir,
+
+			MoveType_Max,
+		};
+		MoveType m_move_type = MoveType_None;
+		Vector3 m_desired_move_pos;
+		float m_desired_move_dir = 0;
 	};
 }

@@ -42,8 +42,8 @@ namespace GameLogic
 
 		m_red_hero = std::make_shared<Hero>();
 		this->AddObject(m_red_hero);
-		m_blue_hero = std::make_shared<Hero>();
-		this->AddObject(m_blue_hero);
+		// m_blue_hero = std::make_shared<Hero>();
+		// this->AddObject(m_blue_hero);
 
 		return true;
 	}

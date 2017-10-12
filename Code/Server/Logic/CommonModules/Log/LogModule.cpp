@@ -52,20 +52,13 @@ EModuleRetCode LogModule::Init(void *param)
 		
 		std::map<int, Config::CsvLogConfig *> cfg_map = cfg_set.id_to_key;
 		int max_log_id = -1;
-		Config::CsvLogConfig *stderr_cfg;
-		Config::CsvLogConfig *stdout_cfg;
 		for (auto kv_pair : cfg_map)
 		{
 			int logger_id = kv_pair.first;
-			if (logger_id == LOGGER_ID_STDERR)
-				stderr_cfg = kv_pair.second;
-			if (logger_id == LOGGER_ID_STDOUT)
-				stdout_cfg = kv_pair.second;
 			if (logger_id > max_log_id)
 				max_log_id = logger_id;
 		}
-		if (max_log_id < LOGGER_ID_STDERR || max_log_id < LOGGER_ID_STDOUT
-			|| nullptr == stderr_cfg || nullptr == stdout_cfg)
+		if (max_log_id < LOGGER_ID_STDOUT)
 		{
 			ret = false;
 			break;
@@ -74,26 +67,23 @@ EModuleRetCode LogModule::Init(void *param)
 		m_logger_num = max_log_id + 1;
 		m_log_datas = new LogData[m_logger_num];
 		m_loggers = new std::shared_ptr<spdlog::logger>[m_logger_num];
+		/*
 		{
 			m_loggers[LOGGER_ID_STDERR] = spdlog::stderr_color_mt(stderr_cfg->name);
 			m_loggers[LOGGER_ID_STDERR]->set_level((spdlog::level::level_enum)stderr_cfg->log_level);
 			m_log_datas[LOGGER_ID_STDERR].log_level = (ELogLevel)stderr_cfg->log_level;
-			m_log_datas[LOGGER_ID_STDERR].write_loggers.insert(m_loggers[LOGGER_ID_STDERR]);
 		}
 		{
 			m_loggers[LOGGER_ID_STDOUT] = spdlog::stderr_color_mt(stdout_cfg->name);
 			m_loggers[LOGGER_ID_STDOUT]->set_level((spdlog::level::level_enum)stdout_cfg->log_level);
 			m_log_datas[LOGGER_ID_STDOUT].log_level = (ELogLevel)stdout_cfg->log_level;
-			m_log_datas[LOGGER_ID_STDOUT].write_loggers.insert(m_loggers[LOGGER_ID_STDOUT]);
 		}
+		*/
 
 		for (auto kv_pair : cfg_map)
 		{
 			int logger_id = kv_pair.first;
 			Config::CsvLogConfig *cfg = kv_pair.second;
-
-			if (LOGGER_ID_STDERR == logger_id || LOGGER_ID_STDOUT == logger_id)
-				continue;
 
 			std::shared_ptr<spdlog::logger> logger = nullptr;
 			switch (cfg->logger_type)
@@ -133,34 +123,32 @@ EModuleRetCode LogModule::Init(void *param)
 			}
 			logger->set_level((spdlog::level::level_enum)cfg->log_level);
 			m_loggers[logger_id] = logger;
-			m_log_datas[logger_id].log_level = (ELogLevel)cfg->log_level;
+			LogData &log_data = m_log_datas[logger_id];
+			log_data.log_id = logger_id;
+			log_data.log_level = (ELogLevel)cfg->log_level;
+			log_data.write_loggers.insert(logger);
 		}
 
-		for (int i = LOGGER_ID_STDERR + 1; i < m_logger_num; ++i)
+		for (int curr_log_id = LOGGER_ID_STDOUT; curr_log_id < m_logger_num; ++curr_log_id)
 		{
-			LogData &data = m_log_datas[i];
-			data.log_id = i;
-			std::shared_ptr<spdlog::logger> logger = m_loggers[i];
-			if (nullptr == logger)
+			std::shared_ptr<spdlog::logger> curr_logger = m_loggers[curr_log_id];
+			if (nullptr == curr_logger)
 				continue;
-			data.write_loggers.insert(logger); // 把内容写入自己的loggger
-			for (auto kv_pair : cfg_map) // 检查是否需要把内容写入其他loggger
-			{
-				int logger_id = kv_pair.first;
-				if (logger_id == data.log_id)
-					continue;
-				std::shared_ptr<spdlog::logger> tmp_logger = m_loggers[logger_id];
-				if (nullptr == tmp_logger)
-					continue;
 
-				Config::CsvLogConfig *cfg = kv_pair.second;
-				for (int writer_id : cfg->alsoWritetoMe)
+			auto curr_cfg_it = cfg_map.find(curr_log_id);
+			if (cfg_map.end() != curr_cfg_it)
+			{
+				Config::CsvLogConfig *curr_log_cfg = curr_cfg_it->second;
+				std::set<int> related_log_ids(curr_log_cfg->alsoWritetoMe.begin(), curr_log_cfg->alsoWritetoMe.end());
+				for (int log_id = LOGGER_ID_STDERR + 1; log_id <= max_log_id; ++log_id)
 				{
-					if (-1 == writer_id || data.log_id == writer_id)
-					{
-						data.write_loggers.insert(tmp_logger);
-						break;
-					}
+					if (log_id == curr_log_id)
+						continue;
+					if (nullptr == m_loggers[log_id])
+						continue;
+					if (related_log_ids.count(-1) <= 0 && related_log_ids.count(log_id) <= 0)
+						continue;
+					m_log_datas[log_id].write_loggers.insert(curr_logger);
 				}
 			}
 		}

@@ -63,9 +63,21 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 	// params.avoidancePriority = 0.5f; 
 	params.queryFilterType = 0;
 	nav_agent->SetAgentParams(params);
-	auto xxx = std::bind(&GameLogic::MoveMgr::OnNavAgentMoved, this, std::placeholders::_1, move_obj);
-	nav_agent->SetMovedCb(xxx);
+	nav_agent->SetMovedCb(std::bind(&GameLogic::MoveMgr::OnNavAgentMoved, this, std::placeholders::_1, move_obj));
 	nav_agent->Enable();
+
+	{
+		// test
+		uint64_t nav_agent_id = nav_agent->GetId();
+		TimerUtil::AddFirm([nav_agent_id, this]() {
+			auto it = m_nav_agents.find(nav_agent_id);
+			if (m_nav_agents.end() != it)
+			{
+				it->second->TryMoveToDir((std::rand() + 1) * 0.01f);
+			}
+		}, 
+		1000 * 2, INT64_MAX);
+	}
 }
 
 void GameLogic::MoveMgr::OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObject> weak_move_obj)
@@ -73,13 +85,13 @@ void GameLogic::MoveMgr::OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObje
 	auto move_obj = weak_move_obj.lock();
 	if (nullptr == move_obj)
 	{
-		LogUtil::Error(LogUtil::STDOUT, "MoveMgr::OnNavAgentMoved move object expired");
+		LogUtil::Error(LogUtil::STDERR, "MoveMgr::OnNavAgentMoved move object expired");
 		return;
 	}
 
 	move_obj->setPosition(agent->GetPos());
 	Vector3 pos = move_obj->GetPosition();
-	LogUtil::Debug(LogUtil::STDOUT, "MoveMgr::OnNavAgentMoved id {0}, pos {1} {2} {3}", 
+	LogUtil::Info(4, "OnNavAgentMoved id {0}, pos {1} {2} {3}", 
 		move_obj->GetId(), pos.x, pos.y, pos.z);
 }
 

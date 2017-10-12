@@ -58,7 +58,7 @@ void TimerModule::TryExecuteNode(srv_rbtree_node_t *node)
 	if (m_to_remove_nodes.count(timer_item->id) > 0)
 		return;
 
-	// timer_item->action();
+	timer_item->action();
 	if (!timer_item->is_firm)
 		--timer_item->execute_times;
 	if (timer_item->is_firm || timer_item->execute_times > 0)
