@@ -89,7 +89,7 @@ namespace GameLogic
 	void NavAgent::TryMoveToPos(const Vector3 &pos)
 	{
 		this->StopMove();
-		m_move_type = MoveType_Pos;
+		m_move_type = EMoveType_Pos;
 		m_desired_move_pos = pos;
 		TryResumeMove();
 	}
@@ -97,14 +97,14 @@ namespace GameLogic
 	void NavAgent::TryMoveToDir(float angle)
 	{
 		this->StopMove();
-		m_move_type = MoveType_Dir;
+		m_move_type = EMoveType_Dir;
 		m_desired_move_dir = angle;
 		TryResumeMove();
 	}
 
 	void NavAgent::StopMove()
 	{
-		m_move_type = MoveType_None;
+		m_move_type = EMoveType_None;
 		m_desired_move_dir = 0.0f;
 		m_desired_move_pos = Vector3::zero;
 		if (IsEnable())
@@ -118,7 +118,7 @@ namespace GameLogic
 		if (!IsEnable())
 			return;
 
-		if (MoveType_Dir == m_move_type)
+		if (EMoveType_Dir == m_move_type)
 		{
 			// m_crowd->requestMoveVelocity()
 			if (abs(m_desired_move_dir) >= FLT_EPSILON)
@@ -128,7 +128,7 @@ namespace GameLogic
 				m_crowd->requestMoveVelocity(m_dt_agent_id, velocity.toPointer());
 			}
 		}
-		if (MoveType_Pos == m_move_type)
+		if (EMoveType_Pos == m_move_type)
 		{
 			Vector3 target_pos;
 			dtPolyRef poly_ref;

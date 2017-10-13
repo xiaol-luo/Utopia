@@ -67,18 +67,6 @@ EModuleRetCode LogModule::Init(void *param)
 		m_logger_num = max_log_id + 1;
 		m_log_datas = new LogData[m_logger_num];
 		m_loggers = new std::shared_ptr<spdlog::logger>[m_logger_num];
-		/*
-		{
-			m_loggers[LOGGER_ID_STDERR] = spdlog::stderr_color_mt(stderr_cfg->name);
-			m_loggers[LOGGER_ID_STDERR]->set_level((spdlog::level::level_enum)stderr_cfg->log_level);
-			m_log_datas[LOGGER_ID_STDERR].log_level = (ELogLevel)stderr_cfg->log_level;
-		}
-		{
-			m_loggers[LOGGER_ID_STDOUT] = spdlog::stderr_color_mt(stdout_cfg->name);
-			m_loggers[LOGGER_ID_STDOUT]->set_level((spdlog::level::level_enum)stdout_cfg->log_level);
-			m_log_datas[LOGGER_ID_STDOUT].log_level = (ELogLevel)stdout_cfg->log_level;
-		}
-		*/
 
 		for (auto kv_pair : cfg_map)
 		{

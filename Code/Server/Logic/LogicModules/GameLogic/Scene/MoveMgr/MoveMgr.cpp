@@ -34,6 +34,49 @@ void GameLogic::MoveMgr::Update()
 	}
 }
 
+void GameLogic::MoveMgr::TryMoveToPos(uint64_t agent_id, const Vector3 &pos)
+{
+	NavAgent *agent = this->GetNavAgent(agent_id);
+	if (nullptr != agent)
+		agent->TryMoveToPos(pos);
+}
+
+void GameLogic::MoveMgr::TryMoveToDir(uint64_t agent_id, float angle)
+{
+	NavAgent *agent = this->GetNavAgent(agent_id);
+	if (nullptr != agent)
+		agent->TryMoveToDir(angle);
+}
+
+void GameLogic::MoveMgr::StopMove(uint64_t agent_id)
+{
+	NavAgent *agent = this->GetNavAgent(agent_id);
+	if (nullptr != agent)
+		agent->StopMove();
+}
+
+void GameLogic::MoveMgr::TryResumeMove(uint64_t agent_id)
+{
+	NavAgent *agent = this->GetNavAgent(agent_id);
+	if (nullptr != agent)
+		agent->TryResumeMove();
+}
+
+GameLogic::NavAgent * GameLogic::MoveMgr::GetNavAgent(uint64_t agent_id)
+{
+	auto it = m_nav_agents.find(agent_id);
+	if (m_nav_agents.end() != it)
+		return it->second;
+	return nullptr;
+}
+
+void GameLogic::MoveMgr::SetMaxSpeed(uint64_t agent_id, float max_speed)
+{
+	NavAgent *agent = this->GetNavAgent(agent_id);
+	if (nullptr != agent)
+		agent->SetMaxSpeed(max_speed);
+}
+
 void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj)
 {
 	m_move_objs[move_obj->GetId()] = move_obj;
@@ -76,7 +119,7 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 				it->second->TryMoveToDir((std::rand() + 1) * 0.01f);
 			}
 		}, 
-		1000 * 2, INT64_MAX);
+		1000 * 2, -1);
 	}
 }
 
@@ -91,8 +134,9 @@ void GameLogic::MoveMgr::OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObje
 
 	move_obj->setPosition(agent->GetPos());
 	Vector3 pos = move_obj->GetPosition();
-	LogUtil::Info(4, "OnNavAgentMoved id {0}, pos {1} {2} {3}", 
-		move_obj->GetId(), pos.x, pos.y, pos.z);
+	Vector3 v = agent->GetVelocity();
+	LogUtil::Info(4, "OnNavAgentMoved id {0}, pos({1},{2},{3}) v({4},{5},{6})", 
+		move_obj->GetId(), pos.x, pos.y, pos.z, v.x, v.y, v.z);
 }
 
 void GameLogic::MoveMgr::OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move_obj)

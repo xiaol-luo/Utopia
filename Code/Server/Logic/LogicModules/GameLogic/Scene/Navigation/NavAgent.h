@@ -1,7 +1,10 @@
+#pragma once
+
 #include <stdint.h>
 #include "DetourCrowd.h"
 #include "Common/Math/Vector3.h"
 #include <functional>
+#include "GameLogic/Scene/Defines/SceneObjectDefine.h"
 
 namespace GameLogic
 {
@@ -52,15 +55,7 @@ namespace GameLogic
 		void StopMove();
 		void TryResumeMove();
 
-		enum MoveType
-		{
-			MoveType_None = 0,
-			MoveType_Pos,
-			MoveType_Dir,
-
-			MoveType_Max,
-		};
-		MoveType m_move_type = MoveType_None;
+		EMoveType m_move_type = EMoveType_None;
 		Vector3 m_desired_move_pos;
 		float m_desired_move_dir = 0;
 	};
