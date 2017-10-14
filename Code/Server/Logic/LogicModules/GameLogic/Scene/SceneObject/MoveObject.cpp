@@ -2,6 +2,7 @@
 #include "GameLogic/Scene/Scene.h"
 #include "GameLogic/Scene/MoveMgr/MoveMgr.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
+#include "GameLogic/Scene/Navigation/NavAgent.h"
 
 namespace GameLogic
 {
@@ -33,7 +34,7 @@ namespace GameLogic
 	void MoveObject::SetSpeed(float speed)
 	{
 		m_speed = speed;
-		m_scene->MoveMgr()->SetMaxSpeed(m_nav_agent_id, speed);
+		m_move_agent->SetMoveMaxSpeed(speed);
 	}
 
 	const Vector3 & MoveObject::GetVelocity()
@@ -43,17 +44,17 @@ namespace GameLogic
 
 	void MoveObject::TryMoveToPos(const Vector3 &pos)
 	{
-		m_scene->MoveMgr()->TryMoveToPos(m_nav_agent_id, pos);
+		m_move_agent->GetNavAgent()->TryMoveToPos(pos);
 	}
 
 	void MoveObject::TryMoveToDir(float angle)
 	{
-		m_scene->MoveMgr()->TryMoveToDir(m_nav_agent_id, angle);
+		m_move_agent->GetNavAgent()->TryMoveToDir(angle);
 	}
 
 	void MoveObject::TryStopMove()
 	{
-		m_scene->MoveMgr()->StopMove(m_nav_agent_id);
+		m_move_agent->GetNavAgent()->StopMove();
 	}
 
 	EMoveType MoveObject::GetMoveType()

@@ -33,15 +33,11 @@ namespace GameLogic
 		float m_radius = 0.4f;
 		float m_height = 2.0f;
 		float m_mass = 100.0f;
-		uint64_t m_nav_agent_id = 0;
 		MoveAgent *m_move_agent = nullptr;
 
 	public:
-		uint64_t GetNavAgentId() { return m_nav_agent_id; }
 		void SetMoveAgent(MoveAgent *val) { m_move_agent = val; }
 		MoveAgent * GetMoveAgent() { return m_move_agent; }
-		void SetNavAgentId(uint64_t val) { m_nav_agent_id = val; }
-		// void SetVelocity(Vector3 val);
 		const Vector3 & GetVelocity();
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);

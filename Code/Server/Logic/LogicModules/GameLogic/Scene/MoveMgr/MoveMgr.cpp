@@ -169,34 +169,16 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 
 }
 
-void GameLogic::MoveMgr::OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObject> weak_move_obj)
-{
-	auto move_obj = weak_move_obj.lock();
-	if (nullptr == move_obj)
-	{
-		LogUtil::Error(LogUtil::STDERR, "MoveMgr::OnNavAgentMoved move object expired");
-		return;
-	}
-
-	move_obj->setPosition(agent->GetPos());
-	Vector3 pos = move_obj->GetPosition();
-	Vector3 v = agent->GetVelocity();
-	LogUtil::Info(4, "OnNavAgentMoved id {0}, pos({1},{2},{3}) v({4},{5},{6})", 
-		move_obj->GetId(), pos.x, pos.y, pos.z, v.x, v.y, v.z);
-}
-
 void GameLogic::MoveMgr::OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move_obj)
 {
 	m_move_objs.erase(move_obj->GetId());
 
-	/*
-	auto it = m_nav_agents.find(move_obj->GetNavAgentId());
-	move_obj->SetNavAgentId(NavAgent::INVALID_ID);
-	if (m_nav_agents.end() != it)
+	auto it = m_move_agents.find(move_obj->GetMoveAgent()->GetId());
+	move_obj->SetMoveAgent(nullptr);
+	if (m_move_agents.end() != it)
 	{
 		delete it->second;
-		m_nav_agents.erase(it);
+		m_move_agents.erase(it);
 	}
-	*/
 }
 

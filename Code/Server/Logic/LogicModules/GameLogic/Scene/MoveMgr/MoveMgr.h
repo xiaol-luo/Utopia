@@ -33,13 +33,14 @@ namespace GameLogic
 	public:
 		void OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj);
 		void OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move_obj);
-		void OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObject> weak_move_obj);
 
 	protected:
 		Scene *m_scene = nullptr;
 		NavMesh *m_nav_mesh = nullptr;
 		std::unordered_map<uint64_t, std::weak_ptr<MoveObject>> m_move_objs;
+
 		std::unordered_map<uint64_t, NavAgent *> m_nav_agents;
+		
 		std::unordered_map<uint64_t, MoveAgent *> m_move_agents;
 		uint64_t m_last_nav_agent_id = 0;
 		uint64_t m_last_move_agent_id = 0;
