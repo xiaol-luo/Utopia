@@ -5,6 +5,12 @@
 
 namespace GameLogic
 {
+	NavAgent::NavAgent(NavMesh *nav_mesh) : m_nav_mesh(nav_mesh)
+	{
+		m_crowd = m_nav_mesh->GetCrowd();
+		m_nav_mesh_query = m_nav_mesh->GetNavMeshQuery();
+	}
+
 	NavAgent::NavAgent(NavMesh *nav_mesh, uint64_t id) : m_nav_mesh(nav_mesh), m_id(id)
 	{
 		m_crowd = m_nav_mesh->GetCrowd();

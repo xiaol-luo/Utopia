@@ -1,6 +1,7 @@
 #include "MoveObject.h"
 #include "GameLogic/Scene/Scene.h"
 #include "GameLogic/Scene/MoveMgr/MoveMgr.h"
+#include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 
 namespace GameLogic
 {
@@ -35,9 +36,9 @@ namespace GameLogic
 		m_scene->MoveMgr()->SetMaxSpeed(m_nav_agent_id, speed);
 	}
 
-	void MoveObject::SetVelocity(Vector3 val)
+	const Vector3 & MoveObject::GetVelocity()
 	{
-		m_velocity = val;
+		return m_move_agent->GetVelocity();
 	}
 
 	void MoveObject::TryMoveToPos(const Vector3 &pos)
@@ -68,6 +69,21 @@ namespace GameLogic
 	Vector3 MoveObject::GetForceMovePos()
 	{
 		return Vector3();
+	}
+
+	void MoveObject::OnMoveStateChange(MoveAgent * agent, EMoveAgentState old_state)
+	{
+
+	}
+
+	void MoveObject::OnPostChange(MoveAgent * agent, Vector3 old_pos)
+	{
+
+	}
+
+	void MoveObject::OnVelocityChange(MoveAgent * agent, Vector3 old_velocity)
+	{
+
 	}
 }
 

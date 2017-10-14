@@ -7,6 +7,7 @@
 #include "Common/Utils/TimerUtil.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "Common/Utils/LogUtil.h"
+#include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 
 GameLogic::MoveMgr::MoveMgr(Scene * scene) : m_scene(scene)
 {
@@ -79,6 +80,7 @@ void GameLogic::MoveMgr::SetMaxSpeed(uint64_t agent_id, float max_speed)
 
 void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj)
 {
+	/*
 	m_move_objs[move_obj->GetId()] = move_obj;
 	++m_last_nav_agent_id;
 	if (NavAgent::INVALID_ID == m_last_nav_agent_id)
@@ -121,6 +123,50 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 		}, 
 		1000 * 2, -1);
 	}
+	*/
+
+	m_move_objs[move_obj->GetId()] = move_obj;
+	++m_last_move_agent_id;
+	if (MoveAgent::INVALID_ID == m_last_move_agent_id)
+		m_last_move_agent_id = 1;
+	MoveAgent *move_agent = new MoveAgent(this);
+	move_agent->SetId(m_last_move_agent_id);
+	move_obj->SetMoveAgent(move_agent);
+	m_move_agents[move_agent->GetId()] = move_agent;
+	{
+		NavAgent *nav_agent = move_agent->GetNavAgent();
+		dtCrowdAgentParams params;
+		memset(&params, 0, sizeof(params));
+		params.radius = move_obj->GetRadius();
+		params.height = move_obj->GetHeight();
+		params.maxAcceleration = 32 * 40;
+		params.maxSpeed = move_obj->GetSpeed();
+		params.collisionQueryRange = params.radius * 12.0f;
+		params.pathOptimizationRange = params.radius * 30.0f;
+		params.separationWeight = 0;
+		params.updateFlags = 0;
+		params.updateFlags |= DT_CROWD_ANTICIPATE_TURNS;
+		params.updateFlags |= DT_CROWD_OPTIMIZE_VIS;
+		params.updateFlags |= DT_CROWD_OPTIMIZE_TOPO;
+		//params.updateFlags |= DT_CROWD_OBSTACLE_AVOIDANCE;
+		if (params.separationWeight > 0.001f) params.updateFlags |= DT_CROWD_SEPARATION;
+		params.obstacleAvoidanceType = 3;
+		// params.avoidancePriority = 0.5f; 
+		params.queryFilterType = 0;
+		nav_agent->SetPos(move_obj->GetPosition());
+		nav_agent->SetAgentParams(params);
+		nav_agent->Enable();
+	}
+	{
+		move_agent->SetPos(move_obj->GetPosition());
+		move_agent->SetMoveMaxSpeed(move_obj->GetSpeed());
+		MoveAgent::EventCallback event_cb;
+		event_cb.move_state_cb = std::bind(&GameLogic::MoveObject::OnMoveStateChange, move_obj, std::placeholders::_1, std::placeholders::_2);
+		event_cb.velocity_change_cb = std::bind(&GameLogic::MoveObject::OnVelocityChange, move_obj, std::placeholders::_1, std::placeholders::_2);
+		event_cb.post_change_cb = std::bind(&GameLogic::MoveObject::OnPostChange, move_obj, std::placeholders::_1, std::placeholders::_2);
+		move_agent->SetEventCb(event_cb);
+	}
+
 }
 
 void GameLogic::MoveMgr::OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObject> weak_move_obj)
@@ -142,6 +188,8 @@ void GameLogic::MoveMgr::OnNavAgentMoved(NavAgent *agent, std::weak_ptr<MoveObje
 void GameLogic::MoveMgr::OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move_obj)
 {
 	m_move_objs.erase(move_obj->GetId());
+
+	/*
 	auto it = m_nav_agents.find(move_obj->GetNavAgentId());
 	move_obj->SetNavAgentId(NavAgent::INVALID_ID);
 	if (m_nav_agents.end() != it)
@@ -149,5 +197,6 @@ void GameLogic::MoveMgr::OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move
 		delete it->second;
 		m_nav_agents.erase(it);
 	}
+	*/
 }
 

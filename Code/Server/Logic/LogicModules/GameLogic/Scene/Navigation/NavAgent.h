@@ -17,6 +17,7 @@ namespace GameLogic
 	public:
 		const static uint64_t INVALID_ID = 0;
 	public:
+		NavAgent(NavMesh *nav_mesh);
 		NavAgent(NavMesh *nav_mesh, uint64_t id);
 		virtual ~NavAgent();
 
@@ -33,7 +34,7 @@ namespace GameLogic
 		bool IsEnable() { return DT_AGENT_INVALID_ID != m_dt_agent_id; }
 		uint64_t GetId() { return m_id; }
 		const Vector3 & GetVelocity() { return m_velocity; }
-		const float GetMaxSpeed() { return m_agent_params.maxSpeed; }
+		float GetMaxSpeed() { return m_agent_params.maxSpeed; }
 		void SetMaxSpeed(float val);
 
 	private:

@@ -2,10 +2,12 @@
 
 #include <stdint.h>
 #include "Common/Math/Vector3.h"
+#include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
 
 namespace GameLogic
 {
 	class Scene;
+	class MoveAgent;
 
 	enum ESceneObjectType
 	{
@@ -37,6 +39,7 @@ namespace GameLogic
 		inline void setPosition(const Vector3 &val) { m_position = val; }
 		inline float getRotation() { return m_rotation; }
 		inline void setRotation(float val) { m_rotation = val; }
+
 	protected:
 		Scene *m_scene = nullptr;
 		uint64_t m_id = 0;

@@ -102,7 +102,7 @@ namespace GameLogic
 		{
 			std::shared_ptr<MoveObject> move_ptr = std::dynamic_pointer_cast<MoveObject>(scene_obj);
 			if (nullptr != move_ptr)
-				m_moveMgr->OnMoveObjectEnterScene(move_ptr);
+				m_moveMgr->OnMoveObjectLeaveScene(move_ptr);
 		}
 		scene_obj->OnLeaveScene(this);
 		scene_obj->SetScene(nullptr);

@@ -5,6 +5,7 @@
 namespace GameLogic
 {
 	class NavAgent;
+	class MoveAgent;
 
 	class MoveObject : public SceneObject
 	{
@@ -33,12 +34,15 @@ namespace GameLogic
 		float m_height = 2.0f;
 		float m_mass = 100.0f;
 		uint64_t m_nav_agent_id = 0;
+		MoveAgent *m_move_agent = nullptr;
 
 	public:
 		uint64_t GetNavAgentId() { return m_nav_agent_id; }
+		void SetMoveAgent(MoveAgent *val) { m_move_agent = val; }
+		MoveAgent * GetMoveAgent() { return m_move_agent; }
 		void SetNavAgentId(uint64_t val) { m_nav_agent_id = val; }
-		void SetVelocity(Vector3 val);
-		const Vector3 & GetVelocity() { return m_velocity; }
+		// void SetVelocity(Vector3 val);
+		const Vector3 & GetVelocity();
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);
 		void TryStopMove();
@@ -46,7 +50,9 @@ namespace GameLogic
 		Vector3 GetDesiredMovePos();
 		Vector3 GetForceMovePos();
 
-	protected:
-		Vector3 m_velocity;
+	public:
+		void OnMoveStateChange(MoveAgent *agent, EMoveAgentState old_state);
+		void OnPostChange(MoveAgent *agent, Vector3 old_pos);
+		void OnVelocityChange(MoveAgent *agent, Vector3 old_velocity);
 	};
 }
