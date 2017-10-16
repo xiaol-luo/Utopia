@@ -57,9 +57,9 @@ namespace GameLogic
 		m_move_agent->GetNavAgent()->StopMove();
 	}
 
-	EMoveType MoveObject::GetMoveType()
+	EMoveAgentState MoveObject::GetMoveAgentState()
 	{
-		return EMoveType();
+		return m_move_agent->GetMoveAgentState();
 	}
 
 	Vector3 MoveObject::GetDesiredMovePos()
@@ -72,17 +72,17 @@ namespace GameLogic
 		return Vector3();
 	}
 
-	void MoveObject::OnMoveStateChange(MoveAgent * agent, EMoveAgentState old_state)
+	void MoveObject::OnMoveStateChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, EMoveAgentState old_state)
 	{
 
 	}
 
-	void MoveObject::OnPostChange(MoveAgent * agent, Vector3 old_pos)
+	void MoveObject::OnPostChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_pos)
 	{
 
 	}
 
-	void MoveObject::OnVelocityChange(MoveAgent * agent, Vector3 old_velocity)
+	void MoveObject::OnVelocityChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)
 	{
 
 	}

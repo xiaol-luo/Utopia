@@ -11,12 +11,6 @@ namespace GameLogic
 		m_nav_mesh_query = m_nav_mesh->GetNavMeshQuery();
 	}
 
-	NavAgent::NavAgent(NavMesh *nav_mesh, uint64_t id) : m_nav_mesh(nav_mesh), m_id(id)
-	{
-		m_crowd = m_nav_mesh->GetCrowd();
-		m_nav_mesh_query = m_nav_mesh->GetNavMeshQuery();
-	}
-
 	NavAgent::~NavAgent()
 	{
 		this->Disable();
@@ -95,7 +89,7 @@ namespace GameLogic
 	void NavAgent::TryMoveToPos(const Vector3 &pos)
 	{
 		this->StopMove();
-		m_move_type = EMoveType_Pos;
+		m_move_type = EMoveType_MovePos;
 		m_desired_move_pos = pos;
 		TryResumeMove();
 	}
@@ -103,7 +97,7 @@ namespace GameLogic
 	void NavAgent::TryMoveToDir(float angle)
 	{
 		this->StopMove();
-		m_move_type = EMoveType_Dir;
+		m_move_type = EMoveType_MoveDir;
 		m_desired_move_dir = angle;
 		TryResumeMove();
 	}
@@ -124,7 +118,7 @@ namespace GameLogic
 		if (!IsEnable())
 			return;
 
-		if (EMoveType_Dir == m_move_type)
+		if (EMoveType_MoveDir == m_move_type)
 		{
 			// m_crowd->requestMoveVelocity()
 			if (abs(m_desired_move_dir) >= FLT_EPSILON)
@@ -134,7 +128,7 @@ namespace GameLogic
 				m_crowd->requestMoveVelocity(m_dt_agent_id, velocity.toPointer());
 			}
 		}
-		if (EMoveType_Pos == m_move_type)
+		if (EMoveType_MovePos == m_move_type)
 		{
 			Vector3 target_pos;
 			dtPolyRef poly_ref;

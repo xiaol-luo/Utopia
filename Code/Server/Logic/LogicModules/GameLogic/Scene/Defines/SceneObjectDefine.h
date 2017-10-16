@@ -3,21 +3,23 @@
 
 namespace GameLogic
 {
-	enum EMoveType
+	enum  EMoveAgentState
 	{
-		EMoveType_None = 1 << 0,
-		EMoveType_Pos = 1 << 2,
-		EMoveType_Dir = 1 << 3,
-		EMoveType_ForceMovePos = 1 << 4,
-		EMoveType_ForceMoveDir = 1 << 5,
+		EMoveAgentState_Idle = 0,
+		EMoveAgentState_MoveToPos,
+		EMoveAgentState_MoveToDir,
+		EMoveAgentState_Immobilized,
+		EMoveAgentState_ForceLine,
+		EMoveAgentState_ForceSky,
 
-		EMoveType_Max,
+		EMoveAgentState_Max,
 	};
 
-	enum ESceneObjectState
+	enum EMoveState
 	{
-		ESOS_Idle = 0,
-		ESOS_Move,
-		ESOS_ForceMove,
+		EMoveState_Idle = 0,
+		EMoveState_Move,
+		EMoveState_Immobilized,
+		EMoveState_ForceMove,
 	};
 }

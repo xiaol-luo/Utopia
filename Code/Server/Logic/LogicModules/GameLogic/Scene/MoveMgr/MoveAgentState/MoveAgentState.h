@@ -1,19 +1,10 @@
 #pragma once
 
+#include "GameLogic/Scene/Defines/SceneObjectDefine.h"
+
 namespace GameLogic
 {
 	class MoveAgent;
-
-	enum  EMoveAgentState
-	{
-		EMoveAgentState_Idle = 0,
-		EMoveAgentState_MoveToPos,
-		EMoveAgentState_MoveToDir,
-		EMoveAgentState_ForceLine,
-		EMoveAgentState_ForceSky,
-
-		EMoveAgentState_Max,
-	};
 
 	class MoveAgentState
 	{
@@ -24,6 +15,9 @@ namespace GameLogic
 		virtual void Enter(void *param) = 0;
 		virtual void Exit() = 0;
 		virtual void Update(long deltaMs) = 0;
+
+	public:
+		EMoveAgentState GetState() { return m_state; }
 
 	protected:
 		EMoveAgentState m_state;

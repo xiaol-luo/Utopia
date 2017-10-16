@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneObject.h"
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
+#include <memory>
 
 namespace GameLogic
 {
@@ -42,13 +43,13 @@ namespace GameLogic
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);
 		void TryStopMove();
-		EMoveType GetMoveType();
+		EMoveAgentState GetMoveAgentState();
 		Vector3 GetDesiredMovePos();
 		Vector3 GetForceMovePos();
 
 	public:
-		void OnMoveStateChange(MoveAgent *agent, EMoveAgentState old_state);
-		void OnPostChange(MoveAgent *agent, Vector3 old_pos);
-		void OnVelocityChange(MoveAgent *agent, Vector3 old_velocity);
+		static void OnMoveStateChange(std::weak_ptr<MoveObject> obj, MoveAgent *agent, EMoveAgentState old_state);
+		static void OnPostChange(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_pos);
+		static void OnVelocityChange(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_velocity);
 	};
 }

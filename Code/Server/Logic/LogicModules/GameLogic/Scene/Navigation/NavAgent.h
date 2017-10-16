@@ -16,9 +16,15 @@ namespace GameLogic
 	{
 	public:
 		const static uint64_t INVALID_ID = 0;
+		
+		enum EMoveType
+		{
+			EMoveType_None = 0,
+			EMoveType_MovePos,
+			EMoveType_MoveDir
+		};
 	public:
 		NavAgent(NavMesh *nav_mesh);
-		NavAgent(NavMesh *nav_mesh, uint64_t id);
 		virtual ~NavAgent();
 
 		void SetMovedCb(std::function<void(NavAgent *)> cb) { m_moved_cb = cb; }
@@ -32,13 +38,11 @@ namespace GameLogic
 		void Enable();
 		void Disable();
 		bool IsEnable() { return DT_AGENT_INVALID_ID != m_dt_agent_id; }
-		uint64_t GetId() { return m_id; }
 		const Vector3 & GetVelocity() { return m_velocity; }
 		float GetMaxSpeed() { return m_agent_params.maxSpeed; }
 		void SetMaxSpeed(float val);
 
 	private:
-		uint64_t m_id = INVALID_ID;
 		NavMesh *m_nav_mesh = nullptr;
 		dtCrowd *m_crowd = nullptr;
 		dtNavMeshQuery *m_nav_mesh_query = nullptr;
