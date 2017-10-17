@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MoveAgentState.h"
+#include "Common/Math/Vector3.h"
 
 namespace GameLogic
 {
@@ -13,6 +14,11 @@ namespace GameLogic
 		virtual void Enter(void *param);
 		virtual void Exit();
 		virtual void Update(long deltaMs);
+
+		void SetDesiredPos(const Vector3 &pos);
+
+	protected:
+		Vector3 m_desired_pos;
 	};
 }
 

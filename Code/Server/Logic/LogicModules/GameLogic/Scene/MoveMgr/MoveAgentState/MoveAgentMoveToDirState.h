@@ -13,5 +13,10 @@ namespace GameLogic
 		virtual void Enter(void *param);
 		virtual void Exit();
 		virtual void Update(long deltaMs);
+
+		void SetDesiredDir(float dir);
+
+	protected:
+		float m_desired_dir = 0.0f;
 	};
 }

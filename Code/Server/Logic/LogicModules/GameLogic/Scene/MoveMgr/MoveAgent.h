@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include "DetourCrowd.h"
+#include "Common/Math/Vector2.h"
 #include "Common/Math/Vector3.h"
 #include <functional>
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
@@ -41,9 +42,15 @@ namespace GameLogic
 		MoveAgentState *m_next_state = nullptr;
 		MoveAgentState *m_curr_state = nullptr;
 
+		void EnterState(EMoveAgentState newState, void *param=nullptr);
+
 	public:
 		EMoveAgentState GetMoveAgentState();
 		EMoveState GetMoveState();
+		bool LoseControl();
+		void NavDisable();
+		void NavEnable();
+		bool IsNavEnable();
 		const Vector3 & GetPos() { return m_pos; }
 		void SetPos(Vector3 val);
 		const Vector3 & GetVelocity() { return m_velocity; }
@@ -63,7 +70,9 @@ namespace GameLogic
 		void Update(long deltaMs);
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);
-		void StopMove();
-		void TryResumeMove();
+		void TryStopMove();
+		void StopForceMove();
+		void ForceMoveLinePos(Vector2 target_pos, int time_ms);
+		void ForceMoveLineDir(Vector2 dir, float speed, int time_ms);
 	};
 }

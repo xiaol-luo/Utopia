@@ -49,6 +49,13 @@ GameLogic::MoveAgent::~MoveAgent()
 	}
 }
 
+void GameLogic::MoveAgent::EnterState(EMoveAgentState new_state, void *param)
+{
+	m_curr_state->Exit();
+	m_curr_state = m_states[new_state];
+	m_curr_state->Enter(param);
+}
+
 GameLogic::EMoveAgentState GameLogic::MoveAgent::GetMoveAgentState()
 {
 	return m_curr_state->GetState();
@@ -57,6 +64,26 @@ GameLogic::EMoveAgentState GameLogic::MoveAgent::GetMoveAgentState()
 GameLogic::EMoveState GameLogic::MoveAgent::GetMoveState()
 {
 	return CalMoveState(this->GetMoveAgentState());
+}
+
+bool GameLogic::MoveAgent::LoseControl()
+{
+	return this->GetMoveState() > EMoveState_Move;
+}
+
+void GameLogic::MoveAgent::NavDisable()
+{
+	this->GetNavAgent()->Disable();
+}
+
+void GameLogic::MoveAgent::NavEnable()
+{
+	this->GetNavAgent()->Enable();
+}
+
+bool GameLogic::MoveAgent::IsNavEnable()
+{
+	return this->GetNavAgent()->IsEnable();
 }
 
 void GameLogic::MoveAgent::SetPos(Vector3 val)
@@ -94,25 +121,77 @@ void GameLogic::MoveAgent::OnNavAgentMoved(NavAgent * agent)
 void GameLogic::MoveAgent::Update(long deltaMs)
 {
 	m_curr_state->Update(deltaMs);
+	if (m_curr_state->IsDone())
+	{
+		MoveAgentState *next_state = m_next_state;
+		m_next_state = m_states[EMoveAgentState_Idle];
+		this->EnterState(next_state->GetState());
+	}
 }
 
 void GameLogic::MoveAgent::TryMoveToPos(const Vector3 &pos)
 {
-
+	MoveAgentMoveToPosState *state = dynamic_cast<MoveAgentMoveToPosState *>(m_states[EMoveAgentState_MoveToPos]);
+	state->SetDesiredPos(pos);
+	if (!LoseControl())
+	{
+		m_next_state = m_states[EMoveAgentState_Idle];
+		this->EnterState(state->GetState());
+	}
+	else
+	{
+		m_next_state = state;
+	}
 }
 
 void GameLogic::MoveAgent::TryMoveToDir(float angle)
 {
-
+	MoveAgentMoveToDirState *state = dynamic_cast<MoveAgentMoveToDirState *>(m_states[EMoveAgentState_MoveToDir]);
+	state->SetDesiredDir(angle);
+	if (!LoseControl())
+	{
+		m_next_state = m_states[EMoveAgentState_Idle];
+		this->EnterState(state->GetState());
+	}
+	else
+	{
+		m_next_state = state;
+	}
 }
 
-void GameLogic::MoveAgent::StopMove()
+void GameLogic::MoveAgent::TryStopMove()
 {
-
+	if (EMoveState_Move == this->GetMoveState())
+	{
+		m_next_state = m_states[EMoveAgentState_Idle];
+		this->EnterState(EMoveAgentState_Idle);
+	}
+	else
+	{
+		this->GetNavAgent()->StopMove();
+		m_next_state = m_states[EMoveAgentState_Idle];
+	}
 }
 
-void GameLogic::MoveAgent::TryResumeMove()
+void GameLogic::MoveAgent::StopForceMove()
 {
-
+	if (EMoveState_ForceMove == this->GetMoveAgentState())
+	{
+		m_next_state = m_states[EMoveAgentState_Idle];
+		this->EnterState(EMoveAgentState_Idle);
+	}
 }
+
+void GameLogic::MoveAgent::ForceMoveLinePos(Vector2 target_pos, int time_ms)
+{
+}
+
+void GameLogic::MoveAgent::ForceMoveLineDir(Vector2 dir, float speed, int time_ms)
+{
+}
+
+
+
+
+
 

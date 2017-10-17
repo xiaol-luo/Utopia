@@ -15,6 +15,7 @@ namespace GameLogic
 		virtual void Enter(void *param) = 0;
 		virtual void Exit() = 0;
 		virtual void Update(long deltaMs) = 0;
+		virtual bool IsDone() { return false; }
 
 	public:
 		EMoveAgentState GetState() { return m_state; }
