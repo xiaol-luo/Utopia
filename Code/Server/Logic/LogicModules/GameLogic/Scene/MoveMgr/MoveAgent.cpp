@@ -51,9 +51,12 @@ GameLogic::MoveAgent::~MoveAgent()
 
 void GameLogic::MoveAgent::EnterState(EMoveAgentState new_state, void *param)
 {
+	EMoveAgentState old_state = m_curr_state->GetState();
 	m_curr_state->Exit();
 	m_curr_state = m_states[new_state];
 	m_curr_state->Enter(param);
+	if (nullptr != m_event_cb.move_state_cb)
+		m_event_cb.move_state_cb(this, old_state);
 }
 
 GameLogic::EMoveAgentState GameLogic::MoveAgent::GetMoveAgentState()
@@ -182,12 +185,9 @@ void GameLogic::MoveAgent::StopForceMove()
 	}
 }
 
-void GameLogic::MoveAgent::ForceMoveLinePos(Vector2 target_pos, int time_ms)
+void GameLogic::MoveAgent::ForceMoveLine(Vector2 dir, float speed, float time_sec, bool ignore_terrian)
 {
-}
 
-void GameLogic::MoveAgent::ForceMoveLineDir(Vector2 dir, float speed, int time_ms)
-{
 }
 
 

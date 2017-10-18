@@ -72,7 +72,6 @@ namespace GameLogic
 		void TryMoveToDir(float angle);
 		void TryStopMove();
 		void StopForceMove();
-		void ForceMoveLinePos(Vector2 target_pos, int time_ms);
-		void ForceMoveLineDir(Vector2 dir, float speed, int time_ms);
+		void ForceMoveLine(Vector2 dir, float speed, float time_sec, bool ignore_terrian);
 	};
 }

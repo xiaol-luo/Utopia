@@ -15,6 +15,7 @@ GameLogic::MoveAgentMoveToDirState::~MoveAgentMoveToDirState()
 
 void GameLogic::MoveAgentMoveToDirState::Enter(void * param)
 {
+	m_move_agent->SetVelocity(Vector3::zero);
 	NavAgent *agent = m_move_agent->GetNavAgent();
 	agent->SetPos(m_move_agent->GetPos());
 	agent->TryMoveToDir(m_desired_dir);
