@@ -1,7 +1,8 @@
 #pragma once
 
 #include "MoveAgentState.h"
-#include "Common/Math/Vector2.h"
+#include "Common/Math/Vector3.h"
+#include "Common/Utils/Ticker.h"
 
 namespace GameLogic
 {
@@ -16,13 +17,15 @@ namespace GameLogic
 		virtual void Update(long deltaMs);
 		virtual bool IsDone();
 
-		void ForceMoveLine(Vector2 dir, float speed, float time_sec, bool ignore_terrian);
+		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
 
 	protected:
 		bool m_is_done = true;
-		Vector2 m_dir = 0;
-		float m_speed = 0;
+		Vector3 m_velocity = Vector3::zero;
 		float m_time_sec = 0;
 		bool m_ignore_terrian = false;
+		Ticker m_ticker;
+		Vector3 m_start_pos;
+		Vector3 m_curr_pos;
 	};
 }
