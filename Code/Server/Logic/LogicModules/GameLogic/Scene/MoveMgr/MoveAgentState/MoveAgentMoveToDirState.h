@@ -13,7 +13,7 @@ namespace GameLogic
 		virtual void Enter(void *param);
 		virtual void Exit();
 		virtual void Update(long deltaMs);
-
+		virtual void Flash(const Vector3 &val);
 		void SetDesiredDir(float dir);
 
 	protected:

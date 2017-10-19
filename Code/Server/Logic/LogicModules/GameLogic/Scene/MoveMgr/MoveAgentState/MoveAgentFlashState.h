@@ -4,11 +4,11 @@
 
 namespace GameLogic
 {
-	class MoveAgenImmobilizedState : public MoveAgentState
+	class MoveAgentFlashState : public MoveAgentState
 	{
 	public:
-		MoveAgenImmobilizedState(MoveAgent *move_agent);
-		virtual ~MoveAgenImmobilizedState();
+		MoveAgentFlashState(MoveAgent *move_agent);
+		virtual ~MoveAgentFlashState();
 
 		virtual void Enter(void *param);
 		virtual void Exit();

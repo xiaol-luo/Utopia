@@ -20,6 +20,7 @@ Ticker::Ticker()
 
 Ticker::~Ticker()
 {
+
 }
 
 void Ticker::Restart()
@@ -31,6 +32,14 @@ void Ticker::Restart(float newCd)
 {
 	m_start = m_now_sec_func();
 	m_cd = newCd;
+}
+
+void Ticker::RestartWithEndTimestamp(float end_time)
+{
+	m_start = m_now_sec_func();
+	m_cd = end_time - m_start;
+	if (m_cd < FLT_EPSILON)
+		m_cd = 0;
 }
 
 float Ticker::LeftTime()
@@ -48,3 +57,4 @@ bool Ticker::InCd()
 {
 	return this->LeftTime() > FLT_EPSILON;
 }
+

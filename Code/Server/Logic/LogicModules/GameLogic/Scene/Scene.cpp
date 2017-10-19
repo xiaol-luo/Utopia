@@ -12,6 +12,8 @@
 #include "GameLogic/GameLogicModule.h"
 #include "CsvConfigSets.h"
 #include "Scene/CsvSceneConfig.h"
+#include "Common/Utils/TimerUtil.h"
+#include "Common/Math/Vector2.h"
 
 namespace GameLogic
 {
@@ -44,6 +46,41 @@ namespace GameLogic
 		this->AddObject(m_red_hero);
 		// m_blue_hero = std::make_shared<Hero>();
 		// this->AddObject(m_blue_hero);
+		{
+			std::weak_ptr<Hero> hero = m_red_hero;
+			TimerUtil::AddFirm([hero]() {
+				std::shared_ptr<Hero> ptr = hero.lock();
+				if (nullptr == ptr)
+					return;
+
+				// ptr->CancelForceMove();
+				// ptr->CancelImmobilized();
+				// ptr->CancelMove();
+
+				int rand_val = std::rand() % EMoveAgentState_Max;
+				switch (rand_val)
+				{
+				case EMoveAgentState_MoveToPos:
+					ptr->TryMoveToPos(Vector3(std::rand() % 101, std::rand()%10, std::rand()%10));
+					break;
+				case EMoveAgentState_MoveToDir:
+					ptr->TryMoveToDir(std::rand() % 36000 * 0.001);
+					break;
+				case EMoveAgentState_ForceLine:
+					ptr->ForceMoveLine(Vector2(std::rand() % 100, std::rand() % 100), std::rand() % 10, std::rand() % 3 + 1, true);
+					break;
+				case EMoveAgentState_Immobilized:
+					ptr->Immobilized(std::rand() % 3 + 1);
+					break;
+				case EMoveAgentState_Idle:
+					ptr->CancelForceMove();
+					ptr->CancelImmobilized();
+					ptr->CancelMove();
+					break;
+				}
+
+			}, 2 * 1000, -1);
+		}
 
 		return true;
 	}

@@ -23,13 +23,19 @@ namespace GameLogic
 		void Update();
 
 	public:
+		MoveAgent *GetMoveAgent(uint64_t agent_id);
+		void SetMoveMaxSpeed(uint64_t agent_id, float max_speed);
+		NavMesh * GetNavMesh() { return m_nav_mesh; }
+
 		void TryMoveToPos(uint64_t agent_id, const Vector3 &pos);
 		void TryMoveToDir(uint64_t agent_id, float angle);
-		void StopMove(uint64_t agent_id);
-		void TryResumeMove(uint64_t agent_id);
-		NavAgent * GetNavAgent(uint64_t agent_id);
-		void SetMaxSpeed(uint64_t agent_id, float max_speed);
-		NavMesh * GetNavMesh() { return m_nav_mesh; }
+		void CancelMove(uint64_t agent_id);
+		void CancelForceMove(uint64_t agent_id);
+		void ForceMoveLine(uint64_t agent_id, const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
+		void Immobilized(uint64_t agent_id, long ms);
+		void CancelImmobilized(uint64_t agent_id);
+		void Flash(uint64_t agent_id, const Vector3 &val);
+
 	public:
 		void OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj);
 		void OnMoveObjectLeaveScene(std::shared_ptr<MoveObject> move_obj);

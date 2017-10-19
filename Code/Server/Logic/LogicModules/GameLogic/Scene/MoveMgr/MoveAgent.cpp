@@ -4,6 +4,9 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentIdleState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentMoveToPosState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentMoveToDirState.h"
+#include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentForceLineState.h"
+#include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentImmobilizedState.h"
+#include "Common/Utils/TimerUtil.h"
 
 GameLogic::EMoveState GameLogic::MoveAgent::CalMoveState(GameLogic::EMoveAgentState state)
 {
@@ -37,6 +40,8 @@ GameLogic::MoveAgent::MoveAgent(MoveMgr * move_mgr) : m_move_mgr(move_mgr)
 	m_states[EMoveAgentState_Idle] = new MoveAgentIdleState(this);
 	m_states[EMoveAgentState_MoveToDir] = new MoveAgentMoveToDirState(this);
 	m_states[EMoveAgentState_MoveToPos] = new MoveAgentMoveToPosState(this);
+	m_states[EMoveAgentState_ForceLine] = new MoveAgentForceLineState(this);
+	m_states[EMoveAgentState_Immobilized] = new MoveAgenImmobilizedState(this);
 	m_next_state = m_states[EMoveState_Idle];
 	m_curr_state = m_states[EMoveState_Idle];
 }
@@ -115,6 +120,15 @@ void GameLogic::MoveAgent::SetMoveMaxSpeed(float val)
 	m_nav_agent->SetMaxSpeed(val);
 }
 
+void GameLogic::MoveAgent::Flash(const Vector3 & val)
+{
+	for (int i = 0; i < EMoveAgentState_Max; ++i)
+	{
+		m_states[i]->Flash(val);
+	}
+	this->SetPos(val);
+}
+
 void GameLogic::MoveAgent::OnNavAgentMoved(NavAgent * agent)
 {
 	this->SetPos(agent->GetPos());
@@ -162,7 +176,7 @@ void GameLogic::MoveAgent::TryMoveToDir(float angle)
 	}
 }
 
-void GameLogic::MoveAgent::TryStopMove()
+void GameLogic::MoveAgent::CancelMove()
 {
 	if (EMoveState_Move == this->GetMoveState())
 	{
@@ -172,22 +186,66 @@ void GameLogic::MoveAgent::TryStopMove()
 	else
 	{
 		this->GetNavAgent()->StopMove();
-		m_next_state = m_states[EMoveAgentState_Idle];
+		if (EMoveState_Move == CalMoveState(m_next_state->GetState()))
+			m_next_state = m_states[EMoveAgentState_Idle];
 	}
 }
 
-void GameLogic::MoveAgent::StopForceMove()
+void GameLogic::MoveAgent::CancelForceMove()
 {
 	if (EMoveState_ForceMove == this->GetMoveAgentState())
 	{
-		m_next_state = m_states[EMoveAgentState_Idle];
-		this->EnterState(EMoveAgentState_Idle);
+		m_curr_state->ForceDone();
+	}
+	else
+	{
+		if (EMoveState_ForceMove == CalMoveState(m_next_state->GetState()))
+		{
+			m_next_state->ForceDone();
+			m_next_state = m_states[EMoveAgentState_Idle];
+		}
 	}
 }
 
-void GameLogic::MoveAgent::ForceMoveLine(Vector2 dir, float speed, float time_sec, bool ignore_terrian)
+void GameLogic::MoveAgent::ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian)
 {
+	MoveAgentForceLineState *state = dynamic_cast<MoveAgentForceLineState *>(m_states[EMoveAgentState_ForceLine]);
+	state->ForceMoveLine(dir, speed, time_sec, ignore_terrian);
+	if (EMoveState_ForceMove != this->GetMoveState())
+		m_next_state = m_curr_state;
+	this->EnterState(EMoveAgentState_ForceLine);
+}
 
+void GameLogic::MoveAgent::Immobilized(long ms)
+{
+	MoveAgenImmobilizedState *state = dynamic_cast<MoveAgenImmobilizedState *>(m_states[EMoveAgentState_Immobilized]);
+	state->ImmobilizeEndMs(TimerUtil::NowMs() + ms);
+	if (EMoveState_ForceMove == this->GetMoveState())
+	{
+		m_next_state = m_states[EMoveAgentState_Immobilized];
+	}
+	else 
+	{
+		if (EMoveState_Immobilized != this->GetMoveState()) 
+			m_next_state = m_curr_state; // MOVE OR IDLE
+		this->EnterState(EMoveAgentState_Immobilized);
+	}
+}
+
+void GameLogic::MoveAgent::CancelImmobilized()
+{
+	if (EMoveState_Immobilized == this->GetMoveAgentState())
+	{
+		m_curr_state->ForceDone();
+	}
+	else
+	{
+		if (EMoveState_Immobilized == CalMoveState(m_next_state->GetState()))
+		{
+			m_next_state->ForceDone();
+			m_next_state = m_states[EMoveAgentState_Idle];
+		}
+	}
 }
 
 

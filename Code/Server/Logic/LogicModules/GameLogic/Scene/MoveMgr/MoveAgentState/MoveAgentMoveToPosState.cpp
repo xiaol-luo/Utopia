@@ -34,6 +34,11 @@ void GameLogic::MoveAgentMoveToPosState::Update(long deltaMs)
 	m_move_agent->GetNavAgent()->OnMoved();
 }
 
+void GameLogic::MoveAgentMoveToPosState::Flash(const Vector3 & val)
+{
+	m_move_agent->GetNavAgent()->SetPos(val);
+}
+
 void GameLogic::MoveAgentMoveToPosState::SetDesiredPos(const Vector3 &pos)
 {
 	m_desired_pos = pos;

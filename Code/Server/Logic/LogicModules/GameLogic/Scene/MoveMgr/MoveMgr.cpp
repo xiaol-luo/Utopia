@@ -37,45 +37,74 @@ void GameLogic::MoveMgr::Update()
 
 void GameLogic::MoveMgr::TryMoveToPos(uint64_t agent_id, const Vector3 &pos)
 {
-	NavAgent *agent = this->GetNavAgent(agent_id);
-	if (nullptr != agent)
-		agent->TryMoveToPos(pos);
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->TryMoveToPos(pos);
 }
 
 void GameLogic::MoveMgr::TryMoveToDir(uint64_t agent_id, float angle)
 {
-	NavAgent *agent = this->GetNavAgent(agent_id);
-	if (nullptr != agent)
-		agent->TryMoveToDir(angle);
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->TryMoveToDir(angle);
 }
 
-void GameLogic::MoveMgr::StopMove(uint64_t agent_id)
+void GameLogic::MoveMgr::CancelMove(uint64_t agent_id)
 {
-	NavAgent *agent = this->GetNavAgent(agent_id);
-	if (nullptr != agent)
-		agent->StopMove();
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->CancelMove();
 }
 
-void GameLogic::MoveMgr::TryResumeMove(uint64_t agent_id)
+void GameLogic::MoveMgr::CancelForceMove(uint64_t agent_id)
 {
-	NavAgent *agent = this->GetNavAgent(agent_id);
-	if (nullptr != agent)
-		agent->TryResumeMove();
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->CancelForceMove();
 }
 
-GameLogic::NavAgent * GameLogic::MoveMgr::GetNavAgent(uint64_t agent_id)
+void GameLogic::MoveMgr::ForceMoveLine(uint64_t agent_id, const Vector2 & dir, float speed, float time_sec, bool ignore_terrian)
+{
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->ForceMoveLine(dir, speed, time_sec, ignore_terrian);
+}
+
+void GameLogic::MoveMgr::Immobilized(uint64_t agent_id, long ms)
+{
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->Immobilized(ms);
+}
+
+void GameLogic::MoveMgr::CancelImmobilized(uint64_t agent_id)
+{
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->CancelImmobilized();
+}
+
+void GameLogic::MoveMgr::Flash(uint64_t agent_id, const Vector3 & val)
+{
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->Flash(val);
+}
+
+
+GameLogic::MoveAgent * GameLogic::MoveMgr::GetMoveAgent(uint64_t agent_id)
 {
 	auto it = m_move_agents.find(agent_id);
 	if (m_move_agents.end() != it)
-		return it->second->GetNavAgent();
+		return it->second;
 	return nullptr;
 }
 
-void GameLogic::MoveMgr::SetMaxSpeed(uint64_t agent_id, float max_speed)
+void GameLogic::MoveMgr::SetMoveMaxSpeed(uint64_t agent_id, float max_speed)
 {
-	NavAgent *agent = this->GetNavAgent(agent_id);
-	if (nullptr != agent)
-		agent->SetMaxSpeed(max_speed);
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->SetMoveMaxSpeed(max_speed);
 }
 
 void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj)
@@ -108,12 +137,12 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 		params.obstacleAvoidanceType = 3;
 		// params.avoidancePriority = 0.5f; 
 		params.queryFilterType = 0;
-		nav_agent->SetPos(move_obj->GetPosition());
+		nav_agent->SetPos(move_obj->GetPos());
 		nav_agent->SetAgentParams(params);
 		nav_agent->Enable();
 	}
 	{
-		move_agent->SetPos(move_obj->GetPosition());
+		move_agent->SetPos(move_obj->GetPos());
 		move_agent->SetMoveMaxSpeed(move_obj->GetSpeed());
 		MoveAgent::EventCallback event_cb;
 		event_cb.move_state_cb = std::bind(&GameLogic::MoveObject::OnMoveStateChange, move_obj, std::placeholders::_1, std::placeholders::_2);

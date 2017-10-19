@@ -40,12 +40,15 @@ namespace GameLogic
 		void SetMoveAgent(MoveAgent *val) { m_move_agent = val; }
 		MoveAgent * GetMoveAgent() { return m_move_agent; }
 		const Vector3 & GetVelocity();
+		EMoveAgentState GetMoveAgentState();
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);
-		void TryStopMove();
-		EMoveAgentState GetMoveAgentState();
-		Vector3 GetDesiredMovePos();
-		Vector3 GetForceMovePos();
+		void CancelMove();
+		void CancelForceMove();
+		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
+		void Immobilized(long ms);
+		void CancelImmobilized();
+		void Flash(const Vector3 &val);
 
 	public:
 		static void OnMoveStateChange(std::weak_ptr<MoveObject> obj, MoveAgent *agent, EMoveAgentState old_state);

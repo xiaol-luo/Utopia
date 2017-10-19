@@ -35,16 +35,16 @@ namespace GameLogic
 		uint64_t GetId() { return m_id; }
 		void SetId(uint64_t id) { m_id = id; }
 		ESceneObjectType GetObjectType() { return m_obj_type; }
-		inline Vector3 GetPosition() { return m_position; }
-		inline void setPosition(const Vector3 &val) { m_position = val; }
-		inline float getRotation() { return m_rotation; }
-		inline void setRotation(float val) { m_rotation = val; }
+		inline const Vector3 & GetPos() { return m_pos; }
+		inline void SetPos(const Vector3 &val) { m_pos = val; }
+		inline float GetRotation() { return m_rotation; }
+		inline void SetRotation(float val) { m_rotation = val; }
 
 	protected:
 		Scene *m_scene = nullptr;
 		uint64_t m_id = 0;
 		ESceneObjectType m_obj_type = ESOT_Max;
-		Vector3 m_position;
+		Vector3 m_pos;
 		float m_rotation;
 	};
 }

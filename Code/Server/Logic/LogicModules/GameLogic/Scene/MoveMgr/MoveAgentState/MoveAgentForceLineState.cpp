@@ -17,9 +17,9 @@ void GameLogic::MoveAgentForceLineState::Enter(void * param)
 {
 	m_is_done = false;
 	m_ticker.Restart(m_time_sec);
-	m_start_pos = m_move_agent->GetPos();
-	m_curr_pos = m_move_agent->GetPos();
+	m_last_elasped_time = 0;
 	m_move_agent->SetVelocity(m_velocity);
+	m_is_done = !m_ticker.InCd();
 }
 
 void GameLogic::MoveAgentForceLineState::Exit()
@@ -28,6 +28,7 @@ void GameLogic::MoveAgentForceLineState::Exit()
 	m_ignore_terrian = false;
 	m_velocity = Vector3::zero;
 	m_ticker.Restart(0);
+	m_last_elasped_time = 0;
 }
 
 void GameLogic::MoveAgentForceLineState::Update(long deltaMs)
@@ -35,24 +36,30 @@ void GameLogic::MoveAgentForceLineState::Update(long deltaMs)
 	if (m_is_done)
 		return;
 
+	float time_span = 0;
+	if (m_ticker.InCd())
+	{
+		time_span = m_ticker.ElaspeTime() - m_last_elasped_time;
+		m_last_elasped_time = m_ticker.ElaspeTime();
+	}
+	else
+	{
+		time_span = m_ticker.GetCd() - m_last_elasped_time;
+		m_last_elasped_time = m_ticker.GetCd();
+		m_is_done = true;
+	}
+
+	Vector3 ret_pos = m_move_agent->GetPos();
 	if (m_ignore_terrian)
 	{
-		if (m_ticker.InCd())
-		{
-			m_curr_pos = m_start_pos + m_velocity * m_ticker.ElaspeTime();
-		}
-		else
-		{
-			m_curr_pos = m_start_pos + m_velocity * m_ticker.GetCd();
-			m_is_done = true;
-		}
+		ret_pos += m_velocity * time_span;
 	}
 	else
 	{
 
 	}
 
-	m_move_agent->SetPos(m_curr_pos);
+	m_move_agent->SetPos(ret_pos);
 }
 
 bool GameLogic::MoveAgentForceLineState::IsDone()

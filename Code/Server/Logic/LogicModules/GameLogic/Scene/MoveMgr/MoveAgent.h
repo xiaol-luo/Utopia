@@ -70,8 +70,11 @@ namespace GameLogic
 		void Update(long deltaMs);
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);
-		void TryStopMove();
-		void StopForceMove();
-		void ForceMoveLine(Vector2 dir, float speed, float time_sec, bool ignore_terrian);
+		void CancelMove();
+		void CancelForceMove();
+		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
+		void Immobilized(long ms);
+		void CancelImmobilized();
+		void Flash(const Vector3 &val);
 	};
 }

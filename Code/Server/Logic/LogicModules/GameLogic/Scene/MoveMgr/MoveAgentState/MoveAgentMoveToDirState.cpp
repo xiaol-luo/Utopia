@@ -32,6 +32,11 @@ void GameLogic::MoveAgentMoveToDirState::Update(long deltaMs)
 	m_move_agent->GetNavAgent()->OnMoved();
 }
 
+void GameLogic::MoveAgentMoveToDirState::Flash(const Vector3 & val)
+{
+	m_move_agent->GetNavAgent()->SetPos(val);
+}
+
 void GameLogic::MoveAgentMoveToDirState::SetDesiredDir(float dir)
 {
 	m_desired_dir = dir;
