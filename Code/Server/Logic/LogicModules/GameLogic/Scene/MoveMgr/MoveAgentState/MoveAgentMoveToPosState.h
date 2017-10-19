@@ -15,6 +15,7 @@ namespace GameLogic
 		virtual void Exit();
 		virtual void Update(long deltaMs);
 		virtual void Flash(const Vector3 &val);
+		virtual bool IsDone();
 
 		void SetDesiredPos(const Vector3 &pos);
 

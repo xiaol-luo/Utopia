@@ -10,7 +10,7 @@ namespace GameLogic
 		EMoveAgentState_MoveToDir,
 		EMoveAgentState_Immobilized,
 		EMoveAgentState_ForceLine,
-		EMoveAgentState_ForceSky,
+		// EMoveAgentState_ForceSky,
 
 		EMoveAgentState_Max,
 	};

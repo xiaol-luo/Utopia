@@ -104,7 +104,7 @@ void GameLogic::MoveMgr::SetMoveMaxSpeed(uint64_t agent_id, float max_speed)
 {
 	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
 	if (nullptr != move_agent)
-		move_agent->SetMoveMaxSpeed(max_speed);
+		move_agent->SetNavMaxSpeed(max_speed);
 }
 
 void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move_obj)
@@ -143,7 +143,7 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 	}
 	{
 		move_agent->SetPos(move_obj->GetPos());
-		move_agent->SetMoveMaxSpeed(move_obj->GetSpeed());
+		move_agent->SetNavMaxSpeed(move_obj->GetSpeed());
 		MoveAgent::EventCallback event_cb;
 		event_cb.move_state_cb = std::bind(&GameLogic::MoveObject::OnMoveStateChange, move_obj, std::placeholders::_1, std::placeholders::_2);
 		event_cb.velocity_change_cb = std::bind(&GameLogic::MoveObject::OnVelocityChange, move_obj, std::placeholders::_1, std::placeholders::_2);

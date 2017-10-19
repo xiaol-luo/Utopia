@@ -7,6 +7,7 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentForceLineState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentImmobilizedState.h"
 #include "Common/Utils/TimerUtil.h"
+#include "Common/Utils/LogUtil.h"
 
 GameLogic::EMoveState GameLogic::MoveAgent::CalMoveState(GameLogic::EMoveAgentState state)
 {
@@ -21,7 +22,7 @@ GameLogic::EMoveState GameLogic::MoveAgent::CalMoveState(GameLogic::EMoveAgentSt
 		ret = EMoveState_Move;
 		break;
 	case EMoveAgentState_ForceLine:
-	case EMoveAgentState_ForceSky:
+	// case EMoveAgentState_ForceSky:
 		ret = EMoveState_ForceMove;
 		break;
 	case EMoveAgentState_Immobilized:
@@ -94,10 +95,17 @@ bool GameLogic::MoveAgent::IsNavEnable()
 	return this->GetNavAgent()->IsEnable();
 }
 
-void GameLogic::MoveAgent::SetPos(Vector3 val)
+void GameLogic::MoveAgent::NavSetPos(const Vector3 & val)
+{
+	this->GetNavAgent()->SetPos(val);
+}
+
+void GameLogic::MoveAgent::SetPos(const Vector3 &pos)
 {
 	Vector3 old_pos = m_pos;
-	m_pos = val;
+	m_pos = pos;
+	LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "SetPos [{}]:{:3.2f}, {:3.2f}, {:3.2f}", 
+		this->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	if (m_event_cb.post_change_cb)
 		m_event_cb.post_change_cb(this, old_pos);
 }
@@ -110,12 +118,12 @@ void GameLogic::MoveAgent::SetVelocity(const Vector3 &val)
 		m_event_cb.velocity_change_cb(this, val);
 }
 
-float GameLogic::MoveAgent::GetMoveMaxSpeed()
+float GameLogic::MoveAgent::GetNavMaxSpeed()
 {
 	return m_nav_agent->GetMaxSpeed();
 }
 
-void GameLogic::MoveAgent::SetMoveMaxSpeed(float val)
+void GameLogic::MoveAgent::SetNavMaxSpeed(float val)
 {
 	m_nav_agent->SetMaxSpeed(val);
 }

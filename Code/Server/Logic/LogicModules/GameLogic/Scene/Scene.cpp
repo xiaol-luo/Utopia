@@ -44,6 +44,7 @@ namespace GameLogic
 
 		m_red_hero = std::make_shared<Hero>();
 		this->AddObject(m_red_hero);
+		m_red_hero->Flash(Vector3(5, 0, 5));
 		// m_blue_hero = std::make_shared<Hero>();
 		// this->AddObject(m_blue_hero);
 		{
@@ -57,29 +58,36 @@ namespace GameLogic
 				// ptr->CancelImmobilized();
 				// ptr->CancelMove();
 
-				int rand_val = std::rand() % EMoveAgentState_Max;
+				int rand_val = std::rand() % EMoveAgentState_Max + 1;
+				// int rand_val = std::rand() % EMoveAgentState_MoveToDir;
+				ptr->Flash(Vector3(std::rand() % 100, 0, std::rand() % 100));
+				// int rand_val = EMoveAgentState_MoveToPos;
 				switch (rand_val)
 				{
 				case EMoveAgentState_MoveToPos:
-					ptr->TryMoveToPos(Vector3(std::rand() % 101, std::rand()%10, std::rand()%10));
+					ptr->TryMoveToPos(Vector3(std::rand() % 10, 0, std::rand()%10));
 					break;
 				case EMoveAgentState_MoveToDir:
 					ptr->TryMoveToDir(std::rand() % 36000 * 0.001);
 					break;
 				case EMoveAgentState_ForceLine:
-					ptr->ForceMoveLine(Vector2(std::rand() % 100, std::rand() % 100), std::rand() % 10, std::rand() % 3 + 1, true);
+					ptr->ForceMoveLine(Vector2(std::rand() % 100, std::rand() % 100), std::rand() % 9, std::rand() % 3 + 1, true);
 					break;
 				case EMoveAgentState_Immobilized:
-					ptr->Immobilized(std::rand() % 3 + 1);
+					ptr->Immobilized(std::rand() % 1000 + 1000);
 					break;
 				case EMoveAgentState_Idle:
 					ptr->CancelForceMove();
 					ptr->CancelImmobilized();
 					ptr->CancelMove();
 					break;
+
+				case EMoveAgentState_Max:
+					ptr->Flash(Vector3(std::rand() % 30, std::rand() % 30, std::rand() % 30));
+					break;
 				}
 
-			}, 2 * 1000, -1);
+			}, 10 * 1000, -1);
 		}
 
 		return true;

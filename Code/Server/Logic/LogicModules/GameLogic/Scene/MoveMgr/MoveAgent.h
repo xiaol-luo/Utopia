@@ -51,12 +51,13 @@ namespace GameLogic
 		void NavDisable();
 		void NavEnable();
 		bool IsNavEnable();
+		void NavSetPos(const Vector3 &val);
+		float GetNavMaxSpeed();
+		void SetNavMaxSpeed(float val);
 		const Vector3 & GetPos() { return m_pos; }
-		void SetPos(Vector3 val);
+		void SetPos(const Vector3 &val);
 		const Vector3 & GetVelocity() { return m_velocity; }
 		void SetVelocity(const Vector3 &val);
-		float GetMoveMaxSpeed();
-		void SetMoveMaxSpeed(float val);
 		EventCallback & GetEventCb() { return m_event_cb; }
 		void SetEventCb(const EventCallback &cb) { m_event_cb = cb; }
 

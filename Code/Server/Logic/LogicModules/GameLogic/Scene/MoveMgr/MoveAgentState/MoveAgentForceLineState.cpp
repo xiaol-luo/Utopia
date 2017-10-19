@@ -20,15 +20,12 @@ void GameLogic::MoveAgentForceLineState::Enter(void * param)
 	m_last_elasped_time = 0;
 	m_move_agent->SetVelocity(m_velocity);
 	m_is_done = !m_ticker.InCd();
+	m_move_agent->NavDisable();
 }
 
 void GameLogic::MoveAgentForceLineState::Exit()
 {
-	m_time_sec = 0;
-	m_ignore_terrian = false;
-	m_velocity = Vector3::zero;
-	m_ticker.Restart(0);
-	m_last_elasped_time = 0;
+	m_is_done = true;
 }
 
 void GameLogic::MoveAgentForceLineState::Update(long deltaMs)

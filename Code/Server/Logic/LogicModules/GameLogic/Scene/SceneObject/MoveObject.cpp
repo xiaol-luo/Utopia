@@ -36,7 +36,7 @@ namespace GameLogic
 	{
 		m_speed = speed;
 		if (nullptr != m_move_agent)
-			m_move_agent->SetMoveMaxSpeed(m_speed);
+			m_move_agent->SetNavMaxSpeed(m_speed);
 	}
 
 	const Vector3 & MoveObject::GetVelocity()
@@ -116,7 +116,7 @@ namespace GameLogic
 
 		ptr->SetPos(agent->GetPos());
 		Vector3 pos = agent->GetPos();
-		LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange:{:3.2f}, {:3.2f}, {:3.2f}", pos.x, pos.y, pos.z);
+		// LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	}
 
 	void MoveObject::OnVelocityChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)

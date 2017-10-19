@@ -22,11 +22,12 @@ void GameLogic::MoveAgenImmobilizedState::Enter(void * param)
 	m_move_agent->SetVelocity(Vector3::zero);
 	m_ticker.RestartWithEndTimestamp(m_end_timestamp_ms * 0.001);
 	m_is_done = !m_ticker.InCd();
+	m_move_agent->GetNavAgent()->StopMove();
+	m_move_agent->NavEnable();
 }
 
 void GameLogic::MoveAgenImmobilizedState::Exit()
 {
-	m_end_timestamp_ms = 0;
 	m_is_done = true;
 	m_ticker.Restart(0);
 }

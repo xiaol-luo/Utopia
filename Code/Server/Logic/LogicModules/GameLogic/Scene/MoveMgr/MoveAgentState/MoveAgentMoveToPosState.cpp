@@ -4,6 +4,7 @@
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "Common/Math/Vector3.h"
 #include "Common/Math/Vector2.h"
+#include "Common/Utils/LogUtil.h"
 
 GameLogic::MoveAgentMoveToPosState::MoveAgentMoveToPosState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_MoveToPos)
 {
@@ -17,11 +18,15 @@ GameLogic::MoveAgentMoveToPosState::~MoveAgentMoveToPosState()
 
 void GameLogic::MoveAgentMoveToPosState::Enter(void * param)
 {
+	Vector3 from = m_move_agent->GetPos();
+	LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "MoveAgentMoveToPosState::Enter: from{:3.2f}, {:3.2f}, {:3.2f} to {:3.2f}, {:3.2f}, {:3.2f} #",
+		from.x, from.y, from.z,
+		m_desired_pos.x, m_desired_pos.y, m_desired_pos.z);
 	m_move_agent->SetVelocity(Vector3::zero);
+	m_move_agent->SetPos(m_move_agent->GetPos());
 	NavAgent *agent = m_move_agent->GetNavAgent();
-	agent->SetPos(m_move_agent->GetPos());
 	agent->TryMoveToPos(m_desired_pos);
-	agent->Enable();
+	m_move_agent->NavEnable();
 }
 
 void GameLogic::MoveAgentMoveToPosState::Exit()
@@ -37,6 +42,12 @@ void GameLogic::MoveAgentMoveToPosState::Update(long deltaMs)
 void GameLogic::MoveAgentMoveToPosState::Flash(const Vector3 & val)
 {
 	m_move_agent->GetNavAgent()->SetPos(val);
+}
+
+bool GameLogic::MoveAgentMoveToPosState::IsDone()
+{
+	bool ret = (m_desired_pos - m_move_agent->GetPos()).sqrMagnitude() < FLT_EPSILON;
+	return ret;
 }
 
 void GameLogic::MoveAgentMoveToPosState::SetDesiredPos(const Vector3 &pos)

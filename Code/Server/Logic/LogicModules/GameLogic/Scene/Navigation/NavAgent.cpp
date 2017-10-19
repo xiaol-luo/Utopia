@@ -34,17 +34,15 @@ namespace GameLogic
 
 	void NavAgent::SetPos(Vector3 val)
 	{
-		m_pos = val;
+		Vector3 fit_pos;
+		dtPolyRef poly_ref;
+		m_nav_mesh->FindNearestPoint(val, 0, &poly_ref, &fit_pos);
+		m_pos = fit_pos;
 
 		if (IsEnable())
 		{
-			auto agent = m_crowd->getEditableAgent(m_dt_agent_id);
-			if (agent)
-			{
-				agent->npos[0] = m_pos.x;
-				agent->npos[1] = m_pos.y;
-				agent->npos[2] = m_pos.z;
-			}
+			this->Disable();
+			this->Enable();
 		}
 	}
 
