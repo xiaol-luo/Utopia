@@ -17,6 +17,7 @@ namespace GameLogic
 		virtual void Update(long deltaMs);
 		virtual bool IsDone();
 		virtual void ForceDone() { m_is_done = true; }
+		virtual void Flash(const Vector3 &val);
 
 		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
 
@@ -27,5 +28,7 @@ namespace GameLogic
 		bool m_ignore_terrian = false;
 		Ticker m_ticker;
 		float m_last_elasped_time = 0;
+		Vector3 m_hit_pos;
+		Vector3 m_expected_pos;
 	};
 }

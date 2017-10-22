@@ -33,6 +33,7 @@ namespace GameLogic
 		void SetId(uint64_t val) { m_id = val; }
 		uint64_t GetId() { return m_id; }
 		NavAgent * GetNavAgent() { return m_nav_agent; }
+		MoveMgr * GetMoveMgr() { return m_move_mgr; }
 
 	protected:
 		int64_t m_id = 0;
@@ -74,6 +75,8 @@ namespace GameLogic
 		void CancelMove();
 		void CancelForceMove();
 		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
+		void ForcePos(const Vector3 &destination, float speed);
+		void ChangeForcePosDestination(const Vector3 &destination);
 		void Immobilized(long ms);
 		void CancelImmobilized();
 		void Flash(const Vector3 &val);

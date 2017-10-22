@@ -76,6 +76,18 @@ namespace GameLogic
 			m_move_agent->ForceMoveLine(dir, speed, time_sec, ignore_terrian);
 	}
 
+	void MoveObject::ForcePos(const Vector3 & destination, float speed)
+	{
+		if (m_move_agent)
+			m_move_agent->ForcePos(destination, speed);
+	}
+
+	void MoveObject::ChangeForcePosDestination(const Vector3 & destination)
+	{
+		if (m_move_agent)
+			m_move_agent->ChangeForcePosDestination(destination);
+	}
+
 	void MoveObject::Immobilized(long ms)
 	{
 		if (m_move_agent)
@@ -116,7 +128,7 @@ namespace GameLogic
 
 		ptr->SetPos(agent->GetPos());
 		Vector3 pos = agent->GetPos();
-		// LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
+		LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	}
 
 	void MoveObject::OnVelocityChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)
@@ -125,7 +137,8 @@ namespace GameLogic
 		if (nullptr == ptr)
 			return;
 
-		// LogUtil::Debug(LogModule::LOGGER_ID_STDOUT, "MoveStateChange:{0}->{1}", old_state, agent->GetMoveAgentState());
+		Vector3 velocity = agent->GetVelocity();
+		LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnVelocityChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), velocity.x, velocity.y, velocity.z);
 	}
 }
 

@@ -70,6 +70,20 @@ void GameLogic::MoveMgr::ForceMoveLine(uint64_t agent_id, const Vector2 & dir, f
 		move_agent->ForceMoveLine(dir, speed, time_sec, ignore_terrian);
 }
 
+void GameLogic::MoveMgr::ForcePos(uint64_t agent_id, const Vector3 & destination, float speed)
+{
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->ForcePos(destination, speed);
+}
+
+void GameLogic::MoveMgr::ChangeForcePosDestination(uint64_t agent_id, const Vector3 & destination)
+{
+	MoveAgent *move_agent = this->GetMoveAgent(agent_id);
+	if (nullptr != move_agent)
+		move_agent->ChangeForcePosDestination(destination);
+}
+
 void GameLogic::MoveMgr::Immobilized(uint64_t agent_id, long ms)
 {
 	MoveAgent *move_agent = this->GetMoveAgent(agent_id);

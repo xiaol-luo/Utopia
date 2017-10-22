@@ -16,6 +16,7 @@ class dtNavMeshQuery;
 
 #include "DetourNavMesh.h"
 #include "Common/Math/Vector3.h"
+#include "DetourNavMeshQuery.h"
 
 namespace GameLogic
 {
@@ -32,8 +33,10 @@ namespace GameLogic
 		dtCrowd * GetCrowd() { return m_dtCrowd; }
 		dtNavMeshQuery * GetNavMeshQuery() { return m_dtNavMeshQuery; }
 
-		void FindNearestPoint(const Vector3 & pos, int filter, dtPolyRef * target_ref, Vector3 *target_pos);
-		Vector3 Raycast(const Vector3 &start_pos, const Vector3 &endPos);
+		bool FindNearestPoint(const Vector3 &center, dtPolyRef &target_ref, Vector3 &target_pos);
+		bool FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef &target_ref, Vector3 &target_pos);
+		bool Raycast(const Vector3 &start_pos, const Vector3 &end_pos, Vector3 &hit_pos);
+		bool GetPolyRef(const Vector3 &pos, dtPolyRef &out_ref);
 
 	protected:
 		Scene *m_scene = nullptr;
@@ -49,5 +52,6 @@ namespace GameLogic
 		void Reset();
 		int NavMesh::rasterizeTileLayers(const int tx, const int ty, 
 			const rcConfig& cfg, TileCacheData* tiles, const int maxTiles);
+		const dtQueryFilter * DefaultFilter();
 	};
 }

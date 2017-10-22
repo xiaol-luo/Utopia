@@ -46,6 +46,8 @@ namespace GameLogic
 		void CancelMove();
 		void CancelForceMove();
 		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
+		void ForcePos(const Vector3 &destination, float speed);
+		void ChangeForcePosDestination(const Vector3 &destination);
 		void Immobilized(long ms);
 		void CancelImmobilized();
 		void Flash(const Vector3 &val);

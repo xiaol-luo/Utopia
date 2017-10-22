@@ -6,8 +6,10 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentMoveToDirState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentForceLineState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentImmobilizedState.h"
+#include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentForcePosState.h"
 #include "Common/Utils/TimerUtil.h"
 #include "Common/Utils/LogUtil.h"
+#include "GameLogic/Scene/Navigation/NavMesh.h"
 
 GameLogic::EMoveState GameLogic::MoveAgent::CalMoveState(GameLogic::EMoveAgentState state)
 {
@@ -41,8 +43,9 @@ GameLogic::MoveAgent::MoveAgent(MoveMgr * move_mgr) : m_move_mgr(move_mgr)
 	m_states[EMoveAgentState_Idle] = new MoveAgentIdleState(this);
 	m_states[EMoveAgentState_MoveToDir] = new MoveAgentMoveToDirState(this);
 	m_states[EMoveAgentState_MoveToPos] = new MoveAgentMoveToPosState(this);
-	m_states[EMoveAgentState_ForceLine] = new MoveAgentForceLineState(this);
 	m_states[EMoveAgentState_Immobilized] = new MoveAgenImmobilizedState(this);
+	m_states[EMoveAgentState_ForceLine] = new MoveAgentForceLineState(this);
+	m_states[EMoveAgentState_ForcePos] = new MoveAgentForcePosState(this);
 	m_next_state = m_states[EMoveState_Idle];
 	m_curr_state = m_states[EMoveState_Idle];
 }
@@ -104,8 +107,8 @@ void GameLogic::MoveAgent::SetPos(const Vector3 &pos)
 {
 	Vector3 old_pos = m_pos;
 	m_pos = pos;
-	LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "SetPos [{}]:{:3.2f}, {:3.2f}, {:3.2f}", 
-		this->GetMoveAgentState(), pos.x, pos.y, pos.z);
+	// LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "SetPos [{}]:{:3.2f}, {:3.2f}, {:3.2f}", 
+	//	this->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	if (m_event_cb.post_change_cb)
 		m_event_cb.post_change_cb(this, old_pos);
 }
@@ -130,11 +133,20 @@ void GameLogic::MoveAgent::SetNavMaxSpeed(float val)
 
 void GameLogic::MoveAgent::Flash(const Vector3 & val)
 {
+	Vector3 fix_pos; dtPolyRef poly_ref;
+	if (!m_move_mgr->GetNavMesh()->FindNearestPoint(val, poly_ref, fix_pos))
+	{
+		if (!m_move_mgr->GetNavMesh()->Raycast(m_pos, val, fix_pos))
+			fix_pos = m_pos;
+	}
+
 	for (int i = 0; i < EMoveAgentState_Max; ++i)
 	{
-		m_states[i]->Flash(val);
+		m_states[i]->Flash(fix_pos);
 	}
-	this->SetPos(val);
+	this->SetPos(fix_pos);
+	LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
+		this->GetMoveAgentState(), fix_pos.x, fix_pos.y, fix_pos.z);
 }
 
 void GameLogic::MoveAgent::OnNavAgentMoved(NavAgent * agent)
@@ -222,6 +234,21 @@ void GameLogic::MoveAgent::ForceMoveLine(const Vector2 &dir, float speed, float 
 	if (EMoveState_ForceMove != this->GetMoveState())
 		m_next_state = m_curr_state;
 	this->EnterState(EMoveAgentState_ForceLine);
+}
+
+void GameLogic::MoveAgent::ForcePos(const Vector3 & destination, float speed)
+{
+	MoveAgentForcePosState *state = dynamic_cast<MoveAgentForcePosState *>(m_states[EMoveAgentState_ForcePos]);
+	state->ForcePos(destination, speed);
+	if (EMoveState_ForceMove != this->GetMoveState())
+		m_next_state = m_curr_state;
+	this->EnterState(EMoveAgentState_ForcePos);
+}
+
+void GameLogic::MoveAgent::ChangeForcePosDestination(const Vector3 & destination)
+{
+	MoveAgentForcePosState *state = dynamic_cast<MoveAgentForcePosState *>(m_states[EMoveAgentState_ForcePos]);
+	state->ForcePos(destination);
 }
 
 void GameLogic::MoveAgent::Immobilized(long ms)

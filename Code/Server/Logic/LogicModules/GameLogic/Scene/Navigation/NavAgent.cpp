@@ -22,21 +22,23 @@ namespace GameLogic
 			return;
 
 		const dtCrowdAgent *dt_agent = m_crowd->getAgent(m_dt_agent_id);
-		if (nullptr != dt_agent)
+		if (nullptr != dt_agent && DT_CROWDAGENT_STATE_INVALID != dt_agent->state)
 		{
-			m_pos = Vector3(dt_agent->npos);
-			m_velocity = Vector3(dt_agent->vel);
+			if (DT_CROWDAGENT_TARGET_VALID != dt_agent->targetState || DT_CROWDAGENT_TARGET_VELOCITY != dt_agent->targetState)
+			{
+				m_pos = Vector3(dt_agent->npos);
+				m_velocity = Vector3(dt_agent->vel);
+			}
+			if (m_moved_cb)
+				m_moved_cb(this);
 		}
-
-		if (m_moved_cb)
-			m_moved_cb(this);
 	}
 
 	void NavAgent::SetPos(Vector3 val)
 	{
 		Vector3 fit_pos;
 		dtPolyRef poly_ref;
-		m_nav_mesh->FindNearestPoint(val, 0, &poly_ref, &fit_pos);
+		m_nav_mesh->FindNearestPoint(val, poly_ref, fit_pos);
 		m_pos = fit_pos;
 
 		if (IsEnable())
@@ -105,6 +107,7 @@ namespace GameLogic
 		m_move_type = EMoveType_None;
 		m_desired_move_dir = 0.0f;
 		m_desired_move_pos = Vector3::zero;
+		m_velocity = Vector3::zero;
 		if (IsEnable())
 		{
 			m_crowd->resetMoveTarget(m_dt_agent_id);
@@ -130,7 +133,7 @@ namespace GameLogic
 		{
 			Vector3 target_pos;
 			dtPolyRef poly_ref;
-			m_nav_mesh->FindNearestPoint(m_desired_move_pos, 0, &poly_ref, &target_pos);
+			m_nav_mesh->FindNearestPoint(m_desired_move_pos, poly_ref, target_pos);
 			m_crowd->requestMoveTarget(m_dt_agent_id, poly_ref, target_pos.toPointer());
 		}
 	}

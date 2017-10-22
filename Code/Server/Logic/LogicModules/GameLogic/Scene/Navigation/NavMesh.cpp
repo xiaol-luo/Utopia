@@ -318,19 +318,56 @@ namespace GameLogic
 		return ret;
 	}
 
-	void NavMesh::FindNearestPoint(const Vector3 &pos, int filter, dtPolyRef *target_ref, Vector3 *target_pos)
+	bool NavMesh::FindNearestPoint(const Vector3 &center, dtPolyRef &target_ref, Vector3 &target_pos)
 	{
-		const dtNavMeshQuery *navquery = m_dtCrowd->getNavMeshQuery();
-		const dtQueryFilter *dt_filter = m_dtCrowd->getFilter(filter);
 		const float *ext = m_dtCrowd->getQueryExtents();
-		float tmp_pos[3];
-		navquery->findNearestPoly(pos.toPointer(), ext, dt_filter, target_ref, tmp_pos);
-		*target_pos = Vector3(tmp_pos);
+		return this->FindNearestPoint(center, Vector3(ext), target_ref, target_pos);
 	}
 
-	Vector3 NavMesh::Raycast(const Vector3 & start_pos, const Vector3 & endPos)
+	bool NavMesh::FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef &target_ref, Vector3 &target_pos)
 	{
-		return Vector3();
+		const dtNavMeshQuery *navquery = m_dtCrowd->getNavMeshQuery();
+		float out_pos[3]; memset(out_pos, 0, sizeof(out_pos));
+		dtStatus state = navquery->findNearestPoly(center.toPointer(), range.toPointer(), DefaultFilter(), &target_ref, out_pos);
+		if (dtStatusSucceed(state) && 0 != target_ref)
+		{
+			target_pos = Vector3(out_pos);
+			return true;
+		}
+		return false;
+	}
+
+	bool NavMesh::Raycast(const Vector3 &start_pos, const Vector3 &end_pos, Vector3 &hit_pos)
+	{
+		dtPolyRef start_poly_ref = 0; Vector3 tmp_pos;
+		if (this->FindNearestPoint(start_pos, Vector3(0.1f, 1.0f, 0.1f), start_poly_ref, tmp_pos))
+		{
+			dtRaycastHit hit; memset(&hit, 0, sizeof(hit));
+			dtStatus state = m_dtNavMeshQuery->raycast(start_poly_ref, tmp_pos.toPointer(),
+				end_pos.toPointer(), DefaultFilter(), DT_RAYCAST_USE_COSTS, &hit);
+			if (dtStatusSucceed(state))
+			{
+				if (hit.t >= 0 && hit.t < 1)
+					hit_pos = tmp_pos + (end_pos - tmp_pos) * hit.t;
+				else if (hit.t >= 1)
+					hit_pos = end_pos;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	bool NavMesh::GetPolyRef(const Vector3 &pos, dtPolyRef &out_ref)
+	{
+		dtPolyRef ref = 0; int ref_count = 0;
+		dtStatus status = m_dtNavMeshQuery->queryPolygons(
+			pos.toPointer(), Vector3(0.1f, 1.0f, 0.1f).toPointer(), DefaultFilter(), &ref, &ref_count, 1);
+		if (dtStatusSucceed(status) && ref_count > 0)
+		{
+			out_ref = ref;
+			return true;
+		}
+		return false;
 	}
 
 	int NavMesh::rasterizeTileLayers(const int tx, const int ty, const rcConfig& cfg, TileCacheData* tiles, const int maxTiles)
@@ -507,6 +544,10 @@ namespace GameLogic
 		}
 
 		return n;
+	}
+	const dtQueryFilter * NavMesh::DefaultFilter()
+	{
+		return m_dtCrowd->getFilter(0);
 	}
 }
 
