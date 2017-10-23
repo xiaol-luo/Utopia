@@ -159,9 +159,9 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 		move_agent->SetPos(move_obj->GetPos());
 		move_agent->SetNavMaxSpeed(move_obj->GetSpeed());
 		MoveAgent::EventCallback event_cb;
-		event_cb.move_state_cb = std::bind(&GameLogic::MoveObject::OnMoveStateChange, move_obj, std::placeholders::_1, std::placeholders::_2);
-		event_cb.velocity_change_cb = std::bind(&GameLogic::MoveObject::OnVelocityChange, move_obj, std::placeholders::_1, std::placeholders::_2);
-		event_cb.post_change_cb = std::bind(&GameLogic::MoveObject::OnPostChange, move_obj, std::placeholders::_1, std::placeholders::_2);
+		event_cb.move_state_cb = std::bind(&GameLogic::MoveObject::MoveStateChangeCb, move_obj, std::placeholders::_1, std::placeholders::_2);
+		event_cb.velocity_change_cb = std::bind(&GameLogic::MoveObject::VelocityChangeCb, move_obj, std::placeholders::_1, std::placeholders::_2);
+		event_cb.post_change_cb = std::bind(&GameLogic::MoveObject::PostChangeCb, move_obj, std::placeholders::_1, std::placeholders::_2);
 		move_agent->SetEventCb(event_cb);
 	}
 }

@@ -34,16 +34,24 @@ namespace GameLogic
 		Scene * GetScene() { return m_scene; }
 		uint64_t GetId() { return m_id; }
 		void SetId(uint64_t id) { m_id = id; }
+		uint64_t GetModelId() { return m_model_id; }
+		void SetModelId(uint64_t val) { m_model_id = val; }
 		ESceneObjectType GetObjectType() { return m_obj_type; }
 		inline const Vector3 & GetPos() { return m_pos; }
-		inline void SetPos(const Vector3 &val) { m_pos = val; }
+		void SetPos(const Vector3 &val);
 		inline float GetRotation() { return m_rotation; }
-		inline void SetRotation(float val) { m_rotation = val; }
+		void SetRotation(float val);
+		virtual void SyncClient(uint64_t uid/*0 means broadcast*/,  bool is_all);
+
+	protected:
+		void OnPosChange(const Vector3 &old_val);
+		void OnRotationChange(float old_val);
 
 	protected:
 		Scene *m_scene = nullptr;
 		uint64_t m_id = 0;
 		ESceneObjectType m_obj_type = ESOT_Max;
+		int m_model_id = 0;
 		Vector3 m_pos;
 		float m_rotation;
 	};

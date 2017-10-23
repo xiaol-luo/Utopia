@@ -32,11 +32,35 @@ namespace GameLogic
 		SceneObject::Update(now_ms);
 	}
 
+	void MoveObject::SetRadius(float radius)
+	{
+		if (abs(m_radius - radius) < FLT_EPSILON)
+			return;
+
+		float old_val = m_radius;
+		this->OnRadiusChange(old_val);
+	}
+
 	void MoveObject::SetSpeed(float speed)
 	{
+		if (abs(m_speed - speed) < FLT_EPSILON)
+			return;
+
+		float old_val = m_speed;
 		m_speed = speed;
 		if (nullptr != m_move_agent)
 			m_move_agent->SetNavMaxSpeed(m_speed);
+		this->OnSpeedChange(old_val);
+	}
+
+	void MoveObject::OnSpeedChange(float old_val)
+	{
+
+	}
+
+	void MoveObject::OnRadiusChange(float old_val)
+	{
+
 	}
 
 	const Vector3 & MoveObject::GetVelocity()
@@ -44,6 +68,21 @@ namespace GameLogic
 		if (m_move_agent)
 			return m_move_agent->GetVelocity();
 		return Vector3::zero;
+	}
+
+	void MoveObject::OnMoveAgentStateChange(EMoveAgentState old_val)
+	{
+		m_move_change = true;
+	}
+
+	void MoveObject::OnVelocityChange(const Vector3 & old_val)
+	{
+		m_move_change = true;
+	}
+
+	void MoveObject::OnPosChange(const Vector3 & old_val)
+	{
+		m_move_change = true;
 	}
 
 	void MoveObject::TryMoveToPos(const Vector3 &pos)
@@ -111,16 +150,17 @@ namespace GameLogic
 		return m_move_agent->GetMoveAgentState();
 	}
 
-	void MoveObject::OnMoveStateChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, EMoveAgentState old_state)
+	void MoveObject::MoveStateChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, EMoveAgentState old_state)
 	{
 		auto ptr = obj.lock();
 		if (nullptr == ptr)
 			return;
 
+		ptr->OnMoveAgentStateChange(old_state);
 		LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "MoveStateChange:{0}->{1}", old_state, agent->GetMoveAgentState());
 	}
 
-	void MoveObject::OnPostChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_pos)
+	void MoveObject::PostChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_pos)
 	{
 		auto ptr = obj.lock();
 		if (nullptr == ptr)
@@ -131,13 +171,15 @@ namespace GameLogic
 		LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	}
 
-	void MoveObject::OnVelocityChange(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)
+	void MoveObject::VelocityChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)
 	{
 		auto ptr = obj.lock();
 		if (nullptr == ptr)
 			return;
 
 		Vector3 velocity = agent->GetVelocity();
+		ptr->OnVelocityChange(old_velocity);
+
 		LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnVelocityChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), velocity.x, velocity.y, velocity.z);
 	}
 }
