@@ -55,6 +55,14 @@ namespace GameLogic
 		void CheckSceneObjectsCache();
 
 	public:
+		template <typename T> 
+		T * CreateProtobuf()
+		{
+			return google::protobuf::Arena::CreateMessage<T>(m_protobuf_arena);
+		}
+
+
+
 		void PullAllSceneInfo(Player *player);
 	};
 }

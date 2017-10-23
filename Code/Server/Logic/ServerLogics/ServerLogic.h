@@ -3,6 +3,8 @@
 #include "ModuleDef/ModuleMgr.h"
 
 class ITimerModule;
+class INetworkModule;
+class LogModule;
 
 enum EServerLogicState
 {
@@ -27,6 +29,11 @@ public:
 	EServerLogicState GetState() { return m_state; }
 	ModuleMgr * GetModuleMgr() { return m_module_mgr; }
 
+	
+	INetworkModule * GetNetworkModule();
+	ITimerModule * GetTimerModule();
+	LogModule * GetLogModule();
+
 protected:
 	virtual void SetupModules() = 0;
 	virtual void ClearInitParams() = 0;
@@ -43,3 +50,4 @@ protected:
 
 	ITimerModule *m_timer_module;
 };
+

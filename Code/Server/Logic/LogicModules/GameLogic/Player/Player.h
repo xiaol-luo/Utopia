@@ -4,6 +4,7 @@
 #include "Common/Macro/MemoryPoolMacro.h"
 #include <unordered_map>
 #include <memory>
+#include "protobuf/include/google/protobuf/message.h"
 
 class GameLogicModule;
 class INetConnectHander;
@@ -27,6 +28,7 @@ namespace GameLogic
 
 		std::shared_ptr<INetConnectHander> GetCnnHandler();
 		NetId GetNetId();
+		void SendMsg(google::protobuf::Message *msg);
 
 	protected:
 		PlayerMgr *m_player_mgr;
@@ -40,6 +42,7 @@ namespace GameLogic
 		void SetHero(std::shared_ptr<Hero> hero);
 		bool CanRecvSceneMsg() { return m_can_recv_scene_msg; }
 		void SetCanRecvSceneMsg(bool value) { m_can_recv_scene_msg = value; }
+
 	protected:
 		std::weak_ptr<Hero> m_hero;
 		bool m_can_recv_scene_msg = false;

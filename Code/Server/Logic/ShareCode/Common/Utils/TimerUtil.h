@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CommonModules\Timer\ITimerModule.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 class TimerUtil
 {

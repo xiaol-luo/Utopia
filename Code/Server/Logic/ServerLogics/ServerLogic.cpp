@@ -5,7 +5,9 @@
 #include "CommonModules/Timer/ITimerModule.h"
 #include "Common/Utils/LogUtil.h"
 #include "Common/Utils/TimerUtil.h"
+#include "Common/Utils/NetworkUtil.h"
 
+ServerLogic *server_logic = nullptr;
 const int TRY_MAX_TIMES = 100000;
 
 ServerLogic::ServerLogic()
@@ -45,6 +47,7 @@ bool ServerLogic::Init()
 	{
 		LogUtil::Init(m_module_mgr->GetModule<LogModule>());
 		TimerUtil::Init(m_timer_module);
+		NetworkUtil::Init(m_module_mgr->GetModule<INetworkModule>());
 	}
 	return ret;
 }
@@ -141,4 +144,17 @@ void ServerLogic::Quit()
 	}
 }
 
+INetworkModule * ServerLogic::GetNetworkModule()
+{
+	return m_module_mgr->GetModule<INetworkModule>();
+}
 
+ITimerModule * ServerLogic::GetTimerModule()
+{
+	return m_module_mgr->GetModule<ITimerModule>();
+}
+
+LogModule * ServerLogic::GetLogModule()
+{
+	return m_module_mgr->GetModule<LogModule>();
+}

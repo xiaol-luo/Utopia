@@ -1,6 +1,8 @@
 #pragma once
-class ServerLogic;
+
+#include "ServerLogics/ServerLogic.h"
 extern ServerLogic *server_logic;
 
-#define ServerLogicInstance server_logic
-#define ModuleMgrInstance server_logic->GetModuleMgr()
+#define GlobalServerLogic server_logic
+#define GlobalModuleMgr server_logic->GetModuleMgr()
+

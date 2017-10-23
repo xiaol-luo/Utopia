@@ -12,7 +12,7 @@
 
 #include <sol.hpp>
 
-ServerLogic *server_logic = nullptr;
+extern ServerLogic *server_logic;
 
 void QuitGame(int signal)
 {

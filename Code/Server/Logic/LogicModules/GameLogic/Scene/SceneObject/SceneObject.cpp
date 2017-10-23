@@ -1,6 +1,6 @@
 #include "SceneObject.h"
 #include "GameLogic/Scene/Scene.h"
-
+#include "Network/Protobuf/Battle.pb.h"
 
 namespace GameLogic
 {
@@ -43,6 +43,7 @@ namespace GameLogic
 
 	void SceneObject::SyncClient(uint64_t uid, bool is_all)
 	{
+		NetProto::SceneObject *xxx = m_scene->CreateProtobuf<NetProto::SceneObject>();
 
 	}
 
