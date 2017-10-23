@@ -12,7 +12,8 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Common/Utils/AutoReleaseUtil.h"
 #include "GameLogic/Scene/SceneObject/Hero.h"
-#include "Common/Utils/LogUtil.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -91,7 +92,7 @@ namespace GameLogic
 			if (nullptr == handler_descript)
 			{
 				is_ok = false;
-				LogUtil::Error(LogUtil::STDERR, "not handler function for protocol id {}", protocol_id);
+				GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR + 1, "not handler function for protocol id {}", protocol_id);
 				break;
 			}
 			char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;

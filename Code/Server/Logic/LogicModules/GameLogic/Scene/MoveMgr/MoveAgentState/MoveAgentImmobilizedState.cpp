@@ -3,7 +3,6 @@
 #include "GameLogic/Scene/MoveMgr/MoveMgr.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
-#include "Common/Utils/TimerUtil.h"
 
 
 GameLogic::MoveAgenImmobilizedState::MoveAgenImmobilizedState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_Immobilized)

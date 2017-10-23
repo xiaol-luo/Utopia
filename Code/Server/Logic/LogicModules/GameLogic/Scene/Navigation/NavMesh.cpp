@@ -9,7 +9,6 @@
 #include "DetourCrowd.h"
 #include "DetourNavMeshQuery.h"
 #include <assert.h>
-#include "Common/Utils/TimerUtil.h"
 
 extern dtNavMesh* LoadNavMesh(const char* path);
 static const int EXPECTED_LAYERS_PER_TILE = 4;

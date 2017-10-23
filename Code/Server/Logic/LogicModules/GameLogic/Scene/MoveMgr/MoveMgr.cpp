@@ -4,10 +4,10 @@
 #include "GameLogic/Scene/Scene.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "GameLogic/Scene/SceneObject/MoveObject.h"
-#include "Common/Utils/TimerUtil.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
-#include "Common/Utils/LogUtil.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 GameLogic::MoveMgr::MoveMgr(Scene * scene) : m_scene(scene)
 {
@@ -26,7 +26,7 @@ bool GameLogic::MoveMgr::Awake()
 
 void GameLogic::MoveMgr::Update()
 {
-	long deltaMs = TimerUtil::DeltaMs();
+	long deltaMs = GlobalServerLogic->GetTimerModule()->DeltaMs();
 	m_nav_mesh->GetCrowd()->update(deltaMs * 0.001, nullptr);
 
 	for (auto kv_pair : m_move_agents)

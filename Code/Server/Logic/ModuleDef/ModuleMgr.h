@@ -4,6 +4,10 @@
 #include "ModuleDef/IModule.h"
 #include "Common/Macro/MemoryPoolMacro.h"
 
+#include "CommonModules/Log/LogModule.h"
+#include "CommonModules/Network/INetworkModule.h"
+#include "CommonModules/Timer/ITimerModule.h"
+
 class ServerLogic;
 
 class ModuleMgr : ObjectBase

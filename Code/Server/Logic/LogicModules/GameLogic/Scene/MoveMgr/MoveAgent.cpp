@@ -7,9 +7,10 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentForceLineState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentImmobilizedState.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentForcePosState.h"
-#include "Common/Utils/TimerUtil.h"
-#include "Common/Utils/LogUtil.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 GameLogic::EMoveState GameLogic::MoveAgent::CalMoveState(GameLogic::EMoveAgentState state)
 {
@@ -145,7 +146,7 @@ void GameLogic::MoveAgent::Flash(const Vector3 & val)
 		m_states[i]->Flash(fix_pos);
 	}
 	this->SetPos(fix_pos);
-	LogUtil::Debug(LogModule::LOGGER_ID_STDOUT + 2, "Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
+	GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
 		this->GetMoveAgentState(), fix_pos.x, fix_pos.y, fix_pos.z);
 }
 
@@ -254,7 +255,7 @@ void GameLogic::MoveAgent::ChangeForcePosDestination(const Vector3 & destination
 void GameLogic::MoveAgent::Immobilized(long ms)
 {
 	MoveAgenImmobilizedState *state = dynamic_cast<MoveAgenImmobilizedState *>(m_states[EMoveAgentState_Immobilized]);
-	state->ImmobilizeEndMs(TimerUtil::NowMs() + ms);
+	state->ImmobilizeEndMs(GlobalServerLogic->GetTimerModule()->NowMs() + ms);
 	if (EMoveState_ForceMove == this->GetMoveState())
 	{
 		m_next_state = m_states[EMoveAgentState_Immobilized];

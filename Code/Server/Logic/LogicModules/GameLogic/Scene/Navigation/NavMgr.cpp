@@ -3,7 +3,8 @@
 #include "DetourCrowd.h"
 #include "DetourNavMeshQuery.h"
 #include <assert.h>
-#include "Common/Utils/TimerUtil.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 namespace GameLogic
 {
@@ -30,7 +31,7 @@ namespace GameLogic
 
 	void GameLogic::NavMgr::Update()
 	{
-		long deltaMs = TimerUtil::DeltaMs();
+		long deltaMs = GlobalServerLogic->GetTimerModule()->DeltaMs();
 		m_dtCrowd->update(deltaMs * 0.001, nullptr);
 	}
 }

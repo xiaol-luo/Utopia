@@ -1,9 +1,10 @@
 #include "Ticker.h"
-#include "TimerUtil.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 float NowSecond()
 {
-	return TimerUtil::NowMs() * 1.0f / ITimerModule::MS_PER_SEC;
+	return GlobalServerLogic->GetTimerModule()->NowMs() *1.0f / ITimerModule::MS_PER_SEC;
 }
 
 Ticker::Ticker(std::function<long()> m_now_sec_func)

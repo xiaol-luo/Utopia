@@ -12,8 +12,9 @@
 #include "GameLogic/GameLogicModule.h"
 #include "CsvConfigSets.h"
 #include "Scene/CsvSceneConfig.h"
-#include "Common/Utils/TimerUtil.h"
 #include "Common/Math/Vector2.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 namespace GameLogic
 {
@@ -50,7 +51,7 @@ namespace GameLogic
 		// this->AddObject(m_blue_hero);
 		{
 			std::weak_ptr<Hero> hero = m_red_hero;
-			TimerUtil::AddFirm([hero]() {
+			GlobalServerLogic->GetTimerModule()->AddFirm([hero]() {
 				std::shared_ptr<Hero> ptr = hero.lock();
 				if (nullptr == ptr)
 					return;
