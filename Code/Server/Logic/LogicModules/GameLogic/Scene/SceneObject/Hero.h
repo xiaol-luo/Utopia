@@ -14,7 +14,7 @@ namespace GameLogic
 		virtual ~Hero();
 
 	public:
-		void SetPlayer(Player *player) { m_Player = player; }
+		void SetPlayer(Player *player);
 		Player * GetPlayer() { return m_Player; }
 	private:
 		Player *m_Player = nullptr;

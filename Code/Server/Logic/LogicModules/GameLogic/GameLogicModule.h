@@ -44,18 +44,11 @@ public:
 	virtual EModuleRetCode Destroy();
 
 	void HandlePlayerMsg(char *data, uint32_t data_len, GameLogic::Player *player);
-	LogModule * GetLog() { return m_log_module; }
-	ITimerModule * GetTimer() { return m_timer_module; }
-	INetworkModule * GetNetwork() { return m_network_module; }
-	NetworkAgent *GetNetAgent() { return m_network_agent; }
 	const std::string & GetCfgRootPath() { return m_cfg_root_path; }
 	Config::CsvConfigSets * GetCsvCfgSet() { return m_csv_cfg_sets; }
+	GameLogic::PlayerMgr * GetPlayerMgr() { return m_player_mgr; }
 
 private:
-	LogModule *m_log_module = nullptr;
-	ITimerModule *m_timer_module = nullptr;
-	INetworkModule *m_network_module = nullptr;
-	NetworkAgent *m_network_agent = nullptr;
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
 	GameLogic::PlayerMgr *m_player_mgr = nullptr;
 	GameLogic::Scene *m_scene = nullptr;

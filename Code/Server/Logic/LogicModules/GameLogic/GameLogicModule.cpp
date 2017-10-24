@@ -11,6 +11,7 @@
 #include "Network/Utils/NetworkAgent.h"
 #include "GameLogic/Scene/Scene.h"
 #include "Network/PlayerMsgHandler.h"
+#include "Common/Macro/ServerLogicMacro.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
@@ -36,13 +37,7 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	WaitModuleState(EMoudleName_Log, EModuleState_Inited, false);
 	WaitModuleState(EMoudleName_Network, EModuleState_Inited, false);
 
-	m_log_module = m_module_mgr->GetModule<LogModule>();
-	m_network_module = m_module_mgr->GetModule<INetworkModule>();
-	m_timer_module = m_module_mgr->GetModule<ITimerModule>();
-
 	m_player_msg_handler->Init();
-	m_network_agent = new NetworkAgent(m_network_module);
-
 	m_cfg_root_path = *(std::string *)param;
 	while ('/' == m_cfg_root_path.back() || '\\' == m_cfg_root_path.back())
 		m_cfg_root_path.pop_back();
@@ -64,7 +59,7 @@ EModuleRetCode GameLogicModule::Awake()
 
 EModuleRetCode GameLogicModule::Update()
 {
-	long long now_ms = m_timer_module->NowMs();
+	long long now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
 	m_player_mgr->Update(now_ms);
 	m_scene->Update(now_ms);
 	return EModuleRetCode_Succ;
@@ -77,17 +72,7 @@ EModuleRetCode GameLogicModule::Release()
 
 EModuleRetCode GameLogicModule::Destroy()
 {
-	if (nullptr != m_network_agent)
-	{
-		delete m_network_agent;
-		m_network_agent = nullptr;
-	}
-
 	m_player_msg_handler->Uninit();
-
-	m_log_module = nullptr;
-	m_timer_module = nullptr;
-	m_network_module = nullptr;
 	return EModuleRetCode_Succ;
 }
 

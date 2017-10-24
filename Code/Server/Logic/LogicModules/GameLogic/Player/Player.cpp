@@ -6,6 +6,7 @@
 #include "GameLogic/Scene/SceneObject/Hero.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
+#include "Network/Utils/NetworkAgent.h"
 
 namespace GameLogic
 {
@@ -84,6 +85,21 @@ namespace GameLogic
 	void Player::SendMsg(google::protobuf::Message * msg)
 	{
 		
+	}
+
+	void Player::Send(int protocol_id, char * msg, uint32_t msg_len)
+	{
+		GlobalServerLogic->GetNetAgent()->Send(this->GetNetId(), protocol_id, msg, msg_len);
+	}
+
+	void Player::Send(int protocol_id, google::protobuf::Message * msg)
+	{
+		GlobalServerLogic->GetNetAgent()->Send(this->GetNetId(), protocol_id, msg);
+	}
+
+	void Player::Close()
+	{
+		GlobalServerLogic->GetNetAgent()->Close(this->GetNetId());
 	}
 
 	void Player::OnNetClose(int err_num)

@@ -29,6 +29,9 @@ namespace GameLogic
 		std::shared_ptr<INetConnectHander> GetCnnHandler();
 		NetId GetNetId();
 		void SendMsg(google::protobuf::Message *msg);
+		void Send(int protocol_id, char *msg, uint32_t msg_len);
+		void Send(int protocol_id, google::protobuf::Message *msg);
+		void Close();
 
 	protected:
 		PlayerMgr *m_player_mgr;

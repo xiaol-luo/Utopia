@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='Common.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x43ommon.proto\x12\x08NetProto\"\x0c\n\nTestCommonB\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x43ommon.proto\x12\x08NetProto\"\x0c\n\nTestCommon\",\n\tPBVector3\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"!\n\tPBVector2\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x42\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 
@@ -48,7 +48,92 @@ _TESTCOMMON = _descriptor.Descriptor(
   serialized_end=38,
 )
 
+
+_PBVECTOR3 = _descriptor.Descriptor(
+  name='PBVector3',
+  full_name='NetProto.PBVector3',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='x', full_name='NetProto.PBVector3.x', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='y', full_name='NetProto.PBVector3.y', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='z', full_name='NetProto.PBVector3.z', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=40,
+  serialized_end=84,
+)
+
+
+_PBVECTOR2 = _descriptor.Descriptor(
+  name='PBVector2',
+  full_name='NetProto.PBVector2',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='x', full_name='NetProto.PBVector2.x', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='y', full_name='NetProto.PBVector2.y', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=86,
+  serialized_end=119,
+)
+
 DESCRIPTOR.message_types_by_name['TestCommon'] = _TESTCOMMON
+DESCRIPTOR.message_types_by_name['PBVector3'] = _PBVECTOR3
+DESCRIPTOR.message_types_by_name['PBVector2'] = _PBVECTOR2
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 TestCommon = _reflection.GeneratedProtocolMessageType('TestCommon', (_message.Message,), dict(
@@ -57,6 +142,20 @@ TestCommon = _reflection.GeneratedProtocolMessageType('TestCommon', (_message.Me
   # @@protoc_insertion_point(class_scope:NetProto.TestCommon)
   ))
 _sym_db.RegisterMessage(TestCommon)
+
+PBVector3 = _reflection.GeneratedProtocolMessageType('PBVector3', (_message.Message,), dict(
+  DESCRIPTOR = _PBVECTOR3,
+  __module__ = 'Common_pb2'
+  # @@protoc_insertion_point(class_scope:NetProto.PBVector3)
+  ))
+_sym_db.RegisterMessage(PBVector3)
+
+PBVector2 = _reflection.GeneratedProtocolMessageType('PBVector2', (_message.Message,), dict(
+  DESCRIPTOR = _PBVECTOR2,
+  __module__ = 'Common_pb2'
+  # @@protoc_insertion_point(class_scope:NetProto.PBVector2)
+  ))
+_sym_db.RegisterMessage(PBVector2)
 
 
 DESCRIPTOR.has_options = True

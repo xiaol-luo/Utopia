@@ -1,6 +1,7 @@
 #include "SceneObject.h"
 #include "GameLogic/Scene/Scene.h"
 #include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
 
 namespace GameLogic
 {
@@ -41,10 +42,23 @@ namespace GameLogic
 		this->OnRotationChange(old_val);
 	}
 
-	void SceneObject::SyncClient(uint64_t uid, bool is_all)
+	std::vector<SyncClientMsg> SceneObject::ColllectSyncClientMsg(int filter_type)
 	{
-		NetProto::SceneObject *xxx = m_scene->CreateProtobuf<NetProto::SceneObject>();
+		std::vector<SyncClientMsg> client_msgs;
+		if (filter_type & SCMF_ForInit)
+		{
+			NetProto::SceneObjectState * msg = m_scene->CreateProtobuf<NetProto::SceneObjectState>();
+			msg->set_model_id(m_model_id);
+			msg->set_obj_type((::NetProto::SceneObjectType)m_obj_type);
+			msg->set_objid(m_id);
+			auto pos = msg->mutable_pos();
+			pos->set_x(m_pos.x);
+			pos->set_y(m_pos.y);
+			pos->set_z(m_pos.z);
+			client_msgs.push_back(SyncClientMsg(NetProto::PID_SceneObjectState, msg));
+		}
 
+		return std::move(client_msgs);
 	}
 
 	void SceneObject::OnPosChange(const Vector3 &old_val)

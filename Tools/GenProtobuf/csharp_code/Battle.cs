@@ -22,23 +22,31 @@ namespace NetProto {
     static BattleReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxCYXR0bGUucHJvdG8SCE5ldFByb3RvIjgKC1JzcEZyZWVIZXJvEhMKC3Jl",
-            "ZF9oZXJvX2lkGAEgASgEEhQKDGJsdWVfaGVyb19pZBgCIAEoBCIgCg1TZWxl",
-            "Y3RIZXJvUmVxEg8KB2hlcm9faWQYASABKAQiMQoNU2VsZWN0SGVyb1JzcBIP",
-            "CgdoZXJvX2lkGAEgASgEEg8KB2lzX3N1Y2MYAiABKAgiWwoLU2NlbmVPYmpl",
-            "Y3QSDQoFb2JqaWQYASABKAQSKwoIb2JqX3R5cGUYAiABKA4yGS5OZXRQcm90",
-            "by5TY2VuZU9iamVjdFR5cGUSEAoIbW9kZWxfaWQYAyABKAUiNQoOQWxsU2Nl",
-            "bmVPYmplY3QSIwoEb2JqcxgBIAMoCzIVLk5ldFByb3RvLlNjZW5lT2JqZWN0",
-            "KjsKD1NjZW5lT2JqZWN0VHlwZRIMCghCdWlsZGluZxAAEggKBEhlcm8QARIH",
-            "CgNOcGMQAhIHCgNNQVgQA0ID+AEBYgZwcm90bzM="));
+            "CgxCYXR0bGUucHJvdG8SCE5ldFByb3RvGgxDb21tb24ucHJvdG8iOAoLUnNw",
+            "RnJlZUhlcm8SEwoLcmVkX2hlcm9faWQYASABKAQSFAoMYmx1ZV9oZXJvX2lk",
+            "GAIgASgEIiAKDVNlbGVjdEhlcm9SZXESDwoHaGVyb19pZBgBIAEoBCIxCg1T",
+            "ZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASABKAQSDwoHaXNfc3VjYxgCIAEo",
+            "CCKCAQoQU2NlbmVPYmplY3RTdGF0ZRINCgVvYmppZBgBIAEoBBIrCghvYmpf",
+            "dHlwZRgCIAEoDjIZLk5ldFByb3RvLlNjZW5lT2JqZWN0VHlwZRIQCghtb2Rl",
+            "bF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQcm90by5QQlZlY3RvcjMi",
+            "PwoTQWxsU2NlbmVPYmplY3RTdGF0ZRIoCgRvYmpzGAEgAygLMhouTmV0UHJv",
+            "dG8uU2NlbmVPYmplY3RTdGF0ZSJSCg9Nb3ZlT2JqZWN0U3RhdGUSDgoGcmFk",
+            "aXVzGAEgASgFEg4KBmhlaWdodBgCIAEoBRIMCgRtYXNzGAMgASgFEhEKCW1h",
+            "eF9zcGVlZBgEIAEoBSIYChZNb3ZlT2JqZWN0TXV0YWJsZVN0YXRlIi0KCU1v",
+            "dmVUb1BvcxIgCgNwb3MYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjIqOwoP",
+            "U2NlbmVPYmplY3RUeXBlEgwKCEJ1aWxkaW5nEAASCAoESGVybxABEgcKA05w",
+            "YxACEgcKA01BWBADQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.SceneObjectType), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.RspFreeHero), global::NetProto.RspFreeHero.Parser, new[]{ "RedHeroId", "BlueHeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroReq), global::NetProto.SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObject), global::NetProto.SceneObject.Parser, new[]{ "Objid", "ObjType", "ModelId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.AllSceneObject), global::NetProto.AllSceneObject.Parser, new[]{ "Objs" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.AllSceneObjectState), global::NetProto.AllSceneObjectState.Parser, new[]{ "Objs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null)
           }));
     }
     #endregion
@@ -462,10 +470,10 @@ namespace NetProto {
 
   }
 
-  public sealed partial class SceneObject : pb::IMessage<SceneObject> {
-    private static readonly pb::MessageParser<SceneObject> _parser = new pb::MessageParser<SceneObject>(() => new SceneObject());
+  public sealed partial class SceneObjectState : pb::IMessage<SceneObjectState> {
+    private static readonly pb::MessageParser<SceneObjectState> _parser = new pb::MessageParser<SceneObjectState>(() => new SceneObjectState());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<SceneObject> Parser { get { return _parser; } }
+    public static pb::MessageParser<SceneObjectState> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -478,22 +486,23 @@ namespace NetProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public SceneObject() {
+    public SceneObjectState() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public SceneObject(SceneObject other) : this() {
+    public SceneObjectState(SceneObjectState other) : this() {
       objid_ = other.objid_;
       objType_ = other.objType_;
       modelId_ = other.modelId_;
+      Pos = other.pos_ != null ? other.Pos.Clone() : null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public SceneObject Clone() {
-      return new SceneObject(this);
+    public SceneObjectState Clone() {
+      return new SceneObjectState(this);
     }
 
     /// <summary>Field number for the "objid" field.</summary>
@@ -529,13 +538,24 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 4;
+    private global::NetProto.PBVector3 pos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as SceneObject);
+    public global::NetProto.PBVector3 Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(SceneObject other) {
+    public override bool Equals(object other) {
+      return Equals(other as SceneObjectState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneObjectState other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -545,6 +565,7 @@ namespace NetProto {
       if (Objid != other.Objid) return false;
       if (ObjType != other.ObjType) return false;
       if (ModelId != other.ModelId) return false;
+      if (!object.Equals(Pos, other.Pos)) return false;
       return true;
     }
 
@@ -554,6 +575,7 @@ namespace NetProto {
       if (Objid != 0UL) hash ^= Objid.GetHashCode();
       if (ObjType != 0) hash ^= ObjType.GetHashCode();
       if (ModelId != 0) hash ^= ModelId.GetHashCode();
+      if (pos_ != null) hash ^= Pos.GetHashCode();
       return hash;
     }
 
@@ -576,6 +598,10 @@ namespace NetProto {
         output.WriteRawTag(24);
         output.WriteInt32(ModelId);
       }
+      if (pos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Pos);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -590,11 +616,14 @@ namespace NetProto {
       if (ModelId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ModelId);
       }
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
       return size;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(SceneObject other) {
+    public void MergeFrom(SceneObjectState other) {
       if (other == null) {
         return;
       }
@@ -606,6 +635,12 @@ namespace NetProto {
       }
       if (other.ModelId != 0) {
         ModelId = other.ModelId;
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          pos_ = new global::NetProto.PBVector3();
+        }
+        Pos.MergeFrom(other.Pos);
       }
     }
 
@@ -629,16 +664,23 @@ namespace NetProto {
             ModelId = input.ReadInt32();
             break;
           }
+          case 34: {
+            if (pos_ == null) {
+              pos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(pos_);
+            break;
+          }
         }
       }
     }
 
   }
 
-  public sealed partial class AllSceneObject : pb::IMessage<AllSceneObject> {
-    private static readonly pb::MessageParser<AllSceneObject> _parser = new pb::MessageParser<AllSceneObject>(() => new AllSceneObject());
+  public sealed partial class AllSceneObjectState : pb::IMessage<AllSceneObjectState> {
+    private static readonly pb::MessageParser<AllSceneObjectState> _parser = new pb::MessageParser<AllSceneObjectState>(() => new AllSceneObjectState());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<AllSceneObject> Parser { get { return _parser; } }
+    public static pb::MessageParser<AllSceneObjectState> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -651,39 +693,39 @@ namespace NetProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AllSceneObject() {
+    public AllSceneObjectState() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AllSceneObject(AllSceneObject other) : this() {
+    public AllSceneObjectState(AllSceneObjectState other) : this() {
       objs_ = other.objs_.Clone();
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AllSceneObject Clone() {
-      return new AllSceneObject(this);
+    public AllSceneObjectState Clone() {
+      return new AllSceneObjectState(this);
     }
 
     /// <summary>Field number for the "objs" field.</summary>
     public const int ObjsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::NetProto.SceneObject> _repeated_objs_codec
-        = pb::FieldCodec.ForMessage(10, global::NetProto.SceneObject.Parser);
-    private readonly pbc::RepeatedField<global::NetProto.SceneObject> objs_ = new pbc::RepeatedField<global::NetProto.SceneObject>();
+    private static readonly pb::FieldCodec<global::NetProto.SceneObjectState> _repeated_objs_codec
+        = pb::FieldCodec.ForMessage(10, global::NetProto.SceneObjectState.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.SceneObjectState> objs_ = new pbc::RepeatedField<global::NetProto.SceneObjectState>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NetProto.SceneObject> Objs {
+    public pbc::RepeatedField<global::NetProto.SceneObjectState> Objs {
       get { return objs_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as AllSceneObject);
+      return Equals(other as AllSceneObjectState);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(AllSceneObject other) {
+    public bool Equals(AllSceneObjectState other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -719,7 +761,7 @@ namespace NetProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(AllSceneObject other) {
+    public void MergeFrom(AllSceneObjectState other) {
       if (other == null) {
         return;
       }
@@ -736,6 +778,419 @@ namespace NetProto {
             break;
           case 10: {
             objs_.AddEntriesFrom(input, _repeated_objs_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class MoveObjectState : pb::IMessage<MoveObjectState> {
+    private static readonly pb::MessageParser<MoveObjectState> _parser = new pb::MessageParser<MoveObjectState>(() => new MoveObjectState());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MoveObjectState> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveObjectState() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveObjectState(MoveObjectState other) : this() {
+      radius_ = other.radius_;
+      height_ = other.height_;
+      mass_ = other.mass_;
+      maxSpeed_ = other.maxSpeed_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveObjectState Clone() {
+      return new MoveObjectState(this);
+    }
+
+    /// <summary>Field number for the "radius" field.</summary>
+    public const int RadiusFieldNumber = 1;
+    private int radius_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Radius {
+      get { return radius_; }
+      set {
+        radius_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "height" field.</summary>
+    public const int HeightFieldNumber = 2;
+    private int height_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Height {
+      get { return height_; }
+      set {
+        height_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "mass" field.</summary>
+    public const int MassFieldNumber = 3;
+    private int mass_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Mass {
+      get { return mass_; }
+      set {
+        mass_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_speed" field.</summary>
+    public const int MaxSpeedFieldNumber = 4;
+    private int maxSpeed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int MaxSpeed {
+      get { return maxSpeed_; }
+      set {
+        maxSpeed_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MoveObjectState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MoveObjectState other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Radius != other.Radius) return false;
+      if (Height != other.Height) return false;
+      if (Mass != other.Mass) return false;
+      if (MaxSpeed != other.MaxSpeed) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Radius != 0) hash ^= Radius.GetHashCode();
+      if (Height != 0) hash ^= Height.GetHashCode();
+      if (Mass != 0) hash ^= Mass.GetHashCode();
+      if (MaxSpeed != 0) hash ^= MaxSpeed.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Radius != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Radius);
+      }
+      if (Height != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Height);
+      }
+      if (Mass != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Mass);
+      }
+      if (MaxSpeed != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(MaxSpeed);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Radius != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Radius);
+      }
+      if (Height != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Height);
+      }
+      if (Mass != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Mass);
+      }
+      if (MaxSpeed != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxSpeed);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MoveObjectState other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Radius != 0) {
+        Radius = other.Radius;
+      }
+      if (other.Height != 0) {
+        Height = other.Height;
+      }
+      if (other.Mass != 0) {
+        Mass = other.Mass;
+      }
+      if (other.MaxSpeed != 0) {
+        MaxSpeed = other.MaxSpeed;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Radius = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Height = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Mass = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            MaxSpeed = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class MoveObjectMutableState : pb::IMessage<MoveObjectMutableState> {
+    private static readonly pb::MessageParser<MoveObjectMutableState> _parser = new pb::MessageParser<MoveObjectMutableState>(() => new MoveObjectMutableState());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MoveObjectMutableState> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveObjectMutableState() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveObjectMutableState(MoveObjectMutableState other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveObjectMutableState Clone() {
+      return new MoveObjectMutableState(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MoveObjectMutableState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MoveObjectMutableState other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MoveObjectMutableState other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class MoveToPos : pb::IMessage<MoveToPos> {
+    private static readonly pb::MessageParser<MoveToPos> _parser = new pb::MessageParser<MoveToPos>(() => new MoveToPos());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MoveToPos> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveToPos() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveToPos(MoveToPos other) : this() {
+      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MoveToPos Clone() {
+      return new MoveToPos(this);
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 1;
+    private global::NetProto.PBVector2 pos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MoveToPos);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MoveToPos other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Pos, other.Pos)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (pos_ != null) hash ^= Pos.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (pos_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Pos);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MoveToPos other) {
+      if (other == null) {
+        return;
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          pos_ = new global::NetProto.PBVector2();
+        }
+        Pos.MergeFrom(other.Pos);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (pos_ == null) {
+              pos_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(pos_);
             break;
           }
         }

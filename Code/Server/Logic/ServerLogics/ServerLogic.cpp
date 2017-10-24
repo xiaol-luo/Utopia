@@ -3,6 +3,9 @@
 #include <chrono>
 #include <ctime>
 #include "CommonModules/Timer/ITimerModule.h"
+#include "CommonModules/Log/LogModule.h"
+#include "CommonModules/Network/INetworkModule.h"
+#include "Network/Utils/NetworkAgent.h"
 
 ServerLogic *server_logic = nullptr;
 const int TRY_MAX_TIMES = 100000;
@@ -40,6 +43,10 @@ bool ServerLogic::Init()
 
 	bool ret = EModuleRetCode_Succ == retCode;
 	if (!ret) this->Quit();
+	else
+	{
+		m_network_agent = new NetworkAgent(this->GetNetworkModule());
+	}
 	return ret;
 }
 
@@ -110,6 +117,11 @@ void ServerLogic::Destroy()
 	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
 	m_timer_module = nullptr;
+	if (nullptr != m_network_agent)
+	{
+		delete m_network_agent;
+		m_network_agent = nullptr;
+	}
 	this->ClearInitParams();
 }
 

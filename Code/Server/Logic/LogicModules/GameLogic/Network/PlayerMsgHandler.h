@@ -4,6 +4,7 @@
 #include <google/protobuf/message.h>
 #include "Network/Protobuf/Empty.pb.h"
 #include "Common/Utils/MemoryUtil.h"
+#include "Network/Protobuf/Battle.pb.h"
 
 class GameLogicModule;
 
@@ -105,5 +106,7 @@ namespace GameLogic
 		void OnLoadSceneComplete(int id, GameLogic::Player *player);
 		void OnLeaveScene(int id, GameLogic::Player *player);
 		void OnPullAllSceneInfo(int id, GameLogic::Player *player);
+		void OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player *player);
+		void OnStopMove(int id, GameLogic::Player *player);
 	};
 }

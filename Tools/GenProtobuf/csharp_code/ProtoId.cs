@@ -22,13 +22,16 @@ namespace NetProto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1Qcm90b0lkLnByb3RvEghOZXRQcm90byqAAgoHUHJvdG9JZBILCgdQSURf",
+            "Cg1Qcm90b0lkLnByb3RvEghOZXRQcm90byr9AgoHUHJvdG9JZBILCgdQSURf",
             "TWluEAASDAoIUElEX1BpbmcQARIMCghQSURfUG9uZxACEhUKEVBJRF9RdWVy",
             "eUZyZWVIZXJvEGQSEwoPUElEX1JzcEZyZWVIZXJvEGUSFQoRUElEX1NlbGVj",
             "dEhlcm9SZXEQZhIVChFQSURfU2VsZWN0SGVyb1JzcBBnEhkKFVBJRF9Mb2Fk",
             "U2NlbmVDb21wbGV0ZRBoEhIKDlBJRF9MZWF2ZVNjZW5lEGkSGAoUUElEX1B1",
             "bGxBbGxTY2VuZUluZm8QahIbChdQSURfUHVsbEFsbFNjZW5lSW5mb1JzcBBr",
-            "EgwKB1BJRF9NYXgQgChCA/gBAWIGcHJvdG8z"));
+            "EhkKFFBJRF9TY2VuZU9iamVjdFN0YXRlEOgHEhgKE1BJRF9Nb3ZlT2JqZWN0",
+            "U3RhdGUQ8gcSHwoaUElEX01vdmVPYmplY3RNdXRhYmxlU3RhdGUQ8wcSEgoN",
+            "UElEX01vdmVUb1BvcxD8BxIRCgxQSURfU3RvcE1vdmUQhggSDAoHUElEX01h",
+            "eBCAKEID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoId), }, null));
@@ -49,6 +52,11 @@ namespace NetProto {
     [pbr::OriginalName("PID_LeaveScene")] PidLeaveScene = 105,
     [pbr::OriginalName("PID_PullAllSceneInfo")] PidPullAllSceneInfo = 106,
     [pbr::OriginalName("PID_PullAllSceneInfoRsp")] PidPullAllSceneInfoRsp = 107,
+    [pbr::OriginalName("PID_SceneObjectState")] PidSceneObjectState = 1000,
+    [pbr::OriginalName("PID_MoveObjectState")] PidMoveObjectState = 1010,
+    [pbr::OriginalName("PID_MoveObjectMutableState")] PidMoveObjectMutableState = 1011,
+    [pbr::OriginalName("PID_MoveToPos")] PidMoveToPos = 1020,
+    [pbr::OriginalName("PID_StopMove")] PidStopMove = 1030,
     [pbr::OriginalName("PID_Max")] PidMax = 5120,
   }
 

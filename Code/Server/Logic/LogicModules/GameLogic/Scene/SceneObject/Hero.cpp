@@ -11,4 +11,8 @@ namespace GameLogic
 	{
 
 	}
+	void Hero::SetPlayer(Player * player)
+	{
+		m_Player = player;
+	}
 }

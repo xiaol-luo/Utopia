@@ -21,6 +21,8 @@ namespace GameLogic
 	{
 		friend GameLogic::PlayerListenHandler;
 		NewDelOperaDeclaration;
+	public:
+		const static uint64_t BROADCAST_NETID = 0;
 	public: 
 		PlayerMgr(GameLogicModule *logic_module);
 		~PlayerMgr();
@@ -30,8 +32,10 @@ namespace GameLogic
 		void OnCnnClose(int err_num, Player *player);
 		void OnCnnRecv(char *data, uint32_t len, Player *player);
 		void OnCnnOpen(int err_num, Player *player);
-
 		void RemovePlayer(NetId netid);
+		void Send(NetId netid, int protocol_id, char *msg, uint32_t msg_len);
+		void Send(NetId netid, int protocol_id, google::protobuf::Message *msg);
+		void Close(NetId netid);
 
 	protected:
 		GameLogicModule *m_logic_module = nullptr;

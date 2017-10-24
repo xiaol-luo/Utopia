@@ -22,4 +22,11 @@ namespace GameLogic
 		EMoveState_Immobilized,
 		EMoveState_ForceMove,
 	};
+
+	enum SyncClientMsgFilter
+	{
+		SCMF_All = -1,
+		SCMF_ForInit = 1 << 0,
+		SCMF_ForMutable = 1 << 1,
+	};
 }

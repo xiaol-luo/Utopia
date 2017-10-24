@@ -5,6 +5,8 @@
 #include <unordered_set>
 
 #include <google/protobuf/arena.h>
+#include "Common/Define/NetworkDefine.h"
+#include "GameLogic/Scene/SceneObject/SceneObject.h"
 
 class GameLogicModule;
 namespace Config
@@ -31,6 +33,9 @@ namespace GameLogic
 
 		std::shared_ptr<Hero> GetRedHero() { return m_red_hero; }
 		std::shared_ptr<Hero> GetBlueHero() { return m_blue_hero; }
+		void SendClient(NetId netid, int protocol_id, google::protobuf::Message *msg);
+		void SendClient(NetId netid, const std::vector<SyncClientMsg> &msgs);
+
 	protected:
 		GameLogicModule *m_logic_module = nullptr;;
 		std::shared_ptr<Hero> m_red_hero;
@@ -60,8 +65,6 @@ namespace GameLogic
 		{
 			return google::protobuf::Arena::CreateMessage<T>(m_protobuf_arena);
 		}
-
-
 
 		void PullAllSceneInfo(Player *player);
 	};

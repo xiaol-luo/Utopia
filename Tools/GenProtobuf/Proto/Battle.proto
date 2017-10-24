@@ -2,6 +2,8 @@ syntax = "proto3";
 option cc_enable_arenas = true;
 package NetProto;
 
+import "Common.proto";
+
 message RspFreeHero
 {
 	uint64 red_hero_id = 1;
@@ -28,14 +30,33 @@ enum SceneObjectType
 	MAX = 3;
 }
 
-message SceneObject
+message SceneObjectState
 {
 	uint64 objid = 1;
 	SceneObjectType obj_type = 2;
 	int32 model_id = 3;
+	PBVector3 pos = 4;
 }
 
-message AllSceneObject
+message AllSceneObjectState
 {
-	repeated SceneObject objs = 1;
+	repeated SceneObjectState objs = 1;
+}
+
+message MoveObjectState
+{
+	int32 radius = 1;
+	int32 height = 2;
+	int32 mass = 3;
+	int32 max_speed = 4;
+}
+
+message MoveObjectMutableState
+{
+
+}
+
+message MoveToPos
+{
+	PBVector2 pos = 1;
 }

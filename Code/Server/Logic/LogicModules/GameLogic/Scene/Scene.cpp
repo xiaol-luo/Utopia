@@ -15,6 +15,7 @@
 #include "Common/Math/Vector2.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Timer/ITimerModule.h"
+#include "GameLogic/Player/PlayerMgr.h"
 
 namespace GameLogic
 {
@@ -105,13 +106,33 @@ namespace GameLogic
 		{
 			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
 			if (nullptr != scene_obj)
+			{
 				scene_obj->Update(now_ms);
+				if (scene_obj->NeedSyncMutableState())
+				{
+					this->SendClient(PlayerMgr::BROADCAST_NETID, scene_obj->ColllectSyncClientMsg(SCMF_ForMutable));
+					scene_obj->SetSyncMutableState(false);
+				}
+			}
 		}
 		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
 
 		m_navMesh->UpdateTerrian();
 		m_moveMgr->Update();
+	}
+
+	void Scene::SendClient(NetId netid, int protocol_id, google::protobuf::Message * msg)
+	{
+		m_logic_module->GetPlayerMgr()->Send(netid, protocol_id, msg);
+	}
+
+	void Scene::SendClient(NetId netid, const std::vector<SyncClientMsg>& msgs)
+	{
+		for (const SyncClientMsg & item : msgs)
+		{
+			m_logic_module->GetPlayerMgr()->Send(netid, item.protocol_id, item.msg);
+		}
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)
@@ -176,8 +197,16 @@ namespace GameLogic
 
 	void Scene::PullAllSceneInfo(Player * player)
 	{
-		NetProto::AllSceneObject *msg = google::protobuf::Arena::CreateMessage<NetProto::AllSceneObject>(m_protobuf_arena);
-		// NetProto::SceneObject *so = msg->add_objs();
-		m_logic_module->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_PullAllSceneInfoRsp, msg);
+		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++it)
+		{
+			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
+			if (nullptr != scene_obj)
+			{
+				for (const SyncClientMsg & item : scene_obj->ColllectSyncClientMsg(SCMF_All))
+				{
+					player->Send(item.protocol_id, item.msg);
+				}
+			}
+		}
 	}
 }

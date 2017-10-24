@@ -43,14 +43,12 @@ namespace GameLogic
 		MoveAgent * GetMoveAgent() { return m_move_agent; }
 		const Vector3 & GetVelocity();
 		EMoveAgentState GetMoveAgentState();
-		bool IsMoveChange() { return m_move_change; }
-		bool ClearMoveChange() { m_move_change = false; }
+		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
 
 	protected:
 		void OnMoveAgentStateChange(EMoveAgentState old_val);
 		void OnVelocityChange(const Vector3 &old_val);
 		void OnPosChange(const Vector3 &old_val);
-		bool m_move_change = false;
 
 	public:
 		void TryMoveToPos(const Vector3 &pos);

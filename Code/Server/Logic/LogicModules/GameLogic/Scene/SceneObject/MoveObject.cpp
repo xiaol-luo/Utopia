@@ -5,6 +5,8 @@
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
+#include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
 
 namespace GameLogic
 {
@@ -73,17 +75,17 @@ namespace GameLogic
 
 	void MoveObject::OnMoveAgentStateChange(EMoveAgentState old_val)
 	{
-		m_move_change = true;
+		this->SetSyncMutableState(true);
 	}
 
 	void MoveObject::OnVelocityChange(const Vector3 & old_val)
 	{
-		m_move_change = true;
+		this->SetSyncMutableState(true);
 	}
 
 	void MoveObject::OnPosChange(const Vector3 & old_val)
 	{
-		m_move_change = true;
+		this->SetSyncMutableState(true);
 	}
 
 	void MoveObject::TryMoveToPos(const Vector3 &pos)
@@ -149,6 +151,27 @@ namespace GameLogic
 	EMoveAgentState MoveObject::GetMoveAgentState()
 	{
 		return m_move_agent->GetMoveAgentState();
+	}
+
+	std::vector<SyncClientMsg> MoveObject::ColllectSyncClientMsg(int filter_type)
+	{
+		std::vector<SyncClientMsg> msgs = SceneObject::ColllectSyncClientMsg(filter_type);
+
+		if (filter_type & SCMF_ForInit)
+		{
+			NetProto::MoveObjectState * msg = m_scene->CreateProtobuf<NetProto::MoveObjectState>();
+			msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectState, msg));
+		}
+		if (filter_type & SCMF_ForMutable)
+		{
+			if (this->NeedSyncMutableState() || filter_type == SCMF_All)
+			{
+				NetProto::MoveObjectMutableState * msg = m_scene->CreateProtobuf<NetProto::MoveObjectMutableState>();
+				msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectMutableState, msg));
+			}
+		}
+
+		return std::vector<SyncClientMsg>();
 	}
 
 	void MoveObject::MoveStateChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, EMoveAgentState old_state)

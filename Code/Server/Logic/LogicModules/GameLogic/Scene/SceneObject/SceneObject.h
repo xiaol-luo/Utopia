@@ -1,8 +1,10 @@
 #pragma once
 
 #include <stdint.h>
+#include <vector>
 #include "Common/Math/Vector3.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
+#include "google/protobuf/message.h"
 
 namespace GameLogic
 {
@@ -15,6 +17,13 @@ namespace GameLogic
 		ESOT_Hero,
 
 		ESOT_Max,
+	};
+
+	struct SyncClientMsg
+	{
+		SyncClientMsg(int id, google::protobuf::Message *_msg) : protocol_id(id), msg(_msg) {}
+		int protocol_id;
+		google::protobuf::Message *msg;
 	};
 
 	class SceneObject
@@ -41,7 +50,10 @@ namespace GameLogic
 		void SetPos(const Vector3 &val);
 		inline float GetRotation() { return m_rotation; }
 		void SetRotation(float val);
-		virtual void SyncClient(uint64_t uid/*0 means broadcast*/,  bool is_all);
+		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
+
+		bool NeedSyncMutableState() { return m_flag_sync_mutable_state; }
+		void SetSyncMutableState(bool val) { m_flag_sync_mutable_state = val; }
 
 	protected:
 		void OnPosChange(const Vector3 &old_val);
@@ -54,5 +66,7 @@ namespace GameLogic
 		int m_model_id = 0;
 		Vector3 m_pos;
 		float m_rotation;
+
+		bool m_flag_sync_mutable_state = false;
 	};
 }

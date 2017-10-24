@@ -5,6 +5,7 @@
 class ITimerModule;
 class INetworkModule;
 class LogModule;
+class NetworkAgent;
 
 enum EServerLogicState
 {
@@ -33,6 +34,7 @@ public:
 	INetworkModule * GetNetworkModule();
 	ITimerModule * GetTimerModule();
 	LogModule * GetLogModule();
+	NetworkAgent * GetNetAgent() { return m_network_agent; }
 
 protected:
 	virtual void SetupModules() = 0;
@@ -49,5 +51,6 @@ protected:
 	void * m_init_params[EMoudleName_Max];
 
 	ITimerModule *m_timer_module;
+	NetworkAgent *m_network_agent = nullptr;
 };
 

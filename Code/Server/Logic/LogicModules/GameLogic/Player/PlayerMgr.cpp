@@ -4,6 +4,9 @@
 #include "Player.h"
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Network/INetworkModule.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "ServerLogics/ServerLogic.h"
+#include "Network/Utils/NetworkAgent.h"
 
 namespace GameLogic
 {
@@ -48,7 +51,7 @@ namespace GameLogic
 
 	bool PlayerMgr::Awake(std::string ip, uint16_t port)
 	{
-		NetId netid = m_logic_module->GetNetwork()->Listen(ip, port, nullptr, m_net_listen_handler);
+		NetId netid = GlobalServerLogic->GetNetworkModule()->Listen(ip, port, nullptr, m_net_listen_handler);
 		return netid > 0;
 	}
 
@@ -103,10 +106,47 @@ namespace GameLogic
 		auto it = m_players.find(netid);
 		if (m_players.end() != it)
 		{
-			m_logic_module->GetNetwork()->Close(netid);
+			GlobalServerLogic->GetNetworkModule()->Close(netid);
 			m_to_remove_players.insert(it->second);
 			m_players.erase(it);
 			it = m_players.end();
 		}
+	}
+
+	void PlayerMgr::Send(NetId netid, int protocol_id, char * msg, uint32_t msg_len)
+	{
+		if (netid > 0)
+		{
+			GlobalServerLogic->GetNetAgent()->Send(netid, protocol_id, msg, msg_len);
+		}
+		else
+		{
+			for (auto kv_pair : m_players)
+			{
+				if (kv_pair.second->CanRecvSceneMsg())
+					GlobalServerLogic->GetNetAgent()->Send(kv_pair.first, protocol_id, msg, msg_len);
+			}
+		}
+	}
+
+	void PlayerMgr::Send(NetId netid, int protocol_id, google::protobuf::Message * msg)
+	{
+		if (netid > 0)
+		{
+			GlobalServerLogic->GetNetAgent()->Send(netid, protocol_id, msg);
+		}
+		else
+		{
+			for (auto kv_pair : m_players)
+			{
+				if (kv_pair.second->CanRecvSceneMsg())
+					GlobalServerLogic->GetNetAgent()->Send(kv_pair.first, protocol_id, msg);
+			}
+		}
+	}
+
+	void PlayerMgr::Close(NetId netid)
+	{
+		GlobalServerLogic->GetNetAgent()->Close(netid);
 	}
 }
