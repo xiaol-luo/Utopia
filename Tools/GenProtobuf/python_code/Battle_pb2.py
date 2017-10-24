@@ -3,7 +3,6 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
-from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -15,51 +14,17 @@ _sym_db = _symbol_database.Default()
 
 
 import Common_pb2 as Common__pb2
+import BattleEnum_pb2 as BattleEnum__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='Battle.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"\x82\x01\n\x10SceneObjectState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12+\n\x08obj_type\x18\x02 \x01(\x0e\x32\x19.NetProto.SceneObjectType\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\"?\n\x13\x41llSceneObjectState\x12(\n\x04objs\x18\x01 \x03(\x0b\x32\x1a.NetProto.SceneObjectState\"R\n\x0fMoveObjectState\x12\x0e\n\x06radius\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x0c\n\x04mass\x18\x03 \x01(\x05\x12\x11\n\tmax_speed\x18\x04 \x01(\x05\"\x18\n\x16MoveObjectMutableState\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2*;\n\x0fSceneObjectType\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03\x42\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"\x91\x01\n\x10SceneObjectState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12(\n\x08obj_type\x18\x02 \x01(\x0e\x32\x16.NetProto.ESceneObject\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08rotation\x18\x05 \x01(\x02\"?\n\x13\x41llSceneObjectState\x12(\n\x04objs\x18\x01 \x03(\x0b\x32\x1a.NetProto.SceneObjectState\"\x81\x01\n\x0fMoveObjectState\x12-\n\tobj_state\x18\x01 \x01(\x0b\x32\x1a.NetProto.SceneObjectState\x12\x0e\n\x06radius\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0c\n\x04mass\x18\x04 \x01(\x05\x12\x11\n\tmax_speed\x18\x05 \x01(\x05\"\xa5\x01\n\x16MoveObjectMutableState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentState\x12%\n\x08volecity\x18\x03 \x01(\x0b\x32\x13.NetProto.PBVector3\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2B\x03\xf8\x01\x01\x62\x06proto3')
   ,
-  dependencies=[Common__pb2.DESCRIPTOR,])
+  dependencies=[Common__pb2.DESCRIPTOR,BattleEnum__pb2.DESCRIPTOR,])
 
-_SCENEOBJECTTYPE = _descriptor.EnumDescriptor(
-  name='SceneObjectType',
-  full_name='NetProto.SceneObjectType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='Building', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='Hero', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='Npc', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MAX', index=3, number=3,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=538,
-  serialized_end=597,
-)
-_sym_db.RegisterEnumDescriptor(_SCENEOBJECTTYPE)
-
-SceneObjectType = enum_type_wrapper.EnumTypeWrapper(_SCENEOBJECTTYPE)
-Building = 0
-Hero = 1
-Npc = 2
-MAX = 3
 
 
 
@@ -96,8 +61,8 @@ _RSPFREEHERO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=40,
-  serialized_end=96,
+  serialized_start=58,
+  serialized_end=114,
 )
 
 
@@ -127,8 +92,8 @@ _SELECTHEROREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=98,
-  serialized_end=130,
+  serialized_start=116,
+  serialized_end=148,
 )
 
 
@@ -165,8 +130,8 @@ _SELECTHERORSP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=132,
-  serialized_end=181,
+  serialized_start=150,
+  serialized_end=199,
 )
 
 
@@ -205,6 +170,13 @@ _SCENEOBJECTSTATE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='rotation', full_name='NetProto.SceneObjectState.rotation', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -217,8 +189,8 @@ _SCENEOBJECTSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=184,
-  serialized_end=314,
+  serialized_start=202,
+  serialized_end=347,
 )
 
 
@@ -248,8 +220,8 @@ _ALLSCENEOBJECTSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=316,
-  serialized_end=379,
+  serialized_start=349,
+  serialized_end=412,
 )
 
 
@@ -261,29 +233,36 @@ _MOVEOBJECTSTATE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='radius', full_name='NetProto.MoveObjectState.radius', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='obj_state', full_name='NetProto.MoveObjectState.obj_state', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='height', full_name='NetProto.MoveObjectState.height', index=1,
+      name='radius', full_name='NetProto.MoveObjectState.radius', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='mass', full_name='NetProto.MoveObjectState.mass', index=2,
+      name='height', full_name='NetProto.MoveObjectState.height', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_speed', full_name='NetProto.MoveObjectState.max_speed', index=3,
+      name='mass', full_name='NetProto.MoveObjectState.mass', index=3,
       number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='max_speed', full_name='NetProto.MoveObjectState.max_speed', index=4,
+      number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -300,8 +279,8 @@ _MOVEOBJECTSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=381,
-  serialized_end=463,
+  serialized_start=415,
+  serialized_end=544,
 )
 
 
@@ -312,6 +291,34 @@ _MOVEOBJECTMUTABLESTATE = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='objid', full_name='NetProto.MoveObjectMutableState.objid', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='move_agent_state', full_name='NetProto.MoveObjectMutableState.move_agent_state', index=1,
+      number=2, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='volecity', full_name='NetProto.MoveObjectMutableState.volecity', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='pos', full_name='NetProto.MoveObjectMutableState.pos', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -324,8 +331,8 @@ _MOVEOBJECTMUTABLESTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=465,
-  serialized_end=489,
+  serialized_start=547,
+  serialized_end=712,
 )
 
 
@@ -355,13 +362,17 @@ _MOVETOPOS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=491,
-  serialized_end=536,
+  serialized_start=714,
+  serialized_end=759,
 )
 
-_SCENEOBJECTSTATE.fields_by_name['obj_type'].enum_type = _SCENEOBJECTTYPE
+_SCENEOBJECTSTATE.fields_by_name['obj_type'].enum_type = BattleEnum__pb2._ESCENEOBJECT
 _SCENEOBJECTSTATE.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR3
 _ALLSCENEOBJECTSTATE.fields_by_name['objs'].message_type = _SCENEOBJECTSTATE
+_MOVEOBJECTSTATE.fields_by_name['obj_state'].message_type = _SCENEOBJECTSTATE
+_MOVEOBJECTMUTABLESTATE.fields_by_name['move_agent_state'].enum_type = BattleEnum__pb2._EMOVEAGENTSTATE
+_MOVEOBJECTMUTABLESTATE.fields_by_name['volecity'].message_type = Common__pb2._PBVECTOR3
+_MOVEOBJECTMUTABLESTATE.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR3
 _MOVETOPOS.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR2
 DESCRIPTOR.message_types_by_name['RspFreeHero'] = _RSPFREEHERO
 DESCRIPTOR.message_types_by_name['SelectHeroReq'] = _SELECTHEROREQ
@@ -371,7 +382,6 @@ DESCRIPTOR.message_types_by_name['AllSceneObjectState'] = _ALLSCENEOBJECTSTATE
 DESCRIPTOR.message_types_by_name['MoveObjectState'] = _MOVEOBJECTSTATE
 DESCRIPTOR.message_types_by_name['MoveObjectMutableState'] = _MOVEOBJECTMUTABLESTATE
 DESCRIPTOR.message_types_by_name['MoveToPos'] = _MOVETOPOS
-DESCRIPTOR.enum_types_by_name['SceneObjectType'] = _SCENEOBJECTTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 RspFreeHero = _reflection.GeneratedProtocolMessageType('RspFreeHero', (_message.Message,), dict(

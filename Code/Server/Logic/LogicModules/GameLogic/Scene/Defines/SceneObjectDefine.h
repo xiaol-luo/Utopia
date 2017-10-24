@@ -3,6 +3,7 @@
 
 namespace GameLogic
 {
+	/*
 	enum  EMoveAgentState
 	{
 		EMoveAgentState_Idle = 0,
@@ -22,6 +23,7 @@ namespace GameLogic
 		EMoveState_Immobilized,
 		EMoveState_ForceMove,
 	};
+	*/
 
 	enum SyncClientMsgFilter
 	{

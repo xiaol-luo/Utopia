@@ -3,6 +3,7 @@ option cc_enable_arenas = true;
 package NetProto;
 
 import "Common.proto";
+import "BattleEnum.proto";
 
 message RspFreeHero
 {
@@ -21,21 +22,13 @@ message SelectHeroRsp
 	bool is_succ = 2;
 }
 
-enum SceneObjectType
-{
-	Building = 0;
-	Hero = 1;
-	Npc = 2;
-	
-	MAX = 3;
-}
-
 message SceneObjectState
 {
 	uint64 objid = 1;
-	SceneObjectType obj_type = 2;
+	ESceneObject obj_type = 2;
 	int32 model_id = 3;
 	PBVector3 pos = 4;
+	float rotation = 5;
 }
 
 message AllSceneObjectState
@@ -45,15 +38,19 @@ message AllSceneObjectState
 
 message MoveObjectState
 {
-	int32 radius = 1;
-	int32 height = 2;
-	int32 mass = 3;
-	int32 max_speed = 4;
+	SceneObjectState obj_state = 1;
+	int32 radius = 2;
+	int32 height = 3;
+	int32 mass = 4;
+	int32 max_speed = 5;
 }
 
 message MoveObjectMutableState
 {
-
+	uint64 objid = 1;
+	EMoveAgentState move_agent_state = 2;
+	PBVector3 volecity = 3;
+	PBVector3 pos = 4;
 }
 
 message MoveToPos

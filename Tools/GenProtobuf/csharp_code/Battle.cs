@@ -22,46 +22,40 @@ namespace NetProto {
     static BattleReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxCYXR0bGUucHJvdG8SCE5ldFByb3RvGgxDb21tb24ucHJvdG8iOAoLUnNw",
-            "RnJlZUhlcm8SEwoLcmVkX2hlcm9faWQYASABKAQSFAoMYmx1ZV9oZXJvX2lk",
-            "GAIgASgEIiAKDVNlbGVjdEhlcm9SZXESDwoHaGVyb19pZBgBIAEoBCIxCg1T",
-            "ZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASABKAQSDwoHaXNfc3VjYxgCIAEo",
-            "CCKCAQoQU2NlbmVPYmplY3RTdGF0ZRINCgVvYmppZBgBIAEoBBIrCghvYmpf",
-            "dHlwZRgCIAEoDjIZLk5ldFByb3RvLlNjZW5lT2JqZWN0VHlwZRIQCghtb2Rl",
-            "bF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQcm90by5QQlZlY3RvcjMi",
-            "PwoTQWxsU2NlbmVPYmplY3RTdGF0ZRIoCgRvYmpzGAEgAygLMhouTmV0UHJv",
-            "dG8uU2NlbmVPYmplY3RTdGF0ZSJSCg9Nb3ZlT2JqZWN0U3RhdGUSDgoGcmFk",
-            "aXVzGAEgASgFEg4KBmhlaWdodBgCIAEoBRIMCgRtYXNzGAMgASgFEhEKCW1h",
-            "eF9zcGVlZBgEIAEoBSIYChZNb3ZlT2JqZWN0TXV0YWJsZVN0YXRlIi0KCU1v",
-            "dmVUb1BvcxIgCgNwb3MYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjIqOwoP",
-            "U2NlbmVPYmplY3RUeXBlEgwKCEJ1aWxkaW5nEAASCAoESGVybxABEgcKA05w",
-            "YxACEgcKA01BWBADQgP4AQFiBnByb3RvMw=="));
+            "CgxCYXR0bGUucHJvdG8SCE5ldFByb3RvGgxDb21tb24ucHJvdG8aEEJhdHRs",
+            "ZUVudW0ucHJvdG8iOAoLUnNwRnJlZUhlcm8SEwoLcmVkX2hlcm9faWQYASAB",
+            "KAQSFAoMYmx1ZV9oZXJvX2lkGAIgASgEIiAKDVNlbGVjdEhlcm9SZXESDwoH",
+            "aGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASAB",
+            "KAQSDwoHaXNfc3VjYxgCIAEoCCKRAQoQU2NlbmVPYmplY3RTdGF0ZRINCgVv",
+            "YmppZBgBIAEoBBIoCghvYmpfdHlwZRgCIAEoDjIWLk5ldFByb3RvLkVTY2Vu",
+            "ZU9iamVjdBIQCghtb2RlbF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQ",
+            "cm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIiPwoTQWxsU2NlbmVP",
+            "YmplY3RTdGF0ZRIoCgRvYmpzGAEgAygLMhouTmV0UHJvdG8uU2NlbmVPYmpl",
+            "Y3RTdGF0ZSKBAQoPTW92ZU9iamVjdFN0YXRlEi0KCW9ial9zdGF0ZRgBIAEo",
+            "CzIaLk5ldFByb3RvLlNjZW5lT2JqZWN0U3RhdGUSDgoGcmFkaXVzGAIgASgF",
+            "Eg4KBmhlaWdodBgDIAEoBRIMCgRtYXNzGAQgASgFEhEKCW1heF9zcGVlZBgF",
+            "IAEoBSKlAQoWTW92ZU9iamVjdE11dGFibGVTdGF0ZRINCgVvYmppZBgBIAEo",
+            "BBIzChBtb3ZlX2FnZW50X3N0YXRlGAIgASgOMhkuTmV0UHJvdG8uRU1vdmVB",
+            "Z2VudFN0YXRlEiUKCHZvbGVjaXR5GAMgASgLMhMuTmV0UHJvdG8uUEJWZWN0",
+            "b3IzEiAKA3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMyItCglNb3Zl",
+            "VG9Qb3MSIAoDcG9zGAEgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyQgP4AQFi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.SceneObjectType), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.RspFreeHero), global::NetProto.RspFreeHero.Parser, new[]{ "RedHeroId", "BlueHeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroReq), global::NetProto.SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.AllSceneObjectState), global::NetProto.AllSceneObjectState.Parser, new[]{ "Objs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null)
           }));
     }
     #endregion
 
   }
-  #region Enums
-  public enum SceneObjectType {
-    [pbr::OriginalName("Building")] Building = 0,
-    [pbr::OriginalName("Hero")] Hero = 1,
-    [pbr::OriginalName("Npc")] Npc = 2,
-    [pbr::OriginalName("MAX")] Max = 3,
-  }
-
-  #endregion
-
   #region Messages
   public sealed partial class RspFreeHero : pb::IMessage<RspFreeHero> {
     private static readonly pb::MessageParser<RspFreeHero> _parser = new pb::MessageParser<RspFreeHero>(() => new RspFreeHero());
@@ -498,6 +492,7 @@ namespace NetProto {
       objType_ = other.objType_;
       modelId_ = other.modelId_;
       Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      rotation_ = other.rotation_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -518,9 +513,9 @@ namespace NetProto {
 
     /// <summary>Field number for the "obj_type" field.</summary>
     public const int ObjTypeFieldNumber = 2;
-    private global::NetProto.SceneObjectType objType_ = 0;
+    private global::NetProto.ESceneObject objType_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.SceneObjectType ObjType {
+    public global::NetProto.ESceneObject ObjType {
       get { return objType_; }
       set {
         objType_ = value;
@@ -549,6 +544,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "rotation" field.</summary>
+    public const int RotationFieldNumber = 5;
+    private float rotation_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Rotation {
+      get { return rotation_; }
+      set {
+        rotation_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SceneObjectState);
@@ -566,6 +572,7 @@ namespace NetProto {
       if (ObjType != other.ObjType) return false;
       if (ModelId != other.ModelId) return false;
       if (!object.Equals(Pos, other.Pos)) return false;
+      if (Rotation != other.Rotation) return false;
       return true;
     }
 
@@ -576,6 +583,7 @@ namespace NetProto {
       if (ObjType != 0) hash ^= ObjType.GetHashCode();
       if (ModelId != 0) hash ^= ModelId.GetHashCode();
       if (pos_ != null) hash ^= Pos.GetHashCode();
+      if (Rotation != 0F) hash ^= Rotation.GetHashCode();
       return hash;
     }
 
@@ -602,6 +610,10 @@ namespace NetProto {
         output.WriteRawTag(34);
         output.WriteMessage(Pos);
       }
+      if (Rotation != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(Rotation);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -618,6 +630,9 @@ namespace NetProto {
       }
       if (pos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      if (Rotation != 0F) {
+        size += 1 + 4;
       }
       return size;
     }
@@ -642,6 +657,9 @@ namespace NetProto {
         }
         Pos.MergeFrom(other.Pos);
       }
+      if (other.Rotation != 0F) {
+        Rotation = other.Rotation;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -657,7 +675,7 @@ namespace NetProto {
             break;
           }
           case 16: {
-            objType_ = (global::NetProto.SceneObjectType) input.ReadEnum();
+            objType_ = (global::NetProto.ESceneObject) input.ReadEnum();
             break;
           }
           case 24: {
@@ -669,6 +687,10 @@ namespace NetProto {
               pos_ = new global::NetProto.PBVector3();
             }
             input.ReadMessage(pos_);
+            break;
+          }
+          case 45: {
+            Rotation = input.ReadFloat();
             break;
           }
         }
@@ -810,6 +832,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MoveObjectState(MoveObjectState other) : this() {
+      ObjState = other.objState_ != null ? other.ObjState.Clone() : null;
       radius_ = other.radius_;
       height_ = other.height_;
       mass_ = other.mass_;
@@ -821,8 +844,19 @@ namespace NetProto {
       return new MoveObjectState(this);
     }
 
+    /// <summary>Field number for the "obj_state" field.</summary>
+    public const int ObjStateFieldNumber = 1;
+    private global::NetProto.SceneObjectState objState_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.SceneObjectState ObjState {
+      get { return objState_; }
+      set {
+        objState_ = value;
+      }
+    }
+
     /// <summary>Field number for the "radius" field.</summary>
-    public const int RadiusFieldNumber = 1;
+    public const int RadiusFieldNumber = 2;
     private int radius_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Radius {
@@ -833,7 +867,7 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "height" field.</summary>
-    public const int HeightFieldNumber = 2;
+    public const int HeightFieldNumber = 3;
     private int height_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Height {
@@ -844,7 +878,7 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "mass" field.</summary>
-    public const int MassFieldNumber = 3;
+    public const int MassFieldNumber = 4;
     private int mass_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Mass {
@@ -855,7 +889,7 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "max_speed" field.</summary>
-    public const int MaxSpeedFieldNumber = 4;
+    public const int MaxSpeedFieldNumber = 5;
     private int maxSpeed_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int MaxSpeed {
@@ -878,6 +912,7 @@ namespace NetProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(ObjState, other.ObjState)) return false;
       if (Radius != other.Radius) return false;
       if (Height != other.Height) return false;
       if (Mass != other.Mass) return false;
@@ -888,6 +923,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (objState_ != null) hash ^= ObjState.GetHashCode();
       if (Radius != 0) hash ^= Radius.GetHashCode();
       if (Height != 0) hash ^= Height.GetHashCode();
       if (Mass != 0) hash ^= Mass.GetHashCode();
@@ -902,20 +938,24 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (objState_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(ObjState);
+      }
       if (Radius != 0) {
-        output.WriteRawTag(8);
+        output.WriteRawTag(16);
         output.WriteInt32(Radius);
       }
       if (Height != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(24);
         output.WriteInt32(Height);
       }
       if (Mass != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(Mass);
       }
       if (MaxSpeed != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteInt32(MaxSpeed);
       }
     }
@@ -923,6 +963,9 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (objState_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ObjState);
+      }
       if (Radius != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Radius);
       }
@@ -942,6 +985,12 @@ namespace NetProto {
     public void MergeFrom(MoveObjectState other) {
       if (other == null) {
         return;
+      }
+      if (other.objState_ != null) {
+        if (objState_ == null) {
+          objState_ = new global::NetProto.SceneObjectState();
+        }
+        ObjState.MergeFrom(other.ObjState);
       }
       if (other.Radius != 0) {
         Radius = other.Radius;
@@ -965,19 +1014,26 @@ namespace NetProto {
           default:
             input.SkipLastField();
             break;
-          case 8: {
-            Radius = input.ReadInt32();
+          case 10: {
+            if (objState_ == null) {
+              objState_ = new global::NetProto.SceneObjectState();
+            }
+            input.ReadMessage(objState_);
             break;
           }
           case 16: {
-            Height = input.ReadInt32();
+            Radius = input.ReadInt32();
             break;
           }
           case 24: {
-            Mass = input.ReadInt32();
+            Height = input.ReadInt32();
             break;
           }
           case 32: {
+            Mass = input.ReadInt32();
+            break;
+          }
+          case 40: {
             MaxSpeed = input.ReadInt32();
             break;
           }
@@ -1011,11 +1067,59 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MoveObjectMutableState(MoveObjectMutableState other) : this() {
+      objid_ = other.objid_;
+      moveAgentState_ = other.moveAgentState_;
+      Volecity = other.volecity_ != null ? other.Volecity.Clone() : null;
+      Pos = other.pos_ != null ? other.Pos.Clone() : null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MoveObjectMutableState Clone() {
       return new MoveObjectMutableState(this);
+    }
+
+    /// <summary>Field number for the "objid" field.</summary>
+    public const int ObjidFieldNumber = 1;
+    private ulong objid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong Objid {
+      get { return objid_; }
+      set {
+        objid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "move_agent_state" field.</summary>
+    public const int MoveAgentStateFieldNumber = 2;
+    private global::NetProto.EMoveAgentState moveAgentState_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.EMoveAgentState MoveAgentState {
+      get { return moveAgentState_; }
+      set {
+        moveAgentState_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "volecity" field.</summary>
+    public const int VolecityFieldNumber = 3;
+    private global::NetProto.PBVector3 volecity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 Volecity {
+      get { return volecity_; }
+      set {
+        volecity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 4;
+    private global::NetProto.PBVector3 pos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1031,12 +1135,20 @@ namespace NetProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (Objid != other.Objid) return false;
+      if (MoveAgentState != other.MoveAgentState) return false;
+      if (!object.Equals(Volecity, other.Volecity)) return false;
+      if (!object.Equals(Pos, other.Pos)) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (Objid != 0UL) hash ^= Objid.GetHashCode();
+      if (MoveAgentState != 0) hash ^= MoveAgentState.GetHashCode();
+      if (volecity_ != null) hash ^= Volecity.GetHashCode();
+      if (pos_ != null) hash ^= Pos.GetHashCode();
       return hash;
     }
 
@@ -1047,11 +1159,39 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Objid != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(Objid);
+      }
+      if (MoveAgentState != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) MoveAgentState);
+      }
+      if (volecity_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Volecity);
+      }
+      if (pos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Pos);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (Objid != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Objid);
+      }
+      if (MoveAgentState != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MoveAgentState);
+      }
+      if (volecity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Volecity);
+      }
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
       return size;
     }
 
@@ -1059,6 +1199,24 @@ namespace NetProto {
     public void MergeFrom(MoveObjectMutableState other) {
       if (other == null) {
         return;
+      }
+      if (other.Objid != 0UL) {
+        Objid = other.Objid;
+      }
+      if (other.MoveAgentState != 0) {
+        MoveAgentState = other.MoveAgentState;
+      }
+      if (other.volecity_ != null) {
+        if (volecity_ == null) {
+          volecity_ = new global::NetProto.PBVector3();
+        }
+        Volecity.MergeFrom(other.Volecity);
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          pos_ = new global::NetProto.PBVector3();
+        }
+        Pos.MergeFrom(other.Pos);
       }
     }
 
@@ -1070,6 +1228,28 @@ namespace NetProto {
           default:
             input.SkipLastField();
             break;
+          case 8: {
+            Objid = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            moveAgentState_ = (global::NetProto.EMoveAgentState) input.ReadEnum();
+            break;
+          }
+          case 26: {
+            if (volecity_ == null) {
+              volecity_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(volecity_);
+            break;
+          }
+          case 34: {
+            if (pos_ == null) {
+              pos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(pos_);
+            break;
+          }
         }
       }
     }

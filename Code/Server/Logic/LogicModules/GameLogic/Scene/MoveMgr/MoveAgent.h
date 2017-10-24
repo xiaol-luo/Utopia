@@ -19,12 +19,12 @@ namespace GameLogic
 		const static uint64_t INVALID_ID = 0;
 		struct EventCallback
 		{
-			std::function<void(MoveAgent *agent, EMoveAgentState old_state)> move_state_cb = nullptr;
+			std::function<void(MoveAgent *agent, NetProto::EMoveAgentState old_state)> move_state_cb = nullptr;
 			std::function<void(MoveAgent *agent, const Vector3 &old_pos)> post_change_cb = nullptr;
 			std::function<void(MoveAgent *agent, const Vector3 &old_velocity)> velocity_change_cb = nullptr;
 		};
 		
-		static EMoveState CalMoveState(EMoveAgentState state);
+		static NetProto::EMoveState CalMoveState(NetProto::EMoveAgentState state);
 	public:
 		MoveAgent(MoveMgr *move_mgr);
 		virtual ~MoveAgent();
@@ -39,15 +39,15 @@ namespace GameLogic
 		int64_t m_id = 0;
 		MoveMgr *m_move_mgr = nullptr;
 		NavAgent *m_nav_agent = nullptr;
-		MoveAgentState *m_states[EMoveAgentState_Max];
+		MoveAgentState *m_states[NetProto::EMoveAgentState_Max];
 		MoveAgentState *m_next_state = nullptr;
 		MoveAgentState *m_curr_state = nullptr;
 
-		void EnterState(EMoveAgentState newState, void *param=nullptr);
+		void EnterState(NetProto::EMoveAgentState newState, void *param=nullptr);
 
 	public:
-		EMoveAgentState GetMoveAgentState();
-		EMoveState GetMoveState();
+		NetProto::EMoveAgentState GetMoveAgentState();
+		NetProto::EMoveState GetMoveState();
 		bool LoseControl();
 		void NavDisable();
 		void NavEnable();

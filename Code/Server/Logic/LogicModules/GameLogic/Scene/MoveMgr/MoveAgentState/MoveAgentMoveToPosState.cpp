@@ -7,7 +7,7 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
 
-GameLogic::MoveAgentMoveToPosState::MoveAgentMoveToPosState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_MoveToPos)
+GameLogic::MoveAgentMoveToPosState::MoveAgentMoveToPosState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_MoveToPos)
 {
 
 }

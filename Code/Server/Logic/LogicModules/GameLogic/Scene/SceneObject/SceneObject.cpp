@@ -47,18 +47,29 @@ namespace GameLogic
 		std::vector<SyncClientMsg> client_msgs;
 		if (filter_type & SCMF_ForInit)
 		{
-			NetProto::SceneObjectState * msg = m_scene->CreateProtobuf<NetProto::SceneObjectState>();
-			msg->set_model_id(m_model_id);
-			msg->set_obj_type((::NetProto::SceneObjectType)m_obj_type);
-			msg->set_objid(m_id);
-			auto pos = msg->mutable_pos();
-			pos->set_x(m_pos.x);
-			pos->set_y(m_pos.y);
-			pos->set_z(m_pos.z);
-			client_msgs.push_back(SyncClientMsg(NetProto::PID_SceneObjectState, msg));
+			client_msgs.push_back(SyncClientMsg(NetProto::PID_SceneObjectState, this->GetStatePb()));
 		}
 
 		return std::move(client_msgs);
+	}
+
+	google::protobuf::Message * SceneObject::GetStatePb()
+	{
+		NetProto::SceneObjectState * msg = m_scene->CreateProtobuf<NetProto::SceneObjectState>();
+		msg->set_model_id(m_model_id);
+		msg->set_obj_type((::NetProto::ESceneObject)m_obj_type);
+		msg->set_objid(m_id);
+		msg->set_rotation(m_rotation);
+		auto pos = msg->mutable_pos();
+		pos->set_x(m_pos.x);
+		pos->set_y(m_pos.y);
+		pos->set_z(m_pos.z);
+		return msg;
+	}
+
+	google::protobuf::Message * SceneObject::GetMutableStatePb()
+	{
+		return nullptr;
 	}
 
 	void SceneObject::OnPosChange(const Vector3 &old_val)
