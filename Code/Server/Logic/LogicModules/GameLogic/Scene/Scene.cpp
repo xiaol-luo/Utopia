@@ -47,9 +47,11 @@ namespace GameLogic
 		m_red_hero = std::make_shared<Hero>();
 		this->AddObject(m_red_hero);
 		m_red_hero->Flash(Vector3(5, 0, 5));
-		// m_red_hero->ForceMoveLine(Vector2(200, 200), 10, 1000, false);
-		// m_blue_hero = std::make_shared<Hero>();
-		// this->AddObject(m_blue_hero);
+
+		m_blue_hero = std::make_shared<Hero>();
+		this->AddObject(m_blue_hero);
+		m_blue_hero->Flash(Vector3(5, 0, 5));
+		/*
 		{
 			std::weak_ptr<Hero> hero = m_red_hero;
 			GlobalServerLogic->GetTimerModule()->AddFirm([hero]() {
@@ -94,7 +96,9 @@ namespace GameLogic
 				}
 
 			}, 1 * 1000, -1);
+			
 		}
+		*/
 
 		return true;
 	}

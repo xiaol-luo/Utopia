@@ -220,8 +220,7 @@ public class ClientSocket
     }
     public static void Loop(object param)
     {
-
-        byte[] recvBuffer = new byte[4096];
+        byte[] recvBuffer = new byte[40960];
         List<byte[]> tmpSendBytes = new List<byte[]>();
 
         ThreadParam threadParam = param as ThreadParam;
@@ -230,26 +229,21 @@ public class ClientSocket
             const int TIMEOUT_ERRNO = 10060;
             try
             {
-                int recvLen = 0;
-                do
+                // receive
+                int recvLen = threadParam.socket.Receive(recvBuffer, 0, recvBuffer.Length, SocketFlags.None);
+                if (recvLen <= 0)
                 {
-                    recvLen = threadParam.socket.Receive(recvBuffer, 0, recvBuffer.Length, SocketFlags.None);
-                    if (recvLen <= 0)
-                    {
-                        threadParam.errno = 2;
-                        threadParam.errmsg = "remote close socket"; 
-                    }
-                    else
-                    {
-                        byte[] bytes = new byte[recvLen];
-                        Array.Copy(recvBuffer, bytes, recvLen);
-                        threadParam.mtx.WaitOne();
-                        threadParam.recvBytes.Add(bytes);
-                        threadParam.mtx.ReleaseMutex();
-                    }
-                } while (recvLen > 0);
-                if (!threadParam.isExit && 0 == threadParam.errno && State.Connected == threadParam.state)
-                    break;
+                    threadParam.errno = 2;
+                    threadParam.errmsg = "remote close socket";
+                }
+                else
+                {
+                    byte[] bytes = new byte[recvLen];
+                    Array.Copy(recvBuffer, bytes, recvLen);
+                    threadParam.mtx.WaitOne();
+                    threadParam.recvBytes.Add(bytes);
+                    threadParam.mtx.ReleaseMutex();
+                }
             }
             catch (Exception e)
             {
@@ -304,8 +298,6 @@ public class ClientSocket
                     continue;
                 }
             }
-
-            // Thread.Sleep(1);
         }
     }
 }

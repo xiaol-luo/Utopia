@@ -191,6 +191,7 @@ namespace GameLogic
 
 		std::shared_ptr<Hero> sptr_hero = hero.lock();
 		sptr_hero->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "OnMoveToPos {0}, {1}", msg->pos().x(), msg->pos().y());
 	}
 	
 	void PlayerMsgHandler::OnStopMove(int id, GameLogic::Player * player)

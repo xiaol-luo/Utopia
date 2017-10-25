@@ -1,4 +1,6 @@
 
+using System;
+
 public class AppStateInBattle : IAppState
 {
     public AppStateInBattle(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.InBattle)
@@ -19,6 +21,7 @@ public class AppStateInBattle : IAppState
 
     public override void Update(params object[] objs)
     {
-
+        Random rand = new Random();
+        App.my.scene.TryMoveToPos(rand.Next() % 100, rand.Next() % 100);
     }
 }
