@@ -4,7 +4,7 @@ using UnityEngine;
 public static class SceneUtils
 {
     const float MouseRaycastDistance = 200.0f;
-    public static bool ScreenMouseToGround(Camera camera, Vector3 mousePos, ref Vector3 hitPos)
+    public static bool ScreenToGround(Camera camera, Vector3 mousePos, ref Vector3 hitPos)
     {
         Ray ray = camera.ScreenPointToRay(mousePos);
         RaycastHit[] hitList = Physics.RaycastAll(ray, MouseRaycastDistance, LayerUtil.groundMask);
