@@ -37,6 +37,8 @@ public class App
     }
     public void Start ()
     {
+        LayerUtil.Init();
+
         do
         {
             if (!gameConfig.Start())
