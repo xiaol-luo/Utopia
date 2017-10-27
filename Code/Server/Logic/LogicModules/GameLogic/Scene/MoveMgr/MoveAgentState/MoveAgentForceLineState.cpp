@@ -6,7 +6,7 @@
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 
-GameLogic::MoveAgentForceLineState::MoveAgentForceLineState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_ForceLine)
+GameLogic::MoveAgentForceLineState::MoveAgentForceLineState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_ForceLine)
 {
 }
 

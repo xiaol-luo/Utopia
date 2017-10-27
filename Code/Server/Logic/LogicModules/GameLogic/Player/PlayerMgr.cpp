@@ -123,7 +123,7 @@ namespace GameLogic
 		{
 			for (auto kv_pair : m_players)
 			{
-				if (kv_pair.second->CanRecvSceneMsg())
+				// if (kv_pair.second->CanRecvSceneMsg())
 					GlobalServerLogic->GetNetAgent()->Send(kv_pair.first, protocol_id, msg, msg_len);
 			}
 		}

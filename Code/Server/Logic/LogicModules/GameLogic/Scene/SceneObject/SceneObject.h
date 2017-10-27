@@ -50,10 +50,13 @@ namespace GameLogic
 		void SetPos(const Vector3 &val);
 		inline float GetRotation() { return m_rotation; }
 		void SetRotation(float val);
-		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
-
 		bool NeedSyncMutableState() { return m_flag_sync_mutable_state; }
 		void SetSyncMutableState(bool val) { m_flag_sync_mutable_state = val; }
+		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
+
+	protected:
+		virtual google::protobuf::Message * GetStatePb();
+		virtual google::protobuf::Message * GetMutableStatePb();
 
 	protected:
 		void OnPosChange(const Vector3 &old_val);

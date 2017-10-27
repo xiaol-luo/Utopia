@@ -5,7 +5,7 @@
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 
 
-GameLogic::MoveAgenImmobilizedState::MoveAgenImmobilizedState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_Immobilized)
+GameLogic::MoveAgenImmobilizedState::MoveAgenImmobilizedState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_Immobilized)
 {
 
 }

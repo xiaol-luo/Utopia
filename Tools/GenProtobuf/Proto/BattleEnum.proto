@@ -1,0 +1,32 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+package NetProto;
+
+enum ESceneObject
+{
+	Building = 0;
+	Hero = 1;
+	Npc = 2;
+	
+	MAX = 3;
+}
+
+enum EMoveAgentState
+{
+	EMoveAgentState_Idle = 0;
+	EMoveAgentState_MoveToPos = 1;
+	EMoveAgentState_MoveToDir = 2;
+	EMoveAgentState_Immobilized = 3;
+	EMoveAgentState_ForceLine = 4;
+	EMoveAgentState_ForcePos = 5;
+
+	EMoveAgentState_Max = 6;
+}
+
+enum EMoveState
+{
+	EMoveState_Idle = 0;
+	EMoveState_Move = 1;
+	EMoveState_Immobilized = 2;
+	EMoveState_ForceMove = 3;
+};

@@ -49,6 +49,7 @@ public class AppStateSelectHero : IAppState
         }
         m_mono = null;
         App.my.gameNetwork.Remove((int)ProtoId.PidRspFreeHero);
+        App.my.gameNetwork.Remove((int)ProtoId.PidSelectHeroRsp);
     }
 
     public override void Update(params object[] objs)

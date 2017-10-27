@@ -12,24 +12,24 @@
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Timer/ITimerModule.h"
 
-GameLogic::EMoveState GameLogic::MoveAgent::CalMoveState(GameLogic::EMoveAgentState state)
+NetProto::EMoveState GameLogic::MoveAgent::CalMoveState(NetProto::EMoveAgentState state)
 {
-	EMoveState ret = EMoveState_Idle;
+	NetProto::EMoveState ret = NetProto::EMoveState_Idle;
 	switch (state)
 	{
-	case EMoveAgentState_Idle:
-		ret = EMoveState_Idle;
+	case NetProto::EMoveAgentState_Idle:
+		ret = NetProto::EMoveState_Idle;
 		break;
-	case EMoveAgentState_MoveToDir:
-	case EMoveAgentState_MoveToPos:
-		ret = EMoveState_Move;
+	case NetProto::EMoveAgentState_MoveToDir:
+	case NetProto::EMoveAgentState_MoveToPos:
+		ret = NetProto::EMoveState_Move;
 		break;
-	case EMoveAgentState_ForceLine:
+	case NetProto::EMoveAgentState_ForceLine:
 	// case EMoveAgentState_ForceSky:
-		ret = EMoveState_ForceMove;
+		ret = NetProto::EMoveState_ForceMove;
 		break;
-	case EMoveAgentState_Immobilized:
-		ret = EMoveState_Immobilized;
+	case NetProto::EMoveAgentState_Immobilized:
+		ret = NetProto::EMoveState_Immobilized;
 		break;
 	}
 
@@ -41,27 +41,27 @@ GameLogic::MoveAgent::MoveAgent(MoveMgr * move_mgr) : m_move_mgr(move_mgr)
 	m_nav_agent = new NavAgent(move_mgr->GetNavMesh());
 	m_nav_agent->SetMovedCb(std::bind(&GameLogic::MoveAgent::OnNavAgentMoved, this, std::placeholders::_1));
 
-	m_states[EMoveAgentState_Idle] = new MoveAgentIdleState(this);
-	m_states[EMoveAgentState_MoveToDir] = new MoveAgentMoveToDirState(this);
-	m_states[EMoveAgentState_MoveToPos] = new MoveAgentMoveToPosState(this);
-	m_states[EMoveAgentState_Immobilized] = new MoveAgenImmobilizedState(this);
-	m_states[EMoveAgentState_ForceLine] = new MoveAgentForceLineState(this);
-	m_states[EMoveAgentState_ForcePos] = new MoveAgentForcePosState(this);
-	m_next_state = m_states[EMoveState_Idle];
-	m_curr_state = m_states[EMoveState_Idle];
+	m_states[NetProto::EMoveAgentState_Idle] = new MoveAgentIdleState(this);
+	m_states[NetProto::EMoveAgentState_MoveToDir] = new MoveAgentMoveToDirState(this);
+	m_states[NetProto::EMoveAgentState_MoveToPos] = new MoveAgentMoveToPosState(this);
+	m_states[NetProto::EMoveAgentState_Immobilized] = new MoveAgenImmobilizedState(this);
+	m_states[NetProto::EMoveAgentState_ForceLine] = new MoveAgentForceLineState(this);
+	m_states[NetProto::EMoveAgentState_ForcePos] = new MoveAgentForcePosState(this);
+	m_next_state = m_states[NetProto::EMoveState_Idle];
+	m_curr_state = m_states[NetProto::EMoveState_Idle];
 }
 
 GameLogic::MoveAgent::~MoveAgent()
 {
-	for (int i = 0; i < EMoveAgentState_Max; ++i)
+	for (int i = 0; i < NetProto::EMoveAgentState_Max; ++i)
 	{
 		delete m_states[i]; m_states[i] = nullptr;
 	}
 }
 
-void GameLogic::MoveAgent::EnterState(EMoveAgentState new_state, void *param)
+void GameLogic::MoveAgent::EnterState(NetProto::EMoveAgentState new_state, void *param)
 {
-	EMoveAgentState old_state = m_curr_state->GetState();
+	NetProto::EMoveAgentState old_state = m_curr_state->GetState();
 	m_curr_state->Exit();
 	m_curr_state = m_states[new_state];
 	m_curr_state->Enter(param);
@@ -69,19 +69,19 @@ void GameLogic::MoveAgent::EnterState(EMoveAgentState new_state, void *param)
 		m_event_cb.move_state_cb(this, old_state);
 }
 
-GameLogic::EMoveAgentState GameLogic::MoveAgent::GetMoveAgentState()
+NetProto::EMoveAgentState GameLogic::MoveAgent::GetMoveAgentState()
 {
 	return m_curr_state->GetState();
 }
 
-GameLogic::EMoveState GameLogic::MoveAgent::GetMoveState()
+NetProto::EMoveState GameLogic::MoveAgent::GetMoveState()
 {
 	return CalMoveState(this->GetMoveAgentState());
 }
 
 bool GameLogic::MoveAgent::LoseControl()
 {
-	return this->GetMoveState() > EMoveState_Move;
+	return this->GetMoveState() > NetProto::EMoveState_Move;
 }
 
 void GameLogic::MoveAgent::NavDisable()
@@ -141,7 +141,7 @@ void GameLogic::MoveAgent::Flash(const Vector3 & val)
 			fix_pos = m_pos;
 	}
 
-	for (int i = 0; i < EMoveAgentState_Max; ++i)
+	for (int i = 0; i < NetProto::EMoveAgentState_Max; ++i)
 	{
 		m_states[i]->Flash(fix_pos);
 	}
@@ -162,18 +162,18 @@ void GameLogic::MoveAgent::Update(long deltaMs)
 	if (m_curr_state->IsDone())
 	{
 		MoveAgentState *next_state = m_next_state;
-		m_next_state = m_states[EMoveAgentState_Idle];
+		m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		this->EnterState(next_state->GetState());
 	}
 }
 
 void GameLogic::MoveAgent::TryMoveToPos(const Vector3 &pos)
 {
-	MoveAgentMoveToPosState *state = dynamic_cast<MoveAgentMoveToPosState *>(m_states[EMoveAgentState_MoveToPos]);
+	MoveAgentMoveToPosState *state = dynamic_cast<MoveAgentMoveToPosState *>(m_states[NetProto::EMoveAgentState_MoveToPos]);
 	state->SetDesiredPos(pos);
 	if (!LoseControl())
 	{
-		m_next_state = m_states[EMoveAgentState_Idle];
+		m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		this->EnterState(state->GetState());
 	}
 	else
@@ -184,11 +184,11 @@ void GameLogic::MoveAgent::TryMoveToPos(const Vector3 &pos)
 
 void GameLogic::MoveAgent::TryMoveToDir(float angle)
 {
-	MoveAgentMoveToDirState *state = dynamic_cast<MoveAgentMoveToDirState *>(m_states[EMoveAgentState_MoveToDir]);
+	MoveAgentMoveToDirState *state = dynamic_cast<MoveAgentMoveToDirState *>(m_states[NetProto::EMoveAgentState_MoveToDir]);
 	state->SetDesiredDir(angle);
 	if (!LoseControl())
 	{
-		m_next_state = m_states[EMoveAgentState_Idle];
+		m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		this->EnterState(state->GetState());
 	}
 	else
@@ -199,87 +199,87 @@ void GameLogic::MoveAgent::TryMoveToDir(float angle)
 
 void GameLogic::MoveAgent::CancelMove()
 {
-	if (EMoveState_Move == this->GetMoveState())
+	if (NetProto::EMoveState_Move == this->GetMoveState())
 	{
-		m_next_state = m_states[EMoveAgentState_Idle];
-		this->EnterState(EMoveAgentState_Idle);
+		m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+		this->EnterState(NetProto::EMoveAgentState_Idle);
 	}
 	else
 	{
 		this->GetNavAgent()->StopMove();
-		if (EMoveState_Move == CalMoveState(m_next_state->GetState()))
-			m_next_state = m_states[EMoveAgentState_Idle];
+		if (NetProto::EMoveState_Move == CalMoveState(m_next_state->GetState()))
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 	}
 }
 
 void GameLogic::MoveAgent::CancelForceMove()
 {
-	if (EMoveState_ForceMove == this->GetMoveAgentState())
+	if (NetProto::EMoveState_ForceMove == this->GetMoveAgentState())
 	{
 		m_curr_state->ForceDone();
 	}
 	else
 	{
-		if (EMoveState_ForceMove == CalMoveState(m_next_state->GetState()))
+		if (NetProto::EMoveState_ForceMove == CalMoveState(m_next_state->GetState()))
 		{
 			m_next_state->ForceDone();
-			m_next_state = m_states[EMoveAgentState_Idle];
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		}
 	}
 }
 
 void GameLogic::MoveAgent::ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian)
 {
-	MoveAgentForceLineState *state = dynamic_cast<MoveAgentForceLineState *>(m_states[EMoveAgentState_ForceLine]);
+	MoveAgentForceLineState *state = dynamic_cast<MoveAgentForceLineState *>(m_states[NetProto::EMoveAgentState_ForceLine]);
 	state->ForceMoveLine(dir, speed, time_sec, ignore_terrian);
-	if (EMoveState_ForceMove != this->GetMoveState())
+	if (NetProto::EMoveState_ForceMove != this->GetMoveState())
 		m_next_state = m_curr_state;
-	this->EnterState(EMoveAgentState_ForceLine);
+	this->EnterState(NetProto::EMoveAgentState_ForceLine);
 }
 
 void GameLogic::MoveAgent::ForcePos(const Vector3 & destination, float speed)
 {
-	MoveAgentForcePosState *state = dynamic_cast<MoveAgentForcePosState *>(m_states[EMoveAgentState_ForcePos]);
+	MoveAgentForcePosState *state = dynamic_cast<MoveAgentForcePosState *>(m_states[NetProto::EMoveAgentState_ForcePos]);
 	state->ForcePos(destination, speed);
-	if (EMoveState_ForceMove != this->GetMoveState())
+	if (NetProto::EMoveState_ForceMove != this->GetMoveState())
 		m_next_state = m_curr_state;
-	this->EnterState(EMoveAgentState_ForcePos);
+	this->EnterState(NetProto::EMoveAgentState_ForcePos);
 }
 
 void GameLogic::MoveAgent::ChangeForcePosDestination(const Vector3 & destination)
 {
-	MoveAgentForcePosState *state = dynamic_cast<MoveAgentForcePosState *>(m_states[EMoveAgentState_ForcePos]);
+	MoveAgentForcePosState *state = dynamic_cast<MoveAgentForcePosState *>(m_states[NetProto::EMoveAgentState_ForcePos]);
 	state->ForcePos(destination);
 }
 
 void GameLogic::MoveAgent::Immobilized(long ms)
 {
-	MoveAgenImmobilizedState *state = dynamic_cast<MoveAgenImmobilizedState *>(m_states[EMoveAgentState_Immobilized]);
+	MoveAgenImmobilizedState *state = dynamic_cast<MoveAgenImmobilizedState *>(m_states[NetProto::EMoveAgentState_Immobilized]);
 	state->ImmobilizeEndMs(GlobalServerLogic->GetTimerModule()->NowMs() + ms);
-	if (EMoveState_ForceMove == this->GetMoveState())
+	if (NetProto::EMoveState_ForceMove == this->GetMoveState())
 	{
-		m_next_state = m_states[EMoveAgentState_Immobilized];
+		m_next_state = m_states[NetProto::EMoveAgentState_Immobilized];
 	}
 	else 
 	{
-		if (EMoveState_Immobilized != this->GetMoveState()) 
+		if (NetProto::EMoveState_Immobilized != this->GetMoveState())
 			m_next_state = m_curr_state; // MOVE OR IDLE
-		this->EnterState(EMoveAgentState_Immobilized);
+		this->EnterState(NetProto::EMoveAgentState_Immobilized);
 	}
 }
 
 void GameLogic::MoveAgent::CancelImmobilized()
 {
-	if (EMoveState_Immobilized == this->GetMoveAgentState())
+	if (NetProto::EMoveState_Immobilized == this->GetMoveAgentState())
 	{
 		m_curr_state->ForceDone();
 	}
 	else
 	{
-		if (EMoveState_Immobilized == CalMoveState(m_next_state->GetState()))
+		if (NetProto::EMoveState_Immobilized == CalMoveState(m_next_state->GetState()))
 		{
 			m_next_state->ForceDone();
-			m_next_state = m_states[EMoveAgentState_Idle];
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		}
 	}
 }

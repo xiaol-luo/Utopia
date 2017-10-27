@@ -3,7 +3,7 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 
-GameLogic::MoveAgentIdleState::MoveAgentIdleState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_Idle)
+GameLogic::MoveAgentIdleState::MoveAgentIdleState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_Idle)
 {
 
 }

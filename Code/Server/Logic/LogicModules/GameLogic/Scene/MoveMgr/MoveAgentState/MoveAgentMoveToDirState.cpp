@@ -3,7 +3,7 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 
-GameLogic::MoveAgentMoveToDirState::MoveAgentMoveToDirState(MoveAgent * move_agent) : MoveAgentState(move_agent, EMoveAgentState_MoveToDir)
+GameLogic::MoveAgentMoveToDirState::MoveAgentMoveToDirState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_MoveToDir)
 {
 
 }

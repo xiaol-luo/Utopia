@@ -2,6 +2,7 @@
 
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
 #include "Common/Math/Vector3.h"
+#include "Network/Protobuf/BattleEnum.pb.h"
 
 namespace GameLogic
 {
@@ -10,7 +11,7 @@ namespace GameLogic
 	class MoveAgentState
 	{
 	public:
-		MoveAgentState(MoveAgent *move_agent, EMoveAgentState state) : m_state(state), m_move_agent(move_agent) {}
+		MoveAgentState(MoveAgent *move_agent, NetProto::EMoveAgentState state) : m_state(state), m_move_agent(move_agent) {}
 		virtual ~MoveAgentState() {}
 
 		virtual void Enter(void *param) = 0;
@@ -21,10 +22,10 @@ namespace GameLogic
 		virtual void Flash(const Vector3 &val) {}
 
 	public:
-		EMoveAgentState GetState() { return m_state; }
+		NetProto::EMoveAgentState GetState() { return m_state; }
 
 	protected:
-		EMoveAgentState m_state;
+		NetProto::EMoveAgentState m_state;
 		MoveAgent *m_move_agent;
 	};
 }

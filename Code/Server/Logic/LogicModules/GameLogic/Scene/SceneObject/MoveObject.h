@@ -42,11 +42,15 @@ namespace GameLogic
 		void SetMoveAgent(MoveAgent *val) { m_move_agent = val; }
 		MoveAgent * GetMoveAgent() { return m_move_agent; }
 		const Vector3 & GetVelocity();
-		EMoveAgentState GetMoveAgentState();
+		NetProto::EMoveAgentState GetMoveAgentState();
 		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
 
 	protected:
-		void OnMoveAgentStateChange(EMoveAgentState old_val);
+		virtual google::protobuf::Message * GetStatePb();
+		virtual google::protobuf::Message * GetMutableStatePb();
+
+	protected:
+		void OnMoveAgentStateChange(NetProto::EMoveAgentState old_val);
 		void OnVelocityChange(const Vector3 &old_val);
 		void OnPosChange(const Vector3 &old_val);
 
@@ -63,7 +67,7 @@ namespace GameLogic
 		void Flash(const Vector3 &val);
 
 	public:
-		static void MoveStateChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, EMoveAgentState old_state);
+		static void MoveStateChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, NetProto::EMoveAgentState old_state);
 		static void PostChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_pos);
 		static void VelocityChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_velocity);
 	};

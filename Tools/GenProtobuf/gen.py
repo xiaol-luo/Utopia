@@ -11,7 +11,8 @@ proto_files = [
 	"Battle.proto",
 	"ProtoId.proto",
 	"Common.proto",
-	"Empty.proto"
+	"Empty.proto",
+	"BattleEnum.proto"
 ]
 
 out_options = [

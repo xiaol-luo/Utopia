@@ -28,9 +28,9 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "Common.pb.h"
+#include "BattleEnum.pb.h"
 // @@protoc_insertion_point(includes)
 namespace NetProto {
 class AllSceneObjectState;
@@ -76,29 +76,6 @@ void AddDescriptors();
 void InitDefaults();
 }  // namespace protobuf_Battle_2eproto
 
-enum SceneObjectType {
-  Building = 0,
-  Hero = 1,
-  Npc = 2,
-  MAX = 3,
-  SceneObjectType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  SceneObjectType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool SceneObjectType_IsValid(int value);
-const SceneObjectType SceneObjectType_MIN = Building;
-const SceneObjectType SceneObjectType_MAX = MAX;
-const int SceneObjectType_ARRAYSIZE = SceneObjectType_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* SceneObjectType_descriptor();
-inline const ::std::string& SceneObjectType_Name(SceneObjectType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    SceneObjectType_descriptor(), value);
-}
-inline bool SceneObjectType_Parse(
-    const ::std::string& name, SceneObjectType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<SceneObjectType>(
-    SceneObjectType_descriptor(), name, value);
-}
 // ===================================================================
 
 class RspFreeHero : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.RspFreeHero) */ {
@@ -568,17 +545,23 @@ class SceneObjectState : public ::google::protobuf::Message /* @@protoc_insertio
   ::google::protobuf::uint64 objid() const;
   void set_objid(::google::protobuf::uint64 value);
 
-  // .NetProto.SceneObjectType obj_type = 2;
+  // .NetProto.ESceneObject obj_type = 2;
   void clear_obj_type();
   static const int kObjTypeFieldNumber = 2;
-  ::NetProto::SceneObjectType obj_type() const;
-  void set_obj_type(::NetProto::SceneObjectType value);
+  ::NetProto::ESceneObject obj_type() const;
+  void set_obj_type(::NetProto::ESceneObject value);
 
   // int32 model_id = 3;
   void clear_model_id();
   static const int kModelIdFieldNumber = 3;
   ::google::protobuf::int32 model_id() const;
   void set_model_id(::google::protobuf::int32 value);
+
+  // float rotation = 5;
+  void clear_rotation();
+  static const int kRotationFieldNumber = 5;
+  float rotation() const;
+  void set_rotation(float value);
 
   // @@protoc_insertion_point(class_scope:NetProto.SceneObjectState)
  private:
@@ -591,6 +574,7 @@ class SceneObjectState : public ::google::protobuf::Message /* @@protoc_insertio
   ::google::protobuf::uint64 objid_;
   int obj_type_;
   ::google::protobuf::int32 model_id_;
+  float rotation_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -807,27 +791,45 @@ class MoveObjectState : public ::google::protobuf::Message /* @@protoc_insertion
 
   // accessors -------------------------------------------------------
 
-  // int32 radius = 1;
+  // .NetProto.SceneObjectState obj_state = 1;
+  bool has_obj_state() const;
+  void clear_obj_state();
+  static const int kObjStateFieldNumber = 1;
+  private:
+  void _slow_mutable_obj_state();
+  void _slow_set_allocated_obj_state(
+      ::google::protobuf::Arena* message_arena, ::NetProto::SceneObjectState** obj_state);
+  ::NetProto::SceneObjectState* _slow_release_obj_state();
+  public:
+  const ::NetProto::SceneObjectState& obj_state() const;
+  ::NetProto::SceneObjectState* mutable_obj_state();
+  ::NetProto::SceneObjectState* release_obj_state();
+  void set_allocated_obj_state(::NetProto::SceneObjectState* obj_state);
+  ::NetProto::SceneObjectState* unsafe_arena_release_obj_state();
+  void unsafe_arena_set_allocated_obj_state(
+      ::NetProto::SceneObjectState* obj_state);
+
+  // int32 radius = 2;
   void clear_radius();
-  static const int kRadiusFieldNumber = 1;
+  static const int kRadiusFieldNumber = 2;
   ::google::protobuf::int32 radius() const;
   void set_radius(::google::protobuf::int32 value);
 
-  // int32 height = 2;
+  // int32 height = 3;
   void clear_height();
-  static const int kHeightFieldNumber = 2;
+  static const int kHeightFieldNumber = 3;
   ::google::protobuf::int32 height() const;
   void set_height(::google::protobuf::int32 value);
 
-  // int32 mass = 3;
+  // int32 mass = 4;
   void clear_mass();
-  static const int kMassFieldNumber = 3;
+  static const int kMassFieldNumber = 4;
   ::google::protobuf::int32 mass() const;
   void set_mass(::google::protobuf::int32 value);
 
-  // int32 max_speed = 4;
+  // int32 max_speed = 5;
   void clear_max_speed();
-  static const int kMaxSpeedFieldNumber = 4;
+  static const int kMaxSpeedFieldNumber = 5;
   ::google::protobuf::int32 max_speed() const;
   void set_max_speed(::google::protobuf::int32 value);
 
@@ -838,6 +840,7 @@ class MoveObjectState : public ::google::protobuf::Message /* @@protoc_insertion
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::NetProto::SceneObjectState* obj_state_;
   ::google::protobuf::int32 radius_;
   ::google::protobuf::int32 height_;
   ::google::protobuf::int32 mass_;
@@ -940,6 +943,54 @@ class MoveObjectMutableState : public ::google::protobuf::Message /* @@protoc_in
 
   // accessors -------------------------------------------------------
 
+  // .NetProto.PBVector3 volecity = 3;
+  bool has_volecity() const;
+  void clear_volecity();
+  static const int kVolecityFieldNumber = 3;
+  private:
+  void _slow_mutable_volecity();
+  void _slow_set_allocated_volecity(
+      ::google::protobuf::Arena* message_arena, ::NetProto::PBVector3** volecity);
+  ::NetProto::PBVector3* _slow_release_volecity();
+  public:
+  const ::NetProto::PBVector3& volecity() const;
+  ::NetProto::PBVector3* mutable_volecity();
+  ::NetProto::PBVector3* release_volecity();
+  void set_allocated_volecity(::NetProto::PBVector3* volecity);
+  ::NetProto::PBVector3* unsafe_arena_release_volecity();
+  void unsafe_arena_set_allocated_volecity(
+      ::NetProto::PBVector3* volecity);
+
+  // .NetProto.PBVector3 pos = 4;
+  bool has_pos() const;
+  void clear_pos();
+  static const int kPosFieldNumber = 4;
+  private:
+  void _slow_mutable_pos();
+  void _slow_set_allocated_pos(
+      ::google::protobuf::Arena* message_arena, ::NetProto::PBVector3** pos);
+  ::NetProto::PBVector3* _slow_release_pos();
+  public:
+  const ::NetProto::PBVector3& pos() const;
+  ::NetProto::PBVector3* mutable_pos();
+  ::NetProto::PBVector3* release_pos();
+  void set_allocated_pos(::NetProto::PBVector3* pos);
+  ::NetProto::PBVector3* unsafe_arena_release_pos();
+  void unsafe_arena_set_allocated_pos(
+      ::NetProto::PBVector3* pos);
+
+  // uint64 objid = 1;
+  void clear_objid();
+  static const int kObjidFieldNumber = 1;
+  ::google::protobuf::uint64 objid() const;
+  void set_objid(::google::protobuf::uint64 value);
+
+  // .NetProto.EMoveAgentState move_agent_state = 2;
+  void clear_move_agent_state();
+  static const int kMoveAgentStateFieldNumber = 2;
+  ::NetProto::EMoveAgentState move_agent_state() const;
+  void set_move_agent_state(::NetProto::EMoveAgentState value);
+
   // @@protoc_insertion_point(class_scope:NetProto.MoveObjectMutableState)
  private:
 
@@ -947,6 +998,10 @@ class MoveObjectMutableState : public ::google::protobuf::Message /* @@protoc_in
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::NetProto::PBVector3* volecity_;
+  ::NetProto::PBVector3* pos_;
+  ::google::protobuf::uint64 objid_;
+  int move_agent_state_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -1182,15 +1237,15 @@ inline void SceneObjectState::set_objid(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:NetProto.SceneObjectState.objid)
 }
 
-// .NetProto.SceneObjectType obj_type = 2;
+// .NetProto.ESceneObject obj_type = 2;
 inline void SceneObjectState::clear_obj_type() {
   obj_type_ = 0;
 }
-inline ::NetProto::SceneObjectType SceneObjectState::obj_type() const {
+inline ::NetProto::ESceneObject SceneObjectState::obj_type() const {
   // @@protoc_insertion_point(field_get:NetProto.SceneObjectState.obj_type)
-  return static_cast< ::NetProto::SceneObjectType >(obj_type_);
+  return static_cast< ::NetProto::ESceneObject >(obj_type_);
 }
-inline void SceneObjectState::set_obj_type(::NetProto::SceneObjectType value) {
+inline void SceneObjectState::set_obj_type(::NetProto::ESceneObject value) {
   
   obj_type_ = value;
   // @@protoc_insertion_point(field_set:NetProto.SceneObjectState.obj_type)
@@ -1260,6 +1315,20 @@ inline  void SceneObjectState::set_allocated_pos(::NetProto::PBVector3* pos) {
   // @@protoc_insertion_point(field_set_allocated:NetProto.SceneObjectState.pos)
 }
 
+// float rotation = 5;
+inline void SceneObjectState::clear_rotation() {
+  rotation_ = 0;
+}
+inline float SceneObjectState::rotation() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneObjectState.rotation)
+  return rotation_;
+}
+inline void SceneObjectState::set_rotation(float value) {
+  
+  rotation_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneObjectState.rotation)
+}
+
 // -------------------------------------------------------------------
 
 // AllSceneObjectState
@@ -1298,7 +1367,57 @@ AllSceneObjectState::objs() const {
 
 // MoveObjectState
 
-// int32 radius = 1;
+// .NetProto.SceneObjectState obj_state = 1;
+inline bool MoveObjectState::has_obj_state() const {
+  return this != internal_default_instance() && obj_state_ != NULL;
+}
+inline void MoveObjectState::clear_obj_state() {
+  if (GetArenaNoVirtual() == NULL && obj_state_ != NULL) delete obj_state_;
+  obj_state_ = NULL;
+}
+inline const ::NetProto::SceneObjectState& MoveObjectState::obj_state() const {
+  const ::NetProto::SceneObjectState* p = obj_state_;
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectState.obj_state)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::SceneObjectState*>(
+      &::NetProto::_SceneObjectState_default_instance_);
+}
+inline ::NetProto::SceneObjectState* MoveObjectState::mutable_obj_state() {
+  
+  if (obj_state_ == NULL) {
+    _slow_mutable_obj_state();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.MoveObjectState.obj_state)
+  return obj_state_;
+}
+inline ::NetProto::SceneObjectState* MoveObjectState::release_obj_state() {
+  // @@protoc_insertion_point(field_release:NetProto.MoveObjectState.obj_state)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_obj_state();
+  } else {
+    ::NetProto::SceneObjectState* temp = obj_state_;
+    obj_state_ = NULL;
+    return temp;
+  }
+}
+inline  void MoveObjectState::set_allocated_obj_state(::NetProto::SceneObjectState* obj_state) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete obj_state_;
+  }
+  if (obj_state != NULL) {
+    _slow_set_allocated_obj_state(message_arena, &obj_state);
+  }
+  obj_state_ = obj_state;
+  if (obj_state) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.MoveObjectState.obj_state)
+}
+
+// int32 radius = 2;
 inline void MoveObjectState::clear_radius() {
   radius_ = 0;
 }
@@ -1312,7 +1431,7 @@ inline void MoveObjectState::set_radius(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NetProto.MoveObjectState.radius)
 }
 
-// int32 height = 2;
+// int32 height = 3;
 inline void MoveObjectState::clear_height() {
   height_ = 0;
 }
@@ -1326,7 +1445,7 @@ inline void MoveObjectState::set_height(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NetProto.MoveObjectState.height)
 }
 
-// int32 mass = 3;
+// int32 mass = 4;
 inline void MoveObjectState::clear_mass() {
   mass_ = 0;
 }
@@ -1340,7 +1459,7 @@ inline void MoveObjectState::set_mass(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:NetProto.MoveObjectState.mass)
 }
 
-// int32 max_speed = 4;
+// int32 max_speed = 5;
 inline void MoveObjectState::clear_max_speed() {
   max_speed_ = 0;
 }
@@ -1357,6 +1476,134 @@ inline void MoveObjectState::set_max_speed(::google::protobuf::int32 value) {
 // -------------------------------------------------------------------
 
 // MoveObjectMutableState
+
+// uint64 objid = 1;
+inline void MoveObjectMutableState::clear_objid() {
+  objid_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 MoveObjectMutableState::objid() const {
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectMutableState.objid)
+  return objid_;
+}
+inline void MoveObjectMutableState::set_objid(::google::protobuf::uint64 value) {
+  
+  objid_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.MoveObjectMutableState.objid)
+}
+
+// .NetProto.EMoveAgentState move_agent_state = 2;
+inline void MoveObjectMutableState::clear_move_agent_state() {
+  move_agent_state_ = 0;
+}
+inline ::NetProto::EMoveAgentState MoveObjectMutableState::move_agent_state() const {
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectMutableState.move_agent_state)
+  return static_cast< ::NetProto::EMoveAgentState >(move_agent_state_);
+}
+inline void MoveObjectMutableState::set_move_agent_state(::NetProto::EMoveAgentState value) {
+  
+  move_agent_state_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.MoveObjectMutableState.move_agent_state)
+}
+
+// .NetProto.PBVector3 volecity = 3;
+inline bool MoveObjectMutableState::has_volecity() const {
+  return this != internal_default_instance() && volecity_ != NULL;
+}
+inline void MoveObjectMutableState::clear_volecity() {
+  if (GetArenaNoVirtual() == NULL && volecity_ != NULL) delete volecity_;
+  volecity_ = NULL;
+}
+inline const ::NetProto::PBVector3& MoveObjectMutableState::volecity() const {
+  const ::NetProto::PBVector3* p = volecity_;
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectMutableState.volecity)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector3*>(
+      &::NetProto::_PBVector3_default_instance_);
+}
+inline ::NetProto::PBVector3* MoveObjectMutableState::mutable_volecity() {
+  
+  if (volecity_ == NULL) {
+    _slow_mutable_volecity();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.MoveObjectMutableState.volecity)
+  return volecity_;
+}
+inline ::NetProto::PBVector3* MoveObjectMutableState::release_volecity() {
+  // @@protoc_insertion_point(field_release:NetProto.MoveObjectMutableState.volecity)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_volecity();
+  } else {
+    ::NetProto::PBVector3* temp = volecity_;
+    volecity_ = NULL;
+    return temp;
+  }
+}
+inline  void MoveObjectMutableState::set_allocated_volecity(::NetProto::PBVector3* volecity) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete volecity_;
+  }
+  if (volecity != NULL) {
+    _slow_set_allocated_volecity(message_arena, &volecity);
+  }
+  volecity_ = volecity;
+  if (volecity) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.MoveObjectMutableState.volecity)
+}
+
+// .NetProto.PBVector3 pos = 4;
+inline bool MoveObjectMutableState::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+inline void MoveObjectMutableState::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) delete pos_;
+  pos_ = NULL;
+}
+inline const ::NetProto::PBVector3& MoveObjectMutableState::pos() const {
+  const ::NetProto::PBVector3* p = pos_;
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectMutableState.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector3*>(
+      &::NetProto::_PBVector3_default_instance_);
+}
+inline ::NetProto::PBVector3* MoveObjectMutableState::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    _slow_mutable_pos();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.MoveObjectMutableState.pos)
+  return pos_;
+}
+inline ::NetProto::PBVector3* MoveObjectMutableState::release_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.MoveObjectMutableState.pos)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_pos();
+  } else {
+    ::NetProto::PBVector3* temp = pos_;
+    pos_ = NULL;
+    return temp;
+  }
+}
+inline  void MoveObjectMutableState::set_allocated_pos(::NetProto::PBVector3* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete pos_;
+  }
+  if (pos != NULL) {
+    _slow_set_allocated_pos(message_arena, &pos);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.MoveObjectMutableState.pos)
+}
 
 // -------------------------------------------------------------------
 
@@ -1435,18 +1682,6 @@ inline  void MoveToPos::set_allocated_pos(::NetProto::PBVector2* pos) {
 
 
 }  // namespace NetProto
-
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::NetProto::SceneObjectType> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::SceneObjectType>() {
-  return ::NetProto::SceneObjectType_descriptor();
-}
-
-}  // namespace protobuf
-}  // namespace google
 
 // @@protoc_insertion_point(global_scope)
 
