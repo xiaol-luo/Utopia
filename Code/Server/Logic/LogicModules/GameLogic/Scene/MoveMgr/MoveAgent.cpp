@@ -170,7 +170,9 @@ void GameLogic::MoveAgent::Update(long deltaMs)
 void GameLogic::MoveAgent::TryMoveToPos(const Vector3 &pos)
 {
 	MoveAgentMoveToPosState *state = dynamic_cast<MoveAgentMoveToPosState *>(m_states[NetProto::EMoveAgentState_MoveToPos]);
-	state->SetDesiredPos(pos);
+	dtPolyRef poly_ref = 0; Vector3 fix_pos = pos;
+	m_move_mgr->GetNavMesh()->FindNearestPoint(pos, poly_ref, fix_pos);
+	state->SetDesiredPos(fix_pos);
 	if (!LoseControl())
 	{
 		m_next_state = m_states[NetProto::EMoveAgentState_Idle];

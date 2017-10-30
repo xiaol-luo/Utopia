@@ -17,6 +17,7 @@ void GameLogic::MoveAgentIdleState::Enter(void * param)
 {
 	m_move_agent->GetNavAgent()->StopMove();
 	m_move_agent->GetNavAgent()->Enable();
+	m_move_agent->SetVelocity(Vector3::zero);
 }
 
 void GameLogic::MoveAgentIdleState::Exit()

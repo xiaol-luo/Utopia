@@ -218,7 +218,7 @@ namespace GameLogic
 
 		ptr->SetPos(agent->GetPos());
 		Vector3 pos = agent->GetPos();
-		// GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	}
 
 	void MoveObject::VelocityChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)
@@ -230,7 +230,7 @@ namespace GameLogic
 		Vector3 velocity = agent->GetVelocity();
 		ptr->OnVelocityChange(old_velocity);
 
-		// GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnVelocityChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), velocity.x, velocity.y, velocity.z);
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnVelocityChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), velocity.x, velocity.y, velocity.z);
 	}
 }
 
