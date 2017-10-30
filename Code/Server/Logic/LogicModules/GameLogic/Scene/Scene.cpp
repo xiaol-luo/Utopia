@@ -52,7 +52,7 @@ namespace GameLogic
 		this->AddObject(m_blue_hero);
 		m_blue_hero->Flash(Vector3(5, 0, 5));
 
-		m_red_hero->TryMoveToPos(Vector3(95, 0, 95));
+		// m_red_hero->TryMoveToPos(Vector3(95, 0, 95));
 
 		/*
 		{

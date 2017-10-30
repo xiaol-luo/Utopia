@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Scene
 {
-    Transform m_rootSceneObjects = null;
     Transform m_rootObstacles = null;
+    public Transform rootSceneObejcts { get { return m_rootSceneObjects; } }
+    Transform m_rootSceneObjects = null;
+
+    SceneObjcet m_testSceneObject = null;
 
     public void EnterScene(string sceneName)
     {
@@ -31,10 +34,17 @@ public class Scene
                 }
             }
         }
+
+        {
+            m_testSceneObject = new SceneObjcet(1, ESceneObject.Hero, 1);
+            m_testSceneObject.position = Vector3.one;
+        }
     }
     public void LeaveScene()
     {
         App.my.gameNetwork.Send(ProtoId.PidLeaveScene);
+        m_testSceneObject = null;
+        rootSceneObejcts.DetachChildren();
     }
 
     void OnPullAllSceneObject(int id, AllSceneObjectState msg)
@@ -53,7 +63,23 @@ public class Scene
     }
     void OnRecvMoveObjectMutableState(int id, MoveObjectMutableState msg)
     {
-
+        if (null != m_testSceneObject)
+        {
+            m_testSceneObject.position = new Vector3(msg.Pos.X, msg.Pos.Y, msg.Pos.Z);
+            if (msg.MoveAgentState != EMoveAgentState.Idle)
+            {
+                Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
+                if (!animation.IsPlaying("run"))
+                    animation.Play("run");
+            }
+            else
+            {
+                Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
+                if (!animation.IsPlaying("idle"))
+                    animation.Play("idle");
+            }
+        }
+        
     }
 
     public void TryMoveToPos(float x, float z)
