@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Resources/Levels/Level_Battle.unity
+    guid: 737f9be2c27bf2f4291111b1a4e7b98e
