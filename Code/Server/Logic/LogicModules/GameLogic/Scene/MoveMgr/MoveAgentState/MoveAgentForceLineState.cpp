@@ -20,6 +20,7 @@ void GameLogic::MoveAgentForceLineState::Enter(void * param)
 	m_ticker.Restart(m_time_sec);
 	m_last_elasped_time = 0;
 	m_move_agent->SetVelocity(m_velocity);
+	m_move_agent->SetPos(m_move_agent->GetPos());
 	m_is_done = !m_ticker.InCd();
 	m_move_agent->NavDisable();
 	if (!m_ignore_terrian)

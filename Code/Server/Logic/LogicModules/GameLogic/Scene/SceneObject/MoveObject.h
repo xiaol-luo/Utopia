@@ -43,6 +43,7 @@ namespace GameLogic
 		MoveAgent * GetMoveAgent() { return m_move_agent; }
 		const Vector3 & GetVelocity();
 		NetProto::EMoveAgentState GetMoveAgentState();
+		NetProto::EMoveState GetMoveState();
 		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
 
 	protected:
@@ -52,7 +53,7 @@ namespace GameLogic
 	protected:
 		void OnMoveAgentStateChange(NetProto::EMoveAgentState old_val);
 		void OnVelocityChange(const Vector3 &old_val);
-		void OnPosChange(const Vector3 &old_val);
+		virtual void OnPosChange(const Vector3 &old_val);
 
 	public:
 		void TryMoveToPos(const Vector3 &pos);

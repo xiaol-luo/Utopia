@@ -7,6 +7,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
+#include "Common/Math/MathUtils.h"
 
 namespace GameLogic
 {
@@ -81,6 +82,15 @@ namespace GameLogic
 	void MoveObject::OnVelocityChange(const Vector3 & old_val)
 	{
 		this->SetSyncMutableState(true);
+		if (NetProto::EMoveState_Move == this->GetMoveState())
+		{
+			Vector3 velocity = this->GetVelocity();
+			if (abs(velocity.x) >= FLT_MIN || abs(velocity.z) >= FLT_MIN)
+			{
+				float angle = MathUtils::AngleFromVector3(velocity);
+				this->SetRotation(angle);
+			}
+		}
 	}
 
 	void MoveObject::OnPosChange(const Vector3 & old_val)
@@ -153,6 +163,11 @@ namespace GameLogic
 		return m_move_agent->GetMoveAgentState();
 	}
 
+	NetProto::EMoveState MoveObject::GetMoveState()
+	{
+		return m_move_agent->GetMoveState();
+	}
+
 	std::vector<SyncClientMsg> MoveObject::ColllectSyncClientMsg(int filter_type)
 	{
 		std::vector<SyncClientMsg> msgs = SceneObject::ColllectSyncClientMsg(filter_type);
@@ -197,6 +212,7 @@ namespace GameLogic
 		pb_volecity->set_z(volecity.z);
 		msg->set_objid(m_id);
 		msg->set_move_agent_state(this->GetMoveAgentState());
+		msg->set_rotation(this->GetRotation());
 		return msg;
 	}
 
@@ -218,7 +234,7 @@ namespace GameLogic
 
 		ptr->SetPos(agent->GetPos());
 		Vector3 pos = agent->GetPos();
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	}
 
 	void MoveObject::VelocityChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)

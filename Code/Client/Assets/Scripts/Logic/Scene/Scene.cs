@@ -66,11 +66,19 @@ public class Scene
         if (null != m_testSceneObject)
         {
             m_testSceneObject.position = new Vector3(msg.Pos.X, msg.Pos.Y, msg.Pos.Z);
-            if (msg.MoveAgentState != EMoveAgentState.Idle)
+            if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
+                msg.MoveAgentState == EMoveAgentState.MoveToDir)
             {
                 Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
                 if (!animation.IsPlaying("run"))
                     animation.Play("run");
+            }
+            else if (msg.MoveAgentState == EMoveAgentState.ForceLine ||
+                msg.MoveAgentState == EMoveAgentState.ForcePos)
+            {
+                Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
+                if (!animation.IsPlaying("knockUpStill"))
+                    animation.Play("knockUpStill");
             }
             else
             {
@@ -78,6 +86,8 @@ public class Scene
                 if (!animation.IsPlaying("idle"))
                     animation.Play("idle");
             }
+
+            m_testSceneObject.modelGo.transform.localRotation = Quaternion.AngleAxis(msg.Rotation, Vector3.up);
         }
         
     }

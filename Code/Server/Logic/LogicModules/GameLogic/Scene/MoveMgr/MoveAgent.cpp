@@ -25,7 +25,7 @@ NetProto::EMoveState GameLogic::MoveAgent::CalMoveState(NetProto::EMoveAgentStat
 		ret = NetProto::EMoveState_Move;
 		break;
 	case NetProto::EMoveAgentState_ForceLine:
-	// case EMoveAgentState_ForceSky:
+	case NetProto::EMoveAgentState_ForcePos:
 		ret = NetProto::EMoveState_ForceMove;
 		break;
 	case NetProto::EMoveAgentState_Immobilized:

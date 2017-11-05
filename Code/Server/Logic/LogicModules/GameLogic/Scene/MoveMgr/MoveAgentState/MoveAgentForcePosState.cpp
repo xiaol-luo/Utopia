@@ -3,6 +3,8 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
+#include "CommonModules/Timer/ITimerModule.h"
+#include "Common/Macro/ServerLogicMacro.h"
 
 GameLogic::MoveAgentForcePosState::MoveAgentForcePosState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_ForcePos)
 {
@@ -42,7 +44,8 @@ void GameLogic::MoveAgentForcePosState::Update(long deltaMs)
 	Vector3 move_dir = m_destination - curr_pos;
 	move_dir.y = 0;
 	move_dir.normalize();
-	Vector3 next_pos = curr_pos + move_dir * m_speed;
+	float delta_time = GlobalServerLogic->GetTimerModule()->DeltaMs() * 1.0 / ITimerModule::MS_PER_SEC;
+	Vector3 next_pos = curr_pos + move_dir * m_speed * delta_time;
 	{
 		Vector3 nor1 = move_dir;
 		Vector3 nor2 = next_pos - m_destination; // 获得从m_destination指向next_pos的向量
@@ -62,7 +65,7 @@ void GameLogic::MoveAgentForcePosState::ForcePos(const Vector3 &destination, flo
 {
 	m_speed = speed;
 	dtPolyRef poly_ref;
-	if (!m_move_agent->GetMoveMgr()->GetNavMesh()->FindNearestPoint(m_destination, poly_ref, m_destination))
+	if (!m_move_agent->GetMoveMgr()->GetNavMesh()->FindNearestPoint(destination, poly_ref, m_destination))
 	{
 		m_destination = m_move_agent->GetPos();
 	}

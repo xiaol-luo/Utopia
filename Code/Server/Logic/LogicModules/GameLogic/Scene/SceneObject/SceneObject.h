@@ -59,8 +59,8 @@ namespace GameLogic
 		virtual google::protobuf::Message * GetMutableStatePb();
 
 	protected:
-		void OnPosChange(const Vector3 &old_val);
-		void OnRotationChange(float old_val);
+		virtual void OnPosChange(const Vector3 &old_val);
+		virtual void OnRotationChange(float old_val);
 
 	protected:
 		Scene *m_scene = nullptr;

@@ -51,10 +51,7 @@ namespace GameLogic
 		m_blue_hero = std::make_shared<Hero>();
 		this->AddObject(m_blue_hero);
 		m_blue_hero->Flash(Vector3(5, 0, 5));
-
-		// m_red_hero->TryMoveToPos(Vector3(95, 0, 95));
-
-		/*
+		
 		{
 			std::weak_ptr<Hero> hero = m_red_hero;
 			GlobalServerLogic->GetTimerModule()->AddFirm([hero]() {
@@ -62,27 +59,21 @@ namespace GameLogic
 				if (nullptr == ptr)
 					return;
 
-				// ptr->CancelForceMove();
-				// ptr->CancelImmobilized();
-				// ptr->CancelMove();
-
-				int rand_val = std::rand() % NetProto::EMoveAgentState_Max + 1;
-				// int rand_val = std::rand() % EMoveAgentState_MoveToDir;
-				// ptr->Flash(Vector3(std::rand() % 105 , 0, std::rand() % 105));
-				// int rand_val = EMoveAgentState_MoveToDir;
+				// int rand_val = std::rand() % NetProto::EMoveAgentState_Max + 1;
+				int rand_val = NetProto::EMoveAgentState_ForceLine;
 				switch (rand_val)
 				{
 				case NetProto::EMoveAgentState_MoveToPos:
-					ptr->TryMoveToPos(Vector3(std::rand() % 100, 0, std::rand()%100));
+					// ptr->TryMoveToPos(Vector3(std::rand() % 100, 0, std::rand()%100));
 					break;
 				case NetProto::EMoveAgentState_MoveToDir:
-					ptr->TryMoveToDir(std::rand() % 36000 * 0.001 + 1);
+					// ptr->TryMoveToDir(std::rand() % 36000 * 0.001 + 1);
 					break;
 				case NetProto::EMoveAgentState_ForceLine:
-					ptr->ForceMoveLine(Vector2(std::rand() % 100, std::rand() % 100), std::rand() % 9, std::rand() % 3 + 2, false);
+					ptr->ForceMoveLine(Vector2(std::rand() * (0 == std::rand() % 2 ? 1 : -1), std::rand() * (0 == std::rand() % 2 ? 1 : -1)), 3, 1.5, false);
 					break;
 				case NetProto::EMoveAgentState_ForcePos:
-					ptr->ForcePos(Vector3(std::rand() % 100, 0, std::rand() % 100), std::rand() % 3 + 1);
+					ptr->ForcePos(Vector3(std::rand() % 20, 0, std::rand() % 20), 10);
 					break;
 				case NetProto::EMoveAgentState_Immobilized:
 					ptr->Immobilized(std::rand() % 1000 + 1000);
@@ -94,14 +85,14 @@ namespace GameLogic
 					break;
 
 				case NetProto::EMoveAgentState_Max:
-					ptr->Flash(Vector3(std::rand() % 105, std::rand() % 30, std::rand() % 105));
+					// ptr->Flash(Vector3(std::rand() % 105, std::rand() % 30, std::rand() % 105));
 					break;
 				}
 
-			}, 1 * 1000, -1);
+			}, 3 * 1000, -1);
 			
 		}
-		*/
+		
 
 		return true;
 	}

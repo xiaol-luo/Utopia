@@ -991,6 +991,12 @@ class MoveObjectMutableState : public ::google::protobuf::Message /* @@protoc_in
   ::NetProto::EMoveAgentState move_agent_state() const;
   void set_move_agent_state(::NetProto::EMoveAgentState value);
 
+  // float rotation = 5;
+  void clear_rotation();
+  static const int kRotationFieldNumber = 5;
+  float rotation() const;
+  void set_rotation(float value);
+
   // @@protoc_insertion_point(class_scope:NetProto.MoveObjectMutableState)
  private:
 
@@ -1002,6 +1008,7 @@ class MoveObjectMutableState : public ::google::protobuf::Message /* @@protoc_in
   ::NetProto::PBVector3* pos_;
   ::google::protobuf::uint64 objid_;
   int move_agent_state_;
+  float rotation_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -1603,6 +1610,20 @@ inline  void MoveObjectMutableState::set_allocated_pos(::NetProto::PBVector3* po
     
   }
   // @@protoc_insertion_point(field_set_allocated:NetProto.MoveObjectMutableState.pos)
+}
+
+// float rotation = 5;
+inline void MoveObjectMutableState::clear_rotation() {
+  rotation_ = 0;
+}
+inline float MoveObjectMutableState::rotation() const {
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectMutableState.rotation)
+  return rotation_;
+}
+inline void MoveObjectMutableState::set_rotation(float value) {
+  
+  rotation_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.MoveObjectMutableState.rotation)
 }
 
 // -------------------------------------------------------------------

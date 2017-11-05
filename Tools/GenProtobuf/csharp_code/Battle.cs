@@ -34,12 +34,12 @@ namespace NetProto {
             "Y3RTdGF0ZSKBAQoPTW92ZU9iamVjdFN0YXRlEi0KCW9ial9zdGF0ZRgBIAEo",
             "CzIaLk5ldFByb3RvLlNjZW5lT2JqZWN0U3RhdGUSDgoGcmFkaXVzGAIgASgF",
             "Eg4KBmhlaWdodBgDIAEoBRIMCgRtYXNzGAQgASgFEhEKCW1heF9zcGVlZBgF",
-            "IAEoBSKlAQoWTW92ZU9iamVjdE11dGFibGVTdGF0ZRINCgVvYmppZBgBIAEo",
+            "IAEoBSK3AQoWTW92ZU9iamVjdE11dGFibGVTdGF0ZRINCgVvYmppZBgBIAEo",
             "BBIzChBtb3ZlX2FnZW50X3N0YXRlGAIgASgOMhkuTmV0UHJvdG8uRU1vdmVB",
             "Z2VudFN0YXRlEiUKCHZvbGVjaXR5GAMgASgLMhMuTmV0UHJvdG8uUEJWZWN0",
-            "b3IzEiAKA3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMyItCglNb3Zl",
-            "VG9Qb3MSIAoDcG9zGAEgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyQgP4AQFi",
-            "BnByb3RvMw=="));
+            "b3IzEiAKA3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIQCghyb3Rh",
+            "dGlvbhgFIAEoAiItCglNb3ZlVG9Qb3MSIAoDcG9zGAEgASgLMhMuTmV0UHJv",
+            "dG8uUEJWZWN0b3IyQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -49,7 +49,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.AllSceneObjectState), global::NetProto.AllSceneObjectState.Parser, new[]{ "Objs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null)
           }));
     }
@@ -1071,6 +1071,7 @@ namespace NetProto {
       moveAgentState_ = other.moveAgentState_;
       Volecity = other.volecity_ != null ? other.Volecity.Clone() : null;
       Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      rotation_ = other.rotation_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1122,6 +1123,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "rotation" field.</summary>
+    public const int RotationFieldNumber = 5;
+    private float rotation_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Rotation {
+      get { return rotation_; }
+      set {
+        rotation_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MoveObjectMutableState);
@@ -1139,6 +1151,7 @@ namespace NetProto {
       if (MoveAgentState != other.MoveAgentState) return false;
       if (!object.Equals(Volecity, other.Volecity)) return false;
       if (!object.Equals(Pos, other.Pos)) return false;
+      if (Rotation != other.Rotation) return false;
       return true;
     }
 
@@ -1149,6 +1162,7 @@ namespace NetProto {
       if (MoveAgentState != 0) hash ^= MoveAgentState.GetHashCode();
       if (volecity_ != null) hash ^= Volecity.GetHashCode();
       if (pos_ != null) hash ^= Pos.GetHashCode();
+      if (Rotation != 0F) hash ^= Rotation.GetHashCode();
       return hash;
     }
 
@@ -1175,6 +1189,10 @@ namespace NetProto {
         output.WriteRawTag(34);
         output.WriteMessage(Pos);
       }
+      if (Rotation != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(Rotation);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1191,6 +1209,9 @@ namespace NetProto {
       }
       if (pos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      if (Rotation != 0F) {
+        size += 1 + 4;
       }
       return size;
     }
@@ -1217,6 +1238,9 @@ namespace NetProto {
           pos_ = new global::NetProto.PBVector3();
         }
         Pos.MergeFrom(other.Pos);
+      }
+      if (other.Rotation != 0F) {
+        Rotation = other.Rotation;
       }
     }
 
@@ -1248,6 +1272,10 @@ namespace NetProto {
               pos_ = new global::NetProto.PBVector3();
             }
             input.ReadMessage(pos_);
+            break;
+          }
+          case 45: {
+            Rotation = input.ReadFloat();
             break;
           }
         }

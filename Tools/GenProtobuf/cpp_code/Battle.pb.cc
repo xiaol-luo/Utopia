@@ -145,6 +145,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveObjectMutableState, move_agent_state_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveObjectMutableState, volecity_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveObjectMutableState, pos_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveObjectMutableState, rotation_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveToPos, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -160,7 +161,7 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTR
   { 30, -1, sizeof(AllSceneObjectState)},
   { 36, -1, sizeof(MoveObjectState)},
   { 46, -1, sizeof(MoveObjectMutableState)},
-  { 55, -1, sizeof(MoveToPos)},
+  { 56, -1, sizeof(MoveToPos)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -251,16 +252,16 @@ void AddDescriptorsImpl() {
       "eObjectState\"\201\001\n\017MoveObjectState\022-\n\tobj_"
       "state\030\001 \001(\0132\032.NetProto.SceneObjectState\022"
       "\016\n\006radius\030\002 \001(\005\022\016\n\006height\030\003 \001(\005\022\014\n\004mass\030"
-      "\004 \001(\005\022\021\n\tmax_speed\030\005 \001(\005\"\245\001\n\026MoveObjectM"
+      "\004 \001(\005\022\021\n\tmax_speed\030\005 \001(\005\"\267\001\n\026MoveObjectM"
       "utableState\022\r\n\005objid\030\001 \001(\004\0223\n\020move_agent"
       "_state\030\002 \001(\0162\031.NetProto.EMoveAgentState\022"
       "%\n\010volecity\030\003 \001(\0132\023.NetProto.PBVector3\022 "
-      "\n\003pos\030\004 \001(\0132\023.NetProto.PBVector3\"-\n\tMove"
-      "ToPos\022 \n\003pos\030\001 \001(\0132\023.NetProto.PBVector2B"
-      "\003\370\001\001b\006proto3"
+      "\n\003pos\030\004 \001(\0132\023.NetProto.PBVector3\022\020\n\010rota"
+      "tion\030\005 \001(\002\"-\n\tMoveToPos\022 \n\003pos\030\001 \001(\0132\023.N"
+      "etProto.PBVector2B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 772);
+      descriptor, 790);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
   ::NetProto::protobuf_Common_2eproto::AddDescriptors();
@@ -2824,6 +2825,7 @@ const int MoveObjectMutableState::kObjidFieldNumber;
 const int MoveObjectMutableState::kMoveAgentStateFieldNumber;
 const int MoveObjectMutableState::kVolecityFieldNumber;
 const int MoveObjectMutableState::kPosFieldNumber;
+const int MoveObjectMutableState::kRotationFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 MoveObjectMutableState::MoveObjectMutableState()
@@ -2858,15 +2860,15 @@ MoveObjectMutableState::MoveObjectMutableState(const MoveObjectMutableState& fro
     pos_ = NULL;
   }
   ::memcpy(&objid_, &from.objid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&move_agent_state_) -
-    reinterpret_cast<char*>(&objid_)) + sizeof(move_agent_state_));
+    static_cast<size_t>(reinterpret_cast<char*>(&rotation_) -
+    reinterpret_cast<char*>(&objid_)) + sizeof(rotation_));
   // @@protoc_insertion_point(copy_constructor:NetProto.MoveObjectMutableState)
 }
 
 void MoveObjectMutableState::SharedCtor() {
   ::memset(&volecity_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&move_agent_state_) -
-      reinterpret_cast<char*>(&volecity_)) + sizeof(move_agent_state_));
+      reinterpret_cast<char*>(&rotation_) -
+      reinterpret_cast<char*>(&volecity_)) + sizeof(rotation_));
   _cached_size_ = 0;
 }
 
@@ -2926,8 +2928,8 @@ void MoveObjectMutableState::Clear() {
   }
   pos_ = NULL;
   ::memset(&objid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&move_agent_state_) -
-      reinterpret_cast<char*>(&objid_)) + sizeof(move_agent_state_));
+      reinterpret_cast<char*>(&rotation_) -
+      reinterpret_cast<char*>(&objid_)) + sizeof(rotation_));
   _internal_metadata_.Clear();
 }
 
@@ -2994,6 +2996,20 @@ bool MoveObjectMutableState::MergePartialFromCodedStream(
         break;
       }
 
+      // float rotation = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(45u /* 45 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &rotation_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -3043,6 +3059,11 @@ void MoveObjectMutableState::SerializeWithCachedSizes(
       4, *this->pos_, output);
   }
 
+  // float rotation = 5;
+  if (this->rotation() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->rotation(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -3080,6 +3101,11 @@ void MoveObjectMutableState::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
         4, *this->pos_, deterministic, target);
+  }
+
+  // float rotation = 5;
+  if (this->rotation() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->rotation(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -3126,6 +3152,11 @@ size_t MoveObjectMutableState::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->move_agent_state());
   }
 
+  // float rotation = 5;
+  if (this->rotation() != 0) {
+    total_size += 1 + 4;
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -3166,6 +3197,9 @@ void MoveObjectMutableState::MergeFrom(const MoveObjectMutableState& from) {
   }
   if (from.move_agent_state() != 0) {
     set_move_agent_state(from.move_agent_state());
+  }
+  if (from.rotation() != 0) {
+    set_rotation(from.rotation());
   }
 }
 
@@ -3212,6 +3246,7 @@ void MoveObjectMutableState::InternalSwap(MoveObjectMutableState* other) {
   swap(pos_, other->pos_);
   swap(objid_, other->objid_);
   swap(move_agent_state_, other->move_agent_state_);
+  swap(rotation_, other->rotation_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -3350,6 +3385,20 @@ const ::NetProto::PBVector3& MoveObjectMutableState::pos() const {
     
   }
   // @@protoc_insertion_point(field_set_allocated:NetProto.MoveObjectMutableState.pos)
+}
+
+// float rotation = 5;
+void MoveObjectMutableState::clear_rotation() {
+  rotation_ = 0;
+}
+float MoveObjectMutableState::rotation() const {
+  // @@protoc_insertion_point(field_get:NetProto.MoveObjectMutableState.rotation)
+  return rotation_;
+}
+void MoveObjectMutableState::set_rotation(float value) {
+  
+  rotation_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.MoveObjectMutableState.rotation)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

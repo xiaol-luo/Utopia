@@ -51,6 +51,7 @@ message MoveObjectMutableState
 	EMoveAgentState move_agent_state = 2;
 	PBVector3 volecity = 3;
 	PBVector3 pos = 4;
+	float rotation = 5;
 }
 
 message MoveToPos

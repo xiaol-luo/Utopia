@@ -20,12 +20,14 @@ GameLogic::MoveAgentMoveToPosState::~MoveAgentMoveToPosState()
 void GameLogic::MoveAgentMoveToPosState::Enter(void * param)
 {
 	Vector3 from = m_move_agent->GetPos();
-	GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "MoveAgentMoveToPosState::Enter: from{:3.2f}, {:3.2f}, {:3.2f} to {:3.2f}, {:3.2f}, {:3.2f} #",
+	GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, 
+		"MoveAgentMoveToPosState::Enter: from{:3.2f}, {:3.2f}, {:3.2f} to {:3.2f}, {:3.2f}, {:3.2f} #",
 		from.x, from.y, from.z,
 		m_desired_pos.x, m_desired_pos.y, m_desired_pos.z);
 	m_move_agent->SetVelocity(Vector3::zero);
 	m_move_agent->SetPos(m_move_agent->GetPos());
 	NavAgent *agent = m_move_agent->GetNavAgent();
+	agent->SetPos(m_move_agent->GetPos());
 	agent->TryMoveToPos(m_desired_pos);
 	m_move_agent->NavEnable();
 }
