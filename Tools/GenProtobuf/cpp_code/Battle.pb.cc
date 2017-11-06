@@ -38,11 +38,6 @@ public:
  ::google::protobuf::internal::ExplicitlyConstructed<SceneObjectState>
      _instance;
 } _SceneObjectState_default_instance_;
-class AllSceneObjectStateDefaultTypeInternal {
-public:
- ::google::protobuf::internal::ExplicitlyConstructed<AllSceneObjectState>
-     _instance;
-} _AllSceneObjectState_default_instance_;
 class MoveObjectStateDefaultTypeInternal {
 public:
  ::google::protobuf::internal::ExplicitlyConstructed<MoveObjectState>
@@ -64,7 +59,7 @@ namespace protobuf_Battle_2eproto {
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[8];
+::google::protobuf::Metadata file_level_metadata[7];
 
 }  // namespace
 
@@ -79,7 +74,6 @@ PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
     TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
@@ -121,12 +115,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SceneObjectState, pos_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SceneObjectState, rotation_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AllSceneObjectState, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AllSceneObjectState, objs_),
-  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveObjectState, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -158,10 +146,9 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTR
   { 7, -1, sizeof(SelectHeroReq)},
   { 13, -1, sizeof(SelectHeroRsp)},
   { 20, -1, sizeof(SceneObjectState)},
-  { 30, -1, sizeof(AllSceneObjectState)},
-  { 36, -1, sizeof(MoveObjectState)},
-  { 46, -1, sizeof(MoveObjectMutableState)},
-  { 56, -1, sizeof(MoveToPos)},
+  { 30, -1, sizeof(MoveObjectState)},
+  { 40, -1, sizeof(MoveObjectMutableState)},
+  { 50, -1, sizeof(MoveToPos)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -169,7 +156,6 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_SelectHeroReq_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_SelectHeroRsp_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_SceneObjectState_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_AllSceneObjectState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveObjectState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveObjectMutableState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveToPos_default_instance_),
@@ -193,7 +179,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 8);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 7);
 }
 
 }  // namespace
@@ -211,9 +197,7 @@ void TableStruct::InitDefaultsImpl() {
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_SelectHeroRsp_default_instance_);_SceneObjectState_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_SceneObjectState_default_instance_);_AllSceneObjectState_default_instance_._instance.DefaultConstruct();
-  ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_AllSceneObjectState_default_instance_);_MoveObjectState_default_instance_._instance.DefaultConstruct();
+      &_SceneObjectState_default_instance_);_MoveObjectState_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_MoveObjectState_default_instance_);_MoveObjectMutableState_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
@@ -247,21 +231,20 @@ void AddDescriptorsImpl() {
       "\221\001\n\020SceneObjectState\022\r\n\005objid\030\001 \001(\004\022(\n\010o"
       "bj_type\030\002 \001(\0162\026.NetProto.ESceneObject\022\020\n"
       "\010model_id\030\003 \001(\005\022 \n\003pos\030\004 \001(\0132\023.NetProto."
-      "PBVector3\022\020\n\010rotation\030\005 \001(\002\"\?\n\023AllSceneO"
-      "bjectState\022(\n\004objs\030\001 \003(\0132\032.NetProto.Scen"
-      "eObjectState\"\201\001\n\017MoveObjectState\022-\n\tobj_"
-      "state\030\001 \001(\0132\032.NetProto.SceneObjectState\022"
-      "\016\n\006radius\030\002 \001(\005\022\016\n\006height\030\003 \001(\005\022\014\n\004mass\030"
-      "\004 \001(\005\022\021\n\tmax_speed\030\005 \001(\005\"\267\001\n\026MoveObjectM"
-      "utableState\022\r\n\005objid\030\001 \001(\004\0223\n\020move_agent"
-      "_state\030\002 \001(\0162\031.NetProto.EMoveAgentState\022"
-      "%\n\010volecity\030\003 \001(\0132\023.NetProto.PBVector3\022 "
-      "\n\003pos\030\004 \001(\0132\023.NetProto.PBVector3\022\020\n\010rota"
-      "tion\030\005 \001(\002\"-\n\tMoveToPos\022 \n\003pos\030\001 \001(\0132\023.N"
-      "etProto.PBVector2B\003\370\001\001b\006proto3"
+      "PBVector3\022\020\n\010rotation\030\005 \001(\002\"\201\001\n\017MoveObje"
+      "ctState\022-\n\tobj_state\030\001 \001(\0132\032.NetProto.Sc"
+      "eneObjectState\022\016\n\006radius\030\002 \001(\005\022\016\n\006height"
+      "\030\003 \001(\005\022\014\n\004mass\030\004 \001(\005\022\021\n\tmax_speed\030\005 \001(\005\""
+      "\267\001\n\026MoveObjectMutableState\022\r\n\005objid\030\001 \001("
+      "\004\0223\n\020move_agent_state\030\002 \001(\0162\031.NetProto.E"
+      "MoveAgentState\022%\n\010volecity\030\003 \001(\0132\023.NetPr"
+      "oto.PBVector3\022 \n\003pos\030\004 \001(\0132\023.NetProto.PB"
+      "Vector3\022\020\n\010rotation\030\005 \001(\002\"-\n\tMoveToPos\022 "
+      "\n\003pos\030\001 \001(\0132\023.NetProto.PBVector2B\003\370\001\001b\006p"
+      "roto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 790);
+      descriptor, 725);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
   ::NetProto::protobuf_Common_2eproto::AddDescriptors();
@@ -1829,312 +1812,6 @@ void SceneObjectState::set_rotation(float value) {
   
   rotation_ = value;
   // @@protoc_insertion_point(field_set:NetProto.SceneObjectState.rotation)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AllSceneObjectState::kObjsFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-AllSceneObjectState::AllSceneObjectState()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_Battle_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:NetProto.AllSceneObjectState)
-}
-AllSceneObjectState::AllSceneObjectState(::google::protobuf::Arena* arena)
-  : ::google::protobuf::Message(),
-  _internal_metadata_(arena),
-  objs_(arena) {
-  protobuf_Battle_2eproto::InitDefaults();
-  SharedCtor();
-  RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:NetProto.AllSceneObjectState)
-}
-AllSceneObjectState::AllSceneObjectState(const AllSceneObjectState& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      objs_(from.objs_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:NetProto.AllSceneObjectState)
-}
-
-void AllSceneObjectState::SharedCtor() {
-  _cached_size_ = 0;
-}
-
-AllSceneObjectState::~AllSceneObjectState() {
-  // @@protoc_insertion_point(destructor:NetProto.AllSceneObjectState)
-  SharedDtor();
-}
-
-void AllSceneObjectState::SharedDtor() {
-  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
-  GOOGLE_DCHECK(arena == NULL);
-  if (arena != NULL) {
-    return;
-  }
-
-}
-
-void AllSceneObjectState::ArenaDtor(void* object) {
-  AllSceneObjectState* _this = reinterpret_cast< AllSceneObjectState* >(object);
-  (void)_this;
-}
-void AllSceneObjectState::RegisterArenaDtor(::google::protobuf::Arena* arena) {
-}
-void AllSceneObjectState::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* AllSceneObjectState::descriptor() {
-  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const AllSceneObjectState& AllSceneObjectState::default_instance() {
-  protobuf_Battle_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
-
-AllSceneObjectState* AllSceneObjectState::New(::google::protobuf::Arena* arena) const {
-  return ::google::protobuf::Arena::CreateMessage<AllSceneObjectState>(arena);
-}
-
-void AllSceneObjectState::Clear() {
-// @@protoc_insertion_point(message_clear_start:NetProto.AllSceneObjectState)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  objs_.Clear();
-  _internal_metadata_.Clear();
-}
-
-bool AllSceneObjectState::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:NetProto.AllSceneObjectState)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .NetProto.SceneObjectState objs = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_objs()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:NetProto.AllSceneObjectState)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:NetProto.AllSceneObjectState)
-  return false;
-#undef DO_
-}
-
-void AllSceneObjectState::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:NetProto.AllSceneObjectState)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NetProto.SceneObjectState objs = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->objs_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->objs(static_cast<int>(i)), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:NetProto.AllSceneObjectState)
-}
-
-::google::protobuf::uint8* AllSceneObjectState::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:NetProto.AllSceneObjectState)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // repeated .NetProto.SceneObjectState objs = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->objs_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        1, this->objs(static_cast<int>(i)), deterministic, target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:NetProto.AllSceneObjectState)
-  return target;
-}
-
-size_t AllSceneObjectState::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:NetProto.AllSceneObjectState)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // repeated .NetProto.SceneObjectState objs = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->objs_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->objs(static_cast<int>(i)));
-    }
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void AllSceneObjectState::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:NetProto.AllSceneObjectState)
-  GOOGLE_DCHECK_NE(&from, this);
-  const AllSceneObjectState* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const AllSceneObjectState>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.AllSceneObjectState)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.AllSceneObjectState)
-    MergeFrom(*source);
-  }
-}
-
-void AllSceneObjectState::MergeFrom(const AllSceneObjectState& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.AllSceneObjectState)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  objs_.MergeFrom(from.objs_);
-}
-
-void AllSceneObjectState::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:NetProto.AllSceneObjectState)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void AllSceneObjectState::CopyFrom(const AllSceneObjectState& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.AllSceneObjectState)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool AllSceneObjectState::IsInitialized() const {
-  return true;
-}
-
-void AllSceneObjectState::Swap(AllSceneObjectState* other) {
-  if (other == this) return;
-  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
-    InternalSwap(other);
-  } else {
-    AllSceneObjectState* temp = New(GetArenaNoVirtual());
-    temp->MergeFrom(*other);
-    other->CopyFrom(*this);
-    InternalSwap(temp);
-    if (GetArenaNoVirtual() == NULL) {
-      delete temp;
-    }
-  }
-}
-void AllSceneObjectState::UnsafeArenaSwap(AllSceneObjectState* other) {
-  if (other == this) return;
-  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
-  InternalSwap(other);
-}
-void AllSceneObjectState::InternalSwap(AllSceneObjectState* other) {
-  using std::swap;
-  objs_.InternalSwap(&other->objs_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata AllSceneObjectState::GetMetadata() const {
-  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// AllSceneObjectState
-
-// repeated .NetProto.SceneObjectState objs = 1;
-int AllSceneObjectState::objs_size() const {
-  return objs_.size();
-}
-void AllSceneObjectState::clear_objs() {
-  objs_.Clear();
-}
-const ::NetProto::SceneObjectState& AllSceneObjectState::objs(int index) const {
-  // @@protoc_insertion_point(field_get:NetProto.AllSceneObjectState.objs)
-  return objs_.Get(index);
-}
-::NetProto::SceneObjectState* AllSceneObjectState::mutable_objs(int index) {
-  // @@protoc_insertion_point(field_mutable:NetProto.AllSceneObjectState.objs)
-  return objs_.Mutable(index);
-}
-::NetProto::SceneObjectState* AllSceneObjectState::add_objs() {
-  // @@protoc_insertion_point(field_add:NetProto.AllSceneObjectState.objs)
-  return objs_.Add();
-}
-::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState >*
-AllSceneObjectState::mutable_objs() {
-  // @@protoc_insertion_point(field_mutable_list:NetProto.AllSceneObjectState.objs)
-  return &objs_;
-}
-const ::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState >&
-AllSceneObjectState::objs() const {
-  // @@protoc_insertion_point(field_list:NetProto.AllSceneObjectState.objs)
-  return objs_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

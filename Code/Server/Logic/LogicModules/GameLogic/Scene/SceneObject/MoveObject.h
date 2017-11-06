@@ -3,6 +3,13 @@
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
 #include <memory>
 
+
+namespace NetProto
+{
+	class MoveObjectMutableState;
+	class MoveObjectState;
+}
+
 namespace GameLogic
 {
 	class NavAgent;
@@ -47,8 +54,8 @@ namespace GameLogic
 		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
 
 	protected:
-		virtual google::protobuf::Message * GetStatePb();
-		virtual google::protobuf::Message * GetMutableStatePb();
+		NetProto::MoveObjectState * GetPbMoveObjectState();
+		NetProto::MoveObjectMutableState * GetPbMoveObjectMutableState();
 
 	protected:
 		void OnMoveAgentStateChange(NetProto::EMoveAgentState old_val);

@@ -1,5 +1,6 @@
 
 using NetProto;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,14 +10,12 @@ public class Scene
     public Transform rootSceneObejcts { get { return m_rootSceneObjects; } }
     Transform m_rootSceneObjects = null;
 
-    SceneObjcet m_testSceneObject = null;
+    Dictionary<ulong, SceneObjcet> m_sceneObjects = new Dictionary<ulong, SceneObjcet>();
 
     public void EnterScene(string sceneName)
     {
         App.my.gameNetwork.Send(ProtoId.PidLoadSceneComplete);
         App.my.gameNetwork.Send(ProtoId.PidPullAllSceneInfo);
-
-        App.my.gameNetwork.Add<AllSceneObjectState>((int)ProtoId.PidPullAllSceneInfo, OnPullAllSceneObject);
         App.my.gameNetwork.Add<SceneObjectState>((int)ProtoId.PidSceneObjectState, OnRecvSceneObjectState);
         App.my.gameNetwork.Add<MoveObjectState>((int)ProtoId.PidMoveObjectState, OnRecvMoveObjectState);
         App.my.gameNetwork.Add<MoveObjectMutableState>((int)ProtoId.PidMoveObjectMutableState, OnRecvMoveObjectMutableState);
@@ -34,62 +33,73 @@ public class Scene
                 }
             }
         }
-
-        {
-            m_testSceneObject = new SceneObjcet(1, ESceneObject.Hero, 1);
-            m_testSceneObject.position = Vector3.one;
-        }
     }
     public void LeaveScene()
     {
         App.my.gameNetwork.Send(ProtoId.PidLeaveScene);
-        m_testSceneObject = null;
+        m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
     }
-
-    void OnPullAllSceneObject(int id, AllSceneObjectState msg)
+    
+    SceneObjcet GetSceneObject(ulong objId)
     {
-
+        SceneObjcet so = null;
+        m_sceneObjects.TryGetValue(objId, out so);
+        return so;
     }
 
     void OnRecvSceneObjectState(int id, SceneObjectState msg)
     {
-
+        SceneObjcet so = this.GetSceneObject(msg.Objid);
+        if (null == so)
+        {
+            so = new SceneObjcet(msg.Objid, msg.ObjType, msg.ModelId);
+            m_sceneObjects[so.id] = so;
+        }
+        so.SetPos(msg.Pos);
+        so.faceDir = msg.Rotation;
     }
 
     void OnRecvMoveObjectState(int id, MoveObjectState msg)
     {
+        SceneObjcet so = this.GetSceneObject(msg.ObjState.Objid);
+        if (null == so)
+        {
+            so = new SceneObjcet(msg.ObjState.Objid, msg.ObjState.ObjType, msg.ObjState.ModelId);
+            m_sceneObjects[so.id] = so;
+        }
+        so.SetPos(msg.ObjState.Pos);
+        so.faceDir = msg.ObjState.Rotation;
 
     }
     void OnRecvMoveObjectMutableState(int id, MoveObjectMutableState msg)
     {
-        if (null != m_testSceneObject)
-        {
-            m_testSceneObject.position = new Vector3(msg.Pos.X, msg.Pos.Y, msg.Pos.Z);
-            if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
-                msg.MoveAgentState == EMoveAgentState.MoveToDir)
-            {
-                Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
-                if (!animation.IsPlaying("run"))
-                    animation.Play("run");
-            }
-            else if (msg.MoveAgentState == EMoveAgentState.ForceLine ||
-                msg.MoveAgentState == EMoveAgentState.ForcePos)
-            {
-                Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
-                if (!animation.IsPlaying("knockUpStill"))
-                    animation.Play("knockUpStill");
-            }
-            else
-            {
-                Animation animation = m_testSceneObject.modelGo.GetComponent<Animation>();
-                if (!animation.IsPlaying("idle"))
-                    animation.Play("idle");
-            }
+        SceneObjcet so = this.GetSceneObject(msg.Objid);
+        if (null == so)
+            return;
 
-            m_testSceneObject.modelGo.transform.localRotation = Quaternion.AngleAxis(msg.Rotation, Vector3.up);
+        so.SetPos(msg.Pos);
+        so.faceDir = msg.Rotation;
+        if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
+                msg.MoveAgentState == EMoveAgentState.MoveToDir)
+        {
+            Animation animation = so.modelGo.GetComponent<Animation>();
+            if (!animation.IsPlaying("run"))
+                animation.Play("run");
         }
-        
+        else if (msg.MoveAgentState == EMoveAgentState.ForceLine ||
+            msg.MoveAgentState == EMoveAgentState.ForcePos)
+        {
+            Animation animation = so.modelGo.GetComponent<Animation>();
+            if (!animation.IsPlaying("knockUpStill"))
+                animation.Play("knockUpStill");
+        }
+        else
+        {
+            Animation animation = so.modelGo.GetComponent<Animation>();
+            if (!animation.IsPlaying("idle"))
+                animation.Play("idle");
+        }
     }
 
     public void TryMoveToPos(float x, float z)
@@ -107,9 +117,6 @@ public class Scene
     }
     public void Update()
     {
-        // Random rand = new Random();
-        // App.my.scene.TryMoveToPos(rand.Next() % 100, rand.Next() % 100);
-
         this.CheckPlayerInput();
     }
 

@@ -33,9 +33,6 @@
 #include "BattleEnum.pb.h"
 // @@protoc_insertion_point(includes)
 namespace NetProto {
-class AllSceneObjectState;
-class AllSceneObjectStateDefaultTypeInternal;
-extern AllSceneObjectStateDefaultTypeInternal _AllSceneObjectState_default_instance_;
 class MoveObjectMutableState;
 class MoveObjectMutableStateDefaultTypeInternal;
 extern MoveObjectMutableStateDefaultTypeInternal _MoveObjectMutableState_default_instance_;
@@ -580,124 +577,6 @@ class SceneObjectState : public ::google::protobuf::Message /* @@protoc_insertio
 };
 // -------------------------------------------------------------------
 
-class AllSceneObjectState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.AllSceneObjectState) */ {
- public:
-  AllSceneObjectState();
-  virtual ~AllSceneObjectState();
-
-  AllSceneObjectState(const AllSceneObjectState& from);
-
-  inline AllSceneObjectState& operator=(const AllSceneObjectState& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  AllSceneObjectState(AllSceneObjectState&& from) noexcept
-    : AllSceneObjectState() {
-    *this = ::std::move(from);
-  }
-
-  inline AllSceneObjectState& operator=(AllSceneObjectState&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
-    return GetArenaNoVirtual();
-  }
-  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
-    return MaybeArenaPtr();
-  }
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AllSceneObjectState& default_instance();
-
-  static inline const AllSceneObjectState* internal_default_instance() {
-    return reinterpret_cast<const AllSceneObjectState*>(
-               &_AllSceneObjectState_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
-
-  void UnsafeArenaSwap(AllSceneObjectState* other);
-  void Swap(AllSceneObjectState* other);
-  friend void swap(AllSceneObjectState& a, AllSceneObjectState& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline AllSceneObjectState* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  AllSceneObjectState* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const AllSceneObjectState& from);
-  void MergeFrom(const AllSceneObjectState& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(AllSceneObjectState* other);
-  protected:
-  explicit AllSceneObjectState(::google::protobuf::Arena* arena);
-  private:
-  static void ArenaDtor(void* object);
-  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // repeated .NetProto.SceneObjectState objs = 1;
-  int objs_size() const;
-  void clear_objs();
-  static const int kObjsFieldNumber = 1;
-  const ::NetProto::SceneObjectState& objs(int index) const;
-  ::NetProto::SceneObjectState* mutable_objs(int index);
-  ::NetProto::SceneObjectState* add_objs();
-  ::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState >*
-      mutable_objs();
-  const ::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState >&
-      objs() const;
-
-  // @@protoc_insertion_point(class_scope:NetProto.AllSceneObjectState)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  ::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState > objs_;
-  mutable int _cached_size_;
-  friend struct protobuf_Battle_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
-
 class MoveObjectState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.MoveObjectState) */ {
  public:
   MoveObjectState();
@@ -738,7 +617,7 @@ class MoveObjectState : public ::google::protobuf::Message /* @@protoc_insertion
                &_MoveObjectState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    4;
 
   void UnsafeArenaSwap(MoveObjectState* other);
   void Swap(MoveObjectState* other);
@@ -890,7 +769,7 @@ class MoveObjectMutableState : public ::google::protobuf::Message /* @@protoc_in
                &_MoveObjectMutableState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+    5;
 
   void UnsafeArenaSwap(MoveObjectMutableState* other);
   void Swap(MoveObjectMutableState* other);
@@ -1054,7 +933,7 @@ class MoveToPos : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_MoveToPos_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+    6;
 
   void UnsafeArenaSwap(MoveToPos* other);
   void Swap(MoveToPos* other);
@@ -1334,40 +1213,6 @@ inline void SceneObjectState::set_rotation(float value) {
   
   rotation_ = value;
   // @@protoc_insertion_point(field_set:NetProto.SceneObjectState.rotation)
-}
-
-// -------------------------------------------------------------------
-
-// AllSceneObjectState
-
-// repeated .NetProto.SceneObjectState objs = 1;
-inline int AllSceneObjectState::objs_size() const {
-  return objs_.size();
-}
-inline void AllSceneObjectState::clear_objs() {
-  objs_.Clear();
-}
-inline const ::NetProto::SceneObjectState& AllSceneObjectState::objs(int index) const {
-  // @@protoc_insertion_point(field_get:NetProto.AllSceneObjectState.objs)
-  return objs_.Get(index);
-}
-inline ::NetProto::SceneObjectState* AllSceneObjectState::mutable_objs(int index) {
-  // @@protoc_insertion_point(field_mutable:NetProto.AllSceneObjectState.objs)
-  return objs_.Mutable(index);
-}
-inline ::NetProto::SceneObjectState* AllSceneObjectState::add_objs() {
-  // @@protoc_insertion_point(field_add:NetProto.AllSceneObjectState.objs)
-  return objs_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState >*
-AllSceneObjectState::mutable_objs() {
-  // @@protoc_insertion_point(field_mutable_list:NetProto.AllSceneObjectState.objs)
-  return &objs_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::NetProto::SceneObjectState >&
-AllSceneObjectState::objs() const {
-  // @@protoc_insertion_point(field_list:NetProto.AllSceneObjectState.objs)
-  return objs_;
 }
 
 // -------------------------------------------------------------------
@@ -1684,8 +1529,6 @@ inline  void MoveToPos::set_allocated_pos(::NetProto::PBVector2* pos) {
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

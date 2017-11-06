@@ -212,8 +212,15 @@ public class ClientSocket
             m_threadParam.mtx.ReleaseMutex();
             if (null != recvBytes && recvBytes.Count > 0)
             {
-                if (null != m_recvDataCb)
-                    m_recvDataCb(recvBytes);
+                try
+                {
+                    if (null != m_recvDataCb)
+                        m_recvDataCb(recvBytes);
+                }
+                catch (Exception)
+                {
+
+                }
                 recvBytes.Clear();
             }
         }

@@ -170,27 +170,27 @@ namespace GameLogic
 
 	std::vector<SyncClientMsg> MoveObject::ColllectSyncClientMsg(int filter_type)
 	{
-		std::vector<SyncClientMsg> msgs = SceneObject::ColllectSyncClientMsg(filter_type);
+		std::vector<SyncClientMsg> msgs;// = SceneObject::ColllectSyncClientMsg(filter_type);
 
 		if (filter_type & SCMF_ForInit)
 		{
-			msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectState, this->GetStatePb()));
+			msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectState, this->GetPbMoveObjectState()));
 		}
 		if (filter_type & SCMF_ForMutable)
 		{
 			if (this->NeedSyncMutableState() || filter_type == SCMF_All)
 			{
-				msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectMutableState, this->GetMutableStatePb()));
+				msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectMutableState, this->GetPbMoveObjectMutableState()));
 			}
 		}
 
 		return msgs;
 	}
 
-	google::protobuf::Message * MoveObject::GetStatePb()
+	NetProto::MoveObjectState * MoveObject::GetPbMoveObjectState()
 	{
-		NetProto::MoveObjectState * msg = m_scene->CreateProtobuf<NetProto::MoveObjectState>();
-		msg->set_allocated_obj_state((NetProto::SceneObjectState *)SceneObject::GetStatePb());
+		NetProto::MoveObjectState *msg = m_scene->CreateProtobuf<NetProto::MoveObjectState>();
+		msg->set_allocated_obj_state(this->GetPbSceneObjectState());
 		msg->set_radius(m_radius);
 		msg->set_height(m_height);
 		msg->set_mass(m_mass);
@@ -198,7 +198,7 @@ namespace GameLogic
 		return msg;
 	}
 
-	google::protobuf::Message * MoveObject::GetMutableStatePb()
+	NetProto::MoveObjectMutableState * MoveObject::GetPbMoveObjectMutableState()
 	{
 		NetProto::MoveObjectMutableState * msg = m_scene->CreateProtobuf<NetProto::MoveObjectMutableState>();
 		auto pb_pos = msg->mutable_pos();

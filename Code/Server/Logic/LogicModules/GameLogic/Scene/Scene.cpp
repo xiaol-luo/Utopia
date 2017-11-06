@@ -60,7 +60,7 @@ namespace GameLogic
 					return;
 
 				// int rand_val = std::rand() % NetProto::EMoveAgentState_Max + 1;
-				int rand_val = NetProto::EMoveAgentState_ForceLine;
+				int rand_val = NetProto::EMoveAgentState_ForcePos;
 				switch (rand_val)
 				{
 				case NetProto::EMoveAgentState_MoveToPos:
@@ -92,7 +92,6 @@ namespace GameLogic
 			}, 3 * 1000, -1);
 			
 		}
-		
 
 		return true;
 	}

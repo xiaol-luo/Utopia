@@ -47,13 +47,14 @@ namespace GameLogic
 		std::vector<SyncClientMsg> client_msgs;
 		if (filter_type & SCMF_ForInit)
 		{
-			client_msgs.push_back(SyncClientMsg(NetProto::PID_SceneObjectState, this->GetStatePb()));
+			client_msgs.push_back(SyncClientMsg(NetProto::PID_SceneObjectState, this->GetPbSceneObjectState()));
 		}
 
 		return std::move(client_msgs);
 	}
 
-	google::protobuf::Message * SceneObject::GetStatePb()
+	 
+	NetProto::SceneObjectState * SceneObject::GetPbSceneObjectState()
 	{
 		NetProto::SceneObjectState * msg = m_scene->CreateProtobuf<NetProto::SceneObjectState>();
 		msg->set_model_id(m_model_id);
@@ -65,11 +66,6 @@ namespace GameLogic
 		pos->set_y(m_pos.y);
 		pos->set_z(m_pos.z);
 		return msg;
-	}
-
-	google::protobuf::Message * SceneObject::GetMutableStatePb()
-	{
-		return nullptr;
 	}
 
 	void SceneObject::OnPosChange(const Vector3 &old_val)

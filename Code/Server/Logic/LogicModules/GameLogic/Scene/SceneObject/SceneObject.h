@@ -6,6 +6,11 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
 #include "google/protobuf/message.h"
 
+namespace NetProto
+{
+	class SceneObjectState;
+}
+
 namespace GameLogic
 {
 	class Scene;
@@ -55,8 +60,7 @@ namespace GameLogic
 		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
 
 	protected:
-		virtual google::protobuf::Message * GetStatePb();
-		virtual google::protobuf::Message * GetMutableStatePb();
+		NetProto::SceneObjectState * GetPbSceneObjectState();
 
 	protected:
 		virtual void OnPosChange(const Vector3 &old_val);

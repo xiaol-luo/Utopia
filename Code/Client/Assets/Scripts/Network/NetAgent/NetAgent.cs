@@ -155,13 +155,13 @@ public class NetAgent
                         int protobufBegin = CONTENT_LEN_DESCRIPT_SIZE + PROTOCOL_LEN_DESCRIPT_SIZE;
                         if (null != m_handler)
                         {
-                            m_handler.OnRecvData(protocolId, m_parseBuffer, protobufBegin, parseBufferOffset - protobufBegin);
+                            try { m_handler.OnRecvData(protocolId, m_parseBuffer, protobufBegin, parseBufferOffset - protobufBegin); }
+                            catch (Exception) {}
                         }
                     }
                 }
             }
         }
-        Debug.Log("OnSocketRecvData ");
     }
 
     void OnSocketClose()

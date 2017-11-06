@@ -29,17 +29,16 @@ namespace NetProto {
             "KAQSDwoHaXNfc3VjYxgCIAEoCCKRAQoQU2NlbmVPYmplY3RTdGF0ZRINCgVv",
             "YmppZBgBIAEoBBIoCghvYmpfdHlwZRgCIAEoDjIWLk5ldFByb3RvLkVTY2Vu",
             "ZU9iamVjdBIQCghtb2RlbF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQ",
-            "cm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIiPwoTQWxsU2NlbmVP",
-            "YmplY3RTdGF0ZRIoCgRvYmpzGAEgAygLMhouTmV0UHJvdG8uU2NlbmVPYmpl",
-            "Y3RTdGF0ZSKBAQoPTW92ZU9iamVjdFN0YXRlEi0KCW9ial9zdGF0ZRgBIAEo",
-            "CzIaLk5ldFByb3RvLlNjZW5lT2JqZWN0U3RhdGUSDgoGcmFkaXVzGAIgASgF",
-            "Eg4KBmhlaWdodBgDIAEoBRIMCgRtYXNzGAQgASgFEhEKCW1heF9zcGVlZBgF",
-            "IAEoBSK3AQoWTW92ZU9iamVjdE11dGFibGVTdGF0ZRINCgVvYmppZBgBIAEo",
-            "BBIzChBtb3ZlX2FnZW50X3N0YXRlGAIgASgOMhkuTmV0UHJvdG8uRU1vdmVB",
-            "Z2VudFN0YXRlEiUKCHZvbGVjaXR5GAMgASgLMhMuTmV0UHJvdG8uUEJWZWN0",
-            "b3IzEiAKA3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIQCghyb3Rh",
-            "dGlvbhgFIAEoAiItCglNb3ZlVG9Qb3MSIAoDcG9zGAEgASgLMhMuTmV0UHJv",
-            "dG8uUEJWZWN0b3IyQgP4AQFiBnByb3RvMw=="));
+            "cm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIigQEKD01vdmVPYmpl",
+            "Y3RTdGF0ZRItCglvYmpfc3RhdGUYASABKAsyGi5OZXRQcm90by5TY2VuZU9i",
+            "amVjdFN0YXRlEg4KBnJhZGl1cxgCIAEoBRIOCgZoZWlnaHQYAyABKAUSDAoE",
+            "bWFzcxgEIAEoBRIRCgltYXhfc3BlZWQYBSABKAUitwEKFk1vdmVPYmplY3RN",
+            "dXRhYmxlU3RhdGUSDQoFb2JqaWQYASABKAQSMwoQbW92ZV9hZ2VudF9zdGF0",
+            "ZRgCIAEoDjIZLk5ldFByb3RvLkVNb3ZlQWdlbnRTdGF0ZRIlCgh2b2xlY2l0",
+            "eRgDIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIgCgNwb3MYBCABKAsyEy5O",
+            "ZXRQcm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIiLQoJTW92ZVRv",
+            "UG9zEiAKA3BvcxgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMkID+AEBYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -47,7 +46,6 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroReq), global::NetProto.SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos", "Rotation" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.AllSceneObjectState), global::NetProto.AllSceneObjectState.Parser, new[]{ "Objs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null)
@@ -699,115 +697,6 @@ namespace NetProto {
 
   }
 
-  public sealed partial class AllSceneObjectState : pb::IMessage<AllSceneObjectState> {
-    private static readonly pb::MessageParser<AllSceneObjectState> _parser = new pb::MessageParser<AllSceneObjectState>(() => new AllSceneObjectState());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<AllSceneObjectState> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AllSceneObjectState() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AllSceneObjectState(AllSceneObjectState other) : this() {
-      objs_ = other.objs_.Clone();
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AllSceneObjectState Clone() {
-      return new AllSceneObjectState(this);
-    }
-
-    /// <summary>Field number for the "objs" field.</summary>
-    public const int ObjsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::NetProto.SceneObjectState> _repeated_objs_codec
-        = pb::FieldCodec.ForMessage(10, global::NetProto.SceneObjectState.Parser);
-    private readonly pbc::RepeatedField<global::NetProto.SceneObjectState> objs_ = new pbc::RepeatedField<global::NetProto.SceneObjectState>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NetProto.SceneObjectState> Objs {
-      get { return objs_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as AllSceneObjectState);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(AllSceneObjectState other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!objs_.Equals(other.objs_)) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= objs_.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      objs_.WriteTo(output, _repeated_objs_codec);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += objs_.CalculateSize(_repeated_objs_codec);
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(AllSceneObjectState other) {
-      if (other == null) {
-        return;
-      }
-      objs_.Add(other.objs_);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 10: {
-            objs_.AddEntriesFrom(input, _repeated_objs_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class MoveObjectState : pb::IMessage<MoveObjectState> {
     private static readonly pb::MessageParser<MoveObjectState> _parser = new pb::MessageParser<MoveObjectState>(() => new MoveObjectState());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -815,7 +704,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1050,7 +939,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1291,7 +1180,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

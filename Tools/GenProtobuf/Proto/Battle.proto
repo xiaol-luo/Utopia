@@ -31,11 +31,6 @@ message SceneObjectState
 	float rotation = 5;
 }
 
-message AllSceneObjectState
-{
-	repeated SceneObjectState objs = 1;
-}
-
 message MoveObjectState
 {
 	SceneObjectState obj_state = 1;

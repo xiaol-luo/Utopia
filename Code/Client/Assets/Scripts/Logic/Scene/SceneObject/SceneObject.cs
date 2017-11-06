@@ -4,36 +4,51 @@ using UnityEngine;
 
 public class SceneObjcet
 {
-    public long id { get; protected set; }
+    public ulong id { get; protected set; }
     public NetProto.ESceneObject objectType { get; protected set; }
     public int modelId { get; protected set; }
     public float faceDir {
         get { return m_faceDir; }
-        set { m_faceDir = value; } }
+        set {
+            m_faceDir = value;
+            if (null != modelGo)
+                modelGo.transform.localRotation = Quaternion.AngleAxis(m_faceDir, Vector3.up);
+        }
+    }
     float m_faceDir = 0.0f;
-    public Vector3 position
+    public Vector3 pos
     {
-        get { return m_position; }
+        get { return m_pos; }
         set
         {
-            m_position = value;
+            m_pos = value;
             if (null != modelGo)
             {
-                modelGo.transform.localPosition = m_position;
+                modelGo.transform.localPosition = m_pos;
             }
         }
     }
-    public Vector3 m_position;
+
+    public void SetPos(NetProto.PBVector3 value)
+    {
+        pos = new Vector3(value.X, value.Y, value.Z);
+    }
+    public void SetPos(Vector3 value)
+    {
+        pos = value;
+    }
+
+    public Vector3 m_pos;
 
     public GameObject modelGo { get; protected set; }
 
-    public SceneObjcet(long _id, NetProto.ESceneObject _objType, int _modelId)
+    public SceneObjcet(ulong _id, NetProto.ESceneObject _objType, int _modelId)
     {
         id = _id;
         objectType = _objType;
         modelId = _modelId  ;
         faceDir = 0.0f;
-        position = Vector3.zero;
+        pos = Vector3.zero;
 
         this.LoadModelResource();
     }
