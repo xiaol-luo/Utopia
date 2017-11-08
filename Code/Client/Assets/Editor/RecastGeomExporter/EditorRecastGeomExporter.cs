@@ -224,7 +224,7 @@ namespace RecastGeomExporter
             return true;
         }
 
-        [MenuItem("Custom/Export/Export all MeshFilters in selection to separate OBJs")]
+        // [MenuItem("Custom/Export/Export all MeshFilters in selection to separate OBJs")]
         static void ExportSelectionToSeparate()
         {
             if (!CreateTargetFolder())
@@ -257,7 +257,7 @@ namespace RecastGeomExporter
                 EditorUtility.DisplayDialog("Objects not exported", "Make sure at least some of your selected objects have mesh filters!", "");
         }
 
-        [MenuItem("Custom/Export/Export whole selection to single OBJ")]
+        // [MenuItem("Custom/Export/Export whole selection to single OBJ")]
         static void ExportWholeSelectionToSingle()
         {
             if (!CreateTargetFolder())
@@ -314,7 +314,7 @@ namespace RecastGeomExporter
 
 
 
-        [MenuItem("Custom/Export/Export each selected to single OBJ")]
+        // [MenuItem("Custom/Export/Export each selected to single OBJ")]
         static void ExportEachSelectionToSingle()
         {
             if (!CreateTargetFolder())
