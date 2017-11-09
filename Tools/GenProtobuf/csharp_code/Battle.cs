@@ -37,8 +37,10 @@ namespace NetProto {
             "ZRgCIAEoDjIZLk5ldFByb3RvLkVNb3ZlQWdlbnRTdGF0ZRIlCgh2b2xlY2l0",
             "eRgDIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIgCgNwb3MYBCABKAsyEy5O",
             "ZXRQcm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIiLQoJTW92ZVRv",
-            "UG9zEiAKA3BvcxgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMkID+AEBYgZw",
-            "cm90bzM="));
+            "UG9zEiAKA3BvcxgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMiJ+Cg9CYXR0",
+            "bGVPcGVyYXRpb24SKQoFb3BlcmEYASABKA4yGi5OZXRQcm90by5FQmF0dGxl",
+            "T3BlcmF0aW9uEhEKCXRhcmdldF9pZBgCIAEoBBILCgNkaXIYAyABKAISIAoD",
+            "cG9zGAQgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -48,7 +50,8 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos", "Rotation" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null)
           }));
     }
     #endregion
@@ -1284,6 +1287,213 @@ namespace NetProto {
             input.SkipLastField();
             break;
           case 10: {
+            if (pos_ == null) {
+              pos_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(pos_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BattleOperation : pb::IMessage<BattleOperation> {
+    private static readonly pb::MessageParser<BattleOperation> _parser = new pb::MessageParser<BattleOperation>(() => new BattleOperation());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BattleOperation> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleOperation() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleOperation(BattleOperation other) : this() {
+      opera_ = other.opera_;
+      targetId_ = other.targetId_;
+      dir_ = other.dir_;
+      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BattleOperation Clone() {
+      return new BattleOperation(this);
+    }
+
+    /// <summary>Field number for the "opera" field.</summary>
+    public const int OperaFieldNumber = 1;
+    private global::NetProto.EBattleOperation opera_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.EBattleOperation Opera {
+      get { return opera_; }
+      set {
+        opera_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_id" field.</summary>
+    public const int TargetIdFieldNumber = 2;
+    private ulong targetId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong TargetId {
+      get { return targetId_; }
+      set {
+        targetId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "dir" field.</summary>
+    public const int DirFieldNumber = 3;
+    private float dir_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Dir {
+      get { return dir_; }
+      set {
+        dir_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 4;
+    private global::NetProto.PBVector2 pos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BattleOperation);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BattleOperation other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Opera != other.Opera) return false;
+      if (TargetId != other.TargetId) return false;
+      if (Dir != other.Dir) return false;
+      if (!object.Equals(Pos, other.Pos)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Opera != 0) hash ^= Opera.GetHashCode();
+      if (TargetId != 0UL) hash ^= TargetId.GetHashCode();
+      if (Dir != 0F) hash ^= Dir.GetHashCode();
+      if (pos_ != null) hash ^= Pos.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Opera != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Opera);
+      }
+      if (TargetId != 0UL) {
+        output.WriteRawTag(16);
+        output.WriteUInt64(TargetId);
+      }
+      if (Dir != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(Dir);
+      }
+      if (pos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Pos);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Opera != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Opera);
+      }
+      if (TargetId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TargetId);
+      }
+      if (Dir != 0F) {
+        size += 1 + 4;
+      }
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BattleOperation other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Opera != 0) {
+        Opera = other.Opera;
+      }
+      if (other.TargetId != 0UL) {
+        TargetId = other.TargetId;
+      }
+      if (other.Dir != 0F) {
+        Dir = other.Dir;
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          pos_ = new global::NetProto.PBVector2();
+        }
+        Pos.MergeFrom(other.Pos);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            opera_ = (global::NetProto.EBattleOperation) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            TargetId = input.ReadUInt64();
+            break;
+          }
+          case 29: {
+            Dir = input.ReadFloat();
+            break;
+          }
+          case 34: {
             if (pos_ == null) {
               pos_ = new global::NetProto.PBVector2();
             }

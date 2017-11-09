@@ -30,3 +30,29 @@ enum EMoveState
 	EMoveState_Immobilized = 2;
 	EMoveState_ForceMove = 3;
 };
+
+enum EBattleOperation
+{
+	EBO_Invalid = 0;
+	EBO_Stop = 1;
+	EBO_Move = 2;
+	EBO_Follow = 3;
+	EBO_Hunt = 4;
+	
+	
+	EBO_CastSkill_Q = 11;
+	EBO_CastSkill_W = 12;
+	EBO_CastSkill_E = 13;
+	EBO_CastSkill_R = 14;
+	EBO_CastSkill_F = 15;
+	EBO_CastSkill_G = 16;
+	
+	EBO_UseItemSolt_1 = 21;
+	EBO_UseItemSolt_2 = 22;
+	EBO_UseItemSolt_3 = 23;
+	EBO_UseItemSolt_4 = 24;
+	EBO_UseItemSolt_5 = 25;
+	EBO_UseItemSolt_6 = 26;
+	
+	EBO_MaxCount = 32;
+}

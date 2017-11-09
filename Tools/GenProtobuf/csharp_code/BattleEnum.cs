@@ -31,10 +31,19 @@ namespace NetProto {
             "bnRTdGF0ZV9Gb3JjZVBvcxAFEhcKE0VNb3ZlQWdlbnRTdGF0ZV9NYXgQBips",
             "CgpFTW92ZVN0YXRlEhMKD0VNb3ZlU3RhdGVfSWRsZRAAEhMKD0VNb3ZlU3Rh",
             "dGVfTW92ZRABEhoKFkVNb3ZlU3RhdGVfSW1tb2JpbGl6ZWQQAhIYChRFTW92",
-            "ZVN0YXRlX0ZvcmNlTW92ZRADQgP4AQFiBnByb3RvMw=="));
+            "ZVN0YXRlX0ZvcmNlTW92ZRADKvcCChBFQmF0dGxlT3BlcmF0aW9uEg8KC0VC",
+            "T19JbnZhbGlkEAASDAoIRUJPX1N0b3AQARIMCghFQk9fTW92ZRACEg4KCkVC",
+            "T19Gb2xsb3cQAxIMCghFQk9fSHVudBAEEhMKD0VCT19DYXN0U2tpbGxfURAL",
+            "EhMKD0VCT19DYXN0U2tpbGxfVxAMEhMKD0VCT19DYXN0U2tpbGxfRRANEhMK",
+            "D0VCT19DYXN0U2tpbGxfUhAOEhMKD0VCT19DYXN0U2tpbGxfRhAPEhMKD0VC",
+            "T19DYXN0U2tpbGxfRxAQEhUKEUVCT19Vc2VJdGVtU29sdF8xEBUSFQoRRUJP",
+            "X1VzZUl0ZW1Tb2x0XzIQFhIVChFFQk9fVXNlSXRlbVNvbHRfMxAXEhUKEUVC",
+            "T19Vc2VJdGVtU29sdF80EBgSFQoRRUJPX1VzZUl0ZW1Tb2x0XzUQGRIVChFF",
+            "Qk9fVXNlSXRlbVNvbHRfNhAaEhAKDEVCT19NYXhDb3VudBAgQgP4AQFiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ESceneObject), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ESceneObject), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EBattleOperation), }, null));
     }
     #endregion
 
@@ -62,6 +71,27 @@ namespace NetProto {
     [pbr::OriginalName("EMoveState_Move")] Move = 1,
     [pbr::OriginalName("EMoveState_Immobilized")] Immobilized = 2,
     [pbr::OriginalName("EMoveState_ForceMove")] ForceMove = 3,
+  }
+
+  public enum EBattleOperation {
+    [pbr::OriginalName("EBO_Invalid")] EboInvalid = 0,
+    [pbr::OriginalName("EBO_Stop")] EboStop = 1,
+    [pbr::OriginalName("EBO_Move")] EboMove = 2,
+    [pbr::OriginalName("EBO_Follow")] EboFollow = 3,
+    [pbr::OriginalName("EBO_Hunt")] EboHunt = 4,
+    [pbr::OriginalName("EBO_CastSkill_Q")] EboCastSkillQ = 11,
+    [pbr::OriginalName("EBO_CastSkill_W")] EboCastSkillW = 12,
+    [pbr::OriginalName("EBO_CastSkill_E")] EboCastSkillE = 13,
+    [pbr::OriginalName("EBO_CastSkill_R")] EboCastSkillR = 14,
+    [pbr::OriginalName("EBO_CastSkill_F")] EboCastSkillF = 15,
+    [pbr::OriginalName("EBO_CastSkill_G")] EboCastSkillG = 16,
+    [pbr::OriginalName("EBO_UseItemSolt_1")] EboUseItemSolt1 = 21,
+    [pbr::OriginalName("EBO_UseItemSolt_2")] EboUseItemSolt2 = 22,
+    [pbr::OriginalName("EBO_UseItemSolt_3")] EboUseItemSolt3 = 23,
+    [pbr::OriginalName("EBO_UseItemSolt_4")] EboUseItemSolt4 = 24,
+    [pbr::OriginalName("EBO_UseItemSolt_5")] EboUseItemSolt5 = 25,
+    [pbr::OriginalName("EBO_UseItemSolt_6")] EboUseItemSolt6 = 26,
+    [pbr::OriginalName("EBO_MaxCount")] EboMaxCount = 32,
   }
 
   #endregion

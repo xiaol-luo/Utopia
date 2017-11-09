@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[3];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[4];
 
 }  // namespace
 
@@ -90,10 +90,20 @@ void AddDescriptorsImpl() {
       "rcePos\020\005\022\027\n\023EMoveAgentState_Max\020\006*l\n\nEMo"
       "veState\022\023\n\017EMoveState_Idle\020\000\022\023\n\017EMoveSta"
       "te_Move\020\001\022\032\n\026EMoveState_Immobilized\020\002\022\030\n"
-      "\024EMoveState_ForceMove\020\003B\003\370\001\001b\006proto3"
+      "\024EMoveState_ForceMove\020\003*\367\002\n\020EBattleOpera"
+      "tion\022\017\n\013EBO_Invalid\020\000\022\014\n\010EBO_Stop\020\001\022\014\n\010E"
+      "BO_Move\020\002\022\016\n\nEBO_Follow\020\003\022\014\n\010EBO_Hunt\020\004\022"
+      "\023\n\017EBO_CastSkill_Q\020\013\022\023\n\017EBO_CastSkill_W\020"
+      "\014\022\023\n\017EBO_CastSkill_E\020\r\022\023\n\017EBO_CastSkill_"
+      "R\020\016\022\023\n\017EBO_CastSkill_F\020\017\022\023\n\017EBO_CastSkil"
+      "l_G\020\020\022\025\n\021EBO_UseItemSolt_1\020\025\022\025\n\021EBO_UseI"
+      "temSolt_2\020\026\022\025\n\021EBO_UseItemSolt_3\020\027\022\025\n\021EB"
+      "O_UseItemSolt_4\020\030\022\025\n\021EBO_UseItemSolt_5\020\031"
+      "\022\025\n\021EBO_UseItemSolt_6\020\032\022\020\n\014EBO_MaxCount\020"
+      " B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 436);
+      descriptor, 814);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -157,6 +167,36 @@ bool EMoveState_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EBattleOperation_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[3];
+}
+bool EBattleOperation_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 21:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 32:
       return true;
     default:
       return false;

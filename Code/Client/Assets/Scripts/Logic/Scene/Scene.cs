@@ -11,6 +11,15 @@ public class Scene
     Transform m_rootSceneObjects = null;
 
     Dictionary<ulong, SceneObjcet> m_sceneObjects = new Dictionary<ulong, SceneObjcet>();
+    public SceneObjcet mainHero
+    {
+        get
+        {
+            SceneObjcet so;
+            m_sceneObjects.TryGetValue(App.my.heroId, out so);
+            return so;
+        }
+    }
 
     public void EnterScene(string sceneName)
     {
@@ -132,9 +141,62 @@ public class Scene
             if (isOk)
             {
                 this.TryMoveToPos(hitGound.x, hitGound.z);
+                this.SendBattleOpera(EBattleOperation.EboMove, 0, hitGound);
             }
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            this.SendBattleOpera(EBattleOperation.EboStop);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Vector3 hitGound = Vector3.zero;
+            bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
+            if (isOk)
+            {
+                this.SendBattleOpera(EBattleOperation.EboCastSkillQ, 0, hitGound);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Vector3 hitGound = Vector3.zero;
+            bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
+            if (isOk)
+            {
+                this.SendBattleOpera(EBattleOperation.EboCastSkillW, 0, hitGound);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            this.SendBattleOpera(EBattleOperation.EboCastSkillE);
+        }
     }
-    
+
+    void SendBattleOpera(EBattleOperation opera, ulong targetId, Vector3 pos)
+    {
+        BattleOperation msg = new BattleOperation();
+        msg.Opera = opera;
+        msg.TargetId = targetId;
+        if (null != pos)
+        {
+            msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
+
+            Vector3 tmp_dir = pos - mainHero.pos;
+            msg.Dir = Vector2.SignedAngle(Vector2.up, new Vector2(tmp_dir.x, tmp_dir.z));
+        }
+        if (null != pos)
+        {
+        }
+        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
+    }
+    void SendBattleOpera(EBattleOperation opera)
+    {
+        this.SendBattleOpera(opera, 0, new Vector3());
+    }
+    void SendBattleOpera(EBattleOperation opera, ulong targetId)
+    {
+        this.SendBattleOpera(opera, targetId, new Vector3());
+    }
+
     // void RspFreeHero(int id, RspFreeHero msg)
 }

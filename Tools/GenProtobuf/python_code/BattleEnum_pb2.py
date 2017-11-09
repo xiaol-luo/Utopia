@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='BattleEnum.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x10\x42\x61ttleEnum.proto\x12\x08NetProto*8\n\x0c\x45SceneObject\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03*\xe0\x01\n\x0f\x45MoveAgentState\x12\x18\n\x14\x45MoveAgentState_Idle\x10\x00\x12\x1d\n\x19\x45MoveAgentState_MoveToPos\x10\x01\x12\x1d\n\x19\x45MoveAgentState_MoveToDir\x10\x02\x12\x1f\n\x1b\x45MoveAgentState_Immobilized\x10\x03\x12\x1d\n\x19\x45MoveAgentState_ForceLine\x10\x04\x12\x1c\n\x18\x45MoveAgentState_ForcePos\x10\x05\x12\x17\n\x13\x45MoveAgentState_Max\x10\x06*l\n\nEMoveState\x12\x13\n\x0f\x45MoveState_Idle\x10\x00\x12\x13\n\x0f\x45MoveState_Move\x10\x01\x12\x1a\n\x16\x45MoveState_Immobilized\x10\x02\x12\x18\n\x14\x45MoveState_ForceMove\x10\x03\x42\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x10\x42\x61ttleEnum.proto\x12\x08NetProto*8\n\x0c\x45SceneObject\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03*\xe0\x01\n\x0f\x45MoveAgentState\x12\x18\n\x14\x45MoveAgentState_Idle\x10\x00\x12\x1d\n\x19\x45MoveAgentState_MoveToPos\x10\x01\x12\x1d\n\x19\x45MoveAgentState_MoveToDir\x10\x02\x12\x1f\n\x1b\x45MoveAgentState_Immobilized\x10\x03\x12\x1d\n\x19\x45MoveAgentState_ForceLine\x10\x04\x12\x1c\n\x18\x45MoveAgentState_ForcePos\x10\x05\x12\x17\n\x13\x45MoveAgentState_Max\x10\x06*l\n\nEMoveState\x12\x13\n\x0f\x45MoveState_Idle\x10\x00\x12\x13\n\x0f\x45MoveState_Move\x10\x01\x12\x1a\n\x16\x45MoveState_Immobilized\x10\x02\x12\x18\n\x14\x45MoveState_ForceMove\x10\x03*\xf7\x02\n\x10\x45\x42\x61ttleOperation\x12\x0f\n\x0b\x45\x42O_Invalid\x10\x00\x12\x0c\n\x08\x45\x42O_Stop\x10\x01\x12\x0c\n\x08\x45\x42O_Move\x10\x02\x12\x0e\n\nEBO_Follow\x10\x03\x12\x0c\n\x08\x45\x42O_Hunt\x10\x04\x12\x13\n\x0f\x45\x42O_CastSkill_Q\x10\x0b\x12\x13\n\x0f\x45\x42O_CastSkill_W\x10\x0c\x12\x13\n\x0f\x45\x42O_CastSkill_E\x10\r\x12\x13\n\x0f\x45\x42O_CastSkill_R\x10\x0e\x12\x13\n\x0f\x45\x42O_CastSkill_F\x10\x0f\x12\x13\n\x0f\x45\x42O_CastSkill_G\x10\x10\x12\x15\n\x11\x45\x42O_UseItemSolt_1\x10\x15\x12\x15\n\x11\x45\x42O_UseItemSolt_2\x10\x16\x12\x15\n\x11\x45\x42O_UseItemSolt_3\x10\x17\x12\x15\n\x11\x45\x42O_UseItemSolt_4\x10\x18\x12\x15\n\x11\x45\x42O_UseItemSolt_5\x10\x19\x12\x15\n\x11\x45\x42O_UseItemSolt_6\x10\x1a\x12\x10\n\x0c\x45\x42O_MaxCount\x10 B\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 _ESCENEOBJECT = _descriptor.EnumDescriptor(
@@ -128,6 +128,93 @@ _EMOVESTATE = _descriptor.EnumDescriptor(
 _sym_db.RegisterEnumDescriptor(_EMOVESTATE)
 
 EMoveState = enum_type_wrapper.EnumTypeWrapper(_EMOVESTATE)
+_EBATTLEOPERATION = _descriptor.EnumDescriptor(
+  name='EBattleOperation',
+  full_name='NetProto.EBattleOperation',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='EBO_Invalid', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_Stop', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_Move', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_Follow', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_Hunt', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_CastSkill_Q', index=5, number=11,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_CastSkill_W', index=6, number=12,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_CastSkill_E', index=7, number=13,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_CastSkill_R', index=8, number=14,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_CastSkill_F', index=9, number=15,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_CastSkill_G', index=10, number=16,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_UseItemSolt_1', index=11, number=21,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_UseItemSolt_2', index=12, number=22,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_UseItemSolt_3', index=13, number=23,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_UseItemSolt_4', index=14, number=24,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_UseItemSolt_5', index=15, number=25,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_UseItemSolt_6', index=16, number=26,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='EBO_MaxCount', index=17, number=32,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=426,
+  serialized_end=801,
+)
+_sym_db.RegisterEnumDescriptor(_EBATTLEOPERATION)
+
+EBattleOperation = enum_type_wrapper.EnumTypeWrapper(_EBATTLEOPERATION)
 Building = 0
 Hero = 1
 Npc = 2
@@ -143,11 +230,30 @@ EMoveState_Idle = 0
 EMoveState_Move = 1
 EMoveState_Immobilized = 2
 EMoveState_ForceMove = 3
+EBO_Invalid = 0
+EBO_Stop = 1
+EBO_Move = 2
+EBO_Follow = 3
+EBO_Hunt = 4
+EBO_CastSkill_Q = 11
+EBO_CastSkill_W = 12
+EBO_CastSkill_E = 13
+EBO_CastSkill_R = 14
+EBO_CastSkill_F = 15
+EBO_CastSkill_G = 16
+EBO_UseItemSolt_1 = 21
+EBO_UseItemSolt_2 = 22
+EBO_UseItemSolt_3 = 23
+EBO_UseItemSolt_4 = 24
+EBO_UseItemSolt_5 = 25
+EBO_UseItemSolt_6 = 26
+EBO_MaxCount = 32
 
 
 DESCRIPTOR.enum_types_by_name['ESceneObject'] = _ESCENEOBJECT
 DESCRIPTOR.enum_types_by_name['EMoveAgentState'] = _EMOVEAGENTSTATE
 DESCRIPTOR.enum_types_by_name['EMoveState'] = _EMOVESTATE
+DESCRIPTOR.enum_types_by_name['EBattleOperation'] = _EBATTLEOPERATION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

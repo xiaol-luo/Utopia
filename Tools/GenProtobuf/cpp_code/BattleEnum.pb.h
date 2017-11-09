@@ -121,6 +121,43 @@ inline bool EMoveState_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EMoveState>(
     EMoveState_descriptor(), name, value);
 }
+enum EBattleOperation {
+  EBO_Invalid = 0,
+  EBO_Stop = 1,
+  EBO_Move = 2,
+  EBO_Follow = 3,
+  EBO_Hunt = 4,
+  EBO_CastSkill_Q = 11,
+  EBO_CastSkill_W = 12,
+  EBO_CastSkill_E = 13,
+  EBO_CastSkill_R = 14,
+  EBO_CastSkill_F = 15,
+  EBO_CastSkill_G = 16,
+  EBO_UseItemSolt_1 = 21,
+  EBO_UseItemSolt_2 = 22,
+  EBO_UseItemSolt_3 = 23,
+  EBO_UseItemSolt_4 = 24,
+  EBO_UseItemSolt_5 = 25,
+  EBO_UseItemSolt_6 = 26,
+  EBO_MaxCount = 32,
+  EBattleOperation_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EBattleOperation_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool EBattleOperation_IsValid(int value);
+const EBattleOperation EBattleOperation_MIN = EBO_Invalid;
+const EBattleOperation EBattleOperation_MAX = EBO_MaxCount;
+const int EBattleOperation_ARRAYSIZE = EBattleOperation_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EBattleOperation_descriptor();
+inline const ::std::string& EBattleOperation_Name(EBattleOperation value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EBattleOperation_descriptor(), value);
+}
+inline bool EBattleOperation_Parse(
+    const ::std::string& name, EBattleOperation* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EBattleOperation>(
+    EBattleOperation_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -161,6 +198,11 @@ template <> struct is_proto_enum< ::NetProto::EMoveState> : ::google::protobuf::
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EMoveState>() {
   return ::NetProto::EMoveState_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::EBattleOperation> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EBattleOperation>() {
+  return ::NetProto::EBattleOperation_descriptor();
 }
 
 }  // namespace protobuf
