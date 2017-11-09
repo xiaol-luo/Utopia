@@ -170,7 +170,7 @@ namespace GameLogic
 
 	std::vector<SyncClientMsg> MoveObject::ColllectSyncClientMsg(int filter_type)
 	{
-		std::vector<SyncClientMsg> msgs;// = SceneObject::ColllectSyncClientMsg(filter_type);
+		std::vector<SyncClientMsg> msgs;
 
 		if (filter_type & SCMF_ForInit)
 		{

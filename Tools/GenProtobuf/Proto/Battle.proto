@@ -53,3 +53,11 @@ message MoveToPos
 {
 	PBVector2 pos = 1;
 }
+
+message BattleOperation
+{
+	EBattleOperation opera = 1;
+	uint64 target_id = 2;
+	float dir = 3;
+	PBVector2 pos = 4;
+}

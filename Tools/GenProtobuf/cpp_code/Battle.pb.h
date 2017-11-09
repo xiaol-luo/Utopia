@@ -33,6 +33,9 @@
 #include "BattleEnum.pb.h"
 // @@protoc_insertion_point(includes)
 namespace NetProto {
+class BattleOperation;
+class BattleOperationDefaultTypeInternal;
+extern BattleOperationDefaultTypeInternal _BattleOperation_default_instance_;
 class MoveObjectMutableState;
 class MoveObjectMutableStateDefaultTypeInternal;
 extern MoveObjectMutableStateDefaultTypeInternal _MoveObjectMutableState_default_instance_;
@@ -1015,6 +1018,151 @@ class MoveToPos : public ::google::protobuf::Message /* @@protoc_insertion_point
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class BattleOperation : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.BattleOperation) */ {
+ public:
+  BattleOperation();
+  virtual ~BattleOperation();
+
+  BattleOperation(const BattleOperation& from);
+
+  inline BattleOperation& operator=(const BattleOperation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  BattleOperation(BattleOperation&& from) noexcept
+    : BattleOperation() {
+    *this = ::std::move(from);
+  }
+
+  inline BattleOperation& operator=(BattleOperation&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BattleOperation& default_instance();
+
+  static inline const BattleOperation* internal_default_instance() {
+    return reinterpret_cast<const BattleOperation*>(
+               &_BattleOperation_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    7;
+
+  void UnsafeArenaSwap(BattleOperation* other);
+  void Swap(BattleOperation* other);
+  friend void swap(BattleOperation& a, BattleOperation& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline BattleOperation* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  BattleOperation* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const BattleOperation& from);
+  void MergeFrom(const BattleOperation& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(BattleOperation* other);
+  protected:
+  explicit BattleOperation(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NetProto.PBVector2 pos = 4;
+  bool has_pos() const;
+  void clear_pos();
+  static const int kPosFieldNumber = 4;
+  private:
+  void _slow_mutable_pos();
+  void _slow_set_allocated_pos(
+      ::google::protobuf::Arena* message_arena, ::NetProto::PBVector2** pos);
+  ::NetProto::PBVector2* _slow_release_pos();
+  public:
+  const ::NetProto::PBVector2& pos() const;
+  ::NetProto::PBVector2* mutable_pos();
+  ::NetProto::PBVector2* release_pos();
+  void set_allocated_pos(::NetProto::PBVector2* pos);
+  ::NetProto::PBVector2* unsafe_arena_release_pos();
+  void unsafe_arena_set_allocated_pos(
+      ::NetProto::PBVector2* pos);
+
+  // uint64 target_id = 2;
+  void clear_target_id();
+  static const int kTargetIdFieldNumber = 2;
+  ::google::protobuf::uint64 target_id() const;
+  void set_target_id(::google::protobuf::uint64 value);
+
+  // .NetProto.EBattleOperation opera = 1;
+  void clear_opera();
+  static const int kOperaFieldNumber = 1;
+  ::NetProto::EBattleOperation opera() const;
+  void set_opera(::NetProto::EBattleOperation value);
+
+  // float dir = 3;
+  void clear_dir();
+  static const int kDirFieldNumber = 3;
+  float dir() const;
+  void set_dir(float value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.BattleOperation)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::NetProto::PBVector2* pos_;
+  ::google::protobuf::uint64 target_id_;
+  int opera_;
+  float dir_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -1525,10 +1673,108 @@ inline  void MoveToPos::set_allocated_pos(::NetProto::PBVector2* pos) {
   // @@protoc_insertion_point(field_set_allocated:NetProto.MoveToPos.pos)
 }
 
+// -------------------------------------------------------------------
+
+// BattleOperation
+
+// .NetProto.EBattleOperation opera = 1;
+inline void BattleOperation::clear_opera() {
+  opera_ = 0;
+}
+inline ::NetProto::EBattleOperation BattleOperation::opera() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.opera)
+  return static_cast< ::NetProto::EBattleOperation >(opera_);
+}
+inline void BattleOperation::set_opera(::NetProto::EBattleOperation value) {
+  
+  opera_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.opera)
+}
+
+// uint64 target_id = 2;
+inline void BattleOperation::clear_target_id() {
+  target_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 BattleOperation::target_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.target_id)
+  return target_id_;
+}
+inline void BattleOperation::set_target_id(::google::protobuf::uint64 value) {
+  
+  target_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.target_id)
+}
+
+// float dir = 3;
+inline void BattleOperation::clear_dir() {
+  dir_ = 0;
+}
+inline float BattleOperation::dir() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.dir)
+  return dir_;
+}
+inline void BattleOperation::set_dir(float value) {
+  
+  dir_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.dir)
+}
+
+// .NetProto.PBVector2 pos = 4;
+inline bool BattleOperation::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+inline void BattleOperation::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) delete pos_;
+  pos_ = NULL;
+}
+inline const ::NetProto::PBVector2& BattleOperation::pos() const {
+  const ::NetProto::PBVector2* p = pos_;
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+inline ::NetProto::PBVector2* BattleOperation::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    _slow_mutable_pos();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.BattleOperation.pos)
+  return pos_;
+}
+inline ::NetProto::PBVector2* BattleOperation::release_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.BattleOperation.pos)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_pos();
+  } else {
+    ::NetProto::PBVector2* temp = pos_;
+    pos_ = NULL;
+    return temp;
+  }
+}
+inline  void BattleOperation::set_allocated_pos(::NetProto::PBVector2* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete pos_;
+  }
+  if (pos != NULL) {
+    _slow_set_allocated_pos(message_arena, &pos);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.BattleOperation.pos)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

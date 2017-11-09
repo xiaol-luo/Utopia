@@ -73,6 +73,7 @@ public class AppStateSelectHero : IAppState
 
         if (msg.IsSucc)
         {
+            App.my.heroId = msg.HeroId;
             System.Action<AppStateLoadingScene.LoadResult, string> cb = this.EnterStateInBattle;
             m_stateMgr.ChangeState(IAppState.StateName.LoadingScene, "Level_Battle", cb);
         }

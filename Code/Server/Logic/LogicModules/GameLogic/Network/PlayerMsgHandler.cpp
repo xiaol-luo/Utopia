@@ -15,6 +15,8 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include <memory>
+#include "Common/Math/Vector2.h"
+#include "Common/Math/MathUtils.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -53,6 +55,7 @@ namespace GameLogic
 		RegPlayerHandler(NetProto::PID_PullAllSceneInfo, OnPullAllSceneInfo);
 		RegPlayerMsgHandler(NetProto::PID_MoveToPos, NetProto::MoveToPos, OnMoveToPos);
 		RegPlayerHandler(NetProto::PID_StopMove, OnStopMove);
+		RegPlayerMsgHandler(NetProto::PID_BattleOperaReq, NetProto::BattleOperation, OnHandleBattleOperation);
 
 		for (auto desc : msg_handle_descripts)
 		{
@@ -202,5 +205,35 @@ namespace GameLogic
 
 		std::shared_ptr<Hero> sptr_hero = hero.lock();
 		sptr_hero->CancelMove();
+	}
+	void PlayerMsgHandler::OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation * msg, GameLogic::Player * player)
+	{
+		std::shared_ptr<Hero> hero = player->GetHero().lock();
+		if (nullptr == hero)
+			return;
+
+		switch (msg->opera())
+		{
+		case NetProto::EBO_Move:
+			hero->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
+			break;
+		case NetProto::EBO_Stop:
+			hero->CancelMove();
+			break;
+		case NetProto::EBO_CastSkill_Q:
+			hero->ForcePos(Vector3(msg->pos().x(), 0, msg->pos().y()), 5);
+			break;
+		case NetProto::EBO_CastSkill_W:
+		{
+			Vector3 dir = MathUtils::Angle2Vector(msg->dir());
+			hero->ForceMoveLine(dir.xz(), 2, 3, false);
+		}
+		break;
+		case NetProto::EBO_CastSkill_E:
+			hero->Immobilized(1500);
+			break;
+		default:
+			break;
+		}
 	}
 }

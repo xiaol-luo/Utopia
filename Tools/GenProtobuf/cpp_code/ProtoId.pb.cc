@@ -80,7 +80,7 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rProtoId.proto\022\010NetProto*\375\002\n\007ProtoId\022\013\n"
+      "\n\rProtoId.proto\022\010NetProto*\226\003\n\007ProtoId\022\013\n"
       "\007PID_Min\020\000\022\014\n\010PID_Ping\020\001\022\014\n\010PID_Pong\020\002\022\025"
       "\n\021PID_QueryFreeHero\020d\022\023\n\017PID_RspFreeHero"
       "\020e\022\025\n\021PID_SelectHeroReq\020f\022\025\n\021PID_SelectH"
@@ -89,11 +89,12 @@ void AddDescriptorsImpl() {
       "j\022\033\n\027PID_PullAllSceneInfoRsp\020k\022\031\n\024PID_Sc"
       "eneObjectState\020\350\007\022\030\n\023PID_MoveObjectState"
       "\020\362\007\022\037\n\032PID_MoveObjectMutableState\020\363\007\022\022\n\r"
-      "PID_MoveToPos\020\374\007\022\021\n\014PID_StopMove\020\206\010\022\014\n\007P"
-      "ID_Max\020\200(B\003\370\001\001b\006proto3"
+      "PID_MoveToPos\020\374\007\022\021\n\014PID_StopMove\020\206\010\022\027\n\022P"
+      "ID_BattleOperaReq\020\314\010\022\014\n\007PID_Max\020\200(B\003\370\001\001b"
+      "\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 422);
+      descriptor, 447);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ProtoId.proto", &protobuf_RegisterTypes);
 }
@@ -134,6 +135,7 @@ bool ProtoId_IsValid(int value) {
     case 1011:
     case 1020:
     case 1030:
+    case 1100:
     case 5120:
       return true;
     default:

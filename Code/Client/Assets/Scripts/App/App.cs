@@ -26,6 +26,7 @@ public class App
     public GameConfig gameConfig { get; protected set; }
     public AppStateMgr stateMgr { get; protected set; }
     public Scene scene { get; protected set; }
+    public ulong heroId { get; set; }
 
     public void Awake()
     {

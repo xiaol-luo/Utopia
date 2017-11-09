@@ -53,13 +53,18 @@ public:
  ::google::protobuf::internal::ExplicitlyConstructed<MoveToPos>
      _instance;
 } _MoveToPos_default_instance_;
+class BattleOperationDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<BattleOperation>
+     _instance;
+} _BattleOperation_default_instance_;
 
 namespace protobuf_Battle_2eproto {
 
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[7];
+::google::protobuf::Metadata file_level_metadata[8];
 
 }  // namespace
 
@@ -74,6 +79,7 @@ PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
     TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
@@ -140,6 +146,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveToPos, pos_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, opera_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, target_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, dir_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, pos_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(RspFreeHero)},
@@ -149,6 +164,7 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTR
   { 30, -1, sizeof(MoveObjectState)},
   { 40, -1, sizeof(MoveObjectMutableState)},
   { 50, -1, sizeof(MoveToPos)},
+  { 56, -1, sizeof(BattleOperation)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -159,6 +175,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveObjectState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveObjectMutableState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveToPos_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_BattleOperation_default_instance_),
 };
 
 namespace {
@@ -179,7 +196,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 7);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 8);
 }
 
 }  // namespace
@@ -203,7 +220,9 @@ void TableStruct::InitDefaultsImpl() {
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_MoveObjectMutableState_default_instance_);_MoveToPos_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_MoveToPos_default_instance_);_SceneObjectState_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector3*>(
+      &_MoveToPos_default_instance_);_BattleOperation_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_BattleOperation_default_instance_);_SceneObjectState_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector3*>(
       ::NetProto::PBVector3::internal_default_instance());
   _MoveObjectState_default_instance_._instance.get_mutable()->obj_state_ = const_cast< ::NetProto::SceneObjectState*>(
       ::NetProto::SceneObjectState::internal_default_instance());
@@ -212,6 +231,8 @@ void TableStruct::InitDefaultsImpl() {
   _MoveObjectMutableState_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector3*>(
       ::NetProto::PBVector3::internal_default_instance());
   _MoveToPos_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector2*>(
+      ::NetProto::PBVector2::internal_default_instance());
+  _BattleOperation_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector2*>(
       ::NetProto::PBVector2::internal_default_instance());
 }
 
@@ -240,11 +261,14 @@ void AddDescriptorsImpl() {
       "MoveAgentState\022%\n\010volecity\030\003 \001(\0132\023.NetPr"
       "oto.PBVector3\022 \n\003pos\030\004 \001(\0132\023.NetProto.PB"
       "Vector3\022\020\n\010rotation\030\005 \001(\002\"-\n\tMoveToPos\022 "
-      "\n\003pos\030\001 \001(\0132\023.NetProto.PBVector2B\003\370\001\001b\006p"
-      "roto3"
+      "\n\003pos\030\001 \001(\0132\023.NetProto.PBVector2\"~\n\017Batt"
+      "leOperation\022)\n\005opera\030\001 \001(\0162\032.NetProto.EB"
+      "attleOperation\022\021\n\ttarget_id\030\002 \001(\004\022\013\n\003dir"
+      "\030\003 \001(\002\022 \n\003pos\030\004 \001(\0132\023.NetProto.PBVector2"
+      "B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 725);
+      descriptor, 853);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
   ::NetProto::protobuf_Common_2eproto::AddDescriptors();
@@ -3453,6 +3477,541 @@ const ::NetProto::PBVector2& MoveToPos::pos() const {
     
   }
   // @@protoc_insertion_point(field_set_allocated:NetProto.MoveToPos.pos)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+void BattleOperation::_slow_mutable_pos() {
+  pos_ = ::google::protobuf::Arena::CreateMessage< ::NetProto::PBVector2 >(
+      GetArenaNoVirtual());
+}
+::NetProto::PBVector2* BattleOperation::_slow_release_pos() {
+  if (pos_ == NULL) {
+    return NULL;
+  } else {
+    ::NetProto::PBVector2* temp = new ::NetProto::PBVector2(*pos_);
+    pos_ = NULL;
+    return temp;
+  }
+}
+::NetProto::PBVector2* BattleOperation::unsafe_arena_release_pos() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.BattleOperation.pos)
+  
+  ::NetProto::PBVector2* temp = pos_;
+  pos_ = NULL;
+  return temp;
+}
+void BattleOperation::_slow_set_allocated_pos(
+    ::google::protobuf::Arena* message_arena, ::NetProto::PBVector2** pos) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*pos) == NULL) {
+      message_arena->Own(*pos);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*pos)) {
+      ::NetProto::PBVector2* new_pos = 
+            ::google::protobuf::Arena::CreateMessage< ::NetProto::PBVector2 >(
+            message_arena);
+      new_pos->CopyFrom(**pos);
+      *pos = new_pos;
+    }
+}
+void BattleOperation::unsafe_arena_set_allocated_pos(
+    ::NetProto::PBVector2* pos) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete pos_;
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NetProto.BattleOperation.pos)
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int BattleOperation::kOperaFieldNumber;
+const int BattleOperation::kTargetIdFieldNumber;
+const int BattleOperation::kDirFieldNumber;
+const int BattleOperation::kPosFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+BattleOperation::BattleOperation()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_Battle_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NetProto.BattleOperation)
+}
+BattleOperation::BattleOperation(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_Battle_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:NetProto.BattleOperation)
+}
+BattleOperation::BattleOperation(const BattleOperation& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_pos()) {
+    pos_ = new ::NetProto::PBVector2(*from.pos_);
+  } else {
+    pos_ = NULL;
+  }
+  ::memcpy(&target_id_, &from.target_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&dir_) -
+    reinterpret_cast<char*>(&target_id_)) + sizeof(dir_));
+  // @@protoc_insertion_point(copy_constructor:NetProto.BattleOperation)
+}
+
+void BattleOperation::SharedCtor() {
+  ::memset(&pos_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&dir_) -
+      reinterpret_cast<char*>(&pos_)) + sizeof(dir_));
+  _cached_size_ = 0;
+}
+
+BattleOperation::~BattleOperation() {
+  // @@protoc_insertion_point(destructor:NetProto.BattleOperation)
+  SharedDtor();
+}
+
+void BattleOperation::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  if (this != internal_default_instance()) delete pos_;
+}
+
+void BattleOperation::ArenaDtor(void* object) {
+  BattleOperation* _this = reinterpret_cast< BattleOperation* >(object);
+  (void)_this;
+}
+void BattleOperation::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
+void BattleOperation::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* BattleOperation::descriptor() {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const BattleOperation& BattleOperation::default_instance() {
+  protobuf_Battle_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+BattleOperation* BattleOperation::New(::google::protobuf::Arena* arena) const {
+  return ::google::protobuf::Arena::CreateMessage<BattleOperation>(arena);
+}
+
+void BattleOperation::Clear() {
+// @@protoc_insertion_point(message_clear_start:NetProto.BattleOperation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) {
+    delete pos_;
+  }
+  pos_ = NULL;
+  ::memset(&target_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&dir_) -
+      reinterpret_cast<char*>(&target_id_)) + sizeof(dir_));
+  _internal_metadata_.Clear();
+}
+
+bool BattleOperation::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NetProto.BattleOperation)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NetProto.EBattleOperation opera = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_opera(static_cast< ::NetProto::EBattleOperation >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint64 target_id = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &target_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // float dir = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u /* 29 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &dir_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .NetProto.PBVector2 pos = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_pos()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NetProto.BattleOperation)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NetProto.BattleOperation)
+  return false;
+#undef DO_
+}
+
+void BattleOperation::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NetProto.BattleOperation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NetProto.EBattleOperation opera = 1;
+  if (this->opera() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->opera(), output);
+  }
+
+  // uint64 target_id = 2;
+  if (this->target_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->target_id(), output);
+  }
+
+  // float dir = 3;
+  if (this->dir() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->dir(), output);
+  }
+
+  // .NetProto.PBVector2 pos = 4;
+  if (this->has_pos()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, *this->pos_, output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NetProto.BattleOperation)
+}
+
+::google::protobuf::uint8* BattleOperation::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.BattleOperation)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NetProto.EBattleOperation opera = 1;
+  if (this->opera() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->opera(), target);
+  }
+
+  // uint64 target_id = 2;
+  if (this->target_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->target_id(), target);
+  }
+
+  // float dir = 3;
+  if (this->dir() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->dir(), target);
+  }
+
+  // .NetProto.PBVector2 pos = 4;
+  if (this->has_pos()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        4, *this->pos_, deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.BattleOperation)
+  return target;
+}
+
+size_t BattleOperation::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NetProto.BattleOperation)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .NetProto.PBVector2 pos = 4;
+  if (this->has_pos()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->pos_);
+  }
+
+  // uint64 target_id = 2;
+  if (this->target_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->target_id());
+  }
+
+  // .NetProto.EBattleOperation opera = 1;
+  if (this->opera() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->opera());
+  }
+
+  // float dir = 3;
+  if (this->dir() != 0) {
+    total_size += 1 + 4;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void BattleOperation::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.BattleOperation)
+  GOOGLE_DCHECK_NE(&from, this);
+  const BattleOperation* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const BattleOperation>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.BattleOperation)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.BattleOperation)
+    MergeFrom(*source);
+  }
+}
+
+void BattleOperation::MergeFrom(const BattleOperation& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.BattleOperation)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_pos()) {
+    mutable_pos()->::NetProto::PBVector2::MergeFrom(from.pos());
+  }
+  if (from.target_id() != 0) {
+    set_target_id(from.target_id());
+  }
+  if (from.opera() != 0) {
+    set_opera(from.opera());
+  }
+  if (from.dir() != 0) {
+    set_dir(from.dir());
+  }
+}
+
+void BattleOperation::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.BattleOperation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BattleOperation::CopyFrom(const BattleOperation& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.BattleOperation)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BattleOperation::IsInitialized() const {
+  return true;
+}
+
+void BattleOperation::Swap(BattleOperation* other) {
+  if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    BattleOperation* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void BattleOperation::UnsafeArenaSwap(BattleOperation* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
+  InternalSwap(other);
+}
+void BattleOperation::InternalSwap(BattleOperation* other) {
+  using std::swap;
+  swap(pos_, other->pos_);
+  swap(target_id_, other->target_id_);
+  swap(opera_, other->opera_);
+  swap(dir_, other->dir_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata BattleOperation::GetMetadata() const {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// BattleOperation
+
+// .NetProto.EBattleOperation opera = 1;
+void BattleOperation::clear_opera() {
+  opera_ = 0;
+}
+::NetProto::EBattleOperation BattleOperation::opera() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.opera)
+  return static_cast< ::NetProto::EBattleOperation >(opera_);
+}
+void BattleOperation::set_opera(::NetProto::EBattleOperation value) {
+  
+  opera_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.opera)
+}
+
+// uint64 target_id = 2;
+void BattleOperation::clear_target_id() {
+  target_id_ = GOOGLE_ULONGLONG(0);
+}
+::google::protobuf::uint64 BattleOperation::target_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.target_id)
+  return target_id_;
+}
+void BattleOperation::set_target_id(::google::protobuf::uint64 value) {
+  
+  target_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.target_id)
+}
+
+// float dir = 3;
+void BattleOperation::clear_dir() {
+  dir_ = 0;
+}
+float BattleOperation::dir() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.dir)
+  return dir_;
+}
+void BattleOperation::set_dir(float value) {
+  
+  dir_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.dir)
+}
+
+// .NetProto.PBVector2 pos = 4;
+bool BattleOperation::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+void BattleOperation::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) delete pos_;
+  pos_ = NULL;
+}
+const ::NetProto::PBVector2& BattleOperation::pos() const {
+  const ::NetProto::PBVector2* p = pos_;
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+::NetProto::PBVector2* BattleOperation::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    _slow_mutable_pos();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.BattleOperation.pos)
+  return pos_;
+}
+::NetProto::PBVector2* BattleOperation::release_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.BattleOperation.pos)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_pos();
+  } else {
+    ::NetProto::PBVector2* temp = pos_;
+    pos_ = NULL;
+    return temp;
+  }
+}
+ void BattleOperation::set_allocated_pos(::NetProto::PBVector2* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete pos_;
+  }
+  if (pos != NULL) {
+    _slow_set_allocated_pos(message_arena, &pos);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.BattleOperation.pos)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

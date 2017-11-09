@@ -108,5 +108,6 @@ namespace GameLogic
 		void OnPullAllSceneInfo(int id, GameLogic::Player *player);
 		void OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player *player);
 		void OnStopMove(int id, GameLogic::Player *player);
+		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
 	};
 }
