@@ -13,6 +13,7 @@
 #include "CsvConfigSets.h"
 #include "Scene/CsvSceneConfig.h"
 #include "Common/Math/Vector2.h"
+#include "Common/Math/MathUtils.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Timer/ITimerModule.h"
 #include "GameLogic/Player/PlayerMgr.h"
@@ -52,6 +53,14 @@ namespace GameLogic
 		this->AddObject(m_blue_hero);
 		m_blue_hero->Flash(Vector3(50, 0, 50));
 
+		Vector2 x1 = MathUtils::CalVector2(Vector2(0, 1), 90);
+		Vector2 x2 = MathUtils::CalVector2(Vector2(0, 1), -90);
+		Vector2 x3 = MathUtils::CalVector2(Vector2(0, 1), 180);
+
+
+		float v1 = MathUtils::Angle(Vector2(0, 1), Vector2(1, 0));
+		float v2 = MathUtils::Angle(Vector2(0, 1), Vector2(-1, 0));
+		float v3 = MathUtils::Angle(Vector2(0, 1), Vector2(0, -1));
 		
 		if (false)
 		{

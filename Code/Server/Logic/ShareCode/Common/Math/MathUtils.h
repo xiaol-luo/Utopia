@@ -104,6 +104,11 @@ public:
 	{
 		return (n >> 1) ^ -static_cast<int>(n & 1);
 	}
+
+	// 逆时针为正
+	static float Angle(Vector3 from, Vector3 to);
+	static float Angle(Vector2 from, Vector2 to);
+	static Vector2 CalVector2(Vector2 from, float rotation); 
 };
 
 

@@ -89,13 +89,13 @@ float MathUtils::AngleFromVector2(const Vector2 &v)
 	current.normalize();
 
 	float angle = (float)(acos(std::min(1.0f, std::max(-1.0f, orig | current))) * DEGREE_PER_RADIANS); // dot(a,b) = |a|*|b|*cos(angle) => cos(angle) = dot(a,b)/(|a|*|b|)
-	return current.x > 0 ? angle : 360 - angle;
+	return current.x > 0 ? angle : - angle;
 }
 
 void MathUtils::Angle2Vector(float degree, Vector3 &v)
 {
 	float radian = d2r(degree);
-	v.x = sin(radian);
+	v.x = -sin(radian);
 	v.y = 0;
 	v.z = cos(radian);
 	return;
@@ -274,6 +274,32 @@ void MathUtils::ClampPointInRect(Vector2 &r1, Vector2 &r2, Vector2 &r3, Vector2 
 		//g_hostImport.logOut(LogType::Log, "intersect with r1r4");
 		return;
 	}
+}
+
+float MathUtils::Angle(Vector3 from, Vector3 to)
+{
+	Vector3  tmp_from(from);
+	Vector3 tmp_to(to);
+	tmp_from.normalize();
+	tmp_to.normalize();
+	Vector3 cross_vec3 = Vector3::cross(tmp_from, tmp_to);
+	float cos_val = Vector3::dot(tmp_from, tmp_to);
+	float angle = acos(cos_val) * DEGREE_PER_RADIANS;
+	return cross_vec3.y >= 0 ? angle : -angle;
+	// 这里cross_vec3.y > 0 则为逆时针，我以逆时针作为旋转正向
+}
+
+float MathUtils::Angle(Vector2 from, Vector2 to)
+{
+	return Angle(Vector3(from.x, 0, from.y), Vector3(to.x, 0, to.y));
+}
+
+Vector2 MathUtils::CalVector2(Vector2 from, float rotation)
+{
+	float radians = d2r(rotation);
+	float x = from.x * cos(radians) + from.y * -sin(radians);
+	float y = from.x * sin(radians) + from.y * cos(radians);
+	return Vector2(x, y);
 }
 
 float MathUtils::Cross(Vector2 p1, Vector2 p2)

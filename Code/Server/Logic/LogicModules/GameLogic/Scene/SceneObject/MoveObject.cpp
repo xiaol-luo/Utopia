@@ -87,7 +87,7 @@ namespace GameLogic
 			Vector3 velocity = this->GetVelocity();
 			if (abs(velocity.x) >= FLT_MIN || abs(velocity.z) >= FLT_MIN)
 			{
-				float angle = MathUtils::AngleFromVector3(velocity);
+				float angle = MathUtils::Angle(Vector2::up, velocity.xz());
 				this->SetRotation(angle);
 			}
 		}

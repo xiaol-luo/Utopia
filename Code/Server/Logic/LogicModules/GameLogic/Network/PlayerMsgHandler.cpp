@@ -225,8 +225,8 @@ namespace GameLogic
 			break;
 		case NetProto::EBO_CastSkill_W:
 		{
-			Vector3 dir = MathUtils::Angle2Vector(msg->dir());
-			hero->ForceMoveLine(dir.xz(), 2, 3, false);
+			Vector2 dir = MathUtils::CalVector2(Vector2::up, msg->dir());
+			hero->ForceMoveLine(dir, 2, 3, false);
 		}
 		break;
 		case NetProto::EBO_CastSkill_E:
