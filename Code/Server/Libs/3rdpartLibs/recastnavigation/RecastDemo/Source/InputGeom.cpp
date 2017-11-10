@@ -220,9 +220,6 @@ bool InputGeom::loadGeomSet(rcContext* ctx, const std::string& filepath)
 	{
 		// Parse one row
 		row[0] = '\0';
-		src = parseRow(src, srcEnd, row, sizeof(row)/sizeof(char));	
-		// Parse one row
-		row[0] = '\0';
 		src = parseRow(src, srcEnd, row, sizeof(row) / sizeof(char));
 		if (row[0] == 'c')
 		{
