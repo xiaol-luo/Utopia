@@ -15,7 +15,7 @@ class dtCrowd;
 class dtNavMeshQuery;
 
 #include "DetourNavMesh.h"
-#include "Common/Math/Vector3.h"
+#include "Common/Geometry/Vector3.h"
 #include "DetourNavMeshQuery.h"
 
 namespace GameLogic

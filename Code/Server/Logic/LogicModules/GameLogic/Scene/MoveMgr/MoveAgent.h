@@ -2,8 +2,8 @@
 
 #include <stdint.h>
 #include "DetourCrowd.h"
-#include "Common/Math/Vector2.h"
-#include "Common/Math/Vector3.h"
+#include "Common/Geometry/Vector2.h"
+#include "Common/Geometry/Vector3.h"
 #include <functional>
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"

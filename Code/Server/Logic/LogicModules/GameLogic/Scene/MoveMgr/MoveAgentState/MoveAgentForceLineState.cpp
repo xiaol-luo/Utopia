@@ -1,6 +1,6 @@
 #include "MoveAgentForceLineState.h"
-#include "Common/Math/Vector3.h"
-#include "Common/Math/Vector2.h"
+#include "Common/Geometry/Vector3.h"
+#include "Common/Geometry/Vector2.h"
 #include "GameLogic/Scene/MoveMgr/MoveMgr.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"

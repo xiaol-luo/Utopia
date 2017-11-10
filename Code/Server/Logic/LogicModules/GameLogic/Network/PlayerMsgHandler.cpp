@@ -15,8 +15,8 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include <memory>
-#include "Common/Math/Vector2.h"
-#include "Common/Math/MathUtils.h"
+#include "Common/Geometry/Vector2.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -225,7 +225,7 @@ namespace GameLogic
 			break;
 		case NetProto::EBO_CastSkill_W:
 		{
-			Vector2 dir = MathUtils::CalVector2(Vector2::up, msg->dir());
+			Vector2 dir = GeometryUtils::CalVector2(Vector2::up, msg->dir());
 			hero->ForceMoveLine(dir, 2, 3, false);
 		}
 		break;

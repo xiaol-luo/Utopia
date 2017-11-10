@@ -1,7 +1,8 @@
 #include "NavAgent.h"
 #include "NavMesh.h"
 #include <cfloat>
-#include "Common/Math/MathUtils.h"
+#include "Common/Geometry/GeometryUtils.h"
+#include "Common/Geometry/Vector2.h"
 
 namespace GameLogic
 {
@@ -124,8 +125,8 @@ namespace GameLogic
 			// m_crowd->requestMoveVelocity()
 			if (abs(m_desired_move_dir) >= FLT_EPSILON)
 			{
-				Vector3 dir = MathUtils::Angle2Vector(m_desired_move_dir);
-				Vector3 velocity = dir * this->GetMaxSpeed();
+				Vector2 dir = GeometryUtils::CalVector2(Vector2::up, m_desired_move_dir);
+				Vector3 velocity = Vector3(dir.x, 0, dir.y) * this->GetMaxSpeed();
 				m_crowd->requestMoveVelocity(m_dt_agent_id, velocity.toPointer());
 			}
 		}

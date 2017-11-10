@@ -7,7 +7,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
-#include "Common/Math/MathUtils.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
 {
@@ -87,7 +87,7 @@ namespace GameLogic
 			Vector3 velocity = this->GetVelocity();
 			if (abs(velocity.x) >= FLT_MIN || abs(velocity.z) >= FLT_MIN)
 			{
-				float angle = MathUtils::Angle(Vector2::up, velocity.xz());
+				float angle = GeometryUtils::DeltaAngle(Vector2::up, velocity.xz());
 				this->SetRotation(angle);
 			}
 		}

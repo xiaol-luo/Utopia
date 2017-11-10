@@ -3,7 +3,7 @@
 #include <memory>
 #include <unordered_map>
 #include <stdint.h>
-#include <Common/Math/Vector3.h>
+#include <Common/Geometry/Vector3.h>
 
 namespace GameLogic
 {

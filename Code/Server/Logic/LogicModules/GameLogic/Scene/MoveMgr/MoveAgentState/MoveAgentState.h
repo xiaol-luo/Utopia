@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
-#include "Common/Math/Vector3.h"
+#include "Common/Geometry/Vector3.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
 
 namespace GameLogic
