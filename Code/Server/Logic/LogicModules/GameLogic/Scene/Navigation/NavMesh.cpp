@@ -111,12 +111,7 @@ namespace GameLogic
 		do
 		{
 			m_geom = new InputGeom;
-			if (!m_geom->load(m_rcCtx, file_path + ".gset"))
-			{
-				ret = false;
-				break;
-			}
-			if (!m_geom->load(m_rcCtx, file_path + ".obj"))
+			if (!m_geom->load(m_rcCtx, file_path))
 			{
 				ret = false;
 				break;

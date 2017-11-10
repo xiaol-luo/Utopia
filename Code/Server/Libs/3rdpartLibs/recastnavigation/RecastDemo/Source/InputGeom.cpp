@@ -164,7 +164,9 @@ bool InputGeom::loadMesh(rcContext* ctx, const std::string& filepath)
 bool InputGeom::loadGeomSet(rcContext* ctx, const std::string& filepath)
 {
 	char* buf = 0;
-	FILE* fp = fopen(filepath.c_str(), "rb");
+	std::string gset_filepath = filepath + ".gset";
+	std::string obj_filepath = filepath + ".obj";
+	FILE* fp = fopen(gset_filepath.c_str(), "rb");
 	if (!fp)
 	{
 		return false;
@@ -204,6 +206,12 @@ bool InputGeom::loadGeomSet(rcContext* ctx, const std::string& filepath)
 	m_volumeCount = 0;
 	delete m_mesh;
 	m_mesh = 0;
+	
+	if (!loadMesh(ctx, obj_filepath.c_str()))
+	{
+		delete[] buf;
+		return false;
+	}
 
 	char* src = buf;
 	char* srcEnd = buf + bufSize;
@@ -212,24 +220,11 @@ bool InputGeom::loadGeomSet(rcContext* ctx, const std::string& filepath)
 	{
 		// Parse one row
 		row[0] = '\0';
-		src = parseRow(src, srcEnd, row, sizeof(row)/sizeof(char));
-		if (row[0] == 'f')
-		{
-			// File name.
-			const char* name = row+1;
-			// Skip white spaces
-			while (*name && isspace(*name))
-				name++;
-			if (*name)
-			{
-				if (!loadMesh(ctx, name))
-				{
-					delete [] buf;
-					return false;
-				}
-			}
-		}
-		else if (row[0] == 'c')
+		src = parseRow(src, srcEnd, row, sizeof(row)/sizeof(char));	
+		// Parse one row
+		row[0] = '\0';
+		src = parseRow(src, srcEnd, row, sizeof(row) / sizeof(char));
+		if (row[0] == 'c')
 		{
 			// Off-mesh connection
 			if (m_offMeshConCount < MAX_OFFMESH_CONNECTIONS)
@@ -297,19 +292,7 @@ bool InputGeom::loadGeomSet(rcContext* ctx, const std::string& filepath)
 
 bool InputGeom::load(rcContext* ctx, const std::string& filepath)
 {
-	size_t extensionPos = filepath.find_last_of('.');
-	if (extensionPos == std::string::npos)
-		return false;
-
-	std::string extension = filepath.substr(extensionPos);
-	std::transform(extension.begin(), extension.end(), extension.begin(), tolower);
-
-	if (extension == ".gset")
-		return loadGeomSet(ctx, filepath);
-	if (extension == ".obj")
-		return loadMesh(ctx, filepath);
-
-	return false;
+	return loadGeomSet(ctx, filepath);
 }
 
 bool InputGeom::saveGeomSet(const BuildSettings* settings)
