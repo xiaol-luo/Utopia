@@ -26,14 +26,12 @@ public:
 	Vector3 normalized() const;
 	float sqrMagnitude() const;
 	void set(float x, float y, float z);
-	float toAngle() const; // return degrees
 	Vector2 xz() const;
 
 
 	static Vector3 cross(const Vector3 &lhs, const Vector3 &rhs);
 	static float dot(const Vector3 &lhs, const Vector3 &rhs);
 	static Vector3 moveTowards(const Vector3 &current, const Vector3 &target, float maxDistanceDelta);
-	static Vector3 fromAngle(float degreeAngle);
 
 	static Vector3 cBack() { return back; }
 	static Vector3 cDown() { return down; }

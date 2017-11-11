@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MoveAgentState.h"
-#include "Common/Math/Vector3.h"
+#include "Common/Geometry/Vector3.h"
 
 namespace GameLogic
 {

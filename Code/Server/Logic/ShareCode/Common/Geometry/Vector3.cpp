@@ -1,7 +1,7 @@
 
 #include "Vector3.h"
 #include "Vector2.h"
-#include "MathUtils.h"
+#include "GeometryUtils.h"
 #include <math.h>
 #include <cfloat>
 
@@ -92,11 +92,6 @@ void Vector3::set(float _x, float _y, float _z)
 	x = _x; y = _y; z = _z;
 }
 
-float Vector3::toAngle() const
-{
-	return MathUtils::AngleFromVector3(*this);
-}
-
 Vector2 Vector3::xz() const
 {
 	return Vector2(x, z);
@@ -130,7 +125,3 @@ Vector3 Vector3::moveTowards(const Vector3 &lhs, const Vector3 &rhs, float clamp
 		return rhs;
 }
 
-Vector3 Vector3::fromAngle(float angle)
-{
-	return MathUtils::Angle2Vector(angle);
-}

@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include <vector>
-#include "Common/Math/Vector3.h"
+#include "Common/Geometry/Vector3.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
 #include "google/protobuf/message.h"
 
