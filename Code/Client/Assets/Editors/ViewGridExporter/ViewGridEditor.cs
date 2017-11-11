@@ -67,7 +67,6 @@ public class ViewGridEditor : MonoBehaviour
         // Invoke("CheckChange", 0.1f);
         this.BuildGrid();
         this.CheckChange();
-        this.Save("eos_navmesh.view");
     }
 
     void BuildGrid()
@@ -88,6 +87,7 @@ public class ViewGridEditor : MonoBehaviour
     void OnNodeTypeChange(int row, int col, ViewGridNodeType nodeType)
     {
         m_grid[row][col] = nodeType;
+        this.Save("eos_navmesh.view");
     }
 
     public void Load(string filePath)
