@@ -80,6 +80,7 @@ public class ViewGridEditor : MonoBehaviour
         {
             Transform child = this.transform.GetChild(childIdx);
             ViewGridNode node = child.GetComponent<ViewGridNode>();
+            node.onNodeTypeChange = this.OnNodeTypeChange;
             m_grid[node.row][node.col] = node.m_nodeType;
 
         }
