@@ -64,27 +64,16 @@ public class ViewGridEditor : MonoBehaviour
 
     private void Start()
     {
-        // Invoke("CheckChange", 0.1f);
-        this.BuildGrid();
+        Load("eos_navmesh.view");
+        Invoke("HeartBeat", 0.1f);
+    }
+
+    void HeartBeat()
+    {
+        Invoke("HeartBeat", 0.1f);
         this.CheckChange();
     }
 
-    void BuildGrid()
-    {
-        this.CheckGridSize(false);
-
-        int childIdx = 0;
-        int childCount = this.transform.childCount;
-
-        for (int i = 0; i < childCount; ++ i)
-        {
-            Transform child = this.transform.GetChild(childIdx);
-            ViewGridNode node = child.GetComponent<ViewGridNode>();
-            node.onNodeTypeChange = this.OnNodeTypeChange;
-            m_grid[node.row][node.col] = node.m_nodeType;
-
-        }
-    }
     void OnNodeTypeChange(int row, int col, ViewGridNodeType nodeType)
     {
         m_grid[row][col] = nodeType;
@@ -93,7 +82,50 @@ public class ViewGridEditor : MonoBehaviour
 
     public void Load(string filePath)
     {
+        string [] lines = File.ReadAllLines(filePath);
+        if (null == lines || lines.Length <= 0)
+            return;
 
+        if (lines.Length >= 1)
+        {
+            string[] strs = lines[0].Split(' ');
+            if (strs.Length < 3)
+                return;
+
+            m_gridSize = float.Parse(strs[0]);
+            m_rowCount = int.Parse(strs[1]);
+            m_colCount = int.Parse(strs[2]);
+        }
+
+        m_oldRowCount = m_rowCount - 1;
+        this.CheckGridSize(false);
+        if (lines.Length >= 2)
+        {
+            string[] strs = lines[1].Split(' ');
+            int idx = 0;
+            for (int row = 0; row < m_grid.Count; ++ row)
+            {
+                for (int col = 0; col < m_grid[row].Count; ++ col)
+                {
+                    m_grid[row][col] = ViewGridNodeType.Ground;
+                    if (idx < strs.Length)
+                    {
+                        m_grid[row][col] = (ViewGridNodeType)int.Parse(strs[idx]);
+                        ++idx;
+                    }
+
+                    /*
+                    if (row >= 57 && row <= 82 && col >= 42 && col <= 67)
+                        m_grid[row][col] = ViewGridNodeType.Grass;
+                    if (row >= 29 && row <= 30 && col >= 30 && col <= 69)
+                        m_grid[row][col] = ViewGridNodeType.Wall;
+                    */
+                }
+            }
+        }
+        m_oldGridSize = m_gridSize - 1;
+        this.CheckChange();
+        this.Save(filePath);
     }
     public void Save(string filePath)
     {
@@ -129,8 +161,6 @@ public class ViewGridEditor : MonoBehaviour
     List<GameObject> m_cachedGos = new List<GameObject>();
     private void CheckChange()
     {
-        Invoke("CheckChange", 0.1f);
-
         if (m_gridSize == m_oldGridSize && !this.CheckGridSize(false))
             return;
 
@@ -176,7 +206,6 @@ public class ViewGridEditor : MonoBehaviour
                     gridNode = cube.AddComponent<ViewGridNode>();
                 gridNode.row = row;
                 gridNode.col = col;
-                gridNode.SetPos(new Vector3(x, 0, z));
                 gridNode.size = m_gridSize;
                 gridNode.onNodeTypeChange = this.OnNodeTypeChange;
                 ViewGridNodeType nodeType = m_grid[row][col];

@@ -18,18 +18,16 @@ public class ViewGridNode : MonoBehaviour
         {ViewGridNodeType.Grass, new Color(0, 1, 0) },
     };
 
+    [SerializeField]
     public int row;
+    [SerializeField]
     public int col;
+    [SerializeField]
     public ViewGridNodeType m_nodeType = ViewGridNodeType.Ground;
     ViewGridNodeType m_oldNodeType = ViewGridNodeType.Ground;
     public System.Action<int, int, ViewGridNodeType> onNodeTypeChange;
+    [SerializeField]
     public float size;
-
-    Vector3 m_pos = new Vector3();
-    public void SetPos(Vector3 _pos)
-    {
-        m_pos = _pos;
-    }
 
     public void SetColor(ViewGridNodeType value, bool triggerCb)
     {
@@ -76,6 +74,6 @@ public class ViewGridNode : MonoBehaviour
     {
         // Gizmos.DrawIcon(transform.position, "green_ball.png", true);
         Gizmos.color = s_colors[m_nodeType];
-        Gizmos.DrawCube(transform.position, new Vector3(size, 1, size));
+        Gizmos.DrawWireCube(transform.position, new Vector3(size, 1, size));
     }
 }
