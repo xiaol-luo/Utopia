@@ -17,7 +17,7 @@ namespace GameLogic
 
 	}
 
-	void SceneEventDispacher::OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj)
+	void SceneEventDispacher::OnSceneAddObject(std::shared_ptr<SceneObject> scene_obj)
 	{
 		scene_obj->OnEnterScene(m_scene);
 		m_scene->GetViewMgr()->OnAddSceneObject(scene_obj);
@@ -28,7 +28,7 @@ namespace GameLogic
 		}
 
 	}
-	void SceneEventDispacher::OnRemoveSceneObject(std::shared_ptr<SceneObject> scene_obj)
+	void SceneEventDispacher::OnSceneRemoveObject(std::shared_ptr<SceneObject> scene_obj)
 	{
 		scene_obj->OnLeaveScene(m_scene);
 		m_scene->GetViewMgr()->OnRemoveSceneObject(scene_obj);
@@ -41,10 +41,14 @@ namespace GameLogic
 	void SceneEventDispacher::OnMoveObjectMoveAgentStateChange(std::shared_ptr<MoveObject> move_obj)
 	{
 	}
-	void SceneEventDispacher::OnMoveObjectVelocityChange(std::shared_ptr<MoveObject> move_obj)
+	void SceneEventDispacher::OnMoveObjectVelocityChange(std::shared_ptr<MoveObject> move_obj, Vector3 old_velocity)
 	{
 	}
-	void SceneEventDispacher::OnSceneObjectPosChange(std::shared_ptr<SceneObject> move_obj)
+	void SceneEventDispacher::OnSceneObjectPosChange(std::shared_ptr<SceneObject> scene_obj, Vector3 old_pos)
+	{
+		m_scene->GetViewMgr()->OnSceneObjectPosChange(scene_obj);
+	}
+	void SceneEventDispacher::OnSceneObjectFaceDirChange(std::shared_ptr<SceneObject> scene_obj, float old_face_dir)
 	{
 	}
 }

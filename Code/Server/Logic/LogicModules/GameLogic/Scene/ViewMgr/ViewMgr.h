@@ -27,6 +27,7 @@ namespace GameLogic
 	public:
 		void OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj);
 		void OnRemoveSceneObject(std::shared_ptr<SceneObject> scene_obj);
+		void OnSceneObjectPosChange(std::shared_ptr<SceneObject> scene_obj);
 	};
 }
 

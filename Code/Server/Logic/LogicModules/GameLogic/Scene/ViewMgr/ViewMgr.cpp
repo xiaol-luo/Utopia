@@ -3,6 +3,8 @@
 #include "ViewDefine.h"
 #include "ViewGrid.h"
 #include "Common/Utils/MemoryUtil.h"
+#include "ViewUnit.h"
+#include "GameLogic/Scene/SceneObject/SceneObject.h"
 
 namespace GameLogic
 {
@@ -88,11 +90,40 @@ namespace GameLogic
 
 	void ViewMgr::OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj)
 	{
+		if (m_units.count(scene_obj->GetId()))
+			return;
 
+		ViewUnit *view_unit = new ViewUnit();
+		bool ret = view_unit->Init(this, scene_obj);
+		if (!ret)
+		{
+			delete view_unit;
+			return;
+		}
+		m_units[scene_obj->GetId()] = view_unit;
+		scene_obj->SetViewUnit(view_unit);
 	}
 
 	void ViewMgr::OnRemoveSceneObject(std::shared_ptr<SceneObject> scene_obj)
 	{
+		ViewUnitMap::iterator it = m_units.find(scene_obj->GetId());
+		if (m_units.end() == it)
+		{
+			scene_obj->SetViewUnit(nullptr);
+			return;
+		}
 
+		delete it->second;
+		scene_obj->SetViewUnit(nullptr);
+		m_units.erase(it);
+	}
+	void ViewMgr::OnSceneObjectPosChange(std::shared_ptr<SceneObject> scene_obj)
+	{
+		ViewUnit *view_unit = scene_obj->GetViewUnit();
+		if (nullptr != view_unit)
+		{
+			view_unit->SetViewChange(true);
+			view_unit->SetVisualChange(true);
+		}
 	}
 }

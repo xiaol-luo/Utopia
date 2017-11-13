@@ -47,7 +47,7 @@ protected:
 
 	EServerLogicState m_state = EServerLogicState_Free;
 	ModuleMgr *m_module_mgr = nullptr;
-	int m_loop_span_ms = 25;
+	int m_loop_span_ms = 50;
 	void * m_init_params[EMoudleName_Max];
 
 	ITimerModule *m_timer_module;

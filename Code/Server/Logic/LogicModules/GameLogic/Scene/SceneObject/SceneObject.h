@@ -16,6 +16,7 @@ namespace GameLogic
 {
 	class Scene;
 	class MoveAgent;
+	class ViewUnit;
 
 	enum ESceneObjectType
 	{
@@ -37,11 +38,23 @@ namespace GameLogic
 	public: 
 		SceneObject(ESceneObjectType obj_type);
 		virtual ~SceneObject();
-
-	public:
 		virtual void OnEnterScene(Scene *scene);
 		virtual void OnLeaveScene(Scene *scene);
 		virtual void Update(long long now_ms);
+
+	protected:
+		template <typename T>
+		std::shared_ptr<T> GetSharedPtr()
+		{
+			return std::dynamic_pointer_cast<T>(shared_from_this());
+		}
+		template <typename T>
+		std::shared_ptr<T> GetSharedPtr() const
+		{
+			return std::dynamic_pointer_cast<T>(shared_from_this());
+		}
+		virtual void OnPosChange(const Vector3 &old_val);
+		virtual void OnFaceDirChange(float old_val);
 
 	public:
 		void LeaveScene();
@@ -56,17 +69,9 @@ namespace GameLogic
 		void SetPos(const Vector3 &val);
 		inline float GetFaceDir() { return m_face_dir; }
 		void SetFaceDir(float val);
-		bool NeedSyncMutableState() { return m_flag_sync_mutable_state; }
-		void SetSyncMutableState(bool val) { m_flag_sync_mutable_state = val; }
-		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
-
-	protected:
-		NetProto::SceneObjectState * GetPbSceneObjectState();
-
-	protected:
-		virtual void OnPosChange(const Vector3 &old_val);
-		virtual void OnRotationChange(float old_val);
-
+		float GetBodyRadius();
+		ViewUnit * GetViewUnit() { return m_view_unit; }
+		void SetViewUnit(ViewUnit *view_unit) { m_view_unit = view_unit; }
 	protected:
 		Scene *m_scene = nullptr;
 		uint64_t m_id = 0;
@@ -78,8 +83,18 @@ namespace GameLogic
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
 		float m_view_radius = 0.0f;
-		bool m_flag_sync_mutable_state = false;
+		float m_body_scale = 1.0f;
+		float m_body_radius = 0.4f;
 		bool m_has_body = true;
 		bool m_has_view = true;
+		ViewUnit *m_view_unit = nullptr;
+
+	public:
+		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
+		bool NeedSyncMutableState() { return m_flag_sync_mutable_state; }
+		void SetSyncMutableState(bool val) { m_flag_sync_mutable_state = val; }
+	protected:
+		NetProto::SceneObjectState * GetPbSceneObjectState();
+		bool m_flag_sync_mutable_state = false;
 	};
 }

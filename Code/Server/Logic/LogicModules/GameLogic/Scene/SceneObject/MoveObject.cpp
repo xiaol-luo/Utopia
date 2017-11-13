@@ -37,15 +37,6 @@ namespace GameLogic
 		SceneObject::Update(now_ms);
 	}
 
-	void MoveObject::SetRadius(float radius)
-	{
-		if (abs(m_radius - radius) < FLT_EPSILON)
-			return;
-
-		float old_val = m_radius;
-		this->OnRadiusChange(old_val);
-	}
-
 	void MoveObject::SetSpeed(float speed)
 	{
 		if (abs(m_speed - speed) < FLT_EPSILON)
@@ -78,11 +69,13 @@ namespace GameLogic
 	void MoveObject::OnMoveAgentStateChange(NetProto::EMoveAgentState old_val)
 	{
 		this->SetSyncMutableState(true);
-		m_scene->GetEventDispacher()->OnMoveObjectMoveAgentStateChange(shared_from_this());
+		m_scene->GetEventDispacher()->OnMoveObjectMoveAgentStateChange(this->GetSharedPtr<MoveObject>());
 	}
 
 	void MoveObject::OnVelocityChange(const Vector3 & old_val)
 	{
+		m_scene->GetEventDispacher()->OnMoveObjectVelocityChange(this->GetSharedPtr<MoveObject>(), old_val);
+
 		this->SetSyncMutableState(true);
 		if (NetProto::EMoveState_Move == this->GetMoveState())
 		{
@@ -194,9 +187,9 @@ namespace GameLogic
 	{
 		NetProto::MoveObjectState *msg = m_scene->CreateProtobuf<NetProto::MoveObjectState>();
 		msg->set_allocated_obj_state(this->GetPbSceneObjectState());
-		msg->set_radius(m_radius);
-		msg->set_height(m_height);
-		msg->set_mass(m_mass);
+		msg->set_radius(this->GetBodyRadius());
+		msg->set_height(m_body_height);
+		msg->set_mass(0);
 		msg->set_max_speed(m_speed);
 		return msg;
 	}

@@ -151,12 +151,11 @@ namespace GameLogic
 		if (m_scene_objs.find(m_last_scene_objid) != m_scene_objs.end())
 			return 0;
 
-		scene_obj->LeaveScene();
 		scene_obj->SetScene(this);
 		scene_obj->SetId(m_last_scene_objid);
 		m_scene_objs[m_last_scene_objid] = scene_obj;
 		m_scene_objs_cache[m_last_scene_objid] = scene_obj;
-		m_event_dispacher->OnAddSceneObject(scene_obj);
+		m_event_dispacher->OnSceneAddObject(scene_obj);
 		return m_last_scene_objid;
 	}
 
@@ -170,7 +169,7 @@ namespace GameLogic
 			return;
 
 		std::shared_ptr<SceneObject> scene_obj = it->second;
-		m_event_dispacher->OnRemoveSceneObject(scene_obj);
+		m_event_dispacher->OnSceneRemoveObject(scene_obj);
 		scene_obj->SetScene(nullptr);
 		scene_obj->SetId(INVALID_SCENE_OBJID);
 		scene_obj = nullptr;

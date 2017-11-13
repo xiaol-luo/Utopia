@@ -135,8 +135,8 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 		NavAgent *nav_agent = move_agent->GetNavAgent();
 		dtCrowdAgentParams params;
 		memset(&params, 0, sizeof(params));
-		params.radius = move_obj->GetRadius();
-		params.height = move_obj->GetHeight();
+		params.radius = move_obj->GetBodyRadius();
+		params.height = move_obj->GetBodyHeight();
 		params.maxAcceleration = 32 * 40;
 		params.maxSpeed = move_obj->GetSpeed();
 		params.collisionQueryRange = params.radius * 12.0f;

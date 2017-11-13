@@ -2,6 +2,7 @@
 #include "GameLogic/Scene/Scene.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
+#include "GameLogic/Scene/EventDispacher/EventDispacher.h"
 
 namespace GameLogic
 {
@@ -11,12 +12,36 @@ namespace GameLogic
 
 	SceneObject::~SceneObject()
 	{
+		this->SetViewUnit(nullptr);
+	}
+
+	void SceneObject::OnPosChange(const Vector3 &old_val)
+	{
+		m_scene->GetEventDispacher()->OnSceneObjectPosChange(this->shared_from_this(), old_val);
+	}
+
+	void SceneObject::OnFaceDirChange(float old_val)
+	{
+		m_scene->GetEventDispacher()->OnSceneObjectFaceDirChange(this->shared_from_this(), old_val);
+	}
+
+	void SceneObject::OnEnterScene(Scene *scene)
+	{
+
+	}
+
+	void SceneObject::OnLeaveScene(Scene *scene)
+	{
+
+	}
+
+	void SceneObject::Update(long long now_ms)
+	{
 
 	}
 
 	void SceneObject::LeaveScene()
 	{
-		shared_from_this();
 		if (nullptr != m_scene)
 		{
 			m_scene->RemoveObject(m_id);
@@ -40,7 +65,12 @@ namespace GameLogic
 
 		float old_val = m_face_dir;
 		m_face_dir = val;
-		this->OnRotationChange(old_val);
+		this->OnFaceDirChange(old_val);
+	}
+
+	float SceneObject::GetBodyRadius()
+	{
+		return m_body_radius * m_body_scale;
 	}
 
 	std::vector<SyncClientMsg> SceneObject::ColllectSyncClientMsg(int filter_type)
@@ -67,29 +97,5 @@ namespace GameLogic
 		pos->set_y(m_pos.y);
 		pos->set_z(m_pos.z);
 		return msg;
-	}
-
-	void SceneObject::OnPosChange(const Vector3 &old_val)
-	{
-
-	}
-
-	void SceneObject::OnRotationChange(float old_val)
-	{
-	}
-
-	void SceneObject::OnEnterScene(Scene *scene)
-	{
-
-	}
-
-	void SceneObject::OnLeaveScene(Scene *scene)
-	{
-
-	}
-
-	void SceneObject::Update(long long now_ms)
-	{
-
 	}
 }

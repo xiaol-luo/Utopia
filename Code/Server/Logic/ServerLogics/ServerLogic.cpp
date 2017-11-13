@@ -6,6 +6,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Network/INetworkModule.h"
 #include "Network/Utils/NetworkAgent.h"
+#include "Common/Macro/ServerLogicMacro.h"
 
 ServerLogic *server_logic = nullptr;
 const int TRY_MAX_TIMES = 100000;
@@ -85,6 +86,8 @@ void ServerLogic::Update()
 			this->Quit();
 
 		long long consume_ms = m_timer_module->RealNowMs() - m_timer_module->NowMs();
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, 
+			"ServerLogic consume time {0} ms", consume_ms);
 		long long sleep_time = m_loop_span_ms - consume_ms;
 		if (sleep_time > 0)
 			std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
