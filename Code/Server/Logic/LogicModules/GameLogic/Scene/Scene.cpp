@@ -17,20 +17,28 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Timer/ITimerModule.h"
 #include "GameLogic/Player/PlayerMgr.h"
+#include "GameLogic/Scene/ViewMgr/ViewMgr.h"
+#include "GameLogic/Scene/EventDispacher/EventDispacher.h"
 
 namespace GameLogic
 {
 	Scene::Scene(GameLogicModule *logic_module) : m_logic_module(logic_module)
 	{
 		m_protobuf_arena = MemoryUtil::NewArena();
-		m_navMesh = new GameLogic::NavMesh(this);
-		m_moveMgr = new GameLogic::MoveMgr(this);
+		m_nav_mesh = new GameLogic::NavMesh(this);
+		m_move_mgr = new GameLogic::MoveMgr(this);
+		m_view_mgr = new GameLogic::ViewMgr(this);
+		m_event_dispacher = new SceneEventDispacher(this);
 	}
 	
 	Scene::~Scene()
 	{
-		delete m_protobuf_arena;
-		m_protobuf_arena = nullptr;
+		delete m_protobuf_arena; m_protobuf_arena = nullptr;
+		delete m_nav_mesh; m_nav_mesh = nullptr;
+		delete m_move_mgr; m_move_mgr = nullptr;
+		delete m_view_mgr; m_view_mgr = nullptr;
+		delete m_event_dispacher; m_event_dispacher = nullptr;
+
 	}
 
 	bool Scene::Awake(void *param)
@@ -39,10 +47,13 @@ namespace GameLogic
 		m_sceneCfg = m_logic_module->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
 
 		bool ret;
-		ret = m_navMesh->LoadTerrain(m_logic_module->GetCfgRootPath() + "/" + m_sceneCfg->terrain_file_path);
+		ret = m_nav_mesh->LoadTerrain(m_logic_module->GetCfgRootPath() + "/" + m_sceneCfg->terrain_file_path);
 		assert(ret);
 
-		ret = m_moveMgr->Awake();
+		ret = m_view_mgr->LoadCfg(m_logic_module->GetCfgRootPath() + "/" + m_sceneCfg->terrain_file_path + ".view");
+		assert(ret);
+
+		ret = m_move_mgr->Awake();
 		assert(ret);
 
 		m_red_hero = std::make_shared<Hero>();
@@ -126,21 +137,8 @@ namespace GameLogic
 		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
 
-		m_navMesh->UpdateTerrian();
-		m_moveMgr->Update();
-	}
-
-	void Scene::SendClient(NetId netid, int protocol_id, google::protobuf::Message * msg)
-	{
-		m_logic_module->GetPlayerMgr()->Send(netid, protocol_id, msg);
-	}
-
-	void Scene::SendClient(NetId netid, const std::vector<SyncClientMsg>& msgs)
-	{
-		for (const SyncClientMsg & item : msgs)
-		{
-			m_logic_module->GetPlayerMgr()->Send(netid, item.protocol_id, item.msg);
-		}
+		m_nav_mesh->UpdateTerrian();
+		m_move_mgr->Update();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)
@@ -156,15 +154,9 @@ namespace GameLogic
 		scene_obj->LeaveScene();
 		scene_obj->SetScene(this);
 		scene_obj->SetId(m_last_scene_objid);
-		{
-			std::shared_ptr<MoveObject> move_ptr = std::dynamic_pointer_cast<MoveObject>(scene_obj);
-			if (nullptr != move_ptr)
-				m_moveMgr->OnMoveObjectEnterScene(move_ptr);
-		}
-		scene_obj->OnEnterScene(this);
 		m_scene_objs[m_last_scene_objid] = scene_obj;
 		m_scene_objs_cache[m_last_scene_objid] = scene_obj;
-
+		m_event_dispacher->OnAddSceneObject(scene_obj);
 		return m_last_scene_objid;
 	}
 
@@ -178,12 +170,7 @@ namespace GameLogic
 			return;
 
 		std::shared_ptr<SceneObject> scene_obj = it->second;
-		{
-			std::shared_ptr<MoveObject> move_ptr = std::dynamic_pointer_cast<MoveObject>(scene_obj);
-			if (nullptr != move_ptr)
-				m_moveMgr->OnMoveObjectLeaveScene(move_ptr);
-		}
-		scene_obj->OnLeaveScene(this);
+		m_event_dispacher->OnRemoveSceneObject(scene_obj);
 		scene_obj->SetScene(nullptr);
 		scene_obj->SetId(INVALID_SCENE_OBJID);
 		scene_obj = nullptr;
@@ -200,6 +187,19 @@ namespace GameLogic
 				m_scene_objs_cache.erase(objid);
 			}
 			m_removed_scene_objids.clear();
+		}
+	}
+
+	void Scene::SendClient(NetId netid, int protocol_id, google::protobuf::Message * msg)
+	{
+		m_logic_module->GetPlayerMgr()->Send(netid, protocol_id, msg);
+	}
+
+	void Scene::SendClient(NetId netid, const std::vector<SyncClientMsg>& msgs)
+	{
+		for (const SyncClientMsg & item : msgs)
+		{
+			m_logic_module->GetPlayerMgr()->Send(netid, item.protocol_id, item.msg);
 		}
 	}
 

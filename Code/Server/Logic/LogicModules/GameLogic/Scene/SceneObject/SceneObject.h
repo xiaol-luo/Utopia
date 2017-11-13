@@ -5,6 +5,7 @@
 #include "Common/Geometry/Vector3.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
 #include "google/protobuf/message.h"
+#include "GameLogic/Scene/SceneDefine.h"
 
 namespace NetProto
 {
@@ -31,7 +32,7 @@ namespace GameLogic
 		google::protobuf::Message *msg;
 	};
 
-	class SceneObject
+	class SceneObject : public std::enable_shared_from_this<SceneObject>
 	{
 	public: 
 		SceneObject(ESceneObjectType obj_type);
@@ -53,8 +54,8 @@ namespace GameLogic
 		ESceneObjectType GetObjectType() { return m_obj_type; }
 		inline const Vector3 & GetPos() { return m_pos; }
 		void SetPos(const Vector3 &val);
-		inline float GetRotation() { return m_rotation; }
-		void SetRotation(float val);
+		inline float GetFaceDir() { return m_face_dir; }
+		void SetFaceDir(float val);
 		bool NeedSyncMutableState() { return m_flag_sync_mutable_state; }
 		void SetSyncMutableState(bool val) { m_flag_sync_mutable_state = val; }
 		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
@@ -72,8 +73,13 @@ namespace GameLogic
 		ESceneObjectType m_obj_type = ESOT_Max;
 		int m_model_id = 0;
 		Vector3 m_pos;
-		float m_rotation;
-
+		float m_face_dir = 0;
+		ESceneObjectShape m_body_shape = ESceneObjectShape_CirCle;
+		float m_body_size_x = 0.0f;
+		float m_body_size_y = 0.0f;
+		float m_view_radius = 0.0f;
 		bool m_flag_sync_mutable_state = false;
+		bool m_has_body = true;
+		bool m_has_view = true;
 	};
 }

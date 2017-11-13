@@ -11,7 +11,7 @@
 
 GameLogic::MoveMgr::MoveMgr(Scene * scene) : m_scene(scene)
 {
-	m_nav_mesh = scene->NavMesh();
+	m_nav_mesh = scene->GetNavMesh();
 }
 
 GameLogic::MoveMgr::~MoveMgr()

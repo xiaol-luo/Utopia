@@ -1,8 +1,6 @@
 #pragma once
 #include "SceneObject.h"
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
-#include <memory>
-
 
 namespace NetProto
 {
@@ -15,7 +13,7 @@ namespace GameLogic
 	class NavAgent;
 	class MoveAgent;
 
-	class MoveObject : public SceneObject
+	class MoveObject : public SceneObject, std::enable_shared_from_this<MoveObject>
 	{
 	public:
 		MoveObject(ESceneObjectType obj_type);

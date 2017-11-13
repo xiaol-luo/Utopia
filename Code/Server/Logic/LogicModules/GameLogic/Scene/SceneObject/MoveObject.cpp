@@ -8,6 +8,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "Common/Geometry/GeometryUtils.h"
+#include "GameLogic/Scene/EventDispacher/EventDispacher.h"
 
 namespace GameLogic
 {
@@ -77,6 +78,7 @@ namespace GameLogic
 	void MoveObject::OnMoveAgentStateChange(NetProto::EMoveAgentState old_val)
 	{
 		this->SetSyncMutableState(true);
+		m_scene->GetEventDispacher()->OnMoveObjectMoveAgentStateChange(shared_from_this());
 	}
 
 	void MoveObject::OnVelocityChange(const Vector3 & old_val)
@@ -88,7 +90,8 @@ namespace GameLogic
 			if (abs(velocity.x) >= FLT_MIN || abs(velocity.z) >= FLT_MIN)
 			{
 				float angle = GeometryUtils::DeltaAngle(Vector2::up, velocity.xz());
-				this->SetRotation(angle);
+				this->SetFaceDir(angle);
+
 			}
 		}
 	}
@@ -212,7 +215,7 @@ namespace GameLogic
 		pb_volecity->set_z(volecity.z);
 		msg->set_objid(m_id);
 		msg->set_move_agent_state(this->GetMoveAgentState());
-		msg->set_rotation(this->GetRotation());
+		msg->set_rotation(this->GetFaceDir());
 		return msg;
 	}
 

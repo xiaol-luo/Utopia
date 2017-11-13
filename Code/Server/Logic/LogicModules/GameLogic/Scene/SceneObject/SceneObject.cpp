@@ -16,6 +16,7 @@ namespace GameLogic
 
 	void SceneObject::LeaveScene()
 	{
+		shared_from_this();
 		if (nullptr != m_scene)
 		{
 			m_scene->RemoveObject(m_id);
@@ -32,13 +33,13 @@ namespace GameLogic
 		this->OnPosChange(old_pos);
 	}
 
-	void SceneObject::SetRotation(float val)
+	void SceneObject::SetFaceDir(float val)
 	{
-		if (abs(val - m_rotation) < FLT_EPSILON)
+		if (abs(val - m_face_dir) < FLT_EPSILON)
 			return;
 
-		float old_val = m_rotation;
-		m_rotation = val;
+		float old_val = m_face_dir;
+		m_face_dir = val;
 		this->OnRotationChange(old_val);
 	}
 
@@ -60,7 +61,7 @@ namespace GameLogic
 		msg->set_model_id(m_model_id);
 		msg->set_obj_type((::NetProto::ESceneObject)m_obj_type);
 		msg->set_objid(m_id);
-		msg->set_rotation(m_rotation);
+		msg->set_rotation(m_face_dir);
 		auto pos = msg->mutable_pos();
 		pos->set_x(m_pos.x);
 		pos->set_y(m_pos.y);
