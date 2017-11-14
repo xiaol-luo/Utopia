@@ -33,7 +33,7 @@ namespace GameLogic
 
 	Vector2 ViewUnit::GetPos()
 	{
-		auto so = this->GetSceneObj();
+		auto so = this->GetSceneObjSptr();
 		if (nullptr != so)
 			return so->GetPos().xz();
 		return InvalidViewPos;

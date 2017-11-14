@@ -79,7 +79,7 @@ namespace GameLogic
 		int m_model_id = 0;
 		Vector3 m_pos;
 		float m_face_dir = 0;
-		ESceneObjectShape m_body_shape = ESceneObjectShape_CirCle;
+		ESceneObjectShape m_body_shape = ESceneObjectShape_Circle;
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
 		float m_view_radius = 0.0f;

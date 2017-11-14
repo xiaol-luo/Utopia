@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 #include <memory>
 #include "stdint.h"
 #include "Common/Geometry/Vector2.h"
@@ -10,13 +11,15 @@ namespace GameLogic
 {
 	class ViewMgr;
 	class SceneObject;
-	class ViewGrid;
+	struct ViewGrid;
 	class ViewUnit;
 
 	using ViewGridMap = std::unordered_map<int32_t, ViewGrid *>;
-	using ViewGridSet = std::unordered_map<int32_t, ViewGrid *>;
+	using ViewGridSet = std::unordered_set<ViewGrid *>;
+	using ViewGridVec = std::vector<ViewGrid *>;
+
 	using ViewUnitMap = std::unordered_map<int32_t, ViewUnit *>;
-	using ViewUnitSet = std::unordered_map<int32_t, ViewUnit *>;
+	using ViewUnitSet = std::unordered_set<ViewUnit *>;
 
 
 	extern const Vector2 InvalidViewPos;

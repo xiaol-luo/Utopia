@@ -5,8 +5,9 @@
 
 namespace GameLogic
 {
-	class ViewGrid;
+	struct ViewGrid;
 	class Scene;
+	struct ViewSnapshot;
 
 	class ViewMgr
 	{
@@ -14,6 +15,8 @@ namespace GameLogic
 		ViewMgr(Scene *scene);
 		~ViewMgr();
 		bool LoadCfg(std::string file_path);
+
+		void Update();
 
 	protected:
 		Scene *m_scene = nullptr;
@@ -23,6 +26,8 @@ namespace GameLogic
 		int m_grid_count = 0;
 		ViewGrid **m_grids = nullptr;
 		ViewUnitMap m_units;
+		ViewSnapshot **m_curr_snapshots = nullptr;
+		ViewSnapshot **m_pre_snapshots = nullptr;
 
 	public:
 		void OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj);

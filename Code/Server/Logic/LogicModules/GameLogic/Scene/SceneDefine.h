@@ -4,6 +4,6 @@ namespace GameLogic
 {
 	enum ESceneObjectShape
 	{
-		ESceneObjectShape_CirCle = 0,
+		ESceneObjectShape_Circle = 0,
 	};
 }

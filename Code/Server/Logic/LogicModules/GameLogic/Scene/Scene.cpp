@@ -121,7 +121,11 @@ namespace GameLogic
 	void Scene::Update(long long now_ms)
 	{
 		this->CheckSceneObjectsCache();
-		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++ it)
+		m_nav_mesh->UpdateTerrian();
+		m_move_mgr->Update();
+		m_view_mgr->Update();
+
+		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++it)
 		{
 			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
 			if (nullptr != scene_obj)
@@ -134,11 +138,8 @@ namespace GameLogic
 				}
 			}
 		}
-		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
-
-		m_nav_mesh->UpdateTerrian();
-		m_move_mgr->Update();
+		this->CheckSceneObjectsCache();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)

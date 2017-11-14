@@ -6,13 +6,14 @@ namespace GameLogic
 {
 	class ViewMgr;
 
-	class ViewGrid
+	struct ViewGrid
 	{
-	public:
-		ViewGrid(ViewMgr *mgr, Vector2 center, float size, EViewGridType grid_type);
+		ViewGrid(ViewMgr *mgr, int _id, Vector2 center, float size, EViewGridType grid_type);
 		~ViewGrid();
+		bool CanSee(EViewCamp camp);
+		bool CanSee(int camp);
 
-	private:
+		int grid_id = -1;
 		ViewMgr *m_view_mgr = nullptr;
 		Vector2 m_center;
 		float m_size = 0;

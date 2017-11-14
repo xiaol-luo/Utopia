@@ -15,7 +15,8 @@ namespace GameLogic
 		void Reset();
 
 		uint64_t GetObjId() { return m_objid; }
-		std::shared_ptr<SceneObject> GetSceneObj() { return m_scene_obj.lock(); }
+		std::shared_ptr<SceneObject> GetSceneObjSptr() { return m_scene_obj.lock(); }
+		std::weak_ptr<SceneObject> GetSceneObjWptr() { return m_scene_obj; }
 		Vector2 GetPos();
 
 		inline void SetVisualChange(bool val=true) { m_visual_change = val; }
@@ -32,7 +33,7 @@ namespace GameLogic
 		// body
 		bool m_has_body = false;
 		bool m_visual_change = true;
-		ESceneObjectShape m_body_shape = ESceneObjectShape_CirCle;
+		ESceneObjectShape m_body_shape = ESceneObjectShape_Circle;
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
 		float m_face_dir = 0.0f;
