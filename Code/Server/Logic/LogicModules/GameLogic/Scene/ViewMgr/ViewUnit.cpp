@@ -1,5 +1,6 @@
 #include "ViewUnit.h"
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
+#include "ViewGrid.h"
 
 namespace GameLogic
 {
@@ -29,6 +30,24 @@ namespace GameLogic
 				scene_obj->SetViewUnit(nullptr);
 		m_scene_obj.reset();
 		m_objid = 0;
+
+		if (m_has_view)
+		{
+			for (auto view_grid : m_view_cover_girds)
+			{
+				--view_grid->m_observing_num[m_view_camp];
+			}
+		}
+		m_view_cover_girds.clear();
+		
+		if (m_has_body)
+		{
+			for (auto view_grid : m_body_cover_girds)
+			{
+				view_grid->m_body_units.erase(m_objid);
+			}
+		}
+		m_body_cover_girds.clear();
 	}
 
 	Vector2 ViewUnit::GetPos()
@@ -37,5 +56,10 @@ namespace GameLogic
 		if (nullptr != so)
 			return so->GetPos().xz();
 		return InvalidViewPos;
+	}
+
+	void ViewUnit::UpdateState()
+	{
+
 	}
 }

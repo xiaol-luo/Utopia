@@ -107,6 +107,12 @@ namespace GameLogic
 	void ViewMgr::Update()
 	{
 		{
+			for (auto it : m_view_units)
+			{
+				it.second->UpdateState();
+			}
+		}
+		{
 			ViewSnapshot **tmp_snapshot = m_pre_snapshots;
 			m_pre_snapshots = m_curr_snapshots;
 			m_curr_snapshots = tmp_snapshot;
@@ -121,9 +127,9 @@ namespace GameLogic
 					if (!grid->CanSee(camp))
 						continue;
 					snapshot->view_grids.push_back(grid);
-					for (ViewUnitSet::iterator it = grid->m_view_units.begin(); it != grid->m_view_units.end(); ++ it)
+					for (auto it : grid->m_body_units)
 					{
-						ViewUnit *view_unit = *it;
+						ViewUnit *view_unit = it.second;
 						snapshot->scene_objs.insert_or_assign(view_unit->GetObjId(), view_unit->GetSceneObjWptr());
 					}
 				}
@@ -139,7 +145,7 @@ namespace GameLogic
 
 	void ViewMgr::OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj)
 	{
-		if (m_units.count(scene_obj->GetId()))
+		if (m_view_units.count(scene_obj->GetId()))
 			return;
 
 		ViewUnit *view_unit = new ViewUnit();
@@ -149,14 +155,14 @@ namespace GameLogic
 			delete view_unit;
 			return;
 		}
-		m_units[scene_obj->GetId()] = view_unit;
+		m_view_units[scene_obj->GetId()] = view_unit;
 		scene_obj->SetViewUnit(view_unit);
 	}
 
 	void ViewMgr::OnRemoveSceneObject(std::shared_ptr<SceneObject> scene_obj)
 	{
-		ViewUnitMap::iterator it = m_units.find(scene_obj->GetId());
-		if (m_units.end() == it)
+		ViewUnitMap::iterator it = m_view_units.find(scene_obj->GetId());
+		if (m_view_units.end() == it)
 		{
 			scene_obj->SetViewUnit(nullptr);
 			return;
@@ -164,15 +170,14 @@ namespace GameLogic
 
 		delete it->second;
 		scene_obj->SetViewUnit(nullptr);
-		m_units.erase(it);
+		m_view_units.erase(it);
 	}
 	void ViewMgr::OnSceneObjectPosChange(std::shared_ptr<SceneObject> scene_obj)
 	{
 		ViewUnit *view_unit = scene_obj->GetViewUnit();
 		if (nullptr != view_unit)
 		{
-			view_unit->SetViewChange(true);
-			view_unit->SetVisualChange(true);
+
 		}
 	}
 }

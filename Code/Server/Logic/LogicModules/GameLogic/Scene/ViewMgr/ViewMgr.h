@@ -25,7 +25,7 @@ namespace GameLogic
 		int m_col_num = 0;
 		int m_grid_count = 0;
 		ViewGrid **m_grids = nullptr;
-		ViewUnitMap m_units;
+		ViewUnitMap m_view_units;
 		ViewSnapshot **m_curr_snapshots = nullptr;
 		ViewSnapshot **m_pre_snapshots = nullptr;
 

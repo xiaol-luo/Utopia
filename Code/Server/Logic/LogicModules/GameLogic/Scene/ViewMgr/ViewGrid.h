@@ -19,6 +19,6 @@ namespace GameLogic
 		float m_size = 0;
 		EViewGridType m_grid_type = EViewGrid_Ground;
 		int m_observing_num[EViewCamp_All];
-		ViewUnitSet m_view_units;
+		ViewUnitMap m_body_units;
 	};
 }

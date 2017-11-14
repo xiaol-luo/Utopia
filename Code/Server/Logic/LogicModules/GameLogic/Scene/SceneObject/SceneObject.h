@@ -5,7 +5,7 @@
 #include "Common/Geometry/Vector3.h"
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
 #include "google/protobuf/message.h"
-#include "GameLogic/Scene/SceneDefine.h"
+#include "GameLogic/Scene/Defines/SceneDefine.h"
 
 namespace NetProto
 {
