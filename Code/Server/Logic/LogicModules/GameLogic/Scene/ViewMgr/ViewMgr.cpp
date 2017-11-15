@@ -7,6 +7,7 @@
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
 #include "ViewSnapshot.h"
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
+#include "Common/Utils/NumUtils.h"
 
 namespace GameLogic
 {
@@ -68,6 +69,8 @@ namespace GameLogic
 			m_grid_count = m_row_num * m_col_num;
 			m_grids = (ViewGrid **)Malloc(sizeof(ViewGrid *) * m_grid_count);
 			memset(m_grids, 0, sizeof(ViewGrid *) * m_grid_count);
+			m_max_x = m_col_num * m_grid_edge_length;
+			m_max_y = m_row_num * m_grid_edge_length;
 			
 
 			bool isOk = true;
@@ -141,6 +144,74 @@ namespace GameLogic
 				// TODO: something
 			}
 		}
+	}
+
+	ViewGridVec ViewMgr::GetCircleCoverGrids(float center_x, float center_y, float radius)
+	{
+		ViewGridVec grids = this->GetAABBConverGrids(center_x - radius, center_y - radius, center_x + radius, center_y + radius);
+		return grids;
+	}
+
+	ViewGridVec ViewMgr::GetAABBConverGrids(float x1, float y1, float x2, float y2)
+	{
+		ViewGridVec grids;
+		int row1 = InRowIdx(y1);
+		int col1 = InColIdx(x1);
+		int row2 = InRowIdx(y2);
+		int col2 = InColIdx(x2);
+		if ((row1 < 0 && row2 < 0) || (row1 >= m_row_num || row2 >= m_row_num) ||
+			(col1 < 0 && col2 < 0) || (col1 >= m_col_num && col2 >= m_col_num))
+			return grids;
+		
+		row1 = NumUtil::GetInRange(row1, 0, m_row_num);
+		row2 = NumUtil::GetInRange(row2, 0, m_row_num);
+		col1 = NumUtil::GetInRange(col1, 0, m_col_num);
+		col2 = NumUtil::GetInRange(col2, 0, m_col_num);
+		NumUtil::MakeInAscOrder(row1, row2);
+		NumUtil::MakeInAscOrder(col1, col2);
+
+		for (int row = row1; row <= row2; ++row)
+		{
+			for (int col = col1; col <= col2; ++col)
+			{
+				int grid_idx = CalGridIdx(row, col);
+				if (grid_idx >= 0 && grid_idx < m_grid_count)
+					grids.push_back(m_grids[grid_idx]);
+			}
+		}
+		return grids;
+	}
+
+	int ViewMgr::CalGridIdx(int row, int col)
+	{
+		return row * m_col_num + col;
+	}
+
+	int ViewMgr::InRowIdx(float y)
+	{
+		if (y < 0)
+			return INT32_MIN;
+		if (y >= m_max_y)
+			return INT32_MAX;
+		return y / m_grid_edge_length;
+	}
+
+	int ViewMgr::InColIdx(float x)
+	{
+		if (x < 0)
+			return INT32_MIN;
+		if (x >= m_max_x)
+			return INT32_MAX;
+		return x / m_grid_edge_length;
+	}
+
+	int ViewMgr::InGridIdx(float x, float y)
+	{
+		int row = this->InRowIdx(y);
+		int col = this->InColIdx(x);
+		if (row < 0 || row >= m_row_num || col < 0 || col >= m_col_num)
+			return VIEW_GRID_INVALID_IDX;
+		return CalGridIdx(row, col);
 	}
 
 	void ViewMgr::OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj)

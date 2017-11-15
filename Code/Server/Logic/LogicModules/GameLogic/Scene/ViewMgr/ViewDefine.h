@@ -23,6 +23,7 @@ namespace GameLogic
 
 
 	extern const Vector2 InvalidViewPos;
+	const int VIEW_GRID_INVALID_IDX = -1;
 
 	enum EViewCamp
 	{

@@ -15,15 +15,22 @@ namespace GameLogic
 		ViewMgr(Scene *scene);
 		~ViewMgr();
 		bool LoadCfg(std::string file_path);
-
 		void Update();
 
+		ViewGridVec GetCircleCoverGrids(float center_x, float center_y, float radius);
+		ViewGridVec GetAABBConverGrids(float min_x, float min_y, float max_x, float max_y);
+		int CalGridIdx(int row, int col);
+		int InRowIdx(float y);
+		int InColIdx(float x);
+		int InGridIdx(float x, float y);
 	protected:
 		Scene *m_scene = nullptr;
 		float m_grid_edge_length = 0;
 		int m_row_num = 0;
 		int m_col_num = 0;
 		int m_grid_count = 0;
+		float m_max_x = 0;
+		float m_max_y = 0;
 		ViewGrid **m_grids = nullptr;
 		ViewUnitMap m_view_units;
 		ViewSnapshot **m_curr_snapshots = nullptr;
