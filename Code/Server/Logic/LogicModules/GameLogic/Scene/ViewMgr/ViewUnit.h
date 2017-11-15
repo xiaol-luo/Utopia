@@ -33,12 +33,12 @@ namespace GameLogic
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
 		float m_face_dir = 0.0f;
-		ViewGridSet m_body_cover_girds;
+		ViewGridVec m_body_cover_girds;
 		
 		// view
 		bool m_has_view = false;
 		float m_view_radius = 0.0f;
 		EViewCamp m_view_camp = EViewCamp_None;
-		ViewGridSet m_view_cover_girds;
+		ViewGridVec m_view_cover_girds;
 	};
 }

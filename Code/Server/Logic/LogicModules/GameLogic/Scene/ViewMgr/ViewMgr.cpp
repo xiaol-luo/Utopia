@@ -8,6 +8,7 @@
 #include "ViewSnapshot.h"
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
 #include "Common/Utils/NumUtils.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
 {
@@ -96,7 +97,7 @@ namespace GameLogic
 					}
 
 					int grid_idx = m_col_num * row + col;
-					Vector2 center(m_grid_edge_length * row + m_grid_edge_length / 2, m_grid_edge_length * col + m_grid_edge_length / 2);
+					Vector2 center(m_grid_edge_length * col + m_grid_edge_length / 2, m_grid_edge_length * row + m_grid_edge_length / 2);
 					ViewGrid *grid = new ViewGrid(this, grid_idx, center, m_grid_edge_length, (EViewGridType)val);
 					m_grids[m_row_num * row + col] = grid;
 				}
@@ -141,14 +142,30 @@ namespace GameLogic
 			for (int i = 0; i < EViewCamp_All; ++i)
 			{
 				ViewSnapshotDifference diff = m_curr_snapshots[i]->CalDifference(m_pre_snapshots[i]);
-				// TODO: something
+				if (!diff.miss_scene_objs.empty() ||
+					!diff.more_scene_objs.empty() ||
+					!diff.miss_view_grids.empty() ||
+					!diff.more_view_grids.empty())
+				{
+					diff.PrintLog();
+				}
 			}
 		}
 	}
 
 	ViewGridVec ViewMgr::GetCircleCoverGrids(float center_x, float center_y, float radius)
 	{
-		ViewGridVec grids = this->GetAABBConverGrids(center_x - radius, center_y - radius, center_x + radius, center_y + radius);
+		ViewGridVec possible_grids = this->GetAABBConverGrids(center_x - radius, center_y - radius, center_x + radius, center_y + radius);
+		ViewGridVec grids;
+		for (auto grid : possible_grids)
+		{
+			if (GeometryUtils::IsCirlceRectIntersect(
+				Vector2(center_x, center_y), radius, 
+				grid->m_center, m_grid_edge_length, m_grid_edge_length))
+			{
+				grids.push_back(grid);
+			}
+		}
 		return grids;
 	}
 
@@ -212,6 +229,15 @@ namespace GameLogic
 		if (row < 0 || row >= m_row_num || col < 0 || col >= m_col_num)
 			return VIEW_GRID_INVALID_IDX;
 		return CalGridIdx(row, col);
+	}
+
+	ViewGrid * ViewMgr::GetGrid(float x, float y)
+	{
+		int grid_idx = this->InGridIdx(x, y);
+		if (VIEW_GRID_INVALID_IDX == grid_idx)
+			return nullptr;
+		return m_grids[grid_idx];
+
 	}
 
 	void ViewMgr::OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj)

@@ -3,6 +3,8 @@
 #include "ViewSnapshot.h"
 #include "ViewMgr.h"
 #include "ViewGrid.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
 
 namespace GameLogic
 {
@@ -39,20 +41,22 @@ namespace GameLogic
 				 if (gird_id == other_grid_id)
 				 {
 					 ++idx; ++other_idx;
-					 gird_id = view_grids[idx]->grid_id; 
-					 other_grid_id = other->view_grids[other_idx]->grid_id;
-					 continue;
+					 if (idx < view_grids.size() && other_idx < other->view_grids.size())
+					 {
+						 gird_id = view_grids[idx]->grid_id;
+						 other_grid_id = other->view_grids[other_idx]->grid_id;
+					 }
 				 }
-				 if (gird_id > other_grid_id)
+				 else if (gird_id > other_grid_id)
 				 {
 					 diff.miss_view_grids.push_back(other->view_grids[other_idx]);
 					 ++other_idx;
 					 if (other_idx < other->view_grids.size())
 						 other_grid_id = other->view_grids[other_idx]->grid_id;
 				 }
-				 if (gird_id < other_grid_id)
+				 else if (gird_id < other_grid_id)
 				 {
-					 diff.more_view_grids.push_back(other->view_grids[idx]);
+					 diff.more_view_grids.push_back(view_grids[idx]);
 					 ++idx;
 					 if (idx < view_grids.size())
 						gird_id = view_grids[idx]->grid_id;
@@ -97,5 +101,29 @@ namespace GameLogic
 		miss_scene_objs.clear();
 		more_view_grids.clear();
 		miss_view_grids.clear();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
+
+	void ViewSnapshotDifference::PrintLog()
+	{/*
+
+		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> miss_scene_objs;
+		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> more_scene_objs;
+		ViewGridVec miss_view_grids;
+		ViewGridVec more_view_grids;
+		*/
+
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+			"-----------------------------------------------------------------------------");
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+			"ViewSnapshotDifference miss_scene_objs {0}", miss_scene_objs.size());
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+			"ViewSnapshotDifference more_scene_objs {0}", more_scene_objs.size());
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+			"ViewSnapshotDifference miss_view_grids {0}", miss_view_grids.size());
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+			"ViewSnapshotDifference more_view_grids {0}", more_view_grids.size());
 	}
 }

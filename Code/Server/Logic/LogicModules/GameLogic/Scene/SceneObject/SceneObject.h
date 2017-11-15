@@ -6,6 +6,7 @@
 #include "GameLogic/Scene/MoveMgr/MoveAgentState/MoveAgentState.h"
 #include "google/protobuf/message.h"
 #include "GameLogic/Scene/Defines/SceneDefine.h"
+#include "GameLogic/Scene/ViewMgr/ViewDefine.h"
 
 namespace NetProto
 {
@@ -72,6 +73,9 @@ namespace GameLogic
 		float GetBodyRadius();
 		ViewUnit * GetViewUnit() { return m_view_unit; }
 		void SetViewUnit(ViewUnit *view_unit) { m_view_unit = view_unit; }
+		float GetViewRadius() { return m_view_radius; }
+		EViewCamp GetViewCamp() { return m_view_camp; }
+		void SetViewCamp(EViewCamp val) { m_view_camp = val; }
 	protected:
 		Scene *m_scene = nullptr;
 		uint64_t m_id = 0;
@@ -82,11 +86,12 @@ namespace GameLogic
 		ESceneObjectShape m_body_shape = ESceneObjectShape_Circle;
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
-		float m_view_radius = 0.0f;
+		float m_view_radius = 2.0f;
 		float m_body_scale = 1.0f;
-		float m_body_radius = 0.4f;
+		float m_body_radius = 0.5f;
 		bool m_has_body = true;
 		bool m_has_view = true;
+		EViewCamp m_view_camp = EViewCamp_None;
 		ViewUnit *m_view_unit = nullptr;
 
 	public:

@@ -23,6 +23,7 @@ namespace GameLogic
 		int InRowIdx(float y);
 		int InColIdx(float x);
 		int InGridIdx(float x, float y);
+		ViewGrid * GetGrid(float x, float y);
 	protected:
 		Scene *m_scene = nullptr;
 		float m_grid_edge_length = 0;

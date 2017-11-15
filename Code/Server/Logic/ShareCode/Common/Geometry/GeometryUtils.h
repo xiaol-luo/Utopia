@@ -9,8 +9,8 @@ class Vector3;
 
 namespace GeometryUtils
 {
-	float DegToRad(float deg) { return deg * KPiOver180; }
-	float RadToDeg(float rad) { return rad * K180OverPi; }
+	float DegToRad(float deg);
+	float RadToDeg(float rad);
 	
 	// 逆时针为正
 	float DeltaAngle(Vector3 from, Vector3 to);

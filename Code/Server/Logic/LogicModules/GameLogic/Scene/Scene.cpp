@@ -57,10 +57,13 @@ namespace GameLogic
 		assert(ret);
 
 		m_red_hero = std::make_shared<Hero>();
+		m_red_hero->SetViewCamp(EViewCamp_Red);
 		this->AddObject(m_red_hero);
 		m_red_hero->Flash(Vector3(50, 0, 50));
 
+
 		m_blue_hero = std::make_shared<Hero>();
+		m_blue_hero->SetViewCamp(EViewCamp_Blue);
 		this->AddObject(m_blue_hero);
 		m_blue_hero->Flash(Vector3(50, 0, 50));
 

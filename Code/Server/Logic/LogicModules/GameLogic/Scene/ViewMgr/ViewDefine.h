@@ -18,7 +18,7 @@ namespace GameLogic
 	using ViewGridSet = std::unordered_set<ViewGrid *>;
 	using ViewGridVec = std::vector<ViewGrid *>;
 
-	using ViewUnitMap = std::unordered_map<int32_t, ViewUnit *>;
+	using ViewUnitMap = std::unordered_map<int64_t, ViewUnit *>;
 	using ViewUnitSet = std::unordered_set<ViewUnit *>;
 
 

@@ -9,6 +9,16 @@
 
 
 
+float GeometryUtils::DegToRad(float deg)
+{
+	return deg * KPiOver180;
+}
+
+float GeometryUtils::RadToDeg(float rad)
+{
+	return rad * K180OverPi;
+}
+
 float GeometryUtils::DeltaAngle(Vector3 from, Vector3 to)
 {
 	Vector3  tmp_from(from);
@@ -130,11 +140,11 @@ float GeometryUtils::GetLineIntersectPoint(Vector2 &a1, Vector2 &a2, Vector2 &b1
 bool GeometryUtils::IsCirlceRectIntersect(const Vector2 & circle_center, float radius, Vector2 rect_center, float length, float width)
 {
 	Vector2 tmp = circle_center;
-	tmp - rect_center;
+	tmp = tmp - rect_center;
 
 	Vector2 v = Vector2(abs(tmp.x), abs(tmp.y));
 	Vector2 h = Vector2(length / 2, width / 2);
-	v - h;
+	v = v - h;
 	if (v.x < FLT_MIN)
 		v.x = 0;
 	if (v.y < FLT_MIN)
@@ -142,5 +152,5 @@ bool GeometryUtils::IsCirlceRectIntersect(const Vector2 & circle_center, float r
 
 	float l1 = Vector2::dot(v, v);
 	float l2 = radius *radius;
-	return l1 <= l2;
+	return l1 < l2;
 }
