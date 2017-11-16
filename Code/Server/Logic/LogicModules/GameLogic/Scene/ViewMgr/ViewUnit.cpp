@@ -2,6 +2,7 @@
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
 #include "ViewGrid.h"
 #include "ViewMgr.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
 {
@@ -141,27 +142,37 @@ namespace GameLogic
 				{
 					if (grid == locate_grid) // 自己所在的位置必定可见且不可阻隔视线
 						continue;
-
 					if (!CanSeeGrid(locate_grid, grid))
-					{
 						blind_grids.insert(grid);
-					}
 					if (CanBlockGrid(locate_grid, grid))
-					{
 						block_grids.push_back(grid);
-					}
-
-					cover_grids.erase(blind_grids.begin(), blind_grids.end());
+				}
+				if (!blind_grids.empty())
+				{
+					for (ViewGrid *grid : blind_grids)
+						cover_grids.erase(grid);
 					blind_grids.clear();
-					for (ViewGrid *block_grid : block_grids)
+				}
+				for (ViewGrid *block_grid : block_grids)
+				{
+					float half_grid_size = block_grid->grid_size / 2;
+					Vector2 r1 = Vector2(block_grid->center.x - half_grid_size, block_grid->center.y - half_grid_size);
+					Vector2 r2 = Vector2(block_grid->center.x + half_grid_size, block_grid->center.y + half_grid_size);
+					for (ViewGrid *cover_grid : cover_grids)
 					{
-						for (ViewGrid *cover_grid : cover_grids)
-						{
-
-						}
-						cover_grids.erase(blind_grids.begin(), blind_grids.end());
-						blind_grids.clear();
+						if (cover_grid->grid_type == block_grid->grid_type &&
+							cover_grid->grid_type_group == block_grid->grid_type_group)
+							continue;
+						bool isIntersect = GeometryUtils::IsRectLineSegmentIntersect(r1, r2, locate_grid->center, cover_grid->center);
+						if (isIntersect)
+							blind_grids.insert(cover_grid);
 					}
+				}
+				if (!blind_grids.empty())
+				{
+					for (ViewGrid *grid : blind_grids)
+						cover_grids.erase(grid);
+					blind_grids.clear();
 				}
 			}
 			for (auto grid : m_view_cover_girds)

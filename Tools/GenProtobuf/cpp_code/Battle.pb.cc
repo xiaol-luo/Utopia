@@ -58,13 +58,28 @@ public:
  ::google::protobuf::internal::ExplicitlyConstructed<BattleOperation>
      _instance;
 } _BattleOperation_default_instance_;
+class ViewGridDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<ViewGrid>
+     _instance;
+} _ViewGrid_default_instance_;
+class ViewAllGridsDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<ViewAllGrids>
+     _instance;
+} _ViewAllGrids_default_instance_;
+class ViewSnapshotDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<ViewSnapshot>
+     _instance;
+} _ViewSnapshot_default_instance_;
 
 namespace protobuf_Battle_2eproto {
 
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[8];
+::google::protobuf::Metadata file_level_metadata[11];
 
 }  // namespace
 
@@ -79,6 +94,9 @@ PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
     TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
@@ -155,6 +173,28 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, target_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, dir_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, pos_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewGrid, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewGrid, center_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewGrid, grid_type_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewAllGrids, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewAllGrids, grid_size_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewAllGrids, row_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewAllGrids, col_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewAllGrids, grids_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewSnapshot, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewSnapshot, grids_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(RspFreeHero)},
@@ -165,6 +205,9 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTR
   { 40, -1, sizeof(MoveObjectMutableState)},
   { 50, -1, sizeof(MoveToPos)},
   { 56, -1, sizeof(BattleOperation)},
+  { 65, -1, sizeof(ViewGrid)},
+  { 72, -1, sizeof(ViewAllGrids)},
+  { 81, -1, sizeof(ViewSnapshot)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -176,6 +219,9 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveObjectMutableState_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_MoveToPos_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_BattleOperation_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_ViewGrid_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_ViewAllGrids_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_ViewSnapshot_default_instance_),
 };
 
 namespace {
@@ -196,7 +242,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 8);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 11);
 }
 
 }  // namespace
@@ -222,7 +268,13 @@ void TableStruct::InitDefaultsImpl() {
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_MoveToPos_default_instance_);_BattleOperation_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_BattleOperation_default_instance_);_SceneObjectState_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector3*>(
+      &_BattleOperation_default_instance_);_ViewGrid_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_ViewGrid_default_instance_);_ViewAllGrids_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_ViewAllGrids_default_instance_);_ViewSnapshot_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_ViewSnapshot_default_instance_);_SceneObjectState_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector3*>(
       ::NetProto::PBVector3::internal_default_instance());
   _MoveObjectState_default_instance_._instance.get_mutable()->obj_state_ = const_cast< ::NetProto::SceneObjectState*>(
       ::NetProto::SceneObjectState::internal_default_instance());
@@ -233,6 +285,8 @@ void TableStruct::InitDefaultsImpl() {
   _MoveToPos_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector2*>(
       ::NetProto::PBVector2::internal_default_instance());
   _BattleOperation_default_instance_._instance.get_mutable()->pos_ = const_cast< ::NetProto::PBVector2*>(
+      ::NetProto::PBVector2::internal_default_instance());
+  _ViewGrid_default_instance_._instance.get_mutable()->center_ = const_cast< ::NetProto::PBVector2*>(
       ::NetProto::PBVector2::internal_default_instance());
 }
 
@@ -265,10 +319,15 @@ void AddDescriptorsImpl() {
       "leOperation\022)\n\005opera\030\001 \001(\0162\032.NetProto.EB"
       "attleOperation\022\021\n\ttarget_id\030\002 \001(\004\022\013\n\003dir"
       "\030\003 \001(\002\022 \n\003pos\030\004 \001(\0132\023.NetProto.PBVector2"
-      "B\003\370\001\001b\006proto3"
+      "\"B\n\010ViewGrid\022#\n\006center\030\001 \001(\0132\023.NetProto."
+      "PBVector2\022\021\n\tgrid_type\030\002 \001(\005\"^\n\014ViewAllG"
+      "rids\022\021\n\tgrid_size\030\001 \001(\002\022\013\n\003row\030\002 \001(\005\022\013\n\003"
+      "col\030\003 \001(\005\022!\n\005grids\030\004 \003(\0132\022.NetProto.View"
+      "Grid\"1\n\014ViewSnapshot\022!\n\005grids\030\001 \003(\0132\022.Ne"
+      "tProto.ViewGridB\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 853);
+      descriptor, 1068);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
   ::NetProto::protobuf_Common_2eproto::AddDescriptors();
@@ -4012,6 +4071,1206 @@ const ::NetProto::PBVector2& BattleOperation::pos() const {
     
   }
   // @@protoc_insertion_point(field_set_allocated:NetProto.BattleOperation.pos)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+void ViewGrid::_slow_mutable_center() {
+  center_ = ::google::protobuf::Arena::CreateMessage< ::NetProto::PBVector2 >(
+      GetArenaNoVirtual());
+}
+::NetProto::PBVector2* ViewGrid::_slow_release_center() {
+  if (center_ == NULL) {
+    return NULL;
+  } else {
+    ::NetProto::PBVector2* temp = new ::NetProto::PBVector2(*center_);
+    center_ = NULL;
+    return temp;
+  }
+}
+::NetProto::PBVector2* ViewGrid::unsafe_arena_release_center() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.ViewGrid.center)
+  
+  ::NetProto::PBVector2* temp = center_;
+  center_ = NULL;
+  return temp;
+}
+void ViewGrid::_slow_set_allocated_center(
+    ::google::protobuf::Arena* message_arena, ::NetProto::PBVector2** center) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*center) == NULL) {
+      message_arena->Own(*center);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*center)) {
+      ::NetProto::PBVector2* new_center = 
+            ::google::protobuf::Arena::CreateMessage< ::NetProto::PBVector2 >(
+            message_arena);
+      new_center->CopyFrom(**center);
+      *center = new_center;
+    }
+}
+void ViewGrid::unsafe_arena_set_allocated_center(
+    ::NetProto::PBVector2* center) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete center_;
+  }
+  center_ = center;
+  if (center) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NetProto.ViewGrid.center)
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ViewGrid::kCenterFieldNumber;
+const int ViewGrid::kGridTypeFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ViewGrid::ViewGrid()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_Battle_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NetProto.ViewGrid)
+}
+ViewGrid::ViewGrid(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  protobuf_Battle_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:NetProto.ViewGrid)
+}
+ViewGrid::ViewGrid(const ViewGrid& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_center()) {
+    center_ = new ::NetProto::PBVector2(*from.center_);
+  } else {
+    center_ = NULL;
+  }
+  grid_type_ = from.grid_type_;
+  // @@protoc_insertion_point(copy_constructor:NetProto.ViewGrid)
+}
+
+void ViewGrid::SharedCtor() {
+  ::memset(&center_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&grid_type_) -
+      reinterpret_cast<char*>(&center_)) + sizeof(grid_type_));
+  _cached_size_ = 0;
+}
+
+ViewGrid::~ViewGrid() {
+  // @@protoc_insertion_point(destructor:NetProto.ViewGrid)
+  SharedDtor();
+}
+
+void ViewGrid::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+  if (this != internal_default_instance()) delete center_;
+}
+
+void ViewGrid::ArenaDtor(void* object) {
+  ViewGrid* _this = reinterpret_cast< ViewGrid* >(object);
+  (void)_this;
+}
+void ViewGrid::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
+void ViewGrid::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ViewGrid::descriptor() {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ViewGrid& ViewGrid::default_instance() {
+  protobuf_Battle_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+ViewGrid* ViewGrid::New(::google::protobuf::Arena* arena) const {
+  return ::google::protobuf::Arena::CreateMessage<ViewGrid>(arena);
+}
+
+void ViewGrid::Clear() {
+// @@protoc_insertion_point(message_clear_start:NetProto.ViewGrid)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaNoVirtual() == NULL && center_ != NULL) {
+    delete center_;
+  }
+  center_ = NULL;
+  grid_type_ = 0;
+  _internal_metadata_.Clear();
+}
+
+bool ViewGrid::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NetProto.ViewGrid)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .NetProto.PBVector2 center = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_center()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 grid_type = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &grid_type_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NetProto.ViewGrid)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NetProto.ViewGrid)
+  return false;
+#undef DO_
+}
+
+void ViewGrid::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NetProto.ViewGrid)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NetProto.PBVector2 center = 1;
+  if (this->has_center()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *this->center_, output);
+  }
+
+  // int32 grid_type = 2;
+  if (this->grid_type() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->grid_type(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NetProto.ViewGrid)
+}
+
+::google::protobuf::uint8* ViewGrid::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.ViewGrid)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .NetProto.PBVector2 center = 1;
+  if (this->has_center()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        1, *this->center_, deterministic, target);
+  }
+
+  // int32 grid_type = 2;
+  if (this->grid_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->grid_type(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.ViewGrid)
+  return target;
+}
+
+size_t ViewGrid::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NetProto.ViewGrid)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // .NetProto.PBVector2 center = 1;
+  if (this->has_center()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->center_);
+  }
+
+  // int32 grid_type = 2;
+  if (this->grid_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->grid_type());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ViewGrid::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.ViewGrid)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ViewGrid* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ViewGrid>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.ViewGrid)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.ViewGrid)
+    MergeFrom(*source);
+  }
+}
+
+void ViewGrid::MergeFrom(const ViewGrid& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.ViewGrid)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_center()) {
+    mutable_center()->::NetProto::PBVector2::MergeFrom(from.center());
+  }
+  if (from.grid_type() != 0) {
+    set_grid_type(from.grid_type());
+  }
+}
+
+void ViewGrid::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.ViewGrid)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ViewGrid::CopyFrom(const ViewGrid& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.ViewGrid)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ViewGrid::IsInitialized() const {
+  return true;
+}
+
+void ViewGrid::Swap(ViewGrid* other) {
+  if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ViewGrid* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ViewGrid::UnsafeArenaSwap(ViewGrid* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
+  InternalSwap(other);
+}
+void ViewGrid::InternalSwap(ViewGrid* other) {
+  using std::swap;
+  swap(center_, other->center_);
+  swap(grid_type_, other->grid_type_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata ViewGrid::GetMetadata() const {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ViewGrid
+
+// .NetProto.PBVector2 center = 1;
+bool ViewGrid::has_center() const {
+  return this != internal_default_instance() && center_ != NULL;
+}
+void ViewGrid::clear_center() {
+  if (GetArenaNoVirtual() == NULL && center_ != NULL) delete center_;
+  center_ = NULL;
+}
+const ::NetProto::PBVector2& ViewGrid::center() const {
+  const ::NetProto::PBVector2* p = center_;
+  // @@protoc_insertion_point(field_get:NetProto.ViewGrid.center)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+::NetProto::PBVector2* ViewGrid::mutable_center() {
+  
+  if (center_ == NULL) {
+    _slow_mutable_center();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.ViewGrid.center)
+  return center_;
+}
+::NetProto::PBVector2* ViewGrid::release_center() {
+  // @@protoc_insertion_point(field_release:NetProto.ViewGrid.center)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_center();
+  } else {
+    ::NetProto::PBVector2* temp = center_;
+    center_ = NULL;
+    return temp;
+  }
+}
+ void ViewGrid::set_allocated_center(::NetProto::PBVector2* center) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete center_;
+  }
+  if (center != NULL) {
+    _slow_set_allocated_center(message_arena, &center);
+  }
+  center_ = center;
+  if (center) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.ViewGrid.center)
+}
+
+// int32 grid_type = 2;
+void ViewGrid::clear_grid_type() {
+  grid_type_ = 0;
+}
+::google::protobuf::int32 ViewGrid::grid_type() const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewGrid.grid_type)
+  return grid_type_;
+}
+void ViewGrid::set_grid_type(::google::protobuf::int32 value) {
+  
+  grid_type_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.ViewGrid.grid_type)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ViewAllGrids::kGridSizeFieldNumber;
+const int ViewAllGrids::kRowFieldNumber;
+const int ViewAllGrids::kColFieldNumber;
+const int ViewAllGrids::kGridsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ViewAllGrids::ViewAllGrids()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_Battle_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NetProto.ViewAllGrids)
+}
+ViewAllGrids::ViewAllGrids(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  grids_(arena) {
+  protobuf_Battle_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:NetProto.ViewAllGrids)
+}
+ViewAllGrids::ViewAllGrids(const ViewAllGrids& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      grids_(from.grids_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&grid_size_, &from.grid_size_,
+    static_cast<size_t>(reinterpret_cast<char*>(&col_) -
+    reinterpret_cast<char*>(&grid_size_)) + sizeof(col_));
+  // @@protoc_insertion_point(copy_constructor:NetProto.ViewAllGrids)
+}
+
+void ViewAllGrids::SharedCtor() {
+  ::memset(&grid_size_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&col_) -
+      reinterpret_cast<char*>(&grid_size_)) + sizeof(col_));
+  _cached_size_ = 0;
+}
+
+ViewAllGrids::~ViewAllGrids() {
+  // @@protoc_insertion_point(destructor:NetProto.ViewAllGrids)
+  SharedDtor();
+}
+
+void ViewAllGrids::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+}
+
+void ViewAllGrids::ArenaDtor(void* object) {
+  ViewAllGrids* _this = reinterpret_cast< ViewAllGrids* >(object);
+  (void)_this;
+}
+void ViewAllGrids::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
+void ViewAllGrids::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ViewAllGrids::descriptor() {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ViewAllGrids& ViewAllGrids::default_instance() {
+  protobuf_Battle_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+ViewAllGrids* ViewAllGrids::New(::google::protobuf::Arena* arena) const {
+  return ::google::protobuf::Arena::CreateMessage<ViewAllGrids>(arena);
+}
+
+void ViewAllGrids::Clear() {
+// @@protoc_insertion_point(message_clear_start:NetProto.ViewAllGrids)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  grids_.Clear();
+  ::memset(&grid_size_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&col_) -
+      reinterpret_cast<char*>(&grid_size_)) + sizeof(col_));
+  _internal_metadata_.Clear();
+}
+
+bool ViewAllGrids::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NetProto.ViewAllGrids)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // float grid_size = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(13u /* 13 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &grid_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 row = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &row_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 col = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &col_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .NetProto.ViewGrid grids = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_grids()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NetProto.ViewAllGrids)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NetProto.ViewAllGrids)
+  return false;
+#undef DO_
+}
+
+void ViewAllGrids::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NetProto.ViewAllGrids)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // float grid_size = 1;
+  if (this->grid_size() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->grid_size(), output);
+  }
+
+  // int32 row = 2;
+  if (this->row() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->row(), output);
+  }
+
+  // int32 col = 3;
+  if (this->col() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->col(), output);
+  }
+
+  // repeated .NetProto.ViewGrid grids = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->grids_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->grids(static_cast<int>(i)), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NetProto.ViewAllGrids)
+}
+
+::google::protobuf::uint8* ViewAllGrids::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.ViewAllGrids)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // float grid_size = 1;
+  if (this->grid_size() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->grid_size(), target);
+  }
+
+  // int32 row = 2;
+  if (this->row() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->row(), target);
+  }
+
+  // int32 col = 3;
+  if (this->col() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->col(), target);
+  }
+
+  // repeated .NetProto.ViewGrid grids = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->grids_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        4, this->grids(static_cast<int>(i)), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.ViewAllGrids)
+  return target;
+}
+
+size_t ViewAllGrids::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NetProto.ViewAllGrids)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated .NetProto.ViewGrid grids = 4;
+  {
+    unsigned int count = static_cast<unsigned int>(this->grids_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->grids(static_cast<int>(i)));
+    }
+  }
+
+  // float grid_size = 1;
+  if (this->grid_size() != 0) {
+    total_size += 1 + 4;
+  }
+
+  // int32 row = 2;
+  if (this->row() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->row());
+  }
+
+  // int32 col = 3;
+  if (this->col() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->col());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ViewAllGrids::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.ViewAllGrids)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ViewAllGrids* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ViewAllGrids>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.ViewAllGrids)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.ViewAllGrids)
+    MergeFrom(*source);
+  }
+}
+
+void ViewAllGrids::MergeFrom(const ViewAllGrids& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.ViewAllGrids)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  grids_.MergeFrom(from.grids_);
+  if (from.grid_size() != 0) {
+    set_grid_size(from.grid_size());
+  }
+  if (from.row() != 0) {
+    set_row(from.row());
+  }
+  if (from.col() != 0) {
+    set_col(from.col());
+  }
+}
+
+void ViewAllGrids::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.ViewAllGrids)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ViewAllGrids::CopyFrom(const ViewAllGrids& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.ViewAllGrids)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ViewAllGrids::IsInitialized() const {
+  return true;
+}
+
+void ViewAllGrids::Swap(ViewAllGrids* other) {
+  if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ViewAllGrids* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ViewAllGrids::UnsafeArenaSwap(ViewAllGrids* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
+  InternalSwap(other);
+}
+void ViewAllGrids::InternalSwap(ViewAllGrids* other) {
+  using std::swap;
+  grids_.InternalSwap(&other->grids_);
+  swap(grid_size_, other->grid_size_);
+  swap(row_, other->row_);
+  swap(col_, other->col_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata ViewAllGrids::GetMetadata() const {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ViewAllGrids
+
+// float grid_size = 1;
+void ViewAllGrids::clear_grid_size() {
+  grid_size_ = 0;
+}
+float ViewAllGrids::grid_size() const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewAllGrids.grid_size)
+  return grid_size_;
+}
+void ViewAllGrids::set_grid_size(float value) {
+  
+  grid_size_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.ViewAllGrids.grid_size)
+}
+
+// int32 row = 2;
+void ViewAllGrids::clear_row() {
+  row_ = 0;
+}
+::google::protobuf::int32 ViewAllGrids::row() const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewAllGrids.row)
+  return row_;
+}
+void ViewAllGrids::set_row(::google::protobuf::int32 value) {
+  
+  row_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.ViewAllGrids.row)
+}
+
+// int32 col = 3;
+void ViewAllGrids::clear_col() {
+  col_ = 0;
+}
+::google::protobuf::int32 ViewAllGrids::col() const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewAllGrids.col)
+  return col_;
+}
+void ViewAllGrids::set_col(::google::protobuf::int32 value) {
+  
+  col_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.ViewAllGrids.col)
+}
+
+// repeated .NetProto.ViewGrid grids = 4;
+int ViewAllGrids::grids_size() const {
+  return grids_.size();
+}
+void ViewAllGrids::clear_grids() {
+  grids_.Clear();
+}
+const ::NetProto::ViewGrid& ViewAllGrids::grids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewAllGrids.grids)
+  return grids_.Get(index);
+}
+::NetProto::ViewGrid* ViewAllGrids::mutable_grids(int index) {
+  // @@protoc_insertion_point(field_mutable:NetProto.ViewAllGrids.grids)
+  return grids_.Mutable(index);
+}
+::NetProto::ViewGrid* ViewAllGrids::add_grids() {
+  // @@protoc_insertion_point(field_add:NetProto.ViewAllGrids.grids)
+  return grids_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >*
+ViewAllGrids::mutable_grids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewAllGrids.grids)
+  return &grids_;
+}
+const ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >&
+ViewAllGrids::grids() const {
+  // @@protoc_insertion_point(field_list:NetProto.ViewAllGrids.grids)
+  return grids_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int ViewSnapshot::kGridsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+ViewSnapshot::ViewSnapshot()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_Battle_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NetProto.ViewSnapshot)
+}
+ViewSnapshot::ViewSnapshot(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena),
+  grids_(arena) {
+  protobuf_Battle_2eproto::InitDefaults();
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:NetProto.ViewSnapshot)
+}
+ViewSnapshot::ViewSnapshot(const ViewSnapshot& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      grids_(from.grids_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:NetProto.ViewSnapshot)
+}
+
+void ViewSnapshot::SharedCtor() {
+  _cached_size_ = 0;
+}
+
+ViewSnapshot::~ViewSnapshot() {
+  // @@protoc_insertion_point(destructor:NetProto.ViewSnapshot)
+  SharedDtor();
+}
+
+void ViewSnapshot::SharedDtor() {
+  ::google::protobuf::Arena* arena = GetArenaNoVirtual();
+  GOOGLE_DCHECK(arena == NULL);
+  if (arena != NULL) {
+    return;
+  }
+
+}
+
+void ViewSnapshot::ArenaDtor(void* object) {
+  ViewSnapshot* _this = reinterpret_cast< ViewSnapshot* >(object);
+  (void)_this;
+}
+void ViewSnapshot::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+}
+void ViewSnapshot::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ViewSnapshot::descriptor() {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const ViewSnapshot& ViewSnapshot::default_instance() {
+  protobuf_Battle_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+ViewSnapshot* ViewSnapshot::New(::google::protobuf::Arena* arena) const {
+  return ::google::protobuf::Arena::CreateMessage<ViewSnapshot>(arena);
+}
+
+void ViewSnapshot::Clear() {
+// @@protoc_insertion_point(message_clear_start:NetProto.ViewSnapshot)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  grids_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool ViewSnapshot::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NetProto.ViewSnapshot)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .NetProto.ViewGrid grids = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_grids()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NetProto.ViewSnapshot)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NetProto.ViewSnapshot)
+  return false;
+#undef DO_
+}
+
+void ViewSnapshot::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NetProto.ViewSnapshot)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .NetProto.ViewGrid grids = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->grids_size()); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->grids(static_cast<int>(i)), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NetProto.ViewSnapshot)
+}
+
+::google::protobuf::uint8* ViewSnapshot::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.ViewSnapshot)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .NetProto.ViewGrid grids = 1;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->grids_size()); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        1, this->grids(static_cast<int>(i)), deterministic, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.ViewSnapshot)
+  return target;
+}
+
+size_t ViewSnapshot::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NetProto.ViewSnapshot)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated .NetProto.ViewGrid grids = 1;
+  {
+    unsigned int count = static_cast<unsigned int>(this->grids_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->grids(static_cast<int>(i)));
+    }
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ViewSnapshot::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.ViewSnapshot)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ViewSnapshot* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const ViewSnapshot>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.ViewSnapshot)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.ViewSnapshot)
+    MergeFrom(*source);
+  }
+}
+
+void ViewSnapshot::MergeFrom(const ViewSnapshot& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.ViewSnapshot)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  grids_.MergeFrom(from.grids_);
+}
+
+void ViewSnapshot::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.ViewSnapshot)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ViewSnapshot::CopyFrom(const ViewSnapshot& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.ViewSnapshot)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ViewSnapshot::IsInitialized() const {
+  return true;
+}
+
+void ViewSnapshot::Swap(ViewSnapshot* other) {
+  if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    ViewSnapshot* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void ViewSnapshot::UnsafeArenaSwap(ViewSnapshot* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
+  InternalSwap(other);
+}
+void ViewSnapshot::InternalSwap(ViewSnapshot* other) {
+  using std::swap;
+  grids_.InternalSwap(&other->grids_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata ViewSnapshot::GetMetadata() const {
+  protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_Battle_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ViewSnapshot
+
+// repeated .NetProto.ViewGrid grids = 1;
+int ViewSnapshot::grids_size() const {
+  return grids_.size();
+}
+void ViewSnapshot::clear_grids() {
+  grids_.Clear();
+}
+const ::NetProto::ViewGrid& ViewSnapshot::grids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshot.grids)
+  return grids_.Get(index);
+}
+::NetProto::ViewGrid* ViewSnapshot::mutable_grids(int index) {
+  // @@protoc_insertion_point(field_mutable:NetProto.ViewSnapshot.grids)
+  return grids_.Mutable(index);
+}
+::NetProto::ViewGrid* ViewSnapshot::add_grids() {
+  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshot.grids)
+  return grids_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >*
+ViewSnapshot::mutable_grids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshot.grids)
+  return &grids_;
+}
+const ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >&
+ViewSnapshot::grids() const {
+  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshot.grids)
+  return grids_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

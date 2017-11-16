@@ -154,3 +154,30 @@ bool GeometryUtils::IsCirlceRectIntersect(const Vector2 & circle_center, float r
 	float l2 = radius *radius;
 	return l1 < l2;
 }
+
+bool GeometryUtils::IsRectLineSegmentIntersect(const Vector2 &r1, const Vector2 &r2, const Vector2 &lp1, const Vector2 &lp2)
+{
+	float min_x = std::min(r1.x, r2.x);
+	float max_x = std::max(r1.x, r2.x);
+	float min_y = std::min(r1.y, r2.y);
+	float max_y = std::max(r1.y, r2.y);
+
+	if (lp1.x >= min_x && lp1.x <= max_x && lp1.y >= min_y && lp1.y <= max_y)
+		return true;
+	if (lp2.x >= min_x && lp2.x <= max_x && lp2.y >= min_y && lp2.y <= max_y)
+		return true;
+	if (GeometryUtils::IsLineSegmentIntersect(lp1, lp2, Vector2(min_x, min_y), Vector2(max_x, max_y)))
+		return true;
+	if (GeometryUtils::IsLineSegmentIntersect(lp1, lp2, Vector2(min_x, max_y), Vector2(max_x, min_y)))
+		return true;
+	return false;
+}
+
+bool GeometryUtils::IsPointInRect(const Vector2 & r1, const Vector2 & r2, const Vector2 & p)
+{
+	float min_x = std::min(r1.x, r2.x);
+	float max_x = std::max(r1.x, r2.x);
+	float min_y = std::min(r1.y, r2.y);
+	float max_y = std::max(r1.y, r2.y);
+	return p.x >= min_x && p.x <= max_x && p.y >= min_y && p.y <= max_y;
+}

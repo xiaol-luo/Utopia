@@ -40,7 +40,12 @@ namespace NetProto {
             "UG9zEiAKA3BvcxgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMiJ+Cg9CYXR0",
             "bGVPcGVyYXRpb24SKQoFb3BlcmEYASABKA4yGi5OZXRQcm90by5FQmF0dGxl",
             "T3BlcmF0aW9uEhEKCXRhcmdldF9pZBgCIAEoBBILCgNkaXIYAyABKAISIAoD",
-            "cG9zGAQgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyQgP4AQFiBnByb3RvMw=="));
+            "cG9zGAQgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyIkIKCFZpZXdHcmlkEiMK",
+            "BmNlbnRlchgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIRCglncmlkX3R5",
+            "cGUYAiABKAUiXgoMVmlld0FsbEdyaWRzEhEKCWdyaWRfc2l6ZRgBIAEoAhIL",
+            "CgNyb3cYAiABKAUSCwoDY29sGAMgASgFEiEKBWdyaWRzGAQgAygLMhIuTmV0",
+            "UHJvdG8uVmlld0dyaWQiMQoMVmlld1NuYXBzaG90EiEKBWdyaWRzGAEgAygL",
+            "MhIuTmV0UHJvdG8uVmlld0dyaWRCA/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -51,7 +56,10 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewGrid), global::NetProto.ViewGrid.Parser, new[]{ "Center", "GridType" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "Grids" }, null, null, null)
           }));
     }
     #endregion
@@ -1498,6 +1506,459 @@ namespace NetProto {
               pos_ = new global::NetProto.PBVector2();
             }
             input.ReadMessage(pos_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ViewGrid : pb::IMessage<ViewGrid> {
+    private static readonly pb::MessageParser<ViewGrid> _parser = new pb::MessageParser<ViewGrid>(() => new ViewGrid());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ViewGrid> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewGrid() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewGrid(ViewGrid other) : this() {
+      Center = other.center_ != null ? other.Center.Clone() : null;
+      gridType_ = other.gridType_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewGrid Clone() {
+      return new ViewGrid(this);
+    }
+
+    /// <summary>Field number for the "center" field.</summary>
+    public const int CenterFieldNumber = 1;
+    private global::NetProto.PBVector2 center_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 Center {
+      get { return center_; }
+      set {
+        center_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "grid_type" field.</summary>
+    public const int GridTypeFieldNumber = 2;
+    private int gridType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int GridType {
+      get { return gridType_; }
+      set {
+        gridType_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ViewGrid);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ViewGrid other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Center, other.Center)) return false;
+      if (GridType != other.GridType) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (center_ != null) hash ^= Center.GetHashCode();
+      if (GridType != 0) hash ^= GridType.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (center_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Center);
+      }
+      if (GridType != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(GridType);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (center_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Center);
+      }
+      if (GridType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(GridType);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ViewGrid other) {
+      if (other == null) {
+        return;
+      }
+      if (other.center_ != null) {
+        if (center_ == null) {
+          center_ = new global::NetProto.PBVector2();
+        }
+        Center.MergeFrom(other.Center);
+      }
+      if (other.GridType != 0) {
+        GridType = other.GridType;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (center_ == null) {
+              center_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(center_);
+            break;
+          }
+          case 16: {
+            GridType = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ViewAllGrids : pb::IMessage<ViewAllGrids> {
+    private static readonly pb::MessageParser<ViewAllGrids> _parser = new pb::MessageParser<ViewAllGrids>(() => new ViewAllGrids());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ViewAllGrids> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewAllGrids() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewAllGrids(ViewAllGrids other) : this() {
+      gridSize_ = other.gridSize_;
+      row_ = other.row_;
+      col_ = other.col_;
+      grids_ = other.grids_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewAllGrids Clone() {
+      return new ViewAllGrids(this);
+    }
+
+    /// <summary>Field number for the "grid_size" field.</summary>
+    public const int GridSizeFieldNumber = 1;
+    private float gridSize_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float GridSize {
+      get { return gridSize_; }
+      set {
+        gridSize_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "row" field.</summary>
+    public const int RowFieldNumber = 2;
+    private int row_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Row {
+      get { return row_; }
+      set {
+        row_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "col" field.</summary>
+    public const int ColFieldNumber = 3;
+    private int col_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Col {
+      get { return col_; }
+      set {
+        col_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "grids" field.</summary>
+    public const int GridsFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::NetProto.ViewGrid> _repeated_grids_codec
+        = pb::FieldCodec.ForMessage(34, global::NetProto.ViewGrid.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.ViewGrid> grids_ = new pbc::RepeatedField<global::NetProto.ViewGrid>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.ViewGrid> Grids {
+      get { return grids_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ViewAllGrids);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ViewAllGrids other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (GridSize != other.GridSize) return false;
+      if (Row != other.Row) return false;
+      if (Col != other.Col) return false;
+      if(!grids_.Equals(other.grids_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (GridSize != 0F) hash ^= GridSize.GetHashCode();
+      if (Row != 0) hash ^= Row.GetHashCode();
+      if (Col != 0) hash ^= Col.GetHashCode();
+      hash ^= grids_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (GridSize != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(GridSize);
+      }
+      if (Row != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Row);
+      }
+      if (Col != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Col);
+      }
+      grids_.WriteTo(output, _repeated_grids_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (GridSize != 0F) {
+        size += 1 + 4;
+      }
+      if (Row != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Row);
+      }
+      if (Col != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Col);
+      }
+      size += grids_.CalculateSize(_repeated_grids_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ViewAllGrids other) {
+      if (other == null) {
+        return;
+      }
+      if (other.GridSize != 0F) {
+        GridSize = other.GridSize;
+      }
+      if (other.Row != 0) {
+        Row = other.Row;
+      }
+      if (other.Col != 0) {
+        Col = other.Col;
+      }
+      grids_.Add(other.grids_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 13: {
+            GridSize = input.ReadFloat();
+            break;
+          }
+          case 16: {
+            Row = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Col = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            grids_.AddEntriesFrom(input, _repeated_grids_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ViewSnapshot : pb::IMessage<ViewSnapshot> {
+    private static readonly pb::MessageParser<ViewSnapshot> _parser = new pb::MessageParser<ViewSnapshot>(() => new ViewSnapshot());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ViewSnapshot> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshot() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshot(ViewSnapshot other) : this() {
+      grids_ = other.grids_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshot Clone() {
+      return new ViewSnapshot(this);
+    }
+
+    /// <summary>Field number for the "grids" field.</summary>
+    public const int GridsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::NetProto.ViewGrid> _repeated_grids_codec
+        = pb::FieldCodec.ForMessage(10, global::NetProto.ViewGrid.Parser);
+    private readonly pbc::RepeatedField<global::NetProto.ViewGrid> grids_ = new pbc::RepeatedField<global::NetProto.ViewGrid>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::NetProto.ViewGrid> Grids {
+      get { return grids_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ViewSnapshot);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ViewSnapshot other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!grids_.Equals(other.grids_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= grids_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      grids_.WriteTo(output, _repeated_grids_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += grids_.CalculateSize(_repeated_grids_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ViewSnapshot other) {
+      if (other == null) {
+        return;
+      }
+      grids_.Add(other.grids_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            grids_.AddEntriesFrom(input, _repeated_grids_codec);
             break;
           }
         }

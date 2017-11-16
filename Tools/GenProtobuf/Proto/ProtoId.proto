@@ -25,6 +25,8 @@ enum ProtoId
 	PID_StopMove = 1030;
 	
 	PID_BattleOperaReq = 1100;
+	PID_ViewSnapshot = 1110;
+	PID_ViewAllGrids = 1111;
 	
 	PID_Max = 5120;
 }

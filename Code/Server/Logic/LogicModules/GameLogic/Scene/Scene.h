@@ -73,5 +73,10 @@ namespace GameLogic
 		void SendClient(NetId netid, int protocol_id, google::protobuf::Message *msg);
 		void SendClient(NetId netid, const std::vector<SyncClientMsg> &msgs);
 		void PullAllSceneInfo(Player *player);
+
+
+	private:
+		// test
+		void TestViewSnapshot();
 	};
 }

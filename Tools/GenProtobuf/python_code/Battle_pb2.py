@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='Battle.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"\x91\x01\n\x10SceneObjectState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12(\n\x08obj_type\x18\x02 \x01(\x0e\x32\x16.NetProto.ESceneObject\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08rotation\x18\x05 \x01(\x02\"\x81\x01\n\x0fMoveObjectState\x12-\n\tobj_state\x18\x01 \x01(\x0b\x32\x1a.NetProto.SceneObjectState\x12\x0e\n\x06radius\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0c\n\x04mass\x18\x04 \x01(\x05\x12\x11\n\tmax_speed\x18\x05 \x01(\x05\"\xb7\x01\n\x16MoveObjectMutableState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentState\x12%\n\x08volecity\x18\x03 \x01(\x0b\x32\x13.NetProto.PBVector3\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08rotation\x18\x05 \x01(\x02\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\"~\n\x0f\x42\x61ttleOperation\x12)\n\x05opera\x18\x01 \x01(\x0e\x32\x1a.NetProto.EBattleOperation\x12\x11\n\ttarget_id\x18\x02 \x01(\x04\x12\x0b\n\x03\x64ir\x18\x03 \x01(\x02\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2B\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"\x91\x01\n\x10SceneObjectState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12(\n\x08obj_type\x18\x02 \x01(\x0e\x32\x16.NetProto.ESceneObject\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08rotation\x18\x05 \x01(\x02\"\x81\x01\n\x0fMoveObjectState\x12-\n\tobj_state\x18\x01 \x01(\x0b\x32\x1a.NetProto.SceneObjectState\x12\x0e\n\x06radius\x18\x02 \x01(\x05\x12\x0e\n\x06height\x18\x03 \x01(\x05\x12\x0c\n\x04mass\x18\x04 \x01(\x05\x12\x11\n\tmax_speed\x18\x05 \x01(\x05\"\xb7\x01\n\x16MoveObjectMutableState\x12\r\n\x05objid\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentState\x12%\n\x08volecity\x18\x03 \x01(\x0b\x32\x13.NetProto.PBVector3\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08rotation\x18\x05 \x01(\x02\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\"~\n\x0f\x42\x61ttleOperation\x12)\n\x05opera\x18\x01 \x01(\x0e\x32\x1a.NetProto.EBattleOperation\x12\x11\n\ttarget_id\x18\x02 \x01(\x04\x12\x0b\n\x03\x64ir\x18\x03 \x01(\x02\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2\"B\n\x08ViewGrid\x12#\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x11\n\tgrid_type\x18\x02 \x01(\x05\"^\n\x0cViewAllGrids\x12\x11\n\tgrid_size\x18\x01 \x01(\x02\x12\x0b\n\x03row\x18\x02 \x01(\x05\x12\x0b\n\x03\x63ol\x18\x03 \x01(\x05\x12!\n\x05grids\x18\x04 \x03(\x0b\x32\x12.NetProto.ViewGrid\"1\n\x0cViewSnapshot\x12!\n\x05grids\x18\x01 \x03(\x0b\x32\x12.NetProto.ViewGridB\x03\xf8\x01\x01\x62\x06proto3')
   ,
   dependencies=[Common__pb2.DESCRIPTOR,BattleEnum__pb2.DESCRIPTOR,])
 
@@ -394,6 +394,127 @@ _BATTLEOPERATION = _descriptor.Descriptor(
   serialized_end=840,
 )
 
+
+_VIEWGRID = _descriptor.Descriptor(
+  name='ViewGrid',
+  full_name='NetProto.ViewGrid',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='center', full_name='NetProto.ViewGrid.center', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='grid_type', full_name='NetProto.ViewGrid.grid_type', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=842,
+  serialized_end=908,
+)
+
+
+_VIEWALLGRIDS = _descriptor.Descriptor(
+  name='ViewAllGrids',
+  full_name='NetProto.ViewAllGrids',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='grid_size', full_name='NetProto.ViewAllGrids.grid_size', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='row', full_name='NetProto.ViewAllGrids.row', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='col', full_name='NetProto.ViewAllGrids.col', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='grids', full_name='NetProto.ViewAllGrids.grids', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=910,
+  serialized_end=1004,
+)
+
+
+_VIEWSNAPSHOT = _descriptor.Descriptor(
+  name='ViewSnapshot',
+  full_name='NetProto.ViewSnapshot',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='grids', full_name='NetProto.ViewSnapshot.grids', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1006,
+  serialized_end=1055,
+)
+
 _SCENEOBJECTSTATE.fields_by_name['obj_type'].enum_type = BattleEnum__pb2._ESCENEOBJECT
 _SCENEOBJECTSTATE.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR3
 _MOVEOBJECTSTATE.fields_by_name['obj_state'].message_type = _SCENEOBJECTSTATE
@@ -403,6 +524,9 @@ _MOVEOBJECTMUTABLESTATE.fields_by_name['pos'].message_type = Common__pb2._PBVECT
 _MOVETOPOS.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR2
 _BATTLEOPERATION.fields_by_name['opera'].enum_type = BattleEnum__pb2._EBATTLEOPERATION
 _BATTLEOPERATION.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR2
+_VIEWGRID.fields_by_name['center'].message_type = Common__pb2._PBVECTOR2
+_VIEWALLGRIDS.fields_by_name['grids'].message_type = _VIEWGRID
+_VIEWSNAPSHOT.fields_by_name['grids'].message_type = _VIEWGRID
 DESCRIPTOR.message_types_by_name['RspFreeHero'] = _RSPFREEHERO
 DESCRIPTOR.message_types_by_name['SelectHeroReq'] = _SELECTHEROREQ
 DESCRIPTOR.message_types_by_name['SelectHeroRsp'] = _SELECTHERORSP
@@ -411,6 +535,9 @@ DESCRIPTOR.message_types_by_name['MoveObjectState'] = _MOVEOBJECTSTATE
 DESCRIPTOR.message_types_by_name['MoveObjectMutableState'] = _MOVEOBJECTMUTABLESTATE
 DESCRIPTOR.message_types_by_name['MoveToPos'] = _MOVETOPOS
 DESCRIPTOR.message_types_by_name['BattleOperation'] = _BATTLEOPERATION
+DESCRIPTOR.message_types_by_name['ViewGrid'] = _VIEWGRID
+DESCRIPTOR.message_types_by_name['ViewAllGrids'] = _VIEWALLGRIDS
+DESCRIPTOR.message_types_by_name['ViewSnapshot'] = _VIEWSNAPSHOT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 RspFreeHero = _reflection.GeneratedProtocolMessageType('RspFreeHero', (_message.Message,), dict(
@@ -468,6 +595,27 @@ BattleOperation = _reflection.GeneratedProtocolMessageType('BattleOperation', (_
   # @@protoc_insertion_point(class_scope:NetProto.BattleOperation)
   ))
 _sym_db.RegisterMessage(BattleOperation)
+
+ViewGrid = _reflection.GeneratedProtocolMessageType('ViewGrid', (_message.Message,), dict(
+  DESCRIPTOR = _VIEWGRID,
+  __module__ = 'Battle_pb2'
+  # @@protoc_insertion_point(class_scope:NetProto.ViewGrid)
+  ))
+_sym_db.RegisterMessage(ViewGrid)
+
+ViewAllGrids = _reflection.GeneratedProtocolMessageType('ViewAllGrids', (_message.Message,), dict(
+  DESCRIPTOR = _VIEWALLGRIDS,
+  __module__ = 'Battle_pb2'
+  # @@protoc_insertion_point(class_scope:NetProto.ViewAllGrids)
+  ))
+_sym_db.RegisterMessage(ViewAllGrids)
+
+ViewSnapshot = _reflection.GeneratedProtocolMessageType('ViewSnapshot', (_message.Message,), dict(
+  DESCRIPTOR = _VIEWSNAPSHOT,
+  __module__ = 'Battle_pb2'
+  # @@protoc_insertion_point(class_scope:NetProto.ViewSnapshot)
+  ))
+_sym_db.RegisterMessage(ViewSnapshot)
 
 
 DESCRIPTOR.has_options = True

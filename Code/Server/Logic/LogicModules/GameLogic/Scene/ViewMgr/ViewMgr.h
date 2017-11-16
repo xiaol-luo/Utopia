@@ -30,6 +30,8 @@ namespace GameLogic
 		ViewGrid * GetRightGrid(int grid_idx);
 		ViewGrid * GetButtomGrid(int grid_idx);
 		ViewGrid * GetLeftGrid(int grid_idx);
+
+		const ViewSnapshot * GetSnapshot(EViewCamp camp);
 		
 	protected:
 		Scene *m_scene = nullptr;

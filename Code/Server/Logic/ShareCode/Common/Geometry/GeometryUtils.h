@@ -23,6 +23,8 @@ namespace GeometryUtils
 	float Cross(Vector2 p1, Vector2 p2);
 
 	bool IsCirlceRectIntersect(const Vector2 &circle_center, float radius, Vector2 rect_center, float length, float width);
+	bool IsRectLineSegmentIntersect(const Vector2 &r1, const Vector2 &r2, const Vector2 &lp1, const Vector2 &lp2);
+	bool IsPointInRect(const Vector2 &r1, const Vector2 &r2, const Vector2 &p);
 };
 
 

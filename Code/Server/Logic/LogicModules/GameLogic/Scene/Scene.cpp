@@ -19,6 +19,8 @@
 #include "GameLogic/Player/PlayerMgr.h"
 #include "GameLogic/Scene/ViewMgr/ViewMgr.h"
 #include "GameLogic/Scene/EventDispacher/EventDispacher.h"
+#include "GameLogic/Scene/ViewMgr/ViewSnapshot.h"
+#include "GameLogic/Scene/ViewMgr/ViewGrid.h"
 
 namespace GameLogic
 {
@@ -128,6 +130,8 @@ namespace GameLogic
 		m_move_mgr->Update();
 		m_view_mgr->Update();
 
+		this->TestViewSnapshot();
+
 		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++it)
 		{
 			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
@@ -216,6 +220,33 @@ namespace GameLogic
 				for (const SyncClientMsg & item : scene_obj->ColllectSyncClientMsg(SCMF_All))
 				{
 					player->Send(item.protocol_id, item.msg);
+				}
+			}
+		}
+	}
+
+	void Scene::TestViewSnapshot()
+	{
+		for (int view_camp = EViewCamp_None + 1; view_camp < EViewCamp_All; ++view_camp)
+		{
+			const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot((EViewCamp)view_camp);
+			NetProto::ViewSnapshot *msg = this->CreateProtobuf<NetProto::ViewSnapshot>();
+			for (ViewGrid *view_grid : snapshot->view_grids)
+			{
+				NetProto::ViewGrid *msg_grid = msg->add_grids();
+				msg_grid->set_grid_type(view_grid->grid_type);
+				NetProto::PBVector2 *msg_center = msg_grid->mutable_center();
+				msg_center->set_x(view_grid->center.x);
+				msg_center->set_y(view_grid->center.y);
+			}
+			for (auto it : m_scene_objs)
+			{
+				if (ESOT_Hero == it.second->GetObjectType() && it.second->GetViewCamp() == view_camp)
+				{
+					std::shared_ptr<Hero> hero_ptr = std::dynamic_pointer_cast<Hero>(it.second);
+					Player *player = hero_ptr->GetPlayer();
+					if (nullptr != player)
+						player->Send(NetProto::PID_ViewSnapshot, msg);
 				}
 			}
 		}

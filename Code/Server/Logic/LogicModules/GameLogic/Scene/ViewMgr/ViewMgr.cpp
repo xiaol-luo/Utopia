@@ -333,6 +333,11 @@ namespace GameLogic
 		return this->GetGrid(idx);
 	}
 
+	const ViewSnapshot * ViewMgr::GetSnapshot(EViewCamp camp)
+	{
+		return m_curr_snapshots[camp];
+	}
+
 	bool ViewMgr::CalRowCol(int grid_idx, int & row, int & col)
 	{
 		if (0 == m_col_num || 0 == m_row_num || grid_idx < 0 || grid_idx >= m_grid_count)

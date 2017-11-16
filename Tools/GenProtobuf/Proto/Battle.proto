@@ -61,3 +61,22 @@ message BattleOperation
 	float dir = 3;
 	PBVector2 pos = 4;
 }
+
+message ViewGrid
+{
+	PBVector2 center = 1;
+	int32 grid_type = 2;
+}
+
+message ViewAllGrids
+{
+	float grid_size = 1;
+	int32 row = 2;
+	int32 col = 3;
+	repeated ViewGrid grids = 4;
+}
+
+message ViewSnapshot
+{
+	repeated ViewGrid grids = 1;
+}

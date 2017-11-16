@@ -71,6 +71,7 @@ namespace GameLogic
 		inline float GetFaceDir() { return m_face_dir; }
 		void SetFaceDir(float val);
 		float GetBodyRadius();
+		float GetNavBodyRadius() { return m_nav_radius; }
 		ViewUnit * GetViewUnit() { return m_view_unit; }
 		void SetViewUnit(ViewUnit *view_unit) { m_view_unit = view_unit; }
 		float GetViewRadius() { return m_view_radius; }
@@ -83,12 +84,13 @@ namespace GameLogic
 		int m_model_id = 0;
 		Vector3 m_pos;
 		float m_face_dir = 0;
+		float m_nav_radius = 0.5f;
 		ESceneObjectShape m_body_shape = ESceneObjectShape_Circle;
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
-		float m_view_radius = 2.0f;
+		float m_view_radius = 4.0f;
 		float m_body_scale = 1.0f;
-		float m_body_radius = 0.5f;
+		float m_body_radius = 1.0f;
 		bool m_has_body = true;
 		bool m_has_view = true;
 		EViewCamp m_view_camp = EViewCamp_None;
