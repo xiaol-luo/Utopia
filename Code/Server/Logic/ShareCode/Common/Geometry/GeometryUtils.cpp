@@ -111,7 +111,7 @@ bool GeometryUtils::IsLineSegmentIntersect(Vector2 p1, Vector2 p2, Vector2 q1, V
 	}
 	if (Cross(p1 - q1, q2 - q1)*Cross(q2 - q1, p2 - q1) < 0)
 	{
-		return false;
+		return false; 
 	}
 
 	return true;

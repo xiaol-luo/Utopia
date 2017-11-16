@@ -42,7 +42,7 @@ namespace GameLogic
 		{
 			for (auto view_grid : m_view_cover_girds)
 			{
-				--view_grid->m_observing_num[m_view_camp];
+				--view_grid->observing_num[m_view_camp];
 			}
 		}
 		m_view_cover_girds.clear();
@@ -51,7 +51,7 @@ namespace GameLogic
 		{
 			for (auto view_grid : m_body_cover_girds)
 			{
-				view_grid->m_body_units.erase(m_objid);
+				view_grid->body_units.erase(m_objid);
 			}
 		}
 		m_body_cover_girds.clear();
@@ -67,6 +67,35 @@ namespace GameLogic
 			return so->GetPos().xz();
 		return InvalidViewPos;
 	}
+
+	bool CanSeeGrid(ViewGrid *locate_grid, ViewGrid *check_grid)
+	{
+		if (EViewGrid_Grass == check_grid->grid_type)
+		{
+			return EViewGrid_Grass == locate_grid->grid_type && locate_grid->grid_type_group == check_grid->grid_type_group;
+		}
+
+		return true;
+	}
+	bool CanBlockGrid(ViewGrid *locate_grid, ViewGrid *check_grid)
+	{
+		bool canBlock = false;
+		switch (check_grid->grid_type)
+		{
+		case EViewGrid_Wall:
+			canBlock = true;
+			break;
+		case EViewGrid_Grass:
+			canBlock = EViewGrid_Grass != locate_grid->grid_type || locate_grid->grid_type_group != check_grid->grid_type_group;
+		}
+		return canBlock;
+	}
+
+	struct VectorAndAngle
+	{
+		Vector2 v;
+		float angle = 0;
+	};
 
 	void ViewUnit::UpdateState()
 	{
@@ -84,32 +113,65 @@ namespace GameLogic
 			return;
 
 		m_locate_grid = locate_grid;
-		Vector2 locate_pos = m_locate_grid->m_center;
+		Vector2 locate_pos = m_locate_grid->center;
 
-		if (m_has_view)
-		{
-			ViewGridVec cover_grids = m_view_mgr->GetCircleCoverGrids(locate_pos.x, locate_pos.y, so->GetViewRadius());
-			for (auto grid : m_view_cover_girds)
-			{
-				--grid->m_observing_num[m_view_camp];
-			}
-			m_view_cover_girds = cover_grids;
-			for (auto grid : m_view_cover_girds)
-			{
-				++grid->m_observing_num[m_view_camp];
-			}
-		}
 		if (m_has_body)
 		{
 			ViewGridVec cover_grids = m_view_mgr->GetCircleCoverGrids(locate_pos.x, locate_pos.y, so->GetBodyRadius());
 			for (auto grid : m_body_cover_girds)
 			{
-				grid->m_body_units.erase(m_objid);
+				grid->body_units.erase(m_objid);
 			}
 			m_body_cover_girds = cover_grids;
 			for (auto grid : m_body_cover_girds)
 			{
-				grid->m_body_units.insert(std::make_pair(m_objid, this));
+				grid->body_units.insert(std::make_pair(m_objid, this));
+			}
+		}
+
+		if (m_has_view)
+		{
+			ViewGridSet cover_grids;
+			{
+				ViewGridVec tmp_grids = m_view_mgr->GetCircleCoverGrids(locate_pos.x, locate_pos.y, so->GetViewRadius());
+				cover_grids.insert(tmp_grids.begin(), tmp_grids.end());
+				cover_grids.insert(locate_grid);
+				ViewGridSet blind_grids; ViewGridVec block_grids;
+				for (ViewGrid *grid : cover_grids)
+				{
+					if (grid == locate_grid) // 自己所在的位置必定可见且不可阻隔视线
+						continue;
+
+					if (!CanSeeGrid(locate_grid, grid))
+					{
+						blind_grids.insert(grid);
+					}
+					if (CanBlockGrid(locate_grid, grid))
+					{
+						block_grids.push_back(grid);
+					}
+
+					cover_grids.erase(blind_grids.begin(), blind_grids.end());
+					blind_grids.clear();
+					for (ViewGrid *block_grid : block_grids)
+					{
+						for (ViewGrid *cover_grid : cover_grids)
+						{
+
+						}
+						cover_grids.erase(blind_grids.begin(), blind_grids.end());
+						blind_grids.clear();
+					}
+				}
+			}
+			for (auto grid : m_view_cover_girds)
+			{
+				--grid->observing_num[m_view_camp];
+			}
+			m_view_cover_girds.assign(cover_grids.begin(), cover_grids.end());
+			for (auto grid : m_view_cover_girds)
+			{
+				++grid->observing_num[m_view_camp];
 			}
 		}
 	}

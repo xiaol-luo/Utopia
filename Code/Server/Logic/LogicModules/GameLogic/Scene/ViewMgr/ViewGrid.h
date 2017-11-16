@@ -8,17 +8,20 @@ namespace GameLogic
 
 	struct ViewGrid
 	{
-		ViewGrid(ViewMgr *mgr, int _id, Vector2 center, float size, EViewGridType grid_type);
+		ViewGrid(ViewMgr *mgr, int _id, int row, int col, Vector2 center, float size, EViewGridType grid_type);
 		~ViewGrid();
 		bool CanSee(EViewCamp camp);
 		bool CanSee(int camp);
 
 		int grid_id = -1;
-		ViewMgr *m_view_mgr = nullptr;
-		Vector2 m_center;
-		float m_size = 0;
-		EViewGridType m_grid_type = EViewGrid_Ground;
-		int m_observing_num[EViewCamp_All];
-		ViewUnitMap m_body_units;
+		int row = -1;
+		int col = -1;
+		ViewMgr *view_mgr = nullptr;
+		Vector2 center;
+		float grid_size = 0;
+		EViewGridType grid_type = EViewGrid_Ground;
+		int grid_type_group = 0;
+		int observing_num[EViewCamp_All];
+		ViewUnitMap body_units;
 	};
 }

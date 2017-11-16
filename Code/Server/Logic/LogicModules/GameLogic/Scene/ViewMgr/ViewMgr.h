@@ -20,10 +20,17 @@ namespace GameLogic
 		ViewGridVec GetCircleCoverGrids(float center_x, float center_y, float radius);
 		ViewGridVec GetAABBConverGrids(float min_x, float min_y, float max_x, float max_y);
 		int CalGridIdx(int row, int col);
+		bool CalRowCol(int grid_idx, int &row, int &col);
 		int InRowIdx(float y);
 		int InColIdx(float x);
 		int InGridIdx(float x, float y);
 		ViewGrid * GetGrid(float x, float y);
+		ViewGrid * GetGrid(int grid_id);
+		ViewGrid * GetUpGrid(int grid_idx);
+		ViewGrid * GetRightGrid(int grid_idx);
+		ViewGrid * GetButtomGrid(int grid_idx);
+		ViewGrid * GetLeftGrid(int grid_idx);
+		
 	protected:
 		Scene *m_scene = nullptr;
 		float m_grid_edge_length = 0;

@@ -4,14 +4,16 @@
 namespace GameLogic
 {
 
-	ViewGrid::ViewGrid(ViewMgr *mgr, int id, Vector2 center, float size, EViewGridType grid_type)
+	ViewGrid::ViewGrid(ViewMgr *mgr, int _id, int _row, int _col, Vector2 _center, float _size, EViewGridType _grid_type)
 	{
-		grid_id = id;
-		m_view_mgr = mgr;
-		m_center = center;
-		m_size = size;
-		m_grid_type = grid_type;
-		memset(m_observing_num, 0, sizeof(m_observing_num));
+		grid_id = _id;
+		row = _row;
+		col = _col;
+		view_mgr = mgr;
+		center = _center;
+		grid_size = _size;
+		grid_type = _grid_type;
+		memset(observing_num, 0, sizeof(observing_num));
 	}
 
 	ViewGrid::~ViewGrid()
@@ -26,6 +28,6 @@ namespace GameLogic
 	{
 		if (camp < EViewCamp_None || camp > EViewCamp_All)
 			return false;
-		return m_observing_num[camp];
+		return observing_num[camp];
 	}
 }

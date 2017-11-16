@@ -9,6 +9,7 @@
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
 #include "Common/Utils/NumUtils.h"
 #include "Common/Geometry/GeometryUtils.h"
+#include <queue>
 
 namespace GameLogic
 {
@@ -98,11 +99,63 @@ namespace GameLogic
 
 					int grid_idx = m_col_num * row + col;
 					Vector2 center(m_grid_edge_length * col + m_grid_edge_length / 2, m_grid_edge_length * row + m_grid_edge_length / 2);
-					ViewGrid *grid = new ViewGrid(this, grid_idx, center, m_grid_edge_length, (EViewGridType)val);
+					ViewGrid *grid = new ViewGrid(this, grid_idx, row, col, center, m_grid_edge_length, (EViewGridType)val);
 					m_grids[m_row_num * row + col] = grid;
 				}
 			}
 		} while (false);
+
+		{
+			std::queue<ViewGrid *> grid_queue;
+			int group_value = 0;
+			for (int grid_idx = 0; grid_idx < m_grid_count; ++grid_idx)
+			{
+				ViewGrid *grid = m_grids[grid_idx];
+				if (EViewGrid_Grass == grid->grid_type && 0 == grid->grid_type_group)
+				{
+					++group_value;
+					grid_queue.push(grid);
+					while (!grid_queue.empty())
+					{
+						ViewGrid *handle_grid = grid_queue.front();
+						grid_queue.pop();
+						if (nullptr == handle_grid || EViewGrid_Grass != handle_grid->grid_type || 0 != handle_grid->grid_type_group)
+							continue;
+						handle_grid->grid_type_group = group_value;
+						grid_queue.push(this->GetUpGrid(handle_grid->grid_id));
+						grid_queue.push(this->GetRightGrid(handle_grid->grid_id));
+						grid_queue.push(this->GetButtomGrid(handle_grid->grid_id));
+						grid_queue.push(this->GetLeftGrid(handle_grid->grid_id));
+					}
+				}
+			}
+		}
+		{
+			std::queue<ViewGrid *> grid_queue;
+			int group_value = 0;
+			for (int grid_idx = 0; grid_idx < m_grid_count; ++grid_idx)
+			{
+				ViewGrid *grid = m_grids[grid_idx];
+				if (EViewGrid_Wall == grid->grid_type && 0 == grid->grid_type_group)
+				{
+					++group_value;
+					grid_queue.push(grid);
+					while (!grid_queue.empty())
+					{
+						ViewGrid *handle_grid = grid_queue.front();
+						grid_queue.pop();
+						if (nullptr == handle_grid || EViewGrid_Wall != handle_grid->grid_type || 0 != handle_grid->grid_type_group)
+							continue;
+						handle_grid->grid_type_group = group_value;
+						grid_queue.push(this->GetUpGrid(handle_grid->grid_id));
+						grid_queue.push(this->GetRightGrid(handle_grid->grid_id));
+						grid_queue.push(this->GetButtomGrid(handle_grid->grid_id));
+						grid_queue.push(this->GetLeftGrid(handle_grid->grid_id));
+					}
+				}
+			}
+		}
+
 		
 		ifs.close();
 		return true;
@@ -131,7 +184,7 @@ namespace GameLogic
 					if (!grid->CanSee(camp))
 						continue;
 					snapshot->view_grids.push_back(grid);
-					for (auto it : grid->m_body_units)
+					for (auto it : grid->body_units)
 					{
 						ViewUnit *view_unit = it.second;
 						snapshot->scene_objs.insert_or_assign(view_unit->GetObjId(), view_unit->GetSceneObjWptr());
@@ -161,7 +214,7 @@ namespace GameLogic
 		{
 			if (GeometryUtils::IsCirlceRectIntersect(
 				Vector2(center_x, center_y), radius, 
-				grid->m_center, m_grid_edge_length, m_grid_edge_length))
+				grid->center, m_grid_edge_length, m_grid_edge_length))
 			{
 				grids.push_back(grid);
 			}
@@ -201,6 +254,8 @@ namespace GameLogic
 
 	int ViewMgr::CalGridIdx(int row, int col)
 	{
+		if (row < 0 || row >= m_row_num || col < 0 || col >= m_col_num)
+			return VIEW_GRID_INVALID_IDX;
 		return row * m_col_num + col;
 	}
 
@@ -226,18 +281,66 @@ namespace GameLogic
 	{
 		int row = this->InRowIdx(y);
 		int col = this->InColIdx(x);
-		if (row < 0 || row >= m_row_num || col < 0 || col >= m_col_num)
-			return VIEW_GRID_INVALID_IDX;
 		return CalGridIdx(row, col);
 	}
 
 	ViewGrid * ViewMgr::GetGrid(float x, float y)
 	{
 		int grid_idx = this->InGridIdx(x, y);
-		if (VIEW_GRID_INVALID_IDX == grid_idx)
-			return nullptr;
-		return m_grids[grid_idx];
+		return this->GetGrid(grid_idx);
+	}
 
+	ViewGrid * ViewMgr::GetGrid(int grid_id)
+	{
+		if (grid_id < 0 || grid_id >= m_grid_count)
+			return nullptr;
+		return m_grids[grid_id];
+	}
+
+	ViewGrid * ViewMgr::GetUpGrid(int grid_idx)
+	{
+		int row, col;
+		if (!this->CalRowCol(grid_idx, row, col))
+			return nullptr;
+		int idx = this->CalGridIdx(row - 1, col);
+		return this->GetGrid(idx);
+	}
+
+	ViewGrid * ViewMgr::GetRightGrid(int grid_idx)
+	{
+		int row, col;
+		if (!this->CalRowCol(grid_idx, row, col))
+			return nullptr;
+		int idx = this->CalGridIdx(row, col + 1);
+		return this->GetGrid(idx);
+	}
+
+	ViewGrid * ViewMgr::GetButtomGrid(int grid_idx)
+	{
+		int row, col;
+		if (!this->CalRowCol(grid_idx, row, col))
+			return nullptr;
+		int idx = this->CalGridIdx(row + 1, col);
+		return this->GetGrid(idx);
+	}
+
+	ViewGrid * ViewMgr::GetLeftGrid(int grid_idx)
+	{
+		int row, col;
+		if (!this->CalRowCol(grid_idx, row, col))
+			return nullptr;
+		int idx = this->CalGridIdx(row, col - 1);
+		return this->GetGrid(idx);
+	}
+
+	bool ViewMgr::CalRowCol(int grid_idx, int & row, int & col)
+	{
+		if (0 == m_col_num || 0 == m_row_num || grid_idx < 0 || grid_idx >= m_grid_count)
+			return false;
+
+		row = grid_idx / m_col_num;
+		col = grid_idx % m_col_num;
+		return true;
 	}
 
 	void ViewMgr::OnAddSceneObject(std::shared_ptr<SceneObject> scene_obj)
