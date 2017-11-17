@@ -135,16 +135,47 @@ namespace GameLogic
 		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++it)
 		{
 			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
-			if (nullptr != scene_obj)
+			if (nullptr == scene_obj)
+				continue;
+			scene_obj->Update(now_ms);
+		}
+
+		for (int view_camp = EViewCamp_None + 1; view_camp < EViewCamp_All; ++view_camp)
+		{
+			const ViewSnapshot *pre_snapshot = m_view_mgr->GetPreSnapshot((EViewCamp)view_camp);
+			const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot((EViewCamp)view_camp);
+			if (nullptr == snapshot || nullptr == pre_snapshot)
+				continue;
+
+			ViewSnapshotDifference diff = snapshot->CalDifference(pre_snapshot);
+			if (diff.miss_scene_objs.size() > 0)
 			{
-				scene_obj->Update(now_ms);
-				if (scene_obj->NeedSyncMutableState())
+				NetProto::SceneObjectDisappear *msg = this->CreateProtobuf<NetProto::SceneObjectDisappear>();
+				for (auto kv_pari : diff.miss_scene_objs)
 				{
-					this->SendClient(PlayerMgr::BROADCAST_NETID, scene_obj->ColllectSyncClientMsg(SCMF_ForMutable));
-					scene_obj->SetSyncMutableState(false);
+					msg->add_objids(kv_pari.first);
 				}
+				this->SendClient(view_camp, NetProto::PID_SceneObjectDisappear, msg);
+			}
+			for (auto kv_pari : snapshot->scene_objs)
+			{
+				uint64_t objid = kv_pari.first;
+				if (diff.more_scene_objs.count(objid) > 0)
+					continue;
+				auto sptr_so = kv_pari.second.lock();
+				if (nullptr == sptr_so)
+					continue;
+				if (!sptr_so->NeedSyncMutableState())
+					continue;
+				this->SendClient(view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
+				sptr_so->SetSyncMutableState(false);
+			}
+			for (auto kv_pari : diff.more_scene_objs)
+			{
+
 			}
 		}
+
 		m_protobuf_arena->Reset();
 		this->CheckSceneObjectsCache();
 	}
@@ -210,17 +241,70 @@ namespace GameLogic
 		}
 	}
 
+	void Scene::SendClient(EViewCamp view_camp, int protocol_id, google::protobuf::Message * msg)
+	{
+		for (auto kv_pair : m_scene_objs)
+		{
+			std::shared_ptr<SceneObject> sptr_so = kv_pair.second;
+			if (ESOT_Hero != sptr_so->GetObjectType() || sptr_so->GetViewCamp() != view_camp)
+				continue;
+			std::shared_ptr<Hero> sptr_hero = std::dynamic_pointer_cast<Hero>(sptr_so);
+			Player *player = sptr_hero->GetPlayer();
+			if (nullptr == player)
+				continue;
+			player->Send(protocol_id, msg);
+		}
+	}
+
+	void Scene::SendClient(EViewCamp view_camp, const std::vector<SyncClientMsg>& msgs)
+	{
+		for (auto kv_pair : m_scene_objs)
+		{
+			std::shared_ptr<SceneObject> sptr_so = kv_pair.second;
+			if (ESOT_Hero != sptr_so->GetObjectType() || sptr_so->GetViewCamp() != view_camp)
+				continue;
+			std::shared_ptr<Hero> sptr_hero = std::dynamic_pointer_cast<Hero>(sptr_so);
+			Player *player = sptr_hero->GetPlayer();
+			if (nullptr == player)
+				continue;
+			for (const SyncClientMsg & item : msgs)
+			{
+				player->Send(item.protocol_id, item.msg);
+			}
+		}
+	}
+
 	void Scene::PullAllSceneInfo(Player * player)
 	{
-		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++it)
+		this->SyncAllSceneObjectState(player, SCMF_All);
+
+		// for test
 		{
-			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
-			if (nullptr != scene_obj)
+			NetProto::ViewAllGrids *msg = this->CreateProtobuf<NetProto::ViewAllGrids>();
+			m_view_mgr->FillPbViewAllGrids(msg);
+			player->Send(NetProto::PID_ViewAllGrids, msg);
+		}
+	}
+
+	void Scene::SyncAllSceneObjectState(Player * player, int filter_flag)
+	{
+		std::weak_ptr<Hero> wptr_hero = player->GetHero();
+		std::shared_ptr<Hero> sptr_hero = wptr_hero.lock();
+		if (nullptr == sptr_hero)
+			return;
+		const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot(sptr_hero->GetViewCamp());
+		if (nullptr == snapshot)
+			return;
+
+		for (auto it : snapshot->scene_objs)
+		{
+			uint64_t objid = it.first;
+			auto sptr_item = it.second.lock();
+			if (nullptr == sptr_item)
+				continue;
+			for (const SyncClientMsg & item : sptr_item->ColllectSyncClientMsg(filter_flag))
 			{
-				for (const SyncClientMsg & item : scene_obj->ColllectSyncClientMsg(SCMF_All))
-				{
-					player->Send(item.protocol_id, item.msg);
-				}
+				player->Send(item.protocol_id, item.msg);
 			}
 		}
 	}
@@ -231,14 +315,7 @@ namespace GameLogic
 		{
 			const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot((EViewCamp)view_camp);
 			NetProto::ViewSnapshot *msg = this->CreateProtobuf<NetProto::ViewSnapshot>();
-			for (ViewGrid *view_grid : snapshot->view_grids)
-			{
-				NetProto::ViewGrid *msg_grid = msg->add_grids();
-				msg_grid->set_grid_type(view_grid->grid_type);
-				NetProto::PBVector2 *msg_center = msg_grid->mutable_center();
-				msg_center->set_x(view_grid->center.x);
-				msg_center->set_y(view_grid->center.y);
-			}
+			m_view_mgr->FillPbViewSnapshot((EViewCamp)view_camp, msg);
 			for (auto it : m_scene_objs)
 			{
 				if (ESOT_Hero == it.second->GetObjectType() && it.second->GetViewCamp() == view_camp)

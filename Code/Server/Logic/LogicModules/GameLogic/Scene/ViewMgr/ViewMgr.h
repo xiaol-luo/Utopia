@@ -3,6 +3,12 @@
 #include "ViewDefine.h"
 #include <string>
 
+namespace NetProto
+{
+	class ViewSnapshot;
+	class ViewAllGrids;
+}
+
 namespace GameLogic
 {
 	struct ViewGrid;
@@ -32,6 +38,10 @@ namespace GameLogic
 		ViewGrid * GetLeftGrid(int grid_idx);
 
 		const ViewSnapshot * GetSnapshot(EViewCamp camp);
+		const ViewSnapshot * GetPreSnapshot(EViewCamp camp);
+
+		void FillPbViewSnapshot(EViewCamp camp, NetProto::ViewSnapshot *msg);
+		void FillPbViewAllGrids(NetProto::ViewAllGrids * msg);
 		
 	protected:
 		Scene *m_scene = nullptr;

@@ -10,6 +10,7 @@
 #include "Common/Utils/NumUtils.h"
 #include "Common/Geometry/GeometryUtils.h"
 #include <queue>
+#include "Network/Protobuf/Battle.pb.h"
 
 namespace GameLogic
 {
@@ -336,6 +337,36 @@ namespace GameLogic
 	const ViewSnapshot * ViewMgr::GetSnapshot(EViewCamp camp)
 	{
 		return m_curr_snapshots[camp];
+	}
+
+	const ViewSnapshot * ViewMgr::GetPreSnapshot(EViewCamp camp)
+	{
+		return m_pre_snapshots[camp];
+	}
+
+	void ViewMgr::FillPbViewSnapshot(EViewCamp camp, NetProto::ViewSnapshot * msg)
+	{
+		ViewSnapshot *snapshot = m_curr_snapshots[camp];
+		for (ViewGrid *view_grid : snapshot->view_grids)
+		{
+			msg->add_light_grids(view_grid->grid_id);
+		}
+	}
+
+	void ViewMgr::FillPbViewAllGrids(NetProto::ViewAllGrids * msg)
+	{
+		msg->set_grid_size(m_grid_edge_length);
+		msg->set_row(m_row_num);
+		msg->set_col(m_col_num);
+		for (int i = 0; i < m_grid_count; ++i)
+		{
+			ViewGrid *grid = m_grids[i];
+			NetProto::ViewGrid *msg_grid = msg->add_grids();
+			msg_grid->set_grid_type(grid->grid_type);
+			NetProto::PBVector2 *msg_center = msg_grid->mutable_center();
+			msg_center->set_x(grid->center.x);
+			msg_center->set_y(grid->center.y);
+		}
 	}
 
 	bool ViewMgr::CalRowCol(int grid_idx, int & row, int & col)

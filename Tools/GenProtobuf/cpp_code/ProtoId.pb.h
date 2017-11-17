@@ -62,6 +62,7 @@ enum ProtoId {
   PID_PullAllSceneInfo = 106,
   PID_PullAllSceneInfoRsp = 107,
   PID_SceneObjectState = 1000,
+  PID_SceneObjectDisappear = 1001,
   PID_MoveObjectState = 1010,
   PID_MoveObjectMutableState = 1011,
   PID_MoveToPos = 1020,

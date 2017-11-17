@@ -19,7 +19,7 @@ namespace GameLogic
 		scene_objs.clear();
 	}
 
-	ViewSnapshotDifference ViewSnapshot::CalDifference(const ViewSnapshot * other)
+	ViewSnapshotDifference ViewSnapshot::CalDifference(const ViewSnapshot * other) const
 	{
 		 ViewSnapshotDifference diff;
 

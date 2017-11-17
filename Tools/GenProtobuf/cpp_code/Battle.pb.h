@@ -48,6 +48,9 @@ extern MoveToPosDefaultTypeInternal _MoveToPos_default_instance_;
 class RspFreeHero;
 class RspFreeHeroDefaultTypeInternal;
 extern RspFreeHeroDefaultTypeInternal _RspFreeHero_default_instance_;
+class SceneObjectDisappear;
+class SceneObjectDisappearDefaultTypeInternal;
+extern SceneObjectDisappearDefaultTypeInternal _SceneObjectDisappear_default_instance_;
 class SceneObjectState;
 class SceneObjectStateDefaultTypeInternal;
 extern SceneObjectStateDefaultTypeInternal _SceneObjectState_default_instance_;
@@ -437,6 +440,125 @@ class SelectHeroRsp : public ::google::protobuf::Message /* @@protoc_insertion_p
 };
 // -------------------------------------------------------------------
 
+class SceneObjectDisappear : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneObjectDisappear) */ {
+ public:
+  SceneObjectDisappear();
+  virtual ~SceneObjectDisappear();
+
+  SceneObjectDisappear(const SceneObjectDisappear& from);
+
+  inline SceneObjectDisappear& operator=(const SceneObjectDisappear& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SceneObjectDisappear(SceneObjectDisappear&& from) noexcept
+    : SceneObjectDisappear() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneObjectDisappear& operator=(SceneObjectDisappear&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SceneObjectDisappear& default_instance();
+
+  static inline const SceneObjectDisappear* internal_default_instance() {
+    return reinterpret_cast<const SceneObjectDisappear*>(
+               &_SceneObjectDisappear_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    3;
+
+  void UnsafeArenaSwap(SceneObjectDisappear* other);
+  void Swap(SceneObjectDisappear* other);
+  friend void swap(SceneObjectDisappear& a, SceneObjectDisappear& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneObjectDisappear* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SceneObjectDisappear* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SceneObjectDisappear& from);
+  void MergeFrom(const SceneObjectDisappear& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SceneObjectDisappear* other);
+  protected:
+  explicit SceneObjectDisappear(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint64 objids = 1;
+  int objids_size() const;
+  void clear_objids();
+  static const int kObjidsFieldNumber = 1;
+  ::google::protobuf::uint64 objids(int index) const;
+  void set_objids(int index, ::google::protobuf::uint64 value);
+  void add_objids(::google::protobuf::uint64 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      objids() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_objids();
+
+  // @@protoc_insertion_point(class_scope:NetProto.SceneObjectDisappear)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > objids_;
+  mutable int _objids_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class SceneObjectState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneObjectState) */ {
  public:
   SceneObjectState();
@@ -477,7 +599,7 @@ class SceneObjectState : public ::google::protobuf::Message /* @@protoc_insertio
                &_SceneObjectState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+    4;
 
   void UnsafeArenaSwap(SceneObjectState* other);
   void Swap(SceneObjectState* other);
@@ -629,7 +751,7 @@ class MoveObjectState : public ::google::protobuf::Message /* @@protoc_insertion
                &_MoveObjectState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+    5;
 
   void UnsafeArenaSwap(MoveObjectState* other);
   void Swap(MoveObjectState* other);
@@ -781,7 +903,7 @@ class MoveObjectMutableState : public ::google::protobuf::Message /* @@protoc_in
                &_MoveObjectMutableState_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    6;
 
   void UnsafeArenaSwap(MoveObjectMutableState* other);
   void Swap(MoveObjectMutableState* other);
@@ -945,7 +1067,7 @@ class MoveToPos : public ::google::protobuf::Message /* @@protoc_insertion_point
                &_MoveToPos_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    6;
+    7;
 
   void UnsafeArenaSwap(MoveToPos* other);
   void Swap(MoveToPos* other);
@@ -1069,7 +1191,7 @@ class BattleOperation : public ::google::protobuf::Message /* @@protoc_insertion
                &_BattleOperation_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    7;
+    8;
 
   void UnsafeArenaSwap(BattleOperation* other);
   void Swap(BattleOperation* other);
@@ -1214,7 +1336,7 @@ class ViewGrid : public ::google::protobuf::Message /* @@protoc_insertion_point(
                &_ViewGrid_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    8;
+    9;
 
   void UnsafeArenaSwap(ViewGrid* other);
   void Swap(ViewGrid* other);
@@ -1345,7 +1467,7 @@ class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_ViewAllGrids_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    9;
+    10;
 
   void UnsafeArenaSwap(ViewAllGrids* other);
   void Swap(ViewAllGrids* other);
@@ -1484,7 +1606,7 @@ class ViewSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_ViewSnapshot_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    10;
+    11;
 
   void UnsafeArenaSwap(ViewSnapshot* other);
   void Swap(ViewSnapshot* other);
@@ -1537,17 +1659,17 @@ class ViewSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // repeated .NetProto.ViewGrid grids = 1;
-  int grids_size() const;
-  void clear_grids();
-  static const int kGridsFieldNumber = 1;
-  const ::NetProto::ViewGrid& grids(int index) const;
-  ::NetProto::ViewGrid* mutable_grids(int index);
-  ::NetProto::ViewGrid* add_grids();
-  ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >*
-      mutable_grids();
-  const ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >&
-      grids() const;
+  // repeated int32 light_grids = 1;
+  int light_grids_size() const;
+  void clear_light_grids();
+  static const int kLightGridsFieldNumber = 1;
+  ::google::protobuf::int32 light_grids(int index) const;
+  void set_light_grids(int index, ::google::protobuf::int32 value);
+  void add_light_grids(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      light_grids() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_light_grids();
 
   // @@protoc_insertion_point(class_scope:NetProto.ViewSnapshot)
  private:
@@ -1556,7 +1678,8 @@ class ViewSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_po
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid > grids_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > light_grids_;
+  mutable int _light_grids_cached_byte_size_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -1648,6 +1771,40 @@ inline void SelectHeroRsp::set_is_succ(bool value) {
   
   is_succ_ = value;
   // @@protoc_insertion_point(field_set:NetProto.SelectHeroRsp.is_succ)
+}
+
+// -------------------------------------------------------------------
+
+// SceneObjectDisappear
+
+// repeated uint64 objids = 1;
+inline int SceneObjectDisappear::objids_size() const {
+  return objids_.size();
+}
+inline void SceneObjectDisappear::clear_objids() {
+  objids_.Clear();
+}
+inline ::google::protobuf::uint64 SceneObjectDisappear::objids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneObjectDisappear.objids)
+  return objids_.Get(index);
+}
+inline void SceneObjectDisappear::set_objids(int index, ::google::protobuf::uint64 value) {
+  objids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:NetProto.SceneObjectDisappear.objids)
+}
+inline void SceneObjectDisappear::add_objids(::google::protobuf::uint64 value) {
+  objids_.Add(value);
+  // @@protoc_insertion_point(field_add:NetProto.SceneObjectDisappear.objids)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+SceneObjectDisappear::objids() const {
+  // @@protoc_insertion_point(field_list:NetProto.SceneObjectDisappear.objids)
+  return objids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+SceneObjectDisappear::mutable_objids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.SceneObjectDisappear.objids)
+  return &objids_;
 }
 
 // -------------------------------------------------------------------
@@ -2314,40 +2471,42 @@ ViewAllGrids::grids() const {
 
 // ViewSnapshot
 
-// repeated .NetProto.ViewGrid grids = 1;
-inline int ViewSnapshot::grids_size() const {
-  return grids_.size();
+// repeated int32 light_grids = 1;
+inline int ViewSnapshot::light_grids_size() const {
+  return light_grids_.size();
 }
-inline void ViewSnapshot::clear_grids() {
-  grids_.Clear();
+inline void ViewSnapshot::clear_light_grids() {
+  light_grids_.Clear();
 }
-inline const ::NetProto::ViewGrid& ViewSnapshot::grids(int index) const {
-  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshot.grids)
-  return grids_.Get(index);
+inline ::google::protobuf::int32 ViewSnapshot::light_grids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshot.light_grids)
+  return light_grids_.Get(index);
 }
-inline ::NetProto::ViewGrid* ViewSnapshot::mutable_grids(int index) {
-  // @@protoc_insertion_point(field_mutable:NetProto.ViewSnapshot.grids)
-  return grids_.Mutable(index);
+inline void ViewSnapshot::set_light_grids(int index, ::google::protobuf::int32 value) {
+  light_grids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:NetProto.ViewSnapshot.light_grids)
 }
-inline ::NetProto::ViewGrid* ViewSnapshot::add_grids() {
-  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshot.grids)
-  return grids_.Add();
+inline void ViewSnapshot::add_light_grids(::google::protobuf::int32 value) {
+  light_grids_.Add(value);
+  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshot.light_grids)
 }
-inline ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >*
-ViewSnapshot::mutable_grids() {
-  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshot.grids)
-  return &grids_;
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+ViewSnapshot::light_grids() const {
+  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshot.light_grids)
+  return light_grids_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >&
-ViewSnapshot::grids() const {
-  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshot.grids)
-  return grids_;
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+ViewSnapshot::mutable_light_grids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshot.light_grids)
+  return &light_grids_;
 }
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -26,32 +26,34 @@ namespace NetProto {
             "ZUVudW0ucHJvdG8iOAoLUnNwRnJlZUhlcm8SEwoLcmVkX2hlcm9faWQYASAB",
             "KAQSFAoMYmx1ZV9oZXJvX2lkGAIgASgEIiAKDVNlbGVjdEhlcm9SZXESDwoH",
             "aGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASAB",
-            "KAQSDwoHaXNfc3VjYxgCIAEoCCKRAQoQU2NlbmVPYmplY3RTdGF0ZRINCgVv",
-            "YmppZBgBIAEoBBIoCghvYmpfdHlwZRgCIAEoDjIWLk5ldFByb3RvLkVTY2Vu",
-            "ZU9iamVjdBIQCghtb2RlbF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQ",
-            "cm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIigQEKD01vdmVPYmpl",
-            "Y3RTdGF0ZRItCglvYmpfc3RhdGUYASABKAsyGi5OZXRQcm90by5TY2VuZU9i",
-            "amVjdFN0YXRlEg4KBnJhZGl1cxgCIAEoBRIOCgZoZWlnaHQYAyABKAUSDAoE",
-            "bWFzcxgEIAEoBRIRCgltYXhfc3BlZWQYBSABKAUitwEKFk1vdmVPYmplY3RN",
-            "dXRhYmxlU3RhdGUSDQoFb2JqaWQYASABKAQSMwoQbW92ZV9hZ2VudF9zdGF0",
-            "ZRgCIAEoDjIZLk5ldFByb3RvLkVNb3ZlQWdlbnRTdGF0ZRIlCgh2b2xlY2l0",
-            "eRgDIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIgCgNwb3MYBCABKAsyEy5O",
-            "ZXRQcm90by5QQlZlY3RvcjMSEAoIcm90YXRpb24YBSABKAIiLQoJTW92ZVRv",
-            "UG9zEiAKA3BvcxgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMiJ+Cg9CYXR0",
-            "bGVPcGVyYXRpb24SKQoFb3BlcmEYASABKA4yGi5OZXRQcm90by5FQmF0dGxl",
-            "T3BlcmF0aW9uEhEKCXRhcmdldF9pZBgCIAEoBBILCgNkaXIYAyABKAISIAoD",
-            "cG9zGAQgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyIkIKCFZpZXdHcmlkEiMK",
-            "BmNlbnRlchgBIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIRCglncmlkX3R5",
-            "cGUYAiABKAUiXgoMVmlld0FsbEdyaWRzEhEKCWdyaWRfc2l6ZRgBIAEoAhIL",
-            "CgNyb3cYAiABKAUSCwoDY29sGAMgASgFEiEKBWdyaWRzGAQgAygLMhIuTmV0",
-            "UHJvdG8uVmlld0dyaWQiMQoMVmlld1NuYXBzaG90EiEKBWdyaWRzGAEgAygL",
-            "MhIuTmV0UHJvdG8uVmlld0dyaWRCA/gBAWIGcHJvdG8z"));
+            "KAQSDwoHaXNfc3VjYxgCIAEoCCImChRTY2VuZU9iamVjdERpc2FwcGVhchIO",
+            "CgZvYmppZHMYASADKAQikQEKEFNjZW5lT2JqZWN0U3RhdGUSDQoFb2JqaWQY",
+            "ASABKAQSKAoIb2JqX3R5cGUYAiABKA4yFi5OZXRQcm90by5FU2NlbmVPYmpl",
+            "Y3QSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
+            "UEJWZWN0b3IzEhAKCHJvdGF0aW9uGAUgASgCIoEBCg9Nb3ZlT2JqZWN0U3Rh",
+            "dGUSLQoJb2JqX3N0YXRlGAEgASgLMhouTmV0UHJvdG8uU2NlbmVPYmplY3RT",
+            "dGF0ZRIOCgZyYWRpdXMYAiABKAUSDgoGaGVpZ2h0GAMgASgFEgwKBG1hc3MY",
+            "BCABKAUSEQoJbWF4X3NwZWVkGAUgASgFIrcBChZNb3ZlT2JqZWN0TXV0YWJs",
+            "ZVN0YXRlEg0KBW9iamlkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiAB",
+            "KA4yGS5OZXRQcm90by5FTW92ZUFnZW50U3RhdGUSJQoIdm9sZWNpdHkYAyAB",
+            "KAsyEy5OZXRQcm90by5QQlZlY3RvcjMSIAoDcG9zGAQgASgLMhMuTmV0UHJv",
+            "dG8uUEJWZWN0b3IzEhAKCHJvdGF0aW9uGAUgASgCIi0KCU1vdmVUb1BvcxIg",
+            "CgNwb3MYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjIifgoPQmF0dGxlT3Bl",
+            "cmF0aW9uEikKBW9wZXJhGAEgASgOMhouTmV0UHJvdG8uRUJhdHRsZU9wZXJh",
+            "dGlvbhIRCgl0YXJnZXRfaWQYAiABKAQSCwoDZGlyGAMgASgCEiAKA3BvcxgE",
+            "IAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMiJCCghWaWV3R3JpZBIjCgZjZW50",
+            "ZXIYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjISEQoJZ3JpZF90eXBlGAIg",
+            "ASgFIl4KDFZpZXdBbGxHcmlkcxIRCglncmlkX3NpemUYASABKAISCwoDcm93",
+            "GAIgASgFEgsKA2NvbBgDIAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3Rv",
+            "LlZpZXdHcmlkIiMKDFZpZXdTbmFwc2hvdBITCgtsaWdodF9ncmlkcxgBIAMo",
+            "BUID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.RspFreeHero), global::NetProto.RspFreeHero.Parser, new[]{ "RedHeroId", "BlueHeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroReq), global::NetProto.SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectDisappear), global::NetProto.SceneObjectDisappear.Parser, new[]{ "Objids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos", "Rotation" }, null, null, null),
@@ -59,7 +61,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewGrid), global::NetProto.ViewGrid.Parser, new[]{ "Center", "GridType" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "Grids" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "LightGrids" }, null, null, null)
           }));
     }
     #endregion
@@ -473,6 +475,116 @@ namespace NetProto {
 
   }
 
+  public sealed partial class SceneObjectDisappear : pb::IMessage<SceneObjectDisappear> {
+    private static readonly pb::MessageParser<SceneObjectDisappear> _parser = new pb::MessageParser<SceneObjectDisappear>(() => new SceneObjectDisappear());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneObjectDisappear> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneObjectDisappear() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneObjectDisappear(SceneObjectDisappear other) : this() {
+      objids_ = other.objids_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneObjectDisappear Clone() {
+      return new SceneObjectDisappear(this);
+    }
+
+    /// <summary>Field number for the "objids" field.</summary>
+    public const int ObjidsFieldNumber = 1;
+    private static readonly pb::FieldCodec<ulong> _repeated_objids_codec
+        = pb::FieldCodec.ForUInt64(10);
+    private readonly pbc::RepeatedField<ulong> objids_ = new pbc::RepeatedField<ulong>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<ulong> Objids {
+      get { return objids_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneObjectDisappear);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneObjectDisappear other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!objids_.Equals(other.objids_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= objids_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      objids_.WriteTo(output, _repeated_objids_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += objids_.CalculateSize(_repeated_objids_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneObjectDisappear other) {
+      if (other == null) {
+        return;
+      }
+      objids_.Add(other.objids_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10:
+          case 8: {
+            objids_.AddEntriesFrom(input, _repeated_objids_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class SceneObjectState : pb::IMessage<SceneObjectState> {
     private static readonly pb::MessageParser<SceneObjectState> _parser = new pb::MessageParser<SceneObjectState>(() => new SceneObjectState());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -480,7 +592,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[3]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -715,7 +827,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -950,7 +1062,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1191,7 +1303,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1314,7 +1426,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1521,7 +1633,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[8]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1672,7 +1784,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[9]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1865,7 +1977,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1882,7 +1994,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ViewSnapshot(ViewSnapshot other) : this() {
-      grids_ = other.grids_.Clone();
+      lightGrids_ = other.lightGrids_.Clone();
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1890,14 +2002,14 @@ namespace NetProto {
       return new ViewSnapshot(this);
     }
 
-    /// <summary>Field number for the "grids" field.</summary>
-    public const int GridsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::NetProto.ViewGrid> _repeated_grids_codec
-        = pb::FieldCodec.ForMessage(10, global::NetProto.ViewGrid.Parser);
-    private readonly pbc::RepeatedField<global::NetProto.ViewGrid> grids_ = new pbc::RepeatedField<global::NetProto.ViewGrid>();
+    /// <summary>Field number for the "light_grids" field.</summary>
+    public const int LightGridsFieldNumber = 1;
+    private static readonly pb::FieldCodec<int> _repeated_lightGrids_codec
+        = pb::FieldCodec.ForInt32(10);
+    private readonly pbc::RepeatedField<int> lightGrids_ = new pbc::RepeatedField<int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::NetProto.ViewGrid> Grids {
-      get { return grids_; }
+    public pbc::RepeatedField<int> LightGrids {
+      get { return lightGrids_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1913,14 +2025,14 @@ namespace NetProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!grids_.Equals(other.grids_)) return false;
+      if(!lightGrids_.Equals(other.lightGrids_)) return false;
       return true;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= grids_.GetHashCode();
+      hash ^= lightGrids_.GetHashCode();
       return hash;
     }
 
@@ -1931,13 +2043,13 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      grids_.WriteTo(output, _repeated_grids_codec);
+      lightGrids_.WriteTo(output, _repeated_lightGrids_codec);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += grids_.CalculateSize(_repeated_grids_codec);
+      size += lightGrids_.CalculateSize(_repeated_lightGrids_codec);
       return size;
     }
 
@@ -1946,7 +2058,7 @@ namespace NetProto {
       if (other == null) {
         return;
       }
-      grids_.Add(other.grids_);
+      lightGrids_.Add(other.lightGrids_);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1957,8 +2069,9 @@ namespace NetProto {
           default:
             input.SkipLastField();
             break;
-          case 10: {
-            grids_.AddEntriesFrom(input, _repeated_grids_codec);
+          case 10:
+          case 8: {
+            lightGrids_.AddEntriesFrom(input, _repeated_lightGrids_codec);
             break;
           }
         }
