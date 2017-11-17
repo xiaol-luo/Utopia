@@ -157,6 +157,16 @@ namespace GameLogic
 				}
 				this->SendClient(view_camp, NetProto::PID_SceneObjectDisappear, msg);
 			}
+			for (auto kv_pari : diff.more_scene_objs)
+			{
+				uint64_t objid = kv_pari.first;
+				if (diff.more_scene_objs.count(objid) > 0)
+					continue;
+				auto sptr_so = kv_pari.second.lock();
+				if (nullptr == sptr_so)
+					continue;
+				this->SendClient(view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All));
+			}
 			for (auto kv_pari : snapshot->scene_objs)
 			{
 				uint64_t objid = kv_pari.first;
@@ -168,11 +178,11 @@ namespace GameLogic
 				if (!sptr_so->NeedSyncMutableState())
 					continue;
 				this->SendClient(view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
-				sptr_so->SetSyncMutableState(false);
 			}
-			for (auto kv_pari : diff.more_scene_objs)
+			for (auto kv_pari : m_scene_objs)
 			{
-
+				std::shared_ptr<SceneObject> sptr_so = kv_pari.second;
+				sptr_so->SetSyncMutableState(false);
 			}
 		}
 
