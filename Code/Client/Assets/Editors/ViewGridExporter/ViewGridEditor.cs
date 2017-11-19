@@ -110,7 +110,8 @@ public class ViewGridEditor : MonoBehaviour
                     m_grid[row][col] = ViewGridNodeType.Ground;
                     if (idx < strs.Length)
                     {
-                        m_grid[row][col] = (ViewGridNodeType)int.Parse(strs[idx]);
+                        try { m_grid[row][col] = (ViewGridNodeType)int.Parse(strs[idx]); }
+                        catch (Exception) { }
                         ++idx;
                     }
 
@@ -120,6 +121,12 @@ public class ViewGridEditor : MonoBehaviour
                     if (row >= 29 && row <= 30 && col >= 30 && col <= 69)
                         m_grid[row][col] = ViewGridNodeType.Wall;
                     */
+                                        
+                    if (col >= 57 && col <= 82 && row >= 42 && row <= 67)
+                        m_grid[row][col] = ViewGridNodeType.Grass;
+                    if (col >= 29 && col <= 30 && row >= 30 && row <= 69)
+                        m_grid[row][col] = ViewGridNodeType.Wall;
+                    
                 }
             }
         }
@@ -181,10 +188,10 @@ public class ViewGridEditor : MonoBehaviour
         float halfGridSize = m_gridSize / 2;
         for (int row = 0; row < m_grid.Count; ++row)
         {
-            float x = halfGridSize + m_gridSize * row;
+            float z = halfGridSize + m_gridSize * row;
             for (int col = 0; col < m_grid[row].Count; ++col)
             {
-                float z = halfGridSize + m_gridSize * col;
+                float x = halfGridSize + m_gridSize * col;
                 GameObject cube = null;
                 if (m_cachedGos.Count > 0)
                 {

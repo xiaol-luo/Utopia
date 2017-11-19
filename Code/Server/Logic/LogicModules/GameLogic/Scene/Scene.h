@@ -72,8 +72,8 @@ namespace GameLogic
 		}
 		void SendClient(NetId netid, int protocol_id, google::protobuf::Message *msg);
 		void SendClient(NetId netid, const std::vector<SyncClientMsg> &msgs);
-		void SendClient(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg);
-		void SendClient(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs);
+		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg);
+		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs);
 		void PullAllSceneInfo(Player *player);
 		void SyncAllSceneObjectState(Player *player, int filter_flag);
 

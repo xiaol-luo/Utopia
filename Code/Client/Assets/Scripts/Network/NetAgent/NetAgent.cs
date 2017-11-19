@@ -110,7 +110,7 @@ public class NetAgent
 
     const int CONTENT_LEN_DESCRIPT_SIZE = sizeof(uint);
     const int PROTOCOL_LEN_DESCRIPT_SIZE = sizeof(int);
-    const int PROTOCOL_CONTENT_MAX_SIZE = 4096;
+    const int PROTOCOL_CONTENT_MAX_SIZE = 409600;
     const int PROTOCOL_MAX_SIZE = PROTOCOL_LEN_DESCRIPT_SIZE + PROTOCOL_CONTENT_MAX_SIZE;
     byte[] m_parseBuffer = new byte[PROTOCOL_MAX_SIZE + CONTENT_LEN_DESCRIPT_SIZE];
     int m_parseBufferOffset = 0;

@@ -193,6 +193,7 @@ namespace GameLogic
 				}
 			}
 
+			/*
 			for (int i = 0; i < EViewCamp_All; ++i)
 			{
 				ViewSnapshotDifference diff = m_curr_snapshots[i]->CalDifference(m_pre_snapshots[i]);
@@ -204,6 +205,7 @@ namespace GameLogic
 					diff.PrintLog();
 				}
 			}
+			*/
 		}
 	}
 

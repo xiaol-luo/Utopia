@@ -155,17 +155,14 @@ namespace GameLogic
 				{
 					msg->add_objids(kv_pari.first);
 				}
-				this->SendClient(view_camp, NetProto::PID_SceneObjectDisappear, msg);
+				this->SendViewCamp((EViewCamp)view_camp, NetProto::PID_SceneObjectDisappear, msg);
 			}
 			for (auto kv_pari : diff.more_scene_objs)
 			{
-				uint64_t objid = kv_pari.first;
-				if (diff.more_scene_objs.count(objid) > 0)
-					continue;
 				auto sptr_so = kv_pari.second.lock();
 				if (nullptr == sptr_so)
 					continue;
-				this->SendClient(view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All));
+				this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All));
 			}
 			for (auto kv_pari : snapshot->scene_objs)
 			{
@@ -177,13 +174,13 @@ namespace GameLogic
 					continue;
 				if (!sptr_so->NeedSyncMutableState())
 					continue;
-				this->SendClient(view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
+				this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
 			}
-			for (auto kv_pari : m_scene_objs)
-			{
-				std::shared_ptr<SceneObject> sptr_so = kv_pari.second;
-				sptr_so->SetSyncMutableState(false);
-			}
+		}
+		for (auto kv_pari : m_scene_objs)
+		{
+			std::shared_ptr<SceneObject> sptr_so = kv_pari.second;
+			sptr_so->SetSyncMutableState(false);
 		}
 
 		m_protobuf_arena->Reset();
@@ -251,7 +248,7 @@ namespace GameLogic
 		}
 	}
 
-	void Scene::SendClient(EViewCamp view_camp, int protocol_id, google::protobuf::Message * msg)
+	void Scene::SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message * msg)
 	{
 		for (auto kv_pair : m_scene_objs)
 		{
@@ -266,7 +263,7 @@ namespace GameLogic
 		}
 	}
 
-	void Scene::SendClient(EViewCamp view_camp, const std::vector<SyncClientMsg>& msgs)
+	void Scene::SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg>& msgs)
 	{
 		for (auto kv_pair : m_scene_objs)
 		{

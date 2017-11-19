@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Scene
 {
+    ViewGridGizmos m_vgg = null;
     Transform m_rootObstacles = null;
     public Transform rootSceneObejcts { get { return m_rootSceneObjects; } }
     Transform m_rootSceneObjects = null;
@@ -23,11 +24,22 @@ public class Scene
 
     public void EnterScene(string sceneName)
     {
+        m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
+
         App.my.gameNetwork.Send(ProtoId.PidLoadSceneComplete);
         App.my.gameNetwork.Send(ProtoId.PidPullAllSceneInfo);
         App.my.gameNetwork.Add<SceneObjectState>((int)ProtoId.PidSceneObjectState, OnRecvSceneObjectState);
         App.my.gameNetwork.Add<MoveObjectState>((int)ProtoId.PidMoveObjectState, OnRecvMoveObjectState);
         App.my.gameNetwork.Add<MoveObjectMutableState>((int)ProtoId.PidMoveObjectMutableState, OnRecvMoveObjectMutableState);
+        App.my.gameNetwork.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
+        App.my.gameNetwork.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
+        {
+            m_vgg.SetAllGrids(msg);
+        });
+        App.my.gameNetwork.Add<ViewSnapshot>((int)ProtoId.PidViewSnapshot, (int id, ViewSnapshot msg) =>
+        {
+            m_vgg.SetSnapshot(msg);
+        });
 
         {
             foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
@@ -48,6 +60,12 @@ public class Scene
         App.my.gameNetwork.Send(ProtoId.PidLeaveScene);
         m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
+
+        App.my.gameNetwork.Remove((int)ProtoId.PidSceneObjectState);
+        App.my.gameNetwork.Remove((int)ProtoId.PidMoveObjectState);
+        App.my.gameNetwork.Remove((int)ProtoId.PidMoveObjectMutableState);
+        App.my.gameNetwork.Remove((int)ProtoId.PidSceneObjectDisappear);
+        App.my.gameNetwork.Remove((int)ProtoId.PidViewAllGrids);
     }
     
     SceneObjcet GetSceneObject(ulong objId)
@@ -108,6 +126,18 @@ public class Scene
             Animation animation = so.modelGo.GetComponent<Animation>();
             if (!animation.IsPlaying("idle"))
                 animation.Play("idle");
+        }
+    }
+
+    void OnSceneObjectDisappear(int id, SceneObjectDisappear msg)
+    {
+        foreach (ulong objid in msg.Objids)
+        {
+            SceneObjcet obj = this.GetSceneObject(objid);
+            if (null == obj)
+                continue;
+            m_sceneObjects.Remove(objid);
+            GameObject.Destroy(obj.modelGo); 
         }
     }
 
