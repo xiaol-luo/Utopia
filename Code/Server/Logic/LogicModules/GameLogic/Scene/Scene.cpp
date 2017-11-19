@@ -58,11 +58,30 @@ namespace GameLogic
 		ret = m_move_mgr->Awake();
 		assert(ret);
 
+		{
+			auto a = std::make_shared<Hero>();
+			a->SetViewCamp(EViewCamp_Red);
+			this->AddObject(a);
+			a->Flash(Vector3(70, 0, 70));
+		}
+		{
+			auto a = std::make_shared<Hero>();
+			a->SetViewCamp(EViewCamp_Red);
+			this->AddObject(a);
+			a->Flash(Vector3(30, 0, 30));
+		}
+		{
+			auto a = std::make_shared<Hero>();
+			a->SetViewCamp(EViewCamp_Red);
+			this->AddObject(a);
+			a->Flash(Vector3(70, 0, 20));
+		}
+
+
 		m_red_hero = std::make_shared<Hero>();
 		m_red_hero->SetViewCamp(EViewCamp_Red);
 		this->AddObject(m_red_hero);
 		m_red_hero->Flash(Vector3(50, 0, 50));
-
 
 		m_blue_hero = std::make_shared<Hero>();
 		m_blue_hero->SetViewCamp(EViewCamp_Blue);
@@ -128,10 +147,6 @@ namespace GameLogic
 		this->CheckSceneObjectsCache();
 		m_nav_mesh->UpdateTerrian();
 		m_move_mgr->Update();
-		m_view_mgr->Update();
-
-		this->TestViewSnapshot();
-
 		for (auto it = m_scene_objs_cache.begin(); m_scene_objs_cache.end() != it; ++it)
 		{
 			std::shared_ptr<SceneObject> scene_obj = it->second.lock();
@@ -139,52 +154,15 @@ namespace GameLogic
 				continue;
 			scene_obj->Update(now_ms);
 		}
-
-		for (int view_camp = EViewCamp_None + 1; view_camp < EViewCamp_All; ++view_camp)
-		{
-			const ViewSnapshot *pre_snapshot = m_view_mgr->GetPreSnapshot((EViewCamp)view_camp);
-			const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot((EViewCamp)view_camp);
-			if (nullptr == snapshot || nullptr == pre_snapshot)
-				continue;
-
-			ViewSnapshotDifference diff = snapshot->CalDifference(pre_snapshot);
-			if (diff.miss_scene_objs.size() > 0)
-			{
-				NetProto::SceneObjectDisappear *msg = this->CreateProtobuf<NetProto::SceneObjectDisappear>();
-				for (auto kv_pari : diff.miss_scene_objs)
-				{
-					msg->add_objids(kv_pari.first);
-				}
-				this->SendViewCamp((EViewCamp)view_camp, NetProto::PID_SceneObjectDisappear, msg);
-			}
-			for (auto kv_pari : diff.more_scene_objs)
-			{
-				auto sptr_so = kv_pari.second.lock();
-				if (nullptr == sptr_so)
-					continue;
-				this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All));
-			}
-			for (auto kv_pari : snapshot->scene_objs)
-			{
-				uint64_t objid = kv_pari.first;
-				if (diff.more_scene_objs.count(objid) > 0)
-					continue;
-				auto sptr_so = kv_pari.second.lock();
-				if (nullptr == sptr_so)
-					continue;
-				if (!sptr_so->NeedSyncMutableState())
-					continue;
-				this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
-			}
-		}
+		m_view_mgr->Update();
+		this->HandleViewChange();
 		for (auto kv_pari : m_scene_objs)
 		{
 			std::shared_ptr<SceneObject> sptr_so = kv_pari.second;
 			sptr_so->SetSyncMutableState(false);
 		}
-
-		m_protobuf_arena->Reset();
 		this->CheckSceneObjectsCache();
+		m_protobuf_arena->Reset();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)
@@ -284,12 +262,19 @@ namespace GameLogic
 	void Scene::PullAllSceneInfo(Player * player)
 	{
 		this->SyncAllSceneObjectState(player, SCMF_All);
-
-		// for test
 		{
+			// view mgr
 			NetProto::ViewAllGrids *msg = this->CreateProtobuf<NetProto::ViewAllGrids>();
 			m_view_mgr->FillPbViewAllGrids(msg);
 			player->Send(NetProto::PID_ViewAllGrids, msg);
+
+			std::shared_ptr<Hero> hero = player->GetHero().lock();
+			if (nullptr != hero)
+			{
+				NetProto::ViewSnapshot *snapshot = this->CreateProtobuf<NetProto::ViewSnapshot>();;
+				m_view_mgr->FillPbViewSnapshot(hero->GetViewCamp(), snapshot);
+				player->Send(NetProto::PID_ViewSnapshot, snapshot);
+			}
 		}
 	}
 
@@ -316,21 +301,55 @@ namespace GameLogic
 		}
 	}
 
-	void Scene::TestViewSnapshot()
+	void Scene::HandleViewChange()
 	{
 		for (int view_camp = EViewCamp_None + 1; view_camp < EViewCamp_All; ++view_camp)
 		{
+			const ViewSnapshot *pre_snapshot = m_view_mgr->GetPreSnapshot((EViewCamp)view_camp);
 			const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot((EViewCamp)view_camp);
-			NetProto::ViewSnapshot *msg = this->CreateProtobuf<NetProto::ViewSnapshot>();
-			m_view_mgr->FillPbViewSnapshot((EViewCamp)view_camp, msg);
-			for (auto it : m_scene_objs)
+			if (nullptr == snapshot || nullptr == pre_snapshot)
+				continue;
+
+			ViewSnapshotDifference diff = snapshot->CalDifference(pre_snapshot);
+			if (!diff.more_view_grids.empty() || !diff.more_view_grids.empty())
 			{
-				if (ESOT_Hero == it.second->GetObjectType() && it.second->GetViewCamp() == view_camp)
+				// view grids 
+				NetProto::ViewSnapshotDiff *msg = this->CreateProtobuf<NetProto::ViewSnapshotDiff>();
+				for (ViewGrid *grid : diff.more_view_grids)
+					msg->add_more_grids(grid->grid_id);
+				for (ViewGrid *grid : diff.miss_view_grids)
+					msg->add_miss_grids(grid->grid_id);
+				this->SendViewCamp((EViewCamp)view_camp, NetProto::PID_ViewSnapshotDiff, msg);
+			}
+			{
+				// scene object 
+				if (diff.miss_scene_objs.size() > 0)
 				{
-					std::shared_ptr<Hero> hero_ptr = std::dynamic_pointer_cast<Hero>(it.second);
-					Player *player = hero_ptr->GetPlayer();
-					if (nullptr != player)
-						player->Send(NetProto::PID_ViewSnapshot, msg);
+					NetProto::SceneObjectDisappear *msg = this->CreateProtobuf<NetProto::SceneObjectDisappear>();
+					for (auto kv_pari : diff.miss_scene_objs)
+					{
+						msg->add_objids(kv_pari.first);
+					}
+					this->SendViewCamp((EViewCamp)view_camp, NetProto::PID_SceneObjectDisappear, msg);
+				}
+				for (auto kv_pari : diff.more_scene_objs)
+				{
+					auto sptr_so = kv_pari.second.lock();
+					if (nullptr == sptr_so)
+						continue;
+					this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All));
+				}
+				for (auto kv_pari : snapshot->scene_objs)
+				{
+					uint64_t objid = kv_pari.first;
+					if (diff.more_scene_objs.count(objid) > 0)
+						continue;
+					auto sptr_so = kv_pari.second.lock();
+					if (nullptr == sptr_so)
+						continue;
+					if (!sptr_so->NeedSyncMutableState())
+						continue;
+					this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
 				}
 			}
 		}

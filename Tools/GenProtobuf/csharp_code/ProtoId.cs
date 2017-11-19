@@ -22,7 +22,7 @@ namespace NetProto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1Qcm90b0lkLnByb3RvEghOZXRQcm90byrjAwoHUHJvdG9JZBILCgdQSURf",
+            "Cg1Qcm90b0lkLnByb3RvEghOZXRQcm90byr+AwoHUHJvdG9JZBILCgdQSURf",
             "TWluEAASDAoIUElEX1BpbmcQARIMCghQSURfUG9uZxACEhUKEVBJRF9RdWVy",
             "eUZyZWVIZXJvEGQSEwoPUElEX1JzcEZyZWVIZXJvEGUSFQoRUElEX1NlbGVj",
             "dEhlcm9SZXEQZhIVChFQSURfU2VsZWN0SGVyb1JzcBBnEhkKFVBJRF9Mb2Fk",
@@ -33,7 +33,8 @@ namespace NetProto {
             "RF9Nb3ZlT2JqZWN0TXV0YWJsZVN0YXRlEPMHEhIKDVBJRF9Nb3ZlVG9Qb3MQ",
             "/AcSEQoMUElEX1N0b3BNb3ZlEIYIEhcKElBJRF9CYXR0bGVPcGVyYVJlcRDM",
             "CBIVChBQSURfVmlld1NuYXBzaG90ENYIEhUKEFBJRF9WaWV3QWxsR3JpZHMQ",
-            "1wgSDAoHUElEX01heBCAKEID+AEBYgZwcm90bzM="));
+            "1wgSGQoUUElEX1ZpZXdTbmFwc2hvdERpZmYQ2AgSDAoHUElEX01heBCAKEID",
+            "+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ProtoId), }, null));
@@ -63,6 +64,7 @@ namespace NetProto {
     [pbr::OriginalName("PID_BattleOperaReq")] PidBattleOperaReq = 1100,
     [pbr::OriginalName("PID_ViewSnapshot")] PidViewSnapshot = 1110,
     [pbr::OriginalName("PID_ViewAllGrids")] PidViewAllGrids = 1111,
+    [pbr::OriginalName("PID_ViewSnapshotDiff")] PidViewSnapshotDiff = 1112,
     [pbr::OriginalName("PID_Max")] PidMax = 5120,
   }
 

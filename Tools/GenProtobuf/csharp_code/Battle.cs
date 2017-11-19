@@ -43,10 +43,11 @@ namespace NetProto {
             "dGlvbhIRCgl0YXJnZXRfaWQYAiABKAQSCwoDZGlyGAMgASgCEiAKA3BvcxgE",
             "IAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMiJCCghWaWV3R3JpZBIjCgZjZW50",
             "ZXIYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjISEQoJZ3JpZF90eXBlGAIg",
-            "ASgFIl4KDFZpZXdBbGxHcmlkcxIRCglncmlkX3NpemUYASABKAISCwoDcm93",
-            "GAIgASgFEgsKA2NvbBgDIAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3Rv",
-            "LlZpZXdHcmlkIiMKDFZpZXdTbmFwc2hvdBITCgtsaWdodF9ncmlkcxgBIAMo",
-            "BUID+AEBYgZwcm90bzM="));
+            "ASgFIjoKEFZpZXdTbmFwc2hvdERpZmYSEgoKbW9yZV9ncmlkcxgBIAMoBRIS",
+            "CgptaXNzX2dyaWRzGAIgAygFIiMKDFZpZXdTbmFwc2hvdBITCgtsaWdodF9n",
+            "cmlkcxgBIAMoBSJeCgxWaWV3QWxsR3JpZHMSEQoJZ3JpZF9zaXplGAEgASgC",
+            "EgsKA3JvdxgCIAEoBRILCgNjb2wYAyABKAUSIQoFZ3JpZHMYBCADKAsyEi5O",
+            "ZXRQcm90by5WaWV3R3JpZEID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -60,8 +61,9 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewGrid), global::NetProto.ViewGrid.Parser, new[]{ "Center", "GridType" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "LightGrids" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshotDiff), global::NetProto.ViewSnapshotDiff.Parser, new[]{ "MoreGrids", "MissGrids" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "LightGrids" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null)
           }));
     }
     #endregion
@@ -1777,6 +1779,247 @@ namespace NetProto {
 
   }
 
+  public sealed partial class ViewSnapshotDiff : pb::IMessage<ViewSnapshotDiff> {
+    private static readonly pb::MessageParser<ViewSnapshotDiff> _parser = new pb::MessageParser<ViewSnapshotDiff>(() => new ViewSnapshotDiff());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ViewSnapshotDiff> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshotDiff() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshotDiff(ViewSnapshotDiff other) : this() {
+      moreGrids_ = other.moreGrids_.Clone();
+      missGrids_ = other.missGrids_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshotDiff Clone() {
+      return new ViewSnapshotDiff(this);
+    }
+
+    /// <summary>Field number for the "more_grids" field.</summary>
+    public const int MoreGridsFieldNumber = 1;
+    private static readonly pb::FieldCodec<int> _repeated_moreGrids_codec
+        = pb::FieldCodec.ForInt32(10);
+    private readonly pbc::RepeatedField<int> moreGrids_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> MoreGrids {
+      get { return moreGrids_; }
+    }
+
+    /// <summary>Field number for the "miss_grids" field.</summary>
+    public const int MissGridsFieldNumber = 2;
+    private static readonly pb::FieldCodec<int> _repeated_missGrids_codec
+        = pb::FieldCodec.ForInt32(18);
+    private readonly pbc::RepeatedField<int> missGrids_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> MissGrids {
+      get { return missGrids_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ViewSnapshotDiff);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ViewSnapshotDiff other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!moreGrids_.Equals(other.moreGrids_)) return false;
+      if(!missGrids_.Equals(other.missGrids_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= moreGrids_.GetHashCode();
+      hash ^= missGrids_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      moreGrids_.WriteTo(output, _repeated_moreGrids_codec);
+      missGrids_.WriteTo(output, _repeated_missGrids_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += moreGrids_.CalculateSize(_repeated_moreGrids_codec);
+      size += missGrids_.CalculateSize(_repeated_missGrids_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ViewSnapshotDiff other) {
+      if (other == null) {
+        return;
+      }
+      moreGrids_.Add(other.moreGrids_);
+      missGrids_.Add(other.missGrids_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10:
+          case 8: {
+            moreGrids_.AddEntriesFrom(input, _repeated_moreGrids_codec);
+            break;
+          }
+          case 18:
+          case 16: {
+            missGrids_.AddEntriesFrom(input, _repeated_missGrids_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ViewSnapshot : pb::IMessage<ViewSnapshot> {
+    private static readonly pb::MessageParser<ViewSnapshot> _parser = new pb::MessageParser<ViewSnapshot>(() => new ViewSnapshot());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ViewSnapshot> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshot() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshot(ViewSnapshot other) : this() {
+      lightGrids_ = other.lightGrids_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ViewSnapshot Clone() {
+      return new ViewSnapshot(this);
+    }
+
+    /// <summary>Field number for the "light_grids" field.</summary>
+    public const int LightGridsFieldNumber = 1;
+    private static readonly pb::FieldCodec<int> _repeated_lightGrids_codec
+        = pb::FieldCodec.ForInt32(10);
+    private readonly pbc::RepeatedField<int> lightGrids_ = new pbc::RepeatedField<int>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<int> LightGrids {
+      get { return lightGrids_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ViewSnapshot);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ViewSnapshot other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!lightGrids_.Equals(other.lightGrids_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= lightGrids_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      lightGrids_.WriteTo(output, _repeated_lightGrids_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += lightGrids_.CalculateSize(_repeated_lightGrids_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ViewSnapshot other) {
+      if (other == null) {
+        return;
+      }
+      lightGrids_.Add(other.lightGrids_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10:
+          case 8: {
+            lightGrids_.AddEntriesFrom(input, _repeated_lightGrids_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ViewAllGrids : pb::IMessage<ViewAllGrids> {
     private static readonly pb::MessageParser<ViewAllGrids> _parser = new pb::MessageParser<ViewAllGrids>(() => new ViewAllGrids());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1784,7 +2027,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1962,116 +2205,6 @@ namespace NetProto {
           }
           case 34: {
             grids_.AddEntriesFrom(input, _repeated_grids_codec);
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class ViewSnapshot : pb::IMessage<ViewSnapshot> {
-    private static readonly pb::MessageParser<ViewSnapshot> _parser = new pb::MessageParser<ViewSnapshot>(() => new ViewSnapshot());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ViewSnapshot> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[11]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ViewSnapshot() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ViewSnapshot(ViewSnapshot other) : this() {
-      lightGrids_ = other.lightGrids_.Clone();
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ViewSnapshot Clone() {
-      return new ViewSnapshot(this);
-    }
-
-    /// <summary>Field number for the "light_grids" field.</summary>
-    public const int LightGridsFieldNumber = 1;
-    private static readonly pb::FieldCodec<int> _repeated_lightGrids_codec
-        = pb::FieldCodec.ForInt32(10);
-    private readonly pbc::RepeatedField<int> lightGrids_ = new pbc::RepeatedField<int>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<int> LightGrids {
-      get { return lightGrids_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as ViewSnapshot);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ViewSnapshot other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!lightGrids_.Equals(other.lightGrids_)) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= lightGrids_.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      lightGrids_.WriteTo(output, _repeated_lightGrids_codec);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      size += lightGrids_.CalculateSize(_repeated_lightGrids_codec);
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ViewSnapshot other) {
-      if (other == null) {
-        return;
-      }
-      lightGrids_.Add(other.lightGrids_);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 10:
-          case 8: {
-            lightGrids_.AddEntriesFrom(input, _repeated_lightGrids_codec);
             break;
           }
         }

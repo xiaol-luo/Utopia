@@ -73,6 +73,17 @@ message ViewGrid
 	int32 grid_type = 2;
 }
 
+message ViewSnapshotDiff
+{
+	repeated int32 more_grids = 1;
+	repeated int32 miss_grids = 2;
+}
+
+message ViewSnapshot
+{
+	repeated int32 light_grids = 1;
+}
+
 message ViewAllGrids
 {
 	float grid_size = 1;
@@ -81,7 +92,3 @@ message ViewAllGrids
 	repeated ViewGrid grids = 4;
 }
 
-message ViewSnapshot
-{
-	repeated int32 light_grids = 1;
-}

@@ -24,10 +24,12 @@ class ViewGridGizmos : MonoBehaviour
 
     public void ClearAll()
     {
+        m_isInited = false;
         m_allGrids.Clear();
         m_snapshotIdxs.Clear();
     }
 
+    bool m_isInited = false;
     Vector3 m_gridSize = Vector3.one;
     int m_row_num = 0;
     int m_col_num = 0;
@@ -43,6 +45,7 @@ class ViewGridGizmos : MonoBehaviour
 
     public void SetAllGrids(NetProto.ViewAllGrids msg)
     {
+        this.ClearAll();
         m_gridSize = new Vector3(msg.GridSize, 0.2f, msg.GridSize);
         m_row_num = msg.Row;
         m_col_num = msg.Col;
@@ -54,11 +57,25 @@ class ViewGridGizmos : MonoBehaviour
             dwg.center = new Vector3(item.Center.X, 0, item.Center.Y);
             m_allGrids.Add(dwg);
         }
+        m_isInited = true;
     }
 
     public void SetSnapshot(NetProto.ViewSnapshot msg)
     {
+        if (!m_isInited)
+            return;
         m_snapshotIdxs = new List<int>(msg.LightGrids);
+    }
+
+    public void SetSnapshotDiff(NetProto.ViewSnapshotDiff msg)
+    {
+        if (!m_isInited)
+            return;
+
+        foreach (int idx in msg.MissGrids)
+            m_snapshotIdxs.Remove(idx);
+        foreach (int idx in msg.MoreGrids)
+            m_snapshotIdxs.Add(idx);
     }
 
     void OnDrawGizmos()

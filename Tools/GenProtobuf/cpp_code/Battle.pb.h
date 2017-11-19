@@ -69,6 +69,9 @@ extern ViewGridDefaultTypeInternal _ViewGrid_default_instance_;
 class ViewSnapshot;
 class ViewSnapshotDefaultTypeInternal;
 extern ViewSnapshotDefaultTypeInternal _ViewSnapshot_default_instance_;
+class ViewSnapshotDiff;
+class ViewSnapshotDiffDefaultTypeInternal;
+extern ViewSnapshotDiffDefaultTypeInternal _ViewSnapshotDiff_default_instance_;
 }  // namespace NetProto
 
 namespace NetProto {
@@ -1427,24 +1430,24 @@ class ViewGrid : public ::google::protobuf::Message /* @@protoc_insertion_point(
 };
 // -------------------------------------------------------------------
 
-class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.ViewAllGrids) */ {
+class ViewSnapshotDiff : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.ViewSnapshotDiff) */ {
  public:
-  ViewAllGrids();
-  virtual ~ViewAllGrids();
+  ViewSnapshotDiff();
+  virtual ~ViewSnapshotDiff();
 
-  ViewAllGrids(const ViewAllGrids& from);
+  ViewSnapshotDiff(const ViewSnapshotDiff& from);
 
-  inline ViewAllGrids& operator=(const ViewAllGrids& from) {
+  inline ViewSnapshotDiff& operator=(const ViewSnapshotDiff& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  ViewAllGrids(ViewAllGrids&& from) noexcept
-    : ViewAllGrids() {
+  ViewSnapshotDiff(ViewSnapshotDiff&& from) noexcept
+    : ViewSnapshotDiff() {
     *this = ::std::move(from);
   }
 
-  inline ViewAllGrids& operator=(ViewAllGrids&& from) noexcept {
+  inline ViewSnapshotDiff& operator=(ViewSnapshotDiff&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -1460,30 +1463,30 @@ class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_po
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ViewAllGrids& default_instance();
+  static const ViewSnapshotDiff& default_instance();
 
-  static inline const ViewAllGrids* internal_default_instance() {
-    return reinterpret_cast<const ViewAllGrids*>(
-               &_ViewAllGrids_default_instance_);
+  static inline const ViewSnapshotDiff* internal_default_instance() {
+    return reinterpret_cast<const ViewSnapshotDiff*>(
+               &_ViewSnapshotDiff_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
     10;
 
-  void UnsafeArenaSwap(ViewAllGrids* other);
-  void Swap(ViewAllGrids* other);
-  friend void swap(ViewAllGrids& a, ViewAllGrids& b) {
+  void UnsafeArenaSwap(ViewSnapshotDiff* other);
+  void Swap(ViewSnapshotDiff* other);
+  friend void swap(ViewSnapshotDiff& a, ViewSnapshotDiff& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ViewAllGrids* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline ViewSnapshotDiff* New() const PROTOBUF_FINAL { return New(NULL); }
 
-  ViewAllGrids* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  ViewSnapshotDiff* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const ViewAllGrids& from);
-  void MergeFrom(const ViewAllGrids& from);
+  void CopyFrom(const ViewSnapshotDiff& from);
+  void MergeFrom(const ViewSnapshotDiff& from);
   void Clear() PROTOBUF_FINAL;
   bool IsInitialized() const PROTOBUF_FINAL;
 
@@ -1499,9 +1502,9 @@ class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_po
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(ViewAllGrids* other);
+  void InternalSwap(ViewSnapshotDiff* other);
   protected:
-  explicit ViewAllGrids(::google::protobuf::Arena* arena);
+  explicit ViewSnapshotDiff(::google::protobuf::Arena* arena);
   private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
@@ -1520,47 +1523,41 @@ class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // repeated .NetProto.ViewGrid grids = 4;
-  int grids_size() const;
-  void clear_grids();
-  static const int kGridsFieldNumber = 4;
-  const ::NetProto::ViewGrid& grids(int index) const;
-  ::NetProto::ViewGrid* mutable_grids(int index);
-  ::NetProto::ViewGrid* add_grids();
-  ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >*
-      mutable_grids();
-  const ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >&
-      grids() const;
+  // repeated int32 more_grids = 1;
+  int more_grids_size() const;
+  void clear_more_grids();
+  static const int kMoreGridsFieldNumber = 1;
+  ::google::protobuf::int32 more_grids(int index) const;
+  void set_more_grids(int index, ::google::protobuf::int32 value);
+  void add_more_grids(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      more_grids() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_more_grids();
 
-  // float grid_size = 1;
-  void clear_grid_size();
-  static const int kGridSizeFieldNumber = 1;
-  float grid_size() const;
-  void set_grid_size(float value);
+  // repeated int32 miss_grids = 2;
+  int miss_grids_size() const;
+  void clear_miss_grids();
+  static const int kMissGridsFieldNumber = 2;
+  ::google::protobuf::int32 miss_grids(int index) const;
+  void set_miss_grids(int index, ::google::protobuf::int32 value);
+  void add_miss_grids(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      miss_grids() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_miss_grids();
 
-  // int32 row = 2;
-  void clear_row();
-  static const int kRowFieldNumber = 2;
-  ::google::protobuf::int32 row() const;
-  void set_row(::google::protobuf::int32 value);
-
-  // int32 col = 3;
-  void clear_col();
-  static const int kColFieldNumber = 3;
-  ::google::protobuf::int32 col() const;
-  void set_col(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:NetProto.ViewAllGrids)
+  // @@protoc_insertion_point(class_scope:NetProto.ViewSnapshotDiff)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid > grids_;
-  float grid_size_;
-  ::google::protobuf::int32 row_;
-  ::google::protobuf::int32 col_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > more_grids_;
+  mutable int _more_grids_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > miss_grids_;
+  mutable int _miss_grids_cached_byte_size_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -1680,6 +1677,145 @@ class ViewSnapshot : public ::google::protobuf::Message /* @@protoc_insertion_po
   typedef void DestructorSkippable_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > light_grids_;
   mutable int _light_grids_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.ViewAllGrids) */ {
+ public:
+  ViewAllGrids();
+  virtual ~ViewAllGrids();
+
+  ViewAllGrids(const ViewAllGrids& from);
+
+  inline ViewAllGrids& operator=(const ViewAllGrids& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ViewAllGrids(ViewAllGrids&& from) noexcept
+    : ViewAllGrids() {
+    *this = ::std::move(from);
+  }
+
+  inline ViewAllGrids& operator=(ViewAllGrids&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ViewAllGrids& default_instance();
+
+  static inline const ViewAllGrids* internal_default_instance() {
+    return reinterpret_cast<const ViewAllGrids*>(
+               &_ViewAllGrids_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    12;
+
+  void UnsafeArenaSwap(ViewAllGrids* other);
+  void Swap(ViewAllGrids* other);
+  friend void swap(ViewAllGrids& a, ViewAllGrids& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ViewAllGrids* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ViewAllGrids* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ViewAllGrids& from);
+  void MergeFrom(const ViewAllGrids& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ViewAllGrids* other);
+  protected:
+  explicit ViewAllGrids(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .NetProto.ViewGrid grids = 4;
+  int grids_size() const;
+  void clear_grids();
+  static const int kGridsFieldNumber = 4;
+  const ::NetProto::ViewGrid& grids(int index) const;
+  ::NetProto::ViewGrid* mutable_grids(int index);
+  ::NetProto::ViewGrid* add_grids();
+  ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >*
+      mutable_grids();
+  const ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid >&
+      grids() const;
+
+  // float grid_size = 1;
+  void clear_grid_size();
+  static const int kGridSizeFieldNumber = 1;
+  float grid_size() const;
+  void set_grid_size(float value);
+
+  // int32 row = 2;
+  void clear_row();
+  static const int kRowFieldNumber = 2;
+  ::google::protobuf::int32 row() const;
+  void set_row(::google::protobuf::int32 value);
+
+  // int32 col = 3;
+  void clear_col();
+  static const int kColFieldNumber = 3;
+  ::google::protobuf::int32 col() const;
+  void set_col(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.ViewAllGrids)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::google::protobuf::RepeatedPtrField< ::NetProto::ViewGrid > grids_;
+  float grid_size_;
+  ::google::protobuf::int32 row_;
+  ::google::protobuf::int32 col_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -2393,6 +2529,104 @@ inline void ViewGrid::set_grid_type(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
+// ViewSnapshotDiff
+
+// repeated int32 more_grids = 1;
+inline int ViewSnapshotDiff::more_grids_size() const {
+  return more_grids_.size();
+}
+inline void ViewSnapshotDiff::clear_more_grids() {
+  more_grids_.Clear();
+}
+inline ::google::protobuf::int32 ViewSnapshotDiff::more_grids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshotDiff.more_grids)
+  return more_grids_.Get(index);
+}
+inline void ViewSnapshotDiff::set_more_grids(int index, ::google::protobuf::int32 value) {
+  more_grids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:NetProto.ViewSnapshotDiff.more_grids)
+}
+inline void ViewSnapshotDiff::add_more_grids(::google::protobuf::int32 value) {
+  more_grids_.Add(value);
+  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshotDiff.more_grids)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+ViewSnapshotDiff::more_grids() const {
+  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshotDiff.more_grids)
+  return more_grids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+ViewSnapshotDiff::mutable_more_grids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshotDiff.more_grids)
+  return &more_grids_;
+}
+
+// repeated int32 miss_grids = 2;
+inline int ViewSnapshotDiff::miss_grids_size() const {
+  return miss_grids_.size();
+}
+inline void ViewSnapshotDiff::clear_miss_grids() {
+  miss_grids_.Clear();
+}
+inline ::google::protobuf::int32 ViewSnapshotDiff::miss_grids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshotDiff.miss_grids)
+  return miss_grids_.Get(index);
+}
+inline void ViewSnapshotDiff::set_miss_grids(int index, ::google::protobuf::int32 value) {
+  miss_grids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:NetProto.ViewSnapshotDiff.miss_grids)
+}
+inline void ViewSnapshotDiff::add_miss_grids(::google::protobuf::int32 value) {
+  miss_grids_.Add(value);
+  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshotDiff.miss_grids)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+ViewSnapshotDiff::miss_grids() const {
+  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshotDiff.miss_grids)
+  return miss_grids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+ViewSnapshotDiff::mutable_miss_grids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshotDiff.miss_grids)
+  return &miss_grids_;
+}
+
+// -------------------------------------------------------------------
+
+// ViewSnapshot
+
+// repeated int32 light_grids = 1;
+inline int ViewSnapshot::light_grids_size() const {
+  return light_grids_.size();
+}
+inline void ViewSnapshot::clear_light_grids() {
+  light_grids_.Clear();
+}
+inline ::google::protobuf::int32 ViewSnapshot::light_grids(int index) const {
+  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshot.light_grids)
+  return light_grids_.Get(index);
+}
+inline void ViewSnapshot::set_light_grids(int index, ::google::protobuf::int32 value) {
+  light_grids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:NetProto.ViewSnapshot.light_grids)
+}
+inline void ViewSnapshot::add_light_grids(::google::protobuf::int32 value) {
+  light_grids_.Add(value);
+  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshot.light_grids)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+ViewSnapshot::light_grids() const {
+  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshot.light_grids)
+  return light_grids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+ViewSnapshot::mutable_light_grids() {
+  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshot.light_grids)
+  return &light_grids_;
+}
+
+// -------------------------------------------------------------------
+
 // ViewAllGrids
 
 // float grid_size = 1;
@@ -2467,44 +2701,12 @@ ViewAllGrids::grids() const {
   return grids_;
 }
 
-// -------------------------------------------------------------------
-
-// ViewSnapshot
-
-// repeated int32 light_grids = 1;
-inline int ViewSnapshot::light_grids_size() const {
-  return light_grids_.size();
-}
-inline void ViewSnapshot::clear_light_grids() {
-  light_grids_.Clear();
-}
-inline ::google::protobuf::int32 ViewSnapshot::light_grids(int index) const {
-  // @@protoc_insertion_point(field_get:NetProto.ViewSnapshot.light_grids)
-  return light_grids_.Get(index);
-}
-inline void ViewSnapshot::set_light_grids(int index, ::google::protobuf::int32 value) {
-  light_grids_.Set(index, value);
-  // @@protoc_insertion_point(field_set:NetProto.ViewSnapshot.light_grids)
-}
-inline void ViewSnapshot::add_light_grids(::google::protobuf::int32 value) {
-  light_grids_.Add(value);
-  // @@protoc_insertion_point(field_add:NetProto.ViewSnapshot.light_grids)
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-ViewSnapshot::light_grids() const {
-  // @@protoc_insertion_point(field_list:NetProto.ViewSnapshot.light_grids)
-  return light_grids_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-ViewSnapshot::mutable_light_grids() {
-  // @@protoc_insertion_point(field_mutable_list:NetProto.ViewSnapshot.light_grids)
-  return &light_grids_;
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

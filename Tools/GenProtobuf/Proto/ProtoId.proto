@@ -29,6 +29,7 @@ enum ProtoId
 	PID_BattleOperaReq = 1100;
 	PID_ViewSnapshot = 1110;
 	PID_ViewAllGrids = 1111;
+	PID_ViewSnapshotDiff = 1112;
 	
 	PID_Max = 5120;
 }

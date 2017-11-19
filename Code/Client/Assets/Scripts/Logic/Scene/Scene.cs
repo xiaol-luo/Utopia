@@ -40,6 +40,11 @@ public class Scene
         {
             m_vgg.SetSnapshot(msg);
         });
+        App.my.gameNetwork.Add<ViewSnapshotDiff>((int)ProtoId.PidViewSnapshotDiff, (int id, ViewSnapshotDiff msg) =>
+        {
+            m_vgg.SetSnapshotDiff(msg);
+        });
+
 
         {
             foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
@@ -66,6 +71,8 @@ public class Scene
         App.my.gameNetwork.Remove((int)ProtoId.PidMoveObjectMutableState);
         App.my.gameNetwork.Remove((int)ProtoId.PidSceneObjectDisappear);
         App.my.gameNetwork.Remove((int)ProtoId.PidViewAllGrids);
+        App.my.gameNetwork.Remove((int)ProtoId.PidViewSnapshot);
+        App.my.gameNetwork.Remove((int)ProtoId.PidViewSnapshotDiff);
     }
     
     SceneObjcet GetSceneObject(ulong objId)

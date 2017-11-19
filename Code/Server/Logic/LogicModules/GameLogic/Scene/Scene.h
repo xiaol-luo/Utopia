@@ -79,7 +79,6 @@ namespace GameLogic
 
 
 	private:
-		// test
-		void TestViewSnapshot();
+		void HandleViewChange();
 	};
 }

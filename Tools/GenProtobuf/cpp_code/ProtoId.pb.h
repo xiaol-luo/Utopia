@@ -70,6 +70,7 @@ enum ProtoId {
   PID_BattleOperaReq = 1100,
   PID_ViewSnapshot = 1110,
   PID_ViewAllGrids = 1111,
+  PID_ViewSnapshotDiff = 1112,
   PID_Max = 5120,
   ProtoId_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ProtoId_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
