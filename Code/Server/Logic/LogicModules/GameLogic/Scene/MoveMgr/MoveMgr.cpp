@@ -1,6 +1,5 @@
 #include "MoveMgr.h"
 #include "GameLogic/Scene/Scene.h"
-#include "GameLogic/Scene/Navigation/NavMgr.h"
 #include "GameLogic/Scene/Scene.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "GameLogic/Scene/SceneObject/MoveObject.h"
@@ -26,7 +25,7 @@ bool GameLogic::MoveMgr::Awake()
 
 void GameLogic::MoveMgr::Update()
 {
-	long deltaMs = GlobalServerLogic->GetTimerModule()->DeltaMs();
+	long deltaMs = this->m_scene->GetLogicDetalMs();
 	m_nav_mesh->GetCrowd()->update(deltaMs * 0.001, nullptr);
 
 	for (auto kv_pair : m_move_agents)

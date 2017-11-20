@@ -56,3 +56,30 @@ enum EBattleOperation
 	
 	EBO_MaxCount = 32;
 }
+
+enum EFightParam
+{
+	EFP_None = 0;
+	EFP_CurrHP = 1;
+	EFP_MaxHP = 2;
+	EFP_CurrMP = 3;	
+	EFP_MaxMP = 4;
+
+	EFP_MoveSpeed = 7;			// 移动速度
+	EFP_AttackDist = 8;			// 射程
+	EFP_AttackSpeed = 9;		// 攻击速度
+	
+	EFP_Dizziness = 10;			// 眩晕
+	EFP_Silence = 11;			// 沉默
+	EFP_Blind = 12;				// 致盲
+	EFP_Immobilized = 13;		// 定身
+
+	EFP_PhyAttack = 20; 		// 物理攻击
+	EFP_MagicAttack = 21; 		// 法术攻击	
+	EFP_PhyHurt = 22; 			// 物强
+	EFP_MagicHurt = 23; 		// 法强
+	EFP_PhyDefense = 24;		// 物抗
+	EFP_MagicDefense = 25;		// 魔抗
+	
+	EFP_COUNT = 32;
+}

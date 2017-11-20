@@ -44,7 +44,7 @@ void GameLogic::MoveAgentForcePosState::Update(long deltaMs)
 	Vector3 move_dir = m_destination - curr_pos;
 	move_dir.y = 0;
 	move_dir.normalize();
-	float delta_time = GlobalServerLogic->GetTimerModule()->DeltaMs() * 1.0 / ITimerModule::MS_PER_SEC;
+	float delta_time = deltaMs * 1.0 / ITimerModule::MS_PER_SEC;
 	Vector3 next_pos = curr_pos + move_dir * m_speed * delta_time;
 	{
 		Vector3 nor1 = move_dir;

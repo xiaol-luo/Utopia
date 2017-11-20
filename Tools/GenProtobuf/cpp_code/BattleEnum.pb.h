@@ -158,6 +158,44 @@ inline bool EBattleOperation_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EBattleOperation>(
     EBattleOperation_descriptor(), name, value);
 }
+enum EFightParam {
+  EFP_None = 0,
+  EFP_CurrHP = 1,
+  EFP_MaxHP = 2,
+  EFP_CurrMP = 3,
+  EFP_MaxMP = 4,
+  EFP_MoveSpeed = 7,
+  EFP_AttackDist = 8,
+  EFP_AttackSpeed = 9,
+  EFP_Dizziness = 10,
+  EFP_Silence = 11,
+  EFP_Blind = 12,
+  EFP_Immobilized = 13,
+  EFP_PhyAttack = 20,
+  EFP_MagicAttack = 21,
+  EFP_PhyHurt = 22,
+  EFP_MagicHurt = 23,
+  EFP_PhyDefense = 24,
+  EFP_MagicDefense = 25,
+  EFP_COUNT = 32,
+  EFightParam_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EFightParam_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool EFightParam_IsValid(int value);
+const EFightParam EFightParam_MIN = EFP_None;
+const EFightParam EFightParam_MAX = EFP_COUNT;
+const int EFightParam_ARRAYSIZE = EFightParam_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* EFightParam_descriptor();
+inline const ::std::string& EFightParam_Name(EFightParam value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    EFightParam_descriptor(), value);
+}
+inline bool EFightParam_Parse(
+    const ::std::string& name, EFightParam* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EFightParam>(
+    EFightParam_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -203,6 +241,11 @@ template <> struct is_proto_enum< ::NetProto::EBattleOperation> : ::google::prot
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EBattleOperation>() {
   return ::NetProto::EBattleOperation_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::EFightParam> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EFightParam>() {
+  return ::NetProto::EFightParam_descriptor();
 }
 
 }  // namespace protobuf

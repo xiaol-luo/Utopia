@@ -3,7 +3,7 @@
 
 namespace GameLogic
 {
-	Hero::Hero() : MoveObject(ESOT_Hero)
+	Hero::Hero() : FightUnit(ESOT_Hero)
 	{
 	}
 

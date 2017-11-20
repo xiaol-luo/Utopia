@@ -144,6 +144,19 @@ namespace GameLogic
 
 	void Scene::Update(long long now_ms)
 	{
+		if (0 == m_last_real_ms)
+		{
+			m_last_real_ms = now_ms;
+			return;
+		}
+
+		long long delta_ms = now_ms - m_last_real_ms;
+		m_last_real_ms = now_ms;
+		if (m_is_pause)
+			return;
+
+		m_logic_detal_ms = delta_ms;
+		m_last_real_ms += delta_ms;
 		this->CheckSceneObjectsCache();
 		m_nav_mesh->UpdateTerrian();
 		m_move_mgr->Update();

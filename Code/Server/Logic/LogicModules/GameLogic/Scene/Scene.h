@@ -41,7 +41,14 @@ namespace GameLogic
 		inline NavMesh * GetNavMesh() { return m_nav_mesh; }
 		inline ViewMgr * GetViewMgr() { return m_view_mgr; }
 		inline SceneEventDispacher * GetEventDispacher() { return m_event_dispacher; }
+		inline long GetLogicMs() { return m_logic_ms; }
+		inline long GetLogicDetalMs() { return m_logic_detal_ms; }
 	protected:
+		bool m_is_pause = false;
+		uint64_t m_logic_ms = 0;
+		uint64_t m_logic_detal_ms;
+		uint64_t m_last_real_ms = 0;
+
 		GameLogicModule *m_logic_module = nullptr;;
 		NavMesh *m_nav_mesh = nullptr;
 		MoveMgr *m_move_mgr = nullptr;

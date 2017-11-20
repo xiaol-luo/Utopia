@@ -39,11 +39,19 @@ namespace NetProto {
             "T19DYXN0U2tpbGxfRxAQEhUKEUVCT19Vc2VJdGVtU29sdF8xEBUSFQoRRUJP",
             "X1VzZUl0ZW1Tb2x0XzIQFhIVChFFQk9fVXNlSXRlbVNvbHRfMxAXEhUKEUVC",
             "T19Vc2VJdGVtU29sdF80EBgSFQoRRUJPX1VzZUl0ZW1Tb2x0XzUQGRIVChFF",
-            "Qk9fVXNlSXRlbVNvbHRfNhAaEhAKDEVCT19NYXhDb3VudBAgQgP4AQFiBnBy",
-            "b3RvMw=="));
+            "Qk9fVXNlSXRlbVNvbHRfNhAaEhAKDEVCT19NYXhDb3VudBAgKuICCgtFRmln",
+            "aHRQYXJhbRIMCghFRlBfTm9uZRAAEg4KCkVGUF9DdXJySFAQARINCglFRlBf",
+            "TWF4SFAQAhIOCgpFRlBfQ3Vyck1QEAMSDQoJRUZQX01heE1QEAQSEQoNRUZQ",
+            "X01vdmVTcGVlZBAHEhIKDkVGUF9BdHRhY2tEaXN0EAgSEwoPRUZQX0F0dGFj",
+            "a1NwZWVkEAkSEQoNRUZQX0RpenppbmVzcxAKEg8KC0VGUF9TaWxlbmNlEAsS",
+            "DQoJRUZQX0JsaW5kEAwSEwoPRUZQX0ltbW9iaWxpemVkEA0SEQoNRUZQX1Bo",
+            "eUF0dGFjaxAUEhMKD0VGUF9NYWdpY0F0dGFjaxAVEg8KC0VGUF9QaHlIdXJ0",
+            "EBYSEQoNRUZQX01hZ2ljSHVydBAXEhIKDkVGUF9QaHlEZWZlbnNlEBgSFAoQ",
+            "RUZQX01hZ2ljRGVmZW5zZRAZEg0KCUVGUF9DT1VOVBAgQgP4AQFiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ESceneObject), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EBattleOperation), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ESceneObject), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EBattleOperation), typeof(global::NetProto.EFightParam), }, null));
     }
     #endregion
 
@@ -92,6 +100,67 @@ namespace NetProto {
     [pbr::OriginalName("EBO_UseItemSolt_5")] EboUseItemSolt5 = 25,
     [pbr::OriginalName("EBO_UseItemSolt_6")] EboUseItemSolt6 = 26,
     [pbr::OriginalName("EBO_MaxCount")] EboMaxCount = 32,
+  }
+
+  public enum EFightParam {
+    [pbr::OriginalName("EFP_None")] EfpNone = 0,
+    [pbr::OriginalName("EFP_CurrHP")] EfpCurrHp = 1,
+    [pbr::OriginalName("EFP_MaxHP")] EfpMaxHp = 2,
+    [pbr::OriginalName("EFP_CurrMP")] EfpCurrMp = 3,
+    [pbr::OriginalName("EFP_MaxMP")] EfpMaxMp = 4,
+    /// <summary>
+    /// 移动速度
+    /// </summary>
+    [pbr::OriginalName("EFP_MoveSpeed")] EfpMoveSpeed = 7,
+    /// <summary>
+    /// 射程
+    /// </summary>
+    [pbr::OriginalName("EFP_AttackDist")] EfpAttackDist = 8,
+    /// <summary>
+    /// 攻击速度
+    /// </summary>
+    [pbr::OriginalName("EFP_AttackSpeed")] EfpAttackSpeed = 9,
+    /// <summary>
+    /// 眩晕
+    /// </summary>
+    [pbr::OriginalName("EFP_Dizziness")] EfpDizziness = 10,
+    /// <summary>
+    /// 沉默
+    /// </summary>
+    [pbr::OriginalName("EFP_Silence")] EfpSilence = 11,
+    /// <summary>
+    /// 致盲
+    /// </summary>
+    [pbr::OriginalName("EFP_Blind")] EfpBlind = 12,
+    /// <summary>
+    /// 定身
+    /// </summary>
+    [pbr::OriginalName("EFP_Immobilized")] EfpImmobilized = 13,
+    /// <summary>
+    /// 物理攻击
+    /// </summary>
+    [pbr::OriginalName("EFP_PhyAttack")] EfpPhyAttack = 20,
+    /// <summary>
+    /// 法术攻击	
+    /// </summary>
+    [pbr::OriginalName("EFP_MagicAttack")] EfpMagicAttack = 21,
+    /// <summary>
+    /// 物强
+    /// </summary>
+    [pbr::OriginalName("EFP_PhyHurt")] EfpPhyHurt = 22,
+    /// <summary>
+    /// 法强
+    /// </summary>
+    [pbr::OriginalName("EFP_MagicHurt")] EfpMagicHurt = 23,
+    /// <summary>
+    /// 物抗
+    /// </summary>
+    [pbr::OriginalName("EFP_PhyDefense")] EfpPhyDefense = 24,
+    /// <summary>
+    /// 魔抗
+    /// </summary>
+    [pbr::OriginalName("EFP_MagicDefense")] EfpMagicDefense = 25,
+    [pbr::OriginalName("EFP_COUNT")] EfpCount = 32,
   }
 
   #endregion

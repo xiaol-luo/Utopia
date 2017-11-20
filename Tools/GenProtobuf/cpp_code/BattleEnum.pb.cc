@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[4];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[5];
 
 }  // namespace
 
@@ -100,10 +100,19 @@ void AddDescriptorsImpl() {
       "temSolt_2\020\026\022\025\n\021EBO_UseItemSolt_3\020\027\022\025\n\021EB"
       "O_UseItemSolt_4\020\030\022\025\n\021EBO_UseItemSolt_5\020\031"
       "\022\025\n\021EBO_UseItemSolt_6\020\032\022\020\n\014EBO_MaxCount\020"
-      " B\003\370\001\001b\006proto3"
+      " *\342\002\n\013EFightParam\022\014\n\010EFP_None\020\000\022\016\n\nEFP_C"
+      "urrHP\020\001\022\r\n\tEFP_MaxHP\020\002\022\016\n\nEFP_CurrMP\020\003\022\r"
+      "\n\tEFP_MaxMP\020\004\022\021\n\rEFP_MoveSpeed\020\007\022\022\n\016EFP_"
+      "AttackDist\020\010\022\023\n\017EFP_AttackSpeed\020\t\022\021\n\rEFP"
+      "_Dizziness\020\n\022\017\n\013EFP_Silence\020\013\022\r\n\tEFP_Bli"
+      "nd\020\014\022\023\n\017EFP_Immobilized\020\r\022\021\n\rEFP_PhyAtta"
+      "ck\020\024\022\023\n\017EFP_MagicAttack\020\025\022\017\n\013EFP_PhyHurt"
+      "\020\026\022\021\n\rEFP_MagicHurt\020\027\022\022\n\016EFP_PhyDefense\020"
+      "\030\022\024\n\020EFP_MagicDefense\020\031\022\r\n\tEFP_COUNT\020 B\003"
+      "\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 814);
+      descriptor, 1171);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -196,6 +205,37 @@ bool EBattleOperation_IsValid(int value) {
     case 24:
     case 25:
     case 26:
+    case 32:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* EFightParam_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[4];
+}
+bool EFightParam_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
     case 32:
       return true;
     default:
