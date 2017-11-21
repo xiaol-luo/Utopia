@@ -1,11 +1,11 @@
 #pragma once
 
-#include "FightParameter.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
 
 namespace GameLogic
 {
 	class FightUnit;
+	class FightParameter;
 
 	class FightParameterMgr
 	{
@@ -13,7 +13,7 @@ namespace GameLogic
 		FightParameterMgr(FightUnit *fight_unit);
 		~FightParameterMgr();
 
-		FightParameter m_params[NetProto::EFP_COUNT];
+		FightParameter *m_params[NetProto::EFP_COUNT];
 		FightUnit *m_fight_unit;
 	};
 }
