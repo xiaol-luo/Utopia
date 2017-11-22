@@ -44,14 +44,9 @@ namespace NumUtil
 		std::vector<V> m_values;
 		struct UniqueValue
 		{
-			V GetValue()
-			{
-				auto it = std::max_element(values.begin(), values.end());
-				return *it;
-			}
-
 			std::vector<V> values;
 		};
+
 		std::map<K, UniqueValue> m_unique_values;
 		ECalculateStrategy m_cal_strategy = ECS_Overlay;
 
@@ -153,7 +148,15 @@ namespace NumUtil
 		void SetMaxValue(V val, bool is_recal=true)
 		{
 			m_max_value = val;
+
 			NumUtil::MakeInAscOrder(m_min_value, m_max_value);
+			if (is_recal)
+				this->Recalcute();
+		}
+
+		void SetCalculateStrategy(ECalculateStrategy cs, bool is_recal=true)
+		{
+			m_cal_strategy = cs;
 			if (is_recal)
 				this->Recalcute();
 		}
@@ -167,7 +170,10 @@ namespace NumUtil
 				for (int val : m_values)
 					m_value += val;
 				for (auto &&kvPair : m_unique_values)
-					m_value += kvPair.second.GetValue();
+				{
+					UniqueValue &unique_value = kvPair.second;
+					m_value += *std::max_element(unique_value.values.begin(), unique_value.values.end());
+				}
 			}
 			m_value = NumUtil::GetInRange(m_value, m_min_value, m_max_value);
 		}
