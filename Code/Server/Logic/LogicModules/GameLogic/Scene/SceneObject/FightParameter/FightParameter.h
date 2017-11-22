@@ -17,33 +17,32 @@ namespace GameLogic
 		FightParameter();
 		~FightParameter();
 
-		void SetFightParam(NetProto::EFightParam val) { m_fight_param = val; }
-		void SetPercentAsDenominator(bool val) { m_is_percent_as_denominator = val; } 
+		inline void SetFightParam(NetProto::EFightParam val) { m_fight_param = val; }
+		inline void SetPercentAsDenominator(bool val) { m_is_percent_as_denominator = val; }
 
-		void SetBaseValueCalStrategy(NumUtil::ECalculateStrategy cs, bool recal = true) { m_base_value.SetCalculateStrategy(cs, recal); }
-		void SetBaseValueMin(int val, bool recal = true) { m_base_value.SetMinValue(val, recal); recal ? this->Recal() : 0; }
-		void SetBaseValueMax(int val, bool recal = true) { m_base_value.SetMaxValue(val, recal); recal ? this->Recal() : 0;}
-		void AddBaseValue(int val, int unique_id = 0, bool recal = true) { m_base_value.Add(val, unique_id, recal); recal ? this->Recal() : 0; }
-		void RemoveBaseValue(int val, int unique_id = 0, bool recal = true) { m_base_value.Remove(val, unique_id, recal); recal ? this->Recal() : 0; }
+		inline void SetBaseValueCalStrategy(NumUtil::ECalculateStrategy cs, bool recal = true) { m_base_value.SetCalculateStrategy(cs, recal); }
+		inline void SetBaseValueMin(int val, bool recal = true) { m_base_value.SetMinValue(val, recal); recal ? this->Recal() : 0; }
+		inline void SetBaseValueMax(int val, bool recal = true) { m_base_value.SetMaxValue(val, recal); recal ? this->Recal() : 0;}
+		inline void AddBaseValue(int val, bool recal = true, int unique_id = 0) { m_base_value.Add(val, unique_id, recal); recal ? this->Recal() : 0; }
+		inline void RemoveBaseValue(int val, bool recal = true, int unique_id = 0) { m_base_value.Remove(val, unique_id, recal); recal ? this->Recal() : 0; }
 
-		void SetExtraPercentCalStrategy(NumUtil::ECalculateStrategy cs, bool recal = true) { m_extra_percent.SetCalculateStrategy(cs, recal); }
-		void SetExtraPercentMin(int val, bool recal = true) { m_extra_percent.SetMinValue(val, recal); recal ? this->Recal() : 0; }
-		void SetExtraPercentMax(int val, bool recal = true) { m_extra_percent.SetMaxValue(val, recal); recal ? this->Recal() : 0; }
-		void AddExtraPercent(int val, int unique_id = 0, bool recal = true) { m_extra_percent.Add(val, unique_id, recal); recal ? this->Recal() : 0; }
-		void RemoveExtraPercent(int val, int unique_id = 0, bool recal = true) { m_extra_percent.Remove(val, unique_id, recal);  recal ? this->Recal() : 0; }
-
-		void SetExtraValueCalStrategy(NumUtil::ECalculateStrategy cs, bool recal = true) { m_extra_value.SetCalculateStrategy(cs, recal); }
-		void SetExtraValueMin(int val, bool recal = true) { m_extra_value.SetMinValue(val, recal); recal ? this->Recal() : 0; }
-		void SetExtraValueMax(int val, bool recal = true) { m_extra_value.SetMaxValue(val, recal); recal ? this->Recal() : 0; }
-		void AddExtraValue(int val, int unique_id = 0, bool recal = true) { m_extra_value.Add(val, unique_id, recal); recal ? this->Recal() : 0; }
-		void RemoveExtraValue(int val, int unique_id = 0, bool recal = true) { m_extra_value.Remove(val, unique_id, recal); recal ? this->Recal() : 0; }
+		inline void SetExtraPercentCalStrategy(NumUtil::ECalculateStrategy cs, bool recal = true) { m_extra_percent.SetCalculateStrategy(cs, recal); }
+		inline void SetExtraPercentMin(int val, bool recal = true) { m_extra_percent.SetMinValue(val, recal); recal ? this->Recal() : 0; }
+		inline void SetExtraPercentMax(int val, bool recal = true) { m_extra_percent.SetMaxValue(val, recal); recal ? this->Recal() : 0; }
+		inline void AddExtraPercent(int val, bool recal = true, int unique_id = 0) { m_extra_percent.Add(val, unique_id, recal); recal ? this->Recal() : 0; }
+		inline void RemoveExtraPercent(int val, bool recal = true, int unique_id = 0) { m_extra_percent.Remove(val, unique_id, recal);  recal ? this->Recal() : 0; }
+		inline void SetExtraValueCalStrategy(NumUtil::ECalculateStrategy cs, bool recal = true) { m_extra_value.SetCalculateStrategy(cs, recal); }
+		inline void SetExtraValueMin(int val, bool recal = true) { m_extra_value.SetMinValue(val, recal); recal ? this->Recal() : 0; }
+		inline void SetExtraValueMax(int val, bool recal = true) { m_extra_value.SetMaxValue(val, recal); recal ? this->Recal() : 0; }
+		inline void AddExtraValue(int val, bool recal = true, int unique_id = 0) { m_extra_value.Add(val, unique_id, recal); recal ? this->Recal() : 0; }
+		inline void RemoveExtraValue(int val, bool recal = true, int unique_id = 0) { m_extra_value.Remove(val, unique_id, recal); recal ? this->Recal() : 0; }
 
 		void SetMinValue(int val);
 		void SetMaxValue(int val);
 		void Recal();
-		NetProto::EFightParam GetFightParam() { return m_fight_param; }
+		inline NetProto::EFightParam GetFightParam() { return m_fight_param; }
 		int GetValue(bool recal = false);
-		void SetValueChangeCallback(ValueChangeCallback cb) { m_value_change_cb = cb; }
+		inline void SetValueChangeCallback(ValueChangeCallback cb) { m_value_change_cb = cb; }
 
 	private:
 		NetProto::EFightParam m_fight_param;

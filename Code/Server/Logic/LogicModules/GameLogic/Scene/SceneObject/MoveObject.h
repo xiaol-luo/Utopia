@@ -44,7 +44,6 @@ namespace GameLogic
 		NetProto::EMoveAgentState GetMoveAgentState();
 		NetProto::EMoveState GetMoveState();
 		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type) override;
-
 	protected:
 		NetProto::MoveObjectState * GetPbMoveObjectState();
 		NetProto::MoveObjectMutableState * GetPbMoveObjectMutableState();
