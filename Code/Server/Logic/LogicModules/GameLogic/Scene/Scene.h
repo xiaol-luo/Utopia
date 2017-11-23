@@ -24,6 +24,7 @@ namespace GameLogic
 	class MoveObject;
 	class ViewMgr;
 	class SceneEventDispacher;
+	class SceneUnit;
 
 	class Scene
 	{
@@ -84,8 +85,9 @@ namespace GameLogic
 		void PullAllSceneInfo(Player *player);
 		void SyncAllSceneObjectState(Player *player, int filter_flag, bool include_unchanged);
 
-
 	private:
 		void HandleViewChange();
+
+		SceneUnit *xxx;
 	};
 }

@@ -22,6 +22,8 @@
 #include "GameLogic/Scene/ViewMgr/ViewSnapshot.h"
 #include "GameLogic/Scene/ViewMgr/ViewGrid.h"
 
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+
 namespace GameLogic
 {
 	Scene::Scene(GameLogicModule *logic_module) : m_logic_module(logic_module)
@@ -31,6 +33,8 @@ namespace GameLogic
 		m_move_mgr = new GameLogic::MoveMgr(this);
 		m_view_mgr = new GameLogic::ViewMgr(this);
 		m_event_dispacher = new SceneEventDispacher(this);
+
+		xxx = new SceneUnit(100);
 	}
 	
 	Scene::~Scene()
@@ -86,8 +90,8 @@ namespace GameLogic
 
 		m_blue_hero = std::make_shared<Hero>();
 		m_blue_hero->SetViewCamp(EViewCamp_Blue);
-		// this->AddObject(m_blue_hero);
-		// m_blue_hero->Flash(Vector3(50, 0, 50));
+		this->AddObject(m_blue_hero);
+		m_blue_hero->Flash(Vector3(50, 0, 50));
 
 		Vector2 x1 = GeometryUtils::CalVector2(Vector2(0, 1), 90);
 		Vector2 x2 = GeometryUtils::CalVector2(Vector2(0, 1), -90);
