@@ -6,7 +6,7 @@ namespace GameLogic
 {
 	class SceneUnit;
 
-	class SceneUnitModule
+	class SceneUnitModule : public std::enable_shared_from_this<SceneUnitModule>
 	{
 		friend SceneUnit;
 	public:
@@ -15,6 +15,17 @@ namespace GameLogic
 
 		inline SceneUnit * GetOwner() { return m_owner; }
 		inline ESceneUnitModule GetModuleName() { return m_module_name; }
+		template <typename T>
+		std::shared_ptr<T> GetSharedPtr()
+		{
+			return std::dynamic_pointer_cast<T>(shared_from_this());
+		}
+		template <typename T>
+		std::shared_ptr<T> GetSharedPtr() const
+		{
+			return std::dynamic_pointer_cast<T>(shared_from_this());
+		}
+
 
 	private:
 		void Init() { this->OnInit(); }

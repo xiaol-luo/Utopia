@@ -8,19 +8,17 @@ namespace GameLogic
 	SceneUnit::SceneUnit(uint64_t id)
 	{
 		m_id = id;
-		memset(m_modules, 0, sizeof(m_modules));
 	}
 
 	SceneUnit::~SceneUnit()
 	{
-		for (auto module : m_modules)
+		for (auto &&module : m_modules)
 		{
-			delete module;
+			module = nullptr;
 		}
-		memset(m_modules, 0, sizeof(m_modules));
 	}
 
-	void SceneUnit::AddModule(SceneUnitModule * module)
+	void SceneUnit::AddModule(std::shared_ptr<SceneUnitModule> module)
 	{
 		assert(!m_inited);
 		assert(nullptr == m_modules[module->GetModuleName()]);
@@ -35,16 +33,17 @@ namespace GameLogic
 		m_started = false;
 
 		{
-			m_transform = dynamic_cast<SceneUnitTransform *>(m_modules[ESceneUnitModule_Transform]);
+			assert(m_modules[ESceneUnitModule_Transform]);
+			m_transform = m_modules[ESceneUnitModule_Transform]->GetSharedPtr<SceneUnitTransform>();
 			assert(m_transform);
 		}
 
-		for (auto module : m_modules)
+		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
 				module->Init();
 		}
-		for (auto module : m_modules)
+		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
 				module->Awake();
@@ -56,22 +55,21 @@ namespace GameLogic
 		if (m_inited)
 		{
 			m_inited = false;
-			for (auto module : m_modules)
+			for (auto &&module : m_modules)
 			{
 				if (nullptr != module)
 					module->Realse();
 			}
-			for (auto module : m_modules)
+			for (auto &&module : m_modules)
 			{
 				if (nullptr != module)
 					module->Destroy();
 			}
 		}
-		for (auto module : m_modules)
+		for (auto &&module : m_modules)
 		{
-			delete module;
+			module = nullptr;
 		}
-		memset(m_modules, 0, sizeof(m_modules));
 	}
 
 	void SceneUnit::Update()
@@ -79,7 +77,7 @@ namespace GameLogic
 		if (!m_started)
 		{
 			m_started = true;
-			for (auto module : m_modules)
+			for (auto &&module : m_modules)
 			{
 				if (nullptr != module)
 					module->Start();
@@ -87,7 +85,7 @@ namespace GameLogic
 		}
 		else
 		{
-			for (auto module : m_modules)
+			for (auto &&module : m_modules)
 			{
 				if (nullptr != module)
 					module->Update();
