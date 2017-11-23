@@ -88,6 +88,7 @@ namespace GameLogic
 	private:
 		void HandleViewChange();
 
-		SceneUnit *xxx;
+		SceneUnit *m_su_red;
+		SceneUnit *m_su_blue;
 	};
 }

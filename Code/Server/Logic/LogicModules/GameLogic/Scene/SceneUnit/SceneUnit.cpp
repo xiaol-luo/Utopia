@@ -8,6 +8,8 @@ namespace GameLogic
 	SceneUnit::SceneUnit(uint64_t id)
 	{
 		m_id = id;
+		m_transform = std::make_shared<SceneUnitTransform>();
+		this->AddModule(m_transform);
 	}
 
 	SceneUnit::~SceneUnit()
@@ -23,6 +25,7 @@ namespace GameLogic
 		assert(!m_inited);
 		assert(nullptr == m_modules[module->GetModuleName()]);
 		m_modules[module->GetModuleName()] = module;
+		module->SetOwner(this);
 	}
 
 	void SceneUnit::EnterScene(Scene * scene)
@@ -31,12 +34,6 @@ namespace GameLogic
 			return;
 		m_inited = true;
 		m_started = false;
-
-		{
-			assert(m_modules[ESceneUnitModule_Transform]);
-			m_transform = m_modules[ESceneUnitModule_Transform]->GetSharedPtr<SceneUnitTransform>();
-			assert(m_transform);
-		}
 
 		for (auto &&module : m_modules)
 		{
@@ -70,6 +67,8 @@ namespace GameLogic
 		{
 			module = nullptr;
 		}
+
+		m_scene = nullptr;
 	}
 
 	void SceneUnit::Update()

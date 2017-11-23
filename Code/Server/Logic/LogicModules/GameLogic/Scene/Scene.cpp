@@ -13,6 +13,7 @@
 #include "CsvConfigSets.h"
 #include "Scene/CsvSceneConfig.h"
 #include "Common/Geometry/Vector2.h"
+#include "Common/Geometry/Vector3.h"
 #include "Common/Geometry/GeometryUtils.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Timer/ITimerModule.h"
@@ -23,6 +24,7 @@
 #include "GameLogic/Scene/ViewMgr/ViewGrid.h"
 
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
 
 namespace GameLogic
 {
@@ -34,7 +36,8 @@ namespace GameLogic
 		m_view_mgr = new GameLogic::ViewMgr(this);
 		m_event_dispacher = new SceneEventDispacher(this);
 
-		xxx = new SceneUnit(100);
+		m_su_red = new SceneUnit(100);
+		m_su_blue = new SceneUnit(101);
 	}
 	
 	Scene::~Scene()
@@ -44,6 +47,9 @@ namespace GameLogic
 		delete m_move_mgr; m_move_mgr = nullptr;
 		delete m_view_mgr; m_view_mgr = nullptr;
 		delete m_event_dispacher; m_event_dispacher = nullptr;
+
+		delete m_su_red;
+		delete m_su_blue;
 
 	}
 
@@ -62,26 +68,54 @@ namespace GameLogic
 		ret = m_move_mgr->Awake();
 		assert(ret);
 
-		/*
+
+
 		{
-			auto a = std::make_shared<Hero>();
-			a->SetViewCamp(EViewCamp_Red);
-			this->AddObject(a);
-			a->Flash(Vector3(70, 0, 70));
+			Vector3 red_pos, blue_pos;
+			auto red_transform = m_su_red->GetTransform();
+			auto blue_transfrom = m_su_blue->GetTransform();
+
+			red_transform->SetLocalPos(Vector3(1, 0, 0));
+			blue_transfrom->SetLocalPos(Vector3(0, 0, 1));
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+
+			red_transform->AddChild(blue_transfrom);
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+			red_transform->Deattach();
+			blue_transfrom->Deattach();
+
+			blue_transfrom->AddChild(red_transform);
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+			red_transform->Deattach();
+			blue_transfrom->Deattach();
+
+			red_transform->SetParent(blue_transfrom);
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+			red_transform->Deattach();
+			blue_transfrom->Deattach();
+
+			blue_transfrom->SetParent(red_transform);
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+			red_transform->Deattach();
+			blue_transfrom->Deattach();
+
+			red_transform->ClearChildren();
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+			red_transform->Deattach();
+			blue_transfrom->Deattach();
+
+			blue_transfrom->ClearChildren();
+			red_pos = red_transform->GetPos();
+			blue_pos = blue_transfrom->GetPos();
+			red_transform->Deattach();
+			blue_transfrom->Deattach();
 		}
-		{
-			auto a = std::make_shared<Hero>();
-			a->SetViewCamp(EViewCamp_Red);
-			this->AddObject(a);
-			a->Flash(Vector3(30, 0, 30));
-		}
-		{
-			auto a = std::make_shared<Hero>();
-			a->SetViewCamp(EViewCamp_Red);
-			this->AddObject(a);
-			a->Flash(Vector3(70, 0, 20));
-		}
-		*/
 
 		m_red_hero = std::make_shared<Hero>();
 		m_red_hero->SetViewCamp(EViewCamp_Red);
@@ -141,7 +175,6 @@ namespace GameLogic
 				}
 
 			}, 3 * 1000, -1);
-			
 		}
 
 		return true;

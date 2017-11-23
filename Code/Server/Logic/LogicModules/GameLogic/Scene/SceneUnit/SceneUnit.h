@@ -32,6 +32,6 @@ namespace GameLogic
 		bool m_inited = false;
 		bool m_started = false;
 		std::shared_ptr<SceneUnitModule> m_modules[ESceneUnitModule_Count];
-		std::shared_ptr<SceneUnitTransform> m_transform;
+		std::shared_ptr<SceneUnitTransform> m_transform = nullptr;
 	};
 }

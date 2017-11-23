@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "GameLogic/Scene/Defines/SceneObjectDefine.h"
 
 namespace GameLogic
@@ -10,7 +11,7 @@ namespace GameLogic
 	{
 		friend SceneUnit;
 	public:
-		SceneUnitModule(SceneUnit *scene_unit, ESceneUnitModule module_name) { m_owner = scene_unit;  m_module_name = module_name; };
+		SceneUnitModule(ESceneUnitModule module_name) { m_module_name = module_name; };
 		virtual ~SceneUnitModule() {}
 
 		inline SceneUnit * GetOwner() { return m_owner; }
@@ -26,8 +27,12 @@ namespace GameLogic
 			return std::dynamic_pointer_cast<T>(shared_from_this());
 		}
 
+		virtual uint64_t GetId();
+		virtual void SetId() {}
+
 
 	private:
+		void SetOwner(SceneUnit *owner) { m_owner = owner; }
 		void Init() { this->OnInit(); }
 		void Awake() { this->OnAwake(); }
 		void Start() { this->OnUpdate(); }
