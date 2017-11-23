@@ -46,7 +46,7 @@ namespace GameLogic
 	protected:
 		bool m_is_pause = false;
 		uint64_t m_logic_ms = 0;
-		uint64_t m_logic_detal_ms;
+		uint64_t m_logic_detal_ms = 0;
 		uint64_t m_last_real_ms = 0;
 
 		GameLogicModule *m_logic_module = nullptr;;
@@ -82,7 +82,7 @@ namespace GameLogic
 		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg);
 		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs);
 		void PullAllSceneInfo(Player *player);
-		void SyncAllSceneObjectState(Player *player, int filter_flag);
+		void SyncAllSceneObjectState(Player *player, int filter_flag, bool include_unchanged);
 
 
 	private:

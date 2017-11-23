@@ -88,7 +88,7 @@ namespace GameLogic
 		ESceneObjectShape m_body_shape = ESceneObjectShape_Circle;
 		float m_body_size_x = 0.0f;
 		float m_body_size_y = 0.0f;
-		float m_view_radius = 12.0f;
+		float m_view_radius = 1.0f;
 		float m_body_scale = 1.0f;
 		float m_body_radius = 1.0f;
 		bool m_has_body = true;
@@ -97,11 +97,13 @@ namespace GameLogic
 		ViewUnit *m_view_unit = nullptr;
 
 	public:
-		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type);
-		bool NeedSyncMutableState() { return m_flag_sync_mutable_state; }
-		void SetSyncMutableState(bool val) { m_flag_sync_mutable_state = val; }
+		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type, bool include_unchanged);
+		inline bool NeedSyncClient() { return 0 != m_sync_client_flag; }
+		inline bool NeedSyncClient(SyncClientMsgFilter val) { return m_sync_client_flag & val; }
+		inline void SetSyncClientFlag(SyncClientMsgFilter val) { m_sync_client_flag |= val; }
+		inline void ClearSyncClientFlag() { m_sync_client_flag = 0; }
 	protected:
 		NetProto::SceneObjectState * GetPbSceneObjectState();
-		bool m_flag_sync_mutable_state = false;
+		uint64_t m_sync_client_flag  = 0;
 	};
 }

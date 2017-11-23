@@ -73,18 +73,16 @@ namespace GameLogic
 		return m_body_radius * m_body_scale;
 	}
 
-	std::vector<SyncClientMsg> SceneObject::ColllectSyncClientMsg(int filter_type)
+	std::vector<SyncClientMsg> SceneObject::ColllectSyncClientMsg(int filter_type, bool include_unchanged)
 	{
 		std::vector<SyncClientMsg> client_msgs;
-		if (filter_type & SCMF_ForInit)
+		if ((filter_type & SCMF_ForInit) && (include_unchanged || this->NeedSyncClient(SCMF_ForInit)))
 		{
 			client_msgs.push_back(SyncClientMsg(NetProto::PID_SceneObjectState, this->GetPbSceneObjectState()));
 		}
-
 		return std::move(client_msgs);
 	}
 
-	 
 	NetProto::SceneObjectState * SceneObject::GetPbSceneObjectState()
 	{
 		NetProto::SceneObjectState * msg = m_scene->CreateProtobuf<NetProto::SceneObjectState>();

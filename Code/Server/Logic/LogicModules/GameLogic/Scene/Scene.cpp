@@ -58,6 +58,7 @@ namespace GameLogic
 		ret = m_move_mgr->Awake();
 		assert(ret);
 
+		/*
 		{
 			auto a = std::make_shared<Hero>();
 			a->SetViewCamp(EViewCamp_Red);
@@ -76,7 +77,7 @@ namespace GameLogic
 			this->AddObject(a);
 			a->Flash(Vector3(70, 0, 20));
 		}
-
+		*/
 
 		m_red_hero = std::make_shared<Hero>();
 		m_red_hero->SetViewCamp(EViewCamp_Red);
@@ -85,8 +86,8 @@ namespace GameLogic
 
 		m_blue_hero = std::make_shared<Hero>();
 		m_blue_hero->SetViewCamp(EViewCamp_Blue);
-		this->AddObject(m_blue_hero);
-		m_blue_hero->Flash(Vector3(50, 0, 50));
+		// this->AddObject(m_blue_hero);
+		// m_blue_hero->Flash(Vector3(50, 0, 50));
 
 		Vector2 x1 = GeometryUtils::CalVector2(Vector2(0, 1), 90);
 		Vector2 x2 = GeometryUtils::CalVector2(Vector2(0, 1), -90);
@@ -155,8 +156,9 @@ namespace GameLogic
 		if (m_is_pause)
 			return;
 
-		m_logic_detal_ms = delta_ms;
-		m_last_real_ms += delta_ms;
+		// m_logic_detal_ms = delta_ms;
+		m_logic_detal_ms = 50;
+		m_logic_ms += delta_ms;
 		this->CheckSceneObjectsCache();
 		m_nav_mesh->UpdateTerrian();
 		m_move_mgr->Update();
@@ -172,7 +174,7 @@ namespace GameLogic
 		for (auto kv_pari : m_scene_objs)
 		{
 			std::shared_ptr<SceneObject> sptr_so = kv_pari.second;
-			sptr_so->SetSyncMutableState(false);
+			sptr_so->ClearSyncClientFlag();
 		}
 		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
@@ -274,7 +276,7 @@ namespace GameLogic
 
 	void Scene::PullAllSceneInfo(Player * player)
 	{
-		this->SyncAllSceneObjectState(player, SCMF_All);
+		this->SyncAllSceneObjectState(player, SCMF_All, true);
 		{
 			// view mgr
 			NetProto::ViewAllGrids *msg = this->CreateProtobuf<NetProto::ViewAllGrids>();
@@ -291,7 +293,7 @@ namespace GameLogic
 		}
 	}
 
-	void Scene::SyncAllSceneObjectState(Player * player, int filter_flag)
+	void Scene::SyncAllSceneObjectState(Player * player, int filter_flag, bool include_unchanged)
 	{
 		std::weak_ptr<Hero> wptr_hero = player->GetHero();
 		std::shared_ptr<Hero> sptr_hero = wptr_hero.lock();
@@ -307,7 +309,7 @@ namespace GameLogic
 			auto sptr_item = it.second.lock();
 			if (nullptr == sptr_item)
 				continue;
-			for (const SyncClientMsg & item : sptr_item->ColllectSyncClientMsg(filter_flag))
+			for (const SyncClientMsg & item : sptr_item->ColllectSyncClientMsg(filter_flag, include_unchanged))
 			{
 				player->Send(item.protocol_id, item.msg);
 			}
@@ -324,7 +326,7 @@ namespace GameLogic
 				continue;
 
 			ViewSnapshotDifference diff = snapshot->CalDifference(pre_snapshot);
-			if (!diff.more_view_grids.empty() || !diff.more_view_grids.empty())
+			if (!diff.more_view_grids.empty() || !diff.miss_view_grids.empty())
 			{
 				// view grids 
 				NetProto::ViewSnapshotDiff *msg = this->CreateProtobuf<NetProto::ViewSnapshotDiff>();
@@ -350,7 +352,7 @@ namespace GameLogic
 					auto sptr_so = kv_pari.second.lock();
 					if (nullptr == sptr_so)
 						continue;
-					this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All));
+					this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All, true));
 				}
 				for (auto kv_pari : snapshot->scene_objs)
 				{
@@ -360,9 +362,9 @@ namespace GameLogic
 					auto sptr_so = kv_pari.second.lock();
 					if (nullptr == sptr_so)
 						continue;
-					if (!sptr_so->NeedSyncMutableState())
+					if (!sptr_so->NeedSyncClient())
 						continue;
-					this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_ForMutable));
+					this->SendViewCamp((EViewCamp)view_camp, sptr_so->ColllectSyncClientMsg(SCMF_All, false));
 				}
 			}
 		}

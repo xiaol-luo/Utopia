@@ -43,7 +43,7 @@ namespace GameLogic
 		const Vector3 & GetVelocity();
 		NetProto::EMoveAgentState GetMoveAgentState();
 		NetProto::EMoveState GetMoveState();
-		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type) override;
+		virtual std::vector<SyncClientMsg> ColllectSyncClientMsg(int filter_type, bool include_unchanged) override;
 	protected:
 		NetProto::MoveObjectState * GetPbMoveObjectState();
 		NetProto::MoveObjectMutableState * GetPbMoveObjectMutableState();
@@ -67,7 +67,7 @@ namespace GameLogic
 
 	public:
 		static void MoveStateChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, NetProto::EMoveAgentState old_state);
-		static void PostChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_pos);
+		static void PosChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_pos);
 		static void VelocityChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent *agent, Vector3 old_velocity);
 	};
 }

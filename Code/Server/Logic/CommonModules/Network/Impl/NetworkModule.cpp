@@ -21,8 +21,7 @@ struct ConnectTaskThread
 		task_mutex(_task_mutex), cnn_tasks(_cnn_tasks), result_mutex(_result_mutex),
 		cnn_results(_cnn_results), action(_action)
 	{
-		int a = 0; 
-		++a;
+
 	}
 
 	~ConnectTaskThread()

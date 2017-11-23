@@ -68,7 +68,7 @@ namespace GameLogic
 
 	void MoveObject::OnMoveAgentStateChange(NetProto::EMoveAgentState old_val)
 	{
-		this->SetSyncMutableState(true);
+		this->SetSyncClientFlag(SCMF_ForMove);
 		m_scene->GetEventDispacher()->OnMoveObjectMoveAgentStateChange(this->GetSharedPtr<MoveObject>());
 	}
 
@@ -76,7 +76,7 @@ namespace GameLogic
 	{
 		m_scene->GetEventDispacher()->OnMoveObjectVelocityChange(this->GetSharedPtr<MoveObject>(), old_val);
 
-		this->SetSyncMutableState(true);
+		this->SetSyncClientFlag(SCMF_ForMove);
 		if (NetProto::EMoveState_Move == this->GetMoveState())
 		{
 			Vector3 velocity = this->GetVelocity();
@@ -84,14 +84,13 @@ namespace GameLogic
 			{
 				float angle = GeometryUtils::DeltaAngle(Vector2::up, velocity.xz());
 				this->SetFaceDir(angle);
-
 			}
 		}
 	}
 
 	void MoveObject::OnPosChange(const Vector3 & old_val)
 	{
-		this->SetSyncMutableState(true);
+		this->SetSyncClientFlag(SCMF_ForMove);
 	}
 
 	void MoveObject::TryMoveToPos(const Vector3 &pos)
@@ -164,20 +163,17 @@ namespace GameLogic
 		return m_move_agent->GetMoveState();
 	}
 
-	std::vector<SyncClientMsg> MoveObject::ColllectSyncClientMsg(int filter_type)
+	std::vector<SyncClientMsg> MoveObject::ColllectSyncClientMsg(int filter_type, bool include_unchanged)
 	{
 		std::vector<SyncClientMsg> msgs;
 
-		if (filter_type & SCMF_ForInit)
+		if ((filter_type & SCMF_ForInit) && (include_unchanged || this->NeedSyncClient(SCMF_ForInit)))
 		{
 			msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectState, this->GetPbMoveObjectState()));
 		}
-		if (filter_type & SCMF_ForMutable)
+		if ((filter_type & SCMF_ForMove) && (include_unchanged || this->NeedSyncClient(SCMF_ForMove)))
 		{
-			if (this->NeedSyncMutableState() || filter_type == SCMF_All)
-			{
-				msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectMutableState, this->GetPbMoveObjectMutableState()));
-			}
+			msgs.push_back(SyncClientMsg(NetProto::PID_MoveObjectMutableState, this->GetPbMoveObjectMutableState()));
 		}
 
 		return msgs;
@@ -222,7 +218,7 @@ namespace GameLogic
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT + 2, "MoveStateChange:{0}->{1}", old_state, agent->GetMoveAgentState());
 	}
 
-	void MoveObject::PostChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_pos)
+	void MoveObject::PosChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_pos)
 	{
 		auto ptr = obj.lock();
 		if (nullptr == ptr)
@@ -230,7 +226,7 @@ namespace GameLogic
 
 		ptr->SetPos(agent->GetPos());
 		Vector3 pos = agent->GetPos();
-		// GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "OnPostChange [{}]:{:3.2f}, {:3.2f}, {:3.2f}", agent->GetMoveAgentState(), pos.x, pos.y, pos.z);
 	}
 
 	void MoveObject::VelocityChangeCb(std::weak_ptr<MoveObject> obj, MoveAgent * agent, Vector3 old_velocity)

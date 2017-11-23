@@ -43,6 +43,9 @@ namespace GameLogic
 					 ++idx; ++other_idx;
 					 if (idx < view_grids.size() && other_idx < other->view_grids.size())
 					 {
+						 assert(gird_id < view_grids[idx]->grid_id);
+						 assert(other_grid_id < other->view_grids[other_idx]->grid_id);
+
 						 gird_id = view_grids[idx]->grid_id;
 						 other_grid_id = other->view_grids[other_idx]->grid_id;
 					 }
@@ -52,14 +55,21 @@ namespace GameLogic
 					 diff.miss_view_grids.push_back(other->view_grids[other_idx]);
 					 ++other_idx;
 					 if (other_idx < other->view_grids.size())
+					 {
+						 assert(other_grid_id < other->view_grids[other_idx]->grid_id);
 						 other_grid_id = other->view_grids[other_idx]->grid_id;
+					 }
+						 
 				 }
 				 else if (gird_id < other_grid_id)
 				 {
 					 diff.more_view_grids.push_back(view_grids[idx]);
 					 ++idx;
 					 if (idx < view_grids.size())
-						gird_id = view_grids[idx]->grid_id;
+					 {
+						 assert(gird_id < view_grids[idx]->grid_id);
+						 gird_id = view_grids[idx]->grid_id;
+					 }
 				 }
 			 }
 			 for (size_t i = idx; i < view_grids.size(); ++i)
