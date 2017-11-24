@@ -2,6 +2,8 @@
 #include <assert.h>
 #include "SceneUnitModule.h"
 #include "SceneUnitModules/SceneUnitTransform.h"
+#include "Common/EventDispatcher/EventDispacher.h"
+#include "Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace GameLogic
 {
@@ -71,6 +73,11 @@ namespace GameLogic
 		m_scene = nullptr;
 	}
 
+	int Test(int a, char *b)
+	{
+		return 0;
+	}
+
 	void SceneUnit::Update()
 	{
 		if (!m_started)
@@ -89,6 +96,18 @@ namespace GameLogic
 				if (nullptr != module)
 					module->Update();
 			}
+		}
+
+		{
+			EventDispacher ev_dispacher;
+			EventDispacherProxy ev_proxy(&ev_dispacher);
+
+
+			std::function<int(int, char *)> f = std::bind(&Test, std::placeholders::_1, std::placeholders::_2);
+			auto f2 = std::bind(&Test, std::placeholders::_1, std::placeholders::_2);
+			// ev_dispacher.Subscribe(1, EventBind(&Test, std::placeholders::_1, std::placeholders::_2));
+			ev_proxy.Subscribe(1, f);
+
 		}
 	}
 }

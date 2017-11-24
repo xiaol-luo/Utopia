@@ -29,6 +29,14 @@ namespace NumUtil
 		}
 	}
 
+	const int BIT_PER_BYTE = 8;
+	template <typename Ret, typename T, typename K>
+	Ret MakeUnionValue(T t, K k)
+	{
+		Ret ret = (Ret)t << (sizeof(k) * BIT_PER_BYTE) | k;
+	}
+
+
 	enum ECalculateStrategy
 	{
 		ECS_Overlay = 0,		// µþ¼Ó

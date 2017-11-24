@@ -68,8 +68,6 @@ namespace GameLogic
 		ret = m_move_mgr->Awake();
 		assert(ret);
 
-
-
 		{
 			Vector3 red_pos, blue_pos;
 			auto red_transform = m_su_red->GetTransform();
@@ -215,6 +213,8 @@ namespace GameLogic
 		}
 		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
+
+		m_su_blue->Update();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)
