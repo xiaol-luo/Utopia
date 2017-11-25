@@ -4,12 +4,15 @@
 #include "SceneUnitModules/SceneUnitTransform.h"
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 
 namespace GameLogic
 {
-	SceneUnit::SceneUnit(uint64_t id)
+	SceneUnit::SceneUnit()
 	{
-		m_id = id;
+		m_event_dispacher = new ::EventDispacher();
 		m_transform = std::make_shared<SceneUnitTransform>();
 		this->AddModule(m_transform);
 	}
@@ -20,6 +23,10 @@ namespace GameLogic
 		{
 			module = nullptr;
 		}
+
+		delete m_event_proxy;  m_event_proxy = nullptr;
+		delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
+		delete m_event_dispacher; m_event_dispacher = nullptr;
 	}
 
 	void SceneUnit::AddModule(std::shared_ptr<SceneUnitModule> module)
@@ -27,30 +34,40 @@ namespace GameLogic
 		assert(!m_inited);
 		assert(nullptr == m_modules[module->GetModuleName()]);
 		m_modules[module->GetModuleName()] = module;
-		module->SetOwner(this);
 	}
 
-	void SceneUnit::EnterScene(Scene * scene)
+	void SceneUnit::EnterScene(NewScene *scene, uint64_t id)
 	{
 		if (m_inited)
 			return;
 		m_inited = true;
 		m_started = false;
 
+		{
+			m_scene = scene;
+			m_id = id;
+			m_scene_event_proxy = new EventDispacherProxy(m_scene->GetEvDispacher());
+			m_event_proxy = new SceneUnitEventProxy(m_event_dispacher, m_scene_event_proxy, this);
+		}
+
 		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
-				module->Init();
+				module->Init(this);
 		}
 		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
 				module->Awake();
 		}
+
+		this->GetEvProxy()->Fire(ESU_EnterScene);
 	}
 
 	void SceneUnit::LeaveScene()
 	{
+		this->GetEvProxy()->Fire(ESU_LeaveScene);
+
 		if (m_inited)
 		{
 			m_inited = false;
@@ -70,10 +87,14 @@ namespace GameLogic
 			module = nullptr;
 		}
 
-		m_scene = nullptr;
+		{
+			delete m_event_proxy;  m_event_proxy = nullptr;
+			delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
+			m_scene = nullptr;
+		}
 	}
 
-	int Test(int a, char *b)
+	int Test(int a, int b)
 	{
 		return 0;
 	}
@@ -96,18 +117,6 @@ namespace GameLogic
 				if (nullptr != module)
 					module->Update();
 			}
-		}
-
-		{
-			EventDispacher ev_dispacher;
-			EventDispacherProxy ev_proxy(&ev_dispacher);
-
-
-			std::function<int(int, char *)> f = std::bind(&Test, std::placeholders::_1, std::placeholders::_2);
-			auto f2 = std::bind(&Test, std::placeholders::_1, std::placeholders::_2);
-			// ev_dispacher.Subscribe(1, EventBind(&Test, std::placeholders::_1, std::placeholders::_2));
-			ev_proxy.Subscribe(1, f);
-
 		}
 	}
 }

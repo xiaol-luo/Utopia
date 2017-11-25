@@ -13,11 +13,4 @@ namespace GameLogic
 	};
 
 	const static float MOVE_TO_POS_IGNORE_SQR_DISTANCE = 0.01f;
-
-	enum ESceneUnitModule
-	{
-		ESceneUnitModule_Transform = 0,
-
-		ESceneUnitModule_Count
-	};
 }

@@ -2,15 +2,7 @@
 
 #include <functional>
 #include <unordered_map>
-
-/*
-template <typename F, typename...Args>
-std::function<void(Args...)> EventBind(F&& f, Args&&... args)
-{
-	std::function<void(Args...)> ret = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
-	return ret;
-}
-*/
+#include <assert.h>
 
 class EventDispacher
 {
@@ -63,6 +55,15 @@ public:
 		sid.f_key = f_key;
 		return sid.id;
 	}
+	
+	template <typename...Args, typename F>
+	int64_t Subscribe(int id, F f)
+	{
+		std::function<void(Args...)> stl_f = f;
+		return this->Subscribe(id, stl_f);
+	}
+	
+
 	void Cancel(int64_t subscribe_id)
 	{
 		SubscribeId sid;

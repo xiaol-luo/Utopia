@@ -9,6 +9,8 @@
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
 
 class GameLogicModule;
+class EventDispacher;
+
 namespace Config
 {
 	struct CsvSceneConfig;
@@ -44,6 +46,7 @@ namespace GameLogic
 		inline SceneEventDispacher * GetEventDispacher() { return m_event_dispacher; }
 		inline long GetLogicMs() { return m_logic_ms; }
 		inline long GetLogicDetalMs() { return m_logic_detal_ms; }
+		inline EventDispacher * GetEvDispacher() { return m_ev_dispacher; }
 	protected:
 		bool m_is_pause = false;
 		uint64_t m_logic_ms = 0;
@@ -87,8 +90,6 @@ namespace GameLogic
 
 	private:
 		void HandleViewChange();
-
-		SceneUnit *m_su_red;
-		SceneUnit *m_su_blue;
+		EventDispacher *m_ev_dispacher;
 	};
 }

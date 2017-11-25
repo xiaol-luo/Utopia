@@ -19,25 +19,25 @@
 #include "CommonModules/Timer/ITimerModule.h"
 #include "GameLogic/Player/PlayerMgr.h"
 #include "GameLogic/Scene/ViewMgr/ViewMgr.h"
-#include "GameLogic/Scene/EventDispacher/EventDispacher.h"
+#include "GameLogic/Scene/EventDispacher/SceneEventDispacher.h"
 #include "GameLogic/Scene/ViewMgr/ViewSnapshot.h"
 #include "GameLogic/Scene/ViewMgr/ViewGrid.h"
 
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "Common/EventDispatcher/EventDispacher.h"
 
 namespace GameLogic
 {
 	Scene::Scene(GameLogicModule *logic_module) : m_logic_module(logic_module)
 	{
+		m_ev_dispacher = new EventDispacher();
 		m_protobuf_arena = MemoryUtil::NewArena();
 		m_nav_mesh = new GameLogic::NavMesh(this);
 		m_move_mgr = new GameLogic::MoveMgr(this);
 		m_view_mgr = new GameLogic::ViewMgr(this);
 		m_event_dispacher = new SceneEventDispacher(this);
-
-		m_su_red = new SceneUnit(100);
-		m_su_blue = new SceneUnit(101);
 	}
 	
 	Scene::~Scene()
@@ -47,10 +47,7 @@ namespace GameLogic
 		delete m_move_mgr; m_move_mgr = nullptr;
 		delete m_view_mgr; m_view_mgr = nullptr;
 		delete m_event_dispacher; m_event_dispacher = nullptr;
-
-		delete m_su_red;
-		delete m_su_blue;
-
+		delete m_ev_dispacher; m_ev_dispacher = nullptr;
 	}
 
 	bool Scene::Awake(void *param)
@@ -68,110 +65,23 @@ namespace GameLogic
 		ret = m_move_mgr->Awake();
 		assert(ret);
 
+		// for test
 		{
-			Vector3 red_pos, blue_pos;
-			auto red_transform = m_su_red->GetTransform();
-			auto blue_transfrom = m_su_blue->GetTransform();
+			m_red_hero = std::make_shared<Hero>();
+			m_red_hero->SetViewCamp(EViewCamp_Red);
+			this->AddObject(m_red_hero);
+			m_red_hero->Flash(Vector3(50, 0, 50));
 
-			red_transform->SetLocalPos(Vector3(1, 0, 0));
-			blue_transfrom->SetLocalPos(Vector3(0, 0, 1));
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-
-			red_transform->AddChild(blue_transfrom);
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-			red_transform->Deattach();
-			blue_transfrom->Deattach();
-
-			blue_transfrom->AddChild(red_transform);
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-			red_transform->Deattach();
-			blue_transfrom->Deattach();
-
-			red_transform->SetParent(blue_transfrom);
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-			red_transform->Deattach();
-			blue_transfrom->Deattach();
-
-			blue_transfrom->SetParent(red_transform);
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-			red_transform->Deattach();
-			blue_transfrom->Deattach();
-
-			red_transform->ClearChildren();
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-			red_transform->Deattach();
-			blue_transfrom->Deattach();
-
-			blue_transfrom->ClearChildren();
-			red_pos = red_transform->GetPos();
-			blue_pos = blue_transfrom->GetPos();
-			red_transform->Deattach();
-			blue_transfrom->Deattach();
+			m_blue_hero = std::make_shared<Hero>();
+			m_blue_hero->SetViewCamp(EViewCamp_Blue);
+			this->AddObject(m_blue_hero);
+			m_blue_hero->Flash(Vector3(50, 0, 50));
 		}
-
-		m_red_hero = std::make_shared<Hero>();
-		m_red_hero->SetViewCamp(EViewCamp_Red);
-		this->AddObject(m_red_hero);
-		m_red_hero->Flash(Vector3(50, 0, 50));
-
-		m_blue_hero = std::make_shared<Hero>();
-		m_blue_hero->SetViewCamp(EViewCamp_Blue);
-		this->AddObject(m_blue_hero);
-		m_blue_hero->Flash(Vector3(50, 0, 50));
-
-		Vector2 x1 = GeometryUtils::CalVector2(Vector2(0, 1), 90);
-		Vector2 x2 = GeometryUtils::CalVector2(Vector2(0, 1), -90);
-		Vector2 x3 = GeometryUtils::CalVector2(Vector2(0, 1), 180);
-
-
-		float v1 = GeometryUtils::DeltaAngle(Vector2(0, 1), Vector2(1, 0));
-		float v2 = GeometryUtils::DeltaAngle(Vector2(0, 1), Vector2(-1, 0));
-		float v3 = GeometryUtils::DeltaAngle(Vector2(0, 1), Vector2(0, -1));
 		
 		if (false)
 		{
 			std::weak_ptr<Hero> hero = m_red_hero;
 			GlobalServerLogic->GetTimerModule()->AddFirm([hero]() {
-				std::shared_ptr<Hero> ptr = hero.lock();
-				if (nullptr == ptr)
-					return;
-
-				// int rand_val = std::rand() % NetProto::EMoveAgentState_Max + 1;
-				int rand_val = NetProto::EMoveAgentState_ForcePos;
-				switch (rand_val)
-				{
-				case NetProto::EMoveAgentState_MoveToPos:
-					// ptr->TryMoveToPos(Vector3(std::rand() % 100, 0, std::rand()%100));
-					break;
-				case NetProto::EMoveAgentState_MoveToDir:
-					// ptr->TryMoveToDir(std::rand() % 36000 * 0.001 + 1);
-					break;
-				case NetProto::EMoveAgentState_ForceLine:
-					ptr->ForceMoveLine(Vector2(std::rand() * (0 == std::rand() % 2 ? 1 : -1), std::rand() * (0 == std::rand() % 2 ? 1 : -1)), 3, 1.5, false);
-					break;
-				case NetProto::EMoveAgentState_ForcePos:
-					ptr->ForcePos(Vector3(std::rand() % 20, 0, std::rand() % 20), 10);
-					break;
-				case NetProto::EMoveAgentState_Immobilized:
-					ptr->Immobilized(std::rand() % 1000 + 1000);
-					break;
-				case NetProto::EMoveAgentState_Idle:
-					ptr->CancelForceMove();
-					ptr->CancelImmobilized();
-					ptr->CancelMove();
-					break;
-
-				case NetProto::EMoveAgentState_Max:
-					// ptr->Flash(Vector3(std::rand() % 105, std::rand() % 30, std::rand() % 105));
-					break;
-				}
-
 			}, 3 * 1000, -1);
 		}
 
@@ -213,8 +123,6 @@ namespace GameLogic
 		}
 		this->CheckSceneObjectsCache();
 		m_protobuf_arena->Reset();
-
-		m_su_blue->Update();
 	}
 
 	int64_t Scene::AddObject(std::shared_ptr<SceneObject> scene_obj)

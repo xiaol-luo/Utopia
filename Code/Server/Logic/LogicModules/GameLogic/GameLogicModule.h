@@ -24,6 +24,7 @@ class NetworkAgent;
 
 namespace GameLogic
 {
+	class NewScene;
 	class Scene;
 	class Player;
 	class PlayerMsgHandler;
@@ -53,6 +54,7 @@ private:
 	GameLogic::PlayerMgr *m_player_mgr = nullptr;
 	GameLogic::Scene *m_scene = nullptr;
 	GameLogic::PlayerMsgHandler *m_player_msg_handler = nullptr;
+	GameLogic::NewScene *m_new_scene = nullptr;
 
 	std::string m_cfg_root_path;
 };

@@ -1,9 +1,13 @@
 #include "SceneUnitTransform.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace GameLogic
 {
-	SceneUnitTransform::SceneUnitTransform() : SceneUnitModule(ESceneUnitModule_Transform)
+	SceneUnitTransform::SceneUnitTransform() : SceneUnitModule(MODULE_TYPE)
 	{
 	}
 	SceneUnitTransform::~SceneUnitTransform()
@@ -11,16 +15,12 @@ namespace GameLogic
 	}
 	bool SceneUnitTransform::SetParent(std::shared_ptr<SceneUnitTransform> parent)
 	{
-		/*
-		// 限制parent不能有parent,限制this不能有child, 所以只有两层防止闭环
-		if (nullptr != parent && !parent->m_parent.expired()) 
-			return false;
-		if (nullptr != parent && !this->m_children.empty())
-			return false;
-		*/
-
 		if (this->CheckLoop(parent))
+		{
+			GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR,
+				"SetParent wiil Loop parent:{0}, child:{1}", parent->GetId(), this->GetId());
 			return false;
+		}
 
 		std::shared_ptr<SceneUnitTransform> curr_parent = m_parent.lock();
 		if (nullptr != curr_parent)
@@ -35,6 +35,7 @@ namespace GameLogic
 			m_parent = parent;
 			parent->m_children.insert(std::make_pair(this->GetId(), this->GetSharedPtr<SceneUnitTransform>()));
 		}
+
 		return true;
 	}
 	bool SceneUnitTransform::AddChild(std::shared_ptr<SceneUnitTransform> child)

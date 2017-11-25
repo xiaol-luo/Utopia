@@ -1,4 +1,4 @@
-#include "EventDispacher.h"
+#include "SceneEventDispacher.h"
 #include "GameLogic/Scene/SceneObject/SceneObject.h"
 #include "GameLogic/Scene/SceneObject/MoveObject.h"
 #include "GameLogic/Scene/Scene.h"

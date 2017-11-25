@@ -8,7 +8,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "Common/Geometry/GeometryUtils.h"
-#include "GameLogic/Scene/EventDispacher/EventDispacher.h"
+#include "GameLogic/Scene/EventDispacher/SceneEventDispacher.h"
 
 namespace GameLogic
 {

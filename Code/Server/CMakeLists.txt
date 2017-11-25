@@ -14,7 +14,7 @@ FUNCTION(SourceGroupByDir base_path file_paths prefix_source_group)
 		string(REPLACE "/"  "\\" group_name "${group_name}")
 		SOURCE_GROUP("${prefix_source_group}\\${group_name}" FILES ${file_path})
 	ENDFOREACH(file_path ${file_paths})
-ENDFUNCTION(SourceGroupByDir) 
+ENDFUNCTION(SourceGroupByDir)
 
 SET(Cpp_File_Pattern "*.hpp" "*.cpp" "*.h" "*.c")
 
