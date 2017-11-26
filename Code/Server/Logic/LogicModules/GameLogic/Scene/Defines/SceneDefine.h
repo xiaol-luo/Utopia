@@ -11,7 +11,7 @@ namespace GameLogic
 
 	enum ESceneModule
 	{
-		ESceneModule_Nav = 0,
+		ESceneModule_NavMesh = 0,
 		ESceneModule_Move,
 		ESceneModule_View,
 
@@ -22,6 +22,8 @@ namespace GameLogic
 	{
 		ESceneUnitModule_Transform = 0,
 		ESceneUnitModule_Move,
+		ESceneUnitModule_Sight,
+		ESceneUnitModule_Body,
 
 		ESceneUnitModule_Count
 	};

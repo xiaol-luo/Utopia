@@ -3,6 +3,7 @@
 namespace GameLogic
 {
 	struct ViewGrid;
+	class SceneUnit;
 
 	struct ViewSnapshotDifference
 	{
@@ -26,5 +27,6 @@ namespace GameLogic
 
 		ViewGridVec view_grids;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> scene_objs;
+		std::unordered_map < uint64_t, std::weak_ptr<SceneUnit>> scene_units;
 	};
 }

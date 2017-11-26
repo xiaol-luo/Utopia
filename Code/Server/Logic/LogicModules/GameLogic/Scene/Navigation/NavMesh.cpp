@@ -67,6 +67,16 @@ namespace GameLogic
 		m_dtNavMeshQuery = dtAllocNavMeshQuery();
 	}
 
+	NavMesh::NavMesh()
+	{
+		m_rcCtx = new rcContext;
+		m_talloc = new LinearAllocator(32000);
+		m_tcomp = new FastLZCompressor();
+		m_tmproc = new MeshProcess();
+		m_dtCrowd = dtAllocCrowd();
+		m_dtNavMeshQuery = dtAllocNavMeshQuery();
+	}
+
 	NavMesh::~NavMesh()
 	{
 		m_scene = nullptr;

@@ -26,6 +26,7 @@ namespace GameLogic
 	{
 	public:
 		NavMesh(Scene *scene);
+		NavMesh();
 		virtual ~NavMesh();
 
 		void UpdateTerrian();

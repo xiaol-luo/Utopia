@@ -6,11 +6,14 @@
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
+#include "GameLogic/GameLogicModule.h"
 
 namespace GameLogic
 {
-	NewScene::NewScene()
+	NewScene::NewScene(GameLogicModule *logic_module)
 	{
+		m_game_logic = logic_module;
 		m_ev_dispacher = new EventDispacher();
 		memset(m_modules, 0, sizeof(m_modules));
 	}
@@ -36,13 +39,14 @@ namespace GameLogic
 	{
 		if (m_awaked)
 			return false;
+		bool ret = true;
+		ret &= this->OnAwake();
+
 		m_awaked = true;
 		m_started = false;
 
-		bool ret = true;
 		do 
 		{
-			ret &= this->OnAwake();
 			if (!ret)
 				break;
 
@@ -182,20 +186,23 @@ namespace GameLogic
 		}
 		else
 		{
-			auto su = std::make_shared<SceneUnit>();
-			uint64_t ret = this->AddUnit(su);
-
 			for (auto &&module : m_modules)
 			{
 				if (nullptr != module)
 					module->Update();
 			}
+		}
 
-			this->RemoveUnit(su->GetId());
+		for (auto kv_pair : m_cached_scene_units)
+		{
+			auto su = kv_pair.second.lock();
+			if (nullptr == su)
+				continue;
+			su->Update();
 		}
 
 		this->UpdateCachedSceneUnits();
-		this->OnLateUpdatae();
+		this->OnLateUpdate();
 	}
 
 	void NewScene::TestEvent(int ev_id, SceneUnit * su)

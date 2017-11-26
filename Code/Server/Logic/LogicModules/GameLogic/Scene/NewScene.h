@@ -12,6 +12,8 @@ namespace Config
 	struct CsvSceneConfig;
 }
 
+class GameLogicModule;
+
 namespace GameLogic
 {
 	class SceneModule;
@@ -20,7 +22,7 @@ namespace GameLogic
 	class NewScene
 	{
 	public:
-		NewScene();
+		NewScene(GameLogicModule *logic_module);
 		virtual ~NewScene();
 
 		void AddModule(SceneModule *module);
@@ -31,7 +33,7 @@ namespace GameLogic
 		virtual bool OnAwake() { return true; }
 		virtual bool OnLateAwake() { return true; }
 		virtual void OnUpdate() {}
-		virtual void OnLateUpdatae() {}
+		virtual void OnLateUpdate() {}
 		virtual void OnDestroy() {}
 		virtual void OnLateDestroy() {}
 
@@ -45,8 +47,21 @@ namespace GameLogic
 		uint64_t m_logic_detal_ms = 0;
 		uint64_t m_last_real_ms = 0;
 		EventDispacher *m_ev_dispacher;
-		Config::CsvSceneConfig *m_sceneCfg = nullptr;
 
+	public:
+		template <typename T>
+		T * GetModule()
+		{
+			T *ptr = nullptr;
+			int idx = T::MODULE_TYPE;
+			if (idx >= 0 && idx < ESceneModule_Count)
+				ptr = dynamic_cast<T *>(m_modules[idx]);
+			return ptr;
+		}
+		GameLogicModule * GetGameLogic() { return m_game_logic; }
+		virtual Config::CsvSceneConfig * GetCfg() = 0;
+	protected:
+		GameLogicModule *m_game_logic;
 		bool m_awaked = false;
 		bool m_started = false;
 		SceneModule *m_modules[ESceneModule_Count];

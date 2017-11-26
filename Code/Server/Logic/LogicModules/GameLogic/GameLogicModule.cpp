@@ -20,7 +20,7 @@ GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(modul
 	m_player_mgr = new GameLogic::PlayerMgr(this);
 	m_scene = new GameLogic::Scene(this);
 	m_player_msg_handler = new GameLogic::PlayerMsgHandler(this);
-	m_new_scene = new GameLogic::TestScene();
+	m_new_scene = new GameLogic::TestScene(this);
 }
 
 GameLogicModule::~GameLogicModule()

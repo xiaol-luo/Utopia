@@ -29,13 +29,6 @@ namespace GameLogic
 		delete m_event_dispacher; m_event_dispacher = nullptr;
 	}
 
-	void SceneUnit::AddModule(std::shared_ptr<SceneUnitModule> module)
-	{
-		assert(!m_inited);
-		assert(nullptr == m_modules[module->GetModuleName()]);
-		m_modules[module->GetModuleName()] = module;
-	}
-
 	void SceneUnit::EnterScene(NewScene *scene, uint64_t id)
 	{
 		if (m_inited)

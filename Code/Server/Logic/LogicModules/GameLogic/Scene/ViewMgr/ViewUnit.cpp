@@ -69,7 +69,7 @@ namespace GameLogic
 		return InvalidViewPos;
 	}
 
-	bool CanSeeGrid(ViewGrid *locate_grid, ViewGrid *check_grid)
+	bool CanSeeGrid2(ViewGrid *locate_grid, ViewGrid *check_grid)
 	{
 		if (EViewGrid_Grass == check_grid->grid_type)
 		{
@@ -78,7 +78,7 @@ namespace GameLogic
 
 		return true;
 	}
-	bool CanBlockGrid(ViewGrid *locate_grid, ViewGrid *check_grid)
+	bool CanBlockGrid2(ViewGrid *locate_grid, ViewGrid *check_grid)
 	{
 		bool canBlock = false;
 		switch (check_grid->grid_type)
@@ -142,9 +142,9 @@ namespace GameLogic
 				{
 					if (grid == locate_grid) // 自己所在的位置必定可见且不可阻隔视线
 						continue;
-					if (!CanSeeGrid(locate_grid, grid))
+					if (!CanSeeGrid2(locate_grid, grid))
 						blind_grids.insert(grid);
-					if (CanBlockGrid(locate_grid, grid))
+					if (CanBlockGrid2(locate_grid, grid))
 						block_grids.push_back(grid);
 				}
 				if (!blind_grids.empty())

@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "GameLogic/Scene/Defines/SceneDefine.h"
+#include <assert.h>
 
 class EventDispacher;
 class EventDispacherProxy;
@@ -18,8 +19,16 @@ namespace GameLogic
 	public:
 		SceneUnit();
 		~SceneUnit();
+		
+		template <typename T>
+		std::shared_ptr<T> AddModule(std::shared_ptr<T> module)
+		{
+			assert(!m_inited);
+			assert(nullptr == m_modules[module->GetModuleName()]);
+			m_modules[module->GetModuleName()] = module;
+			return module;
+		}
 
-		void AddModule(std::shared_ptr<SceneUnitModule> module);
 		void EnterScene(NewScene *scene, uint64_t id);
 		void LeaveScene();
 		void Update();
@@ -36,9 +45,7 @@ namespace GameLogic
 			std::shared_ptr<T> ptr = nullptr;
 			int idx = T::MODULE_TYPE;
 			if (idx  >= 0 && idx < ESceneUnitModule_Count)
-			{
 				ptr = std::dynamic_pointer_cast<T>(m_modules[idx]);
-			}
 			return ptr;
 		}
 

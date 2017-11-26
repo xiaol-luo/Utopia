@@ -100,7 +100,7 @@ namespace GameLogic
 
 					int grid_idx = m_col_num * row + col;
 					Vector2 center(m_grid_edge_length * col + m_grid_edge_length / 2, m_grid_edge_length * row + m_grid_edge_length / 2);
-					ViewGrid *grid = new ViewGrid(this, grid_idx, row, col, center, m_grid_edge_length, (EViewGridType)val);
+					ViewGrid *grid = new ViewGrid(grid_idx, row, col, center, m_grid_edge_length, (EViewGridType)val);
 					m_grids[m_row_num * row + col] = grid;
 				}
 			}
