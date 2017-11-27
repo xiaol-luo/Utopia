@@ -22,8 +22,8 @@ namespace GameLogic
 	{
 		ESceneUnitModule_Transform = 0,
 		ESceneUnitModule_Move,
-		ESceneUnitModule_Sight,
 		ESceneUnitModule_Body,
+		ESceneUnitModule_Sight,
 
 		ESceneUnitModule_Count
 	};

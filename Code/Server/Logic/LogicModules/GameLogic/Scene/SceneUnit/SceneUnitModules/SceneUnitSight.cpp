@@ -13,23 +13,27 @@ namespace GameLogic
 
 	SceneUnitSight::~SceneUnitSight()
 	{
+		this->SetSceneView(nullptr);
 	}
 
 	void SceneUnitSight::SetSceneView(SceneView * scene_view)
 	{
-		this->ClearSight();
+		if (nullptr == scene_view)
+			this->ClearSight();
 		m_scene_view = scene_view;
 	}
 
 	void SceneUnitSight::SetRadius(float val)
 	{
-		this->ClearSight();
+		if (val < FLT_EPSILON)
+			this->ClearSight();
 		m_sight_radius = val;
 	}
 
 	void SceneUnitSight::SetViewCamp(EViewCamp val)
 	{
-		this->ClearSight();
+		if (val != m_view_camp)
+			this->ClearSight();
 		m_view_camp = val;
 	}
 
@@ -58,6 +62,8 @@ namespace GameLogic
 
 	void SceneUnitSight::UpdateState()
 	{
+		this->ClearSight();
+
 		if (nullptr == m_scene_view || m_sight_radius < FLT_EPSILON)
 			return;
 
@@ -110,7 +116,6 @@ namespace GameLogic
 			}
 		}
 
-		this->ClearSight();
 		m_cover_girds.assign(cover_grids.begin(), cover_grids.end());
 		for (auto grid : m_cover_girds)
 		{
@@ -121,13 +126,17 @@ namespace GameLogic
 	void SceneUnitSight::OnAwake()
 	{
 	}
+
 	void SceneUnitSight::OnDestroy()
 	{
-		this->ClearSight();
+		this->SetSceneView(nullptr);
 	}
 
 	void SceneUnitSight::ClearSight()
 	{
+		if (m_cover_girds.empty())
+			return;
+
 		for (auto grid : m_cover_girds)
 		{
 			--grid->observing_num[m_view_camp];

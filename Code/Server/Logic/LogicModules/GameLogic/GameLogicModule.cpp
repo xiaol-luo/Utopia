@@ -65,7 +65,7 @@ EModuleRetCode GameLogicModule::Update()
 {
 	long long now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
 	m_player_mgr->Update(now_ms);
-	m_scene->Update(now_ms);
+	// m_scene->Update(now_ms);
 	m_new_scene->Update();
 	return EModuleRetCode_Succ;
 }

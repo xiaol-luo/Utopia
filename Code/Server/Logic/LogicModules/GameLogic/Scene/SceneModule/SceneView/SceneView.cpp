@@ -49,24 +49,33 @@ namespace GameLogic
 		assert(ret);
 		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
 			std::bind(&SceneView::OnSceneUnitEnterScene, this, std::placeholders::_1));
-		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_LeaveScene,
-			std::bind(&SceneView::OnSceneUnitLeaveScene, this, std::placeholders::_1));
 		return ret;
 	}
 
 	void SceneView::OnUpdate()
 	{
-		for (auto kv_pair : m_scene_units)
 		{
-			auto su = kv_pair.second.lock();
-			if (nullptr == su)
-				continue;
-			auto su_sight = su->GetModule<SceneUnitSight>();
-			if (nullptr != su_sight)
-				su_sight->UpdateState();
-			auto su_body = su->GetModule<SceneUnitBody>();
-			if (nullptr != su_body)
-				su_body->UpdateState();
+			std::vector<uint64_t> expired_ids;
+			for (auto kv_pair : m_scene_units)
+			{
+				auto su = kv_pair.second.lock();
+				if (nullptr == su)
+				{
+					expired_ids.push_back(kv_pair.first);
+					continue;
+				}
+				auto su_sight = su->GetModule<SceneUnitSight>();
+				if (nullptr != su_sight)
+					su_sight->UpdateState();
+				auto su_body = su->GetModule<SceneUnitBody>();
+				if (nullptr != su_body)
+					su_body->UpdateState();
+			}
+			if (!expired_ids.empty())
+			{
+				for (uint64_t id : expired_ids)
+					m_scene_units.erase(id);
+			}
 		}
 
 		{
@@ -384,10 +393,6 @@ namespace GameLogic
 		auto su_body = su->GetModule<SceneUnitBody>();
 		if (nullptr != su_sight || nullptr != su_body)
 			m_scene_units.insert_or_assign(su->GetId(), su->shared_from_this());
-	}
-	void SceneView::OnSceneUnitLeaveScene(SceneUnit * su)
-	{
-		m_scene_units.erase(su->GetId());
 	}
 }
 

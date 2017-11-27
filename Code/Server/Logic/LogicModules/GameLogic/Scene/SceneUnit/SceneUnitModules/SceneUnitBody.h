@@ -16,6 +16,8 @@ namespace GameLogic
 		virtual ~SceneUnitBody() override;
 
 		void SetSceneView(SceneView *scene_view);
+		void SetRadius(float val);
+		float GetRadius();
 		void UpdateState();
 
 	protected:
@@ -23,6 +25,7 @@ namespace GameLogic
 		float m_size_x = 0.0f;
 		float m_size_y = 0.0f;
 		ViewGridVec m_cover_girds;
-		SceneView *m_scene_view;
+		SceneView *m_scene_view = nullptr;
+		void ResetCoverGrids();
 	};
 }

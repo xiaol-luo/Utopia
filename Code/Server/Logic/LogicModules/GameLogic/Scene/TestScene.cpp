@@ -25,15 +25,6 @@ namespace GameLogic
 		assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
 		m_sceneCfg = m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
 
-		/*
-		bool ret;
-		ret = m_nav_mesh->LoadTerrain(m_logic_module->GetCfgRootPath() + "/" + m_sceneCfg->terrain_file_path);
-		assert(ret);
-
-		ret = m_view_mgr->LoadCfg(m_logic_module->GetCfgRootPath() + "/" + m_sceneCfg->terrain_file_path + ".view");
-		assert(ret);
-		*/
-
 		this->AddModule(new SceneMove());
 		this->AddModule(new SceneView());
 		this->AddModule(new SceneNavMesh());
@@ -52,6 +43,8 @@ namespace GameLogic
 		
 		{
 			auto sub = su->AddModule(std::make_shared<SceneUnitBody>());
+			sub->SetSceneView(this->GetModule<SceneView>());
+			sub->SetRadius(5);
 		}
 
 		
