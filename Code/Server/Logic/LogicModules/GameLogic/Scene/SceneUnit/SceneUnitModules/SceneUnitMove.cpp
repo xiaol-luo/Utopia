@@ -12,6 +12,10 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
 
 namespace GameLogic
 {
@@ -69,15 +73,18 @@ namespace GameLogic
 
 	void SceneUnitMove::SetVelocity(const Vector3 & val)
 	{
+		Vector3 old_val = m_velocity;
 		m_velocity = val;
-		// TODO : CB
+		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_VolecityChange, old_val, m_velocity);
 	}
 	void SceneUnitMove::EnterState(NetProto::EMoveAgentState new_state, void * param)
 	{
+		NetProto::EMoveAgentState old_state = m_curr_state->GetState();
 		m_curr_state->Exit();
 		m_curr_state = m_states[new_state];
 		m_curr_state->Enter(param);
-		// TODO : CB
+		this->GetEvProxy()->Fire<NetProto::EMoveAgentState, NetProto::EMoveAgentState>(
+			ESU_MoveStateChange, old_state, new_state);
 	}
 
 	NetProto::EMoveState SceneUnitMove::CalMoveState(NetProto::EMoveAgentState state)
@@ -239,4 +246,20 @@ namespace GameLogic
 		}
 	}
 
+	void SceneUnitMove::Flash(const Vector3 & val)
+	{
+		Vector3 fix_pos; dtPolyRef poly_ref;
+		if (!m_nav_mesh->FindNearestPoint(val, poly_ref, fix_pos))
+		{
+			Vector3 now_pos = this->GetPos();
+			if (!m_nav_mesh->Raycast(now_pos, val, fix_pos))
+				fix_pos = now_pos;
+		}
+		for (int i = 0; i < NetProto::EMoveAgentState_Max; ++i)
+			m_states[i]->Flash(fix_pos);
+		this->SetPos(fix_pos);
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, 
+			"Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
+			this->GetMoveAgentState(), fix_pos.x, fix_pos.y, fix_pos.z);
+	}
 }

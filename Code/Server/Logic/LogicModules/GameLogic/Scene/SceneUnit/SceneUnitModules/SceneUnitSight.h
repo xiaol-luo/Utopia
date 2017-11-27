@@ -21,8 +21,6 @@ namespace GameLogic
 		void SetViewCamp(EViewCamp val);
 		void UpdateState();
 
-
-
 	protected:
 		virtual void OnAwake() override;
 		virtual void OnDestroy() override;

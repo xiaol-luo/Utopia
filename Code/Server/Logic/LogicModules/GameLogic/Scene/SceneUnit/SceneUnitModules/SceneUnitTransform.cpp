@@ -4,6 +4,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 
 namespace GameLogic
 {
@@ -81,7 +82,9 @@ namespace GameLogic
 	}
 	void SceneUnitTransform::SetLocalPos(const Vector3 & pos)
 	{
+		Vector3 old_Pos = this->GetPos();
 		m_local_pos = pos;
+		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, old_Pos, this->GetPos());
 	}
 	const Vector3 & SceneUnitTransform::GetLocalPos()
 	{
@@ -103,11 +106,27 @@ namespace GameLogic
 	{
 		return m_face_dir;
 	}
+
 	void SceneUnitTransform::SetFaceAngle(float face_angle)
 	{
 	}
+
 	float SceneUnitTransform::GetFaceAngle()
 	{
 		return 0.0f;
+	}
+
+	void SceneUnitTransform::OnAwake()
+	{
+		/*
+		this->GetEvProxy()->Subscribe<Vector3, Vector3>(ESU_VolecityChange, 
+			std::bind(&SceneUnitTransform::OnMoveVolecityChange,
+			this, std::placeholders::_1, std::placeholders::_2));
+			*/
+	}
+
+	void SceneUnitTransform::OnMoveVolecityChange(Vector3 old_val, Vector3 new_val)
+	{
+		this->SetFaceDir(new_val.xz());
 	}
 }

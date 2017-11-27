@@ -6,6 +6,9 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "recastnavigation/DetourCrowd/Include/DetourCrowd.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/Navigation/NavMesh.h"
+#include "GameLogic/Scene/SceneModule/SceneNavMesh/SceneNavMesh.h"
 
 namespace GameLogic
 {
@@ -19,6 +22,7 @@ namespace GameLogic
 
 	bool SceneMove::OnAwake()
 	{
+		m_nav_mesh = m_scene->GetModule<SceneNavMesh>()->GetNavMesh();
 		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
 			std::bind(&SceneMove::OnSceneUnitEnterScene, this, std::placeholders::_1));
 		return true;
@@ -47,7 +51,6 @@ namespace GameLogic
 					m_su_moves.erase(id);
 			}
 		}
-
 	}
 
 	void SceneMove::OnSceneUnitEnterScene(SceneUnit * su)

@@ -55,7 +55,6 @@ namespace GameLogic
 		bool IsLoseControl();
 
 	public:
-		void Update(long deltaMs);
 		void TryMoveToPos(const Vector3 &pos);
 		void TryMoveToDir(float angle);
 		void CancelMove();

@@ -39,5 +39,9 @@ namespace GameLogic
 	protected:
 		Vector2 m_face_dir;
 		Vector3 m_local_pos;
+
+	protected:
+		virtual void OnAwake() override;
+		void OnMoveVolecityChange(Vector3 old_val, Vector3 new_pos);
 	};
 }
