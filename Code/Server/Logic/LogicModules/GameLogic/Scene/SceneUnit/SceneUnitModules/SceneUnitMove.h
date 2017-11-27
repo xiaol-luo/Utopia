@@ -20,7 +20,7 @@ namespace GameLogic
 	public: 
 		SceneUnitMove();
 		virtual ~SceneUnitMove() override;
-		void UpdateState();
+		void UpdateState(long deltaMs);
 
 	protected:
 		virtual void OnAwake() override;
@@ -46,12 +46,26 @@ namespace GameLogic
 		void EnterState(NetProto::EMoveAgentState newState, void *param = nullptr);
 		void AwakeNavAgent();
 		void DestroyNavAgent();
+		void OnNavAgentMoved(NavAgent *agent);
 
 	public:
 		static NetProto::EMoveState CalMoveState(NetProto::EMoveAgentState state);
 		NetProto::EMoveAgentState GetMoveAgentState();
 		NetProto::EMoveState GetMoveState();
 		bool IsLoseControl();
+
+	public:
+		void Update(long deltaMs);
+		void TryMoveToPos(const Vector3 &pos);
+		void TryMoveToDir(float angle);
+		void CancelMove();
+		void CancelForceMove();
+		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
+		void ForcePos(const Vector3 &destination, float speed);
+		void ChangeForcePosDestination(const Vector3 &destination);
+		void Immobilized(long ms);
+		void CancelImmobilized();
+		void Flash(const Vector3 &val);
 
 	};
 }

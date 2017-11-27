@@ -129,7 +129,9 @@ void GameLogic::MoveMgr::OnMoveObjectEnterScene(std::shared_ptr<MoveObject> move
 	MoveAgent *move_agent = new MoveAgent(this);
 	move_agent->SetId(m_last_move_agent_id);
 	move_obj->SetMoveAgent(move_agent);
+
 	m_move_agents[move_agent->GetId()] = move_agent;
+
 	{
 		NavAgent *nav_agent = move_agent->GetNavAgent();
 		dtCrowdAgentParams params;

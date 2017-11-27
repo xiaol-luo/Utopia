@@ -39,7 +39,7 @@ namespace GameLogic
 					expired_ids.push_back(kv_pair.first);
 					continue;
 				}
-				su_move->UpdateState();
+				su_move->UpdateState(deltaMs);
 			}
 			if (!expired_ids.empty())
 			{

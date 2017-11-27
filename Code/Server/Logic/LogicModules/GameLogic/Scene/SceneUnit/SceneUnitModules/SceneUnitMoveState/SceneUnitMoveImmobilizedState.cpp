@@ -2,8 +2,12 @@
 #include "Common/Geometry/Vector3.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
-GameLogic::SceneUnitMoveImmobilizedState::SceneUnitMoveImmobilizedState(SceneUnitMove *move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Immobilized)
+
+GameLogic::SceneUnitMoveImmobilizedState::SceneUnitMoveImmobilizedState(SceneUnitMove *move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Immobilized),
+	m_ticker(std::bind(&NewScene::GetLogicMs, move_agent->GetOwner()->GetScene()))
 {
 
 }

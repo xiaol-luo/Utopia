@@ -4,8 +4,12 @@
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include <functional>
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
-GameLogic::SceneUnitMoveForceLineState::SceneUnitMoveForceLineState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_ForceLine)
+GameLogic::SceneUnitMoveForceLineState::SceneUnitMoveForceLineState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_ForceLine),
+	m_ticker(std::bind(&NewScene::GetLogicMs, move_agent->GetOwner()->GetScene()))
 {
 }
 

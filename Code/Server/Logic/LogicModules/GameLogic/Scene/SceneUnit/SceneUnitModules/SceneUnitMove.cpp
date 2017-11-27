@@ -11,6 +11,7 @@
 #include "GameLogic/Scene/SceneModule/SceneNavMesh/SceneNavMesh.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
+#include "GameLogic/Scene/Navigation/NavMesh.h"
 
 namespace GameLogic
 {
@@ -36,9 +37,15 @@ namespace GameLogic
 		delete m_nav_agent; m_nav_agent = nullptr;
 	}
 
-	void SceneUnitMove::UpdateState()
+	void SceneUnitMove::UpdateState(long deltaMs)
 	{
-
+		m_curr_state->Update(deltaMs);
+		if (m_curr_state->IsDone())
+		{
+			SceneUnitMoveState *next_state = m_next_state;
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			this->EnterState(next_state->GetState());
+		}
 	}
 
 	void SceneUnitMove::OnAwake()
@@ -111,4 +118,125 @@ namespace GameLogic
 	{
 		return this->GetMoveState() > NetProto::EMoveState_Move;
 	}
+
+
+	void SceneUnitMove::TryMoveToPos(const Vector3 &pos)
+	{
+		SceneUnitMoveToPosState *state = dynamic_cast<SceneUnitMoveToPosState *>(m_states[NetProto::EMoveAgentState_MoveToPos]);
+		dtPolyRef poly_ref = 0; Vector3 fix_pos = pos;
+		m_nav_mesh->FindNearestPoint(pos, poly_ref, fix_pos);
+		state->SetDesiredPos(fix_pos);
+		if (!IsLoseControl())
+		{
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			this->EnterState(state->GetState());
+		}
+		else
+		{
+			m_next_state = state;
+		}
+	}
+
+	void SceneUnitMove::TryMoveToDir(float angle)
+	{
+		SceneUnitMoveToDirState *state = dynamic_cast<SceneUnitMoveToDirState *>(m_states[NetProto::EMoveAgentState_MoveToDir]);
+		state->SetDesiredDir(angle);
+		if (!IsLoseControl())
+		{
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			this->EnterState(state->GetState());
+		}
+		else
+		{
+			m_next_state = state;
+		}
+	}
+
+	void SceneUnitMove::CancelMove()
+	{
+		if (NetProto::EMoveState_Move == this->GetMoveState())
+		{
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			this->EnterState(NetProto::EMoveAgentState_Idle);
+		}
+		else
+		{
+			this->GetNavAgent()->StopMove();
+			if (NetProto::EMoveState_Move == CalMoveState(m_next_state->GetState()))
+				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+		}
+	}
+
+	void SceneUnitMove::CancelForceMove()
+	{
+		if (NetProto::EMoveState_ForceMove == this->GetMoveAgentState())
+		{
+			m_curr_state->ForceDone();
+		}
+		else
+		{
+			if (NetProto::EMoveState_ForceMove == CalMoveState(m_next_state->GetState()))
+			{
+				m_next_state->ForceDone();
+				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			}
+		}
+	}
+
+	void SceneUnitMove::ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian)
+	{
+		SceneUnitMoveForceLineState *state = dynamic_cast<SceneUnitMoveForceLineState *>(m_states[NetProto::EMoveAgentState_ForceLine]);
+		state->ForceMoveLine(dir, speed, time_sec, ignore_terrian);
+		if (NetProto::EMoveState_ForceMove != this->GetMoveState())
+			m_next_state = m_curr_state;
+		this->EnterState(NetProto::EMoveAgentState_ForceLine);
+	}
+
+	void SceneUnitMove::ForcePos(const Vector3 & destination, float speed)
+	{
+		SceneUnitMoveForcePosState *state = dynamic_cast<SceneUnitMoveForcePosState *>(m_states[NetProto::EMoveAgentState_ForcePos]);
+		state->ForcePos(destination, speed);
+		if (NetProto::EMoveState_ForceMove != this->GetMoveState())
+			m_next_state = m_curr_state;
+		this->EnterState(NetProto::EMoveAgentState_ForcePos);
+	}
+
+	void SceneUnitMove::ChangeForcePosDestination(const Vector3 & destination)
+	{
+		SceneUnitMoveForcePosState *state = dynamic_cast<SceneUnitMoveForcePosState *>(m_states[NetProto::EMoveAgentState_ForcePos]);
+		state->ForcePos(destination);
+	}
+
+	void SceneUnitMove::Immobilized(long ms)
+	{
+		SceneUnitMoveImmobilizedState *state = dynamic_cast<SceneUnitMoveImmobilizedState *>(m_states[NetProto::EMoveAgentState_Immobilized]);
+		state->ImmobilizeEndMs(m_owner->GetScene()->GetLogicMs() + ms);
+		if (NetProto::EMoveState_ForceMove == this->GetMoveState())
+		{
+			m_next_state = m_states[NetProto::EMoveAgentState_Immobilized];
+		}
+		else
+		{
+			if (NetProto::EMoveState_Immobilized != this->GetMoveState())
+				m_next_state = m_curr_state; // MOVE OR IDLE
+			this->EnterState(NetProto::EMoveAgentState_Immobilized);
+		}
+	}
+
+	void SceneUnitMove::CancelImmobilized()
+	{
+		if (NetProto::EMoveState_Immobilized == this->GetMoveAgentState())
+		{
+			m_curr_state->ForceDone();
+		}
+		else
+		{
+			if (NetProto::EMoveState_Immobilized == CalMoveState(m_next_state->GetState()))
+			{
+				m_next_state->ForceDone();
+				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			}
+		}
+	}
+
 }
