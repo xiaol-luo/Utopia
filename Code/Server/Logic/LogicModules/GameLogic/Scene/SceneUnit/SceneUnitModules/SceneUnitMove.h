@@ -5,6 +5,7 @@
 #include "Common/Geometry/Vector2.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include "Common/Utils/Ticker.h"
 
 namespace GameLogic
 {
@@ -69,5 +70,6 @@ namespace GameLogic
 
 	private:
 		void TestAction(); // for test
+		Ticker m_test_ticker;
 	};
 }

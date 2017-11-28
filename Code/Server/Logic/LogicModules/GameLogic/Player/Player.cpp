@@ -105,7 +105,6 @@ namespace GameLogic
 	void Player::OnNetClose(int err_num)
 	{
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "{0} is close, errno {1}", this->m_cnn_handler->GetNetId(), err_num);
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "{0} is close, errno {1}", this->m_cnn_handler->GetNetId(), err_num);
 		m_player_mgr->OnCnnClose(err_num, this);
 	}
 

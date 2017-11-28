@@ -16,6 +16,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
+#include <cstdlib>
 
 namespace GameLogic
 {
@@ -60,6 +61,9 @@ namespace GameLogic
 		this->AwakeNavAgent();
 
 		this->GetSceneEvProxy()->Subscribe(ES_TestHeartBeat, std::bind(&SceneUnitMove::TestAction, this));
+
+		m_test_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, m_owner->GetScene()));
+		m_test_ticker.SetCd(5);
 	}
 	void SceneUnitMove::OnDestroy()
 	{
@@ -277,7 +281,10 @@ namespace GameLogic
 	}
 	void SceneUnitMove::TestAction()
 	{
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
-			"SceneUnitMove::TestAction");
+		if (!m_test_ticker.InCd())
+		{
+			m_test_ticker.Restart();
+			this->TryMoveToPos(Vector3(std::rand() % 100, 0, std::rand() % 100));
+		}
 	}
 }

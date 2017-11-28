@@ -55,6 +55,11 @@ float Ticker::ElaspeTime()
 	return m_now_sec_func() - m_start;
 }
 
+float Ticker::EndTimestamp()
+{
+	return m_start + m_cd;
+}
+
 bool Ticker::InCd()
 {
 	return this->LeftTime() > FLT_EPSILON;

@@ -86,6 +86,9 @@ namespace GameLogic
 		Vector3 old_Pos = this->GetPos();
 		m_local_pos = pos;
 		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, old_Pos, this->GetPos());
+
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+		"SceneUnitTransform::SetLocalPos {:3.2f}, {:3.2f}, {:3.2f}", m_local_pos.x, m_local_pos.y, m_local_pos.z);
 	}
 	const Vector3 & SceneUnitTransform::GetLocalPos()
 	{

@@ -179,6 +179,22 @@ namespace GameLogic
 		if (!m_awaked)
 			return;
 
+		long now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
+		if (0 == m_last_real_ms)
+		{
+			m_last_real_ms = now_ms;
+			return;
+		}
+
+		long long delta_ms = now_ms - m_last_real_ms;
+		m_last_real_ms = now_ms;
+		if (m_is_pause)
+			return;
+
+		// m_logic_detal_ms = delta_ms;
+		m_logic_detal_ms = 50;
+		m_logic_ms += m_logic_detal_ms;
+
 		this->UpdateCachedSceneUnits();
 		this->OnUpdate();
 
