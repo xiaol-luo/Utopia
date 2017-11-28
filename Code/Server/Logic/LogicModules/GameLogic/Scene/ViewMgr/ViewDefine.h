@@ -27,10 +27,9 @@ namespace GameLogic
 
 	enum EViewCamp
 	{
-		EViewCamp_None = 0,
 		EViewCamp_Red,
 		EViewCamp_Blue,
-		EViewCamp_All
+		EViewCamp_Observer,
 	};
 
 	enum EViewGridType

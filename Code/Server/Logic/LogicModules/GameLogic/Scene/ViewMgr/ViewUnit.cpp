@@ -38,7 +38,7 @@ namespace GameLogic
 				scene_obj->SetViewUnit(nullptr);
 		m_scene_obj.reset();
 		m_objid = 0;
-		m_view_camp = EViewCamp_None;
+		m_view_camp = EViewCamp_Observer;
 		if (m_has_view)
 		{
 			for (auto view_grid : m_view_cover_girds)

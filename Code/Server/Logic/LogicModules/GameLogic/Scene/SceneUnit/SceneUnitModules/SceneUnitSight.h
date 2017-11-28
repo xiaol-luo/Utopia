@@ -27,7 +27,7 @@ namespace GameLogic
 		void ClearSight();
 		SceneView *m_scene_view = nullptr;
 		float m_sight_radius = 6.0f;
-		EViewCamp m_view_camp = EViewCamp_None;
+		EViewCamp m_view_camp = EViewCamp_Observer;
 		ViewGridVec m_cover_girds;
 	};
 }

@@ -9,6 +9,9 @@
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/GameLogicModule.h"
 #include "CommonModules/Timer/ITimerModule.h"
+#include "GameLogic/Player/Player.h"
+#include "GameLogic/GameLogicModule.h"
+#include "GameLogic/Player/PlayerMgr.h"
 
 namespace GameLogic
 {
@@ -234,9 +237,92 @@ namespace GameLogic
 	{
 		GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "NewScene::TestEvent ev_id:{0} su_id:{1}", ev_id, su->GetId());
 	}
+
 	void NewScene::TestSubscribeEvents()
 	{
 		m_ev_dispacher->Subscribe<SceneUnit *>(ESU_EnterScene, std::bind(&NewScene::TestEvent, this, ESU_EnterScene, std::placeholders::_1));
 		m_ev_dispacher->Subscribe<SceneUnit *>(ESU_LeaveScene, std::bind(&NewScene::TestEvent, this, ESU_LeaveScene, std::placeholders::_1));
+	}
+
+	bool NewScene::PlayerSelectHero(Player * player, uint64_t su_id)
+	{
+		if (nullptr == player)
+			return false;
+
+		auto hero = this->GetUnit(su_id);
+		if (nullptr != hero && hero->GetPlayerId() <= 0)
+		{
+			hero->SetPlayerId(player->GetNetId());
+			player->SetSu(hero);
+			return true;
+		}
+		return false;
+	}
+
+	void NewScene::OnPlayerDisconnect(Player * player)
+	{
+		if (nullptr == player)
+			return;
+
+		for (auto & m_player_view_camp : m_player_view_camps)
+		{
+			m_player_view_camp.erase(player->GetNetId());
+		}
+	}
+
+	void NewScene::SetPlayerViewCamp(Player *player, EViewCamp view_camp)
+	{
+		if (nullptr == player || view_camp < 0 || view_camp > EViewCamp_Observer)
+			return;
+
+		for (auto & m_player_view_camp : m_player_view_camps)
+		{
+			m_player_view_camp.erase(player->GetNetId());
+		}
+		m_player_view_camps[view_camp].insert(std::make_pair(player->GetNetId(), player));
+
+		// pull all data
+	}
+	void NewScene::SendClient(NetId netid, int protocol_id, google::protobuf::Message * msg)
+	{
+		m_game_logic->GetPlayerMgr()->Send(netid, protocol_id, msg);
+	}
+
+	void NewScene::SendClient(NetId netid, const std::vector<SyncClientMsg>& msgs)
+	{
+		for (auto &msg : msgs)
+			this->SendClient(netid, msg.protocol_id, msg.msg);
+	}
+	void NewScene::SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message * msg)
+	{
+		if (view_camp < 0 || view_camp >= EViewCamp_Observer)
+			return;
+
+		for (auto kv_pair : m_player_view_camps[view_camp])
+		{
+			kv_pair.second->Send(protocol_id, msg);
+		}
+		for (auto kv_pair : m_player_view_camps[EViewCamp_Observer])
+		{
+			kv_pair.second->Send(protocol_id, msg);
+		}
+	}
+
+	void NewScene::SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg>& msgs)
+	{
+		if (view_camp < 0 || view_camp >= EViewCamp_Observer)
+			return;
+
+		for (auto &msg : msgs)
+		{
+			for (auto kv_pair : m_player_view_camps[view_camp])
+			{
+				kv_pair.second->Send(msg.protocol_id, msg.msg);
+			}
+			for (auto kv_pair : m_player_view_camps[EViewCamp_Observer])
+			{
+				kv_pair.second->Send(msg.protocol_id, msg.msg);
+			}
+		}
 	}
 }

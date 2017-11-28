@@ -7,6 +7,8 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "Network/Utils/NetworkAgent.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
 namespace GameLogic
 {
@@ -105,6 +107,17 @@ namespace GameLogic
 	void Player::OnNetClose(int err_num)
 	{
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "{0} is close, errno {1}", this->m_cnn_handler->GetNetId(), err_num);
+		if (nullptr != m_scene)
+		{
+			m_scene->OnPlayerDisconnect(this);
+			m_scene = nullptr;
+		}
+		if (nullptr != m_su)
+		{
+			m_su->SetPlayerId(0);
+			m_su = nullptr;
+		}
+
 		m_player_mgr->OnCnnClose(err_num, this);
 	}
 

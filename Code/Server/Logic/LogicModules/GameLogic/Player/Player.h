@@ -13,6 +13,8 @@ namespace GameLogic
 	class PlayerCnnHandler; 
 	class PlayerMgr;
 	class Hero;
+	class SceneUnit;
+	class NewScene;
 }
 
 namespace GameLogic
@@ -46,8 +48,15 @@ namespace GameLogic
 		bool CanRecvSceneMsg() { return m_can_recv_scene_msg; }
 		void SetCanRecvSceneMsg(bool value) { m_can_recv_scene_msg = value; }
 
+		std::shared_ptr<SceneUnit> GetSu() { return m_su; }
+		void SetSu(std::shared_ptr<SceneUnit> su) { m_su = su; }
+		NewScene * GetScene() { return m_scene; }
+		void SetScene(NewScene *scene) { m_scene = scene; }
+
 	protected:
 		std::weak_ptr<Hero> m_hero;
 		bool m_can_recv_scene_msg = false;
+		std::shared_ptr<SceneUnit> m_su = nullptr;
+		NewScene * m_scene = nullptr;
 	};
 }

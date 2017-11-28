@@ -21,9 +21,9 @@ namespace GameLogic
 {
 	SceneView::SceneView() : SceneModule(MODULE_TYPE)
 	{
-		m_pre_snapshots = (ViewSnapshot **)Malloc(sizeof(ViewSnapshot *) * EViewCamp_All);
-		m_curr_snapshots = (ViewSnapshot **)Malloc(sizeof(ViewSnapshot *) * EViewCamp_All);
-		for (int i = 0; i < EViewCamp_All; ++i)
+		m_pre_snapshots = (ViewSnapshot **)Malloc(sizeof(ViewSnapshot *) * EViewCamp_Observer);
+		m_curr_snapshots = (ViewSnapshot **)Malloc(sizeof(ViewSnapshot *) * EViewCamp_Observer);
+		for (int i = 0; i < EViewCamp_Observer; ++i)
 		{
 			m_pre_snapshots[i] = new ViewSnapshot();
 			m_curr_snapshots[i] = new ViewSnapshot();
@@ -32,7 +32,7 @@ namespace GameLogic
 
 	SceneView::~SceneView()
 	{
-		for (int i = 0; i < EViewCamp_All; ++i)
+		for (int i = 0; i < EViewCamp_Observer; ++i)
 		{
 			delete m_pre_snapshots[i];
 			delete m_curr_snapshots[i];
@@ -83,7 +83,7 @@ namespace GameLogic
 			m_pre_snapshots = m_curr_snapshots;
 			m_curr_snapshots = tmp_snapshot;
 
-			for (int camp = 0; camp < EViewCamp_All; ++camp)
+			for (int camp = 0; camp < EViewCamp_Observer; ++camp)
 			{
 				ViewSnapshot *snapshot = m_curr_snapshots[camp];
 				snapshot->Reset();
@@ -107,7 +107,7 @@ namespace GameLogic
 
 	void SceneView::OnRelease()
 	{
-		for (int i = 0; i < EViewCamp_All; ++i)
+		for (int i = 0; i < EViewCamp_Observer; ++i)
 		{
 			m_pre_snapshots[i]->Reset();
 			m_curr_snapshots[i]->Reset();

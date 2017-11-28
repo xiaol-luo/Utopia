@@ -25,7 +25,7 @@ namespace GameLogic
 	}
 	bool ViewGrid::CanSee(int camp)
 	{
-		if (camp < EViewCamp_None || camp > EViewCamp_All)
+		if (camp < 0 || camp > EViewCamp_Observer)
 			return false;
 		return observing_num[camp];
 	}

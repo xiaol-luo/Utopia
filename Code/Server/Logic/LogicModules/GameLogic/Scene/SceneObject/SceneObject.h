@@ -27,13 +27,6 @@ namespace GameLogic
 		ESOT_Max,
 	};
 
-	struct SyncClientMsg
-	{
-		SyncClientMsg(int id, google::protobuf::Message *_msg) : protocol_id(id), msg(_msg) {}
-		int protocol_id;
-		google::protobuf::Message *msg;
-	};
-
 	class SceneObject : public std::enable_shared_from_this<SceneObject>
 	{
 	public: 
@@ -93,7 +86,7 @@ namespace GameLogic
 		float m_body_radius = 1.0f;
 		bool m_has_body = true;
 		bool m_has_view = true;
-		EViewCamp m_view_camp = EViewCamp_None;
+		EViewCamp m_view_camp = EViewCamp_Observer;
 		ViewUnit *m_view_unit = nullptr;
 
 	public:

@@ -263,7 +263,7 @@ namespace GameLogic
 
 	void Scene::HandleViewChange()
 	{
-		for (int view_camp = EViewCamp_None + 1; view_camp < EViewCamp_All; ++view_camp)
+		for (int view_camp = 0; view_camp < EViewCamp_Observer; ++view_camp)
 		{
 			const ViewSnapshot *pre_snapshot = m_view_mgr->GetPreSnapshot((EViewCamp)view_camp);
 			const ViewSnapshot *snapshot = m_view_mgr->GetSnapshot((EViewCamp)view_camp);

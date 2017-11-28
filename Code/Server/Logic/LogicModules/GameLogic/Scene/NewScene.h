@@ -5,6 +5,9 @@
 #include <unordered_set>
 #include <memory>
 #include "GameLogic/Scene/Defines/SceneDefine.h"
+#include "GameLogic/Scene/ViewMgr/ViewDefine.h"
+#include "Common/Define/NetworkDefine.h"
+
 class EventDispacher;
 
 namespace Config
@@ -16,6 +19,7 @@ class GameLogicModule;
 
 namespace GameLogic
 {
+	class Player;
 	class SceneModule;
 	class SceneUnit;
 
@@ -83,5 +87,16 @@ namespace GameLogic
 	protected:
 		void TestEvent(int ev_id, SceneUnit *su);
 		void TestSubscribeEvents();
+
+	public:
+		bool PlayerSelectHero(Player *player, uint64_t su_id);
+		void OnPlayerDisconnect(Player *player);
+		void SetPlayerViewCamp(Player *player, EViewCamp view_camp);
+		void SendClient(NetId netid, int protocol_id, google::protobuf::Message *msg);
+		void SendClient(NetId netid, const std::vector<SyncClientMsg> &msgs);
+		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg);
+		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs);
+
+		std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];
 	};
 }

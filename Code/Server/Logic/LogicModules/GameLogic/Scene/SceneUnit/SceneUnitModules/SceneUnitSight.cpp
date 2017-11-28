@@ -66,6 +66,8 @@ namespace GameLogic
 
 		if (nullptr == m_scene_view || m_sight_radius < FLT_EPSILON)
 			return;
+		if (m_view_camp < 0 || m_view_camp >= EViewCamp_Observer)
+			return;
 
 		Vector3 pos = this->GetOwner()->GetTransform()->GetPos();
 		ViewGrid *locate_grid = m_scene_view->GetGrid(pos.x, pos.z);

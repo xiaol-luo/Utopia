@@ -37,7 +37,6 @@ namespace GameLogic
 		EventDispacher * GetEvDispacher() { return m_event_dispacher; }
 		SceneUnitEventProxy * GetEvProxy() { return m_event_proxy; }
 		EventDispacherProxy * GetSceneEvProxy() { return m_scene_event_proxy; }
-		uint64_t GetId() { return m_id; }
 
 		template <typename T>
 		std::shared_ptr<T> GetModule()
@@ -51,10 +50,22 @@ namespace GameLogic
 
 		std::shared_ptr<SceneUnitTransform> GetTransform() { return m_transform; }
 
+	public:
+		uint64_t GetId() { return m_id; }
+		uint64_t GetPlayerId() { return m_player_id; }
+		void SetPlayerId(uint64_t player_id) { m_player_id = player_id; }
+		int GetModelId() { return m_model_id; }
+		void SetModelId(int val) { m_model_id = val; }
+		int GetUnitType() { return m_unit_type; }
+		void SetUnitType(int unit_type) { m_unit_type = unit_type; }
+
 	private:
 		NewScene *m_scene = nullptr;
 		uint64_t m_id = 0;
-
+		uint64_t m_player_id = 0;
+		int m_unit_type = 0;
+		int m_model_id = 0;
+		
 		bool m_inited = false;
 		bool m_started = false;
 		std::shared_ptr<SceneUnitModule> m_modules[ESceneUnitModule_Count];
