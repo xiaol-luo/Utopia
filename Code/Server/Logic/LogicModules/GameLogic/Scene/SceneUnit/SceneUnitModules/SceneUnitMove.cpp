@@ -21,18 +21,7 @@ namespace GameLogic
 {
 	SceneUnitMove::SceneUnitMove() : SceneUnitModule(MODULE_TYPE)
 	{
-		m_states[NetProto::EMoveAgentState_Idle] = new SceneUnitMoveIdleState(this);
-		m_states[NetProto::EMoveAgentState_MoveToDir] = new SceneUnitMoveToDirState(this);
-		m_states[NetProto::EMoveAgentState_MoveToPos] = new SceneUnitMoveToPosState(this);
-		m_states[NetProto::EMoveAgentState_Immobilized] = new SceneUnitMoveImmobilizedState(this);
-		m_states[NetProto::EMoveAgentState_ForceLine] = new SceneUnitMoveForceLineState(this);
-		m_states[NetProto::EMoveAgentState_ForcePos] = new SceneUnitMoveForcePosState(this);
-		m_next_state = m_states[NetProto::EMoveState_Idle];
-		m_curr_state = m_states[NetProto::EMoveState_Idle];
 
-		SceneNavMesh *scene_navmesh = m_owner->GetScene()->GetModule<SceneNavMesh>();
-		m_nav_mesh = scene_navmesh->GetNavMesh();
-		m_nav_agent = new NavAgent(m_nav_mesh);
 	}
 
 	SceneUnitMove::~SceneUnitMove()
@@ -43,6 +32,9 @@ namespace GameLogic
 
 	void SceneUnitMove::UpdateState(long deltaMs)
 	{
+		if (nullptr == m_curr_state)
+			return;
+
 		m_curr_state->Update(deltaMs);
 		if (m_curr_state->IsDone())
 		{
@@ -54,10 +46,28 @@ namespace GameLogic
 
 	void SceneUnitMove::OnAwake()
 	{
+		m_states[NetProto::EMoveAgentState_Idle] = new SceneUnitMoveIdleState(this);
+		m_states[NetProto::EMoveAgentState_MoveToDir] = new SceneUnitMoveToDirState(this);
+		m_states[NetProto::EMoveAgentState_MoveToPos] = new SceneUnitMoveToPosState(this);
+		m_states[NetProto::EMoveAgentState_Immobilized] = new SceneUnitMoveImmobilizedState(this);
+		m_states[NetProto::EMoveAgentState_ForceLine] = new SceneUnitMoveForceLineState(this);
+		m_states[NetProto::EMoveAgentState_ForcePos] = new SceneUnitMoveForcePosState(this);
+		m_next_state = m_states[NetProto::EMoveState_Idle];
+		m_curr_state = m_states[NetProto::EMoveState_Idle];
+
+		SceneNavMesh *scene_navmesh = m_owner->GetScene()->GetModule<SceneNavMesh>();
+		m_nav_mesh = scene_navmesh->GetNavMesh();
 		this->AwakeNavAgent();
+
+		this->GetSceneEvProxy()->Subscribe(ES_TestHeartBeat, std::bind(&SceneUnitMove::TestAction, this));
 	}
 	void SceneUnitMove::OnDestroy()
 	{
+		m_next_state = nullptr;
+		m_curr_state = nullptr;
+		for (auto state : m_states)
+			delete state;
+		memset(m_states, 0, sizeof(m_states));
 		this->DestroyNavAgent();
 	}
 
@@ -73,6 +83,9 @@ namespace GameLogic
 
 	void SceneUnitMove::SetVelocity(const Vector3 & val)
 	{
+		if (val == m_velocity)
+			return;
+
 		Vector3 old_val = m_velocity;
 		m_velocity = val;
 		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_VolecityChange, old_val, m_velocity);
@@ -261,5 +274,10 @@ namespace GameLogic
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, 
 			"Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
 			this->GetMoveAgentState(), fix_pos.x, fix_pos.y, fix_pos.z);
+	}
+	void SceneUnitMove::TestAction()
+	{
+		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+			"SceneUnitMove::TestAction");
 	}
 }

@@ -19,8 +19,6 @@ namespace GameLogic
 		virtual bool IsDone() { return false; }
 		virtual void ForceDone() {}
 		virtual void Flash(const Vector3 &val) {}
-
-	public:
 		NetProto::EMoveAgentState GetState() { return m_state; }
 
 	protected:

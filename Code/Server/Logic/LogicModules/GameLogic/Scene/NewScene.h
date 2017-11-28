@@ -38,6 +38,7 @@ namespace GameLogic
 		virtual void OnLateDestroy() {}
 
 	public:
+		float GetLogicSec();
 		inline long GetLogicMs() { return m_logic_ms; }
 		inline long GetLogicDetalMs() { return m_logic_detal_ms; }
 		inline EventDispacher * GetEvDispacher() { return m_ev_dispacher; }

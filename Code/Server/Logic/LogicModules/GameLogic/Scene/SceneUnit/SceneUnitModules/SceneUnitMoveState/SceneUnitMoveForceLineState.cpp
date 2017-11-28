@@ -8,9 +8,9 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
-GameLogic::SceneUnitMoveForceLineState::SceneUnitMoveForceLineState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_ForceLine),
-	m_ticker(std::bind(&NewScene::GetLogicMs, move_agent->GetOwner()->GetScene()))
+GameLogic::SceneUnitMoveForceLineState::SceneUnitMoveForceLineState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_ForceLine)
 {
+	m_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, m_move_agent->GetOwner()->GetScene()));
 }
 
 GameLogic::SceneUnitMoveForceLineState::~SceneUnitMoveForceLineState()

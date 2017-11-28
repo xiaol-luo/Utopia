@@ -8,6 +8,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/GameLogicModule.h"
+#include "CommonModules/Timer/ITimerModule.h"
 
 namespace GameLogic
 {
@@ -104,6 +105,12 @@ namespace GameLogic
 		memset(m_modules, 0, sizeof(m_modules));
 
 		this->OnLateDestroy();
+	}
+
+	float NewScene::GetLogicSec()
+	{
+		float sec = m_logic_ms * 1.0 / ITimerModule::MS_PER_SEC;
+		return sec;
 	}
 
 	uint64_t NewScene::AddUnit(std::shared_ptr<SceneUnit> su)
@@ -203,6 +210,8 @@ namespace GameLogic
 
 		this->UpdateCachedSceneUnits();
 		this->OnLateUpdate();
+
+		this->GetEvDispacher()->Fire(ES_TestHeartBeat);
 	}
 
 	void NewScene::TestEvent(int ev_id, SceneUnit * su)

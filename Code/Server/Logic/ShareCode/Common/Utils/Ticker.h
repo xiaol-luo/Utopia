@@ -5,10 +5,10 @@
 class Ticker
 {
 public:
-	Ticker(std::function<long()> m_now_sec_func);
 	Ticker();
 	~Ticker();
 
+	void SetTimeFunc(std::function<float()> func);
 	void Restart();
 	void Restart(float newCd);
 	void RestartWithEndTimestamp(float end_time);

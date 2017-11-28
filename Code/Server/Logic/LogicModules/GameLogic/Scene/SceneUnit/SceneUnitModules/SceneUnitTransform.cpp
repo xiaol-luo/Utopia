@@ -5,6 +5,7 @@
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
 
 namespace GameLogic
 {
@@ -101,6 +102,7 @@ namespace GameLogic
 	void SceneUnitTransform::SetFaceDir(const Vector2 &face_dir)
 	{
 		m_face_dir = face_dir;
+		m_face_dir.normalize();
 	}
 	const Vector2 & SceneUnitTransform::GetFaceDir()
 	{
@@ -118,15 +120,20 @@ namespace GameLogic
 
 	void SceneUnitTransform::OnAwake()
 	{
-		/*
 		this->GetEvProxy()->Subscribe<Vector3, Vector3>(ESU_VolecityChange, 
 			std::bind(&SceneUnitTransform::OnMoveVolecityChange,
-			this, std::placeholders::_1, std::placeholders::_2));
-			*/
+			this, std::placeholders::_1, std::placeholders::_2));		
 	}
 
 	void SceneUnitTransform::OnMoveVolecityChange(Vector3 old_val, Vector3 new_val)
 	{
-		this->SetFaceDir(new_val.xz());
+		auto move_state = m_owner->GetModule<SceneUnitMove>()->GetMoveState();
+		if (NetProto::EMoveState_Move == move_state)
+		{
+			if (abs(new_val.x) > FLT_EPSILON || (abs(new_val.z) > FLT_EPSILON))
+			{
+				this->SetFaceDir(new_val.xz());
+			}
+		}
 	}
 }

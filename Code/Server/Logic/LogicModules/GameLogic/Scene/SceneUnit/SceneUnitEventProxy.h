@@ -29,17 +29,17 @@ namespace GameLogic
 			m_scene_proxy->Fire(id, m_unit, args...);
 		}
 
-		template <typename...Args, typename F>
-		int64_t Subscribe(int id, F f)
+		template <typename...Args>
+		int64_t Subscribe(int id, std::function<void(Args...)> f)
 		{
-			m_unit_proxy->Subscribe(id, f);
+			return m_unit_proxy->Subscribe(id, f);
 		}
 
-		template <typename Ret, typename...Args>
-		int64_t Subscribe(int id, std::function<Ret(Args...)> f)
+		int64_t Subscribe(int id, std::function<void(void)> f)
 		{
-			m_unit_proxy->Subscribe(id, f);
+			return m_unit_proxy->Subscribe(id, f);
 		}
+
 		void Cancel(int64_t subscribe_id)
 		{
 			m_unit_proxy->Cancel(subscribe_id);

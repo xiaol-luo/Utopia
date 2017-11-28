@@ -5,11 +5,9 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
-
-GameLogic::SceneUnitMoveImmobilizedState::SceneUnitMoveImmobilizedState(SceneUnitMove *move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Immobilized),
-	m_ticker(std::bind(&NewScene::GetLogicMs, move_agent->GetOwner()->GetScene()))
+GameLogic::SceneUnitMoveImmobilizedState::SceneUnitMoveImmobilizedState(SceneUnitMove *move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Immobilized)
 {
-
+	m_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, m_move_agent->GetOwner()->GetScene()));
 }
 
 GameLogic::SceneUnitMoveImmobilizedState::~SceneUnitMoveImmobilizedState()

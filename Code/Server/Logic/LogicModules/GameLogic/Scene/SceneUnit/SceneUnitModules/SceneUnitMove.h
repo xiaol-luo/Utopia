@@ -66,5 +66,8 @@ namespace GameLogic
 		void CancelImmobilized();
 		void Flash(const Vector3 &val);
 
+
+	private:
+		void TestAction(); // for test
 	};
 }

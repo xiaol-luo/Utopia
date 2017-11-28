@@ -9,6 +9,9 @@
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitBody.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "Common/EventDispatcher/EventDispacher.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
 
 namespace GameLogic
 {
@@ -29,6 +32,8 @@ namespace GameLogic
 		this->AddModule(new SceneView());
 		this->AddModule(new SceneNavMesh());
 
+		m_ev_dispacher->Subscribe(ES_TestHeartBeat, std::bind(&TestScene::TestAction, this));
+
 		return true;
 	}
 
@@ -47,11 +52,21 @@ namespace GameLogic
 			sub->SetRadius(5);
 		}
 
+		{
+			auto sum = su->AddModule(std::make_shared<SceneUnitMove>());
+		}
+
 		
 		uint64_t ret = this->AddUnit(su);
 		auto transform = su->GetModule<SceneUnitTransform>();
 		transform->SetLocalPos(Vector3(50, 0, 50));
 		return true;
+	}
+
+	void TestScene::TestAction()
+	{
+		int a = 0;
+		++a;
 	}
 }
 

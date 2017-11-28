@@ -9,6 +9,7 @@ namespace GameLogic
 {
 	void SceneUnitMove::AwakeNavAgent()
 	{
+		m_nav_agent = new NavAgent(m_nav_mesh);
 		dtCrowdAgentParams params;
 		{
 			memset(&params, 0, sizeof(params));
@@ -41,6 +42,7 @@ namespace GameLogic
 	{
 		m_nav_agent->SetMovedCb(nullptr);
 		m_nav_agent->Disable();
+		delete m_nav_agent; m_nav_agent = nullptr;
 	}
 
 	void SceneUnitMove::OnNavAgentMoved(NavAgent *agent)

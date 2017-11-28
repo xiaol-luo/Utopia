@@ -8,4 +8,6 @@ enum ESUEventId
 	ESU_LeaveScene,			// 离开场景
 	ESU_VolecityChange,		// su速度改变
 	ESU_MoveStateChange,	// su移动状态改变
+
+	ES_TestHeartBeat,		// 测试用
 };

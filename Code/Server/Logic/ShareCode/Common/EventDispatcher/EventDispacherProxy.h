@@ -18,21 +18,23 @@ public:
 		m_ev_dispacher->Fire(id, args...);
 	}
 
-	template <typename...Args, typename F>
-	int64_t Subscribe(int id, F f)
-	{
-		std::function<void(Args...)> stl_f = f;
-		return this->Subscribe(id, stl_f);
-	}
-
-	template <typename Ret, typename...Args>
-	int64_t Subscribe(int id, std::function<Ret(Args...)> f)
+	template <typename...Args>
+	int64_t Subscribe(int id, std::function<void(Args...)> f)
 	{
 		int64_t ret = m_ev_dispacher->Subscribe(id, f);
 		if (EventDispacher::INVALID_ID != ret)
 			m_subscribe_ids.insert(ret);
 		return ret;
 	}
+
+	int64_t Subscribe(int id, std::function<void()> f)
+	{
+		int64_t ret = m_ev_dispacher->Subscribe(id, f);
+		if (EventDispacher::INVALID_ID != ret)
+			m_subscribe_ids.insert(ret);
+		return ret;
+	}
+
 	void Cancel(int64_t subscribe_id)
 	{
 		if (m_subscribe_ids.count(subscribe_id) > 0)

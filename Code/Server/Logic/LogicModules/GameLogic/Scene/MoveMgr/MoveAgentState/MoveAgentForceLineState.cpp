@@ -8,6 +8,7 @@
 
 GameLogic::MoveAgentForceLineState::MoveAgentForceLineState(MoveAgent * move_agent) : MoveAgentState(move_agent, NetProto::EMoveAgentState_ForceLine)
 {
+	
 }
 
 GameLogic::MoveAgentForceLineState::~MoveAgentForceLineState()

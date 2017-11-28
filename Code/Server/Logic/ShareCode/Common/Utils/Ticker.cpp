@@ -7,11 +7,6 @@ float NowSecond()
 	return GlobalServerLogic->GetTimerModule()->NowMs() *1.0f / ITimerModule::MS_PER_SEC;
 }
 
-Ticker::Ticker(std::function<long()> m_now_sec_func)
-{
-	m_now_sec_func = m_now_sec_func;
-	this->Restart(0);
-}
 
 Ticker::Ticker()
 {
@@ -22,6 +17,12 @@ Ticker::Ticker()
 Ticker::~Ticker()
 {
 
+}
+
+void Ticker::SetTimeFunc(std::function<float()> func)
+{
+	m_now_sec_func = func;
+	this->Restart(0);
 }
 
 void Ticker::Restart()
