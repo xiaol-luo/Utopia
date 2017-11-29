@@ -17,6 +17,8 @@
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include <cstdlib>
+#include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
 
 namespace GameLogic
 {
@@ -93,6 +95,21 @@ namespace GameLogic
 		Vector3 old_val = m_velocity;
 		m_velocity = val;
 		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_VolecityChange, old_val, m_velocity);
+	}
+	std::vector<SyncClientMsg> SceneUnitMove::CollectPBInit()
+	{
+		return std::move(this->CollectPbMutable());
+	}
+	std::vector<SyncClientMsg> SceneUnitMove::CollectPbMutable()
+	{
+		std::vector<SyncClientMsg> msgs;
+		{
+			NetProto::SceneUnitMove *msg = m_owner->GetScene()->CreateProtobuf<NetProto::SceneUnitMove>();
+			msg->set_su_id(this->GetId());
+			msg->set_move_agent_state(m_curr_state->GetState());
+			msgs.push_back(SyncClientMsg(NetProto::PID_SceneUnitMove, msg));
+		}
+		return std::move(msgs);
 	}
 	void SceneUnitMove::EnterState(NetProto::EMoveAgentState new_state, void * param)
 	{

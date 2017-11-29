@@ -26,6 +26,7 @@ namespace GameLogic
 			assert(!m_inited);
 			assert(nullptr == m_modules[module->GetModuleName()]);
 			m_modules[module->GetModuleName()] = module;
+			module->m_owner = this;
 			return module;
 		}
 
@@ -58,6 +59,8 @@ namespace GameLogic
 		void SetModelId(int val) { m_model_id = val; }
 		int GetUnitType() { return m_unit_type; }
 		void SetUnitType(int unit_type) { m_unit_type = unit_type; }
+		std::vector<SyncClientMsg> CollectPBInit();
+		std::vector<SyncClientMsg> CollectPbMutable();
 
 	private:
 		NewScene *m_scene = nullptr;

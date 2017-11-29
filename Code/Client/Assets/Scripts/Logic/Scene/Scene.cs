@@ -27,10 +27,13 @@ public class Scene
         m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
 
         App.my.gameNetwork.Send(ProtoId.PidLoadSceneComplete);
-        App.my.gameNetwork.Send(ProtoId.PidPullAllSceneInfo);
-        App.my.gameNetwork.Add<SceneObjectState>((int)ProtoId.PidSceneObjectState, OnRecvSceneObjectState);
-        App.my.gameNetwork.Add<MoveObjectState>((int)ProtoId.PidMoveObjectState, OnRecvMoveObjectState);
-        App.my.gameNetwork.Add<MoveObjectMutableState>((int)ProtoId.PidMoveObjectMutableState, OnRecvMoveObjectMutableState);
+
+        App.my.gameNetwork.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
+        App.my.gameNetwork.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
+        App.my.gameNetwork.Add<SceneUnitMove>((int)ProtoId.PidSceneUnitMove, OnRecvceneUnitMove);
+
+
+
         App.my.gameNetwork.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
         App.my.gameNetwork.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
         {
@@ -66,9 +69,9 @@ public class Scene
         m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
 
-        App.my.gameNetwork.Remove((int)ProtoId.PidSceneObjectState);
-        App.my.gameNetwork.Remove((int)ProtoId.PidMoveObjectState);
-        App.my.gameNetwork.Remove((int)ProtoId.PidMoveObjectMutableState);
+        App.my.gameNetwork.Remove((int)ProtoId.PidSceneUnitState);
+        App.my.gameNetwork.Remove((int)ProtoId.PidSceneUnitTransform);
+        App.my.gameNetwork.Remove((int)ProtoId.PidSceneUnitMove);
         App.my.gameNetwork.Remove((int)ProtoId.PidSceneObjectDisappear);
         App.my.gameNetwork.Remove((int)ProtoId.PidViewAllGrids);
         App.my.gameNetwork.Remove((int)ProtoId.PidViewSnapshot);
@@ -82,38 +85,32 @@ public class Scene
         return so;
     }
 
-    void OnRecvSceneObjectState(int id, SceneObjectState msg)
+    void OnRecvSceneUnitState(int id, SceneUnitState msg)
     {
-        SceneObjcet so = this.GetSceneObject(msg.Objid);
+        SceneObjcet so = this.GetSceneObject(msg.SuId);
         if (null == so)
         {
-            so = new SceneObjcet(msg.Objid, msg.ObjType, msg.ModelId);
+            so = new SceneObjcet(msg.SuId, msg.UnitType, msg.ModelId);
             m_sceneObjects[so.id] = so;
         }
         so.SetPos(msg.Pos);
-        so.faceDir = msg.Rotation;
+        so.faceDir = msg.FaceDir;
     }
-
-    void OnRecvMoveObjectState(int id, MoveObjectState msg)
+    void OnRecvSceneUnitTransform(int id, SceneUnitTransform msg)
     {
-        SceneObjcet so = this.GetSceneObject(msg.ObjState.Objid);
-        if (null == so)
-        {
-            so = new SceneObjcet(msg.ObjState.Objid, msg.ObjState.ObjType, msg.ObjState.ModelId);
-            m_sceneObjects[so.id] = so;
-        }
-        so.SetPos(msg.ObjState.Pos);
-        so.faceDir = msg.ObjState.Rotation;
-
-    }
-    void OnRecvMoveObjectMutableState(int id, MoveObjectMutableState msg)
-    {
-        SceneObjcet so = this.GetSceneObject(msg.Objid);
+        SceneObjcet so = this.GetSceneObject(msg.SuId);
         if (null == so)
             return;
 
         so.SetPos(msg.Pos);
-        so.faceDir = msg.Rotation;
+        so.faceDir = msg.FaceDir;
+    }
+    void OnRecvceneUnitMove(int id, SceneUnitMove msg)
+    {
+        SceneObjcet so = this.GetSceneObject(msg.SuId);
+        if (null == so)
+            return;
+
         if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
                 msg.MoveAgentState == EMoveAgentState.MoveToDir)
         {

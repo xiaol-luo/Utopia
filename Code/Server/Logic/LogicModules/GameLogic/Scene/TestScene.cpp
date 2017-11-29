@@ -37,30 +37,41 @@ namespace GameLogic
 		return true;
 	}
 
-	bool TestScene::OnLateAwake()
+	void BuildHero(std::shared_ptr<SceneUnit> su, NewScene *scene, 
+		Vector3 pos, EViewCamp view_camp)
 	{
-		auto su = std::make_shared<SceneUnit>();
+		su->GetTransform()->SetLocalPos(pos);
 		{
 			auto sus = su->AddModule(std::make_shared<SceneUnitSight>());
-			sus->SetSceneView(this->GetModule<SceneView>());
-			sus->SetViewCamp(EViewCamp_Red);
+			sus->SetSceneView(scene->GetModule<SceneView>());
+			sus->SetViewCamp(view_camp);
 		}
-		
 		{
 			auto sub = su->AddModule(std::make_shared<SceneUnitBody>());
-			sub->SetSceneView(this->GetModule<SceneView>());
+			sub->SetSceneView(scene->GetModule<SceneView>());
 			sub->SetRadius(5);
 		}
-
 		{
 			auto sum = su->AddModule(std::make_shared<SceneUnitMove>());
 		}
+	}
 
-		
-		uint64_t ret = this->AddUnit(su);
-		auto transform = su->GetModule<SceneUnitTransform>();
-		transform->SetLocalPos(Vector3(50, 0, 50));
+	bool TestScene::OnLateAwake()
+	{
+		red_su = std::make_shared<SceneUnit>();
+		BuildHero(red_su, this, Vector3(50, 0, 50), EViewCamp_Red);
+		this->AddUnit(red_su);
+
+		blue_su = std::make_shared<SceneUnit>();
+		BuildHero(blue_su, this, Vector3(50, 0, 50), EViewCamp_Blue);
+		this->AddUnit(blue_su);
+
 		return true;
+	}
+
+	void TestScene::OnLateUpdate()
+	{
+		this->GetEvDispacher()->Fire(ES_TestHeartBeat);
 	}
 
 	void TestScene::TestAction()

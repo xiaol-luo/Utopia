@@ -12,6 +12,10 @@ namespace GameLogic
 
 		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> miss_scene_objs;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> more_scene_objs;
+
+		std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> miss_su;
+		std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> more_su;
+
 		ViewGridVec miss_view_grids;
 		ViewGridVec more_view_grids;
 

@@ -54,6 +54,15 @@ extern SceneObjectDisappearDefaultTypeInternal _SceneObjectDisappear_default_ins
 class SceneObjectState;
 class SceneObjectStateDefaultTypeInternal;
 extern SceneObjectStateDefaultTypeInternal _SceneObjectState_default_instance_;
+class SceneUnitMove;
+class SceneUnitMoveDefaultTypeInternal;
+extern SceneUnitMoveDefaultTypeInternal _SceneUnitMove_default_instance_;
+class SceneUnitState;
+class SceneUnitStateDefaultTypeInternal;
+extern SceneUnitStateDefaultTypeInternal _SceneUnitState_default_instance_;
+class SceneUnitTransform;
+class SceneUnitTransformDefaultTypeInternal;
+extern SceneUnitTransformDefaultTypeInternal _SceneUnitTransform_default_instance_;
 class SelectHeroReq;
 class SelectHeroReqDefaultTypeInternal;
 extern SelectHeroReqDefaultTypeInternal _SelectHeroReq_default_instance_;
@@ -1819,6 +1828,429 @@ class ViewAllGrids : public ::google::protobuf::Message /* @@protoc_insertion_po
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class SceneUnitState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneUnitState) */ {
+ public:
+  SceneUnitState();
+  virtual ~SceneUnitState();
+
+  SceneUnitState(const SceneUnitState& from);
+
+  inline SceneUnitState& operator=(const SceneUnitState& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SceneUnitState(SceneUnitState&& from) noexcept
+    : SceneUnitState() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneUnitState& operator=(SceneUnitState&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SceneUnitState& default_instance();
+
+  static inline const SceneUnitState* internal_default_instance() {
+    return reinterpret_cast<const SceneUnitState*>(
+               &_SceneUnitState_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    13;
+
+  void UnsafeArenaSwap(SceneUnitState* other);
+  void Swap(SceneUnitState* other);
+  friend void swap(SceneUnitState& a, SceneUnitState& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneUnitState* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SceneUnitState* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SceneUnitState& from);
+  void MergeFrom(const SceneUnitState& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SceneUnitState* other);
+  protected:
+  explicit SceneUnitState(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NetProto.PBVector3 pos = 4;
+  bool has_pos() const;
+  void clear_pos();
+  static const int kPosFieldNumber = 4;
+  private:
+  void _slow_mutable_pos();
+  void _slow_set_allocated_pos(
+      ::google::protobuf::Arena* message_arena, ::NetProto::PBVector3** pos);
+  ::NetProto::PBVector3* _slow_release_pos();
+  public:
+  const ::NetProto::PBVector3& pos() const;
+  ::NetProto::PBVector3* mutable_pos();
+  ::NetProto::PBVector3* release_pos();
+  void set_allocated_pos(::NetProto::PBVector3* pos);
+  ::NetProto::PBVector3* unsafe_arena_release_pos();
+  void unsafe_arena_set_allocated_pos(
+      ::NetProto::PBVector3* pos);
+
+  // uint64 su_id = 1;
+  void clear_su_id();
+  static const int kSuIdFieldNumber = 1;
+  ::google::protobuf::uint64 su_id() const;
+  void set_su_id(::google::protobuf::uint64 value);
+
+  // int32 unit_type = 2;
+  void clear_unit_type();
+  static const int kUnitTypeFieldNumber = 2;
+  ::google::protobuf::int32 unit_type() const;
+  void set_unit_type(::google::protobuf::int32 value);
+
+  // int32 model_id = 3;
+  void clear_model_id();
+  static const int kModelIdFieldNumber = 3;
+  ::google::protobuf::int32 model_id() const;
+  void set_model_id(::google::protobuf::int32 value);
+
+  // uint64 parent_su_id = 6;
+  void clear_parent_su_id();
+  static const int kParentSuIdFieldNumber = 6;
+  ::google::protobuf::uint64 parent_su_id() const;
+  void set_parent_su_id(::google::protobuf::uint64 value);
+
+  // float face_dir = 5;
+  void clear_face_dir();
+  static const int kFaceDirFieldNumber = 5;
+  float face_dir() const;
+  void set_face_dir(float value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.SceneUnitState)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::NetProto::PBVector3* pos_;
+  ::google::protobuf::uint64 su_id_;
+  ::google::protobuf::int32 unit_type_;
+  ::google::protobuf::int32 model_id_;
+  ::google::protobuf::uint64 parent_su_id_;
+  float face_dir_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class SceneUnitTransform : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneUnitTransform) */ {
+ public:
+  SceneUnitTransform();
+  virtual ~SceneUnitTransform();
+
+  SceneUnitTransform(const SceneUnitTransform& from);
+
+  inline SceneUnitTransform& operator=(const SceneUnitTransform& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SceneUnitTransform(SceneUnitTransform&& from) noexcept
+    : SceneUnitTransform() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneUnitTransform& operator=(SceneUnitTransform&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SceneUnitTransform& default_instance();
+
+  static inline const SceneUnitTransform* internal_default_instance() {
+    return reinterpret_cast<const SceneUnitTransform*>(
+               &_SceneUnitTransform_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    14;
+
+  void UnsafeArenaSwap(SceneUnitTransform* other);
+  void Swap(SceneUnitTransform* other);
+  friend void swap(SceneUnitTransform& a, SceneUnitTransform& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneUnitTransform* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SceneUnitTransform* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SceneUnitTransform& from);
+  void MergeFrom(const SceneUnitTransform& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SceneUnitTransform* other);
+  protected:
+  explicit SceneUnitTransform(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .NetProto.PBVector3 pos = 2;
+  bool has_pos() const;
+  void clear_pos();
+  static const int kPosFieldNumber = 2;
+  private:
+  void _slow_mutable_pos();
+  void _slow_set_allocated_pos(
+      ::google::protobuf::Arena* message_arena, ::NetProto::PBVector3** pos);
+  ::NetProto::PBVector3* _slow_release_pos();
+  public:
+  const ::NetProto::PBVector3& pos() const;
+  ::NetProto::PBVector3* mutable_pos();
+  ::NetProto::PBVector3* release_pos();
+  void set_allocated_pos(::NetProto::PBVector3* pos);
+  ::NetProto::PBVector3* unsafe_arena_release_pos();
+  void unsafe_arena_set_allocated_pos(
+      ::NetProto::PBVector3* pos);
+
+  // uint64 su_id = 1;
+  void clear_su_id();
+  static const int kSuIdFieldNumber = 1;
+  ::google::protobuf::uint64 su_id() const;
+  void set_su_id(::google::protobuf::uint64 value);
+
+  // uint64 parent_su_id = 4;
+  void clear_parent_su_id();
+  static const int kParentSuIdFieldNumber = 4;
+  ::google::protobuf::uint64 parent_su_id() const;
+  void set_parent_su_id(::google::protobuf::uint64 value);
+
+  // float face_dir = 3;
+  void clear_face_dir();
+  static const int kFaceDirFieldNumber = 3;
+  float face_dir() const;
+  void set_face_dir(float value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.SceneUnitTransform)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::NetProto::PBVector3* pos_;
+  ::google::protobuf::uint64 su_id_;
+  ::google::protobuf::uint64 parent_su_id_;
+  float face_dir_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneUnitMove) */ {
+ public:
+  SceneUnitMove();
+  virtual ~SceneUnitMove();
+
+  SceneUnitMove(const SceneUnitMove& from);
+
+  inline SceneUnitMove& operator=(const SceneUnitMove& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SceneUnitMove(SceneUnitMove&& from) noexcept
+    : SceneUnitMove() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneUnitMove& operator=(SceneUnitMove&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SceneUnitMove& default_instance();
+
+  static inline const SceneUnitMove* internal_default_instance() {
+    return reinterpret_cast<const SceneUnitMove*>(
+               &_SceneUnitMove_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    15;
+
+  void UnsafeArenaSwap(SceneUnitMove* other);
+  void Swap(SceneUnitMove* other);
+  friend void swap(SceneUnitMove& a, SceneUnitMove& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneUnitMove* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SceneUnitMove* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SceneUnitMove& from);
+  void MergeFrom(const SceneUnitMove& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SceneUnitMove* other);
+  protected:
+  explicit SceneUnitMove(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // uint64 su_id = 1;
+  void clear_su_id();
+  static const int kSuIdFieldNumber = 1;
+  ::google::protobuf::uint64 su_id() const;
+  void set_su_id(::google::protobuf::uint64 value);
+
+  // .NetProto.EMoveAgentState move_agent_state = 2;
+  void clear_move_agent_state();
+  static const int kMoveAgentStateFieldNumber = 2;
+  ::NetProto::EMoveAgentState move_agent_state() const;
+  void set_move_agent_state(::NetProto::EMoveAgentState value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.SceneUnitMove)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::google::protobuf::uint64 su_id_;
+  int move_agent_state_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -2701,10 +3133,268 @@ ViewAllGrids::grids() const {
   return grids_;
 }
 
+// -------------------------------------------------------------------
+
+// SceneUnitState
+
+// uint64 su_id = 1;
+inline void SceneUnitState::clear_su_id() {
+  su_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SceneUnitState::su_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitState.su_id)
+  return su_id_;
+}
+inline void SceneUnitState::set_su_id(::google::protobuf::uint64 value) {
+  
+  su_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitState.su_id)
+}
+
+// int32 unit_type = 2;
+inline void SceneUnitState::clear_unit_type() {
+  unit_type_ = 0;
+}
+inline ::google::protobuf::int32 SceneUnitState::unit_type() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitState.unit_type)
+  return unit_type_;
+}
+inline void SceneUnitState::set_unit_type(::google::protobuf::int32 value) {
+  
+  unit_type_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitState.unit_type)
+}
+
+// int32 model_id = 3;
+inline void SceneUnitState::clear_model_id() {
+  model_id_ = 0;
+}
+inline ::google::protobuf::int32 SceneUnitState::model_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitState.model_id)
+  return model_id_;
+}
+inline void SceneUnitState::set_model_id(::google::protobuf::int32 value) {
+  
+  model_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitState.model_id)
+}
+
+// .NetProto.PBVector3 pos = 4;
+inline bool SceneUnitState::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+inline void SceneUnitState::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) delete pos_;
+  pos_ = NULL;
+}
+inline const ::NetProto::PBVector3& SceneUnitState::pos() const {
+  const ::NetProto::PBVector3* p = pos_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitState.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector3*>(
+      &::NetProto::_PBVector3_default_instance_);
+}
+inline ::NetProto::PBVector3* SceneUnitState::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    _slow_mutable_pos();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitState.pos)
+  return pos_;
+}
+inline ::NetProto::PBVector3* SceneUnitState::release_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitState.pos)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_pos();
+  } else {
+    ::NetProto::PBVector3* temp = pos_;
+    pos_ = NULL;
+    return temp;
+  }
+}
+inline  void SceneUnitState::set_allocated_pos(::NetProto::PBVector3* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete pos_;
+  }
+  if (pos != NULL) {
+    _slow_set_allocated_pos(message_arena, &pos);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitState.pos)
+}
+
+// float face_dir = 5;
+inline void SceneUnitState::clear_face_dir() {
+  face_dir_ = 0;
+}
+inline float SceneUnitState::face_dir() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitState.face_dir)
+  return face_dir_;
+}
+inline void SceneUnitState::set_face_dir(float value) {
+  
+  face_dir_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitState.face_dir)
+}
+
+// uint64 parent_su_id = 6;
+inline void SceneUnitState::clear_parent_su_id() {
+  parent_su_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SceneUnitState::parent_su_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitState.parent_su_id)
+  return parent_su_id_;
+}
+inline void SceneUnitState::set_parent_su_id(::google::protobuf::uint64 value) {
+  
+  parent_su_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitState.parent_su_id)
+}
+
+// -------------------------------------------------------------------
+
+// SceneUnitTransform
+
+// uint64 su_id = 1;
+inline void SceneUnitTransform::clear_su_id() {
+  su_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SceneUnitTransform::su_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitTransform.su_id)
+  return su_id_;
+}
+inline void SceneUnitTransform::set_su_id(::google::protobuf::uint64 value) {
+  
+  su_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitTransform.su_id)
+}
+
+// .NetProto.PBVector3 pos = 2;
+inline bool SceneUnitTransform::has_pos() const {
+  return this != internal_default_instance() && pos_ != NULL;
+}
+inline void SceneUnitTransform::clear_pos() {
+  if (GetArenaNoVirtual() == NULL && pos_ != NULL) delete pos_;
+  pos_ = NULL;
+}
+inline const ::NetProto::PBVector3& SceneUnitTransform::pos() const {
+  const ::NetProto::PBVector3* p = pos_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitTransform.pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector3*>(
+      &::NetProto::_PBVector3_default_instance_);
+}
+inline ::NetProto::PBVector3* SceneUnitTransform::mutable_pos() {
+  
+  if (pos_ == NULL) {
+    _slow_mutable_pos();
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitTransform.pos)
+  return pos_;
+}
+inline ::NetProto::PBVector3* SceneUnitTransform::release_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitTransform.pos)
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_pos();
+  } else {
+    ::NetProto::PBVector3* temp = pos_;
+    pos_ = NULL;
+    return temp;
+  }
+}
+inline  void SceneUnitTransform::set_allocated_pos(::NetProto::PBVector3* pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete pos_;
+  }
+  if (pos != NULL) {
+    _slow_set_allocated_pos(message_arena, &pos);
+  }
+  pos_ = pos;
+  if (pos) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitTransform.pos)
+}
+
+// float face_dir = 3;
+inline void SceneUnitTransform::clear_face_dir() {
+  face_dir_ = 0;
+}
+inline float SceneUnitTransform::face_dir() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitTransform.face_dir)
+  return face_dir_;
+}
+inline void SceneUnitTransform::set_face_dir(float value) {
+  
+  face_dir_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitTransform.face_dir)
+}
+
+// uint64 parent_su_id = 4;
+inline void SceneUnitTransform::clear_parent_su_id() {
+  parent_su_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SceneUnitTransform::parent_su_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitTransform.parent_su_id)
+  return parent_su_id_;
+}
+inline void SceneUnitTransform::set_parent_su_id(::google::protobuf::uint64 value) {
+  
+  parent_su_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitTransform.parent_su_id)
+}
+
+// -------------------------------------------------------------------
+
+// SceneUnitMove
+
+// uint64 su_id = 1;
+inline void SceneUnitMove::clear_su_id() {
+  su_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SceneUnitMove::su_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.su_id)
+  return su_id_;
+}
+inline void SceneUnitMove::set_su_id(::google::protobuf::uint64 value) {
+  
+  su_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.su_id)
+}
+
+// .NetProto.EMoveAgentState move_agent_state = 2;
+inline void SceneUnitMove::clear_move_agent_state() {
+  move_agent_state_ = 0;
+}
+inline ::NetProto::EMoveAgentState SceneUnitMove::move_agent_state() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.move_agent_state)
+  return static_cast< ::NetProto::EMoveAgentState >(move_agent_state_);
+}
+inline void SceneUnitMove::set_move_agent_state(::NetProto::EMoveAgentState value) {
+  
+  move_agent_state_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.move_agent_state)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

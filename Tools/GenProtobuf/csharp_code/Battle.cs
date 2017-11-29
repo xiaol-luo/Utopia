@@ -47,7 +47,15 @@ namespace NetProto {
             "CgptaXNzX2dyaWRzGAIgAygFIiMKDFZpZXdTbmFwc2hvdBITCgtsaWdodF9n",
             "cmlkcxgBIAMoBSJeCgxWaWV3QWxsR3JpZHMSEQoJZ3JpZF9zaXplGAEgASgC",
             "EgsKA3JvdxgCIAEoBRILCgNjb2wYAyABKAUSIQoFZ3JpZHMYBCADKAsyEi5O",
-            "ZXRQcm90by5WaWV3R3JpZEID+AEBYgZwcm90bzM="));
+            "ZXRQcm90by5WaWV3R3JpZCKOAQoOU2NlbmVVbml0U3RhdGUSDQoFc3VfaWQY",
+            "ASABKAQSEQoJdW5pdF90eXBlGAIgASgFEhAKCG1vZGVsX2lkGAMgASgFEiAK",
+            "A3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIQCghmYWNlX2RpchgF",
+            "IAEoAhIUCgxwYXJlbnRfc3VfaWQYBiABKAQibQoSU2NlbmVVbml0VHJhbnNm",
+            "b3JtEg0KBXN1X2lkGAEgASgEEiAKA3BvcxgCIAEoCzITLk5ldFByb3RvLlBC",
+            "VmVjdG9yMxIQCghmYWNlX2RpchgDIAEoAhIUCgxwYXJlbnRfc3VfaWQYBCAB",
+            "KAQiUwoNU2NlbmVVbml0TW92ZRINCgVzdV9pZBgBIAEoBBIzChBtb3ZlX2Fn",
+            "ZW50X3N0YXRlGAIgASgOMhkuTmV0UHJvdG8uRU1vdmVBZ2VudFN0YXRlQgP4",
+            "AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -63,7 +71,10 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewGrid), global::NetProto.ViewGrid.Parser, new[]{ "Center", "GridType" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshotDiff), global::NetProto.ViewSnapshotDiff.Parser, new[]{ "MoreGrids", "MissGrids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "LightGrids" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitState), global::NetProto.SceneUnitState.Parser, new[]{ "SuId", "UnitType", "ModelId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitTransform), global::NetProto.SceneUnitTransform.Parser, new[]{ "SuId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState" }, null, null, null)
           }));
     }
     #endregion
@@ -2205,6 +2216,621 @@ namespace NetProto {
           }
           case 34: {
             grids_.AddEntriesFrom(input, _repeated_grids_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SceneUnitState : pb::IMessage<SceneUnitState> {
+    private static readonly pb::MessageParser<SceneUnitState> _parser = new pb::MessageParser<SceneUnitState>(() => new SceneUnitState());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneUnitState> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[13]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitState() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitState(SceneUnitState other) : this() {
+      suId_ = other.suId_;
+      unitType_ = other.unitType_;
+      modelId_ = other.modelId_;
+      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      faceDir_ = other.faceDir_;
+      parentSuId_ = other.parentSuId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitState Clone() {
+      return new SceneUnitState(this);
+    }
+
+    /// <summary>Field number for the "su_id" field.</summary>
+    public const int SuIdFieldNumber = 1;
+    private ulong suId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SuId {
+      get { return suId_; }
+      set {
+        suId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "unit_type" field.</summary>
+    public const int UnitTypeFieldNumber = 2;
+    private int unitType_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int UnitType {
+      get { return unitType_; }
+      set {
+        unitType_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "model_id" field.</summary>
+    public const int ModelIdFieldNumber = 3;
+    private int modelId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ModelId {
+      get { return modelId_; }
+      set {
+        modelId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 4;
+    private global::NetProto.PBVector3 pos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "face_dir" field.</summary>
+    public const int FaceDirFieldNumber = 5;
+    private float faceDir_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float FaceDir {
+      get { return faceDir_; }
+      set {
+        faceDir_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "parent_su_id" field.</summary>
+    public const int ParentSuIdFieldNumber = 6;
+    private ulong parentSuId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong ParentSuId {
+      get { return parentSuId_; }
+      set {
+        parentSuId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneUnitState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneUnitState other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SuId != other.SuId) return false;
+      if (UnitType != other.UnitType) return false;
+      if (ModelId != other.ModelId) return false;
+      if (!object.Equals(Pos, other.Pos)) return false;
+      if (FaceDir != other.FaceDir) return false;
+      if (ParentSuId != other.ParentSuId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SuId != 0UL) hash ^= SuId.GetHashCode();
+      if (UnitType != 0) hash ^= UnitType.GetHashCode();
+      if (ModelId != 0) hash ^= ModelId.GetHashCode();
+      if (pos_ != null) hash ^= Pos.GetHashCode();
+      if (FaceDir != 0F) hash ^= FaceDir.GetHashCode();
+      if (ParentSuId != 0UL) hash ^= ParentSuId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SuId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SuId);
+      }
+      if (UnitType != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(UnitType);
+      }
+      if (ModelId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(ModelId);
+      }
+      if (pos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Pos);
+      }
+      if (FaceDir != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(FaceDir);
+      }
+      if (ParentSuId != 0UL) {
+        output.WriteRawTag(48);
+        output.WriteUInt64(ParentSuId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
+      }
+      if (UnitType != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UnitType);
+      }
+      if (ModelId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ModelId);
+      }
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      if (FaceDir != 0F) {
+        size += 1 + 4;
+      }
+      if (ParentSuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ParentSuId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneUnitState other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SuId != 0UL) {
+        SuId = other.SuId;
+      }
+      if (other.UnitType != 0) {
+        UnitType = other.UnitType;
+      }
+      if (other.ModelId != 0) {
+        ModelId = other.ModelId;
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          pos_ = new global::NetProto.PBVector3();
+        }
+        Pos.MergeFrom(other.Pos);
+      }
+      if (other.FaceDir != 0F) {
+        FaceDir = other.FaceDir;
+      }
+      if (other.ParentSuId != 0UL) {
+        ParentSuId = other.ParentSuId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            SuId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            UnitType = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            ModelId = input.ReadInt32();
+            break;
+          }
+          case 34: {
+            if (pos_ == null) {
+              pos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(pos_);
+            break;
+          }
+          case 45: {
+            FaceDir = input.ReadFloat();
+            break;
+          }
+          case 48: {
+            ParentSuId = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SceneUnitTransform : pb::IMessage<SceneUnitTransform> {
+    private static readonly pb::MessageParser<SceneUnitTransform> _parser = new pb::MessageParser<SceneUnitTransform>(() => new SceneUnitTransform());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneUnitTransform> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[14]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitTransform() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitTransform(SceneUnitTransform other) : this() {
+      suId_ = other.suId_;
+      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      faceDir_ = other.faceDir_;
+      parentSuId_ = other.parentSuId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitTransform Clone() {
+      return new SceneUnitTransform(this);
+    }
+
+    /// <summary>Field number for the "su_id" field.</summary>
+    public const int SuIdFieldNumber = 1;
+    private ulong suId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SuId {
+      get { return suId_; }
+      set {
+        suId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 2;
+    private global::NetProto.PBVector3 pos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "face_dir" field.</summary>
+    public const int FaceDirFieldNumber = 3;
+    private float faceDir_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float FaceDir {
+      get { return faceDir_; }
+      set {
+        faceDir_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "parent_su_id" field.</summary>
+    public const int ParentSuIdFieldNumber = 4;
+    private ulong parentSuId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong ParentSuId {
+      get { return parentSuId_; }
+      set {
+        parentSuId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneUnitTransform);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneUnitTransform other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SuId != other.SuId) return false;
+      if (!object.Equals(Pos, other.Pos)) return false;
+      if (FaceDir != other.FaceDir) return false;
+      if (ParentSuId != other.ParentSuId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SuId != 0UL) hash ^= SuId.GetHashCode();
+      if (pos_ != null) hash ^= Pos.GetHashCode();
+      if (FaceDir != 0F) hash ^= FaceDir.GetHashCode();
+      if (ParentSuId != 0UL) hash ^= ParentSuId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SuId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SuId);
+      }
+      if (pos_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Pos);
+      }
+      if (FaceDir != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(FaceDir);
+      }
+      if (ParentSuId != 0UL) {
+        output.WriteRawTag(32);
+        output.WriteUInt64(ParentSuId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
+      }
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      if (FaceDir != 0F) {
+        size += 1 + 4;
+      }
+      if (ParentSuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ParentSuId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneUnitTransform other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SuId != 0UL) {
+        SuId = other.SuId;
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          pos_ = new global::NetProto.PBVector3();
+        }
+        Pos.MergeFrom(other.Pos);
+      }
+      if (other.FaceDir != 0F) {
+        FaceDir = other.FaceDir;
+      }
+      if (other.ParentSuId != 0UL) {
+        ParentSuId = other.ParentSuId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            SuId = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            if (pos_ == null) {
+              pos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(pos_);
+            break;
+          }
+          case 29: {
+            FaceDir = input.ReadFloat();
+            break;
+          }
+          case 32: {
+            ParentSuId = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SceneUnitMove : pb::IMessage<SceneUnitMove> {
+    private static readonly pb::MessageParser<SceneUnitMove> _parser = new pb::MessageParser<SceneUnitMove>(() => new SceneUnitMove());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneUnitMove> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitMove() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitMove(SceneUnitMove other) : this() {
+      suId_ = other.suId_;
+      moveAgentState_ = other.moveAgentState_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitMove Clone() {
+      return new SceneUnitMove(this);
+    }
+
+    /// <summary>Field number for the "su_id" field.</summary>
+    public const int SuIdFieldNumber = 1;
+    private ulong suId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SuId {
+      get { return suId_; }
+      set {
+        suId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "move_agent_state" field.</summary>
+    public const int MoveAgentStateFieldNumber = 2;
+    private global::NetProto.EMoveAgentState moveAgentState_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.EMoveAgentState MoveAgentState {
+      get { return moveAgentState_; }
+      set {
+        moveAgentState_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneUnitMove);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneUnitMove other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SuId != other.SuId) return false;
+      if (MoveAgentState != other.MoveAgentState) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SuId != 0UL) hash ^= SuId.GetHashCode();
+      if (MoveAgentState != 0) hash ^= MoveAgentState.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SuId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SuId);
+      }
+      if (MoveAgentState != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) MoveAgentState);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
+      }
+      if (MoveAgentState != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MoveAgentState);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneUnitMove other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SuId != 0UL) {
+        SuId = other.SuId;
+      }
+      if (other.MoveAgentState != 0) {
+        MoveAgentState = other.MoveAgentState;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            SuId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            moveAgentState_ = (global::NetProto.EMoveAgentState) input.ReadEnum();
             break;
           }
         }

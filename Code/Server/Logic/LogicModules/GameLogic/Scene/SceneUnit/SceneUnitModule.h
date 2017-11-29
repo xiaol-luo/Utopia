@@ -55,5 +55,7 @@ namespace GameLogic
 		virtual void OnUpdate() {}
 		virtual void OnRelease() {}
 		virtual void OnDestroy() {}
+		virtual std::vector<SyncClientMsg> CollectPBInit() { return std::move(std::vector<SyncClientMsg>()); }
+		virtual std::vector<SyncClientMsg> CollectPbMutable() { return std::move(std::vector<SyncClientMsg>()); }
 	};
 }

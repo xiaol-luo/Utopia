@@ -43,5 +43,9 @@ namespace GameLogic
 	protected:
 		virtual void OnAwake() override;
 		void OnMoveVolecityChange(Vector3 old_val, Vector3 new_pos);
+
+	public:
+		virtual std::vector<SyncClientMsg> CollectPBInit() override;
+		virtual std::vector<SyncClientMsg> CollectPbMutable() override;
 	};
 }

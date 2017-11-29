@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneObjcet
 {
     public ulong id { get; protected set; }
-    public NetProto.ESceneObject objectType { get; protected set; }
+    public int unitType { get; protected set; }
     public int modelId { get; protected set; }
     public float faceDir {
         get { return m_faceDir; }
@@ -42,10 +42,10 @@ public class SceneObjcet
 
     public GameObject modelGo { get; protected set; }
 
-    public SceneObjcet(ulong _id, NetProto.ESceneObject _objType, int _modelId)
+    public SceneObjcet(ulong _id, int _unitType, int _modelId)
     {
         id = _id;
-        objectType = _objType;
+        unitType = _unitType;
         modelId = _modelId  ;
         faceDir = 0.0f;
         pos = Vector3.zero;
