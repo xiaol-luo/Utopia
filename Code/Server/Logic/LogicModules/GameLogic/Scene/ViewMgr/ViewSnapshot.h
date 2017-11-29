@@ -24,6 +24,7 @@ namespace GameLogic
 		void Reset();
 		// other make some opera according "ViewSnapshotDifference" with equal to 'this'
 		ViewSnapshotDifference CalDifference(const ViewSnapshot *other) const; 
+		bool CanSeeSu(uint64_t su_id);
 
 		ViewGridVec view_grids;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> scene_objs;

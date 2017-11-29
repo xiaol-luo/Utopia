@@ -41,18 +41,7 @@ namespace GameLogic
 		Free(m_curr_snapshots); m_curr_snapshots = nullptr;
 	}
 
-	bool SceneView::OnAwake()
-	{
-		bool ret = false;
-		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg();
-		ret = this->LoadCfg(m_scene->GetGameLogic()->GetCfgRootPath() + "/" + scene_cfg->terrain_file_path + ".view");
-		assert(ret);
-		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
-			std::bind(&SceneView::OnSceneUnitEnterScene, this, std::placeholders::_1));
-		return ret;
-	}
-
-	void SceneView::OnUpdate()
+	void SceneView::MakeSnapshot(std::function<void(ViewSnapshot**, ViewSnapshot**)> func)
 	{
 		{
 			std::vector<uint64_t> expired_ids;
@@ -77,7 +66,6 @@ namespace GameLogic
 					m_scene_units.erase(id);
 			}
 		}
-
 		{
 			ViewSnapshot **tmp_snapshot = m_pre_snapshots;
 			m_pre_snapshots = m_curr_snapshots;
@@ -103,6 +91,24 @@ namespace GameLogic
 				}
 			}
 		}
+		if (nullptr != func)
+			func(m_curr_snapshots, m_pre_snapshots);
+	}
+
+	bool SceneView::OnAwake()
+	{
+		bool ret = false;
+		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg();
+		ret = this->LoadCfg(m_scene->GetGameLogic()->GetCfgRootPath() + "/" + scene_cfg->terrain_file_path + ".view");
+		assert(ret);
+		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
+			std::bind(&SceneView::OnSceneUnitEnterScene, this, std::placeholders::_1));
+		return ret;
+	}
+
+	void SceneView::OnUpdate()
+	{
+
 	}
 
 	void SceneView::OnRelease()

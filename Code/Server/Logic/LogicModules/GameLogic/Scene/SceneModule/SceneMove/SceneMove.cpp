@@ -51,6 +51,8 @@ namespace GameLogic
 					m_su_moves.erase(id);
 			}
 		}
+
+		this->GetScene()->MakeSnapshot(false);
 	}
 
 	void SceneMove::OnSceneUnitEnterScene(SceneUnit * su)

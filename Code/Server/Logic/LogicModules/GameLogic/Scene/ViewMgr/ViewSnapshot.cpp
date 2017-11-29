@@ -100,6 +100,11 @@ namespace GameLogic
 		 return diff;
 	}
 
+	bool ViewSnapshot::CanSeeSu(uint64_t su_id)
+	{
+		return scene_units.count(su_id) > 0;
+	}
+
 	ViewSnapshotDifference::ViewSnapshotDifference()
 	{
 			

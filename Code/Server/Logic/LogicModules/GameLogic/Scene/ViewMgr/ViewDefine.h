@@ -29,7 +29,9 @@ namespace GameLogic
 	{
 		EViewCamp_Red,
 		EViewCamp_Blue,
+		EViewCamp_Monster,
 		EViewCamp_Observer,
+		EViewCamp_All,
 	};
 
 	enum EViewGridType

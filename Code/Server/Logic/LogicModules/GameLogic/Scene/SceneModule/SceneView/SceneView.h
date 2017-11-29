@@ -2,6 +2,7 @@
 
 #include "GameLogic/Scene/SceneModule/SceneModule.h"
 #include "GameLogic/Scene/ViewMgr/ViewDefine.h"
+#include <functional>
 
 namespace GameLogic
 {
@@ -32,6 +33,10 @@ namespace GameLogic
 		ViewGrid * GetRightGrid(int grid_idx);
 		ViewGrid * GetButtomGrid(int grid_idx);
 		ViewGrid * GetLeftGrid(int grid_idx);
+
+		ViewSnapshot ** GetSnapshot() { return m_curr_snapshots; }
+		ViewSnapshot ** GetPreSnapshot() { return m_pre_snapshots; }
+		void MakeSnapshot(std::function<void(ViewSnapshot **, ViewSnapshot **)> func);
 
 	protected:
 		virtual bool OnAwake() override;
