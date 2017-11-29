@@ -351,6 +351,6 @@ namespace GameLogic
 	}
 	void NewScene::MakeSnapshot(bool syncClient)
 	{
-
+		
 	}
 }

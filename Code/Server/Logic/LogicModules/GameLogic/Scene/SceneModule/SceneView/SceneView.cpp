@@ -41,7 +41,7 @@ namespace GameLogic
 		Free(m_curr_snapshots); m_curr_snapshots = nullptr;
 	}
 
-	void SceneView::MakeSnapshot(std::function<void(ViewSnapshot**, ViewSnapshot**)> func)
+	void SceneView::MakeSnapshot()
 	{
 		{
 			std::vector<uint64_t> expired_ids;
@@ -91,8 +91,6 @@ namespace GameLogic
 				}
 			}
 		}
-		if (nullptr != func)
-			func(m_curr_snapshots, m_pre_snapshots);
 	}
 
 	bool SceneView::OnAwake()

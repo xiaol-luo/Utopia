@@ -36,7 +36,7 @@ namespace GameLogic
 
 		ViewSnapshot ** GetSnapshot() { return m_curr_snapshots; }
 		ViewSnapshot ** GetPreSnapshot() { return m_pre_snapshots; }
-		void MakeSnapshot(std::function<void(ViewSnapshot **, ViewSnapshot **)> func);
+		void MakeSnapshot();
 
 	protected:
 		virtual bool OnAwake() override;

@@ -99,7 +99,17 @@ namespace GameLogic
 		void SendClient(int64_t su_id, const std::vector<SyncClientMsg> &msgs);
 		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg, bool to_ob=true);
 		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs, bool to_ob=true);
-		void MakeSnapshot(bool syncClient);
 		std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];
+
+		void MakeSnapshot(bool syncClient);
+		struct ViewCampDiff
+		{
+			void Clear() { more_sus.clear(); miss_su_ids.clear(); }
+
+			EViewCamp view_camp;
+			std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> more_sus;
+			std::unordered_set<uint64_t> miss_su_ids;
+		};
+		ViewCampDiff m_view_camp_diff[EViewCamp_Observer];
 	};
 }
