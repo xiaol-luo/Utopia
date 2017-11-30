@@ -11,7 +11,8 @@ float NowSecond()
 Ticker::Ticker()
 {
 	m_now_sec_func = std::bind(NowSecond);
-	this->Restart(0);
+	m_cd = 0;
+	m_start = 0;
 }
 
 Ticker::~Ticker()

@@ -300,8 +300,11 @@ namespace GameLogic
 	{
 		if (!m_test_ticker.InCd())
 		{
-			m_test_ticker.Restart();
-			this->TryMoveToPos(Vector3(std::rand() % 100, 0, std::rand() % 100));
+			if (m_owner->GetPlayerId() <= 0)
+			{
+				m_test_ticker.Restart();
+				this->TryMoveToPos(Vector3(std::rand() % 100, 0, std::rand() % 100));
+			}
 		}
 	}
 }

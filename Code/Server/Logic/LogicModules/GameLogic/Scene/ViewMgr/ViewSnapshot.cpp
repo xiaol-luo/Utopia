@@ -17,6 +17,7 @@ namespace GameLogic
 	{
 		view_grids.clear();
 		scene_objs.clear();
+		scene_units.clear();
 	}
 
 	ViewSnapshotDifference ViewSnapshot::CalDifference(const ViewSnapshot * other) const

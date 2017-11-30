@@ -17,6 +17,7 @@
 #include "GameLogic/Scene/ViewMgr/ViewGrid.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
 
 namespace GameLogic
 {
@@ -210,8 +211,8 @@ namespace GameLogic
 		if (m_is_pause)
 			return;
 
-		// m_logic_detal_ms = delta_ms;
-		m_logic_detal_ms = 50;
+		m_logic_detal_ms = delta_ms;
+		// m_logic_detal_ms = 50;
 		m_logic_ms += m_logic_detal_ms;
 
 		this->UpdateCachedSceneUnits();
@@ -321,6 +322,23 @@ namespace GameLogic
 		else
 		{
 			camps.insert(view_camp);
+		}
+
+		SceneView *scene_view = this->GetModule<SceneView>();
+		{
+			// view mgr
+			NetProto::ViewAllGrids *msg = this->CreateProtobuf<NetProto::ViewAllGrids>();
+			scene_view->FillPbViewAllGrids(msg);
+			player->Send(NetProto::PID_ViewAllGrids, msg);
+
+			auto su = player->GetSu();
+			if (nullptr != su && nullptr != su->GetModule<SceneUnitSight>())
+			{
+				su->GetModule<SceneUnitSight>()->GetViewCamp();
+				NetProto::ViewSnapshot *snapshot = this->CreateProtobuf<NetProto::ViewSnapshot>();;
+				scene_view->FillPbViewSnapshot(su->GetModule<SceneUnitSight>()->GetViewCamp(), snapshot);
+				player->Send(NetProto::PID_ViewSnapshot, snapshot);
+			}
 		}
 
 		ViewSnapshot **snapshots = this->GetModule<SceneView>()->GetSnapshot();

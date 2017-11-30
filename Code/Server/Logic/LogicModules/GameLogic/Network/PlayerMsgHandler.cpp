@@ -20,6 +20,7 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -182,13 +183,15 @@ namespace GameLogic
 		{
 			player->GetScene()->SetPlayerViewCamp(player, scene_view->GetViewCamp());
 		}
-		player->SetCanRecvSceneMsg(true);
 	}
 
 	void PlayerMsgHandler::OnLeaveScene(int id, GameLogic::Player * player)
 	{
 		NewScene *scene = player->GetScene();
-		scene->OnPlayerQuit(player);
+		if (nullptr != scene)
+			scene->OnPlayerQuit(player);
+		player->SetSu(nullptr);
+		player->SetScene(nullptr);
 	}
 
 	void PlayerMsgHandler::OnPullAllSceneInfo(int id, GameLogic::Player * player)
@@ -198,49 +201,54 @@ namespace GameLogic
 
 	void PlayerMsgHandler::OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player * player)
 	{
-		std::weak_ptr<Hero> hero = player->GetHero();
-		if (hero.expired())
+		auto hero = player->GetSu();
+		if (nullptr == hero)
 			return;
-
-		std::shared_ptr<Hero> sptr_hero = hero.lock();
-		sptr_hero->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
+		auto su_move = hero->GetModule<SceneUnitMove>();
+		if (nullptr == su_move)
+			return;
+		su_move->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "OnMoveToPos {0}, {1}", msg->pos().x(), msg->pos().y());
 	}
 	
 	void PlayerMsgHandler::OnStopMove(int id, GameLogic::Player * player)
 	{
-		std::weak_ptr<Hero> hero = player->GetHero();
-		if (hero.expired())
+		auto hero = player->GetSu();
+		if (nullptr == hero)
 			return;
-
-		std::shared_ptr<Hero> sptr_hero = hero.lock();
-		sptr_hero->CancelMove();
+		auto su_move = hero->GetModule<SceneUnitMove>();
+		if (nullptr == su_move)
+			return;
+		su_move->CancelMove();
 	}
 	void PlayerMsgHandler::OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation * msg, GameLogic::Player * player)
 	{
-		std::shared_ptr<Hero> hero = player->GetHero().lock();
+		auto hero = player->GetSu();
 		if (nullptr == hero)
+			return;
+		auto su_move = hero->GetModule<SceneUnitMove>();
+		if (nullptr == su_move)
 			return;
 
 		switch (msg->opera())
 		{
 		case NetProto::EBO_Move:
-			hero->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
+			su_move->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
 			break;
 		case NetProto::EBO_Stop:
-			hero->CancelMove();
+			su_move->CancelMove();
 			break;
 		case NetProto::EBO_CastSkill_Q:
-			hero->ForcePos(Vector3(msg->pos().x(), 0, msg->pos().y()), 5);
+			su_move->ForcePos(Vector3(msg->pos().x(), 0, msg->pos().y()), 5);
 			break;
 		case NetProto::EBO_CastSkill_W:
 		{
 			Vector2 dir = GeometryUtils::CalVector2(Vector2::up, msg->dir());
-			hero->ForceMoveLine(dir, 2, 3, false);
+			su_move->ForceMoveLine(dir, 2, 3, false);
 		}
 		break;
 		case NetProto::EBO_CastSkill_E:
-			hero->Immobilized(1500);
+			su_move->Immobilized(1500);
 			break;
 		default:
 			break;

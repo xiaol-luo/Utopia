@@ -34,6 +34,8 @@ namespace GameLogic
 
 		m_ev_dispacher->Subscribe(ES_TestHeartBeat, std::bind(&TestScene::TestAction, this));
 
+		m_test_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, this));
+		m_test_ticker.SetCd(1);
 		return true;
 	}
 
@@ -49,7 +51,7 @@ namespace GameLogic
 		{
 			auto sub = su->AddModule(std::make_shared<SceneUnitBody>());
 			sub->SetSceneView(scene->GetModule<SceneView>());
-			sub->SetRadius(5);
+			sub->SetRadius(1);
 		}
 		{
 			auto sum = su->AddModule(std::make_shared<SceneUnitMove>());
@@ -76,8 +78,16 @@ namespace GameLogic
 
 	void TestScene::TestAction()
 	{
-		int a = 0;
-		++a;
+		if (!m_test_ticker.InCd())
+		{
+			m_test_ticker.Restart();
+			if (m_scene_units.size() < 10)
+			{
+				auto hero = std::make_shared<SceneUnit>();
+				BuildHero(hero, this, Vector3(std::rand() % 100, 0, std::rand() % 100), (EViewCamp)(std::rand() % 2));
+				this->AddUnit(hero);
+			}
+		}
 	}
 }
 

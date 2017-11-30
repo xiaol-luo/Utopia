@@ -4,6 +4,12 @@
 #include "GameLogic/Scene/ViewMgr/ViewDefine.h"
 #include <functional>
 
+namespace NetProto
+{
+	class ViewSnapshot;
+	class ViewAllGrids;
+}
+
 namespace GameLogic
 {
 	struct ViewGrid;
@@ -37,6 +43,8 @@ namespace GameLogic
 		ViewSnapshot ** GetSnapshot() { return m_curr_snapshots; }
 		ViewSnapshot ** GetPreSnapshot() { return m_pre_snapshots; }
 		void MakeSnapshot();
+		void FillPbViewSnapshot(EViewCamp camp, NetProto::ViewSnapshot *msg);
+		void FillPbViewAllGrids(NetProto::ViewAllGrids * msg);
 
 	protected:
 		virtual bool OnAwake() override;

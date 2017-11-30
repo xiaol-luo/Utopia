@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NewScene.h"
+#include "Common/Utils/Ticker.h"
 
 namespace GameLogic
 {
@@ -19,5 +20,6 @@ namespace GameLogic
 		Config::CsvSceneConfig *m_sceneCfg = nullptr;
 
 		void TestAction();
+		Ticker m_test_ticker;
 	};
 }
