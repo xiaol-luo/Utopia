@@ -10,7 +10,6 @@
 namespace GameLogic
 {
 	class ViewMgr;
-	class SceneObject;
 	struct ViewGrid;
 	class ViewUnit;
 

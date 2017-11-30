@@ -9,7 +9,6 @@
 #include "Network/Protobuf/msg.pb.h"
 #include "Network/Protobuf/test.pb.h"
 #include "Network/Utils/NetworkAgent.h"
-#include "GameLogic/Scene/Scene.h"
 #include "Network/PlayerMsgHandler.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "GameLogic/Scene/TestScene.h"
@@ -18,7 +17,6 @@ GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(modul
 {
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 	m_player_mgr = new GameLogic::PlayerMgr(this);
-	m_scene = new GameLogic::Scene(this);
 	m_player_msg_handler = new GameLogic::PlayerMsgHandler(this);
 	m_new_scene = new GameLogic::TestScene(this);
 }
@@ -56,7 +54,6 @@ EModuleRetCode GameLogicModule::Awake()
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
 
 	bool ret = m_player_mgr->Awake("0.0.0.0", 10240);
-	ret = ret && m_scene->Awake(nullptr);
 	ret = ret && m_new_scene->Awake();
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }

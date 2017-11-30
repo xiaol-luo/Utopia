@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ViewSnapshot.h"
-#include "ViewMgr.h"
 #include "ViewGrid.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
@@ -16,7 +15,6 @@ namespace GameLogic
 	void ViewSnapshot::Reset()
 	{
 		view_grids.clear();
-		scene_objs.clear();
 		scene_units.clear();
 	}
 
@@ -83,20 +81,6 @@ namespace GameLogic
 			 }
 		 }
 
-		 for (auto so : scene_objs)
-		 {
-			 if (other->scene_objs.count(so.first) <= 0)
-			 {
-				 diff.more_scene_objs.insert(so);
-			 }
-		 }
-		 for (auto so : other->scene_objs)
-		 {
-			 if (scene_objs.count(so.first) <= 0)
-			 {
-				 diff.miss_scene_objs.insert(so);
-			 }
-		 }
 		 for (auto so : scene_units)
 		 {
 			 if (other->scene_units.count(so.first) <= 0)
@@ -127,30 +111,23 @@ namespace GameLogic
 
 	void ViewSnapshotDifference::Reset()
 	{
-		more_scene_objs.clear();
-		miss_scene_objs.clear();
 		more_view_grids.clear();
 		miss_view_grids.clear();
+		miss_su.clear();
+		more_su.clear();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
 
 
 	void ViewSnapshotDifference::PrintLog()
-	{/*
-
-		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> miss_scene_objs;
-		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> more_scene_objs;
-		ViewGridVec miss_view_grids;
-		ViewGridVec more_view_grids;
-		*/
-
+	{
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
 			"-----------------------------------------------------------------------------");
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
-			"ViewSnapshotDifference miss_scene_objs {0}", miss_scene_objs.size());
+			"ViewSnapshotDifference miss_scene_objs {0}", miss_su.size());
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
-			"ViewSnapshotDifference more_scene_objs {0}", more_scene_objs.size());
+			"ViewSnapshotDifference more_scene_objs {0}", more_su.size());
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
 			"ViewSnapshotDifference miss_view_grids {0}", miss_view_grids.size());
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,

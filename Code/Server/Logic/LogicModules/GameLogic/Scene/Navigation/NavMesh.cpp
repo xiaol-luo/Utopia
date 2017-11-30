@@ -1,5 +1,4 @@
 #include "NavMesh.h"
-#include "GameLogic/Scene/Scene.h"
 #include "DetourTileCache.h"
 #include "DetourNavMesh.h"
 #include "InputGeom.h"
@@ -57,16 +56,6 @@ struct RasterizationContext
 
 namespace GameLogic
 {
-	NavMesh::NavMesh(Scene * scene) : m_scene(scene)
-	{
-		m_rcCtx = new rcContext;
-		m_talloc = new LinearAllocator(32000);
-		m_tcomp = new FastLZCompressor();
-		m_tmproc = new MeshProcess();
-		m_dtCrowd = dtAllocCrowd();
-		m_dtNavMeshQuery = dtAllocNavMeshQuery();
-	}
-
 	NavMesh::NavMesh()
 	{
 		m_rcCtx = new rcContext;
@@ -79,7 +68,6 @@ namespace GameLogic
 
 	NavMesh::~NavMesh()
 	{
-		m_scene = nullptr;
 		delete m_talloc; m_tmproc = nullptr;
 		delete m_tcomp; m_tcomp = nullptr;
 		delete m_tmproc; m_tmproc = nullptr;

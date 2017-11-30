@@ -27,33 +27,6 @@ message SceneObjectDisappear
 	repeated uint64 objids = 1;
 }
 
-message SceneObjectState
-{
-	uint64 objid = 1;
-	ESceneObject obj_type = 2;
-	int32 model_id = 3;
-	PBVector3 pos = 4;
-	float rotation = 5;
-}
-
-message MoveObjectState
-{
-	SceneObjectState obj_state = 1;
-	int32 radius = 2;
-	int32 height = 3;
-	int32 mass = 4;
-	int32 max_speed = 5;
-}
-
-message MoveObjectMutableState
-{
-	uint64 objid = 1;
-	EMoveAgentState move_agent_state = 2;
-	PBVector3 volecity = 3;
-	PBVector3 pos = 4;
-	float rotation = 5;
-}
-
 message MoveToPos
 {
 	PBVector2 pos = 1;

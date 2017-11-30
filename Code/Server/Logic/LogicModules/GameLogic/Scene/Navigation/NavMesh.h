@@ -25,7 +25,6 @@ namespace GameLogic
 	class NavMesh
 	{
 	public:
-		NavMesh(Scene *scene);
 		NavMesh();
 		virtual ~NavMesh();
 
@@ -33,7 +32,6 @@ namespace GameLogic
 		bool LoadTerrain(std::string file_path);
 		dtCrowd * GetCrowd() { return m_dtCrowd; }
 		dtNavMeshQuery * GetNavMeshQuery() { return m_dtNavMeshQuery; }
-		Scene * GetScene() { return m_scene; }
 
 		bool FindNearestPoint(const Vector3 &center, dtPolyRef &target_ref, Vector3 &target_pos);
 		bool FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef &target_ref, Vector3 &target_pos);
@@ -41,7 +39,6 @@ namespace GameLogic
 		bool GetPolyRef(const Vector3 &pos, dtPolyRef &out_ref);
 
 	protected:
-		Scene *m_scene = nullptr;
 		rcContext *m_rcCtx = nullptr;
 		LinearAllocator *m_talloc;
 		FastLZCompressor *m_tcomp;

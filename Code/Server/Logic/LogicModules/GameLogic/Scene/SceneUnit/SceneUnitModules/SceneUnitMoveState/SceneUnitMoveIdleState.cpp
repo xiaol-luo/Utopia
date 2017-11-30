@@ -1,6 +1,4 @@
 #include "SceneUnitMoveIdleState.h"
-#include "GameLogic/Scene/MoveMgr/MoveMgr.h"
-#include "GameLogic/Scene/MoveMgr/MoveAgent.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
 

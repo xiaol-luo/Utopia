@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='ProtoId.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\rProtoId.proto\x12\x08NetProto*\xcc\x04\n\x07ProtoId\x12\x0b\n\x07PID_Min\x10\x00\x12\x0c\n\x08PID_Ping\x10\x01\x12\x0c\n\x08PID_Pong\x10\x02\x12\x15\n\x11PID_QueryFreeHero\x10\x64\x12\x13\n\x0fPID_RspFreeHero\x10\x65\x12\x15\n\x11PID_SelectHeroReq\x10\x66\x12\x15\n\x11PID_SelectHeroRsp\x10g\x12\x19\n\x15PID_LoadSceneComplete\x10h\x12\x12\n\x0ePID_LeaveScene\x10i\x12\x18\n\x14PID_PullAllSceneInfo\x10j\x12\x1b\n\x17PID_PullAllSceneInfoRsp\x10k\x12\x19\n\x14PID_SceneObjectState\x10\xe8\x07\x12\x1d\n\x18PID_SceneObjectDisappear\x10\xe9\x07\x12\x18\n\x13PID_MoveObjectState\x10\xf2\x07\x12\x1f\n\x1aPID_MoveObjectMutableState\x10\xf3\x07\x12\x12\n\rPID_MoveToPos\x10\xfc\x07\x12\x11\n\x0cPID_StopMove\x10\x86\x08\x12\x17\n\x12PID_BattleOperaReq\x10\xcc\x08\x12\x15\n\x10PID_ViewSnapshot\x10\xd6\x08\x12\x15\n\x10PID_ViewAllGrids\x10\xd7\x08\x12\x19\n\x14PID_ViewSnapshotDiff\x10\xd8\x08\x12\x17\n\x12PID_SceneUnitState\x10\xb0\t\x12\x1b\n\x16PID_SceneUnitTransform\x10\xb1\t\x12\x16\n\x11PID_SceneUnitMove\x10\xb2\t\x12\x0c\n\x07PID_Max\x10\x80(B\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\rProtoId.proto\x12\x08NetProto*\xbf\x03\n\x07ProtoId\x12\x0b\n\x07PID_Min\x10\x00\x12\x0c\n\x08PID_Ping\x10\x01\x12\x0c\n\x08PID_Pong\x10\x02\x12\x15\n\x11PID_QueryFreeHero\x10\x64\x12\x13\n\x0fPID_RspFreeHero\x10\x65\x12\x15\n\x11PID_SelectHeroReq\x10\x66\x12\x15\n\x11PID_SelectHeroRsp\x10g\x12\x19\n\x15PID_LoadSceneComplete\x10h\x12\x12\n\x0ePID_LeaveScene\x10i\x12\x1d\n\x18PID_SceneObjectDisappear\x10\xf2\x07\x12\x12\n\rPID_MoveToPos\x10\xfc\x07\x12\x11\n\x0cPID_StopMove\x10\x86\x08\x12\x17\n\x12PID_BattleOperaReq\x10\xcc\x08\x12\x15\n\x10PID_ViewSnapshot\x10\xd6\x08\x12\x15\n\x10PID_ViewAllGrids\x10\xd7\x08\x12\x19\n\x14PID_ViewSnapshotDiff\x10\xd8\x08\x12\x17\n\x12PID_SceneUnitState\x10\xb0\t\x12\x1b\n\x16PID_SceneUnitTransform\x10\xb1\t\x12\x16\n\x11PID_SceneUnitMove\x10\xb2\t\x12\x0c\n\x07PID_Max\x10\x80(B\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 _PROTOID = _descriptor.EnumDescriptor(
@@ -66,74 +66,54 @@ _PROTOID = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_PullAllSceneInfo', index=9, number=106,
+      name='PID_SceneObjectDisappear', index=9, number=1010,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_PullAllSceneInfoRsp', index=10, number=107,
+      name='PID_MoveToPos', index=10, number=1020,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_SceneObjectState', index=11, number=1000,
+      name='PID_StopMove', index=11, number=1030,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_SceneObjectDisappear', index=12, number=1001,
+      name='PID_BattleOperaReq', index=12, number=1100,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_MoveObjectState', index=13, number=1010,
+      name='PID_ViewSnapshot', index=13, number=1110,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_MoveObjectMutableState', index=14, number=1011,
+      name='PID_ViewAllGrids', index=14, number=1111,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_MoveToPos', index=15, number=1020,
+      name='PID_ViewSnapshotDiff', index=15, number=1112,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_StopMove', index=16, number=1030,
+      name='PID_SceneUnitState', index=16, number=1200,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_BattleOperaReq', index=17, number=1100,
+      name='PID_SceneUnitTransform', index=17, number=1201,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_ViewSnapshot', index=18, number=1110,
+      name='PID_SceneUnitMove', index=18, number=1202,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PID_ViewAllGrids', index=19, number=1111,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PID_ViewSnapshotDiff', index=20, number=1112,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PID_SceneUnitState', index=21, number=1200,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PID_SceneUnitTransform', index=22, number=1201,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PID_SceneUnitMove', index=23, number=1202,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PID_Max', index=24, number=5120,
+      name='PID_Max', index=19, number=5120,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=28,
-  serialized_end=616,
+  serialized_end=475,
 )
 _sym_db.RegisterEnumDescriptor(_PROTOID)
 
@@ -147,12 +127,7 @@ PID_SelectHeroReq = 102
 PID_SelectHeroRsp = 103
 PID_LoadSceneComplete = 104
 PID_LeaveScene = 105
-PID_PullAllSceneInfo = 106
-PID_PullAllSceneInfoRsp = 107
-PID_SceneObjectState = 1000
-PID_SceneObjectDisappear = 1001
-PID_MoveObjectState = 1010
-PID_MoveObjectMutableState = 1011
+PID_SceneObjectDisappear = 1010
 PID_MoveToPos = 1020
 PID_StopMove = 1030
 PID_BattleOperaReq = 1100

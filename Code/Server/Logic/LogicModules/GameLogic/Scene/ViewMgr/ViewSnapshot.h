@@ -10,9 +10,6 @@ namespace GameLogic
 		ViewSnapshotDifference();
 		void Reset();
 
-		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> miss_scene_objs;
-		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> more_scene_objs;
-
 		std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> miss_su;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> more_su;
 
@@ -31,7 +28,6 @@ namespace GameLogic
 		bool CanSeeSu(uint64_t su_id);
 
 		ViewGridVec view_grids;
-		std::unordered_map<uint64_t, std::weak_ptr<SceneObject>> scene_objs;
 		std::unordered_map < uint64_t, std::weak_ptr<SceneUnit>> scene_units;
 	};
 }

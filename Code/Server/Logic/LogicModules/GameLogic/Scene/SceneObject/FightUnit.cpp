@@ -4,7 +4,7 @@
 
 namespace GameLogic
 {
-	FightUnit::FightUnit(ESceneObjectType obj_type) : MoveObject(obj_type)
+	FightUnit::FightUnit(int obj_type) 
 	{
 		m_fight_param_mgr = new FightParameterMgr(this);
 	}
@@ -16,18 +16,14 @@ namespace GameLogic
 
 	void FightUnit::OnEnterScene(Scene * scene)
 	{
-		MoveObject::OnEnterScene(scene);
 	}
 
 	void FightUnit::OnLeaveScene(Scene * scene)
 	{
-		MoveObject::OnLeaveScene(scene);
 	}
 
 	void FightUnit::Update(long long now_ms)
 	{
-		MoveObject::Update(now_ms);
-
 		m_fight_param_mgr->AddBaseValue(NetProto::EFP_MaxHP, 1, true);
 		m_fight_param_mgr->AddExtraPercent(NetProto::EFP_MaxHP, 1, true);
 		m_fight_param_mgr->AddExtraValue(NetProto::EFP_MaxHP, 1, true);

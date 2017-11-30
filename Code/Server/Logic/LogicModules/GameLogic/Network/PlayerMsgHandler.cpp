@@ -7,11 +7,8 @@
 #include "GameLogic/GameLogicModule.h"
 #include "GameLogic/Player/Player.h"
 #include "Network/Utils/NetworkAgent.h"
-#include "GameLogic/Scene/SceneObject/Hero.h"
-#include "GameLogic/Scene/Scene.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Common/Utils/AutoReleaseUtil.h"
-#include "GameLogic/Scene/SceneObject/Hero.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include <memory>
@@ -56,7 +53,6 @@ namespace GameLogic
 		RegPlayerMsgHandler(NetProto::PID_SelectHeroReq, NetProto::SelectHeroReq, OnSelectHeroReq);
 		RegPlayerHandler(NetProto::PID_LoadSceneComplete, OnLoadSceneComplete);
 		RegPlayerHandler(NetProto::PID_LeaveScene, OnLeaveScene);
-		RegPlayerHandler(NetProto::PID_PullAllSceneInfo, OnPullAllSceneInfo);
 		RegPlayerMsgHandler(NetProto::PID_MoveToPos, NetProto::MoveToPos, OnMoveToPos);
 		RegPlayerHandler(NetProto::PID_StopMove, OnStopMove);
 		RegPlayerMsgHandler(NetProto::PID_BattleOperaReq, NetProto::BattleOperation, OnHandleBattleOperation);
@@ -152,8 +148,8 @@ namespace GameLogic
 		auto blue_hero = m_logic_module->m_new_scene->blue_su;
 		NetProto::SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::SelectHeroRsp>(m_protobuf_arena);
 		
-		auto hero = player->GetHero();
-		if (hero.expired())
+		auto hero = player->GetSu();
+		if (nullptr == hero)
 		{
 			rsp_msg->set_hero_id(msg->hero_id());
 			if (msg->hero_id() == red_hero->GetId())
@@ -192,11 +188,6 @@ namespace GameLogic
 			scene->OnPlayerQuit(player);
 		player->SetSu(nullptr);
 		player->SetScene(nullptr);
-	}
-
-	void PlayerMsgHandler::OnPullAllSceneInfo(int id, GameLogic::Player * player)
-	{
-		m_logic_module->m_scene->PullAllSceneInfo(player);
 	}
 
 	void PlayerMsgHandler::OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player * player)

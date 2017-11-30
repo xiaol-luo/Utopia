@@ -43,11 +43,6 @@ namespace GameLogic
 		void OnNetRecv(char *data, uint32_t len);
 
 	public:
-		std::weak_ptr<Hero> GetHero() { return m_hero; }
-		void SetHero(std::shared_ptr<Hero> hero);
-		bool CanRecvSceneMsg() { return m_can_recv_scene_msg; }
-		void SetCanRecvSceneMsg(bool value) { m_can_recv_scene_msg = value; }
-
 		std::shared_ptr<SceneUnit> GetSu() { return m_su; }
 		void SetSu(std::shared_ptr<SceneUnit> su) { m_su = su; }
 		NewScene * GetScene() { return m_scene; }
@@ -55,7 +50,6 @@ namespace GameLogic
 
 	protected:
 		std::weak_ptr<Hero> m_hero;
-		bool m_can_recv_scene_msg = false;
 		std::shared_ptr<SceneUnit> m_su = nullptr;
 		NewScene * m_scene = nullptr;
 	};

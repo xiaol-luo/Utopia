@@ -27,35 +27,24 @@ namespace NetProto {
             "KAQSFAoMYmx1ZV9oZXJvX2lkGAIgASgEIiAKDVNlbGVjdEhlcm9SZXESDwoH",
             "aGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASAB",
             "KAQSDwoHaXNfc3VjYxgCIAEoCCImChRTY2VuZU9iamVjdERpc2FwcGVhchIO",
-            "CgZvYmppZHMYASADKAQikQEKEFNjZW5lT2JqZWN0U3RhdGUSDQoFb2JqaWQY",
-            "ASABKAQSKAoIb2JqX3R5cGUYAiABKA4yFi5OZXRQcm90by5FU2NlbmVPYmpl",
-            "Y3QSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
-            "UEJWZWN0b3IzEhAKCHJvdGF0aW9uGAUgASgCIoEBCg9Nb3ZlT2JqZWN0U3Rh",
-            "dGUSLQoJb2JqX3N0YXRlGAEgASgLMhouTmV0UHJvdG8uU2NlbmVPYmplY3RT",
-            "dGF0ZRIOCgZyYWRpdXMYAiABKAUSDgoGaGVpZ2h0GAMgASgFEgwKBG1hc3MY",
-            "BCABKAUSEQoJbWF4X3NwZWVkGAUgASgFIrcBChZNb3ZlT2JqZWN0TXV0YWJs",
-            "ZVN0YXRlEg0KBW9iamlkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiAB",
-            "KA4yGS5OZXRQcm90by5FTW92ZUFnZW50U3RhdGUSJQoIdm9sZWNpdHkYAyAB",
-            "KAsyEy5OZXRQcm90by5QQlZlY3RvcjMSIAoDcG9zGAQgASgLMhMuTmV0UHJv",
-            "dG8uUEJWZWN0b3IzEhAKCHJvdGF0aW9uGAUgASgCIi0KCU1vdmVUb1BvcxIg",
-            "CgNwb3MYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjIifgoPQmF0dGxlT3Bl",
-            "cmF0aW9uEikKBW9wZXJhGAEgASgOMhouTmV0UHJvdG8uRUJhdHRsZU9wZXJh",
-            "dGlvbhIRCgl0YXJnZXRfaWQYAiABKAQSCwoDZGlyGAMgASgCEiAKA3BvcxgE",
-            "IAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMiJCCghWaWV3R3JpZBIjCgZjZW50",
-            "ZXIYASABKAsyEy5OZXRQcm90by5QQlZlY3RvcjISEQoJZ3JpZF90eXBlGAIg",
-            "ASgFIjoKEFZpZXdTbmFwc2hvdERpZmYSEgoKbW9yZV9ncmlkcxgBIAMoBRIS",
-            "CgptaXNzX2dyaWRzGAIgAygFIiMKDFZpZXdTbmFwc2hvdBITCgtsaWdodF9n",
-            "cmlkcxgBIAMoBSJeCgxWaWV3QWxsR3JpZHMSEQoJZ3JpZF9zaXplGAEgASgC",
-            "EgsKA3JvdxgCIAEoBRILCgNjb2wYAyABKAUSIQoFZ3JpZHMYBCADKAsyEi5O",
-            "ZXRQcm90by5WaWV3R3JpZCKOAQoOU2NlbmVVbml0U3RhdGUSDQoFc3VfaWQY",
-            "ASABKAQSEQoJdW5pdF90eXBlGAIgASgFEhAKCG1vZGVsX2lkGAMgASgFEiAK",
-            "A3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIQCghmYWNlX2RpchgF",
-            "IAEoAhIUCgxwYXJlbnRfc3VfaWQYBiABKAQibQoSU2NlbmVVbml0VHJhbnNm",
-            "b3JtEg0KBXN1X2lkGAEgASgEEiAKA3BvcxgCIAEoCzITLk5ldFByb3RvLlBC",
-            "VmVjdG9yMxIQCghmYWNlX2RpchgDIAEoAhIUCgxwYXJlbnRfc3VfaWQYBCAB",
-            "KAQiUwoNU2NlbmVVbml0TW92ZRINCgVzdV9pZBgBIAEoBBIzChBtb3ZlX2Fn",
-            "ZW50X3N0YXRlGAIgASgOMhkuTmV0UHJvdG8uRU1vdmVBZ2VudFN0YXRlQgP4",
-            "AQFiBnByb3RvMw=="));
+            "CgZvYmppZHMYASADKAQiLQoJTW92ZVRvUG9zEiAKA3BvcxgBIAEoCzITLk5l",
+            "dFByb3RvLlBCVmVjdG9yMiJ+Cg9CYXR0bGVPcGVyYXRpb24SKQoFb3BlcmEY",
+            "ASABKA4yGi5OZXRQcm90by5FQmF0dGxlT3BlcmF0aW9uEhEKCXRhcmdldF9p",
+            "ZBgCIAEoBBILCgNkaXIYAyABKAISIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
+            "UEJWZWN0b3IyIkIKCFZpZXdHcmlkEiMKBmNlbnRlchgBIAEoCzITLk5ldFBy",
+            "b3RvLlBCVmVjdG9yMhIRCglncmlkX3R5cGUYAiABKAUiOgoQVmlld1NuYXBz",
+            "aG90RGlmZhISCgptb3JlX2dyaWRzGAEgAygFEhIKCm1pc3NfZ3JpZHMYAiAD",
+            "KAUiIwoMVmlld1NuYXBzaG90EhMKC2xpZ2h0X2dyaWRzGAEgAygFIl4KDFZp",
+            "ZXdBbGxHcmlkcxIRCglncmlkX3NpemUYASABKAISCwoDcm93GAIgASgFEgsK",
+            "A2NvbBgDIAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3RvLlZpZXdHcmlk",
+            "Io4BCg5TY2VuZVVuaXRTdGF0ZRINCgVzdV9pZBgBIAEoBBIRCgl1bml0X3R5",
+            "cGUYAiABKAUSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0",
+            "UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAUgASgCEhQKDHBhcmVudF9z",
+            "dV9pZBgGIAEoBCJtChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASAB",
+            "KAQSIAoDcG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2Vf",
+            "ZGlyGAMgASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCJTCg1TY2VuZVVuaXRN",
+            "b3ZlEg0KBXN1X2lkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiABKA4y",
+            "GS5OZXRQcm90by5FTW92ZUFnZW50U3RhdGVCA/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -63,9 +52,6 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroReq), global::NetProto.SelectHeroReq.Parser, new[]{ "HeroId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectDisappear), global::NetProto.SceneObjectDisappear.Parser, new[]{ "Objids" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectState), global::NetProto.SceneObjectState.Parser, new[]{ "Objid", "ObjType", "ModelId", "Pos", "Rotation" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectState), global::NetProto.MoveObjectState.Parser, new[]{ "ObjState", "Radius", "Height", "Mass", "MaxSpeed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveObjectMutableState), global::NetProto.MoveObjectMutableState.Parser, new[]{ "Objid", "MoveAgentState", "Volecity", "Pos", "Rotation" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewGrid), global::NetProto.ViewGrid.Parser, new[]{ "Center", "GridType" }, null, null, null),
@@ -598,717 +584,6 @@ namespace NetProto {
 
   }
 
-  public sealed partial class SceneObjectState : pb::IMessage<SceneObjectState> {
-    private static readonly pb::MessageParser<SceneObjectState> _parser = new pb::MessageParser<SceneObjectState>(() => new SceneObjectState());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<SceneObjectState> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public SceneObjectState() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public SceneObjectState(SceneObjectState other) : this() {
-      objid_ = other.objid_;
-      objType_ = other.objType_;
-      modelId_ = other.modelId_;
-      Pos = other.pos_ != null ? other.Pos.Clone() : null;
-      rotation_ = other.rotation_;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public SceneObjectState Clone() {
-      return new SceneObjectState(this);
-    }
-
-    /// <summary>Field number for the "objid" field.</summary>
-    public const int ObjidFieldNumber = 1;
-    private ulong objid_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong Objid {
-      get { return objid_; }
-      set {
-        objid_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "obj_type" field.</summary>
-    public const int ObjTypeFieldNumber = 2;
-    private global::NetProto.ESceneObject objType_ = 0;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.ESceneObject ObjType {
-      get { return objType_; }
-      set {
-        objType_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "model_id" field.</summary>
-    public const int ModelIdFieldNumber = 3;
-    private int modelId_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int ModelId {
-      get { return modelId_; }
-      set {
-        modelId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "pos" field.</summary>
-    public const int PosFieldNumber = 4;
-    private global::NetProto.PBVector3 pos_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.PBVector3 Pos {
-      get { return pos_; }
-      set {
-        pos_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "rotation" field.</summary>
-    public const int RotationFieldNumber = 5;
-    private float rotation_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Rotation {
-      get { return rotation_; }
-      set {
-        rotation_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as SceneObjectState);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(SceneObjectState other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Objid != other.Objid) return false;
-      if (ObjType != other.ObjType) return false;
-      if (ModelId != other.ModelId) return false;
-      if (!object.Equals(Pos, other.Pos)) return false;
-      if (Rotation != other.Rotation) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Objid != 0UL) hash ^= Objid.GetHashCode();
-      if (ObjType != 0) hash ^= ObjType.GetHashCode();
-      if (ModelId != 0) hash ^= ModelId.GetHashCode();
-      if (pos_ != null) hash ^= Pos.GetHashCode();
-      if (Rotation != 0F) hash ^= Rotation.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Objid != 0UL) {
-        output.WriteRawTag(8);
-        output.WriteUInt64(Objid);
-      }
-      if (ObjType != 0) {
-        output.WriteRawTag(16);
-        output.WriteEnum((int) ObjType);
-      }
-      if (ModelId != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(ModelId);
-      }
-      if (pos_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(Pos);
-      }
-      if (Rotation != 0F) {
-        output.WriteRawTag(45);
-        output.WriteFloat(Rotation);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Objid != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Objid);
-      }
-      if (ObjType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ObjType);
-      }
-      if (ModelId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ModelId);
-      }
-      if (pos_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
-      }
-      if (Rotation != 0F) {
-        size += 1 + 4;
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(SceneObjectState other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Objid != 0UL) {
-        Objid = other.Objid;
-      }
-      if (other.ObjType != 0) {
-        ObjType = other.ObjType;
-      }
-      if (other.ModelId != 0) {
-        ModelId = other.ModelId;
-      }
-      if (other.pos_ != null) {
-        if (pos_ == null) {
-          pos_ = new global::NetProto.PBVector3();
-        }
-        Pos.MergeFrom(other.Pos);
-      }
-      if (other.Rotation != 0F) {
-        Rotation = other.Rotation;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 8: {
-            Objid = input.ReadUInt64();
-            break;
-          }
-          case 16: {
-            objType_ = (global::NetProto.ESceneObject) input.ReadEnum();
-            break;
-          }
-          case 24: {
-            ModelId = input.ReadInt32();
-            break;
-          }
-          case 34: {
-            if (pos_ == null) {
-              pos_ = new global::NetProto.PBVector3();
-            }
-            input.ReadMessage(pos_);
-            break;
-          }
-          case 45: {
-            Rotation = input.ReadFloat();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class MoveObjectState : pb::IMessage<MoveObjectState> {
-    private static readonly pb::MessageParser<MoveObjectState> _parser = new pb::MessageParser<MoveObjectState>(() => new MoveObjectState());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<MoveObjectState> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MoveObjectState() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MoveObjectState(MoveObjectState other) : this() {
-      ObjState = other.objState_ != null ? other.ObjState.Clone() : null;
-      radius_ = other.radius_;
-      height_ = other.height_;
-      mass_ = other.mass_;
-      maxSpeed_ = other.maxSpeed_;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MoveObjectState Clone() {
-      return new MoveObjectState(this);
-    }
-
-    /// <summary>Field number for the "obj_state" field.</summary>
-    public const int ObjStateFieldNumber = 1;
-    private global::NetProto.SceneObjectState objState_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.SceneObjectState ObjState {
-      get { return objState_; }
-      set {
-        objState_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "radius" field.</summary>
-    public const int RadiusFieldNumber = 2;
-    private int radius_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Radius {
-      get { return radius_; }
-      set {
-        radius_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "height" field.</summary>
-    public const int HeightFieldNumber = 3;
-    private int height_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Height {
-      get { return height_; }
-      set {
-        height_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "mass" field.</summary>
-    public const int MassFieldNumber = 4;
-    private int mass_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Mass {
-      get { return mass_; }
-      set {
-        mass_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "max_speed" field.</summary>
-    public const int MaxSpeedFieldNumber = 5;
-    private int maxSpeed_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int MaxSpeed {
-      get { return maxSpeed_; }
-      set {
-        maxSpeed_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as MoveObjectState);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(MoveObjectState other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(ObjState, other.ObjState)) return false;
-      if (Radius != other.Radius) return false;
-      if (Height != other.Height) return false;
-      if (Mass != other.Mass) return false;
-      if (MaxSpeed != other.MaxSpeed) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (objState_ != null) hash ^= ObjState.GetHashCode();
-      if (Radius != 0) hash ^= Radius.GetHashCode();
-      if (Height != 0) hash ^= Height.GetHashCode();
-      if (Mass != 0) hash ^= Mass.GetHashCode();
-      if (MaxSpeed != 0) hash ^= MaxSpeed.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (objState_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(ObjState);
-      }
-      if (Radius != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Radius);
-      }
-      if (Height != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Height);
-      }
-      if (Mass != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(Mass);
-      }
-      if (MaxSpeed != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(MaxSpeed);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (objState_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ObjState);
-      }
-      if (Radius != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Radius);
-      }
-      if (Height != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Height);
-      }
-      if (Mass != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Mass);
-      }
-      if (MaxSpeed != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MaxSpeed);
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(MoveObjectState other) {
-      if (other == null) {
-        return;
-      }
-      if (other.objState_ != null) {
-        if (objState_ == null) {
-          objState_ = new global::NetProto.SceneObjectState();
-        }
-        ObjState.MergeFrom(other.ObjState);
-      }
-      if (other.Radius != 0) {
-        Radius = other.Radius;
-      }
-      if (other.Height != 0) {
-        Height = other.Height;
-      }
-      if (other.Mass != 0) {
-        Mass = other.Mass;
-      }
-      if (other.MaxSpeed != 0) {
-        MaxSpeed = other.MaxSpeed;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 10: {
-            if (objState_ == null) {
-              objState_ = new global::NetProto.SceneObjectState();
-            }
-            input.ReadMessage(objState_);
-            break;
-          }
-          case 16: {
-            Radius = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            Height = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            Mass = input.ReadInt32();
-            break;
-          }
-          case 40: {
-            MaxSpeed = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
-  public sealed partial class MoveObjectMutableState : pb::IMessage<MoveObjectMutableState> {
-    private static readonly pb::MessageParser<MoveObjectMutableState> _parser = new pb::MessageParser<MoveObjectMutableState>(() => new MoveObjectMutableState());
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<MoveObjectMutableState> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MoveObjectMutableState() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MoveObjectMutableState(MoveObjectMutableState other) : this() {
-      objid_ = other.objid_;
-      moveAgentState_ = other.moveAgentState_;
-      Volecity = other.volecity_ != null ? other.Volecity.Clone() : null;
-      Pos = other.pos_ != null ? other.Pos.Clone() : null;
-      rotation_ = other.rotation_;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public MoveObjectMutableState Clone() {
-      return new MoveObjectMutableState(this);
-    }
-
-    /// <summary>Field number for the "objid" field.</summary>
-    public const int ObjidFieldNumber = 1;
-    private ulong objid_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ulong Objid {
-      get { return objid_; }
-      set {
-        objid_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "move_agent_state" field.</summary>
-    public const int MoveAgentStateFieldNumber = 2;
-    private global::NetProto.EMoveAgentState moveAgentState_ = 0;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.EMoveAgentState MoveAgentState {
-      get { return moveAgentState_; }
-      set {
-        moveAgentState_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "volecity" field.</summary>
-    public const int VolecityFieldNumber = 3;
-    private global::NetProto.PBVector3 volecity_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.PBVector3 Volecity {
-      get { return volecity_; }
-      set {
-        volecity_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "pos" field.</summary>
-    public const int PosFieldNumber = 4;
-    private global::NetProto.PBVector3 pos_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.PBVector3 Pos {
-      get { return pos_; }
-      set {
-        pos_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "rotation" field.</summary>
-    public const int RotationFieldNumber = 5;
-    private float rotation_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Rotation {
-      get { return rotation_; }
-      set {
-        rotation_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as MoveObjectMutableState);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(MoveObjectMutableState other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Objid != other.Objid) return false;
-      if (MoveAgentState != other.MoveAgentState) return false;
-      if (!object.Equals(Volecity, other.Volecity)) return false;
-      if (!object.Equals(Pos, other.Pos)) return false;
-      if (Rotation != other.Rotation) return false;
-      return true;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Objid != 0UL) hash ^= Objid.GetHashCode();
-      if (MoveAgentState != 0) hash ^= MoveAgentState.GetHashCode();
-      if (volecity_ != null) hash ^= Volecity.GetHashCode();
-      if (pos_ != null) hash ^= Pos.GetHashCode();
-      if (Rotation != 0F) hash ^= Rotation.GetHashCode();
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (Objid != 0UL) {
-        output.WriteRawTag(8);
-        output.WriteUInt64(Objid);
-      }
-      if (MoveAgentState != 0) {
-        output.WriteRawTag(16);
-        output.WriteEnum((int) MoveAgentState);
-      }
-      if (volecity_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(Volecity);
-      }
-      if (pos_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(Pos);
-      }
-      if (Rotation != 0F) {
-        output.WriteRawTag(45);
-        output.WriteFloat(Rotation);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Objid != 0UL) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Objid);
-      }
-      if (MoveAgentState != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MoveAgentState);
-      }
-      if (volecity_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Volecity);
-      }
-      if (pos_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
-      }
-      if (Rotation != 0F) {
-        size += 1 + 4;
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(MoveObjectMutableState other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Objid != 0UL) {
-        Objid = other.Objid;
-      }
-      if (other.MoveAgentState != 0) {
-        MoveAgentState = other.MoveAgentState;
-      }
-      if (other.volecity_ != null) {
-        if (volecity_ == null) {
-          volecity_ = new global::NetProto.PBVector3();
-        }
-        Volecity.MergeFrom(other.Volecity);
-      }
-      if (other.pos_ != null) {
-        if (pos_ == null) {
-          pos_ = new global::NetProto.PBVector3();
-        }
-        Pos.MergeFrom(other.Pos);
-      }
-      if (other.Rotation != 0F) {
-        Rotation = other.Rotation;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            input.SkipLastField();
-            break;
-          case 8: {
-            Objid = input.ReadUInt64();
-            break;
-          }
-          case 16: {
-            moveAgentState_ = (global::NetProto.EMoveAgentState) input.ReadEnum();
-            break;
-          }
-          case 26: {
-            if (volecity_ == null) {
-              volecity_ = new global::NetProto.PBVector3();
-            }
-            input.ReadMessage(volecity_);
-            break;
-          }
-          case 34: {
-            if (pos_ == null) {
-              pos_ = new global::NetProto.PBVector3();
-            }
-            input.ReadMessage(pos_);
-            break;
-          }
-          case 45: {
-            Rotation = input.ReadFloat();
-            break;
-          }
-        }
-      }
-    }
-
-  }
-
   public sealed partial class MoveToPos : pb::IMessage<MoveToPos> {
     private static readonly pb::MessageParser<MoveToPos> _parser = new pb::MessageParser<MoveToPos>(() => new MoveToPos());
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1316,7 +591,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1439,7 +714,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[8]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1646,7 +921,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[9]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1797,7 +1072,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1928,7 +1203,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[11]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2038,7 +1313,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[12]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2231,7 +1506,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[13]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2494,7 +1769,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[14]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2701,7 +1976,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[15]; }
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

@@ -3,7 +3,6 @@
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Handlers/LenCtxNetStreamCnnHandler.h"
 #include "Common/Utils/MemoryUtil.h"
-#include "GameLogic/Scene/SceneObject/Hero.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "Network/Utils/NetworkAgent.h"
@@ -68,10 +67,11 @@ namespace GameLogic
 
 	Player::~Player()
 	{
-		this->SetHero(nullptr);
 		m_hero.reset();
 		m_player_mgr = nullptr;
 		m_cnn_handler = nullptr;
+		m_scene = nullptr;
+		m_su = nullptr;
 	}
 
 	std::shared_ptr<INetConnectHander> Player::GetCnnHandler()
@@ -129,14 +129,5 @@ namespace GameLogic
 	void Player::OnNetRecv(char *data, uint32_t len)
 	{
 		m_player_mgr->OnCnnRecv(data, len, this);
-	}
-
-	void Player::SetHero(std::shared_ptr<Hero> hero)
-	{
-		if (!m_hero.expired())
-			m_hero.lock()->SetPlayer(nullptr);
-		m_hero = hero;
-		if (!m_hero.expired())
-			m_hero.lock()->SetPlayer(this);
 	}
 }

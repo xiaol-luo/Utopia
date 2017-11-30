@@ -105,7 +105,6 @@ namespace GameLogic
 		void OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player);
 		void OnLoadSceneComplete(int id, GameLogic::Player *player);
 		void OnLeaveScene(int id, GameLogic::Player *player);
-		void OnPullAllSceneInfo(int id, GameLogic::Player *player);
 		void OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player *player);
 		void OnStopMove(int id, GameLogic::Player *player);
 		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
