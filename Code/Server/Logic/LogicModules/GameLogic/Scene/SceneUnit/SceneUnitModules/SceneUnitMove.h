@@ -38,6 +38,9 @@ namespace GameLogic
 	public:
 		NavAgent * GetNavAgent() { return m_nav_agent; }
 		NavMesh * GetNavMesh() { return m_nav_mesh; }
+		virtual std::vector<SyncClientMsg> CollectPBInit() override;
+		virtual std::vector<SyncClientMsg> CollectPbMutable() override;
+
 	protected:
 		NavMesh *m_nav_mesh = nullptr;
 		NavAgent *m_nav_agent = nullptr;
@@ -66,7 +69,6 @@ namespace GameLogic
 		void Immobilized(long ms);
 		void CancelImmobilized();
 		void Flash(const Vector3 &val);
-
 
 	private:
 		void TestAction(); // for test

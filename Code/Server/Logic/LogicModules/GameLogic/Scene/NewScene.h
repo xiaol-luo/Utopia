@@ -92,6 +92,7 @@ namespace GameLogic
 	public:
 		bool PlayerSelectHero(Player *player, uint64_t su_id);
 		void OnPlayerDisconnect(Player *player);
+		void OnPlayerQuit(Player *player);
 		void SetPlayerViewCamp(Player *player, EViewCamp view_camp);
 		void SendPlayer(NetId netid, int protocol_id, google::protobuf::Message *msg);
 		void SendPlayer(NetId netid, const std::vector<SyncClientMsg> &msgs);
@@ -100,16 +101,35 @@ namespace GameLogic
 		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg, bool to_ob=true);
 		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs, bool to_ob=true);
 		std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];
+		template <typename T>
+		T * CreateProtobuf()
+		{
+			return google::protobuf::Arena::CreateMessage<T>(m_protobuf_arena);
+		}
+	protected:
+		google::protobuf::Arena *m_protobuf_arena = nullptr;
 
+	public:
 		void MakeSnapshot(bool syncClient);
+	protected:
 		struct ViewCampDiff
 		{
-			void Clear() { more_sus.clear(); miss_su_ids.clear(); }
+			void Clear() 
+			{
+				more_sus.clear(); miss_su_ids.clear(); 
+				more_gird_ids.clear(); miss_su_ids.clear();
+			}
 
-			EViewCamp view_camp;
 			std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> more_sus;
 			std::unordered_set<uint64_t> miss_su_ids;
+			std::unordered_set<int> more_gird_ids;
+			std::unordered_set<int> miss_grid_ids;
 		};
 		ViewCampDiff m_view_camp_diff[EViewCamp_Observer];
+
+	public:
+		// msg logic
+		std::shared_ptr<SceneUnit> red_su = nullptr;
+		std::shared_ptr<SceneUnit> blue_su = nullptr;
 	};
 }

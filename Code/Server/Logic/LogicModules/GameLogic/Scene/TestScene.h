@@ -14,6 +14,7 @@ namespace GameLogic
 	protected:
 		virtual bool OnAwake() override;
 		virtual bool OnLateAwake() override;
+		virtual void OnLateUpdate() override;
 
 		Config::CsvSceneConfig *m_sceneCfg = nullptr;
 

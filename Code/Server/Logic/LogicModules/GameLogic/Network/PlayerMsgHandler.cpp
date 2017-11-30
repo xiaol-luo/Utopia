@@ -17,6 +17,9 @@
 #include <memory>
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/GeometryUtils.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -128,13 +131,15 @@ namespace GameLogic
 
 	void PlayerMsgHandler::OnQueryFreeHero(int protocol_id, GameLogic::Player *player)
 	{
-		std::shared_ptr<Hero> red_hero = m_logic_module->m_scene->GetRedHero();
-		std::shared_ptr<Hero> blue_hero = m_logic_module->m_scene->GetBlueHero();
+		auto red_hero = m_logic_module->m_new_scene->red_su;
+		auto blue_hero = m_logic_module->m_new_scene->blue_su;
+
+
 
 		NetProto::RspFreeHero *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::RspFreeHero>(m_protobuf_arena);
-		if (nullptr == red_hero->GetPlayer())
+		if (0 == red_hero->GetPlayerId())
 			rsp_msg->set_red_hero_id(red_hero->GetId());
-		if (nullptr == blue_hero->GetPlayer())
+		if (0 == blue_hero->GetPlayerId())
 			rsp_msg->set_blue_hero_id(blue_hero->GetId());
 
 		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_RspFreeHero, rsp_msg);
@@ -142,8 +147,8 @@ namespace GameLogic
 
 	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player)
 	{
-		std::shared_ptr<Hero> red_hero = m_logic_module->m_scene->GetRedHero();
-		std::shared_ptr<Hero> blue_hero = m_logic_module->m_scene->GetBlueHero();
+		auto red_hero = m_logic_module->m_new_scene->red_su;
+		auto blue_hero = m_logic_module->m_new_scene->blue_su;
 		NetProto::SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::SelectHeroRsp>(m_protobuf_arena);
 		
 		auto hero = player->GetHero();
@@ -152,17 +157,17 @@ namespace GameLogic
 			rsp_msg->set_hero_id(msg->hero_id());
 			if (msg->hero_id() == red_hero->GetId())
 			{
-				if (nullptr == red_hero->GetPlayer())
+				if (0 == red_hero->GetPlayerId())
 				{
-					player->SetHero(red_hero);
+					m_logic_module->m_new_scene->PlayerSelectHero(player, red_hero->GetId());
 					rsp_msg->set_is_succ(true);
 				}
 			}
 			if (msg->hero_id() == blue_hero->GetId())
 			{
-				if (nullptr == blue_hero->GetPlayer())
+				if (0 == blue_hero->GetPlayerId())
 				{
-					player->SetHero(blue_hero);
+					m_logic_module->m_new_scene->PlayerSelectHero(player, blue_hero->GetId());
 					rsp_msg->set_is_succ(true);
 				}
 			}
@@ -172,13 +177,18 @@ namespace GameLogic
 
 	void PlayerMsgHandler::OnLoadSceneComplete(int id, GameLogic::Player * player)
 	{
+		auto scene_view = player->GetSu()->GetModule<SceneUnitSight>();
+		if (nullptr != scene_view)
+		{
+			player->GetScene()->SetPlayerViewCamp(player, scene_view->GetViewCamp());
+		}
 		player->SetCanRecvSceneMsg(true);
 	}
 
 	void PlayerMsgHandler::OnLeaveScene(int id, GameLogic::Player * player)
 	{
-		player->SetCanRecvSceneMsg(false);
-		player->SetHero(nullptr);
+		NewScene *scene = player->GetScene();
+		scene->OnPlayerQuit(player);
 	}
 
 	void PlayerMsgHandler::OnPullAllSceneInfo(int id, GameLogic::Player * player)

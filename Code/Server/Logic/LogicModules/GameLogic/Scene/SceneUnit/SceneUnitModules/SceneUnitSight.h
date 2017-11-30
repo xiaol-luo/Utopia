@@ -19,6 +19,7 @@ namespace GameLogic
 		void SetSceneView(SceneView *scene_view);
 		void SetRadius(float val);
 		void SetViewCamp(EViewCamp val);
+		EViewCamp GetViewCamp() { return m_view_camp; }
 		void UpdateState();
 
 	protected:

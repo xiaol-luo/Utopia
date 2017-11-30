@@ -6,6 +6,11 @@
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "Network/Protobuf/Battle.pb.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "Network/Protobuf/ProtoId.pb.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
 {
@@ -85,7 +90,9 @@ namespace GameLogic
 	{
 		Vector3 old_Pos = this->GetPos();
 		m_local_pos = pos;
-		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, old_Pos, this->GetPos());
+
+		if (nullptr != m_owner->GetScene())
+			this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, old_Pos, this->GetPos());
 
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
 		"SceneUnitTransform::SetLocalPos {:3.2f}, {:3.2f}, {:3.2f}", m_local_pos.x, m_local_pos.y, m_local_pos.z);
@@ -114,11 +121,14 @@ namespace GameLogic
 
 	void SceneUnitTransform::SetFaceAngle(float face_angle)
 	{
+		m_face_dir = GeometryUtils::CalVector2(Vector2::up, face_angle);
+		m_face_dir.normalize();
 	}
 
 	float SceneUnitTransform::GetFaceAngle()
 	{
-		return 0.0f;
+		float angle = GeometryUtils::DeltaAngle(Vector2::up, m_face_dir);
+		return angle;
 	}
 
 	void SceneUnitTransform::OnAwake()
@@ -138,5 +148,43 @@ namespace GameLogic
 				this->SetFaceDir(new_val.xz());
 			}
 		}
+	}
+	std::vector<SyncClientMsg> SceneUnitTransform::CollectPBInit()
+	{
+		std::vector<SyncClientMsg> msgs;
+		{
+			NetProto::SceneUnitState *msg = m_owner->GetScene()->CreateProtobuf<NetProto::SceneUnitState>();
+			msg->set_su_id(this->GetId());
+			msg->set_unit_type(m_owner->GetUnitType());
+			msg->set_model_id(m_owner->GetModelId());
+			NetProto::PBVector3 *pb_pos = msg->mutable_pos();
+			pb_pos->set_x(m_local_pos.x);
+			pb_pos->set_y(m_local_pos.y);
+			pb_pos->set_z(m_local_pos.z);
+			msg->set_face_dir(this->GetFaceAngle());
+			auto parent = m_parent.lock();
+			if (nullptr != parent)
+				msg->set_parent_su_id(parent->GetId());
+			msgs.push_back(SyncClientMsg(NetProto::PID_SceneUnitState, msg));
+		}
+		return std::move(msgs);
+	}
+	std::vector<SyncClientMsg> SceneUnitTransform::CollectPbMutable()
+	{
+		std::vector<SyncClientMsg> msgs;
+		{
+			NetProto::SceneUnitTransform *msg = m_owner->GetScene()->CreateProtobuf<NetProto::SceneUnitTransform>();
+			msg->set_su_id(this->GetId());
+			NetProto::PBVector3 *pb_pos = msg->mutable_pos();
+			pb_pos->set_x(m_local_pos.x);
+			pb_pos->set_y(m_local_pos.y);
+			pb_pos->set_z(m_local_pos.z);
+			msg->set_face_dir(this->GetFaceAngle());
+			auto parent = m_parent.lock();
+			if (nullptr != parent)
+				msg->set_parent_su_id(parent->GetId());
+			msgs.push_back(SyncClientMsg(NetProto::PID_SceneUnitTransform, msg));
+		}
+		return std::move(msgs);
 	}
 }

@@ -96,6 +96,20 @@ namespace GameLogic
 				 diff.miss_scene_objs.insert(so);
 			 }
 		 }
+		 for (auto so : scene_units)
+		 {
+			 if (other->scene_units.count(so.first) <= 0)
+			 {
+				 diff.more_su.insert(so);
+			 }
+		 }
+		 for (auto so : other->scene_units)
+		 {
+			 if (scene_units.count(so.first) <= 0)
+			 {
+				 diff.miss_su.insert(so);
+			 }
+		 }
 
 		 return diff;
 	}

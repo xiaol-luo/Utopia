@@ -14,11 +14,15 @@
 #include "GameLogic/Player/PlayerMgr.h"
 #include "GameLogic/Scene/SceneModule/SceneView/SceneView.h"
 #include "GameLogic/Scene/ViewMgr/ViewSnapshot.h"
+#include "GameLogic/Scene/ViewMgr/ViewGrid.h"
+#include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
 
 namespace GameLogic
 {
 	NewScene::NewScene(GameLogicModule *logic_module)
 	{
+		m_protobuf_arena = MemoryUtil::NewArena();
 		m_game_logic = logic_module;
 		m_ev_dispacher = new EventDispacher();
 		memset(m_modules, 0, sizeof(m_modules));
@@ -26,6 +30,7 @@ namespace GameLogic
 
 	NewScene::~NewScene()
 	{
+		delete m_protobuf_arena; m_protobuf_arena = nullptr;
 		delete m_ev_dispacher; m_ev_dispacher = nullptr;
 		for (auto &&module : m_modules)
 		{
@@ -108,6 +113,15 @@ namespace GameLogic
 			delete module;
 		}
 		memset(m_modules, 0, sizeof(m_modules));
+
+		for (auto & m_player_view_camp : m_player_view_camps)
+		{
+			for (auto kv_pair : m_player_view_camp)
+			{
+				kv_pair.second->SetSu(nullptr);
+				kv_pair.second->SetScene(nullptr);
+			}
+		}
 
 		this->OnLateDestroy();
 	}
@@ -232,8 +246,7 @@ namespace GameLogic
 
 		this->UpdateCachedSceneUnits();
 		this->OnLateUpdate();
-
-		this->GetEvDispacher()->Fire(ES_TestHeartBeat);
+		m_protobuf_arena->Reset();
 	}
 
 	void NewScene::TestEvent(int ev_id, SceneUnit * su)
@@ -257,6 +270,7 @@ namespace GameLogic
 		{
 			hero->SetPlayerId(player->GetNetId());
 			player->SetSu(hero);
+			player->SetScene(this);
 			return true;
 		}
 		return false;
@@ -267,6 +281,19 @@ namespace GameLogic
 		if (nullptr == player)
 			return;
 
+		for (auto & m_player_view_camp : m_player_view_camps)
+		{
+			m_player_view_camp.erase(player->GetNetId());
+		}
+	}
+
+	void NewScene::OnPlayerQuit(Player * player)
+	{
+		if (nullptr == player)
+			return;
+
+		player->SetScene(nullptr);
+		player->SetSu(nullptr);
 		for (auto & m_player_view_camp : m_player_view_camps)
 		{
 			m_player_view_camp.erase(player->GetNetId());
@@ -284,8 +311,33 @@ namespace GameLogic
 		}
 		m_player_view_camps[view_camp].insert(std::make_pair(player->GetNetId(), player));
 
-		// pull all data
+		std::unordered_set<EViewCamp> camps;
+		if (EViewCamp_Observer == view_camp)
+		{
+			camps.insert(EViewCamp_Red);
+			camps.insert(EViewCamp_Blue);
+			camps.insert(EViewCamp_Monster);
+		}
+		else
+		{
+			camps.insert(view_camp);
+		}
+
+		ViewSnapshot **snapshots = this->GetModule<SceneView>()->GetSnapshot();
+		for (EViewCamp camp : camps)
+		{
+			for (auto kv_pair : snapshots[camp]->scene_units)
+			{
+				auto su = kv_pair.second.lock();
+				if (nullptr != su)
+				{
+					for (auto & msg : su->CollectPBInit())
+					player->Send(msg.protocol_id, msg.msg);
+				}
+			}
+		}
 	}
+
 	void NewScene::SendPlayer(NetId netid, int protocol_id, google::protobuf::Message * msg)
 	{
 		m_game_logic->GetPlayerMgr()->Send(netid, protocol_id, msg);
@@ -300,10 +352,10 @@ namespace GameLogic
 	void NewScene::SendClient(int64_t su_id, int protocol_id, google::protobuf::Message * msg)
 	{
 		SceneView *scene_view = this->GetModule<SceneView>();
-		ViewSnapshot **snapshot = scene_view->GetSnapshot();
+		ViewSnapshot **snapshots = scene_view->GetSnapshot();
 		for (int camp = 0; camp < EViewCamp_Observer; ++camp)
 		{
-			if (snapshot[camp]->CanSeeSu(su_id))
+			if (snapshots[camp]->CanSeeSu(su_id))
 				this->SendViewCamp((EViewCamp)camp, protocol_id, msg, false);
 		}
 		this->SendViewCamp(EViewCamp_Observer, protocol_id, msg, false);
@@ -351,6 +403,84 @@ namespace GameLogic
 	}
 	void NewScene::MakeSnapshot(bool syncClient)
 	{
+		SceneView *scene_view = this->GetModule<SceneView>();
+		scene_view->MakeSnapshot();
+		ViewSnapshot **curr_snapshot = scene_view->GetSnapshot();
+		ViewSnapshot **pre_snapshot = scene_view->GetPreSnapshot();
 		
+		for (int camp = 0; camp < EViewCamp_Observer; ++camp)
+		{
+			ViewSnapshotDifference diff = curr_snapshot[camp]->CalDifference(pre_snapshot[camp]);
+			ViewCampDiff &camp_diff = m_view_camp_diff[camp];
+			for (ViewGrid *grid : diff.miss_view_grids)
+			{
+				camp_diff.more_gird_ids.erase(grid->grid_id);
+				camp_diff.miss_grid_ids.insert(grid->grid_id);
+			}
+			for (ViewGrid *grid : diff.more_view_grids)
+			{
+				camp_diff.more_gird_ids.insert(grid->grid_id);
+				camp_diff.miss_grid_ids.erase(grid->grid_id);
+			}
+			for (auto kv_pair : diff.miss_su)
+			{
+				camp_diff.miss_su_ids.insert(kv_pair.first);
+				camp_diff.more_sus.erase(kv_pair.first);
+			}
+			for (auto kv_pair : diff.more_su)
+			{
+				camp_diff.miss_su_ids.erase(kv_pair.first);
+				camp_diff.more_sus.insert_or_assign(kv_pair.first, kv_pair.second);
+			}
+		}
+		if (syncClient)
+		{
+			for (int camp = 0; camp < EViewCamp_Observer; ++camp)
+			{
+				ViewCampDiff &diff = m_view_camp_diff[camp];
+				if (!diff.more_gird_ids.empty() || !diff.miss_grid_ids.empty())
+				{
+					// view grids 
+					NetProto::ViewSnapshotDiff *msg = this->CreateProtobuf<NetProto::ViewSnapshotDiff>();
+					for (int grid_id : diff.more_gird_ids)
+						msg->add_more_grids(grid_id);
+					for (int grid_id : diff.miss_grid_ids)
+						msg->add_miss_grids(grid_id);
+					this->SendViewCamp((EViewCamp)camp, NetProto::PID_ViewSnapshotDiff, msg, true);
+				}
+
+				{
+					// scene object 
+					if (diff.miss_su_ids.size() > 0)
+					{
+						NetProto::SceneObjectDisappear *msg = this->CreateProtobuf<NetProto::SceneObjectDisappear>();
+						for (int64_t su_id : diff.miss_su_ids)
+						{
+							msg->add_objids(su_id);
+						}
+						this->SendViewCamp((EViewCamp)camp, NetProto::PID_SceneObjectDisappear, msg, true);
+					}
+					for (auto kv_pari : diff.more_sus)
+					{
+						auto sptr_su = kv_pari.second.lock();
+						if (nullptr == sptr_su)
+							continue;
+						this->SendViewCamp((EViewCamp)camp ,sptr_su->CollectPBInit(), true);
+					}
+					for (auto kv_pari : curr_snapshot[camp]->scene_units)
+					{
+						uint64_t objid = kv_pari.first;
+						if (diff.more_sus.count(objid) > 0)
+							continue;
+						auto sptr_su = kv_pari.second.lock();
+						if (nullptr == sptr_su)
+							continue;
+						this->SendViewCamp((EViewCamp)camp, sptr_su->CollectPbMutable(), true);
+					}
+
+					diff.Clear();
+				}
+			}
+		}
 	}
 }

@@ -80,7 +80,7 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\rProtoId.proto\022\010NetProto*\376\003\n\007ProtoId\022\013\n"
+      "\n\rProtoId.proto\022\010NetProto*\314\004\n\007ProtoId\022\013\n"
       "\007PID_Min\020\000\022\014\n\010PID_Ping\020\001\022\014\n\010PID_Pong\020\002\022\025"
       "\n\021PID_QueryFreeHero\020d\022\023\n\017PID_RspFreeHero"
       "\020e\022\025\n\021PID_SelectHeroReq\020f\022\025\n\021PID_SelectH"
@@ -93,10 +93,12 @@ void AddDescriptorsImpl() {
       "oPos\020\374\007\022\021\n\014PID_StopMove\020\206\010\022\027\n\022PID_Battle"
       "OperaReq\020\314\010\022\025\n\020PID_ViewSnapshot\020\326\010\022\025\n\020PI"
       "D_ViewAllGrids\020\327\010\022\031\n\024PID_ViewSnapshotDif"
-      "f\020\330\010\022\014\n\007PID_Max\020\200(B\003\370\001\001b\006proto3"
+      "f\020\330\010\022\027\n\022PID_SceneUnitState\020\260\t\022\033\n\026PID_Sce"
+      "neUnitTransform\020\261\t\022\026\n\021PID_SceneUnitMove\020"
+      "\262\t\022\014\n\007PID_Max\020\200(B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 551);
+      descriptor, 629);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ProtoId.proto", &protobuf_RegisterTypes);
 }
@@ -142,6 +144,9 @@ bool ProtoId_IsValid(int value) {
     case 1110:
     case 1111:
     case 1112:
+    case 1200:
+    case 1201:
+    case 1202:
     case 5120:
       return true;
     default:

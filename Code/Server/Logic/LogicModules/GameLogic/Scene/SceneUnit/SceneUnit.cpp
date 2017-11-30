@@ -112,5 +112,31 @@ namespace GameLogic
 			}
 		}
 	}
+	std::vector<SyncClientMsg> SceneUnit::CollectPBInit()
+	{
+		std::vector<SyncClientMsg> msgs;
+		for (auto module : m_modules)
+		{
+			if (nullptr != module)
+			{
+				for (auto & msg : module->CollectPBInit())
+					msgs.push_back(msg);
+			}
+		}
+		return std::move(msgs);
+	}
+	std::vector<SyncClientMsg> SceneUnit::CollectPbMutable()
+	{
+		std::vector<SyncClientMsg> msgs;
+		for (auto module : m_modules)
+		{
+			if (nullptr != module)
+			{
+				for (auto & msg : module->CollectPbMutable())
+					msgs.push_back(msg);
+			}
+		}
+		return std::move(msgs);
+	}
 }
 
