@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
-#include "GameLogic/Scene/ViewMgr/ViewDefine.h"
+#include "GameLogic/Scene/Defines/ViewDefine.h"
 
 namespace GameLogic
 {

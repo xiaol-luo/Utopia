@@ -131,8 +131,6 @@ namespace GameLogic
 		auto red_hero = m_logic_module->m_new_scene->red_su;
 		auto blue_hero = m_logic_module->m_new_scene->blue_su;
 
-
-
 		NetProto::RspFreeHero *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::RspFreeHero>(m_protobuf_arena);
 		if (0 == red_hero->GetPlayerId())
 			rsp_msg->set_red_hero_id(red_hero->GetId());

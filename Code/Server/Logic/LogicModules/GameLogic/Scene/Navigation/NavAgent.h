@@ -4,7 +4,6 @@
 #include "DetourCrowd.h"
 #include "Common/Geometry/Vector3.h"
 #include <functional>
-#include "GameLogic/Scene/Defines/SceneObjectDefine.h"
 
 namespace GameLogic
 {

@@ -5,7 +5,7 @@
 #include <unordered_set>
 #include <memory>
 #include "GameLogic/Scene/Defines/SceneDefine.h"
-#include "GameLogic/Scene/ViewMgr/ViewDefine.h"
+#include "GameLogic/Scene/Defines/ViewDefine.h"
 #include "Common/Define/NetworkDefine.h"
 #include "Common/Geometry/Vector3.h"
 

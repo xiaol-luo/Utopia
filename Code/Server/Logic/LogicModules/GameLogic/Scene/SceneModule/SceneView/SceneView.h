@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameLogic/Scene/SceneModule/SceneModule.h"
-#include "GameLogic/Scene/ViewMgr/ViewDefine.h"
+#include "GameLogic/Scene/Defines/ViewDefine.h"
 #include <functional>
 
 namespace NetProto

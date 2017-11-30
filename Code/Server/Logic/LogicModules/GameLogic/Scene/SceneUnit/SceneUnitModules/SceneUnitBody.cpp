@@ -2,7 +2,7 @@
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/SceneModule/SceneView/SceneView.h"
-#include "GameLogic/Scene/ViewMgr/ViewGrid.h"
+#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"
 #include "Common/Geometry/GeometryUtils.h"
 #include "Common/Geometry/Vector3.h"
 #include "Common/Geometry/Vector2.h"

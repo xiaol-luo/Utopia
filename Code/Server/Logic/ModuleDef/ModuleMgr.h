@@ -21,7 +21,7 @@ public:
 	void Quit();
 
 	bool SetModule(IModule *module);
-	template <typename T> T * ModuleMgr::GetModule() 
+	template <typename T> T * GetModule() 
 	{ 
 		IModule *module = this->GetModule(T::MODULE_NAME);
 		return dynamic_cast<T *>(module);

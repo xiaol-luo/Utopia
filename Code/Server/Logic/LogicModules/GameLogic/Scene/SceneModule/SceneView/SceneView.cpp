@@ -9,8 +9,8 @@
 #include <queue>
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/Vector3.h"
-#include "GameLogic/Scene/ViewMgr/ViewGrid.h"
-#include "GameLogic/Scene/ViewMgr/ViewSnapshot.h"
+#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"
+#include "GameLogic/Scene/SceneModule/SceneView/ViewSnapshot.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
