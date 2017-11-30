@@ -1,33 +1,33 @@
-#include "FightParameter.h"
+#include "FightParam.h"
 
 static const float F_PERCENT_DEVIDE = 10000.0f;
 static const float F_1_Over_PERCENT_DIVIDE = 1 / F_PERCENT_DEVIDE;
 
 namespace GameLogic
 {
-	FightParameter::FightParameter()
+	FightParam::FightParam()
 	{
 	}
 
-	FightParameter::~FightParameter()
+	FightParam::~FightParam()
 	{
 	}
 
-	void FightParameter::SetMinValue(int val)
+	void FightParam::SetMinValue(int val)
 	{
 		m_min_value = val;
 		NumUtil::MakeInAscOrder(m_min_value, m_max_value);
 		m_value = NumUtil::GetInRange(m_value, m_min_value, m_max_value);
 	}
 
-	void FightParameter::SetMaxValue(int val)
+	void FightParam::SetMaxValue(int val)
 	{
 		m_max_value = val;
 		NumUtil::MakeInAscOrder(m_min_value, m_max_value);
 		m_value = NumUtil::GetInRange(m_value, m_min_value, m_max_value);
 	}
 
-	void FightParameter::Recal()
+	void FightParam::Recal()
 	{
 		int old_value = m_value;
 		float add_percent = 1 + m_extra_percent.GetValue() * F_1_Over_PERCENT_DIVIDE;
@@ -47,7 +47,7 @@ namespace GameLogic
 		if (nullptr != m_value_change_cb && m_value != old_value)
 			m_value_change_cb(m_fight_param, m_value, old_value);
 	}
-	int FightParameter::GetValue(bool recal)
+	int FightParam::GetValue(bool recal)
 	{
 		if (recal)
 			this->Recal();

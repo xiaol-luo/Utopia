@@ -23,6 +23,7 @@ namespace GameLogic
 	enum ESceneUnitModule
 	{
 		ESceneUnitModule_Transform = 0,
+		ESceneUnitModule_FightParam,
 		ESceneUnitModule_Move,
 		ESceneUnitModule_Body,
 		ESceneUnitModule_Sight,

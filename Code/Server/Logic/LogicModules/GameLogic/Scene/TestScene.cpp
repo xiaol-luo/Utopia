@@ -12,6 +12,7 @@
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitFightParam.h"
 
 namespace GameLogic
 {
@@ -55,6 +56,9 @@ namespace GameLogic
 		}
 		{
 			auto sum = su->AddModule(std::make_shared<SceneUnitMove>());
+		}
+		{
+			auto suf = su->AddModule(std::make_shared<SceneUnitFightParam>());
 		}
 	}
 

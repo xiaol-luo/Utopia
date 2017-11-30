@@ -9,6 +9,7 @@
 #include "ShareCode/Network/Utils/LenCtxStreamParserEx.h"
 #include <stdint.h>
 #include "MemoryPool/StlAllocator.h"
+#include "Common/Utils/TupleUtil.h"
 
 #include <sol.hpp>
 
@@ -37,8 +38,19 @@ void TestSol(lua_State *l)
 	ret = lua.script_file("LuaScript/test_sol.lua");
 }
 
+void test(int a, float b)
+{
+	a++;
+	b++;
+}
+
 int main(int argc, char **argv)
 {
+	{
+		auto t = std::make_tuple(1, 2);
+		Tuple::Apply(test, t);
+	}
+
 	L = luaL_newstate();
 	TestSol(L);
 	lua_close(L); L = nullptr;

@@ -9,13 +9,13 @@ namespace GameLogic
 {
 	class FightParameterMgr;
 
-	class FightParameter
+	class FightParam
 	{
 	public:
 		using ValueChangeCallback = std::function<void(NetProto::EFightParam efp, int new_value, int old_value)>;
 	public: 
-		FightParameter();
-		~FightParameter();
+		FightParam();
+		~FightParam();
 
 		inline void SetFightParam(NetProto::EFightParam val) { m_fight_param = val; }
 		inline void SetPercentAsDenominator(bool val) { m_is_percent_as_denominator = val; }
