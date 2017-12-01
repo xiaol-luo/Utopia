@@ -27,6 +27,8 @@ namespace GameLogic
 		ESceneUnitModule_Move,
 		ESceneUnitModule_Body,
 		ESceneUnitModule_Sight,
+		ESceneUnitModule_Action,
+		ESceneUnitModule_Skills,
 
 		ESceneUnitModule_Count
 	};
