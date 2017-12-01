@@ -5,14 +5,14 @@
 #include "GameLogic/GameLogicModule.h"
 #include "Config/AutoCsvCode/Scene/CsvSceneConfig.h"
 #include "Config/AutoCsvCode/CsvConfigSets.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitBody.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitFightParam.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 
 namespace GameLogic
 {

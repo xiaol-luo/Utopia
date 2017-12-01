@@ -5,7 +5,7 @@
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/NewScene.h"

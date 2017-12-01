@@ -16,8 +16,8 @@
 #include "Common/Geometry/GeometryUtils.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))

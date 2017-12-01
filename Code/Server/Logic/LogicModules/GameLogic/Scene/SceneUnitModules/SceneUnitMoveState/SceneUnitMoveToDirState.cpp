@@ -1,6 +1,6 @@
 #include "SceneUnitMoveToDirState.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
 GameLogic::SceneUnitMoveToDirState::SceneUnitMoveToDirState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_MoveToDir)
 {

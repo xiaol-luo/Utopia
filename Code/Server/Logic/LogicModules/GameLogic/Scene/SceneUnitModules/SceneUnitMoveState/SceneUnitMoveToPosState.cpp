@@ -4,7 +4,7 @@
 #include "Common/Geometry/Vector2.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
 GameLogic::SceneUnitMoveToPosState::SceneUnitMoveToPosState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_MoveToPos)
 {

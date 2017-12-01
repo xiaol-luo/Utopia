@@ -6,7 +6,7 @@
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "CommonModules/Log/LogModule.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitTransform.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/GameLogicModule.h"
 #include "CommonModules/Timer/ITimerModule.h"
 #include "GameLogic/Player/Player.h"
@@ -17,7 +17,7 @@
 #include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitSight.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 
 namespace GameLogic
 {

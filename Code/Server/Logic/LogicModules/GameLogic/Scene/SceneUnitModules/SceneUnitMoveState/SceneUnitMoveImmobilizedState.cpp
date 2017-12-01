@@ -1,7 +1,7 @@
 #include "SceneUnitMoveImmobilizedState.h"
 #include "Common/Geometry/Vector3.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 

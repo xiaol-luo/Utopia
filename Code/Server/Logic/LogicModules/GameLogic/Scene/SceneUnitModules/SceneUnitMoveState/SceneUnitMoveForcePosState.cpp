@@ -3,7 +3,7 @@
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "CommonModules/Timer/ITimerModule.h"
 #include "Common/Macro/ServerLogicMacro.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
 GameLogic::SceneUnitMoveForcePosState::SceneUnitMoveForcePosState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_ForcePos)
 {

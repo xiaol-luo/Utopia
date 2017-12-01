@@ -1,6 +1,6 @@
 #include "SceneUnitMoveIdleState.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
-#include "GameLogic/Scene/SceneUnit/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
 GameLogic::SceneUnitMoveIdleState::SceneUnitMoveIdleState(SceneUnitMove * move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Idle)
 {
