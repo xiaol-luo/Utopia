@@ -803,11 +803,11 @@ class BattleOperation : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::uint64 target_id() const;
   void set_target_id(::google::protobuf::uint64 value);
 
-  // .NetProto.EBattleOperation opera = 1;
+  // .NetProto.EPlayerOpera opera = 1;
   void clear_opera();
   static const int kOperaFieldNumber = 1;
-  ::NetProto::EBattleOperation opera() const;
-  void set_opera(::NetProto::EBattleOperation value);
+  ::NetProto::EPlayerOpera opera() const;
+  void set_opera(::NetProto::EPlayerOpera value);
 
   // float dir = 3;
   void clear_dir();
@@ -1956,15 +1956,15 @@ inline  void MoveToPos::set_allocated_pos(::NetProto::PBVector2* pos) {
 
 // BattleOperation
 
-// .NetProto.EBattleOperation opera = 1;
+// .NetProto.EPlayerOpera opera = 1;
 inline void BattleOperation::clear_opera() {
   opera_ = 0;
 }
-inline ::NetProto::EBattleOperation BattleOperation::opera() const {
+inline ::NetProto::EPlayerOpera BattleOperation::opera() const {
   // @@protoc_insertion_point(field_get:NetProto.BattleOperation.opera)
-  return static_cast< ::NetProto::EBattleOperation >(opera_);
+  return static_cast< ::NetProto::EPlayerOpera >(opera_);
 }
-inline void BattleOperation::set_opera(::NetProto::EBattleOperation value) {
+inline void BattleOperation::set_opera(::NetProto::EPlayerOpera value) {
   
   opera_ = value;
   // @@protoc_insertion_point(field_set:NetProto.BattleOperation.opera)

@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[5];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[7];
 
 }  // namespace
 
@@ -80,39 +80,42 @@ namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020BattleEnum.proto\022\010NetProto*8\n\014ESceneOb"
-      "ject\022\014\n\010Building\020\000\022\010\n\004Hero\020\001\022\007\n\003Npc\020\002\022\007\n"
-      "\003MAX\020\003*\340\001\n\017EMoveAgentState\022\030\n\024EMoveAgent"
-      "State_Idle\020\000\022\035\n\031EMoveAgentState_MoveToPo"
-      "s\020\001\022\035\n\031EMoveAgentState_MoveToDir\020\002\022\037\n\033EM"
-      "oveAgentState_Immobilized\020\003\022\035\n\031EMoveAgen"
-      "tState_ForceLine\020\004\022\034\n\030EMoveAgentState_Fo"
-      "rcePos\020\005\022\027\n\023EMoveAgentState_Max\020\006*l\n\nEMo"
-      "veState\022\023\n\017EMoveState_Idle\020\000\022\023\n\017EMoveSta"
-      "te_Move\020\001\022\032\n\026EMoveState_Immobilized\020\002\022\030\n"
-      "\024EMoveState_ForceMove\020\003*\367\002\n\020EBattleOpera"
-      "tion\022\017\n\013EBO_Invalid\020\000\022\014\n\010EBO_Stop\020\001\022\014\n\010E"
-      "BO_Move\020\002\022\016\n\nEBO_Follow\020\003\022\014\n\010EBO_Hunt\020\004\022"
-      "\023\n\017EBO_CastSkill_Q\020\013\022\023\n\017EBO_CastSkill_W\020"
-      "\014\022\023\n\017EBO_CastSkill_E\020\r\022\023\n\017EBO_CastSkill_"
-      "R\020\016\022\023\n\017EBO_CastSkill_F\020\017\022\023\n\017EBO_CastSkil"
-      "l_G\020\020\022\025\n\021EBO_UseItemSolt_1\020\025\022\025\n\021EBO_UseI"
-      "temSolt_2\020\026\022\025\n\021EBO_UseItemSolt_3\020\027\022\025\n\021EB"
-      "O_UseItemSolt_4\020\030\022\025\n\021EBO_UseItemSolt_5\020\031"
-      "\022\025\n\021EBO_UseItemSolt_6\020\032\022\020\n\014EBO_MaxCount\020"
-      " *\342\002\n\013EFightParam\022\014\n\010EFP_None\020\000\022\016\n\nEFP_C"
-      "urrHP\020\001\022\r\n\tEFP_MaxHP\020\002\022\016\n\nEFP_CurrMP\020\003\022\r"
-      "\n\tEFP_MaxMP\020\004\022\021\n\rEFP_MoveSpeed\020\007\022\022\n\016EFP_"
-      "AttackDist\020\010\022\023\n\017EFP_AttackSpeed\020\t\022\021\n\rEFP"
-      "_Dizziness\020\n\022\017\n\013EFP_Silence\020\013\022\r\n\tEFP_Bli"
-      "nd\020\014\022\023\n\017EFP_Immobilized\020\r\022\021\n\rEFP_PhyAtta"
-      "ck\020\024\022\023\n\017EFP_MagicAttack\020\025\022\017\n\013EFP_PhyHurt"
-      "\020\026\022\021\n\rEFP_MagicHurt\020\027\022\022\n\016EFP_PhyDefense\020"
-      "\030\022\024\n\020EFP_MagicDefense\020\031\022\r\n\tEFP_COUNT\020 B\003"
-      "\370\001\001b\006proto3"
+      "\n\020BattleEnum.proto\022\010NetProto*5\n\tEUnitTyp"
+      "e\022\014\n\010Building\020\000\022\010\n\004Hero\020\001\022\007\n\003Npc\020\002\022\007\n\003MA"
+      "X\020\003*\340\001\n\017EMoveAgentState\022\030\n\024EMoveAgentSta"
+      "te_Idle\020\000\022\035\n\031EMoveAgentState_MoveToPos\020\001"
+      "\022\035\n\031EMoveAgentState_MoveToDir\020\002\022\037\n\033EMove"
+      "AgentState_Immobilized\020\003\022\035\n\031EMoveAgentSt"
+      "ate_ForceLine\020\004\022\034\n\030EMoveAgentState_Force"
+      "Pos\020\005\022\027\n\023EMoveAgentState_Max\020\006*l\n\nEMoveS"
+      "tate\022\023\n\017EMoveState_Idle\020\000\022\023\n\017EMoveState_"
+      "Move\020\001\022\032\n\026EMoveState_Immobilized\020\002\022\030\n\024EM"
+      "oveState_ForceMove\020\003*\217\001\n\014EPlayerOpera\022\017\n"
+      "\013EPO_Invalid\020\000\022\014\n\010EPO_Stop\020\001\022\014\n\010EPO_Move"
+      "\020\002\022\016\n\nEPO_Follow\020\003\022\014\n\010EPO_Hunt\020\004\022\021\n\rEPO_"
+      "CastSkill\020\005\022\017\n\013EPO_UseItem\020\006\022\020\n\014EBO_MaxC"
+      "ount\020 *\332\002\n\013EFightParam\022\014\n\010EFP_None\020\000\022\n\n\006"
+      "EFP_HP\020\001\022\n\n\006EFP_MP\020\002\022\r\n\tEFP_MaxHP\020\t\022\r\n\tE"
+      "FP_MaxMP\020\n\022\021\n\rEFP_MoveSpeed\020\013\022\022\n\016EFP_Att"
+      "ackDist\020\014\022\023\n\017EFP_AttackSpeed\020\r\022\021\n\rEFP_Ph"
+      "yAttack\020\016\022\023\n\017EFP_MagicAttack\020\017\022\017\n\013EFP_Ph"
+      "yHurt\020\020\022\021\n\rEFP_MagicHurt\020\021\022\022\n\016EFP_PhyDef"
+      "ense\020\022\022\024\n\020EFP_MagicDefense\020\023\022\021\n\rEFP_Dizz"
+      "iness\020\024\022\017\n\013EFP_Silence\020\025\022\r\n\tEFP_Blind\020\026\022"
+      "\023\n\017EFP_Immobilized\020\027\022\r\n\tEFP_COUNT\020 *\362\001\n\n"
+      "ESkillSlot\022\r\n\tESS_QSlot\020\000\022\r\n\tESS_WSlot\020\001"
+      "\022\r\n\tESS_ESlot\020\002\022\r\n\tESS_RSlot\020\003\022\r\n\tESS_FS"
+      "lot\020\004\022\r\n\tESS_GSlot\020\005\022\r\n\tESS_PSlot\020\006\022\017\n\013E"
+      "SS_OneSlot\020\013\022\017\n\013ESS_TwoSlot\020\014\022\021\n\rESS_Thr"
+      "eeSlot\020\r\022\020\n\014ESS_FourSlot\020\016\022\020\n\014ESS_FiveSl"
+      "ot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_SevenSlot\020\021"
+      "*n\n\013ESkillState\022\014\n\010ESS_Free\020\000\022\021\n\rESS_Pre"
+      "paring\020\001\022\021\n\rESS_Releasing\020\002\022\r\n\tESS_Using"
+      "\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005B\003\370\001\001b\006p"
+      "roto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1171);
+      descriptor, 1285);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -131,11 +134,11 @@ struct StaticDescriptorInitializer {
 
 }  // namespace protobuf_BattleEnum_2eproto
 
-const ::google::protobuf::EnumDescriptor* ESceneObject_descriptor() {
+const ::google::protobuf::EnumDescriptor* EUnitType_descriptor() {
   protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[0];
 }
-bool ESceneObject_IsValid(int value) {
+bool EUnitType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -182,29 +185,19 @@ bool EMoveState_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* EBattleOperation_descriptor() {
+const ::google::protobuf::EnumDescriptor* EPlayerOpera_descriptor() {
   protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[3];
 }
-bool EBattleOperation_IsValid(int value) {
+bool EPlayerOpera_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
     case 2:
     case 3:
     case 4:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-    case 21:
-    case 22:
-    case 23:
-    case 24:
-    case 25:
-    case 26:
+    case 5:
+    case 6:
     case 32:
       return true;
     default:
@@ -221,22 +214,66 @@ bool EFightParam_IsValid(int value) {
     case 0:
     case 1:
     case 2:
-    case 3:
-    case 4:
-    case 7:
-    case 8:
     case 9:
     case 10:
     case 11:
     case 12:
     case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
     case 20:
     case 21:
     case 22:
     case 23:
-    case 24:
-    case 25:
     case 32:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESkillSlot_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[5];
+}
+bool ESkillSlot_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESkillState_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[6];
+}
+bool ESkillState_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;

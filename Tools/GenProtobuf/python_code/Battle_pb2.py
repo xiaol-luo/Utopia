@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='Battle.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"&\n\x14SceneObjectDisappear\x12\x0e\n\x06objids\x18\x01 \x03(\x04\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\"~\n\x0f\x42\x61ttleOperation\x12)\n\x05opera\x18\x01 \x01(\x0e\x32\x1a.NetProto.EBattleOperation\x12\x11\n\ttarget_id\x18\x02 \x01(\x04\x12\x0b\n\x03\x64ir\x18\x03 \x01(\x02\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2\"B\n\x08ViewGrid\x12#\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x11\n\tgrid_type\x18\x02 \x01(\x05\":\n\x10ViewSnapshotDiff\x12\x12\n\nmore_grids\x18\x01 \x03(\x05\x12\x12\n\nmiss_grids\x18\x02 \x03(\x05\"#\n\x0cViewSnapshot\x12\x13\n\x0blight_grids\x18\x01 \x03(\x05\"^\n\x0cViewAllGrids\x12\x11\n\tgrid_size\x18\x01 \x01(\x02\x12\x0b\n\x03row\x18\x02 \x01(\x05\x12\x0b\n\x03\x63ol\x18\x03 \x01(\x05\x12!\n\x05grids\x18\x04 \x03(\x0b\x32\x12.NetProto.ViewGrid\"\x8e\x01\n\x0eSceneUnitState\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x11\n\tunit_type\x18\x02 \x01(\x05\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x05 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x06 \x01(\x04\"m\n\x12SceneUnitTransform\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12 \n\x03pos\x18\x02 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x03 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x04 \x01(\x04\"S\n\rSceneUnitMove\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentStateB\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"&\n\x14SceneObjectDisappear\x12\x0e\n\x06objids\x18\x01 \x03(\x04\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\"z\n\x0f\x42\x61ttleOperation\x12%\n\x05opera\x18\x01 \x01(\x0e\x32\x16.NetProto.EPlayerOpera\x12\x11\n\ttarget_id\x18\x02 \x01(\x04\x12\x0b\n\x03\x64ir\x18\x03 \x01(\x02\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2\"B\n\x08ViewGrid\x12#\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x11\n\tgrid_type\x18\x02 \x01(\x05\":\n\x10ViewSnapshotDiff\x12\x12\n\nmore_grids\x18\x01 \x03(\x05\x12\x12\n\nmiss_grids\x18\x02 \x03(\x05\"#\n\x0cViewSnapshot\x12\x13\n\x0blight_grids\x18\x01 \x03(\x05\"^\n\x0cViewAllGrids\x12\x11\n\tgrid_size\x18\x01 \x01(\x02\x12\x0b\n\x03row\x18\x02 \x01(\x05\x12\x0b\n\x03\x63ol\x18\x03 \x01(\x05\x12!\n\x05grids\x18\x04 \x03(\x0b\x32\x12.NetProto.ViewGrid\"\x8e\x01\n\x0eSceneUnitState\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x11\n\tunit_type\x18\x02 \x01(\x05\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x05 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x06 \x01(\x04\"m\n\x12SceneUnitTransform\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12 \n\x03pos\x18\x02 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x03 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x04 \x01(\x04\"S\n\rSceneUnitMove\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentStateB\x03\xf8\x01\x01\x62\x06proto3')
   ,
   dependencies=[Common__pb2.DESCRIPTOR,BattleEnum__pb2.DESCRIPTOR,])
 
@@ -245,7 +245,7 @@ _BATTLEOPERATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=288,
-  serialized_end=414,
+  serialized_end=410,
 )
 
 
@@ -282,8 +282,8 @@ _VIEWGRID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=416,
-  serialized_end=482,
+  serialized_start=412,
+  serialized_end=478,
 )
 
 
@@ -320,8 +320,8 @@ _VIEWSNAPSHOTDIFF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=484,
-  serialized_end=542,
+  serialized_start=480,
+  serialized_end=538,
 )
 
 
@@ -351,8 +351,8 @@ _VIEWSNAPSHOT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=544,
-  serialized_end=579,
+  serialized_start=540,
+  serialized_end=575,
 )
 
 
@@ -403,8 +403,8 @@ _VIEWALLGRIDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=581,
-  serialized_end=675,
+  serialized_start=577,
+  serialized_end=671,
 )
 
 
@@ -469,8 +469,8 @@ _SCENEUNITSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=678,
-  serialized_end=820,
+  serialized_start=674,
+  serialized_end=816,
 )
 
 
@@ -521,8 +521,8 @@ _SCENEUNITTRANSFORM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=822,
-  serialized_end=931,
+  serialized_start=818,
+  serialized_end=927,
 )
 
 
@@ -559,12 +559,12 @@ _SCENEUNITMOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=933,
-  serialized_end=1016,
+  serialized_start=929,
+  serialized_end=1012,
 )
 
 _MOVETOPOS.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR2
-_BATTLEOPERATION.fields_by_name['opera'].enum_type = BattleEnum__pb2._EBATTLEOPERATION
+_BATTLEOPERATION.fields_by_name['opera'].enum_type = BattleEnum__pb2._EPLAYEROPERA
 _BATTLEOPERATION.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR2
 _VIEWGRID.fields_by_name['center'].message_type = Common__pb2._PBVECTOR2
 _VIEWALLGRIDS.fields_by_name['grids'].message_type = _VIEWGRID

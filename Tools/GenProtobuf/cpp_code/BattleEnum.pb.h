@@ -49,28 +49,28 @@ void AddDescriptors();
 void InitDefaults();
 }  // namespace protobuf_BattleEnum_2eproto
 
-enum ESceneObject {
+enum EUnitType {
   Building = 0,
   Hero = 1,
   Npc = 2,
   MAX = 3,
-  ESceneObject_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ESceneObject_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+  EUnitType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EUnitType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool ESceneObject_IsValid(int value);
-const ESceneObject ESceneObject_MIN = Building;
-const ESceneObject ESceneObject_MAX = MAX;
-const int ESceneObject_ARRAYSIZE = ESceneObject_MAX + 1;
+bool EUnitType_IsValid(int value);
+const EUnitType EUnitType_MIN = Building;
+const EUnitType EUnitType_MAX = MAX;
+const int EUnitType_ARRAYSIZE = EUnitType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESceneObject_descriptor();
-inline const ::std::string& ESceneObject_Name(ESceneObject value) {
+const ::google::protobuf::EnumDescriptor* EUnitType_descriptor();
+inline const ::std::string& EUnitType_Name(EUnitType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ESceneObject_descriptor(), value);
+    EUnitType_descriptor(), value);
 }
-inline bool ESceneObject_Parse(
-    const ::std::string& name, ESceneObject* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ESceneObject>(
-    ESceneObject_descriptor(), name, value);
+inline bool EUnitType_Parse(
+    const ::std::string& name, EUnitType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EUnitType>(
+    EUnitType_descriptor(), name, value);
 }
 enum EMoveAgentState {
   EMoveAgentState_Idle = 0,
@@ -121,62 +121,52 @@ inline bool EMoveState_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<EMoveState>(
     EMoveState_descriptor(), name, value);
 }
-enum EBattleOperation {
-  EBO_Invalid = 0,
-  EBO_Stop = 1,
-  EBO_Move = 2,
-  EBO_Follow = 3,
-  EBO_Hunt = 4,
-  EBO_CastSkill_Q = 11,
-  EBO_CastSkill_W = 12,
-  EBO_CastSkill_E = 13,
-  EBO_CastSkill_R = 14,
-  EBO_CastSkill_F = 15,
-  EBO_CastSkill_G = 16,
-  EBO_UseItemSolt_1 = 21,
-  EBO_UseItemSolt_2 = 22,
-  EBO_UseItemSolt_3 = 23,
-  EBO_UseItemSolt_4 = 24,
-  EBO_UseItemSolt_5 = 25,
-  EBO_UseItemSolt_6 = 26,
+enum EPlayerOpera {
+  EPO_Invalid = 0,
+  EPO_Stop = 1,
+  EPO_Move = 2,
+  EPO_Follow = 3,
+  EPO_Hunt = 4,
+  EPO_CastSkill = 5,
+  EPO_UseItem = 6,
   EBO_MaxCount = 32,
-  EBattleOperation_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  EBattleOperation_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+  EPlayerOpera_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  EPlayerOpera_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool EBattleOperation_IsValid(int value);
-const EBattleOperation EBattleOperation_MIN = EBO_Invalid;
-const EBattleOperation EBattleOperation_MAX = EBO_MaxCount;
-const int EBattleOperation_ARRAYSIZE = EBattleOperation_MAX + 1;
+bool EPlayerOpera_IsValid(int value);
+const EPlayerOpera EPlayerOpera_MIN = EPO_Invalid;
+const EPlayerOpera EPlayerOpera_MAX = EBO_MaxCount;
+const int EPlayerOpera_ARRAYSIZE = EPlayerOpera_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* EBattleOperation_descriptor();
-inline const ::std::string& EBattleOperation_Name(EBattleOperation value) {
+const ::google::protobuf::EnumDescriptor* EPlayerOpera_descriptor();
+inline const ::std::string& EPlayerOpera_Name(EPlayerOpera value) {
   return ::google::protobuf::internal::NameOfEnum(
-    EBattleOperation_descriptor(), value);
+    EPlayerOpera_descriptor(), value);
 }
-inline bool EBattleOperation_Parse(
-    const ::std::string& name, EBattleOperation* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<EBattleOperation>(
-    EBattleOperation_descriptor(), name, value);
+inline bool EPlayerOpera_Parse(
+    const ::std::string& name, EPlayerOpera* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<EPlayerOpera>(
+    EPlayerOpera_descriptor(), name, value);
 }
 enum EFightParam {
   EFP_None = 0,
-  EFP_CurrHP = 1,
-  EFP_MaxHP = 2,
-  EFP_CurrMP = 3,
-  EFP_MaxMP = 4,
-  EFP_MoveSpeed = 7,
-  EFP_AttackDist = 8,
-  EFP_AttackSpeed = 9,
-  EFP_Dizziness = 10,
-  EFP_Silence = 11,
-  EFP_Blind = 12,
-  EFP_Immobilized = 13,
-  EFP_PhyAttack = 20,
-  EFP_MagicAttack = 21,
-  EFP_PhyHurt = 22,
-  EFP_MagicHurt = 23,
-  EFP_PhyDefense = 24,
-  EFP_MagicDefense = 25,
+  EFP_HP = 1,
+  EFP_MP = 2,
+  EFP_MaxHP = 9,
+  EFP_MaxMP = 10,
+  EFP_MoveSpeed = 11,
+  EFP_AttackDist = 12,
+  EFP_AttackSpeed = 13,
+  EFP_PhyAttack = 14,
+  EFP_MagicAttack = 15,
+  EFP_PhyHurt = 16,
+  EFP_MagicHurt = 17,
+  EFP_PhyDefense = 18,
+  EFP_MagicDefense = 19,
+  EFP_Dizziness = 20,
+  EFP_Silence = 21,
+  EFP_Blind = 22,
+  EFP_Immobilized = 23,
   EFP_COUNT = 32,
   EFightParam_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EFightParam_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
@@ -195,6 +185,64 @@ inline bool EFightParam_Parse(
     const ::std::string& name, EFightParam* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EFightParam>(
     EFightParam_descriptor(), name, value);
+}
+enum ESkillSlot {
+  ESS_QSlot = 0,
+  ESS_WSlot = 1,
+  ESS_ESlot = 2,
+  ESS_RSlot = 3,
+  ESS_FSlot = 4,
+  ESS_GSlot = 5,
+  ESS_PSlot = 6,
+  ESS_OneSlot = 11,
+  ESS_TwoSlot = 12,
+  ESS_ThreeSlot = 13,
+  ESS_FourSlot = 14,
+  ESS_FiveSlot = 15,
+  ESS_SixSlot = 16,
+  ESS_SevenSlot = 17,
+  ESkillSlot_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillSlot_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESkillSlot_IsValid(int value);
+const ESkillSlot ESkillSlot_MIN = ESS_QSlot;
+const ESkillSlot ESkillSlot_MAX = ESS_SevenSlot;
+const int ESkillSlot_ARRAYSIZE = ESkillSlot_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESkillSlot_descriptor();
+inline const ::std::string& ESkillSlot_Name(ESkillSlot value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillSlot_descriptor(), value);
+}
+inline bool ESkillSlot_Parse(
+    const ::std::string& name, ESkillSlot* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillSlot>(
+    ESkillSlot_descriptor(), name, value);
+}
+enum ESkillState {
+  ESS_Free = 0,
+  ESS_Preparing = 1,
+  ESS_Releasing = 2,
+  ESS_Using = 3,
+  ESS_Lasting = 4,
+  ESS_End = 5,
+  ESkillState_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillState_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESkillState_IsValid(int value);
+const ESkillState ESkillState_MIN = ESS_Free;
+const ESkillState ESkillState_MAX = ESS_End;
+const int ESkillState_ARRAYSIZE = ESkillState_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESkillState_descriptor();
+inline const ::std::string& ESkillState_Name(ESkillState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillState_descriptor(), value);
+}
+inline bool ESkillState_Parse(
+    const ::std::string& name, ESkillState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillState>(
+    ESkillState_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -222,10 +270,10 @@ inline bool EFightParam_Parse(
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::NetProto::ESceneObject> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::NetProto::EUnitType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESceneObject>() {
-  return ::NetProto::ESceneObject_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EUnitType>() {
+  return ::NetProto::EUnitType_descriptor();
 }
 template <> struct is_proto_enum< ::NetProto::EMoveAgentState> : ::google::protobuf::internal::true_type {};
 template <>
@@ -237,15 +285,25 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EMoveState>() {
   return ::NetProto::EMoveState_descriptor();
 }
-template <> struct is_proto_enum< ::NetProto::EBattleOperation> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::NetProto::EPlayerOpera> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EBattleOperation>() {
-  return ::NetProto::EBattleOperation_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EPlayerOpera>() {
+  return ::NetProto::EPlayerOpera_descriptor();
 }
 template <> struct is_proto_enum< ::NetProto::EFightParam> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::EFightParam>() {
   return ::NetProto::EFightParam_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESkillSlot> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillSlot>() {
+  return ::NetProto::ESkillSlot_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESkillState> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillState>() {
+  return ::NetProto::ESkillState_descriptor();
 }
 
 }  // namespace protobuf

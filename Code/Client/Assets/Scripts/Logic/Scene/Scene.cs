@@ -175,20 +175,21 @@ public class Scene
             if (isOk)
             {
                 this.TryMoveToPos(hitGound.x, hitGound.z);
-                this.SendBattleOpera(EBattleOperation.EboMove, 0, hitGound);
+                this.SendBattleOpera(EPlayerOpera.EpoMove, 0, hitGound);
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            this.SendBattleOpera(EBattleOperation.EboStop);
+            this.SendBattleOpera(EPlayerOpera.EpoStop);
         }
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Vector3 hitGound = Vector3.zero;
             bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
             if (isOk)
             {
-                this.SendBattleOpera(EBattleOperation.EboCastSkillQ, 0, hitGound);
+                this.SendBattleOpera(EPlayerOpera.EpoCastSkill, 0, hitGound);
             }
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -197,16 +198,17 @@ public class Scene
             bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
             if (isOk)
             {
-                this.SendBattleOpera(EBattleOperation.EboCastSkillW, 0, hitGound);
+                this.SendBattleOpera(EPlayerOpera.EboCastSkillW, 0, hitGound);
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            this.SendBattleOpera(EBattleOperation.EboCastSkillE);
+            this.SendBattleOpera(EPlayerOpera.EboCastSkillE);
         }
+        */
     }
 
-    void SendBattleOpera(EBattleOperation opera, ulong targetId, Vector3 pos)
+    void SendBattleOpera(EPlayerOpera opera, ulong targetId, Vector3 pos)
     {
         BattleOperation msg = new BattleOperation();
         msg.Opera = opera;
@@ -223,11 +225,11 @@ public class Scene
         }
         App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
-    void SendBattleOpera(EBattleOperation opera)
+    void SendBattleOpera(EPlayerOpera opera)
     {
         this.SendBattleOpera(opera, 0, new Vector3());
     }
-    void SendBattleOpera(EBattleOperation opera, ulong targetId)
+    void SendBattleOpera(EPlayerOpera opera, ulong targetId)
     {
         this.SendBattleOpera(opera, targetId, new Vector3());
     }

@@ -28,23 +28,23 @@ namespace NetProto {
             "aGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASAB",
             "KAQSDwoHaXNfc3VjYxgCIAEoCCImChRTY2VuZU9iamVjdERpc2FwcGVhchIO",
             "CgZvYmppZHMYASADKAQiLQoJTW92ZVRvUG9zEiAKA3BvcxgBIAEoCzITLk5l",
-            "dFByb3RvLlBCVmVjdG9yMiJ+Cg9CYXR0bGVPcGVyYXRpb24SKQoFb3BlcmEY",
-            "ASABKA4yGi5OZXRQcm90by5FQmF0dGxlT3BlcmF0aW9uEhEKCXRhcmdldF9p",
-            "ZBgCIAEoBBILCgNkaXIYAyABKAISIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
-            "UEJWZWN0b3IyIkIKCFZpZXdHcmlkEiMKBmNlbnRlchgBIAEoCzITLk5ldFBy",
-            "b3RvLlBCVmVjdG9yMhIRCglncmlkX3R5cGUYAiABKAUiOgoQVmlld1NuYXBz",
-            "aG90RGlmZhISCgptb3JlX2dyaWRzGAEgAygFEhIKCm1pc3NfZ3JpZHMYAiAD",
-            "KAUiIwoMVmlld1NuYXBzaG90EhMKC2xpZ2h0X2dyaWRzGAEgAygFIl4KDFZp",
-            "ZXdBbGxHcmlkcxIRCglncmlkX3NpemUYASABKAISCwoDcm93GAIgASgFEgsK",
-            "A2NvbBgDIAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3RvLlZpZXdHcmlk",
-            "Io4BCg5TY2VuZVVuaXRTdGF0ZRINCgVzdV9pZBgBIAEoBBIRCgl1bml0X3R5",
-            "cGUYAiABKAUSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0",
-            "UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAUgASgCEhQKDHBhcmVudF9z",
-            "dV9pZBgGIAEoBCJtChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASAB",
-            "KAQSIAoDcG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2Vf",
-            "ZGlyGAMgASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCJTCg1TY2VuZVVuaXRN",
-            "b3ZlEg0KBXN1X2lkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiABKA4y",
-            "GS5OZXRQcm90by5FTW92ZUFnZW50U3RhdGVCA/gBAWIGcHJvdG8z"));
+            "dFByb3RvLlBCVmVjdG9yMiJ6Cg9CYXR0bGVPcGVyYXRpb24SJQoFb3BlcmEY",
+            "ASABKA4yFi5OZXRQcm90by5FUGxheWVyT3BlcmESEQoJdGFyZ2V0X2lkGAIg",
+            "ASgEEgsKA2RpchgDIAEoAhIgCgNwb3MYBCABKAsyEy5OZXRQcm90by5QQlZl",
+            "Y3RvcjIiQgoIVmlld0dyaWQSIwoGY2VudGVyGAEgASgLMhMuTmV0UHJvdG8u",
+            "UEJWZWN0b3IyEhEKCWdyaWRfdHlwZRgCIAEoBSI6ChBWaWV3U25hcHNob3RE",
+            "aWZmEhIKCm1vcmVfZ3JpZHMYASADKAUSEgoKbWlzc19ncmlkcxgCIAMoBSIj",
+            "CgxWaWV3U25hcHNob3QSEwoLbGlnaHRfZ3JpZHMYASADKAUiXgoMVmlld0Fs",
+            "bEdyaWRzEhEKCWdyaWRfc2l6ZRgBIAEoAhILCgNyb3cYAiABKAUSCwoDY29s",
+            "GAMgASgFEiEKBWdyaWRzGAQgAygLMhIuTmV0UHJvdG8uVmlld0dyaWQijgEK",
+            "DlNjZW5lVW5pdFN0YXRlEg0KBXN1X2lkGAEgASgEEhEKCXVuaXRfdHlwZRgC",
+            "IAEoBRIQCghtb2RlbF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQcm90",
+            "by5QQlZlY3RvcjMSEAoIZmFjZV9kaXIYBSABKAISFAoMcGFyZW50X3N1X2lk",
+            "GAYgASgEIm0KElNjZW5lVW5pdFRyYW5zZm9ybRINCgVzdV9pZBgBIAEoBBIg",
+            "CgNwb3MYAiABKAsyEy5OZXRQcm90by5QQlZlY3RvcjMSEAoIZmFjZV9kaXIY",
+            "AyABKAISFAoMcGFyZW50X3N1X2lkGAQgASgEIlMKDVNjZW5lVW5pdE1vdmUS",
+            "DQoFc3VfaWQYASABKAQSMwoQbW92ZV9hZ2VudF9zdGF0ZRgCIAEoDjIZLk5l",
+            "dFByb3RvLkVNb3ZlQWdlbnRTdGF0ZUID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -744,9 +744,9 @@ namespace NetProto {
 
     /// <summary>Field number for the "opera" field.</summary>
     public const int OperaFieldNumber = 1;
-    private global::NetProto.EBattleOperation opera_ = 0;
+    private global::NetProto.EPlayerOpera opera_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::NetProto.EBattleOperation Opera {
+    public global::NetProto.EPlayerOpera Opera {
       get { return opera_; }
       set {
         opera_ = value;
@@ -890,7 +890,7 @@ namespace NetProto {
             input.SkipLastField();
             break;
           case 8: {
-            opera_ = (global::NetProto.EBattleOperation) input.ReadEnum();
+            opera_ = (global::NetProto.EPlayerOpera) input.ReadEnum();
             break;
           }
           case 16: {
