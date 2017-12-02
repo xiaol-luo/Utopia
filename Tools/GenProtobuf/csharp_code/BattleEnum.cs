@@ -47,11 +47,13 @@ namespace NetProto {
             "Eg0KCUVTU19GU2xvdBAEEg0KCUVTU19HU2xvdBAFEg0KCUVTU19QU2xvdBAG",
             "Eg8KC0VTU19PbmVTbG90EAsSDwoLRVNTX1R3b1Nsb3QQDBIRCg1FU1NfVGhy",
             "ZWVTbG90EA0SEAoMRVNTX0ZvdXJTbG90EA4SEAoMRVNTX0ZpdmVTbG90EA8S",
-            "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBFCA/gBAWIGcHJv",
-            "dG8z"));
+            "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBEqbgoLRVNraWxs",
+            "U3RhdGUSDAoIRVNTX0ZyZWUQABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNT",
+            "X1JlbGVhc2luZxACEg0KCUVTU19Vc2luZxADEg8KC0VTU19MYXN0aW5nEAQS",
+            "CwoHRVNTX0VuZBAFQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillState), }, null));
     }
     #endregion
 
@@ -189,6 +191,33 @@ namespace NetProto {
     [pbr::OriginalName("ESS_FiveSlot")] EssFiveSlot = 15,
     [pbr::OriginalName("ESS_SixSlot")] EssSixSlot = 16,
     [pbr::OriginalName("ESS_SevenSlot")] EssSevenSlot = 17,
+  }
+
+  public enum ESkillState {
+    /// <summary>
+    /// 空闲
+    /// </summary>
+    [pbr::OriginalName("ESS_Free")] EssFree = 0,
+    /// <summary>
+    /// 吟唱
+    /// </summary>
+    [pbr::OriginalName("ESS_Preparing")] EssPreparing = 1,
+    /// <summary>
+    /// 前摇
+    /// </summary>
+    [pbr::OriginalName("ESS_Releasing")] EssReleasing = 2,
+    /// <summary>
+    /// 引导
+    /// </summary>
+    [pbr::OriginalName("ESS_Using")] EssUsing = 3,
+    /// <summary>
+    /// 后摇
+    /// </summary>
+    [pbr::OriginalName("ESS_Lasting")] EssLasting = 4,
+    /// <summary>
+    /// 结束
+    /// </summary>
+    [pbr::OriginalName("ESS_End")] EssEnd = 5,
   }
 
   #endregion

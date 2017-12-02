@@ -7,5 +7,12 @@ namespace GameLogic
 	public:
 		Skill();
 		~Skill();
+
+		void Begin();
+		void HeartBeat();
+		void End();
+
+	protected:
+
 	};
 }

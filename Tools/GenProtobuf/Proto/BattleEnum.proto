@@ -76,9 +76,9 @@ enum ESkillSlot
 	ESS_WSlot = 1;
 	ESS_ESlot = 2;
 	ESS_RSlot = 3;
-	ESS_FSlot = 4;	// 召唤师技能1
-	ESS_GSlot = 5;	// 召唤师技能2
-	ESS_PSlot = 6;	// 被动
+	ESS_FSlot = 4;				// 召唤师技能1
+	ESS_GSlot = 5;				// 召唤师技能2
+	ESS_PSlot = 6;				// 被动
 	ESS_OneSlot = 11;
 	ESS_TwoSlot = 12;
 	ESS_ThreeSlot = 13;
@@ -87,3 +87,14 @@ enum ESkillSlot
 	ESS_SixSlot = 16;
 	ESS_SevenSlot = 17;
 }
+
+enum ESkillState
+{
+	ESS_Free = 0;				// 空闲
+	ESS_Preparing = 1;			// 吟唱
+	ESS_Releasing = 2;			// 前摇
+	ESS_Using = 3;				// 引导
+	ESS_Lasting = 4;			// 后摇
+	ESS_End = 5;				// 结束
+}
+

@@ -219,6 +219,31 @@ inline bool ESkillSlot_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESkillSlot>(
     ESkillSlot_descriptor(), name, value);
 }
+enum ESkillState {
+  ESS_Free = 0,
+  ESS_Preparing = 1,
+  ESS_Releasing = 2,
+  ESS_Using = 3,
+  ESS_Lasting = 4,
+  ESS_End = 5,
+  ESkillState_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillState_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESkillState_IsValid(int value);
+const ESkillState ESkillState_MIN = ESS_Free;
+const ESkillState ESkillState_MAX = ESS_End;
+const int ESkillState_ARRAYSIZE = ESkillState_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESkillState_descriptor();
+inline const ::std::string& ESkillState_Name(ESkillState value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillState_descriptor(), value);
+}
+inline bool ESkillState_Parse(
+    const ::std::string& name, ESkillState* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillState>(
+    ESkillState_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -274,6 +299,11 @@ template <> struct is_proto_enum< ::NetProto::ESkillSlot> : ::google::protobuf::
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillSlot>() {
   return ::NetProto::ESkillSlot_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESkillState> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillState>() {
+  return ::NetProto::ESkillState_descriptor();
 }
 
 }  // namespace protobuf

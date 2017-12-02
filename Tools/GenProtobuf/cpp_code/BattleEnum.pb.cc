@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[6];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[7];
 
 }  // namespace
 
@@ -93,7 +93,7 @@ void AddDescriptorsImpl() {
       "oveState_ForceMove\020\003*\217\001\n\014EPlayerOpera\022\017\n"
       "\013EPO_Invalid\020\000\022\014\n\010EPO_Stop\020\001\022\014\n\010EPO_Move"
       "\020\002\022\016\n\nEPO_Follow\020\003\022\014\n\010EPO_Hunt\020\004\022\021\n\rEPO_"
-      "CastSkill\020\005\022\017\n\013EPO_UseItem\020\006\022\020\n\014EPO_MaxC"
+      "CastSkill\020\005\022\017\n\013EPO_UseItem\020\006\022\020\n\014EBO_MaxC"
       "ount\020 *\332\002\n\013EFightParam\022\014\n\010EFP_None\020\000\022\n\n\006"
       "EFP_HP\020\001\022\n\n\006EFP_MP\020\002\022\r\n\tEFP_MaxHP\020\t\022\r\n\tE"
       "FP_MaxMP\020\n\022\021\n\rEFP_MoveSpeed\020\013\022\022\n\016EFP_Att"
@@ -109,10 +109,13 @@ void AddDescriptorsImpl() {
       "SS_OneSlot\020\013\022\017\n\013ESS_TwoSlot\020\014\022\021\n\rESS_Thr"
       "eeSlot\020\r\022\020\n\014ESS_FourSlot\020\016\022\020\n\014ESS_FiveSl"
       "ot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_SevenSlot\020\021"
-      "B\003\370\001\001b\006proto3"
+      "*n\n\013ESkillState\022\014\n\010ESS_Free\020\000\022\021\n\rESS_Pre"
+      "paring\020\001\022\021\n\rESS_Releasing\020\002\022\r\n\tESS_Using"
+      "\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005B\003\370\001\001b\006p"
+      "roto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1173);
+      descriptor, 1285);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -253,6 +256,24 @@ bool ESkillSlot_IsValid(int value) {
     case 15:
     case 16:
     case 17:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESkillState_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[6];
+}
+bool ESkillState_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;
