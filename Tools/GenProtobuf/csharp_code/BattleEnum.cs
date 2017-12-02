@@ -22,42 +22,42 @@ namespace NetProto {
     static BattleEnumReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChBCYXR0bGVFbnVtLnByb3RvEghOZXRQcm90byo4CgxFU2NlbmVPYmplY3QS",
-            "DAoIQnVpbGRpbmcQABIICgRIZXJvEAESBwoDTnBjEAISBwoDTUFYEAMq4AEK",
-            "D0VNb3ZlQWdlbnRTdGF0ZRIYChRFTW92ZUFnZW50U3RhdGVfSWRsZRAAEh0K",
-            "GUVNb3ZlQWdlbnRTdGF0ZV9Nb3ZlVG9Qb3MQARIdChlFTW92ZUFnZW50U3Rh",
-            "dGVfTW92ZVRvRGlyEAISHwobRU1vdmVBZ2VudFN0YXRlX0ltbW9iaWxpemVk",
-            "EAMSHQoZRU1vdmVBZ2VudFN0YXRlX0ZvcmNlTGluZRAEEhwKGEVNb3ZlQWdl",
-            "bnRTdGF0ZV9Gb3JjZVBvcxAFEhcKE0VNb3ZlQWdlbnRTdGF0ZV9NYXgQBips",
-            "CgpFTW92ZVN0YXRlEhMKD0VNb3ZlU3RhdGVfSWRsZRAAEhMKD0VNb3ZlU3Rh",
-            "dGVfTW92ZRABEhoKFkVNb3ZlU3RhdGVfSW1tb2JpbGl6ZWQQAhIYChRFTW92",
-            "ZVN0YXRlX0ZvcmNlTW92ZRADKvcCChBFQmF0dGxlT3BlcmF0aW9uEg8KC0VC",
-            "T19JbnZhbGlkEAASDAoIRUJPX1N0b3AQARIMCghFQk9fTW92ZRACEg4KCkVC",
-            "T19Gb2xsb3cQAxIMCghFQk9fSHVudBAEEhMKD0VCT19DYXN0U2tpbGxfURAL",
-            "EhMKD0VCT19DYXN0U2tpbGxfVxAMEhMKD0VCT19DYXN0U2tpbGxfRRANEhMK",
-            "D0VCT19DYXN0U2tpbGxfUhAOEhMKD0VCT19DYXN0U2tpbGxfRhAPEhMKD0VC",
-            "T19DYXN0U2tpbGxfRxAQEhUKEUVCT19Vc2VJdGVtU29sdF8xEBUSFQoRRUJP",
-            "X1VzZUl0ZW1Tb2x0XzIQFhIVChFFQk9fVXNlSXRlbVNvbHRfMxAXEhUKEUVC",
-            "T19Vc2VJdGVtU29sdF80EBgSFQoRRUJPX1VzZUl0ZW1Tb2x0XzUQGRIVChFF",
-            "Qk9fVXNlSXRlbVNvbHRfNhAaEhAKDEVCT19NYXhDb3VudBAgKuICCgtFRmln",
-            "aHRQYXJhbRIMCghFRlBfTm9uZRAAEg4KCkVGUF9DdXJySFAQARINCglFRlBf",
-            "TWF4SFAQAhIOCgpFRlBfQ3Vyck1QEAMSDQoJRUZQX01heE1QEAQSEQoNRUZQ",
-            "X01vdmVTcGVlZBAHEhIKDkVGUF9BdHRhY2tEaXN0EAgSEwoPRUZQX0F0dGFj",
-            "a1NwZWVkEAkSEQoNRUZQX0RpenppbmVzcxAKEg8KC0VGUF9TaWxlbmNlEAsS",
-            "DQoJRUZQX0JsaW5kEAwSEwoPRUZQX0ltbW9iaWxpemVkEA0SEQoNRUZQX1Bo",
-            "eUF0dGFjaxAUEhMKD0VGUF9NYWdpY0F0dGFjaxAVEg8KC0VGUF9QaHlIdXJ0",
-            "EBYSEQoNRUZQX01hZ2ljSHVydBAXEhIKDkVGUF9QaHlEZWZlbnNlEBgSFAoQ",
-            "RUZQX01hZ2ljRGVmZW5zZRAZEg0KCUVGUF9DT1VOVBAgQgP4AQFiBnByb3Rv",
-            "Mw=="));
+            "ChBCYXR0bGVFbnVtLnByb3RvEghOZXRQcm90byo1CglFVW5pdFR5cGUSDAoI",
+            "QnVpbGRpbmcQABIICgRIZXJvEAESBwoDTnBjEAISBwoDTUFYEAMq4AEKD0VN",
+            "b3ZlQWdlbnRTdGF0ZRIYChRFTW92ZUFnZW50U3RhdGVfSWRsZRAAEh0KGUVN",
+            "b3ZlQWdlbnRTdGF0ZV9Nb3ZlVG9Qb3MQARIdChlFTW92ZUFnZW50U3RhdGVf",
+            "TW92ZVRvRGlyEAISHwobRU1vdmVBZ2VudFN0YXRlX0ltbW9iaWxpemVkEAMS",
+            "HQoZRU1vdmVBZ2VudFN0YXRlX0ZvcmNlTGluZRAEEhwKGEVNb3ZlQWdlbnRT",
+            "dGF0ZV9Gb3JjZVBvcxAFEhcKE0VNb3ZlQWdlbnRTdGF0ZV9NYXgQBipsCgpF",
+            "TW92ZVN0YXRlEhMKD0VNb3ZlU3RhdGVfSWRsZRAAEhMKD0VNb3ZlU3RhdGVf",
+            "TW92ZRABEhoKFkVNb3ZlU3RhdGVfSW1tb2JpbGl6ZWQQAhIYChRFTW92ZVN0",
+            "YXRlX0ZvcmNlTW92ZRADKo8BCgxFUGxheWVyT3BlcmESDwoLRVBPX0ludmFs",
+            "aWQQABIMCghFUE9fU3RvcBABEgwKCEVQT19Nb3ZlEAISDgoKRVBPX0ZvbGxv",
+            "dxADEgwKCEVQT19IdW50EAQSEQoNRVBPX0Nhc3RTa2lsbBAFEg8KC0VQT19V",
+            "c2VJdGVtEAYSEAoMRUJPX01heENvdW50ECAq2gIKC0VGaWdodFBhcmFtEgwK",
+            "CEVGUF9Ob25lEAASCgoGRUZQX0hQEAESCgoGRUZQX01QEAISDQoJRUZQX01h",
+            "eEhQEAkSDQoJRUZQX01heE1QEAoSEQoNRUZQX01vdmVTcGVlZBALEhIKDkVG",
+            "UF9BdHRhY2tEaXN0EAwSEwoPRUZQX0F0dGFja1NwZWVkEA0SEQoNRUZQX1Bo",
+            "eUF0dGFjaxAOEhMKD0VGUF9NYWdpY0F0dGFjaxAPEg8KC0VGUF9QaHlIdXJ0",
+            "EBASEQoNRUZQX01hZ2ljSHVydBAREhIKDkVGUF9QaHlEZWZlbnNlEBISFAoQ",
+            "RUZQX01hZ2ljRGVmZW5zZRATEhEKDUVGUF9EaXp6aW5lc3MQFBIPCgtFRlBf",
+            "U2lsZW5jZRAVEg0KCUVGUF9CbGluZBAWEhMKD0VGUF9JbW1vYmlsaXplZBAX",
+            "Eg0KCUVGUF9DT1VOVBAgKvIBCgpFU2tpbGxTbG90Eg0KCUVTU19RU2xvdBAA",
+            "Eg0KCUVTU19XU2xvdBABEg0KCUVTU19FU2xvdBACEg0KCUVTU19SU2xvdBAD",
+            "Eg0KCUVTU19GU2xvdBAEEg0KCUVTU19HU2xvdBAFEg0KCUVTU19QU2xvdBAG",
+            "Eg8KC0VTU19PbmVTbG90EAsSDwoLRVNTX1R3b1Nsb3QQDBIRCg1FU1NfVGhy",
+            "ZWVTbG90EA0SEAoMRVNTX0ZvdXJTbG90EA4SEAoMRVNTX0ZpdmVTbG90EA8S",
+            "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBFCA/gBAWIGcHJv",
+            "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.ESceneObject), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EBattleOperation), typeof(global::NetProto.EFightParam), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), }, null));
     }
     #endregion
 
   }
   #region Enums
-  public enum ESceneObject {
+  public enum EUnitType {
     [pbr::OriginalName("Building")] Building = 0,
     [pbr::OriginalName("Hero")] Hero = 1,
     [pbr::OriginalName("Npc")] Npc = 2,
@@ -81,86 +81,114 @@ namespace NetProto {
     [pbr::OriginalName("EMoveState_ForceMove")] ForceMove = 3,
   }
 
-  public enum EBattleOperation {
-    [pbr::OriginalName("EBO_Invalid")] EboInvalid = 0,
-    [pbr::OriginalName("EBO_Stop")] EboStop = 1,
-    [pbr::OriginalName("EBO_Move")] EboMove = 2,
-    [pbr::OriginalName("EBO_Follow")] EboFollow = 3,
-    [pbr::OriginalName("EBO_Hunt")] EboHunt = 4,
-    [pbr::OriginalName("EBO_CastSkill_Q")] EboCastSkillQ = 11,
-    [pbr::OriginalName("EBO_CastSkill_W")] EboCastSkillW = 12,
-    [pbr::OriginalName("EBO_CastSkill_E")] EboCastSkillE = 13,
-    [pbr::OriginalName("EBO_CastSkill_R")] EboCastSkillR = 14,
-    [pbr::OriginalName("EBO_CastSkill_F")] EboCastSkillF = 15,
-    [pbr::OriginalName("EBO_CastSkill_G")] EboCastSkillG = 16,
-    [pbr::OriginalName("EBO_UseItemSolt_1")] EboUseItemSolt1 = 21,
-    [pbr::OriginalName("EBO_UseItemSolt_2")] EboUseItemSolt2 = 22,
-    [pbr::OriginalName("EBO_UseItemSolt_3")] EboUseItemSolt3 = 23,
-    [pbr::OriginalName("EBO_UseItemSolt_4")] EboUseItemSolt4 = 24,
-    [pbr::OriginalName("EBO_UseItemSolt_5")] EboUseItemSolt5 = 25,
-    [pbr::OriginalName("EBO_UseItemSolt_6")] EboUseItemSolt6 = 26,
+  public enum EPlayerOpera {
+    [pbr::OriginalName("EPO_Invalid")] EpoInvalid = 0,
+    [pbr::OriginalName("EPO_Stop")] EpoStop = 1,
+    [pbr::OriginalName("EPO_Move")] EpoMove = 2,
+    [pbr::OriginalName("EPO_Follow")] EpoFollow = 3,
+    [pbr::OriginalName("EPO_Hunt")] EpoHunt = 4,
+    [pbr::OriginalName("EPO_CastSkill")] EpoCastSkill = 5,
+    [pbr::OriginalName("EPO_UseItem")] EpoUseItem = 6,
     [pbr::OriginalName("EBO_MaxCount")] EboMaxCount = 32,
   }
 
   public enum EFightParam {
     [pbr::OriginalName("EFP_None")] EfpNone = 0,
-    [pbr::OriginalName("EFP_CurrHP")] EfpCurrHp = 1,
-    [pbr::OriginalName("EFP_MaxHP")] EfpMaxHp = 2,
-    [pbr::OriginalName("EFP_CurrMP")] EfpCurrMp = 3,
-    [pbr::OriginalName("EFP_MaxMP")] EfpMaxMp = 4,
+    /// <summary>
+    /// 当前血量
+    /// </summary>
+    [pbr::OriginalName("EFP_HP")] EfpHp = 1,
+    /// <summary>
+    /// 当前魔法
+    /// </summary>
+    [pbr::OriginalName("EFP_MP")] EfpMp = 2,
+    /// <summary>
+    /// 最大血量			
+    /// </summary>
+    [pbr::OriginalName("EFP_MaxHP")] EfpMaxHp = 9,
+    /// <summary>
+    /// 最大魔法
+    /// </summary>
+    [pbr::OriginalName("EFP_MaxMP")] EfpMaxMp = 10,
     /// <summary>
     /// 移动速度
     /// </summary>
-    [pbr::OriginalName("EFP_MoveSpeed")] EfpMoveSpeed = 7,
+    [pbr::OriginalName("EFP_MoveSpeed")] EfpMoveSpeed = 11,
     /// <summary>
     /// 射程
     /// </summary>
-    [pbr::OriginalName("EFP_AttackDist")] EfpAttackDist = 8,
+    [pbr::OriginalName("EFP_AttackDist")] EfpAttackDist = 12,
     /// <summary>
     /// 攻击速度
     /// </summary>
-    [pbr::OriginalName("EFP_AttackSpeed")] EfpAttackSpeed = 9,
-    /// <summary>
-    /// 眩晕
-    /// </summary>
-    [pbr::OriginalName("EFP_Dizziness")] EfpDizziness = 10,
-    /// <summary>
-    /// 沉默
-    /// </summary>
-    [pbr::OriginalName("EFP_Silence")] EfpSilence = 11,
-    /// <summary>
-    /// 致盲
-    /// </summary>
-    [pbr::OriginalName("EFP_Blind")] EfpBlind = 12,
-    /// <summary>
-    /// 定身
-    /// </summary>
-    [pbr::OriginalName("EFP_Immobilized")] EfpImmobilized = 13,
+    [pbr::OriginalName("EFP_AttackSpeed")] EfpAttackSpeed = 13,
     /// <summary>
     /// 物理攻击
     /// </summary>
-    [pbr::OriginalName("EFP_PhyAttack")] EfpPhyAttack = 20,
+    [pbr::OriginalName("EFP_PhyAttack")] EfpPhyAttack = 14,
     /// <summary>
     /// 法术攻击	
     /// </summary>
-    [pbr::OriginalName("EFP_MagicAttack")] EfpMagicAttack = 21,
+    [pbr::OriginalName("EFP_MagicAttack")] EfpMagicAttack = 15,
     /// <summary>
     /// 物强
     /// </summary>
-    [pbr::OriginalName("EFP_PhyHurt")] EfpPhyHurt = 22,
+    [pbr::OriginalName("EFP_PhyHurt")] EfpPhyHurt = 16,
     /// <summary>
     /// 法强
     /// </summary>
-    [pbr::OriginalName("EFP_MagicHurt")] EfpMagicHurt = 23,
+    [pbr::OriginalName("EFP_MagicHurt")] EfpMagicHurt = 17,
     /// <summary>
     /// 物抗
     /// </summary>
-    [pbr::OriginalName("EFP_PhyDefense")] EfpPhyDefense = 24,
+    [pbr::OriginalName("EFP_PhyDefense")] EfpPhyDefense = 18,
     /// <summary>
     /// 魔抗
     /// </summary>
-    [pbr::OriginalName("EFP_MagicDefense")] EfpMagicDefense = 25,
+    [pbr::OriginalName("EFP_MagicDefense")] EfpMagicDefense = 19,
+    /// <summary>
+    /// 眩晕
+    /// </summary>
+    [pbr::OriginalName("EFP_Dizziness")] EfpDizziness = 20,
+    /// <summary>
+    /// 沉默
+    /// </summary>
+    [pbr::OriginalName("EFP_Silence")] EfpSilence = 21,
+    /// <summary>
+    /// 致盲
+    /// </summary>
+    [pbr::OriginalName("EFP_Blind")] EfpBlind = 22,
+    /// <summary>
+    /// 定身
+    /// </summary>
+    [pbr::OriginalName("EFP_Immobilized")] EfpImmobilized = 23,
     [pbr::OriginalName("EFP_COUNT")] EfpCount = 32,
+  }
+
+  public enum ESkillSlot {
+    [pbr::OriginalName("ESS_QSlot")] EssQslot = 0,
+    [pbr::OriginalName("ESS_WSlot")] EssWslot = 1,
+    [pbr::OriginalName("ESS_ESlot")] EssEslot = 2,
+    [pbr::OriginalName("ESS_RSlot")] EssRslot = 3,
+    /// <summary>
+    /// 召唤师技能1
+    /// </summary>
+    [pbr::OriginalName("ESS_FSlot")] EssFslot = 4,
+    /// <summary>
+    /// 召唤师技能2
+    /// </summary>
+    [pbr::OriginalName("ESS_GSlot")] EssGslot = 5,
+    /// <summary>
+    /// 被动
+    /// </summary>
+    [pbr::OriginalName("ESS_PSlot")] EssPslot = 6,
+    [pbr::OriginalName("ESS_OneSlot")] EssOneSlot = 11,
+    [pbr::OriginalName("ESS_TwoSlot")] EssTwoSlot = 12,
+    [pbr::OriginalName("ESS_ThreeSlot")] EssThreeSlot = 13,
+    [pbr::OriginalName("ESS_FourSlot")] EssFourSlot = 14,
+    [pbr::OriginalName("ESS_FiveSlot")] EssFiveSlot = 15,
+    [pbr::OriginalName("ESS_SixSlot")] EssSixSlot = 16,
+    [pbr::OriginalName("ESS_SevenSlot")] EssSevenSlot = 17,
   }
 
   #endregion

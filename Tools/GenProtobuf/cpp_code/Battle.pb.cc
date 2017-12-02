@@ -331,28 +331,28 @@ void AddDescriptorsImpl() {
       "roRsp\022\017\n\007hero_id\030\001 \001(\004\022\017\n\007is_succ\030\002 \001(\010\""
       "&\n\024SceneObjectDisappear\022\016\n\006objids\030\001 \003(\004\""
       "-\n\tMoveToPos\022 \n\003pos\030\001 \001(\0132\023.NetProto.PBV"
-      "ector2\"~\n\017BattleOperation\022)\n\005opera\030\001 \001(\016"
-      "2\032.NetProto.EBattleOperation\022\021\n\ttarget_i"
-      "d\030\002 \001(\004\022\013\n\003dir\030\003 \001(\002\022 \n\003pos\030\004 \001(\0132\023.NetP"
-      "roto.PBVector2\"B\n\010ViewGrid\022#\n\006center\030\001 \001"
-      "(\0132\023.NetProto.PBVector2\022\021\n\tgrid_type\030\002 \001"
-      "(\005\":\n\020ViewSnapshotDiff\022\022\n\nmore_grids\030\001 \003"
-      "(\005\022\022\n\nmiss_grids\030\002 \003(\005\"#\n\014ViewSnapshot\022\023"
-      "\n\013light_grids\030\001 \003(\005\"^\n\014ViewAllGrids\022\021\n\tg"
-      "rid_size\030\001 \001(\002\022\013\n\003row\030\002 \001(\005\022\013\n\003col\030\003 \001(\005"
-      "\022!\n\005grids\030\004 \003(\0132\022.NetProto.ViewGrid\"\216\001\n\016"
-      "SceneUnitState\022\r\n\005su_id\030\001 \001(\004\022\021\n\tunit_ty"
-      "pe\030\002 \001(\005\022\020\n\010model_id\030\003 \001(\005\022 \n\003pos\030\004 \001(\0132"
-      "\023.NetProto.PBVector3\022\020\n\010face_dir\030\005 \001(\002\022\024"
-      "\n\014parent_su_id\030\006 \001(\004\"m\n\022SceneUnitTransfo"
-      "rm\022\r\n\005su_id\030\001 \001(\004\022 \n\003pos\030\002 \001(\0132\023.NetProt"
-      "o.PBVector3\022\020\n\010face_dir\030\003 \001(\002\022\024\n\014parent_"
-      "su_id\030\004 \001(\004\"S\n\rSceneUnitMove\022\r\n\005su_id\030\001 "
-      "\001(\004\0223\n\020move_agent_state\030\002 \001(\0162\031.NetProto"
-      ".EMoveAgentStateB\003\370\001\001b\006proto3"
+      "ector2\"z\n\017BattleOperation\022%\n\005opera\030\001 \001(\016"
+      "2\026.NetProto.EPlayerOpera\022\021\n\ttarget_id\030\002 "
+      "\001(\004\022\013\n\003dir\030\003 \001(\002\022 \n\003pos\030\004 \001(\0132\023.NetProto"
+      ".PBVector2\"B\n\010ViewGrid\022#\n\006center\030\001 \001(\0132\023"
+      ".NetProto.PBVector2\022\021\n\tgrid_type\030\002 \001(\005\":"
+      "\n\020ViewSnapshotDiff\022\022\n\nmore_grids\030\001 \003(\005\022\022"
+      "\n\nmiss_grids\030\002 \003(\005\"#\n\014ViewSnapshot\022\023\n\013li"
+      "ght_grids\030\001 \003(\005\"^\n\014ViewAllGrids\022\021\n\tgrid_"
+      "size\030\001 \001(\002\022\013\n\003row\030\002 \001(\005\022\013\n\003col\030\003 \001(\005\022!\n\005"
+      "grids\030\004 \003(\0132\022.NetProto.ViewGrid\"\216\001\n\016Scen"
+      "eUnitState\022\r\n\005su_id\030\001 \001(\004\022\021\n\tunit_type\030\002"
+      " \001(\005\022\020\n\010model_id\030\003 \001(\005\022 \n\003pos\030\004 \001(\0132\023.Ne"
+      "tProto.PBVector3\022\020\n\010face_dir\030\005 \001(\002\022\024\n\014pa"
+      "rent_su_id\030\006 \001(\004\"m\n\022SceneUnitTransform\022\r"
+      "\n\005su_id\030\001 \001(\004\022 \n\003pos\030\002 \001(\0132\023.NetProto.PB"
+      "Vector3\022\020\n\010face_dir\030\003 \001(\002\022\024\n\014parent_su_i"
+      "d\030\004 \001(\004\"S\n\rSceneUnitMove\022\r\n\005su_id\030\001 \001(\004\022"
+      "3\n\020move_agent_state\030\002 \001(\0162\031.NetProto.EMo"
+      "veAgentStateB\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1029);
+      descriptor, 1025);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
   ::NetProto::protobuf_Common_2eproto::AddDescriptors();
@@ -2204,7 +2204,7 @@ bool BattleOperation::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .NetProto.EBattleOperation opera = 1;
+      // .NetProto.EPlayerOpera opera = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
@@ -2212,7 +2212,7 @@ bool BattleOperation::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          set_opera(static_cast< ::NetProto::EBattleOperation >(value));
+          set_opera(static_cast< ::NetProto::EPlayerOpera >(value));
         } else {
           goto handle_unusual;
         }
@@ -2285,7 +2285,7 @@ void BattleOperation::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NetProto.EBattleOperation opera = 1;
+  // .NetProto.EPlayerOpera opera = 1;
   if (this->opera() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->opera(), output);
@@ -2321,7 +2321,7 @@ void BattleOperation::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .NetProto.EBattleOperation opera = 1;
+  // .NetProto.EPlayerOpera opera = 1;
   if (this->opera() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->opera(), target);
@@ -2375,7 +2375,7 @@ size_t BattleOperation::ByteSizeLong() const {
         this->target_id());
   }
 
-  // .NetProto.EBattleOperation opera = 1;
+  // .NetProto.EPlayerOpera opera = 1;
   if (this->opera() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->opera());
@@ -2484,15 +2484,15 @@ void BattleOperation::InternalSwap(BattleOperation* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // BattleOperation
 
-// .NetProto.EBattleOperation opera = 1;
+// .NetProto.EPlayerOpera opera = 1;
 void BattleOperation::clear_opera() {
   opera_ = 0;
 }
-::NetProto::EBattleOperation BattleOperation::opera() const {
+::NetProto::EPlayerOpera BattleOperation::opera() const {
   // @@protoc_insertion_point(field_get:NetProto.BattleOperation.opera)
-  return static_cast< ::NetProto::EBattleOperation >(opera_);
+  return static_cast< ::NetProto::EPlayerOpera >(opera_);
 }
-void BattleOperation::set_opera(::NetProto::EBattleOperation value) {
+void BattleOperation::set_opera(::NetProto::EPlayerOpera value) {
   
   opera_ = value;
   // @@protoc_insertion_point(field_set:NetProto.BattleOperation.opera)

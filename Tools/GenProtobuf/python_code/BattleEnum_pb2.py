@@ -20,12 +20,12 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='BattleEnum.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x10\x42\x61ttleEnum.proto\x12\x08NetProto*8\n\x0c\x45SceneObject\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03*\xe0\x01\n\x0f\x45MoveAgentState\x12\x18\n\x14\x45MoveAgentState_Idle\x10\x00\x12\x1d\n\x19\x45MoveAgentState_MoveToPos\x10\x01\x12\x1d\n\x19\x45MoveAgentState_MoveToDir\x10\x02\x12\x1f\n\x1b\x45MoveAgentState_Immobilized\x10\x03\x12\x1d\n\x19\x45MoveAgentState_ForceLine\x10\x04\x12\x1c\n\x18\x45MoveAgentState_ForcePos\x10\x05\x12\x17\n\x13\x45MoveAgentState_Max\x10\x06*l\n\nEMoveState\x12\x13\n\x0f\x45MoveState_Idle\x10\x00\x12\x13\n\x0f\x45MoveState_Move\x10\x01\x12\x1a\n\x16\x45MoveState_Immobilized\x10\x02\x12\x18\n\x14\x45MoveState_ForceMove\x10\x03*\xf7\x02\n\x10\x45\x42\x61ttleOperation\x12\x0f\n\x0b\x45\x42O_Invalid\x10\x00\x12\x0c\n\x08\x45\x42O_Stop\x10\x01\x12\x0c\n\x08\x45\x42O_Move\x10\x02\x12\x0e\n\nEBO_Follow\x10\x03\x12\x0c\n\x08\x45\x42O_Hunt\x10\x04\x12\x13\n\x0f\x45\x42O_CastSkill_Q\x10\x0b\x12\x13\n\x0f\x45\x42O_CastSkill_W\x10\x0c\x12\x13\n\x0f\x45\x42O_CastSkill_E\x10\r\x12\x13\n\x0f\x45\x42O_CastSkill_R\x10\x0e\x12\x13\n\x0f\x45\x42O_CastSkill_F\x10\x0f\x12\x13\n\x0f\x45\x42O_CastSkill_G\x10\x10\x12\x15\n\x11\x45\x42O_UseItemSolt_1\x10\x15\x12\x15\n\x11\x45\x42O_UseItemSolt_2\x10\x16\x12\x15\n\x11\x45\x42O_UseItemSolt_3\x10\x17\x12\x15\n\x11\x45\x42O_UseItemSolt_4\x10\x18\x12\x15\n\x11\x45\x42O_UseItemSolt_5\x10\x19\x12\x15\n\x11\x45\x42O_UseItemSolt_6\x10\x1a\x12\x10\n\x0c\x45\x42O_MaxCount\x10 *\xe2\x02\n\x0b\x45\x46ightParam\x12\x0c\n\x08\x45\x46P_None\x10\x00\x12\x0e\n\nEFP_CurrHP\x10\x01\x12\r\n\tEFP_MaxHP\x10\x02\x12\x0e\n\nEFP_CurrMP\x10\x03\x12\r\n\tEFP_MaxMP\x10\x04\x12\x11\n\rEFP_MoveSpeed\x10\x07\x12\x12\n\x0e\x45\x46P_AttackDist\x10\x08\x12\x13\n\x0f\x45\x46P_AttackSpeed\x10\t\x12\x11\n\rEFP_Dizziness\x10\n\x12\x0f\n\x0b\x45\x46P_Silence\x10\x0b\x12\r\n\tEFP_Blind\x10\x0c\x12\x13\n\x0f\x45\x46P_Immobilized\x10\r\x12\x11\n\rEFP_PhyAttack\x10\x14\x12\x13\n\x0f\x45\x46P_MagicAttack\x10\x15\x12\x0f\n\x0b\x45\x46P_PhyHurt\x10\x16\x12\x11\n\rEFP_MagicHurt\x10\x17\x12\x12\n\x0e\x45\x46P_PhyDefense\x10\x18\x12\x14\n\x10\x45\x46P_MagicDefense\x10\x19\x12\r\n\tEFP_COUNT\x10 B\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x10\x42\x61ttleEnum.proto\x12\x08NetProto*5\n\tEUnitType\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03*\xe0\x01\n\x0f\x45MoveAgentState\x12\x18\n\x14\x45MoveAgentState_Idle\x10\x00\x12\x1d\n\x19\x45MoveAgentState_MoveToPos\x10\x01\x12\x1d\n\x19\x45MoveAgentState_MoveToDir\x10\x02\x12\x1f\n\x1b\x45MoveAgentState_Immobilized\x10\x03\x12\x1d\n\x19\x45MoveAgentState_ForceLine\x10\x04\x12\x1c\n\x18\x45MoveAgentState_ForcePos\x10\x05\x12\x17\n\x13\x45MoveAgentState_Max\x10\x06*l\n\nEMoveState\x12\x13\n\x0f\x45MoveState_Idle\x10\x00\x12\x13\n\x0f\x45MoveState_Move\x10\x01\x12\x1a\n\x16\x45MoveState_Immobilized\x10\x02\x12\x18\n\x14\x45MoveState_ForceMove\x10\x03*\x8f\x01\n\x0c\x45PlayerOpera\x12\x0f\n\x0b\x45PO_Invalid\x10\x00\x12\x0c\n\x08\x45PO_Stop\x10\x01\x12\x0c\n\x08\x45PO_Move\x10\x02\x12\x0e\n\nEPO_Follow\x10\x03\x12\x0c\n\x08\x45PO_Hunt\x10\x04\x12\x11\n\rEPO_CastSkill\x10\x05\x12\x0f\n\x0b\x45PO_UseItem\x10\x06\x12\x10\n\x0c\x45\x42O_MaxCount\x10 *\xda\x02\n\x0b\x45\x46ightParam\x12\x0c\n\x08\x45\x46P_None\x10\x00\x12\n\n\x06\x45\x46P_HP\x10\x01\x12\n\n\x06\x45\x46P_MP\x10\x02\x12\r\n\tEFP_MaxHP\x10\t\x12\r\n\tEFP_MaxMP\x10\n\x12\x11\n\rEFP_MoveSpeed\x10\x0b\x12\x12\n\x0e\x45\x46P_AttackDist\x10\x0c\x12\x13\n\x0f\x45\x46P_AttackSpeed\x10\r\x12\x11\n\rEFP_PhyAttack\x10\x0e\x12\x13\n\x0f\x45\x46P_MagicAttack\x10\x0f\x12\x0f\n\x0b\x45\x46P_PhyHurt\x10\x10\x12\x11\n\rEFP_MagicHurt\x10\x11\x12\x12\n\x0e\x45\x46P_PhyDefense\x10\x12\x12\x14\n\x10\x45\x46P_MagicDefense\x10\x13\x12\x11\n\rEFP_Dizziness\x10\x14\x12\x0f\n\x0b\x45\x46P_Silence\x10\x15\x12\r\n\tEFP_Blind\x10\x16\x12\x13\n\x0f\x45\x46P_Immobilized\x10\x17\x12\r\n\tEFP_COUNT\x10 *\xf2\x01\n\nESkillSlot\x12\r\n\tESS_QSlot\x10\x00\x12\r\n\tESS_WSlot\x10\x01\x12\r\n\tESS_ESlot\x10\x02\x12\r\n\tESS_RSlot\x10\x03\x12\r\n\tESS_FSlot\x10\x04\x12\r\n\tESS_GSlot\x10\x05\x12\r\n\tESS_PSlot\x10\x06\x12\x0f\n\x0b\x45SS_OneSlot\x10\x0b\x12\x0f\n\x0b\x45SS_TwoSlot\x10\x0c\x12\x11\n\rESS_ThreeSlot\x10\r\x12\x10\n\x0c\x45SS_FourSlot\x10\x0e\x12\x10\n\x0c\x45SS_FiveSlot\x10\x0f\x12\x0f\n\x0b\x45SS_SixSlot\x10\x10\x12\x11\n\rESS_SevenSlot\x10\x11\x42\x03\xf8\x01\x01\x62\x06proto3')
 )
 
-_ESCENEOBJECT = _descriptor.EnumDescriptor(
-  name='ESceneObject',
-  full_name='NetProto.ESceneObject',
+_EUNITTYPE = _descriptor.EnumDescriptor(
+  name='EUnitType',
+  full_name='NetProto.EUnitType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -49,11 +49,11 @@ _ESCENEOBJECT = _descriptor.EnumDescriptor(
   containing_type=None,
   options=None,
   serialized_start=30,
-  serialized_end=86,
+  serialized_end=83,
 )
-_sym_db.RegisterEnumDescriptor(_ESCENEOBJECT)
+_sym_db.RegisterEnumDescriptor(_EUNITTYPE)
 
-ESceneObject = enum_type_wrapper.EnumTypeWrapper(_ESCENEOBJECT)
+EUnitType = enum_type_wrapper.EnumTypeWrapper(_EUNITTYPE)
 _EMOVEAGENTSTATE = _descriptor.EnumDescriptor(
   name='EMoveAgentState',
   full_name='NetProto.EMoveAgentState',
@@ -91,8 +91,8 @@ _EMOVEAGENTSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=89,
-  serialized_end=313,
+  serialized_start=86,
+  serialized_end=310,
 )
 _sym_db.RegisterEnumDescriptor(_EMOVEAGENTSTATE)
 
@@ -122,99 +122,59 @@ _EMOVESTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=315,
-  serialized_end=423,
+  serialized_start=312,
+  serialized_end=420,
 )
 _sym_db.RegisterEnumDescriptor(_EMOVESTATE)
 
 EMoveState = enum_type_wrapper.EnumTypeWrapper(_EMOVESTATE)
-_EBATTLEOPERATION = _descriptor.EnumDescriptor(
-  name='EBattleOperation',
-  full_name='NetProto.EBattleOperation',
+_EPLAYEROPERA = _descriptor.EnumDescriptor(
+  name='EPlayerOpera',
+  full_name='NetProto.EPlayerOpera',
   filename=None,
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='EBO_Invalid', index=0, number=0,
+      name='EPO_Invalid', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_Stop', index=1, number=1,
+      name='EPO_Stop', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_Move', index=2, number=2,
+      name='EPO_Move', index=2, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_Follow', index=3, number=3,
+      name='EPO_Follow', index=3, number=3,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_Hunt', index=4, number=4,
+      name='EPO_Hunt', index=4, number=4,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_CastSkill_Q', index=5, number=11,
+      name='EPO_CastSkill', index=5, number=5,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_CastSkill_W', index=6, number=12,
+      name='EPO_UseItem', index=6, number=6,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EBO_CastSkill_E', index=7, number=13,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_CastSkill_R', index=8, number=14,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_CastSkill_F', index=9, number=15,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_CastSkill_G', index=10, number=16,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_UseItemSolt_1', index=11, number=21,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_UseItemSolt_2', index=12, number=22,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_UseItemSolt_3', index=13, number=23,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_UseItemSolt_4', index=14, number=24,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_UseItemSolt_5', index=15, number=25,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_UseItemSolt_6', index=16, number=26,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='EBO_MaxCount', index=17, number=32,
+      name='EBO_MaxCount', index=7, number=32,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=426,
-  serialized_end=801,
+  serialized_start=423,
+  serialized_end=566,
 )
-_sym_db.RegisterEnumDescriptor(_EBATTLEOPERATION)
+_sym_db.RegisterEnumDescriptor(_EPLAYEROPERA)
 
-EBattleOperation = enum_type_wrapper.EnumTypeWrapper(_EBATTLEOPERATION)
+EPlayerOpera = enum_type_wrapper.EnumTypeWrapper(_EPLAYEROPERA)
 _EFIGHTPARAM = _descriptor.EnumDescriptor(
   name='EFightParam',
   full_name='NetProto.EFightParam',
@@ -226,71 +186,71 @@ _EFIGHTPARAM = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_CurrHP', index=1, number=1,
+      name='EFP_HP', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_MaxHP', index=2, number=2,
+      name='EFP_MP', index=2, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_CurrMP', index=3, number=3,
+      name='EFP_MaxHP', index=3, number=9,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_MaxMP', index=4, number=4,
+      name='EFP_MaxMP', index=4, number=10,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_MoveSpeed', index=5, number=7,
+      name='EFP_MoveSpeed', index=5, number=11,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_AttackDist', index=6, number=8,
+      name='EFP_AttackDist', index=6, number=12,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_AttackSpeed', index=7, number=9,
+      name='EFP_AttackSpeed', index=7, number=13,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_Dizziness', index=8, number=10,
+      name='EFP_PhyAttack', index=8, number=14,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_Silence', index=9, number=11,
+      name='EFP_MagicAttack', index=9, number=15,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_Blind', index=10, number=12,
+      name='EFP_PhyHurt', index=10, number=16,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_Immobilized', index=11, number=13,
+      name='EFP_MagicHurt', index=11, number=17,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_PhyAttack', index=12, number=20,
+      name='EFP_PhyDefense', index=12, number=18,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_MagicAttack', index=13, number=21,
+      name='EFP_MagicDefense', index=13, number=19,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_PhyHurt', index=14, number=22,
+      name='EFP_Dizziness', index=14, number=20,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_MagicHurt', index=15, number=23,
+      name='EFP_Silence', index=15, number=21,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_PhyDefense', index=16, number=24,
+      name='EFP_Blind', index=16, number=22,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EFP_MagicDefense', index=17, number=25,
+      name='EFP_Immobilized', index=17, number=23,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -300,12 +260,83 @@ _EFIGHTPARAM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=804,
-  serialized_end=1158,
+  serialized_start=569,
+  serialized_end=915,
 )
 _sym_db.RegisterEnumDescriptor(_EFIGHTPARAM)
 
 EFightParam = enum_type_wrapper.EnumTypeWrapper(_EFIGHTPARAM)
+_ESKILLSLOT = _descriptor.EnumDescriptor(
+  name='ESkillSlot',
+  full_name='NetProto.ESkillSlot',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='ESS_QSlot', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_WSlot', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_ESlot', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_RSlot', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_FSlot', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_GSlot', index=5, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_PSlot', index=6, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_OneSlot', index=7, number=11,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_TwoSlot', index=8, number=12,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_ThreeSlot', index=9, number=13,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_FourSlot', index=10, number=14,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_FiveSlot', index=11, number=15,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_SixSlot', index=12, number=16,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESS_SevenSlot', index=13, number=17,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=918,
+  serialized_end=1160,
+)
+_sym_db.RegisterEnumDescriptor(_ESKILLSLOT)
+
+ESkillSlot = enum_type_wrapper.EnumTypeWrapper(_ESKILLSLOT)
 Building = 0
 Hero = 1
 Npc = 2
@@ -321,50 +352,55 @@ EMoveState_Idle = 0
 EMoveState_Move = 1
 EMoveState_Immobilized = 2
 EMoveState_ForceMove = 3
-EBO_Invalid = 0
-EBO_Stop = 1
-EBO_Move = 2
-EBO_Follow = 3
-EBO_Hunt = 4
-EBO_CastSkill_Q = 11
-EBO_CastSkill_W = 12
-EBO_CastSkill_E = 13
-EBO_CastSkill_R = 14
-EBO_CastSkill_F = 15
-EBO_CastSkill_G = 16
-EBO_UseItemSolt_1 = 21
-EBO_UseItemSolt_2 = 22
-EBO_UseItemSolt_3 = 23
-EBO_UseItemSolt_4 = 24
-EBO_UseItemSolt_5 = 25
-EBO_UseItemSolt_6 = 26
+EPO_Invalid = 0
+EPO_Stop = 1
+EPO_Move = 2
+EPO_Follow = 3
+EPO_Hunt = 4
+EPO_CastSkill = 5
+EPO_UseItem = 6
 EBO_MaxCount = 32
 EFP_None = 0
-EFP_CurrHP = 1
-EFP_MaxHP = 2
-EFP_CurrMP = 3
-EFP_MaxMP = 4
-EFP_MoveSpeed = 7
-EFP_AttackDist = 8
-EFP_AttackSpeed = 9
-EFP_Dizziness = 10
-EFP_Silence = 11
-EFP_Blind = 12
-EFP_Immobilized = 13
-EFP_PhyAttack = 20
-EFP_MagicAttack = 21
-EFP_PhyHurt = 22
-EFP_MagicHurt = 23
-EFP_PhyDefense = 24
-EFP_MagicDefense = 25
+EFP_HP = 1
+EFP_MP = 2
+EFP_MaxHP = 9
+EFP_MaxMP = 10
+EFP_MoveSpeed = 11
+EFP_AttackDist = 12
+EFP_AttackSpeed = 13
+EFP_PhyAttack = 14
+EFP_MagicAttack = 15
+EFP_PhyHurt = 16
+EFP_MagicHurt = 17
+EFP_PhyDefense = 18
+EFP_MagicDefense = 19
+EFP_Dizziness = 20
+EFP_Silence = 21
+EFP_Blind = 22
+EFP_Immobilized = 23
 EFP_COUNT = 32
+ESS_QSlot = 0
+ESS_WSlot = 1
+ESS_ESlot = 2
+ESS_RSlot = 3
+ESS_FSlot = 4
+ESS_GSlot = 5
+ESS_PSlot = 6
+ESS_OneSlot = 11
+ESS_TwoSlot = 12
+ESS_ThreeSlot = 13
+ESS_FourSlot = 14
+ESS_FiveSlot = 15
+ESS_SixSlot = 16
+ESS_SevenSlot = 17
 
 
-DESCRIPTOR.enum_types_by_name['ESceneObject'] = _ESCENEOBJECT
+DESCRIPTOR.enum_types_by_name['EUnitType'] = _EUNITTYPE
 DESCRIPTOR.enum_types_by_name['EMoveAgentState'] = _EMOVEAGENTSTATE
 DESCRIPTOR.enum_types_by_name['EMoveState'] = _EMOVESTATE
-DESCRIPTOR.enum_types_by_name['EBattleOperation'] = _EBATTLEOPERATION
+DESCRIPTOR.enum_types_by_name['EPlayerOpera'] = _EPLAYEROPERA
 DESCRIPTOR.enum_types_by_name['EFightParam'] = _EFIGHTPARAM
+DESCRIPTOR.enum_types_by_name['ESkillSlot'] = _ESKILLSLOT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 

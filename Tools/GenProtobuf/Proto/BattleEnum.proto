@@ -2,7 +2,7 @@ syntax = "proto3";
 option cc_enable_arenas = true;
 package NetProto;
 
-enum ESceneObject
+enum EUnitType
 {
 	Building = 0;
 	Hero = 1;
@@ -29,31 +29,19 @@ enum EMoveState
 	EMoveState_Move = 1;
 	EMoveState_Immobilized = 2;
 	EMoveState_ForceMove = 3;
-};
+}
 
-enum EBattleOperation
+enum EPlayerOpera
 {
-	EBO_Invalid = 0;
-	EBO_Stop = 1;
-	EBO_Move = 2;
-	EBO_Follow = 3;
-	EBO_Hunt = 4;
-	
-	
-	EBO_CastSkill_Q = 11;
-	EBO_CastSkill_W = 12;
-	EBO_CastSkill_E = 13;
-	EBO_CastSkill_R = 14;
-	EBO_CastSkill_F = 15;
-	EBO_CastSkill_G = 16;
-	
-	EBO_UseItemSolt_1 = 21;
-	EBO_UseItemSolt_2 = 22;
-	EBO_UseItemSolt_3 = 23;
-	EBO_UseItemSolt_4 = 24;
-	EBO_UseItemSolt_5 = 25;
-	EBO_UseItemSolt_6 = 26;
-	
+	EPO_Invalid = 0;
+	EPO_Stop = 1;
+	EPO_Move = 2;
+	EPO_Follow = 3;
+	EPO_Hunt = 4;
+
+	EPO_CastSkill = 5;
+	EPO_UseItem = 6;
+
 	EBO_MaxCount = 32;
 }
 
@@ -67,12 +55,12 @@ enum EFightParam
 	EFP_MoveSpeed = 11;			// 移动速度
 	EFP_AttackDist = 12;		// 射程
 	EFP_AttackSpeed = 13;		// 攻击速度
-	EFP_PhyAttack = 13; 		// 物理攻击
-	EFP_MagicAttack = 14; 		// 法术攻击	
-	EFP_PhyHurt = 15; 			// 物强
-	EFP_MagicHurt = 16; 		// 法强
-	EFP_PhyDefense = 17;		// 物抗
-	EFP_MagicDefense = 18;		// 魔抗
+	EFP_PhyAttack = 14; 		// 物理攻击
+	EFP_MagicAttack = 15; 		// 法术攻击	
+	EFP_PhyHurt = 16; 			// 物强
+	EFP_MagicHurt = 17; 		// 法强
+	EFP_PhyDefense = 18;		// 物抗
+	EFP_MagicDefense = 19;		// 魔抗
 	
 	EFP_Dizziness = 20;			// 眩晕
 	EFP_Silence = 21;			// 沉默
@@ -80,4 +68,22 @@ enum EFightParam
 	EFP_Immobilized = 23;		// 定身
 	
 	EFP_COUNT = 32;
+}
+
+enum ESkillSlot
+{
+	ESS_QSlot = 0;
+	ESS_WSlot = 1;
+	ESS_ESlot = 2;
+	ESS_RSlot = 3;
+	ESS_FSlot = 4;	// 召唤师技能1
+	ESS_GSlot = 5;	// 召唤师技能2
+	ESS_PSlot = 6;	// 被动
+	ESS_OneSlot = 11;
+	ESS_TwoSlot = 12;
+	ESS_ThreeSlot = 13;
+	ESS_FourSlot = 14;
+	ESS_FiveSlot = 15;
+	ESS_SixSlot = 16;
+	ESS_SevenSlot = 17;
 }

@@ -221,24 +221,26 @@ namespace GameLogic
 
 		switch (msg->opera())
 		{
-		case NetProto::EBO_Move:
+		case NetProto::EPO_Move:
 			su_move->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
 			break;
-		case NetProto::EBO_Stop:
+		case NetProto::EPO_Stop:
 			su_move->CancelMove();
 			break;
-		case NetProto::EBO_CastSkill_Q:
+			/*
+		case NetProto::EPO_CastSkill_Q:
 			su_move->ForcePos(Vector3(msg->pos().x(), 0, msg->pos().y()), 5);
 			break;
-		case NetProto::EBO_CastSkill_W:
+		case NetProto::EPO_CastSkill_W:
 		{
 			Vector2 dir = GeometryUtils::CalVector2(Vector2::up, msg->dir());
 			su_move->ForceMoveLine(dir, 2, 3, false);
 		}
 		break;
-		case NetProto::EBO_CastSkill_E:
+		case NetProto::EPO_CastSkill_E:
 			su_move->Immobilized(1500);
 			break;
+			*/
 		default:
 			break;
 		}
