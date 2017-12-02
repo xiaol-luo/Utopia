@@ -1,22 +1,22 @@
-#include "Scene/CsvSceneConfig.h"
+#include "skill/SkillLevelConfig.h"
 #include "CsvParser/csv.h"
 
 namespace Config
 {
      static const char * Field_Name_id = "id";
-     static const char * Field_Name_terrain_file_path = "terrain_file_path";
+     static const char * Field_Name_level = "level";
 
-    bool CsvSceneConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
+    bool SkillLevelConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
         bool all_ok = true;
         all_ok = all_ok && kvPairs.count(Field_Name_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_id], id);
-        all_ok = all_ok && kvPairs.count(Field_Name_terrain_file_path) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_terrain_file_path], terrain_file_path);
+        all_ok = all_ok && kvPairs.count(Field_Name_level) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_level], level);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
     }
 
-    CsvSceneConfigSet::~CsvSceneConfigSet()
+    SkillLevelConfigSet::~SkillLevelConfigSet()
     {
         for (auto cfg : cfg_vec)
         {
@@ -24,30 +24,30 @@ namespace Config
         }
     }
 
-    bool CsvSceneConfigSet::Load(std::string file_path)
+    bool SkillLevelConfigSet::Load(std::string file_path)
     {
         io::CSVReader<2, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
-            Field_Name_terrain_file_path
+            Field_Name_level
             );
 
         std::map<std::string, std::string> kvParis;
         kvParis[Field_Name_id] = "";
-        kvParis[Field_Name_terrain_file_path] = "";
+        kvParis[Field_Name_level] = "";
 
         bool all_ok = true;
         int curr_row = 0;
         while (csv_reader.read_row(
             kvParis[Field_Name_id],
-            kvParis[Field_Name_terrain_file_path]
+            kvParis[Field_Name_level]
             ))
         {            
             if (++ curr_row <= 1)
                 continue;
             if (kvParis[Field_Name_id].empty())
                 continue;
-            CsvSceneConfig *cfg = new CsvSceneConfig();
+            SkillLevelConfig *cfg = new SkillLevelConfig();
             all_ok &= cfg->Init(kvParis, cfg_check_fun);
             if (!all_ok)
                 break;
@@ -59,12 +59,18 @@ namespace Config
             for (auto cfg : cfg_vec)
             {
                 {
-                    if (id_to_key.count(cfg->id) > 0)
+                    auto it = id_to_group.find(cfg->id);
+                    if (id_to_group.end() == it)
                     {
-                        all_ok = false;
-                        break;
+                        auto ret_it = id_to_group.insert(std::make_pair(cfg->id, std::vector<SkillLevelConfig *>()));
+                        if (!ret_it.second)
+                        {
+                            all_ok = false;
+                            break;
+                        }
+                        it = ret_it.first;
                     }
-                    id_to_key[cfg->id] = cfg;
+                    it->second.push_back(cfg);
                 }
             }
         }

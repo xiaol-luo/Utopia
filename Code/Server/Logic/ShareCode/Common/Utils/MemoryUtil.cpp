@@ -47,16 +47,22 @@ void MemoryUtil::Destroy()
 
 void * MemoryUtil::Malloc(size_t size)
 {
+	if (nullptr == memory_pool_mgr)
+		return nullptr;
 	return memory_pool_mgr->Malloc(size);
 }
 
 void MemoryUtil::Free(void * ptr)
 {
+	if (nullptr == memory_pool_mgr)
+		return;
 	memory_pool_mgr->Free(ptr);
 }
 
 void * MemoryUtil::Realloc(void * ptr, size_t size)
 {
+	if (nullptr == memory_pool_mgr)
+		return nullptr;
 	void *new_ptr = memory_pool_mgr->Malloc(size);
 	if (nullptr != ptr)
 	{

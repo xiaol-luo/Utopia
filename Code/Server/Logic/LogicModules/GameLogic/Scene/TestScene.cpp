@@ -85,7 +85,7 @@ namespace GameLogic
 		if (!m_test_ticker.InCd())
 		{
 			m_test_ticker.Restart();
-			if (m_scene_units.size() < 10)
+			if (m_scene_units.size() < 2)
 			{
 				auto hero = std::make_shared<SceneUnit>();
 				BuildHero(hero, this, Vector3(std::rand() % 100, 0, std::rand() % 100), (EViewCamp)(std::rand() % 2));

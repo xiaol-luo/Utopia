@@ -53,6 +53,8 @@ namespace Config
         {            
             if (++ curr_row <= 1)
                 continue;
+            if (kvParis[{{fields[0].column_name_tag}}].empty())
+                continue;
             {{ class_name }} *cfg = new {{ class_name }}();
             all_ok &= cfg->Init(kvParis, cfg_check_fun);
             if (!all_ok)

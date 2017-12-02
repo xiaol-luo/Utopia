@@ -85,6 +85,8 @@ namespace Config
         {            
             if (++ curr_row <= 1)
                 continue;
+            if (kvParis[Field_Name_id].empty())
+                continue;
             CsvLogConfig *cfg = new CsvLogConfig();
             all_ok &= cfg->Init(kvParis, cfg_check_fun);
             if (!all_ok)

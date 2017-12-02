@@ -23,6 +23,25 @@ out_cs_file_path = Scene/CsvSceneConfig.cs
 out_cpp_file_path = Scene/CsvSceneConfig
 out_lua_file_path = Scene/CsvSceneConfig.lua
 
+[excel2csv-skill.skill]
+file_path = skill/skill.xlsx
+sheet_name = skill
+out_csv_file_path = skill/SkillConfig.csv
+class_name = SkillConfig
+out_cs_file_path = skill/SkillConfig.cs
+out_cpp_file_path = skill/SkillConfig
+out_lua_file_path = skill/SkillConfig.lua
+
+[excel2csv-skill.level]
+file_path = skill/skill.xlsx
+sheet_name = level
+out_csv_file_path = skill/SkillLevelConfig.csv
+class_name = SkillLevelConfig
+out_cs_file_path = skill/SkillLevelConfig.cs
+out_cpp_file_path = skill/SkillLevelConfig
+out_lua_file_path = skill/SkillLevelConfig.lua
+
+
 
 
 

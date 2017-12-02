@@ -67,6 +67,8 @@ void * MemoryPoolMgr::Malloc(uint32_t malloc_size)
 
 void MemoryPoolMgr::Free(void *ptr)
 {
+	if (nullptr == ptr)
+		return;
 	void *real_ptr = (char *)ptr - BLOCK_SIZE_DESCRIPT_LEN;
 	ptr = nullptr;
 	uint32_t malloc_size = *(uint32_t *)real_ptr;
