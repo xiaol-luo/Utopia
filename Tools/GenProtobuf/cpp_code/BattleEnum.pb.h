@@ -244,6 +244,54 @@ inline bool ESkillState_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESkillState>(
     ESkillState_descriptor(), name, value);
 }
+enum ESkillUseWay {
+  ESkillTarget_Target = 0,
+  ESkillTarget_Direction = 1,
+  ESkillTarget_Postion = 2,
+  ESkillUseWay_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillUseWay_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESkillUseWay_IsValid(int value);
+const ESkillUseWay ESkillUseWay_MIN = ESkillTarget_Target;
+const ESkillUseWay ESkillUseWay_MAX = ESkillTarget_Postion;
+const int ESkillUseWay_ARRAYSIZE = ESkillUseWay_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESkillUseWay_descriptor();
+inline const ::std::string& ESkillUseWay_Name(ESkillUseWay value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillUseWay_descriptor(), value);
+}
+inline bool ESkillUseWay_Parse(
+    const ::std::string& name, ESkillUseWay* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillUseWay>(
+    ESkillUseWay_descriptor(), name, value);
+}
+enum ESkillTargetCase {
+  ESkillTargetCase_Self = 0,
+  ESkillTargetCase_Friend = 1,
+  ESkillTargetCase_Enemy = 2,
+  ESkillTargetCase_SelfEnemy = 3,
+  ESkillTargetCase_FriendExcludeSelf = 4,
+  ESkillTargetCase_AllExcludeSelf = 5,
+  ESkillTargetCase_All = 6,
+  ESkillTargetCase_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillTargetCase_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESkillTargetCase_IsValid(int value);
+const ESkillTargetCase ESkillTargetCase_MIN = ESkillTargetCase_Self;
+const ESkillTargetCase ESkillTargetCase_MAX = ESkillTargetCase_All;
+const int ESkillTargetCase_ARRAYSIZE = ESkillTargetCase_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESkillTargetCase_descriptor();
+inline const ::std::string& ESkillTargetCase_Name(ESkillTargetCase value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillTargetCase_descriptor(), value);
+}
+inline bool ESkillTargetCase_Parse(
+    const ::std::string& name, ESkillTargetCase* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillTargetCase>(
+    ESkillTargetCase_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -304,6 +352,16 @@ template <> struct is_proto_enum< ::NetProto::ESkillState> : ::google::protobuf:
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillState>() {
   return ::NetProto::ESkillState_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESkillUseWay> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillUseWay>() {
+  return ::NetProto::ESkillUseWay_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESkillTargetCase> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillTargetCase>() {
+  return ::NetProto::ESkillTargetCase_descriptor();
 }
 
 }  // namespace protobuf

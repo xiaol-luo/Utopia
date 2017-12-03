@@ -9,12 +9,24 @@ namespace Config
     {
         public const string Field_Name_id = "id";
         public const string Field_Name_level = "level";
+        public const string Field_Name_preparing_span = "preparing_span";
+        public const string Field_Name_releasing_span = "releasing_span";
+        public const string Field_Name_using_span = "using_span";
+        public const string Field_Name_lasting_span = "lasting_span";
+        public const string Field_Name_comsume_mp = "comsume_mp";
+        public const string Field_Name_cd = "cd";
     }
 
     public class SkillLevelConfig
     {
         public int id;
         public int level;
+        public int preparing_span;
+        public int releasing_span;
+        public int using_span;
+        public int lasting_span;
+        public int comsume_mp;
+        public int cd;
 
         public delegate bool ConfigCheckFunc(SkillLevelConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -22,6 +34,12 @@ namespace Config
             bool all_ok = true;
         all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_id], ref id);
         all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_level) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_level], ref level);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_preparing_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_preparing_span], ref preparing_span);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_releasing_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_releasing_span], ref releasing_span);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_using_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_using_span], ref using_span);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_lasting_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_lasting_span], ref lasting_span);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_comsume_mp) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_comsume_mp], ref comsume_mp);
+        all_ok = all_ok && kvPairs.ContainsKey(FieldName_SkillLevelConfig.Field_Name_cd) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_SkillLevelConfig.Field_Name_cd], ref cd);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -49,6 +67,12 @@ namespace Config
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_id));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_level));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_preparing_span));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_releasing_span));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_using_span));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_lasting_span));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_comsume_mp));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_SkillLevelConfig.Field_Name_cd));
                 }
                 catch (Exception e)
                 {

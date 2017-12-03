@@ -50,10 +50,17 @@ namespace NetProto {
             "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBEqbgoLRVNraWxs",
             "U3RhdGUSDAoIRVNTX0ZyZWUQABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNT",
             "X1JlbGVhc2luZxACEg0KCUVTU19Vc2luZxADEg8KC0VTU19MYXN0aW5nEAQS",
-            "CwoHRVNTX0VuZBAFQgP4AQFiBnByb3RvMw=="));
+            "CwoHRVNTX0VuZBAFKl0KDEVTa2lsbFVzZVdheRIXChNFU2tpbGxUYXJnZXRf",
+            "VGFyZ2V0EAASGgoWRVNraWxsVGFyZ2V0X0RpcmVjdGlvbhABEhgKFEVTa2ls",
+            "bFRhcmdldF9Qb3N0aW9uEAIq7QEKEEVTa2lsbFRhcmdldENhc2USGQoVRVNr",
+            "aWxsVGFyZ2V0Q2FzZV9TZWxmEAASGwoXRVNraWxsVGFyZ2V0Q2FzZV9Gcmll",
+            "bmQQARIaChZFU2tpbGxUYXJnZXRDYXNlX0VuZW15EAISHgoaRVNraWxsVGFy",
+            "Z2V0Q2FzZV9TZWxmRW5lbXkQAxImCiJFU2tpbGxUYXJnZXRDYXNlX0ZyaWVu",
+            "ZEV4Y2x1ZGVTZWxmEAQSIwofRVNraWxsVGFyZ2V0Q2FzZV9BbGxFeGNsdWRl",
+            "U2VsZhAFEhgKFEVTa2lsbFRhcmdldENhc2VfQWxsEAZCA/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillState), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillTargetCase), }, null));
     }
     #endregion
 
@@ -218,6 +225,22 @@ namespace NetProto {
     /// 结束
     /// </summary>
     [pbr::OriginalName("ESS_End")] EssEnd = 5,
+  }
+
+  public enum ESkillUseWay {
+    [pbr::OriginalName("ESkillTarget_Target")] EskillTargetTarget = 0,
+    [pbr::OriginalName("ESkillTarget_Direction")] EskillTargetDirection = 1,
+    [pbr::OriginalName("ESkillTarget_Postion")] EskillTargetPostion = 2,
+  }
+
+  public enum ESkillTargetCase {
+    [pbr::OriginalName("ESkillTargetCase_Self")] Self = 0,
+    [pbr::OriginalName("ESkillTargetCase_Friend")] Friend = 1,
+    [pbr::OriginalName("ESkillTargetCase_Enemy")] Enemy = 2,
+    [pbr::OriginalName("ESkillTargetCase_SelfEnemy")] SelfEnemy = 3,
+    [pbr::OriginalName("ESkillTargetCase_FriendExcludeSelf")] FriendExcludeSelf = 4,
+    [pbr::OriginalName("ESkillTargetCase_AllExcludeSelf")] AllExcludeSelf = 5,
+    [pbr::OriginalName("ESkillTargetCase_All")] All = 6,
   }
 
   #endregion

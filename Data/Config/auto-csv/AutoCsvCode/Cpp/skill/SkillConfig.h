@@ -10,6 +10,7 @@ namespace Config
     {
         int id = 0 ;
         std::string name;
+        bool is_normal_attack = 0 ;
 
         using ConfigCheckFunc = bool(*)(SkillConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

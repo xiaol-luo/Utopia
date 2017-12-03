@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[7];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[9];
 
 }  // namespace
 
@@ -111,11 +111,19 @@ void AddDescriptorsImpl() {
       "ot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_SevenSlot\020\021"
       "*n\n\013ESkillState\022\014\n\010ESS_Free\020\000\022\021\n\rESS_Pre"
       "paring\020\001\022\021\n\rESS_Releasing\020\002\022\r\n\tESS_Using"
-      "\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005B\003\370\001\001b\006p"
-      "roto3"
+      "\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*]\n\014ESki"
+      "llUseWay\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESk"
+      "illTarget_Direction\020\001\022\030\n\024ESkillTarget_Po"
+      "stion\020\002*\355\001\n\020ESkillTargetCase\022\031\n\025ESkillTa"
+      "rgetCase_Self\020\000\022\033\n\027ESkillTargetCase_Frie"
+      "nd\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032ESki"
+      "llTargetCase_SelfEnemy\020\003\022&\n\"ESkillTarget"
+      "Case_FriendExcludeSelf\020\004\022#\n\037ESkillTarget"
+      "Case_AllExcludeSelf\020\005\022\030\n\024ESkillTargetCas"
+      "e_All\020\006B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1285);
+      descriptor, 1620);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -274,6 +282,40 @@ bool ESkillState_IsValid(int value) {
     case 3:
     case 4:
     case 5:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESkillUseWay_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[7];
+}
+bool ESkillUseWay_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESkillTargetCase_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[8];
+}
+bool ESkillTargetCase_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
       return true;
     default:
       return false;

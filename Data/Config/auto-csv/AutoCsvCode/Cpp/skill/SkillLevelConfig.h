@@ -10,6 +10,12 @@ namespace Config
     {
         int id = 0 ;
         int level = 0 ;
+        int preparing_span = 0 ;
+        int releasing_span = 0 ;
+        int using_span = 0 ;
+        int lasting_span = 0 ;
+        int comsume_mp = 0 ;
+        int cd = 0 ;
 
         using ConfigCheckFunc = bool(*)(SkillLevelConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

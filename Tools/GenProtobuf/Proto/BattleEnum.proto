@@ -98,3 +98,20 @@ enum ESkillState
 	ESS_End = 5;				// 结束
 }
 
+enum ESkillUseWay
+{
+	ESkillTarget_Target = 0;
+	ESkillTarget_Direction = 1;
+	ESkillTarget_Postion = 2;
+}
+
+enum ESkillTargetCase
+{
+	ESkillTargetCase_Self = 0;
+	ESkillTargetCase_Friend = 1;
+	ESkillTargetCase_Enemy = 2;
+	ESkillTargetCase_SelfEnemy = 3;
+	ESkillTargetCase_FriendExcludeSelf = 4;
+	ESkillTargetCase_AllExcludeSelf = 5;
+	ESkillTargetCase_All = 6;
+}
