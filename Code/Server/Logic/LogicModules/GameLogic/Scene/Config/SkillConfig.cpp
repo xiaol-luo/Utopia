@@ -1,4 +1,5 @@
 #include "SkillConfig.h"
+#include "SkillConfig.h"
 #include "Config/AutoCsvCode/skill/CsvSkillConfig.h"
 #include "Config/AutoCsvCode/skill/CsvSkillLevelConfig.h"
 #include "Config/AutoCsvCode/CsvConfigSets.h"
@@ -41,7 +42,7 @@ namespace GameLogic
 			skill_cfg->name = csv_skill->name;
 			skill_cfg->is_normal_attack = csv_skill->is_normal_attack;
 			skill_cfg->use_way = (NetProto::ESkillUseWay)csv_skill->use_way;
-			skill_cfg->target_case = (NetProto::ESkillTargetCase)csv_skill->target_case;
+			skill_cfg->target_case = (NetProto::ESkillEffectCase)csv_skill->target_case;
 
 			for (Config::CsvSkillLevelConfig *csv_lvl : kv_pair.second)
 			{
@@ -64,19 +65,19 @@ namespace GameLogic
 		}
 	}
 
-	const SkillConfig * SkillConfigSet::GetSkill(int skill_id)
+	const SkillConfig * SkillConfigSet::GetSkill(int skill_id) const
 	{
 		auto it = skills.find(skill_id);
 		if (skills.end() == it)
 			return nullptr;
 		return it->second;
 	}
-	const SkillLevelConfig * SkillConfigSet::GetSkill(int skill_id, int level)
+	const SkillLevelConfig * SkillConfigSet::GetSkill(int skill_id, int level) const
 	{
 		const SkillConfig *skill_cfg = this->GetSkill(skill_id);
-		if (nullptr == skill_cfg || level < 0 || level > skill_cfg->max_level)
+		if (nullptr == skill_cfg)
 			return nullptr;
-		return skill_cfg->level_cfgs[level];
+		return skill_cfg->GetLvlCfg(level);
 	}
 	SkillConfig::~SkillConfig()
 	{
@@ -84,6 +85,13 @@ namespace GameLogic
 		{
 			delete lvl_cfg;
 		}
+	}
+
+	const SkillLevelConfig * SkillConfig::GetLvlCfg(int lvl) const
+	{
+		if (lvl < 0 || lvl > max_level)
+			return nullptr;
+		return level_cfgs[lvl];
 	}
 
 	SkillLevelConfig::~SkillLevelConfig()

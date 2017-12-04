@@ -219,6 +219,27 @@ inline bool ESkillSlot_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESkillSlot>(
     ESkillSlot_descriptor(), name, value);
 }
+enum ESkillBar {
+  ESkillBar_Default = 0,
+  ESkillBar_Extra = 1,
+  ESkillBar_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillBar_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESkillBar_IsValid(int value);
+const ESkillBar ESkillBar_MIN = ESkillBar_Default;
+const ESkillBar ESkillBar_MAX = ESkillBar_Extra;
+const int ESkillBar_ARRAYSIZE = ESkillBar_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESkillBar_descriptor();
+inline const ::std::string& ESkillBar_Name(ESkillBar value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESkillBar_descriptor(), value);
+}
+inline bool ESkillBar_Parse(
+    const ::std::string& name, ESkillBar* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillBar>(
+    ESkillBar_descriptor(), name, value);
+}
 enum ESkillState {
   ESS_Free = 0,
   ESS_Preparing = 1,
@@ -247,13 +268,13 @@ inline bool ESkillState_Parse(
 enum ESkillUseWay {
   ESkillTarget_Target = 0,
   ESkillTarget_Direction = 1,
-  ESkillTarget_Postion = 2,
+  ESkillTarget_Position = 2,
   ESkillUseWay_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESkillUseWay_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ESkillUseWay_IsValid(int value);
 const ESkillUseWay ESkillUseWay_MIN = ESkillTarget_Target;
-const ESkillUseWay ESkillUseWay_MAX = ESkillTarget_Postion;
+const ESkillUseWay ESkillUseWay_MAX = ESkillTarget_Position;
 const int ESkillUseWay_ARRAYSIZE = ESkillUseWay_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ESkillUseWay_descriptor();
@@ -266,7 +287,7 @@ inline bool ESkillUseWay_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESkillUseWay>(
     ESkillUseWay_descriptor(), name, value);
 }
-enum ESkillTargetCase {
+enum ESkillEffectCase {
   ESkillTargetCase_Self = 0,
   ESkillTargetCase_Friend = 1,
   ESkillTargetCase_Enemy = 2,
@@ -274,23 +295,23 @@ enum ESkillTargetCase {
   ESkillTargetCase_FriendExcludeSelf = 4,
   ESkillTargetCase_AllExcludeSelf = 5,
   ESkillTargetCase_All = 6,
-  ESkillTargetCase_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ESkillTargetCase_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+  ESkillEffectCase_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESkillEffectCase_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool ESkillTargetCase_IsValid(int value);
-const ESkillTargetCase ESkillTargetCase_MIN = ESkillTargetCase_Self;
-const ESkillTargetCase ESkillTargetCase_MAX = ESkillTargetCase_All;
-const int ESkillTargetCase_ARRAYSIZE = ESkillTargetCase_MAX + 1;
+bool ESkillEffectCase_IsValid(int value);
+const ESkillEffectCase ESkillEffectCase_MIN = ESkillTargetCase_Self;
+const ESkillEffectCase ESkillEffectCase_MAX = ESkillTargetCase_All;
+const int ESkillEffectCase_ARRAYSIZE = ESkillEffectCase_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESkillTargetCase_descriptor();
-inline const ::std::string& ESkillTargetCase_Name(ESkillTargetCase value) {
+const ::google::protobuf::EnumDescriptor* ESkillEffectCase_descriptor();
+inline const ::std::string& ESkillEffectCase_Name(ESkillEffectCase value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ESkillTargetCase_descriptor(), value);
+    ESkillEffectCase_descriptor(), value);
 }
-inline bool ESkillTargetCase_Parse(
-    const ::std::string& name, ESkillTargetCase* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ESkillTargetCase>(
-    ESkillTargetCase_descriptor(), name, value);
+inline bool ESkillEffectCase_Parse(
+    const ::std::string& name, ESkillEffectCase* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESkillEffectCase>(
+    ESkillEffectCase_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -348,6 +369,11 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillSlot>() {
   return ::NetProto::ESkillSlot_descriptor();
 }
+template <> struct is_proto_enum< ::NetProto::ESkillBar> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillBar>() {
+  return ::NetProto::ESkillBar_descriptor();
+}
 template <> struct is_proto_enum< ::NetProto::ESkillState> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillState>() {
@@ -358,10 +384,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillUseWay>() {
   return ::NetProto::ESkillUseWay_descriptor();
 }
-template <> struct is_proto_enum< ::NetProto::ESkillTargetCase> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::NetProto::ESkillEffectCase> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillTargetCase>() {
-  return ::NetProto::ESkillTargetCase_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillEffectCase>() {
+  return ::NetProto::ESkillEffectCase_descriptor();
 }
 
 }  // namespace protobuf

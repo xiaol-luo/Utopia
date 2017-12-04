@@ -88,6 +88,12 @@ enum ESkillSlot
 	ESS_SevenSlot = 17;
 }
 
+enum ESkillBar
+{
+	ESkillBar_Default = 0;
+	ESkillBar_Extra = 1;
+}
+
 enum ESkillState
 {
 	ESS_Free = 0;				// 空闲

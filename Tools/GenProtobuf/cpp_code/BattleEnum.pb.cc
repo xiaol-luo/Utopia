@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[9];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[10];
 
 }  // namespace
 
@@ -109,21 +109,22 @@ void AddDescriptorsImpl() {
       "SS_OneSlot\020\013\022\017\n\013ESS_TwoSlot\020\014\022\021\n\rESS_Thr"
       "eeSlot\020\r\022\020\n\014ESS_FourSlot\020\016\022\020\n\014ESS_FiveSl"
       "ot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_SevenSlot\020\021"
-      "*n\n\013ESkillState\022\014\n\010ESS_Free\020\000\022\021\n\rESS_Pre"
-      "paring\020\001\022\021\n\rESS_Releasing\020\002\022\r\n\tESS_Using"
-      "\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*]\n\014ESki"
-      "llUseWay\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESk"
-      "illTarget_Direction\020\001\022\030\n\024ESkillTarget_Po"
-      "stion\020\002*\355\001\n\020ESkillTargetCase\022\031\n\025ESkillTa"
-      "rgetCase_Self\020\000\022\033\n\027ESkillTargetCase_Frie"
-      "nd\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032ESki"
-      "llTargetCase_SelfEnemy\020\003\022&\n\"ESkillTarget"
-      "Case_FriendExcludeSelf\020\004\022#\n\037ESkillTarget"
-      "Case_AllExcludeSelf\020\005\022\030\n\024ESkillTargetCas"
-      "e_All\020\006B\003\370\001\001b\006proto3"
+      "*7\n\tESkillBar\022\025\n\021ESkillBar_Default\020\000\022\023\n\017"
+      "ESkillBar_Extra\020\001*n\n\013ESkillState\022\014\n\010ESS_"
+      "Free\020\000\022\021\n\rESS_Preparing\020\001\022\021\n\rESS_Releasi"
+      "ng\020\002\022\r\n\tESS_Using\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007"
+      "ESS_End\020\005*^\n\014ESkillUseWay\022\027\n\023ESkillTarge"
+      "t_Target\020\000\022\032\n\026ESkillTarget_Direction\020\001\022\031"
+      "\n\025ESkillTarget_Position\020\002*\355\001\n\020ESkillEffe"
+      "ctCase\022\031\n\025ESkillTargetCase_Self\020\000\022\033\n\027ESk"
+      "illTargetCase_Friend\020\001\022\032\n\026ESkillTargetCa"
+      "se_Enemy\020\002\022\036\n\032ESkillTargetCase_SelfEnemy"
+      "\020\003\022&\n\"ESkillTargetCase_FriendExcludeSelf"
+      "\020\004\022#\n\037ESkillTargetCase_AllExcludeSelf\020\005\022"
+      "\030\n\024ESkillTargetCase_All\020\006B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1620);
+      descriptor, 1678);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -270,9 +271,23 @@ bool ESkillSlot_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* ESkillState_descriptor() {
+const ::google::protobuf::EnumDescriptor* ESkillBar_descriptor() {
   protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[6];
+}
+bool ESkillBar_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESkillState_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[7];
 }
 bool ESkillState_IsValid(int value) {
   switch (value) {
@@ -290,7 +305,7 @@ bool ESkillState_IsValid(int value) {
 
 const ::google::protobuf::EnumDescriptor* ESkillUseWay_descriptor() {
   protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[7];
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[8];
 }
 bool ESkillUseWay_IsValid(int value) {
   switch (value) {
@@ -303,11 +318,11 @@ bool ESkillUseWay_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* ESkillTargetCase_descriptor() {
+const ::google::protobuf::EnumDescriptor* ESkillEffectCase_descriptor() {
   protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[8];
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[9];
 }
-bool ESkillTargetCase_IsValid(int value) {
+bool ESkillEffectCase_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:

@@ -47,20 +47,22 @@ namespace NetProto {
             "Eg0KCUVTU19GU2xvdBAEEg0KCUVTU19HU2xvdBAFEg0KCUVTU19QU2xvdBAG",
             "Eg8KC0VTU19PbmVTbG90EAsSDwoLRVNTX1R3b1Nsb3QQDBIRCg1FU1NfVGhy",
             "ZWVTbG90EA0SEAoMRVNTX0ZvdXJTbG90EA4SEAoMRVNTX0ZpdmVTbG90EA8S",
-            "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBEqbgoLRVNraWxs",
-            "U3RhdGUSDAoIRVNTX0ZyZWUQABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNT",
-            "X1JlbGVhc2luZxACEg0KCUVTU19Vc2luZxADEg8KC0VTU19MYXN0aW5nEAQS",
-            "CwoHRVNTX0VuZBAFKl0KDEVTa2lsbFVzZVdheRIXChNFU2tpbGxUYXJnZXRf",
-            "VGFyZ2V0EAASGgoWRVNraWxsVGFyZ2V0X0RpcmVjdGlvbhABEhgKFEVTa2ls",
-            "bFRhcmdldF9Qb3N0aW9uEAIq7QEKEEVTa2lsbFRhcmdldENhc2USGQoVRVNr",
-            "aWxsVGFyZ2V0Q2FzZV9TZWxmEAASGwoXRVNraWxsVGFyZ2V0Q2FzZV9Gcmll",
-            "bmQQARIaChZFU2tpbGxUYXJnZXRDYXNlX0VuZW15EAISHgoaRVNraWxsVGFy",
-            "Z2V0Q2FzZV9TZWxmRW5lbXkQAxImCiJFU2tpbGxUYXJnZXRDYXNlX0ZyaWVu",
-            "ZEV4Y2x1ZGVTZWxmEAQSIwofRVNraWxsVGFyZ2V0Q2FzZV9BbGxFeGNsdWRl",
-            "U2VsZhAFEhgKFEVTa2lsbFRhcmdldENhc2VfQWxsEAZCA/gBAWIGcHJvdG8z"));
+            "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBEqNwoJRVNraWxs",
+            "QmFyEhUKEUVTa2lsbEJhcl9EZWZhdWx0EAASEwoPRVNraWxsQmFyX0V4dHJh",
+            "EAEqbgoLRVNraWxsU3RhdGUSDAoIRVNTX0ZyZWUQABIRCg1FU1NfUHJlcGFy",
+            "aW5nEAESEQoNRVNTX1JlbGVhc2luZxACEg0KCUVTU19Vc2luZxADEg8KC0VT",
+            "U19MYXN0aW5nEAQSCwoHRVNTX0VuZBAFKl4KDEVTa2lsbFVzZVdheRIXChNF",
+            "U2tpbGxUYXJnZXRfVGFyZ2V0EAASGgoWRVNraWxsVGFyZ2V0X0RpcmVjdGlv",
+            "bhABEhkKFUVTa2lsbFRhcmdldF9Qb3NpdGlvbhACKu0BChBFU2tpbGxFZmZl",
+            "Y3RDYXNlEhkKFUVTa2lsbFRhcmdldENhc2VfU2VsZhAAEhsKF0VTa2lsbFRh",
+            "cmdldENhc2VfRnJpZW5kEAESGgoWRVNraWxsVGFyZ2V0Q2FzZV9FbmVteRAC",
+            "Eh4KGkVTa2lsbFRhcmdldENhc2VfU2VsZkVuZW15EAMSJgoiRVNraWxsVGFy",
+            "Z2V0Q2FzZV9GcmllbmRFeGNsdWRlU2VsZhAEEiMKH0VTa2lsbFRhcmdldENh",
+            "c2VfQWxsRXhjbHVkZVNlbGYQBRIYChRFU2tpbGxUYXJnZXRDYXNlX0FsbBAG",
+            "QgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillTargetCase), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
     }
     #endregion
 
@@ -200,6 +202,11 @@ namespace NetProto {
     [pbr::OriginalName("ESS_SevenSlot")] EssSevenSlot = 17,
   }
 
+  public enum ESkillBar {
+    [pbr::OriginalName("ESkillBar_Default")] Default = 0,
+    [pbr::OriginalName("ESkillBar_Extra")] Extra = 1,
+  }
+
   public enum ESkillState {
     /// <summary>
     /// 空闲
@@ -230,17 +237,17 @@ namespace NetProto {
   public enum ESkillUseWay {
     [pbr::OriginalName("ESkillTarget_Target")] EskillTargetTarget = 0,
     [pbr::OriginalName("ESkillTarget_Direction")] EskillTargetDirection = 1,
-    [pbr::OriginalName("ESkillTarget_Postion")] EskillTargetPostion = 2,
+    [pbr::OriginalName("ESkillTarget_Position")] EskillTargetPosition = 2,
   }
 
-  public enum ESkillTargetCase {
-    [pbr::OriginalName("ESkillTargetCase_Self")] Self = 0,
-    [pbr::OriginalName("ESkillTargetCase_Friend")] Friend = 1,
-    [pbr::OriginalName("ESkillTargetCase_Enemy")] Enemy = 2,
-    [pbr::OriginalName("ESkillTargetCase_SelfEnemy")] SelfEnemy = 3,
-    [pbr::OriginalName("ESkillTargetCase_FriendExcludeSelf")] FriendExcludeSelf = 4,
-    [pbr::OriginalName("ESkillTargetCase_AllExcludeSelf")] AllExcludeSelf = 5,
-    [pbr::OriginalName("ESkillTargetCase_All")] All = 6,
+  public enum ESkillEffectCase {
+    [pbr::OriginalName("ESkillTargetCase_Self")] EskillTargetCaseSelf = 0,
+    [pbr::OriginalName("ESkillTargetCase_Friend")] EskillTargetCaseFriend = 1,
+    [pbr::OriginalName("ESkillTargetCase_Enemy")] EskillTargetCaseEnemy = 2,
+    [pbr::OriginalName("ESkillTargetCase_SelfEnemy")] EskillTargetCaseSelfEnemy = 3,
+    [pbr::OriginalName("ESkillTargetCase_FriendExcludeSelf")] EskillTargetCaseFriendExcludeSelf = 4,
+    [pbr::OriginalName("ESkillTargetCase_AllExcludeSelf")] EskillTargetCaseAllExcludeSelf = 5,
+    [pbr::OriginalName("ESkillTargetCase_All")] EskillTargetCaseAll = 6,
   }
 
   #endregion

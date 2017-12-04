@@ -33,9 +33,11 @@ namespace GameLogic
 		std::string name;
 		bool is_normal_attack = false;
 		NetProto::ESkillUseWay use_way;
-		NetProto::ESkillTargetCase target_case;
+		NetProto::ESkillEffectCase target_case;
 		int max_level = -1;
 		SkillLevelConfig *level_cfgs[MAX_SKILL_LEVEL + 1];
+
+		const SkillLevelConfig * GetLvlCfg(int lvl) const;
 	};
 
 	struct SkillConfigSet
@@ -47,7 +49,7 @@ namespace GameLogic
 		void Reset();
 		void Init(Config::CsvConfigSets *csv_cfgs, void *param);
 
-		const SkillConfig * GetSkill(int skill_id);
-		const SkillLevelConfig * GetSkill(int skill_id, int level);
+		const SkillConfig * GetSkill(int skill_id) const;
+		const SkillLevelConfig * GetSkill(int skill_id, int level) const;
 	};
 }

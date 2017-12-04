@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='BattleEnum.proto',
   package='NetProto',
   syntax='proto3',
-  serialized_pb=_b('\n\x10\x42\x61ttleEnum.proto\x12\x08NetProto*5\n\tEUnitType\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03*\xe0\x01\n\x0f\x45MoveAgentState\x12\x18\n\x14\x45MoveAgentState_Idle\x10\x00\x12\x1d\n\x19\x45MoveAgentState_MoveToPos\x10\x01\x12\x1d\n\x19\x45MoveAgentState_MoveToDir\x10\x02\x12\x1f\n\x1b\x45MoveAgentState_Immobilized\x10\x03\x12\x1d\n\x19\x45MoveAgentState_ForceLine\x10\x04\x12\x1c\n\x18\x45MoveAgentState_ForcePos\x10\x05\x12\x17\n\x13\x45MoveAgentState_Max\x10\x06*l\n\nEMoveState\x12\x13\n\x0f\x45MoveState_Idle\x10\x00\x12\x13\n\x0f\x45MoveState_Move\x10\x01\x12\x1a\n\x16\x45MoveState_Immobilized\x10\x02\x12\x18\n\x14\x45MoveState_ForceMove\x10\x03*\x8f\x01\n\x0c\x45PlayerOpera\x12\x0f\n\x0b\x45PO_Invalid\x10\x00\x12\x0c\n\x08\x45PO_Stop\x10\x01\x12\x0c\n\x08\x45PO_Move\x10\x02\x12\x0e\n\nEPO_Follow\x10\x03\x12\x0c\n\x08\x45PO_Hunt\x10\x04\x12\x11\n\rEPO_CastSkill\x10\x05\x12\x0f\n\x0b\x45PO_UseItem\x10\x06\x12\x10\n\x0c\x45\x42O_MaxCount\x10 *\xda\x02\n\x0b\x45\x46ightParam\x12\x0c\n\x08\x45\x46P_None\x10\x00\x12\n\n\x06\x45\x46P_HP\x10\x01\x12\n\n\x06\x45\x46P_MP\x10\x02\x12\r\n\tEFP_MaxHP\x10\t\x12\r\n\tEFP_MaxMP\x10\n\x12\x11\n\rEFP_MoveSpeed\x10\x0b\x12\x12\n\x0e\x45\x46P_AttackDist\x10\x0c\x12\x13\n\x0f\x45\x46P_AttackSpeed\x10\r\x12\x11\n\rEFP_PhyAttack\x10\x0e\x12\x13\n\x0f\x45\x46P_MagicAttack\x10\x0f\x12\x0f\n\x0b\x45\x46P_PhyHurt\x10\x10\x12\x11\n\rEFP_MagicHurt\x10\x11\x12\x12\n\x0e\x45\x46P_PhyDefense\x10\x12\x12\x14\n\x10\x45\x46P_MagicDefense\x10\x13\x12\x11\n\rEFP_Dizziness\x10\x14\x12\x0f\n\x0b\x45\x46P_Silence\x10\x15\x12\r\n\tEFP_Blind\x10\x16\x12\x13\n\x0f\x45\x46P_Immobilized\x10\x17\x12\r\n\tEFP_COUNT\x10 *\xf2\x01\n\nESkillSlot\x12\r\n\tESS_QSlot\x10\x00\x12\r\n\tESS_WSlot\x10\x01\x12\r\n\tESS_ESlot\x10\x02\x12\r\n\tESS_RSlot\x10\x03\x12\r\n\tESS_FSlot\x10\x04\x12\r\n\tESS_GSlot\x10\x05\x12\r\n\tESS_PSlot\x10\x06\x12\x0f\n\x0b\x45SS_OneSlot\x10\x0b\x12\x0f\n\x0b\x45SS_TwoSlot\x10\x0c\x12\x11\n\rESS_ThreeSlot\x10\r\x12\x10\n\x0c\x45SS_FourSlot\x10\x0e\x12\x10\n\x0c\x45SS_FiveSlot\x10\x0f\x12\x0f\n\x0b\x45SS_SixSlot\x10\x10\x12\x11\n\rESS_SevenSlot\x10\x11*n\n\x0b\x45SkillState\x12\x0c\n\x08\x45SS_Free\x10\x00\x12\x11\n\rESS_Preparing\x10\x01\x12\x11\n\rESS_Releasing\x10\x02\x12\r\n\tESS_Using\x10\x03\x12\x0f\n\x0b\x45SS_Lasting\x10\x04\x12\x0b\n\x07\x45SS_End\x10\x05*]\n\x0c\x45SkillUseWay\x12\x17\n\x13\x45SkillTarget_Target\x10\x00\x12\x1a\n\x16\x45SkillTarget_Direction\x10\x01\x12\x18\n\x14\x45SkillTarget_Postion\x10\x02*\xed\x01\n\x10\x45SkillTargetCase\x12\x19\n\x15\x45SkillTargetCase_Self\x10\x00\x12\x1b\n\x17\x45SkillTargetCase_Friend\x10\x01\x12\x1a\n\x16\x45SkillTargetCase_Enemy\x10\x02\x12\x1e\n\x1a\x45SkillTargetCase_SelfEnemy\x10\x03\x12&\n\"ESkillTargetCase_FriendExcludeSelf\x10\x04\x12#\n\x1f\x45SkillTargetCase_AllExcludeSelf\x10\x05\x12\x18\n\x14\x45SkillTargetCase_All\x10\x06\x42\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x10\x42\x61ttleEnum.proto\x12\x08NetProto*5\n\tEUnitType\x12\x0c\n\x08\x42uilding\x10\x00\x12\x08\n\x04Hero\x10\x01\x12\x07\n\x03Npc\x10\x02\x12\x07\n\x03MAX\x10\x03*\xe0\x01\n\x0f\x45MoveAgentState\x12\x18\n\x14\x45MoveAgentState_Idle\x10\x00\x12\x1d\n\x19\x45MoveAgentState_MoveToPos\x10\x01\x12\x1d\n\x19\x45MoveAgentState_MoveToDir\x10\x02\x12\x1f\n\x1b\x45MoveAgentState_Immobilized\x10\x03\x12\x1d\n\x19\x45MoveAgentState_ForceLine\x10\x04\x12\x1c\n\x18\x45MoveAgentState_ForcePos\x10\x05\x12\x17\n\x13\x45MoveAgentState_Max\x10\x06*l\n\nEMoveState\x12\x13\n\x0f\x45MoveState_Idle\x10\x00\x12\x13\n\x0f\x45MoveState_Move\x10\x01\x12\x1a\n\x16\x45MoveState_Immobilized\x10\x02\x12\x18\n\x14\x45MoveState_ForceMove\x10\x03*\x8f\x01\n\x0c\x45PlayerOpera\x12\x0f\n\x0b\x45PO_Invalid\x10\x00\x12\x0c\n\x08\x45PO_Stop\x10\x01\x12\x0c\n\x08\x45PO_Move\x10\x02\x12\x0e\n\nEPO_Follow\x10\x03\x12\x0c\n\x08\x45PO_Hunt\x10\x04\x12\x11\n\rEPO_CastSkill\x10\x05\x12\x0f\n\x0b\x45PO_UseItem\x10\x06\x12\x10\n\x0c\x45\x42O_MaxCount\x10 *\xda\x02\n\x0b\x45\x46ightParam\x12\x0c\n\x08\x45\x46P_None\x10\x00\x12\n\n\x06\x45\x46P_HP\x10\x01\x12\n\n\x06\x45\x46P_MP\x10\x02\x12\r\n\tEFP_MaxHP\x10\t\x12\r\n\tEFP_MaxMP\x10\n\x12\x11\n\rEFP_MoveSpeed\x10\x0b\x12\x12\n\x0e\x45\x46P_AttackDist\x10\x0c\x12\x13\n\x0f\x45\x46P_AttackSpeed\x10\r\x12\x11\n\rEFP_PhyAttack\x10\x0e\x12\x13\n\x0f\x45\x46P_MagicAttack\x10\x0f\x12\x0f\n\x0b\x45\x46P_PhyHurt\x10\x10\x12\x11\n\rEFP_MagicHurt\x10\x11\x12\x12\n\x0e\x45\x46P_PhyDefense\x10\x12\x12\x14\n\x10\x45\x46P_MagicDefense\x10\x13\x12\x11\n\rEFP_Dizziness\x10\x14\x12\x0f\n\x0b\x45\x46P_Silence\x10\x15\x12\r\n\tEFP_Blind\x10\x16\x12\x13\n\x0f\x45\x46P_Immobilized\x10\x17\x12\r\n\tEFP_COUNT\x10 *\xf2\x01\n\nESkillSlot\x12\r\n\tESS_QSlot\x10\x00\x12\r\n\tESS_WSlot\x10\x01\x12\r\n\tESS_ESlot\x10\x02\x12\r\n\tESS_RSlot\x10\x03\x12\r\n\tESS_FSlot\x10\x04\x12\r\n\tESS_GSlot\x10\x05\x12\r\n\tESS_PSlot\x10\x06\x12\x0f\n\x0b\x45SS_OneSlot\x10\x0b\x12\x0f\n\x0b\x45SS_TwoSlot\x10\x0c\x12\x11\n\rESS_ThreeSlot\x10\r\x12\x10\n\x0c\x45SS_FourSlot\x10\x0e\x12\x10\n\x0c\x45SS_FiveSlot\x10\x0f\x12\x0f\n\x0b\x45SS_SixSlot\x10\x10\x12\x11\n\rESS_SevenSlot\x10\x11*7\n\tESkillBar\x12\x15\n\x11\x45SkillBar_Default\x10\x00\x12\x13\n\x0f\x45SkillBar_Extra\x10\x01*n\n\x0b\x45SkillState\x12\x0c\n\x08\x45SS_Free\x10\x00\x12\x11\n\rESS_Preparing\x10\x01\x12\x11\n\rESS_Releasing\x10\x02\x12\r\n\tESS_Using\x10\x03\x12\x0f\n\x0b\x45SS_Lasting\x10\x04\x12\x0b\n\x07\x45SS_End\x10\x05*^\n\x0c\x45SkillUseWay\x12\x17\n\x13\x45SkillTarget_Target\x10\x00\x12\x1a\n\x16\x45SkillTarget_Direction\x10\x01\x12\x19\n\x15\x45SkillTarget_Position\x10\x02*\xed\x01\n\x10\x45SkillEffectCase\x12\x19\n\x15\x45SkillTargetCase_Self\x10\x00\x12\x1b\n\x17\x45SkillTargetCase_Friend\x10\x01\x12\x1a\n\x16\x45SkillTargetCase_Enemy\x10\x02\x12\x1e\n\x1a\x45SkillTargetCase_SelfEnemy\x10\x03\x12&\n\"ESkillTargetCase_FriendExcludeSelf\x10\x04\x12#\n\x1f\x45SkillTargetCase_AllExcludeSelf\x10\x05\x12\x18\n\x14\x45SkillTargetCase_All\x10\x06\x42\x03\xf8\x01\x01\x62\x06proto3')
 )
 
 _EUNITTYPE = _descriptor.EnumDescriptor(
@@ -337,6 +337,29 @@ _ESKILLSLOT = _descriptor.EnumDescriptor(
 _sym_db.RegisterEnumDescriptor(_ESKILLSLOT)
 
 ESkillSlot = enum_type_wrapper.EnumTypeWrapper(_ESKILLSLOT)
+_ESKILLBAR = _descriptor.EnumDescriptor(
+  name='ESkillBar',
+  full_name='NetProto.ESkillBar',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='ESkillBar_Default', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ESkillBar_Extra', index=1, number=1,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1162,
+  serialized_end=1217,
+)
+_sym_db.RegisterEnumDescriptor(_ESKILLBAR)
+
+ESkillBar = enum_type_wrapper.EnumTypeWrapper(_ESKILLBAR)
 _ESKILLSTATE = _descriptor.EnumDescriptor(
   name='ESkillState',
   full_name='NetProto.ESkillState',
@@ -370,8 +393,8 @@ _ESKILLSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1162,
-  serialized_end=1272,
+  serialized_start=1219,
+  serialized_end=1329,
 )
 _sym_db.RegisterEnumDescriptor(_ESKILLSTATE)
 
@@ -391,21 +414,21 @@ _ESKILLUSEWAY = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ESkillTarget_Postion', index=2, number=2,
+      name='ESkillTarget_Position', index=2, number=2,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1274,
-  serialized_end=1367,
+  serialized_start=1331,
+  serialized_end=1425,
 )
 _sym_db.RegisterEnumDescriptor(_ESKILLUSEWAY)
 
 ESkillUseWay = enum_type_wrapper.EnumTypeWrapper(_ESKILLUSEWAY)
-_ESKILLTARGETCASE = _descriptor.EnumDescriptor(
-  name='ESkillTargetCase',
-  full_name='NetProto.ESkillTargetCase',
+_ESKILLEFFECTCASE = _descriptor.EnumDescriptor(
+  name='ESkillEffectCase',
+  full_name='NetProto.ESkillEffectCase',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -440,12 +463,12 @@ _ESKILLTARGETCASE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1370,
-  serialized_end=1607,
+  serialized_start=1428,
+  serialized_end=1665,
 )
-_sym_db.RegisterEnumDescriptor(_ESKILLTARGETCASE)
+_sym_db.RegisterEnumDescriptor(_ESKILLEFFECTCASE)
 
-ESkillTargetCase = enum_type_wrapper.EnumTypeWrapper(_ESKILLTARGETCASE)
+ESkillEffectCase = enum_type_wrapper.EnumTypeWrapper(_ESKILLEFFECTCASE)
 Building = 0
 Hero = 1
 Npc = 2
@@ -502,6 +525,8 @@ ESS_FourSlot = 14
 ESS_FiveSlot = 15
 ESS_SixSlot = 16
 ESS_SevenSlot = 17
+ESkillBar_Default = 0
+ESkillBar_Extra = 1
 ESS_Free = 0
 ESS_Preparing = 1
 ESS_Releasing = 2
@@ -510,7 +535,7 @@ ESS_Lasting = 4
 ESS_End = 5
 ESkillTarget_Target = 0
 ESkillTarget_Direction = 1
-ESkillTarget_Postion = 2
+ESkillTarget_Position = 2
 ESkillTargetCase_Self = 0
 ESkillTargetCase_Friend = 1
 ESkillTargetCase_Enemy = 2
@@ -526,9 +551,10 @@ DESCRIPTOR.enum_types_by_name['EMoveState'] = _EMOVESTATE
 DESCRIPTOR.enum_types_by_name['EPlayerOpera'] = _EPLAYEROPERA
 DESCRIPTOR.enum_types_by_name['EFightParam'] = _EFIGHTPARAM
 DESCRIPTOR.enum_types_by_name['ESkillSlot'] = _ESKILLSLOT
+DESCRIPTOR.enum_types_by_name['ESkillBar'] = _ESKILLBAR
 DESCRIPTOR.enum_types_by_name['ESkillState'] = _ESKILLSTATE
 DESCRIPTOR.enum_types_by_name['ESkillUseWay'] = _ESKILLUSEWAY
-DESCRIPTOR.enum_types_by_name['ESkillTargetCase'] = _ESKILLTARGETCASE
+DESCRIPTOR.enum_types_by_name['ESkillEffectCase'] = _ESKILLEFFECTCASE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
