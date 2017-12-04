@@ -102,10 +102,10 @@ enum ESkillUseWay
 {
 	ESkillTarget_Target = 0;
 	ESkillTarget_Direction = 1;
-	ESkillTarget_Postion = 2;
+	ESkillTarget_Position = 2;
 }
 
-enum ESkillTargetCase
+enum ESkillEffectCase
 {
 	ESkillTargetCase_Self = 0;
 	ESkillTargetCase_Friend = 1;
@@ -115,3 +115,5 @@ enum ESkillTargetCase
 	ESkillTargetCase_AllExcludeSelf = 5;
 	ESkillTargetCase_All = 6;
 }
+
+

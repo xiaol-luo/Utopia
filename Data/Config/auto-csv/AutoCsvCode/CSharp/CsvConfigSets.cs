@@ -8,8 +8,8 @@ namespace Config
         public string errMsg = string.Empty;
         public CsvLogConfigSet csv_CsvLogConfigSet = new CsvLogConfigSet();
         public CsvSceneConfigSet csv_CsvSceneConfigSet = new CsvSceneConfigSet();
-        public SkillConfigSet csv_SkillConfigSet = new SkillConfigSet();
-        public SkillLevelConfigSet csv_SkillLevelConfigSet = new SkillLevelConfigSet();
+        public CsvSkillConfigSet csv_CsvSkillConfigSet = new CsvSkillConfigSet();
+        public CsvSkillLevelConfigSet csv_CsvSkillLevelConfigSet = new CsvSkillLevelConfigSet();
 
         public bool Load(string root_path)
         {
@@ -23,14 +23,14 @@ namespace Config
                 errMsg = "Load csv_CsvSceneConfigSet fail";
                 return false;
             }
-            if (!csv_SkillConfigSet.Load(Path.Combine(root_path, "skill/SkillConfig.csv")))
+            if (!csv_CsvSkillConfigSet.Load(Path.Combine(root_path, "skill/CsvSkillConfig.csv")))
             {
-                errMsg = "Load csv_SkillConfigSet fail";
+                errMsg = "Load csv_CsvSkillConfigSet fail";
                 return false;
             }
-            if (!csv_SkillLevelConfigSet.Load(Path.Combine(root_path, "skill/SkillLevelConfig.csv")))
+            if (!csv_CsvSkillLevelConfigSet.Load(Path.Combine(root_path, "skill/CsvSkillLevelConfig.csv")))
             {
-                errMsg = "Load csv_SkillLevelConfigSet fail";
+                errMsg = "Load csv_CsvSkillLevelConfigSet fail";
                 return false;
             }
 

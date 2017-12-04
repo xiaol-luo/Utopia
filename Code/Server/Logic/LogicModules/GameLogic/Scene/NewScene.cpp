@@ -18,6 +18,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
 
 namespace GameLogic
 {
@@ -27,6 +28,7 @@ namespace GameLogic
 		m_game_logic = logic_module;
 		m_ev_dispacher = new EventDispacher();
 		memset(m_modules, 0, sizeof(m_modules));
+		m_cfg = new SceneAllConfig();
 	}
 
 	NewScene::~NewScene()
@@ -38,6 +40,8 @@ namespace GameLogic
 			delete module;
 		}
 		memset(m_modules, 0, sizeof(m_modules));
+
+		delete m_cfg; m_cfg = nullptr;
 	}
 
 	void NewScene::AddModule(SceneModule * module)

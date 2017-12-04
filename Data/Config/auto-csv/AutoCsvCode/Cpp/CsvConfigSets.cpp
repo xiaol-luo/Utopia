@@ -1,8 +1,8 @@
 #include "CsvConfigSets.h"
 #include "log/CsvLogConfig.h"
 #include "Scene/CsvSceneConfig.h"
-#include "skill/SkillConfig.h"
-#include "skill/SkillLevelConfig.h"
+#include "skill/CsvSkillConfig.h"
+#include "skill/CsvSkillLevelConfig.h"
 
 namespace Config
 {
@@ -10,8 +10,8 @@ namespace Config
     {
         delete csv_CsvLogConfigSet;
         delete csv_CsvSceneConfigSet;
-        delete csv_SkillConfigSet;
-        delete csv_SkillLevelConfigSet;
+        delete csv_CsvSkillConfigSet;
+        delete csv_CsvSkillLevelConfigSet;
     }
 
     bool CsvConfigSets::Load(std::string root_path)
@@ -24,8 +24,8 @@ namespace Config
         }
         csv_CsvLogConfigSet = new CsvLogConfigSet;
         csv_CsvSceneConfigSet = new CsvSceneConfigSet;
-        csv_SkillConfigSet = new SkillConfigSet;
-        csv_SkillLevelConfigSet = new SkillLevelConfigSet;
+        csv_CsvSkillConfigSet = new CsvSkillConfigSet;
+        csv_CsvSkillLevelConfigSet = new CsvSkillLevelConfigSet;
 
         bool all_ok = true;
         if (all_ok)
@@ -38,19 +38,19 @@ namespace Config
         }
         if (all_ok)
         {
-            all_ok = csv_SkillConfigSet->Load(root_path + '/' + "skill/SkillConfig.csv");
+            all_ok = csv_CsvSkillConfigSet->Load(root_path + '/' + "skill/CsvSkillConfig.csv");
         }
         if (all_ok)
         {
-            all_ok = csv_SkillLevelConfigSet->Load(root_path + '/' + "skill/SkillLevelConfig.csv");
+            all_ok = csv_CsvSkillLevelConfigSet->Load(root_path + '/' + "skill/CsvSkillLevelConfig.csv");
         }
 
         if (!all_ok)
         {
             delete csv_CsvLogConfigSet; csv_CsvLogConfigSet = nullptr;
             delete csv_CsvSceneConfigSet; csv_CsvSceneConfigSet = nullptr;
-            delete csv_SkillConfigSet; csv_SkillConfigSet = nullptr;
-            delete csv_SkillLevelConfigSet; csv_SkillLevelConfigSet = nullptr;
+            delete csv_CsvSkillConfigSet; csv_CsvSkillConfigSet = nullptr;
+            delete csv_CsvSkillLevelConfigSet; csv_CsvSkillLevelConfigSet = nullptr;
         }
 
         return all_ok;

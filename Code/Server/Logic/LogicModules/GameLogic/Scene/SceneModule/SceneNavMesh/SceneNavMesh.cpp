@@ -3,6 +3,7 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/GameLogicModule.h"
 #include "Config/AutoCsvCode/Scene/CsvSceneConfig.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
 
 namespace GameLogic
 {
@@ -17,7 +18,7 @@ namespace GameLogic
 	bool SceneNavMesh::OnAwake()
 	{
 		bool ret;
-		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg();
+		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg()->scene_cfg;
 		ret = m_nav_mesh->LoadTerrain(m_scene->GetGameLogic()->GetCfgRootPath() + "/" + scene_cfg->terrain_file_path);
 		assert(ret);
 		return ret;

@@ -13,11 +13,14 @@
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
+#include "GameLogic/Scene/Config/SkillConfig.h"
 
 namespace GameLogic
 {
 	TestScene::TestScene(GameLogicModule * logic_module) : NewScene(logic_module)
 	{
+
 	}
 
 	TestScene::~TestScene()
@@ -26,8 +29,14 @@ namespace GameLogic
 
 	bool TestScene::OnAwake()
 	{
-		assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
-		m_sceneCfg = m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
+		
+		{
+			// init config
+			assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
+			m_cfg->scene_cfg = m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
+			m_cfg->skill_cfgs->Init(m_game_logic->GetCsvCfgSet(), nullptr);
+		}
+		
 
 		this->AddModule(new SceneMove());
 		this->AddModule(new SceneView());

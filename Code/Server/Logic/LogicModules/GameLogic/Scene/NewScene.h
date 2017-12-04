@@ -23,6 +23,7 @@ namespace GameLogic
 	class Player;
 	class SceneModule;
 	class SceneUnit;
+	struct SceneAllConfig;
 
 	class NewScene
 	{
@@ -65,12 +66,13 @@ namespace GameLogic
 			return ptr;
 		}
 		GameLogicModule * GetGameLogic() { return m_game_logic; }
-		virtual Config::CsvSceneConfig * GetCfg() = 0;
+		const SceneAllConfig * GetCfg() { return m_cfg; }
 	protected:
 		GameLogicModule *m_game_logic;
 		bool m_awaked = false;
 		bool m_started = false;
 		SceneModule *m_modules[ESceneModule_Count];
+		SceneAllConfig *m_cfg = nullptr;
 
 	public:
 		uint64_t AddUnit(std::shared_ptr<SceneUnit> su);

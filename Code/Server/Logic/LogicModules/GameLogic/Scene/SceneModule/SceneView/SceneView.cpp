@@ -17,6 +17,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
 #include "Network/Protobuf/Battle.pb.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
 
 namespace GameLogic
 {
@@ -125,7 +126,7 @@ namespace GameLogic
 	bool SceneView::OnAwake()
 	{
 		bool ret = false;
-		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg();
+		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg()->scene_cfg;
 		ret = this->LoadCfg(m_scene->GetGameLogic()->GetCfgRootPath() + "/" + scene_cfg->terrain_file_path + ".view");
 		assert(ret);
 		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
