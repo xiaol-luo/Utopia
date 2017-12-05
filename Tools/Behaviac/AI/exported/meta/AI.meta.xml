@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<agents version="1" signature="869008455">
+  <agent type="AIHero" base="behaviac::Agent" signature="2323391890">
+    <properties>
+      <property name="name" type="string" member="false" static="false" defaultvalue="" />
+    </properties>
+  </agent>
+</agents>

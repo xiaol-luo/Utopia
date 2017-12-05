@@ -12,6 +12,7 @@
 #include "Network/PlayerMsgHandler.h"
 #include "Common/Macro/ServerLogicMacro.h"
 #include "GameLogic/Scene/TestScene.h"
+#include "behaviac/behaviac.h"
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
@@ -43,6 +44,8 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	while ('/' == m_cfg_root_path.back() || '\\' == m_cfg_root_path.back())
 		m_cfg_root_path.pop_back();
 
+	behaviac::Workspace::GetInstance()->SetFilePath((m_cfg_root_path + "/AI").c_str());
+	behaviac::Workspace::GetInstance()->SetFileFormat(behaviac::Workspace::EFF_xml);
 	std::string csv_cfg_path = m_cfg_root_path + "/auto-csv/AutoCsvConfig";
 	bool ret = m_csv_cfg_sets->Load(csv_cfg_path);
 	m_state = ret ? EModuleState_Inited : EModuleState_Error;
@@ -76,6 +79,7 @@ EModuleRetCode GameLogicModule::Destroy()
 {
 	m_new_scene->Destroy();
 	m_player_msg_handler->Uninit();
+	behaviac::Workspace::GetInstance()->Cleanup();
 	return EModuleRetCode_Succ;
 }
 

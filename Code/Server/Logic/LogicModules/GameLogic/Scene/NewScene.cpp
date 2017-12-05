@@ -254,15 +254,15 @@ namespace GameLogic
 		m_protobuf_arena->Reset();
 	}
 
-	void NewScene::TestEvent(int ev_id, SceneUnit * su)
+	void NewScene::TestEvent(int ev_id, std::shared_ptr<SceneUnit> su)
 	{
 		GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "NewScene::TestEvent ev_id:{0} su_id:{1}", ev_id, su->GetId());
 	}
 
 	void NewScene::TestSubscribeEvents()
 	{
-		m_ev_dispacher->Subscribe<SceneUnit *>(ESU_EnterScene, std::bind(&NewScene::TestEvent, this, ESU_EnterScene, std::placeholders::_1));
-		m_ev_dispacher->Subscribe<SceneUnit *>(ESU_LeaveScene, std::bind(&NewScene::TestEvent, this, ESU_LeaveScene, std::placeholders::_1));
+		m_ev_dispacher->Subscribe<std::shared_ptr<SceneUnit>>(ESU_EnterScene, std::bind(&NewScene::TestEvent, this, ESU_EnterScene, std::placeholders::_1));
+		m_ev_dispacher->Subscribe<std::shared_ptr<SceneUnit>>(ESU_LeaveScene, std::bind(&NewScene::TestEvent, this, ESU_LeaveScene, std::placeholders::_1));
 	}
 
 	bool NewScene::PlayerSelectHero(Player * player, uint64_t su_id)

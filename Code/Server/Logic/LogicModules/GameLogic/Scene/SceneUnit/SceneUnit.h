@@ -26,7 +26,7 @@ namespace GameLogic
 			assert(!m_inited);
 			assert(nullptr == m_modules[module->GetModuleName()]);
 			m_modules[module->GetModuleName()] = module;
-			module->m_owner = this;
+			module->m_owner = this->shared_from_this();
 			return module;
 		}
 
@@ -49,7 +49,7 @@ namespace GameLogic
 			return ptr;
 		}
 
-		std::shared_ptr<SceneUnitTransform> GetTransform() { return m_transform; }
+		std::shared_ptr<SceneUnitTransform> GetTransform();
 
 	public:
 		uint64_t GetId() { return m_id; }

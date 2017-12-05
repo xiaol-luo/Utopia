@@ -88,7 +88,7 @@ namespace GameLogic
 		void UpdateCachedSceneUnits();
 
 	protected:
-		void TestEvent(int ev_id, SceneUnit *su);
+		void TestEvent(int ev_id, std::shared_ptr<SceneUnit> su);
 		void TestSubscribeEvents();
 
 	public:

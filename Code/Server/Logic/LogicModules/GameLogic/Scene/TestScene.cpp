@@ -15,6 +15,9 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
 #include "GameLogic/Scene/Config/SkillConfig.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
+#include "GameLogic/Scene/Skills/Skill.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
 
 namespace GameLogic
 {
@@ -29,7 +32,6 @@ namespace GameLogic
 
 	bool TestScene::OnAwake()
 	{
-		
 		{
 			// init config
 			assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
@@ -69,6 +71,12 @@ namespace GameLogic
 		{
 			auto suf = su->AddModule(std::make_shared<SceneUnitFightParam>());
 		}
+		{
+			auto sus = su->AddModule(std::make_shared<SceneUnitSkills>());
+		}
+		{
+			auto sus = su->AddModule(std::make_shared<SceneHeroAction>());
+		}
 	}
 
 	bool TestScene::OnLateAwake()
@@ -76,11 +84,36 @@ namespace GameLogic
 		red_su = std::make_shared<SceneUnit>();
 		BuildHero(red_su, this, Vector3(50, 0, 50), EViewCamp_Red);
 		this->AddUnit(red_su);
+		{
+			auto sus = red_su->GetModule<SceneUnitSkills>();
+			{
+				auto skill_cfg = this->GetCfg()->skill_cfgs->GetSkill(11);
+				auto skill = std::make_shared<Skill>(skill_cfg);
+				sus->AddSkill(skill, NetProto::ESS_QSlot, NetProto::ESkillBar_Default);
+			}
+			{
+				auto skill_cfg = this->GetCfg()->skill_cfgs->GetSkill(12);
+				auto skill = std::make_shared<Skill>(skill_cfg);
+				sus->AddSkill(skill, NetProto::ESS_WSlot, NetProto::ESkillBar_Default);
+			}
+		}
 
 		blue_su = std::make_shared<SceneUnit>();
 		BuildHero(blue_su, this, Vector3(50, 0, 50), EViewCamp_Blue);
 		this->AddUnit(blue_su);
-
+		{
+			auto sus = blue_su->GetModule<SceneUnitSkills>();
+			{
+				auto skill_cfg = this->GetCfg()->skill_cfgs->GetSkill(21);
+				auto skill = std::make_shared<Skill>(skill_cfg);
+				sus->AddSkill(skill, NetProto::ESS_QSlot, NetProto::ESkillBar_Default);
+			}
+			{
+				auto skill_cfg = this->GetCfg()->skill_cfgs->GetSkill(22);
+				auto skill = std::make_shared<Skill>(skill_cfg);
+				sus->AddSkill(skill, NetProto::ESS_WSlot, NetProto::ESkillBar_Default);
+			}
+		}
 		return true;
 	}
 

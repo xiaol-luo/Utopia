@@ -10,6 +10,7 @@ namespace GameLogic
 	{
 		delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
 		delete m_event_proxy; m_event_proxy = nullptr;
+		m_owner = nullptr;
 	}
 	uint64_t GameLogic::SceneUnitModule::GetId()
 	{
@@ -17,7 +18,7 @@ namespace GameLogic
 			return 0;
 		return m_owner->GetId();
 	}
-	void SceneUnitModule::Init(SceneUnit *owner)
+	void SceneUnitModule::Init(std::shared_ptr<SceneUnit> owner)
 	{
 		m_owner = owner;
 		m_scene_event_proxy = new EventDispacherProxy(m_owner->GetScene()->GetEvDispacher());
@@ -29,5 +30,6 @@ namespace GameLogic
 		this->OnDestroy();
 		delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
 		delete m_event_proxy; m_event_proxy = nullptr;
+		m_owner = nullptr;
 	}
 }

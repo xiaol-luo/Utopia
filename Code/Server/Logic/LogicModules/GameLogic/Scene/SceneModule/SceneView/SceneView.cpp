@@ -129,7 +129,7 @@ namespace GameLogic
 		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg()->scene_cfg;
 		ret = this->LoadCfg(m_scene->GetGameLogic()->GetCfgRootPath() + "/" + scene_cfg->terrain_file_path + ".view");
 		assert(ret);
-		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
+		this->GetSceneEvProxy()->Subscribe<std::shared_ptr<SceneUnit>>(ESU_EnterScene,
 			std::bind(&SceneView::OnSceneUnitEnterScene, this, std::placeholders::_1));
 		return ret;
 	}
@@ -421,7 +421,7 @@ namespace GameLogic
 		ifs.close();
 		return true;
 	}
-	void SceneView::OnSceneUnitEnterScene(SceneUnit * su)
+	void SceneView::OnSceneUnitEnterScene(std::shared_ptr<SceneUnit> su)
 	{
 		auto su_sight = su->GetModule<SceneUnitSight>();;
 		auto su_body = su->GetModule<SceneUnitBody>();

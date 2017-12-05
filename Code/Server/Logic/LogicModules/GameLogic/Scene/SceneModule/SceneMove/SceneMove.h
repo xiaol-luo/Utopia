@@ -25,6 +25,6 @@ namespace GameLogic
 	protected:
 		NavMesh *m_nav_mesh = nullptr;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneUnitMove>> m_su_moves;
-		void OnSceneUnitEnterScene(SceneUnit *su);
+		void OnSceneUnitEnterScene(std::shared_ptr<SceneUnit> su);
 	};
 }

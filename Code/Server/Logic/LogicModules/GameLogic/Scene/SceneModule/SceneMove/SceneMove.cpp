@@ -23,7 +23,7 @@ namespace GameLogic
 	bool SceneMove::OnAwake()
 	{
 		m_nav_mesh = m_scene->GetModule<SceneNavMesh>()->GetNavMesh();
-		this->GetSceneEvProxy()->Subscribe<SceneUnit *>(ESU_EnterScene,
+		this->GetSceneEvProxy()->Subscribe<std::shared_ptr<SceneUnit>>(ESU_EnterScene,
 			std::bind(&SceneMove::OnSceneUnitEnterScene, this, std::placeholders::_1));
 		return true;
 	}
@@ -55,7 +55,7 @@ namespace GameLogic
 		this->GetScene()->MakeSnapshot(false);
 	}
 
-	void SceneMove::OnSceneUnitEnterScene(SceneUnit * su)
+	void SceneMove::OnSceneUnitEnterScene(std::shared_ptr<SceneUnit> su)
 	{
 		auto su_move = su->GetModule<SceneUnitMove>();
 		if (nullptr != su_move)

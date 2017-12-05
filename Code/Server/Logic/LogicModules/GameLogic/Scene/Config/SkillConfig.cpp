@@ -62,6 +62,8 @@ namespace GameLogic
 				lvl_cfg->stage_spans[NetProto::ESS_Using] = csv_lvl->using_span;
 				lvl_cfg->stage_spans[NetProto::ESS_Lasting] = csv_lvl->lasting_span;
 			}
+
+			skills.insert(std::make_pair(skill_cfg->id, skill_cfg));
 		}
 	}
 

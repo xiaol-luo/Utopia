@@ -17,7 +17,7 @@ namespace GameLogic
 		SceneUnitModule(ESceneUnitModule module_name) { m_module_name = module_name; };
 		virtual ~SceneUnitModule();
 
-		inline SceneUnit * GetOwner() { return m_owner; }
+		inline std::shared_ptr<SceneUnit> GetOwner() { return m_owner; }
 		inline ESceneUnitModule GetModuleName() { return m_module_name; }
 		template <typename T>
 		std::shared_ptr<T> GetSharedPtr()
@@ -36,13 +36,13 @@ namespace GameLogic
 		inline EventDispacherProxy * GetSceneEvProxy() { return m_scene_event_proxy; }
 
 	protected:
-		SceneUnit *m_owner = nullptr;
+		std::shared_ptr<SceneUnit> m_owner = nullptr;
 		ESceneUnitModule m_module_name = ESceneUnitModule_Count;
 		EventDispacherProxy *m_scene_event_proxy = nullptr;
 		SceneUnitEventProxy *m_event_proxy = nullptr;
 
 	private:
-		void Init(SceneUnit *owner);
+		void Init(std::shared_ptr<SceneUnit> owner);
 		void Awake() { this->OnAwake(); }
 		void Start() { this->OnUpdate(); }
 		void Update() { this->OnUpdate(); }

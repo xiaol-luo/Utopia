@@ -14,7 +14,6 @@ namespace GameLogic
 	{
 		m_event_dispacher = new ::EventDispacher();
 		m_transform = std::make_shared<SceneUnitTransform>();
-		this->AddModule(m_transform);
 	}
 
 	SceneUnit::~SceneUnit()
@@ -23,7 +22,7 @@ namespace GameLogic
 		{
 			module = nullptr;
 		}
-
+		m_transform = nullptr;
 		delete m_event_proxy;  m_event_proxy = nullptr;
 		delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
 		delete m_event_dispacher; m_event_dispacher = nullptr;
@@ -36,17 +35,18 @@ namespace GameLogic
 		m_inited = true;
 		m_started = false;
 
+		this->GetTransform();
 		{
 			m_scene = scene;
 			m_id = id;
 			m_scene_event_proxy = new EventDispacherProxy(m_scene->GetEvDispacher());
-			m_event_proxy = new SceneUnitEventProxy(m_event_dispacher, m_scene_event_proxy, this);
+			m_event_proxy = new SceneUnitEventProxy(m_event_dispacher, m_scene_event_proxy, this->shared_from_this());
 		}
 
 		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
-				module->Init(this);
+				module->Init(this->shared_from_this());
 		}
 		for (auto &&module : m_modules)
 		{
@@ -111,6 +111,12 @@ namespace GameLogic
 					module->Update();
 			}
 		}
+	}
+	std::shared_ptr<SceneUnitTransform> SceneUnit::GetTransform()
+	{
+		if (nullptr == m_transform->GetOwner())
+			this->AddModule(m_transform);
+		return m_transform;
 	}
 	std::vector<SyncClientMsg> SceneUnit::CollectPBInit()
 	{

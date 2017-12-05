@@ -9,7 +9,7 @@ namespace GameLogic
 	class SceneUnitEventProxy
 	{
 	public:
-		SceneUnitEventProxy(EventDispacher *unit_dispacher, EventDispacherProxy *scene_proxy, SceneUnit *unit)
+		SceneUnitEventProxy(EventDispacher *unit_dispacher, EventDispacherProxy *scene_proxy, std::shared_ptr<SceneUnit> unit)
 		{
 			m_unit = unit;
 			m_unit_proxy = new EventDispacherProxy(unit_dispacher);
@@ -52,7 +52,7 @@ namespace GameLogic
 
 
 	private:
-		SceneUnit *m_unit = nullptr;
+		std::shared_ptr<SceneUnit> m_unit = nullptr;
 		EventDispacherProxy *m_unit_proxy = nullptr;
 		EventDispacherProxy *m_scene_proxy = nullptr;
 	};
