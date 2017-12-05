@@ -19,7 +19,27 @@ namespace behaviac
 	inline void Set_AIHero_name(Agent* self, behaviac::string value) { ((AIHero*)self)->name = value; };
 	inline const void* Get_AIHero_name(Agent* self) { return &((AIHero*)self)->name; };
 
+	inline void Set_AIHero_p1(Agent* self, int value) { ((AIHero*)self)->_Get_Property_<PROPERTY_TYPE_AIHero_p1, int >() = value; };
+	inline const void* Get_AIHero_p1(Agent* self) { return &((AIHero*)self)->_Get_Property_<PROPERTY_TYPE_AIHero_p1, int >(); };
+
 	inline void FunctionPointer_AIHero_LogMessage(char* param0) { AIHero::LogMessage(param0); }
 	inline void FunctionPointer_AIHero_SayHello(Agent* self) { ((AIHero*)self)->SayHello(); }
+
+	inline void Set_SecondAgent_p2(Agent* self, int value) { ((SecondAgent*)self)->_Get_Property_<PROPERTY_TYPE_SecondAgent_p2, int >() = value; };
+	inline const void* Get_SecondAgent_p2(Agent* self) { return &((SecondAgent*)self)->_Get_Property_<PROPERTY_TYPE_SecondAgent_p2, int >(); };
+
+	inline void FunctionPointer_SecondAgent_LogMessage(char* param0) { SecondAgent::LogMessage(param0); }
+
+	inline void Set_FirstAgent_p1(Agent* self, int value) { ((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_p1, int >() = value; };
+	inline const void* Get_FirstAgent_p1(Agent* self) { return &((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_p1, int >(); };
+
+	inline void Set_FirstAgent_second_agent(Agent* self,  value) { ((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_second_agent,  >() = value; };
+	inline const void* Get_FirstAgent_second_agent(Agent* self) { return &((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_second_agent,  >(); };
+
+	inline void FunctionPointer_FirstAgent_event_task(Agent* self, int param0) { } /* event_task */
+	inline void FunctionPointer_FirstAgent_LogMessage(char* param0) { FirstAgent::LogMessage(param0); }
+	inline void FunctionPointer_FirstAgent_Say(Agent* self, behaviac::string param0) { ((FirstAgent*)self)->_Execute_Method_<METHOD_TYPE_FirstAgent_Say, void, behaviac::string >(param0); }
+	inline void FunctionPointer_FirstAgent_SayHello(Agent* self) { ((FirstAgent*)self)->_Execute_Method_<METHOD_TYPE_FirstAgent_SayHello, void >(); }
+	inline void FunctionPointer_FirstAgent_t1(Agent* self, int param0) { } /* t1 */
 }
 #endif // _BEHAVIAC_AGENT_PROPERTIES_H_

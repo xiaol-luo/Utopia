@@ -4,38 +4,42 @@
 // PLEASE MODIFY AND REGENERETE IT IN THE DESIGNER FOR CLASS/MEMBERS/METHODS, ETC.
 // -------------------------------------------------------------------------------
 
-#ifndef _BEHAVIAC_AIHERO_H_
-#define _BEHAVIAC_AIHERO_H_
-
-#include "behaviac_headers.h"
+#include "FirstAgent.h"
 
 ///<<< BEGIN WRITING YOUR CODE FILE_INIT
 
 ///<<< END WRITING YOUR CODE
 
-class AIHero : public behaviac::Agent
-///<<< BEGIN WRITING YOUR CODE AIHero
-///<<< END WRITING YOUR CODE
+FirstAgent::FirstAgent()
 {
-public:
-	AIHero();
-	virtual ~AIHero();
-
-	BEHAVIAC_DECLARE_AGENTTYPE(AIHero, behaviac::Agent)
-
-	public: behaviac::string name;
-
-	private: int p1;
-
-	public: void SayHello();
-
-///<<< BEGIN WRITING YOUR CODE CLASS_PART
+	p1 = 0;
+	second_agent = "";
+///<<< BEGIN WRITING YOUR CODE CONSTRUCTOR
 
 ///<<< END WRITING YOUR CODE
-};
+}
+
+FirstAgent::~FirstAgent()
+{
+///<<< BEGIN WRITING YOUR CODE DESTRUCTOR
+
+///<<< END WRITING YOUR CODE
+}
+
+void FirstAgent::Say(behaviac::string param0)
+{
+///<<< BEGIN WRITING YOUR CODE Say
+	printf("FirstAgent::Say %s\n", param0.c_str());
+///<<< END WRITING YOUR CODE
+}
+
+void FirstAgent::SayHello()
+{
+///<<< BEGIN WRITING YOUR CODE SayHello
+///<<< END WRITING YOUR CODE
+}
+
 
 ///<<< BEGIN WRITING YOUR CODE FILE_UNINIT
 
 ///<<< END WRITING YOUR CODE
-
-#endif

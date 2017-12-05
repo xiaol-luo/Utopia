@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
-<agents version="1" signature="869008455">
-  <agent type="AIHero" base="behaviac::Agent" signature="2323391890">
+<agents version="1" signature="2988284549">
+  <agent type="AIHero" base="behaviac::Agent" signature="263444190">
     <properties>
       <property name="name" type="string" member="false" static="false" defaultvalue="" />
+      <property name="p1" type="int" member="false" static="false" defaultvalue="0" />
+    </properties>
+  </agent>
+  <agent type="SecondAgent" base="behaviac::Agent" signature="2420330950">
+    <properties>
+      <property name="p2" type="int" member="false" static="false" defaultvalue="0" />
+    </properties>
+  </agent>
+  <agent type="FirstAgent" base="behaviac::Agent" signature="3173780605">
+    <properties>
+      <property name="p1" type="int" member="false" static="false" defaultvalue="0" />
+      <property name="second_agent" type="" member="false" static="false" defaultvalue="&quot;&quot;" />
     </properties>
   </agent>
 </agents>

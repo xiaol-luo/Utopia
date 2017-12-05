@@ -4,8 +4,8 @@
 // PLEASE MODIFY AND REGENERETE IT IN THE DESIGNER FOR CLASS/MEMBERS/METHODS, ETC.
 // -------------------------------------------------------------------------------
 
-#ifndef _BEHAVIAC_AIHERO_H_
-#define _BEHAVIAC_AIHERO_H_
+#ifndef _BEHAVIAC_SECONDAGENT_H_
+#define _BEHAVIAC_SECONDAGENT_H_
 
 #include "behaviac_headers.h"
 
@@ -13,21 +13,17 @@
 
 ///<<< END WRITING YOUR CODE
 
-class AIHero : public behaviac::Agent
-///<<< BEGIN WRITING YOUR CODE AIHero
+class SecondAgent : public behaviac::Agent
+///<<< BEGIN WRITING YOUR CODE SecondAgent
 ///<<< END WRITING YOUR CODE
 {
 public:
-	AIHero();
-	virtual ~AIHero();
+	SecondAgent();
+	virtual ~SecondAgent();
 
-	BEHAVIAC_DECLARE_AGENTTYPE(AIHero, behaviac::Agent)
+	BEHAVIAC_DECLARE_AGENTTYPE(SecondAgent, behaviac::Agent)
 
-	public: behaviac::string name;
-
-	private: int p1;
-
-	public: void SayHello();
+	private: int p2;
 
 ///<<< BEGIN WRITING YOUR CODE CLASS_PART
 

@@ -4,30 +4,34 @@
 // PLEASE MODIFY AND REGENERETE IT IN THE DESIGNER FOR CLASS/MEMBERS/METHODS, ETC.
 // -------------------------------------------------------------------------------
 
-#ifndef _BEHAVIAC_AIHERO_H_
-#define _BEHAVIAC_AIHERO_H_
+#ifndef _BEHAVIAC_FIRSTAGENT_H_
+#define _BEHAVIAC_FIRSTAGENT_H_
 
 #include "behaviac_headers.h"
 
 ///<<< BEGIN WRITING YOUR CODE FILE_INIT
 
+class SecondAgent;
+
 ///<<< END WRITING YOUR CODE
 
-class AIHero : public behaviac::Agent
-///<<< BEGIN WRITING YOUR CODE AIHero
+class FirstAgent : public behaviac::Agent
+///<<< BEGIN WRITING YOUR CODE FirstAgent
 ///<<< END WRITING YOUR CODE
 {
 public:
-	AIHero();
-	virtual ~AIHero();
+	FirstAgent();
+	virtual ~FirstAgent();
 
-	BEHAVIAC_DECLARE_AGENTTYPE(AIHero, behaviac::Agent)
-
-	public: behaviac::string name;
+	BEHAVIAC_DECLARE_AGENTTYPE(FirstAgent, behaviac::Agent)
 
 	private: int p1;
 
-	public: void SayHello();
+	private:  second_agent;
+
+	private: void Say(behaviac::string param0);
+
+	private: void SayHello();
 
 ///<<< BEGIN WRITING YOUR CODE CLASS_PART
 

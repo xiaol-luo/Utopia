@@ -9,5 +9,7 @@
 
 // THE FOLLOWING AGENT HEADER FILES IS GENERATED AUTOMATICALLY:
 #include "AIHero.h"
+#include "SecondAgent.h"
+#include "FirstAgent.h"
 
 #endif // _BEHAVIAC_AGENT_HEADERS_H_

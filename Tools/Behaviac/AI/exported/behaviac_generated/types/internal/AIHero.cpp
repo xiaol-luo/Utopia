@@ -13,6 +13,7 @@
 AIHero::AIHero()
 {
 	name = "";
+	p1 = 0;
 ///<<< BEGIN WRITING YOUR CODE CONSTRUCTOR
 
 ///<<< END WRITING YOUR CODE

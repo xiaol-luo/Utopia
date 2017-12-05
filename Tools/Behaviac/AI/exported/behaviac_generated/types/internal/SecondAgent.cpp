@@ -4,38 +4,28 @@
 // PLEASE MODIFY AND REGENERETE IT IN THE DESIGNER FOR CLASS/MEMBERS/METHODS, ETC.
 // -------------------------------------------------------------------------------
 
-#ifndef _BEHAVIAC_AIHERO_H_
-#define _BEHAVIAC_AIHERO_H_
-
-#include "behaviac_headers.h"
+#include "SecondAgent.h"
 
 ///<<< BEGIN WRITING YOUR CODE FILE_INIT
 
 ///<<< END WRITING YOUR CODE
 
-class AIHero : public behaviac::Agent
-///<<< BEGIN WRITING YOUR CODE AIHero
-///<<< END WRITING YOUR CODE
+SecondAgent::SecondAgent()
 {
-public:
-	AIHero();
-	virtual ~AIHero();
-
-	BEHAVIAC_DECLARE_AGENTTYPE(AIHero, behaviac::Agent)
-
-	public: behaviac::string name;
-
-	private: int p1;
-
-	public: void SayHello();
-
-///<<< BEGIN WRITING YOUR CODE CLASS_PART
+	p2 = 0;
+///<<< BEGIN WRITING YOUR CODE CONSTRUCTOR
 
 ///<<< END WRITING YOUR CODE
-};
+}
+
+SecondAgent::~SecondAgent()
+{
+///<<< BEGIN WRITING YOUR CODE DESTRUCTOR
+
+///<<< END WRITING YOUR CODE
+}
+
 
 ///<<< BEGIN WRITING YOUR CODE FILE_UNINIT
 
 ///<<< END WRITING YOUR CODE
-
-#endif

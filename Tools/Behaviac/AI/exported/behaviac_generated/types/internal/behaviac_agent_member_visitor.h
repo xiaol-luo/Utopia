@@ -10,5 +10,43 @@
 // Agent property and method handlers
 
 
+struct PROPERTY_TYPE_AIHero_p1 { };
+template<> inline int& AIHero::_Get_Property_<PROPERTY_TYPE_AIHero_p1>()
+{
+	return this->p1;
+}
+
+
+struct PROPERTY_TYPE_SecondAgent_p2 { };
+template<> inline int& SecondAgent::_Get_Property_<PROPERTY_TYPE_SecondAgent_p2>()
+{
+	return this->p2;
+}
+
+
+struct PROPERTY_TYPE_FirstAgent_p1 { };
+template<> inline int& FirstAgent::_Get_Property_<PROPERTY_TYPE_FirstAgent_p1>()
+{
+	return this->p1;
+}
+
+struct PROPERTY_TYPE_FirstAgent_second_agent { };
+template<> inline & FirstAgent::_Get_Property_<PROPERTY_TYPE_FirstAgent_second_agent>()
+{
+	return this->second_agent;
+}
+
+struct METHOD_TYPE_FirstAgent_Say { };
+template<> inline void FirstAgent::_Execute_Method_<METHOD_TYPE_FirstAgent_Say>(behaviac::string p0)
+{
+	this->FirstAgent::Say(p0);
+}
+
+struct METHOD_TYPE_FirstAgent_SayHello { };
+template<> inline void FirstAgent::_Execute_Method_<METHOD_TYPE_FirstAgent_SayHello>()
+{
+	this->FirstAgent::SayHello();
+}
+
 
 #endif // _BEHAVIAC_MEMBER_VISITOR_H_

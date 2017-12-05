@@ -237,7 +237,7 @@ namespace behaviac
 
 		virtual bool load()
 		{
-			AgentMeta::SetTotalSignature(869008455u);
+			AgentMeta::SetTotalSignature(2988284549u);
 
 			AgentMeta* meta = NULL;
 			BEHAVIAC_UNUSED_VAR(meta);
@@ -253,9 +253,10 @@ namespace behaviac
 			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
 
 			// AIHero
-			meta = BEHAVIAC_NEW AgentMeta(2323391890u);
+			meta = BEHAVIAC_NEW AgentMeta(263444190u);
 			AgentMeta::GetAgentMetas()[2427486002u] = meta;
 			meta->RegisterMemberProperty(3282915872u, BEHAVIAC_NEW CMemberProperty< behaviac::string >("name", Set_AIHero_name, Get_AIHero_name));
+			meta->RegisterMemberProperty(2082220067u, BEHAVIAC_NEW CMemberProperty< int >("p1", Set_AIHero_p1, Get_AIHero_p1));
 			meta->RegisterMethod(1045109914u, BEHAVIAC_NEW CAgentStaticMethodVoid_1<char*>(FunctionPointer_AIHero_LogMessage));
 			meta->RegisterMethod(1505908390u, BEHAVIAC_NEW CAgentMethodVoid(FunctionPointer_AIHero_SayHello));
 			meta->RegisterMethod(2521019022u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorAdd());
@@ -264,8 +265,39 @@ namespace behaviac
 			meta->RegisterMethod(505785840u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorLength());
 			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
 
+			// SecondAgent
+			meta = BEHAVIAC_NEW AgentMeta(2420330950u);
+			AgentMeta::GetAgentMetas()[2432194202u] = meta;
+			meta->RegisterMemberProperty(1462860768u, BEHAVIAC_NEW CMemberProperty< int >("p2", Set_SecondAgent_p2, Get_SecondAgent_p2));
+			meta->RegisterMethod(1045109914u, BEHAVIAC_NEW CAgentStaticMethodVoid_1<char*>(FunctionPointer_SecondAgent_LogMessage));
+			meta->RegisterMethod(2521019022u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorAdd());
+			meta->RegisterMethod(2306090221u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorClear());
+			meta->RegisterMethod(3483755530u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorContains());
+			meta->RegisterMethod(505785840u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorLength());
+			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
+
+			// FirstAgent
+			meta = BEHAVIAC_NEW AgentMeta(3173780605u);
+			AgentMeta::GetAgentMetas()[1778122110u] = meta;
+			meta->RegisterMemberProperty(2082220067u, BEHAVIAC_NEW CMemberProperty< int >("p1", Set_FirstAgent_p1, Get_FirstAgent_p1));
+			meta->RegisterMemberProperty(1609373346u, BEHAVIAC_NEW CMemberProperty<  >("second_agent", Set_FirstAgent_second_agent, Get_FirstAgent_second_agent));
+			meta->RegisterMethod(3345343196u, BEHAVIAC_NEW CAgentMethodVoid_1<int>(FunctionPointer_FirstAgent_event_task) /* event_task */);
+			meta->RegisterMethod(1045109914u, BEHAVIAC_NEW CAgentStaticMethodVoid_1<char*>(FunctionPointer_FirstAgent_LogMessage));
+			meta->RegisterMethod(702722749u, BEHAVIAC_NEW CAgentMethodVoid_1<behaviac::string>(FunctionPointer_FirstAgent_Say));
+			meta->RegisterMethod(1505908390u, BEHAVIAC_NEW CAgentMethodVoid(FunctionPointer_FirstAgent_SayHello));
+			meta->RegisterMethod(2065006847u, BEHAVIAC_NEW CAgentMethodVoid_1<int>(FunctionPointer_FirstAgent_t1) /* t1 */);
+			meta->RegisterMethod(2521019022u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorAdd());
+			meta->RegisterMethod(2306090221u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorClear());
+			meta->RegisterMethod(3483755530u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorContains());
+			meta->RegisterMethod(505785840u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorLength());
+			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
+
 			AgentMeta::Register<behaviac::Agent>("behaviac::Agent");
 			AgentMeta::Register<AIHero>("AIHero");
+			AgentMeta::Register<SecondAgent>("SecondAgent");
+			AgentMeta::Register<FirstAgent>("FirstAgent");
+
+			Agent::RegisterInstanceName<SecondAgent>("SecondAgentInstance");
 
 			behaviac::Workspace::GetInstance()->SetUseIntValue(true);
 
@@ -276,6 +308,10 @@ namespace behaviac
 		{
 			AgentMeta::UnRegister<behaviac::Agent>("behaviac::Agent");
 			AgentMeta::UnRegister<AIHero>("AIHero");
+			AgentMeta::UnRegister<SecondAgent>("SecondAgent");
+			AgentMeta::UnRegister<FirstAgent>("FirstAgent");
+
+			Agent::UnRegisterInstanceName<SecondAgent>("SecondAgentInstance");
 
 			return true;
 		}

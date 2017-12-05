@@ -2,7 +2,7 @@
 <meta>
   <types />
   <agents>
-    <agent classfullname="behaviac::Agent" DisplayName="behaviac::Agent" Desc="behaviac::Agent" IsRefType="true" IsImplemented="true">
+    <agent classfullname="behaviac::Agent" DisplayName="behaviac::Agent" Desc="" IsRefType="true" IsImplemented="true">
       <Method Name="VectorLength" DisplayName="VectorLength" Desc="VectorLength" Class="behaviac::Agent" ReturnType="int" ReturnTypeFullName="System.Int32" Static="true" Public="true" istask="false">
         <Param Name="param0" Type="const IList&amp;" TypeFullName="System.Collections.IList" DisplayName="param0" Desc="param0" />
       </Method>
@@ -27,8 +27,28 @@
     </agent>
     <agent classfullname="AIHero" base="behaviac::Agent" DisplayName="AIHeroAgent" Desc="AIHeroAgent" IsRefType="true" IsCustomized="true">
       <Member Name="name" DisplayName="name" Desc="name" Class="AIHero" Type="string" TypeFullName="System.String" defaultvalue="" Static="false" Public="true" Readonly="false" />
+      <Member Name="p1" DisplayName="p1" Desc="p1" Class="AIHero" Type="int" TypeFullName="System.Int32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
       <Method Name="SayHello" DisplayName="SayHello" Desc="SayHello" Class="AIHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
     </agent>
+    <agent classfullname="SecondAgent" base="behaviac::Agent" DisplayName="SecondAgent" Desc="SecondAgent" IsRefType="true" IsCustomized="true">
+      <Member Name="p2" DisplayName="p2" Desc="p2" Class="SecondAgent" Type="int" TypeFullName="System.Int32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
+    </agent>
+    <agent classfullname="FirstAgent" base="behaviac::Agent" DisplayName="FirstAgent" Desc="FirstAgent" IsRefType="true" IsCustomized="true">
+      <Member Name="second_agent" DisplayName="second_agent" Desc="second_agent" Class="FirstAgent" Type="" TypeFullName="" defaultvalue="&quot;&quot;" Static="false" Public="false" Readonly="false" />
+      <Member Name="p1" DisplayName="p1" Desc="p1" Class="FirstAgent" Type="int" TypeFullName="System.Int32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
+      <Method Name="SayHello" DisplayName="SayHello" Desc="SayHello" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="false" />
+      <Method Name="t1" DisplayName="t1" Desc="t1" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="true">
+        <Param Name="param0" Type="int" TypeFullName="System.Int32" DisplayName="param0" Desc="param0" />
+      </Method>
+      <Method Name="Say" DisplayName="Say" Desc="Say" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="false">
+        <Param Name="param0" Type="string" TypeFullName="System.String" DisplayName="param0" Desc="param0" />
+      </Method>
+      <Method Name="event_task" DisplayName="event_task" Desc="event_task" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="true">
+        <Param Name="param0" Type="int" TypeFullName="System.Int32" DisplayName="param0" Desc="" />
+      </Method>
+    </agent>
   </agents>
-  <instances />
+  <instances>
+    <instance name="SecondAgentInstance" class="SecondAgent" DisplayName="SecondAgentInstance" Desc="SecondAgentInstance" />
+  </instances>
 </meta>
