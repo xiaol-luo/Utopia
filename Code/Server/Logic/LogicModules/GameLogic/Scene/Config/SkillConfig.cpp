@@ -57,10 +57,9 @@ namespace GameLogic
 				lvl_cfg->consume_mp = csv_lvl->comsume_mp;
 				lvl_cfg->cd = csv_lvl->cd;
 				lvl_cfg->cast_distance = csv_lvl->cast_distance;
-				lvl_cfg->stage_spans[NetProto::ESS_Preparing] = csv_lvl->preparing_span;
-				lvl_cfg->stage_spans[NetProto::ESS_Releasing] = csv_lvl->releasing_span;
-				lvl_cfg->stage_spans[NetProto::ESS_Using] = csv_lvl->using_span;
-				lvl_cfg->stage_spans[NetProto::ESS_Lasting] = csv_lvl->lasting_span;
+				lvl_cfg->preparing_span = csv_lvl->preparing_span;
+				lvl_cfg->releasing_span = csv_lvl->releasing_span;
+				lvl_cfg->lasting_span = csv_lvl->lasting_span;
 			}
 
 			skills.insert(std::make_pair(skill_cfg->id, skill_cfg));

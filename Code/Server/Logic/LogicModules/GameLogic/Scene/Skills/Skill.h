@@ -4,6 +4,7 @@
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/Vector3.h"
 #include "Common/Utils/Ticker.h"
+#include "Network/Protobuf/BattleEnum.pb.h"
 
 namespace GameLogic
 {
@@ -35,17 +36,24 @@ namespace GameLogic
 		void HeartBeat();
 		bool IsRunning();
 		bool TryCancel();
+		void SyncClient();
 
 	protected:
+		bool CheckCanCast();
+		void ReleaseEffects();
 		void End();
 		std::shared_ptr<SceneUnitSkills> m_su_skills;
 		const SkillConfig *m_cfg = nullptr;
 		const SkillLevelConfig *m_lvl_cfg = nullptr;
 		uint64_t m_skill_key = 0;
 
-		uint64_t target_suid = 0;
-		std::weak_ptr<SceneUnit> target_su;
-		Vector3 pos;
-		Vector2 dir;
+		uint64_t m_target_suid = 0;
+		std::weak_ptr<SceneUnit> m_target_su;
+		Vector3 m_pos;
+		Vector2 m_dir;
+		Ticker m_cd;
+
+		int m_state = NetProto::ESS_End;
+		Ticker m_state_span;
 	};
 }

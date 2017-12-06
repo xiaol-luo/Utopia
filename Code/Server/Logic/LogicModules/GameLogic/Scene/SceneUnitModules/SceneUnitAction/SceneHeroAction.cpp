@@ -142,7 +142,7 @@ namespace GameLogic
 		bool ret = false;
 		if (ret || nullptr == m_use_skill_param.skill)
 			ret = true;
-		if (ret || m_use_skill_param.skill->IsRunning())
+		if (ret || !m_use_skill_param.skill->IsRunning())
 			ret = true;
 		if (ret || m_use_skill_param.skill->TryCancel())
 			ret = true;

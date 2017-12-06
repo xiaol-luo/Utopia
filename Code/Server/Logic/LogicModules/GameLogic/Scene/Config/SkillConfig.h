@@ -22,7 +22,9 @@ namespace GameLogic
 		int consume_mp = 0;
 		int cd = 0;
 		int cast_distance = 0;
-		int stage_spans[NetProto::ESS_End] = { 0 };
+		int preparing_span = 0;
+		int releasing_span = 0;
+		int lasting_span = 0;
 	};
 
 	struct SkillConfig

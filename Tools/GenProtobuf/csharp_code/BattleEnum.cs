@@ -49,17 +49,16 @@ namespace NetProto {
             "ZWVTbG90EA0SEAoMRVNTX0ZvdXJTbG90EA4SEAoMRVNTX0ZpdmVTbG90EA8S",
             "DwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5TbG90EBEqNwoJRVNraWxs",
             "QmFyEhUKEUVTa2lsbEJhcl9EZWZhdWx0EAASEwoPRVNraWxsQmFyX0V4dHJh",
-            "EAEqbgoLRVNraWxsU3RhdGUSDAoIRVNTX0ZyZWUQABIRCg1FU1NfUHJlcGFy",
-            "aW5nEAESEQoNRVNTX1JlbGVhc2luZxACEg0KCUVTU19Vc2luZxADEg8KC0VT",
-            "U19MYXN0aW5nEAQSCwoHRVNTX0VuZBAFKl4KDEVTa2lsbFVzZVdheRIXChNF",
-            "U2tpbGxUYXJnZXRfVGFyZ2V0EAASGgoWRVNraWxsVGFyZ2V0X0RpcmVjdGlv",
-            "bhABEhkKFUVTa2lsbFRhcmdldF9Qb3NpdGlvbhACKu0BChBFU2tpbGxFZmZl",
-            "Y3RDYXNlEhkKFUVTa2lsbFRhcmdldENhc2VfU2VsZhAAEhsKF0VTa2lsbFRh",
-            "cmdldENhc2VfRnJpZW5kEAESGgoWRVNraWxsVGFyZ2V0Q2FzZV9FbmVteRAC",
-            "Eh4KGkVTa2lsbFRhcmdldENhc2VfU2VsZkVuZW15EAMSJgoiRVNraWxsVGFy",
-            "Z2V0Q2FzZV9GcmllbmRFeGNsdWRlU2VsZhAEEiMKH0VTa2lsbFRhcmdldENh",
-            "c2VfQWxsRXhjbHVkZVNlbGYQBRIYChRFU2tpbGxUYXJnZXRDYXNlX0FsbBAG",
-            "QgP4AQFiBnByb3RvMw=="));
+            "EAEqYAoLRVNraWxsU3RhdGUSEQoNRVNTX1ByZXBhcmluZxAAEhEKDUVTU19S",
+            "ZWxlYXNpbmcQARINCglFU1NfVXNpbmcQAhIPCgtFU1NfTGFzdGluZxADEgsK",
+            "B0VTU19FbmQQBCpeCgxFU2tpbGxVc2VXYXkSFwoTRVNraWxsVGFyZ2V0X1Rh",
+            "cmdldBAAEhoKFkVTa2lsbFRhcmdldF9EaXJlY3Rpb24QARIZChVFU2tpbGxU",
+            "YXJnZXRfUG9zaXRpb24QAirtAQoQRVNraWxsRWZmZWN0Q2FzZRIZChVFU2tp",
+            "bGxUYXJnZXRDYXNlX1NlbGYQABIbChdFU2tpbGxUYXJnZXRDYXNlX0ZyaWVu",
+            "ZBABEhoKFkVTa2lsbFRhcmdldENhc2VfRW5lbXkQAhIeChpFU2tpbGxUYXJn",
+            "ZXRDYXNlX1NlbGZFbmVteRADEiYKIkVTa2lsbFRhcmdldENhc2VfRnJpZW5k",
+            "RXhjbHVkZVNlbGYQBBIjCh9FU2tpbGxUYXJnZXRDYXNlX0FsbEV4Y2x1ZGVT",
+            "ZWxmEAUSGAoURVNraWxsVGFyZ2V0Q2FzZV9BbGwQBkID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
@@ -209,29 +208,25 @@ namespace NetProto {
 
   public enum ESkillState {
     /// <summary>
-    /// 空闲
-    /// </summary>
-    [pbr::OriginalName("ESS_Free")] EssFree = 0,
-    /// <summary>
     /// 吟唱
     /// </summary>
-    [pbr::OriginalName("ESS_Preparing")] EssPreparing = 1,
+    [pbr::OriginalName("ESS_Preparing")] EssPreparing = 0,
     /// <summary>
     /// 前摇
     /// </summary>
-    [pbr::OriginalName("ESS_Releasing")] EssReleasing = 2,
+    [pbr::OriginalName("ESS_Releasing")] EssReleasing = 1,
     /// <summary>
     /// 引导
     /// </summary>
-    [pbr::OriginalName("ESS_Using")] EssUsing = 3,
+    [pbr::OriginalName("ESS_Using")] EssUsing = 2,
     /// <summary>
     /// 后摇
     /// </summary>
-    [pbr::OriginalName("ESS_Lasting")] EssLasting = 4,
+    [pbr::OriginalName("ESS_Lasting")] EssLasting = 3,
     /// <summary>
     /// 结束
     /// </summary>
-    [pbr::OriginalName("ESS_End")] EssEnd = 5,
+    [pbr::OriginalName("ESS_End")] EssEnd = 4,
   }
 
   public enum ESkillUseWay {

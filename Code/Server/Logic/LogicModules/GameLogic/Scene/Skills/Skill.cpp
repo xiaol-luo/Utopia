@@ -40,25 +40,120 @@ namespace GameLogic
 
 	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)
 	{
+
 	}
 
 	bool Skill::Begin()
 	{
-		return false;
+		if (!this->CheckCanCast())
+			return false;
+
+		m_state = NetProto::ESS_Preparing;
+		m_state_span.Restart(m_lvl_cfg->preparing_span);
+		this->SyncClient();
+		return true;
 	}
 	void Skill::HeartBeat()
 	{
+		int old_state = m_state;
+		if (this->IsRunning() && !m_state_span.InCd())
+		{
+			while (m_state < NetProto::ESS_End && !m_state_span.InCd())
+			{
+				switch (m_state)
+				{
+					case NetProto::ESS_Preparing:
+					{
+						if (this->CheckCanCast())
+						{
+							++m_state;
+							m_state_span.Restart(m_lvl_cfg->releasing_span);
+						}
+						else
+						{
+							m_state = NetProto::ESS_End;
+						}
+					}
+					break;
+					case NetProto::ESS_Releasing:
+					{
+						if (this->CheckCanCast())
+						{
+							this->ReleaseEffects();
+							++m_state;
+						}
+						else
+						{
+							m_state = NetProto::ESS_End;
+						}
+					}
+					break;
+					case NetProto::ESS_Using:
+					{
+						bool using_skill = false;
+						if (using_skill)
+						{
+
+						}
+						else
+						{
+							++m_state;
+							m_state_span.Restart(m_lvl_cfg->lasting_span);
+						}
+					}
+					break;
+					case NetProto::ESS_Lasting:
+					{
+						++m_state;
+					}
+					break;
+				}
+			}
+			if (m_state >= NetProto::ESS_End)
+			{
+				this->End();
+			}
+		}
+		if (old_state != m_state)
+		{
+			this->SyncClient();
+		}
 	}
+
 	bool Skill::IsRunning()
 	{
-		return false;
+		return m_state >= 0 && m_state < NetProto::ESS_End;
 	}
+
 	bool Skill::TryCancel()
 	{
-		return false;
+		if (!IsRunning())
+			return true;
+
+		// TODO
+		this->End();
+		this->SyncClient();
+		return true;
 	}
+
+	void Skill::SyncClient()
+	{
+	}
+
+	bool Skill::CheckCanCast()
+	{
+		return true;
+	}
+
+	void Skill::ReleaseEffects()
+	{
+		// TODO
+	}
+
 	void Skill::End()
 	{
+		m_state = NetProto::ESS_End;
+		m_state_span.Restart(0);
 	}
 }
 
