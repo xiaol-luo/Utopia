@@ -29,7 +29,6 @@ AIHero::~AIHero()
 void AIHero::SayHello()
 {
 ///<<< BEGIN WRITING YOUR CODE SayHello
-	printf("AIHero Say Hello\n");
 ///<<< END WRITING YOUR CODE
 }
 

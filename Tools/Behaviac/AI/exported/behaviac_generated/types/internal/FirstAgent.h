@@ -10,9 +10,7 @@
 #include "behaviac_headers.h"
 
 ///<<< BEGIN WRITING YOUR CODE FILE_INIT
-
-class SecondAgent;
-
+class AgentType;
 ///<<< END WRITING YOUR CODE
 
 class FirstAgent : public behaviac::Agent
@@ -26,8 +24,6 @@ public:
 	BEHAVIAC_DECLARE_AGENTTYPE(FirstAgent, behaviac::Agent)
 
 	private: int p1;
-
-	private:  second_agent;
 
 	private: void Say(behaviac::string param0);
 

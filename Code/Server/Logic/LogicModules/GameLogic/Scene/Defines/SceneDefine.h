@@ -43,4 +43,12 @@ namespace GameLogic
 	};
 
 	const static float MOVE_TO_POS_IGNORE_SQR_DISTANCE = 0.01f;		// 移动时，距离目标点为N算到达
+
+	enum ESUAction
+	{
+		ESUAction_Idle = 0,
+		ESUAction_Move,
+		ESUAction_Trace,
+		ESUAction_UseSkill,
+	};
 }

@@ -19,11 +19,13 @@ namespace GameLogic
 		uint64_t AddSkill(std::shared_ptr<Skill> skill, NetProto::ESkillSlot slot, NetProto::ESkillBar bar);
 		void RemoveSkill(uint64_t skill_key);
 		std::shared_ptr<Skill> GetSkill(uint64_t skill_key);
-		std::shared_ptr<Skill> GetSlotSkill(NetProto::ESkillSlot  slot);
+		std::shared_ptr<Skill> GetSlotActiveSkill(NetProto::ESkillSlot  slot);
+		std::shared_ptr<Skill> GetActiveSkill(int skill_id);
 		std::shared_ptr<Skill> GetSlotSkill(NetProto::ESkillSlot  slot, NetProto::ESkillBar bar);
 		bool SetSlotLevel(NetProto::ESkillSlot  slot, int level);
 		int GetSlotLevel(NetProto::ESkillSlot slot);
 		int GetSlotMaxLevel(NetProto::ESkillSlot slot);
+
 	protected:
 		std::shared_ptr<Skill> m_slots[NetProto::ESkillSlot_ARRAYSIZE][NetProto::ESkillBar_ARRAYSIZE];
 		uint64_t m_last_skill_key = 0;

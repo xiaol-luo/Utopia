@@ -13,7 +13,6 @@
 FirstAgent::FirstAgent()
 {
 	p1 = 0;
-	second_agent = "";
 ///<<< BEGIN WRITING YOUR CODE CONSTRUCTOR
 
 ///<<< END WRITING YOUR CODE
@@ -29,7 +28,6 @@ FirstAgent::~FirstAgent()
 void FirstAgent::Say(behaviac::string param0)
 {
 ///<<< BEGIN WRITING YOUR CODE Say
-	printf("FirstAgent::Say %s\n", param0.c_str());
 ///<<< END WRITING YOUR CODE
 }
 

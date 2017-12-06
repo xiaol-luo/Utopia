@@ -15,6 +15,11 @@ namespace GameLogic
 
 	}
 
+	int Skill::GetSkillId()
+	{
+		return m_cfg->id;
+	}
+
 	bool Skill::SetLevel(int lvl)
 	{
 		if (lvl < 0 || lvl > m_cfg->max_level)
@@ -33,14 +38,25 @@ namespace GameLogic
 		return m_cfg->max_level;
 	}
 
-	void Skill::Begin()
+	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)
 	{
 	}
 
+	bool Skill::Begin()
+	{
+		return false;
+	}
 	void Skill::HeartBeat()
 	{
 	}
-
+	bool Skill::IsRunning()
+	{
+		return false;
+	}
+	bool Skill::TryCancel()
+	{
+		return false;
+	}
 	void Skill::End()
 	{
 	}

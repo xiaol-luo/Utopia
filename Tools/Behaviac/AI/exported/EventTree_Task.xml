@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: EventTree_Task.xml-->
+<behavior name="EventTree_Task" agenttype="FirstAgent" version="5">
+  <node class="Sequence" id="0">
+    <attachment class="Event" id="3" flag="event">
+      <property ReferenceFilename="SubTree_Task" />
+      <property Task="Self.FirstAgent::t1(0)" />
+      <property TriggeredOnce="true" />
+      <property TriggerMode="Transfer" />
+    </attachment>
+    <node class="Action" id="1">
+      <property Method="Self.FirstAgent::Say(&quot;wait subtree&quot;)" />
+      <property ResultOption="BT_RUNNING" />
+    </node>
+    <node class="Assignment" id="2">
+      <property CastRight="false" />
+      <property Opl="int Self.FirstAgent::p1" />
+      <property Opr="const int 1" />
+    </node>
+  </node>
+</behavior>

@@ -64,7 +64,7 @@ namespace GameLogic
 		return nullptr;
 	}
 
-	std::shared_ptr<Skill> SceneUnitSkills::GetSlotSkill(NetProto::ESkillSlot slot)
+	std::shared_ptr<Skill> SceneUnitSkills::GetSlotActiveSkill(NetProto::ESkillSlot slot)
 	{
 		if (slot < NetProto::ESkillSlot_MIN || slot > NetProto::ESkillSlot_MAX)
 			return nullptr;
@@ -74,6 +74,17 @@ namespace GameLogic
 		{
 			if (nullptr != skill_bar[bar])
 				return skill_bar[bar];
+		}
+		return nullptr;
+	}
+
+	std::shared_ptr<Skill> SceneUnitSkills::GetActiveSkill(int skill_id)
+	{
+		for (int slot = 0; slot < NetProto::ESkillSlot_ARRAYSIZE; ++slot)
+		{
+			auto skill = this->GetSlotActiveSkill((NetProto::ESkillSlot)slot);
+			if (nullptr != skill && skill_id == skill->GetSkillId())
+				return skill;
 		}
 		return nullptr;
 	}
@@ -99,7 +110,7 @@ namespace GameLogic
 
 	int SceneUnitSkills::GetSlotLevel(NetProto::ESkillSlot slot)
 	{
-		auto skill = this->GetSlotSkill(slot);
+		auto skill = this->GetSlotSkill(slot, NetProto::ESkillBar_Default);
 		if (nullptr == skill)
 			return -1;
 		return skill->GetLevel();
@@ -107,7 +118,7 @@ namespace GameLogic
 
 	int SceneUnitSkills::GetSlotMaxLevel(NetProto::ESkillSlot slot)
 	{
-		auto skill = this->GetSlotSkill(slot);
+		auto skill = this->GetSlotSkill(slot, NetProto::ESkillBar_Default);
 		if (nullptr == skill)
 			return -1;
 		return skill->GetMaxLevel();

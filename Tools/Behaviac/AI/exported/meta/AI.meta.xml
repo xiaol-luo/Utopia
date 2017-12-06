@@ -12,10 +12,9 @@
       <property name="p2" type="int" member="false" static="false" defaultvalue="0" />
     </properties>
   </agent>
-  <agent type="FirstAgent" base="behaviac::Agent" signature="3173780605">
+  <agent type="FirstAgent" base="behaviac::Agent" signature="1397710440">
     <properties>
       <property name="p1" type="int" member="false" static="false" defaultvalue="0" />
-      <property name="second_agent" type="" member="false" static="false" defaultvalue="&quot;&quot;" />
     </properties>
   </agent>
 </agents>

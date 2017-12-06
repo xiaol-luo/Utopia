@@ -19,5 +19,27 @@
         <property ResultOption="BT_SUCCESS" />
       </node>
     </node>
+    <node class="Selector" id="5">
+      <node class="Condition" id="6">
+        <property Operator="Greater" />
+        <property Opl="int Self.AIHero::p1" />
+        <property Opr="const int 2" />
+      </node>
+      <node class="Action" id="7">
+        <property Method="Self.AIHero::SayHello()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+    </node>
+    <node class="Selector" id="8">
+      <node class="Condition" id="9">
+        <property Operator="Greater" />
+        <property Opl="int Self.AIHero::p1" />
+        <property Opr="const int 3" />
+      </node>
+      <node class="Action" id="10">
+        <property Method="Self.AIHero::SayHello()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+    </node>
   </node>
 </behavior>

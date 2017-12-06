@@ -277,10 +277,9 @@ namespace behaviac
 			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
 
 			// FirstAgent
-			meta = BEHAVIAC_NEW AgentMeta(3173780605u);
+			meta = BEHAVIAC_NEW AgentMeta(1397710440u);
 			AgentMeta::GetAgentMetas()[1778122110u] = meta;
 			meta->RegisterMemberProperty(2082220067u, BEHAVIAC_NEW CMemberProperty< int >("p1", Set_FirstAgent_p1, Get_FirstAgent_p1));
-			meta->RegisterMemberProperty(1609373346u, BEHAVIAC_NEW CMemberProperty<  >("second_agent", Set_FirstAgent_second_agent, Get_FirstAgent_second_agent));
 			meta->RegisterMethod(3345343196u, BEHAVIAC_NEW CAgentMethodVoid_1<int>(FunctionPointer_FirstAgent_event_task) /* event_task */);
 			meta->RegisterMethod(1045109914u, BEHAVIAC_NEW CAgentStaticMethodVoid_1<char*>(FunctionPointer_FirstAgent_LogMessage));
 			meta->RegisterMethod(702722749u, BEHAVIAC_NEW CAgentMethodVoid_1<behaviac::string>(FunctionPointer_FirstAgent_Say));

@@ -33,9 +33,6 @@ namespace behaviac
 	inline void Set_FirstAgent_p1(Agent* self, int value) { ((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_p1, int >() = value; };
 	inline const void* Get_FirstAgent_p1(Agent* self) { return &((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_p1, int >(); };
 
-	inline void Set_FirstAgent_second_agent(Agent* self,  value) { ((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_second_agent,  >() = value; };
-	inline const void* Get_FirstAgent_second_agent(Agent* self) { return &((FirstAgent*)self)->_Get_Property_<PROPERTY_TYPE_FirstAgent_second_agent,  >(); };
-
 	inline void FunctionPointer_FirstAgent_event_task(Agent* self, int param0) { } /* event_task */
 	inline void FunctionPointer_FirstAgent_LogMessage(char* param0) { FirstAgent::LogMessage(param0); }
 	inline void FunctionPointer_FirstAgent_Say(Agent* self, behaviac::string param0) { ((FirstAgent*)self)->_Execute_Method_<METHOD_TYPE_FirstAgent_Say, void, behaviac::string >(param0); }

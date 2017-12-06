@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: SubTree.xml-->
+<behavior name="SubTree" agenttype="FirstAgent" version="5">
+  <node class="Sequence" id="0">
+    <node class="Assignment" id="1">
+      <property CastRight="false" />
+      <property Opl="int Self.FirstAgent::p1" />
+      <property Opr="const int 1" />
+    </node>
+    <node class="Action" id="2">
+      <property Method="Self.FirstAgent::Say(&quot;Hello SubTree&quot;)" />
+      <property ResultOption="BT_SUCCESS" />
+    </node>
+  </node>
+</behavior>

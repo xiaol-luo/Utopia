@@ -34,7 +34,6 @@
       <Member Name="p2" DisplayName="p2" Desc="p2" Class="SecondAgent" Type="int" TypeFullName="System.Int32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
     </agent>
     <agent classfullname="FirstAgent" base="behaviac::Agent" DisplayName="FirstAgent" Desc="FirstAgent" IsRefType="true" IsCustomized="true">
-      <Member Name="second_agent" DisplayName="second_agent" Desc="second_agent" Class="FirstAgent" Type="" TypeFullName="" defaultvalue="&quot;&quot;" Static="false" Public="false" Readonly="false" />
       <Member Name="p1" DisplayName="p1" Desc="p1" Class="FirstAgent" Type="int" TypeFullName="System.Int32" defaultvalue="0" Static="false" Public="false" Readonly="false" />
       <Method Name="SayHello" DisplayName="SayHello" Desc="SayHello" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="false" />
       <Method Name="t1" DisplayName="t1" Desc="t1" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="true">

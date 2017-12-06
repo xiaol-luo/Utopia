@@ -25,6 +25,9 @@ namespace GeometryUtils
 	bool IsCirlceRectIntersect(const Vector2 &circle_center, float radius, Vector2 rect_center, float length, float width);
 	bool IsRectLineSegmentIntersect(const Vector2 &r1, const Vector2 &r2, const Vector2 &lp1, const Vector2 &lp2);
 	bool IsPointInRect(const Vector2 &r1, const Vector2 &r2, const Vector2 &p);
+
+	bool InFlatDistance(const Vector2 &from, const Vector2 &to, float distance);
+	bool InFlatDistance(const Vector3 &from, const Vector3 &to, float distance);
 };
 
 

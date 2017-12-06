@@ -181,3 +181,17 @@ bool GeometryUtils::IsPointInRect(const Vector2 & r1, const Vector2 & r2, const 
 	float max_y = std::max(r1.y, r2.y);
 	return p.x >= min_x && p.x <= max_x && p.y >= min_y && p.y <= max_y;
 }
+
+bool GeometryUtils::InFlatDistance(const Vector2 & from, const Vector2 & to, float distance)
+{
+	if (distance <= 0)
+		return true;
+
+	Vector2 delta = from; delta - to;
+	return delta.sqrMagnitude() <= distance * distance;
+}
+
+bool GeometryUtils::InFlatDistance(const Vector3 & from, const Vector3 & to, float distance)
+{
+	return GeometryUtils::InFlatDistance(from.xz(), to.xz(), distance);
+}
