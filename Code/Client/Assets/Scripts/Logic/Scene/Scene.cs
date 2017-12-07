@@ -22,6 +22,19 @@ public class Scene
         }
     }
 
+    ulong targetSuid
+    {
+        get
+        {
+            foreach (var kv_pair in m_sceneObjects)
+            {
+                if (kv_pair.Key != mainHero.id)
+                    return kv_pair.Key;
+            }
+            return 0;
+        }
+    }
+
     public void EnterScene(string sceneName)
     {
         m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
@@ -31,8 +44,6 @@ public class Scene
         App.my.gameNetwork.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
         App.my.gameNetwork.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
         App.my.gameNetwork.Add<SceneUnitMove>((int)ProtoId.PidSceneUnitMove, OnRecvceneUnitMove);
-
-
 
         App.my.gameNetwork.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
         App.my.gameNetwork.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
@@ -145,15 +156,6 @@ public class Scene
         }
     }
 
-    public void TryMoveToPos(float x, float z)
-    {
-        MoveToPos msg = new MoveToPos();
-        msg.Pos = new PBVector2();
-        msg.Pos.X = x;
-        msg.Pos.Y = z;
-        App.my.gameNetwork.Send(ProtoId.PidMoveToPos, msg);
-    }
-
     public void TryStopMove()
     {
         App.my.gameNetwork.Send(ProtoId.PidStopMove);
@@ -174,22 +176,21 @@ public class Scene
             bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
             if (isOk)
             {
-                this.TryMoveToPos(hitGound.x, hitGound.z);
-                this.SendBattleOpera(EPlayerOpera.EpoMove, 0, hitGound);
+                this.TryMoveToPos(hitGound);
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            this.SendBattleOpera(EPlayerOpera.EpoStop);
+            this.StopAction();
         }
-        /*
+        
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Vector3 hitGound = Vector3.zero;
             bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
             if (isOk)
             {
-                this.SendBattleOpera(EPlayerOpera.EpoCastSkill, 0, hitGound);
+                this.CastSkill(ESkillSlot.EssQslot, targetSuid, hitGound);
             }
         }
         if (Input.GetKeyDown(KeyCode.W))
@@ -198,40 +199,42 @@ public class Scene
             bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
             if (isOk)
             {
-                this.SendBattleOpera(EPlayerOpera.EboCastSkillW, 0, hitGound);
+                this.CastSkill(ESkillSlot.EssWslot, targetSuid, hitGound);
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            this.SendBattleOpera(EPlayerOpera.EboCastSkillE);
+            this.TraceUnit(targetSuid);
         }
-        */
-    }
 
-    void SendBattleOpera(EPlayerOpera opera, ulong targetId, Vector3 pos)
+    }
+    void CastSkill(ESkillSlot skillSlot, ulong targetId, Vector3 pos)
     {
         BattleOperation msg = new BattleOperation();
-        msg.Opera = opera;
+        msg.Opera = EPlayerOpera.EpoCastSkill;
         msg.TargetId = targetId;
-        if (null != pos)
-        {
-            msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
-
-            Vector3 tmp_dir = pos - mainHero.pos;
-            msg.Dir = Vector2.SignedAngle(Vector2.up, new Vector2(tmp_dir.x, tmp_dir.z));
-        }
-        if (null != pos)
-        {
-        }
+        msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
         App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
-    void SendBattleOpera(EPlayerOpera opera)
+    void TraceUnit(ulong targetId)
     {
-        this.SendBattleOpera(opera, 0, new Vector3());
+        BattleOperation msg = new BattleOperation();
+        msg.Opera = EPlayerOpera.EpoTrace;
+        msg.TargetId = targetId;
+        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
-    void SendBattleOpera(EPlayerOpera opera, ulong targetId)
+    void TryMoveToPos(Vector3 pos)
     {
-        this.SendBattleOpera(opera, targetId, new Vector3());
+        BattleOperation msg = new BattleOperation();
+        msg.Opera = EPlayerOpera.EpoMove;
+        msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
+        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
+    }
+    void StopAction()
+    {
+        BattleOperation msg = new BattleOperation();
+        msg.Opera = EPlayerOpera.EpoStop;
+        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
 
     // void RspFreeHero(int id, RspFreeHero msg)

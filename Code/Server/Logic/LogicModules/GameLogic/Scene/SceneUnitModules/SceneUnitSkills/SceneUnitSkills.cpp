@@ -30,7 +30,7 @@ namespace GameLogic
 		++m_last_skill_key;
 		skill->SetSkillKey(m_last_skill_key);
 		skill->SetSceneUnitSkills(this->GetSharedPtr<SceneUnitSkills>());
-		m_slots[slot][bar];
+		m_slots[slot][bar] = skill;
 		// TODO : Sync client
 		return m_last_skill_key;
 	}

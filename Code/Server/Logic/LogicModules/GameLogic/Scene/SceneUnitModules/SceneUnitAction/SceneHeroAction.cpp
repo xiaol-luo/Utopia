@@ -68,7 +68,7 @@ namespace GameLogic
 		
 		m_move_param.Reset();
 		m_move_param.allow_distance = allow_distance;
-		m_move_param.target_suid = 0;
+		m_move_param.target_suid = suid;
 		m_move_param.target_su = target_su;
 		m_move_param.target_pos = fit_pos;
 		m_move_param.try_moving = true;
@@ -161,7 +161,7 @@ namespace GameLogic
 		if (m_move_param.first_check || !m_move_param.check_span.InCd())
 		{
 			m_move_param.first_check = false;
-			m_move_param.check_span.Restart(0.5f);
+			m_move_param.check_span.Restart(0.2f);
 
 			if (0 == m_move_param.target_suid)
 			{

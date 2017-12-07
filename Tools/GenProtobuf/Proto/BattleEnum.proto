@@ -41,6 +41,7 @@ enum EPlayerOpera
 
 	EPO_CastSkill = 5;
 	EPO_UseItem = 6;
+	EPO_Trace = 7;
 
 	EBO_MaxCount = 32;
 }

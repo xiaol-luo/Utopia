@@ -187,8 +187,10 @@ bool GeometryUtils::InFlatDistance(const Vector2 & from, const Vector2 & to, flo
 	if (distance <= 0)
 		return true;
 
-	Vector2 delta = from; delta - to;
-	return delta.sqrMagnitude() <= distance * distance;
+	Vector2 delta = from; 
+	delta = delta - to;
+	float delta_sqr = delta.sqrMagnitude();
+	return delta_sqr <= distance * distance;
 }
 
 bool GeometryUtils::InFlatDistance(const Vector3 & from, const Vector3 & to, float distance)

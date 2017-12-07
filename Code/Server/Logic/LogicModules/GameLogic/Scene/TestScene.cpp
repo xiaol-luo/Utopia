@@ -119,7 +119,7 @@ namespace GameLogic
 
 	void TestScene::OnLateUpdate()
 	{
-		this->GetEvDispacher()->Fire(ES_TestHeartBeat);
+		// this->GetEvDispacher()->Fire(ES_TestHeartBeat);
 	}
 
 	void TestScene::TestAction()

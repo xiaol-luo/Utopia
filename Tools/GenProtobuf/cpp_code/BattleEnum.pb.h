@@ -129,6 +129,7 @@ enum EPlayerOpera {
   EPO_Hunt = 4,
   EPO_CastSkill = 5,
   EPO_UseItem = 6,
+  EPO_Trace = 7,
   EBO_MaxCount = 32,
   EPlayerOpera_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EPlayerOpera_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max

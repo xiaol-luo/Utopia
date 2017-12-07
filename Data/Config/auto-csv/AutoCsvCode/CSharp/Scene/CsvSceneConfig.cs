@@ -20,8 +20,8 @@ namespace Config
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSceneConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSceneConfig.Field_Name_id], ref id);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSceneConfig.Field_Name_terrain_file_path) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvSceneConfig.Field_Name_terrain_file_path], ref terrain_file_path);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSceneConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSceneConfig.Field_Name_id], ref id);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSceneConfig.Field_Name_terrain_file_path) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvSceneConfig.Field_Name_terrain_file_path], ref terrain_file_path);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -64,6 +64,8 @@ namespace Config
                         kvPairs[headers[fieldIdx]] = csv[fieldIdx];
                         
                     }
+                    if (string.IsNullOrWhiteSpace(kvPairs[headers[0]]))
+                        continue;
                     CsvSceneConfig cfg = new CsvSceneConfig();
                     if (!cfg.Init(kvPairs, cfg_check_fun))
                     {

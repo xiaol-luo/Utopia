@@ -227,9 +227,16 @@ namespace GameLogic
 		case NetProto::EPO_Move:
 			su_action->MoveTo(Vector3(msg->pos().x(), 0, msg->pos().y()), 0.1f);
 			break;
+
 		case NetProto::EPO_Stop:
 			su_action->CancelMove();
+			su_action->CancelSkill();
 			break;
+
+		case NetProto::EPO_Trace:
+			su_action->Trace(msg->target_id(), 3.0f);
+			break;
+
 		case NetProto::EPO_CastSkill:
 		{
 			std::shared_ptr<SceneUnitSkills> su_skills = su_action->GetModule<SceneUnitSkills>();

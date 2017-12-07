@@ -90,42 +90,42 @@ void AddDescriptorsImpl() {
       "Pos\020\005\022\027\n\023EMoveAgentState_Max\020\006*l\n\nEMoveS"
       "tate\022\023\n\017EMoveState_Idle\020\000\022\023\n\017EMoveState_"
       "Move\020\001\022\032\n\026EMoveState_Immobilized\020\002\022\030\n\024EM"
-      "oveState_ForceMove\020\003*\217\001\n\014EPlayerOpera\022\017\n"
+      "oveState_ForceMove\020\003*\236\001\n\014EPlayerOpera\022\017\n"
       "\013EPO_Invalid\020\000\022\014\n\010EPO_Stop\020\001\022\014\n\010EPO_Move"
       "\020\002\022\016\n\nEPO_Follow\020\003\022\014\n\010EPO_Hunt\020\004\022\021\n\rEPO_"
-      "CastSkill\020\005\022\017\n\013EPO_UseItem\020\006\022\020\n\014EBO_MaxC"
-      "ount\020 *\332\002\n\013EFightParam\022\014\n\010EFP_None\020\000\022\n\n\006"
-      "EFP_HP\020\001\022\n\n\006EFP_MP\020\002\022\r\n\tEFP_MaxHP\020\t\022\r\n\tE"
-      "FP_MaxMP\020\n\022\021\n\rEFP_MoveSpeed\020\013\022\022\n\016EFP_Att"
-      "ackDist\020\014\022\023\n\017EFP_AttackSpeed\020\r\022\021\n\rEFP_Ph"
-      "yAttack\020\016\022\023\n\017EFP_MagicAttack\020\017\022\017\n\013EFP_Ph"
-      "yHurt\020\020\022\021\n\rEFP_MagicHurt\020\021\022\022\n\016EFP_PhyDef"
-      "ense\020\022\022\024\n\020EFP_MagicDefense\020\023\022\021\n\rEFP_Dizz"
-      "iness\020\024\022\017\n\013EFP_Silence\020\025\022\r\n\tEFP_Blind\020\026\022"
-      "\023\n\017EFP_Immobilized\020\027\022\r\n\tEFP_COUNT\020 *\362\001\n\n"
-      "ESkillSlot\022\r\n\tESS_QSlot\020\000\022\r\n\tESS_WSlot\020\001"
-      "\022\r\n\tESS_ESlot\020\002\022\r\n\tESS_RSlot\020\003\022\r\n\tESS_FS"
-      "lot\020\004\022\r\n\tESS_GSlot\020\005\022\r\n\tESS_PSlot\020\006\022\017\n\013E"
-      "SS_OneSlot\020\013\022\017\n\013ESS_TwoSlot\020\014\022\021\n\rESS_Thr"
-      "eeSlot\020\r\022\020\n\014ESS_FourSlot\020\016\022\020\n\014ESS_FiveSl"
-      "ot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_SevenSlot\020\021"
-      "*7\n\tESkillBar\022\025\n\021ESkillBar_Default\020\000\022\023\n\017"
-      "ESkillBar_Extra\020\001*q\n\013ESkillState\022\017\n\013ESS_"
-      "ReadyGo\020\000\022\021\n\rESS_Preparing\020\001\022\021\n\rESS_Rele"
-      "asing\020\002\022\r\n\tESS_Using\020\003\022\017\n\013ESS_Lasting\020\004\022"
-      "\013\n\007ESS_End\020\005*^\n\014ESkillUseWay\022\027\n\023ESkillTa"
-      "rget_Target\020\000\022\032\n\026ESkillTarget_Direction\020"
-      "\001\022\031\n\025ESkillTarget_Position\020\002*\355\001\n\020ESkillE"
-      "ffectCase\022\031\n\025ESkillTargetCase_Self\020\000\022\033\n\027"
-      "ESkillTargetCase_Friend\020\001\022\032\n\026ESkillTarge"
-      "tCase_Enemy\020\002\022\036\n\032ESkillTargetCase_SelfEn"
-      "emy\020\003\022&\n\"ESkillTargetCase_FriendExcludeS"
-      "elf\020\004\022#\n\037ESkillTargetCase_AllExcludeSelf"
-      "\020\005\022\030\n\024ESkillTargetCase_All\020\006B\003\370\001\001b\006proto"
-      "3"
+      "CastSkill\020\005\022\017\n\013EPO_UseItem\020\006\022\r\n\tEPO_Trac"
+      "e\020\007\022\020\n\014EBO_MaxCount\020 *\332\002\n\013EFightParam\022\014\n"
+      "\010EFP_None\020\000\022\n\n\006EFP_HP\020\001\022\n\n\006EFP_MP\020\002\022\r\n\tE"
+      "FP_MaxHP\020\t\022\r\n\tEFP_MaxMP\020\n\022\021\n\rEFP_MoveSpe"
+      "ed\020\013\022\022\n\016EFP_AttackDist\020\014\022\023\n\017EFP_AttackSp"
+      "eed\020\r\022\021\n\rEFP_PhyAttack\020\016\022\023\n\017EFP_MagicAtt"
+      "ack\020\017\022\017\n\013EFP_PhyHurt\020\020\022\021\n\rEFP_MagicHurt\020"
+      "\021\022\022\n\016EFP_PhyDefense\020\022\022\024\n\020EFP_MagicDefens"
+      "e\020\023\022\021\n\rEFP_Dizziness\020\024\022\017\n\013EFP_Silence\020\025\022"
+      "\r\n\tEFP_Blind\020\026\022\023\n\017EFP_Immobilized\020\027\022\r\n\tE"
+      "FP_COUNT\020 *\362\001\n\nESkillSlot\022\r\n\tESS_QSlot\020\000"
+      "\022\r\n\tESS_WSlot\020\001\022\r\n\tESS_ESlot\020\002\022\r\n\tESS_RS"
+      "lot\020\003\022\r\n\tESS_FSlot\020\004\022\r\n\tESS_GSlot\020\005\022\r\n\tE"
+      "SS_PSlot\020\006\022\017\n\013ESS_OneSlot\020\013\022\017\n\013ESS_TwoSl"
+      "ot\020\014\022\021\n\rESS_ThreeSlot\020\r\022\020\n\014ESS_FourSlot\020"
+      "\016\022\020\n\014ESS_FiveSlot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\r"
+      "ESS_SevenSlot\020\021*7\n\tESkillBar\022\025\n\021ESkillBa"
+      "r_Default\020\000\022\023\n\017ESkillBar_Extra\020\001*q\n\013ESki"
+      "llState\022\017\n\013ESS_ReadyGo\020\000\022\021\n\rESS_Preparin"
+      "g\020\001\022\021\n\rESS_Releasing\020\002\022\r\n\tESS_Using\020\003\022\017\n"
+      "\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*^\n\014ESkillUse"
+      "Way\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESkillTa"
+      "rget_Direction\020\001\022\031\n\025ESkillTarget_Positio"
+      "n\020\002*\355\001\n\020ESkillEffectCase\022\031\n\025ESkillTarget"
+      "Case_Self\020\000\022\033\n\027ESkillTargetCase_Friend\020\001"
+      "\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032ESkillTa"
+      "rgetCase_SelfEnemy\020\003\022&\n\"ESkillTargetCase"
+      "_FriendExcludeSelf\020\004\022#\n\037ESkillTargetCase"
+      "_AllExcludeSelf\020\005\022\030\n\024ESkillTargetCase_Al"
+      "l\020\006B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1681);
+      descriptor, 1696);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -208,6 +208,7 @@ bool EPlayerOpera_IsValid(int value) {
     case 4:
     case 5:
     case 6:
+    case 7:
     case 32:
       return true;
     default:

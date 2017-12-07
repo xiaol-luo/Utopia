@@ -12,7 +12,7 @@ namespace Config
         {
             try
             {
-                outVal = bool.Parse(str);
+                outVal = (0 != int.Parse(str));
                 return true;
             }
             catch (Exception)

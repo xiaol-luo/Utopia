@@ -26,11 +26,11 @@ namespace Config
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_id], ref id);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvSkillConfig.Field_Name_name], ref name);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_is_normal_attack) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_is_normal_attack], ref is_normal_attack);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_use_way) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_use_way], ref use_way);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_case) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_case], ref target_case);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_id], ref id);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvSkillConfig.Field_Name_name], ref name);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_is_normal_attack) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_is_normal_attack], ref is_normal_attack);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_use_way) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_use_way], ref use_way);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_case) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_case], ref target_case);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -76,6 +76,8 @@ namespace Config
                         kvPairs[headers[fieldIdx]] = csv[fieldIdx];
                         
                     }
+                    if (string.IsNullOrWhiteSpace(kvPairs[headers[0]]))
+                        continue;
                     CsvSkillConfig cfg = new CsvSkillConfig();
                     if (!cfg.Init(kvPairs, cfg_check_fun))
                     {

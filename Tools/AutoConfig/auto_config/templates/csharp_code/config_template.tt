@@ -29,7 +29,7 @@ namespace Config
         {
             bool all_ok = true;
     {%- for  field in fields %}
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_{{ class_name }}.{{ field.column_name_tag }}) && {{ field.convert_func }} (kvPairs[FieldName_{{ class_name }}.{{ field.column_name_tag }}], ref {{ field.field_name }});
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_{{ class_name }}.{{ field.column_name_tag }}) && {{ field.convert_func }} (kvPairs[FieldName_{{ class_name }}.{{ field.column_name_tag }}], ref {{ field.field_name }});
     {%- endfor %}
     {%- for  field in extra_fields %}
             all_ok = all_ok && {{ field.field_name }}.Init(this);
@@ -85,6 +85,8 @@ namespace Config
                         kvPairs[headers[fieldIdx]] = csv[fieldIdx];
                         
                     }
+                    if (string.IsNullOrWhiteSpace(kvPairs[headers[0]]))
+                        continue;
                     {{ class_name }} cfg = new {{ class_name }}();
                     if (!cfg.Init(kvPairs, cfg_check_fun))
                     {

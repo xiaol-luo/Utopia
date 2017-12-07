@@ -34,15 +34,15 @@ namespace Config
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_id], ref id);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_level) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_level], ref level);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_preparing_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_preparing_span], ref preparing_span);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_releasing_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_releasing_span], ref releasing_span);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_lasting_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_lasting_span], ref lasting_span);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_comsume_mp) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_comsume_mp], ref comsume_mp);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_cd) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_cd], ref cd);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_cast_distance) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_cast_distance], ref cast_distance);
-        all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_can_move) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_can_move], ref can_move);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_id], ref id);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_level) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_level], ref level);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_preparing_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_preparing_span], ref preparing_span);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_releasing_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_releasing_span], ref releasing_span);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_lasting_span) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_lasting_span], ref lasting_span);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_comsume_mp) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_comsume_mp], ref comsume_mp);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_cd) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_cd], ref cd);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_cast_distance) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_cast_distance], ref cast_distance);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_can_move) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_can_move], ref can_move);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -92,6 +92,8 @@ namespace Config
                         kvPairs[headers[fieldIdx]] = csv[fieldIdx];
                         
                     }
+                    if (string.IsNullOrWhiteSpace(kvPairs[headers[0]]))
+                        continue;
                     CsvSkillLevelConfig cfg = new CsvSkillLevelConfig();
                     if (!cfg.Init(kvPairs, cfg_check_fun))
                     {

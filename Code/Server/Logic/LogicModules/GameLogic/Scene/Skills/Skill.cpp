@@ -59,14 +59,14 @@ namespace GameLogic
 			{
 				m_pos = pos;
 			}
+			break;
 			case NetProto::ESkillTarget_Direction:
 			{
 				m_dir = dir;
 				if (m_dir == Vector2::zero)
 					m_dir = Vector2::up;
 			}
-			default:
-				break;
+			break;
 		}
 	}
 
