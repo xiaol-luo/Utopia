@@ -40,6 +40,7 @@ namespace GameLogic
 
 	protected:
 		bool CheckCanCast();
+		void SetFaceDir();
 		void ReleaseEffects();
 		void End();
 		std::shared_ptr<SceneUnitSkills> m_su_skills;
@@ -47,13 +48,15 @@ namespace GameLogic
 		const SkillLevelConfig *m_lvl_cfg = nullptr;
 		uint64_t m_skill_key = 0;
 
+		void ResetParams();
 		uint64_t m_target_suid = 0;
 		std::weak_ptr<SceneUnit> m_target_su;
 		Vector3 m_pos;
 		Vector2 m_dir;
-		Ticker m_cd;
-
+		bool m_can_move = true;
+		long m_last_release_ms = LONG_MIN;
 		int m_state = NetProto::ESS_End;
-		Ticker m_state_span;
+		long m_stage_begin_ms = LONG_MAX;
+		long GetLogicMs(long delta_ms = 0);
 	};
 }

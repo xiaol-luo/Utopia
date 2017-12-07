@@ -110,21 +110,22 @@ void AddDescriptorsImpl() {
       "eeSlot\020\r\022\020\n\014ESS_FourSlot\020\016\022\020\n\014ESS_FiveSl"
       "ot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_SevenSlot\020\021"
       "*7\n\tESkillBar\022\025\n\021ESkillBar_Default\020\000\022\023\n\017"
-      "ESkillBar_Extra\020\001*`\n\013ESkillState\022\021\n\rESS_"
-      "Preparing\020\000\022\021\n\rESS_Releasing\020\001\022\r\n\tESS_Us"
-      "ing\020\002\022\017\n\013ESS_Lasting\020\003\022\013\n\007ESS_End\020\004*^\n\014E"
-      "SkillUseWay\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026"
-      "ESkillTarget_Direction\020\001\022\031\n\025ESkillTarget"
-      "_Position\020\002*\355\001\n\020ESkillEffectCase\022\031\n\025ESki"
-      "llTargetCase_Self\020\000\022\033\n\027ESkillTargetCase_"
-      "Friend\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032"
-      "ESkillTargetCase_SelfEnemy\020\003\022&\n\"ESkillTa"
-      "rgetCase_FriendExcludeSelf\020\004\022#\n\037ESkillTa"
-      "rgetCase_AllExcludeSelf\020\005\022\030\n\024ESkillTarge"
-      "tCase_All\020\006B\003\370\001\001b\006proto3"
+      "ESkillBar_Extra\020\001*q\n\013ESkillState\022\017\n\013ESS_"
+      "ReadyGo\020\000\022\021\n\rESS_Preparing\020\001\022\021\n\rESS_Rele"
+      "asing\020\002\022\r\n\tESS_Using\020\003\022\017\n\013ESS_Lasting\020\004\022"
+      "\013\n\007ESS_End\020\005*^\n\014ESkillUseWay\022\027\n\023ESkillTa"
+      "rget_Target\020\000\022\032\n\026ESkillTarget_Direction\020"
+      "\001\022\031\n\025ESkillTarget_Position\020\002*\355\001\n\020ESkillE"
+      "ffectCase\022\031\n\025ESkillTargetCase_Self\020\000\022\033\n\027"
+      "ESkillTargetCase_Friend\020\001\022\032\n\026ESkillTarge"
+      "tCase_Enemy\020\002\022\036\n\032ESkillTargetCase_SelfEn"
+      "emy\020\003\022&\n\"ESkillTargetCase_FriendExcludeS"
+      "elf\020\004\022#\n\037ESkillTargetCase_AllExcludeSelf"
+      "\020\005\022\030\n\024ESkillTargetCase_All\020\006B\003\370\001\001b\006proto"
+      "3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1664);
+      descriptor, 1681);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -296,6 +297,7 @@ bool ESkillState_IsValid(int value) {
     case 2:
     case 3:
     case 4:
+    case 5:
       return true;
     default:
       return false;

@@ -19,9 +19,21 @@
 #include <cstdlib>
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 
 namespace GameLogic
 {
+	bool NeedImmobilized(SceneUnitMove *sum)
+	{
+		// 如果被定身或者眩晕了，就进入不动的状态
+		std::shared_ptr<SceneUnitFightParam> sufp = sum->GetModule<SceneUnitFightParam>();
+		if (nullptr == sufp)
+			return false;
+		if (sufp->IsStateActive(NetProto::EFP_Immobilized) || sufp->IsStateActive(NetProto::EFP_Dizziness))
+			return true;
+		return false;
+	}
+
 	SceneUnitMove::SceneUnitMove() : SceneUnitModule(MODULE_TYPE)
 	{
 
@@ -44,6 +56,10 @@ namespace GameLogic
 			SceneUnitMoveState *next_state = m_next_state;
 			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 			this->EnterState(next_state->GetState());
+
+			// 如果被定身或者眩晕了，就进入不动的状态
+			if (NeedImmobilized(this))
+				this->Immobilized();
 		}
 	}
 
@@ -248,18 +264,20 @@ namespace GameLogic
 		state->ForcePos(destination);
 	}
 
-	void SceneUnitMove::Immobilized(long ms)
+	void SceneUnitMove::Immobilized()
 	{
+		if (NetProto::EMoveState_Immobilized == this->GetMoveState())
+			return;
+
 		SceneUnitMoveImmobilizedState *state = dynamic_cast<SceneUnitMoveImmobilizedState *>(m_states[NetProto::EMoveAgentState_Immobilized]);
-		state->ImmobilizeEndMs(m_owner->GetScene()->GetLogicMs() + ms);
+		state->ImmobilizeEndMs(m_owner->GetScene()->GetLogicMs() + INT_MAX);
 		if (NetProto::EMoveState_ForceMove == this->GetMoveState())
 		{
 			m_next_state = m_states[NetProto::EMoveAgentState_Immobilized];
 		}
 		else
 		{
-			if (NetProto::EMoveState_Immobilized != this->GetMoveState())
-				m_next_state = m_curr_state; // MOVE OR IDLE
+			m_next_state = m_curr_state; // MOVE OR IDLE
 			this->EnterState(NetProto::EMoveAgentState_Immobilized);
 		}
 	}
@@ -296,6 +314,21 @@ namespace GameLogic
 			"Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
 			this->GetMoveAgentState(), fix_pos.x, fix_pos.y, fix_pos.z);
 	}
+
+	void SceneUnitMove::OnImmobilizeStateChange(bool attach)
+	{
+		if (NeedImmobilized(this))
+			this->Immobilized();
+		else
+			this->CancelImmobilized();
+	}
+
+	void SceneUnitMove::OnInit()
+	{
+		this->GetEvProxy()->Subscribe<bool>(ESU_ImmobilizedChange, std::bind(&SceneUnitMove::OnImmobilizeStateChange, this, std::placeholders::_1));
+		this->GetEvProxy()->Subscribe<bool>(ESU_DizzinessChange, std::bind(&SceneUnitMove::OnImmobilizeStateChange, this, std::placeholders::_1));
+	}
+
 	void SceneUnitMove::TestAction()
 	{
 		if (!m_test_ticker.InCd())

@@ -31,14 +31,14 @@ namespace GameLogic
 		void SetLocalPos(const Vector3 &pos);
 		const Vector3 & GetLocalPos();
 		Vector3 GetPos();
-		void SetFaceDir(const Vector2 &face_dir);
-		const Vector2 & GetFaceDir();
-		void SetFaceAngle(float face_angle);
+		void SetFaceDir(const Vector2 &face_dir, ESUFaceDir e_dir);
+		Vector2 GetFaceDir();
+		void SetFaceAngle(float face_angle, ESUFaceDir e_dir);
 		float GetFaceAngle();
 
 	protected:
-		Vector2 m_face_dir;
 		Vector3 m_local_pos;
+		Vector2 m_face_dir[ESUFaceDir_Count];
 
 	protected:
 		virtual void OnAwake() override;

@@ -12,11 +12,11 @@ namespace Config
         int level = 0 ;
         int preparing_span = 0 ;
         int releasing_span = 0 ;
-        int using_span = 0 ;
         int lasting_span = 0 ;
         int comsume_mp = 0 ;
         int cd = 0 ;
         float cast_distance = 0 ;
+        bool can_move = 0 ;
 
         using ConfigCheckFunc = bool(*)(CsvSkillLevelConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

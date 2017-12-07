@@ -815,6 +815,12 @@ class BattleOperation : public ::google::protobuf::Message /* @@protoc_insertion
   float dir() const;
   void set_dir(float value);
 
+  // .NetProto.ESkillSlot skill_slot = 5;
+  void clear_skill_slot();
+  static const int kSkillSlotFieldNumber = 5;
+  ::NetProto::ESkillSlot skill_slot() const;
+  void set_skill_slot(::NetProto::ESkillSlot value);
+
   // @@protoc_insertion_point(class_scope:NetProto.BattleOperation)
  private:
 
@@ -826,6 +832,7 @@ class BattleOperation : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::uint64 target_id_;
   int opera_;
   float dir_;
+  int skill_slot_;
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
@@ -2046,6 +2053,20 @@ inline  void BattleOperation::set_allocated_pos(::NetProto::PBVector2* pos) {
     
   }
   // @@protoc_insertion_point(field_set_allocated:NetProto.BattleOperation.pos)
+}
+
+// .NetProto.ESkillSlot skill_slot = 5;
+inline void BattleOperation::clear_skill_slot() {
+  skill_slot_ = 0;
+}
+inline ::NetProto::ESkillSlot BattleOperation::skill_slot() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.skill_slot)
+  return static_cast< ::NetProto::ESkillSlot >(skill_slot_);
+}
+inline void BattleOperation::set_skill_slot(::NetProto::ESkillSlot value) {
+  
+  skill_slot_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.skill_slot)
 }
 
 // -------------------------------------------------------------------

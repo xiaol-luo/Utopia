@@ -66,12 +66,17 @@ namespace GameLogic
 		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
 		void ForcePos(const Vector3 &destination, float speed);
 		void ChangeForcePosDestination(const Vector3 &destination);
-		void Immobilized(long ms);
+		void Immobilized();
 		void CancelImmobilized();
 		void Flash(const Vector3 &val);
+
+	protected:
+		void OnImmobilizeStateChange(bool attach);
+		virtual void OnInit() override;
 
 	private:
 		void TestAction(); // for test
 		Ticker m_test_ticker;
+
 	};
 }

@@ -161,6 +161,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, target_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, dir_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, pos_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BattleOperation, skill_slot_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ViewGrid, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -225,13 +226,13 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTR
   { 20, -1, sizeof(SceneObjectDisappear)},
   { 26, -1, sizeof(MoveToPos)},
   { 32, -1, sizeof(BattleOperation)},
-  { 41, -1, sizeof(ViewGrid)},
-  { 48, -1, sizeof(ViewSnapshotDiff)},
-  { 55, -1, sizeof(ViewSnapshot)},
-  { 61, -1, sizeof(ViewAllGrids)},
-  { 70, -1, sizeof(SceneUnitState)},
-  { 81, -1, sizeof(SceneUnitTransform)},
-  { 90, -1, sizeof(SceneUnitMove)},
+  { 42, -1, sizeof(ViewGrid)},
+  { 49, -1, sizeof(ViewSnapshotDiff)},
+  { 56, -1, sizeof(ViewSnapshot)},
+  { 62, -1, sizeof(ViewAllGrids)},
+  { 71, -1, sizeof(SceneUnitState)},
+  { 82, -1, sizeof(SceneUnitTransform)},
+  { 91, -1, sizeof(SceneUnitMove)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -331,28 +332,29 @@ void AddDescriptorsImpl() {
       "roRsp\022\017\n\007hero_id\030\001 \001(\004\022\017\n\007is_succ\030\002 \001(\010\""
       "&\n\024SceneObjectDisappear\022\016\n\006objids\030\001 \003(\004\""
       "-\n\tMoveToPos\022 \n\003pos\030\001 \001(\0132\023.NetProto.PBV"
-      "ector2\"z\n\017BattleOperation\022%\n\005opera\030\001 \001(\016"
-      "2\026.NetProto.EPlayerOpera\022\021\n\ttarget_id\030\002 "
-      "\001(\004\022\013\n\003dir\030\003 \001(\002\022 \n\003pos\030\004 \001(\0132\023.NetProto"
-      ".PBVector2\"B\n\010ViewGrid\022#\n\006center\030\001 \001(\0132\023"
-      ".NetProto.PBVector2\022\021\n\tgrid_type\030\002 \001(\005\":"
-      "\n\020ViewSnapshotDiff\022\022\n\nmore_grids\030\001 \003(\005\022\022"
-      "\n\nmiss_grids\030\002 \003(\005\"#\n\014ViewSnapshot\022\023\n\013li"
-      "ght_grids\030\001 \003(\005\"^\n\014ViewAllGrids\022\021\n\tgrid_"
-      "size\030\001 \001(\002\022\013\n\003row\030\002 \001(\005\022\013\n\003col\030\003 \001(\005\022!\n\005"
-      "grids\030\004 \003(\0132\022.NetProto.ViewGrid\"\216\001\n\016Scen"
-      "eUnitState\022\r\n\005su_id\030\001 \001(\004\022\021\n\tunit_type\030\002"
-      " \001(\005\022\020\n\010model_id\030\003 \001(\005\022 \n\003pos\030\004 \001(\0132\023.Ne"
-      "tProto.PBVector3\022\020\n\010face_dir\030\005 \001(\002\022\024\n\014pa"
-      "rent_su_id\030\006 \001(\004\"m\n\022SceneUnitTransform\022\r"
-      "\n\005su_id\030\001 \001(\004\022 \n\003pos\030\002 \001(\0132\023.NetProto.PB"
-      "Vector3\022\020\n\010face_dir\030\003 \001(\002\022\024\n\014parent_su_i"
-      "d\030\004 \001(\004\"S\n\rSceneUnitMove\022\r\n\005su_id\030\001 \001(\004\022"
-      "3\n\020move_agent_state\030\002 \001(\0162\031.NetProto.EMo"
-      "veAgentStateB\003\370\001\001b\006proto3"
+      "ector2\"\244\001\n\017BattleOperation\022%\n\005opera\030\001 \001("
+      "\0162\026.NetProto.EPlayerOpera\022\021\n\ttarget_id\030\002"
+      " \001(\004\022\013\n\003dir\030\003 \001(\002\022 \n\003pos\030\004 \001(\0132\023.NetProt"
+      "o.PBVector2\022(\n\nskill_slot\030\005 \001(\0162\024.NetPro"
+      "to.ESkillSlot\"B\n\010ViewGrid\022#\n\006center\030\001 \001("
+      "\0132\023.NetProto.PBVector2\022\021\n\tgrid_type\030\002 \001("
+      "\005\":\n\020ViewSnapshotDiff\022\022\n\nmore_grids\030\001 \003("
+      "\005\022\022\n\nmiss_grids\030\002 \003(\005\"#\n\014ViewSnapshot\022\023\n"
+      "\013light_grids\030\001 \003(\005\"^\n\014ViewAllGrids\022\021\n\tgr"
+      "id_size\030\001 \001(\002\022\013\n\003row\030\002 \001(\005\022\013\n\003col\030\003 \001(\005\022"
+      "!\n\005grids\030\004 \003(\0132\022.NetProto.ViewGrid\"\216\001\n\016S"
+      "ceneUnitState\022\r\n\005su_id\030\001 \001(\004\022\021\n\tunit_typ"
+      "e\030\002 \001(\005\022\020\n\010model_id\030\003 \001(\005\022 \n\003pos\030\004 \001(\0132\023"
+      ".NetProto.PBVector3\022\020\n\010face_dir\030\005 \001(\002\022\024\n"
+      "\014parent_su_id\030\006 \001(\004\"m\n\022SceneUnitTransfor"
+      "m\022\r\n\005su_id\030\001 \001(\004\022 \n\003pos\030\002 \001(\0132\023.NetProto"
+      ".PBVector3\022\020\n\010face_dir\030\003 \001(\002\022\024\n\014parent_s"
+      "u_id\030\004 \001(\004\"S\n\rSceneUnitMove\022\r\n\005su_id\030\001 \001"
+      "(\004\0223\n\020move_agent_state\030\002 \001(\0162\031.NetProto."
+      "EMoveAgentStateB\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1025);
+      descriptor, 1068);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Battle.proto", &protobuf_RegisterTypes);
   ::NetProto::protobuf_Common_2eproto::AddDescriptors();
@@ -2097,6 +2099,7 @@ const int BattleOperation::kOperaFieldNumber;
 const int BattleOperation::kTargetIdFieldNumber;
 const int BattleOperation::kDirFieldNumber;
 const int BattleOperation::kPosFieldNumber;
+const int BattleOperation::kSkillSlotFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 BattleOperation::BattleOperation()
@@ -2126,15 +2129,15 @@ BattleOperation::BattleOperation(const BattleOperation& from)
     pos_ = NULL;
   }
   ::memcpy(&target_id_, &from.target_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&dir_) -
-    reinterpret_cast<char*>(&target_id_)) + sizeof(dir_));
+    static_cast<size_t>(reinterpret_cast<char*>(&skill_slot_) -
+    reinterpret_cast<char*>(&target_id_)) + sizeof(skill_slot_));
   // @@protoc_insertion_point(copy_constructor:NetProto.BattleOperation)
 }
 
 void BattleOperation::SharedCtor() {
   ::memset(&pos_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&dir_) -
-      reinterpret_cast<char*>(&pos_)) + sizeof(dir_));
+      reinterpret_cast<char*>(&skill_slot_) -
+      reinterpret_cast<char*>(&pos_)) + sizeof(skill_slot_));
   _cached_size_ = 0;
 }
 
@@ -2189,8 +2192,8 @@ void BattleOperation::Clear() {
   }
   pos_ = NULL;
   ::memset(&target_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&dir_) -
-      reinterpret_cast<char*>(&target_id_)) + sizeof(dir_));
+      reinterpret_cast<char*>(&skill_slot_) -
+      reinterpret_cast<char*>(&target_id_)) + sizeof(skill_slot_));
   _internal_metadata_.Clear();
 }
 
@@ -2259,6 +2262,21 @@ bool BattleOperation::MergePartialFromCodedStream(
         break;
       }
 
+      // .NetProto.ESkillSlot skill_slot = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_skill_slot(static_cast< ::NetProto::ESkillSlot >(value));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -2307,6 +2325,12 @@ void BattleOperation::SerializeWithCachedSizes(
       4, *this->pos_, output);
   }
 
+  // .NetProto.ESkillSlot skill_slot = 5;
+  if (this->skill_slot() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      5, this->skill_slot(), output);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
@@ -2342,6 +2366,12 @@ void BattleOperation::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
         4, *this->pos_, deterministic, target);
+  }
+
+  // .NetProto.ESkillSlot skill_slot = 5;
+  if (this->skill_slot() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      5, this->skill_slot(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -2386,6 +2416,12 @@ size_t BattleOperation::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
+  // .NetProto.ESkillSlot skill_slot = 5;
+  if (this->skill_slot() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->skill_slot());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = cached_size;
@@ -2426,6 +2462,9 @@ void BattleOperation::MergeFrom(const BattleOperation& from) {
   }
   if (from.dir() != 0) {
     set_dir(from.dir());
+  }
+  if (from.skill_slot() != 0) {
+    set_skill_slot(from.skill_slot());
   }
 }
 
@@ -2472,6 +2511,7 @@ void BattleOperation::InternalSwap(BattleOperation* other) {
   swap(target_id_, other->target_id_);
   swap(opera_, other->opera_);
   swap(dir_, other->dir_);
+  swap(skill_slot_, other->skill_slot_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }
@@ -2574,6 +2614,20 @@ const ::NetProto::PBVector2& BattleOperation::pos() const {
     
   }
   // @@protoc_insertion_point(field_set_allocated:NetProto.BattleOperation.pos)
+}
+
+// .NetProto.ESkillSlot skill_slot = 5;
+void BattleOperation::clear_skill_slot() {
+  skill_slot_ = 0;
+}
+::NetProto::ESkillSlot BattleOperation::skill_slot() const {
+  // @@protoc_insertion_point(field_get:NetProto.BattleOperation.skill_slot)
+  return static_cast< ::NetProto::ESkillSlot >(skill_slot_);
+}
+void BattleOperation::set_skill_slot(::NetProto::ESkillSlot value) {
+  
+  skill_slot_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.BattleOperation.skill_slot)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

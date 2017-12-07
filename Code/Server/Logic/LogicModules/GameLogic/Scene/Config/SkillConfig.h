@@ -25,6 +25,7 @@ namespace GameLogic
 		int preparing_span = 0;
 		int releasing_span = 0;
 		int lasting_span = 0;
+		bool can_move = false;
 	};
 
 	struct SkillConfig

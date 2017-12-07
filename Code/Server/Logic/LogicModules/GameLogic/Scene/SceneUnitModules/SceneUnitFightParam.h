@@ -39,6 +39,11 @@ namespace GameLogic
 		void RecalFix(NetProto::EFightParam efp);
 		int GetValueFix(NetProto::EFightParam efp, bool recal = false);
 
+	public:
+		void AttachState(NetProto::EFightParam efp);
+		void DeattachState(NetProto::EFightParam efp);
+		bool IsStateActive(NetProto::EFightParam efp);
+
 	protected:
 		FightParam *m_params[NetProto::EFP_COUNT];
 		FightParam *m_fix_params[NetProto::EFP_COUNT];
@@ -51,5 +56,9 @@ namespace GameLogic
 		void OnDestroy() override;
 		void ForTestInitParam();
 		void ForTestInitFixParam();
+
+		bool HasFixParam(NetProto::EFightParam efp);
+		bool IsState(NetProto::EFightParam efp);
+		void OnStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value);
 	};
 }

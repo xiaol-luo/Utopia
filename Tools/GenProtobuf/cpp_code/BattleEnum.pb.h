@@ -241,16 +241,17 @@ inline bool ESkillBar_Parse(
     ESkillBar_descriptor(), name, value);
 }
 enum ESkillState {
-  ESS_Preparing = 0,
-  ESS_Releasing = 1,
-  ESS_Using = 2,
-  ESS_Lasting = 3,
-  ESS_End = 4,
+  ESS_ReadyGo = 0,
+  ESS_Preparing = 1,
+  ESS_Releasing = 2,
+  ESS_Using = 3,
+  ESS_Lasting = 4,
+  ESS_End = 5,
   ESkillState_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESkillState_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ESkillState_IsValid(int value);
-const ESkillState ESkillState_MIN = ESS_Preparing;
+const ESkillState ESkillState_MIN = ESS_ReadyGo;
 const ESkillState ESkillState_MAX = ESS_End;
 const int ESkillState_ARRAYSIZE = ESkillState_MAX + 1;
 

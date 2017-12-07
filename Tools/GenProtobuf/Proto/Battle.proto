@@ -38,6 +38,7 @@ message BattleOperation
 	uint64 target_id = 2;
 	float dir = 3;
 	PBVector2 pos = 4;
+	ESkillSlot skill_slot = 5;
 }
 
 message ViewGrid

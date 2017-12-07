@@ -18,6 +18,9 @@
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
+#include "GameLogic/Scene/Skills/Skill.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -215,32 +218,27 @@ namespace GameLogic
 		auto hero = player->GetSu();
 		if (nullptr == hero)
 			return;
-		auto su_move = hero->GetModule<SceneUnitMove>();
-		if (nullptr == su_move)
+		std::shared_ptr<SceneHeroAction> su_action = hero->GetModule<SceneHeroAction>();
+		if (nullptr == su_action)
 			return;
 
 		switch (msg->opera())
 		{
 		case NetProto::EPO_Move:
-			su_move->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
+			su_action->MoveTo(Vector3(msg->pos().x(), 0, msg->pos().y()), 0.1f);
 			break;
 		case NetProto::EPO_Stop:
-			su_move->CancelMove();
+			su_action->CancelMove();
 			break;
-			/*
-		case NetProto::EPO_CastSkill_Q:
-			su_move->ForcePos(Vector3(msg->pos().x(), 0, msg->pos().y()), 5);
-			break;
-		case NetProto::EPO_CastSkill_W:
+		case NetProto::EPO_CastSkill:
 		{
-			Vector2 dir = GeometryUtils::CalVector2(Vector2::up, msg->dir());
-			su_move->ForceMoveLine(dir, 2, 3, false);
+			std::shared_ptr<SceneUnitSkills> su_skills = su_action->GetModule<SceneUnitSkills>();
+			std::shared_ptr<Skill> skill = su_skills->GetSlotActiveSkill(msg->skill_slot());
+			if (nullptr != skill)
+				su_action->UseSkill(skill->GetSkillId(), msg->target_id(), Vector2(msg->pos().x(), msg->pos().y()));
 		}
 		break;
-		case NetProto::EPO_CastSkill_E:
-			su_move->Immobilized(1500);
-			break;
-			*/
+
 		default:
 			break;
 		}

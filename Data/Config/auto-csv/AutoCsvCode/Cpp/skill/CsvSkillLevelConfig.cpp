@@ -7,11 +7,11 @@ namespace Config
      static const char * Field_Name_level = "level";
      static const char * Field_Name_preparing_span = "preparing_span";
      static const char * Field_Name_releasing_span = "releasing_span";
-     static const char * Field_Name_using_span = "using_span";
      static const char * Field_Name_lasting_span = "lasting_span";
      static const char * Field_Name_comsume_mp = "comsume_mp";
      static const char * Field_Name_cd = "cd";
      static const char * Field_Name_cast_distance = "cast_distance";
+     static const char * Field_Name_can_move = "can_move";
 
     bool CsvSkillLevelConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
@@ -20,11 +20,11 @@ namespace Config
         all_ok = all_ok && kvPairs.count(Field_Name_level) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_level], level);
         all_ok = all_ok && kvPairs.count(Field_Name_preparing_span) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_preparing_span], preparing_span);
         all_ok = all_ok && kvPairs.count(Field_Name_releasing_span) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_releasing_span], releasing_span);
-        all_ok = all_ok && kvPairs.count(Field_Name_using_span) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_using_span], using_span);
         all_ok = all_ok && kvPairs.count(Field_Name_lasting_span) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_lasting_span], lasting_span);
         all_ok = all_ok && kvPairs.count(Field_Name_comsume_mp) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_comsume_mp], comsume_mp);
         all_ok = all_ok && kvPairs.count(Field_Name_cd) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_cd], cd);
         all_ok = all_ok && kvPairs.count(Field_Name_cast_distance) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_cast_distance], cast_distance);
+        all_ok = all_ok && kvPairs.count(Field_Name_can_move) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_can_move], can_move);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -46,11 +46,11 @@ namespace Config
             Field_Name_level,
             Field_Name_preparing_span,
             Field_Name_releasing_span,
-            Field_Name_using_span,
             Field_Name_lasting_span,
             Field_Name_comsume_mp,
             Field_Name_cd,
-            Field_Name_cast_distance
+            Field_Name_cast_distance,
+            Field_Name_can_move
             );
 
         std::map<std::string, std::string> kvParis;
@@ -58,11 +58,11 @@ namespace Config
         kvParis[Field_Name_level] = "";
         kvParis[Field_Name_preparing_span] = "";
         kvParis[Field_Name_releasing_span] = "";
-        kvParis[Field_Name_using_span] = "";
         kvParis[Field_Name_lasting_span] = "";
         kvParis[Field_Name_comsume_mp] = "";
         kvParis[Field_Name_cd] = "";
         kvParis[Field_Name_cast_distance] = "";
+        kvParis[Field_Name_can_move] = "";
 
         bool all_ok = true;
         int curr_row = 0;
@@ -71,11 +71,11 @@ namespace Config
             kvParis[Field_Name_level],
             kvParis[Field_Name_preparing_span],
             kvParis[Field_Name_releasing_span],
-            kvParis[Field_Name_using_span],
             kvParis[Field_Name_lasting_span],
             kvParis[Field_Name_comsume_mp],
             kvParis[Field_Name_cd],
-            kvParis[Field_Name_cast_distance]
+            kvParis[Field_Name_cast_distance],
+            kvParis[Field_Name_can_move]
             ))
         {            
             if (++ curr_row <= 1)

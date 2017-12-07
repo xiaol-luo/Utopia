@@ -9,6 +9,10 @@ enum ESUEventId
 	ESU_VolecityChange,				// su速度改变
 	ESU_MoveStateChange,			// su移动状态改变
 	ESU_FightParamChange,			// 战斗参数变了
+	ESU_DizzinessChange,			// su昏迷状态改变 true:atttach,  false:deattach
+	ESU_ImmobilizedChange,			// su定身状态改变 true:atttach,  false:deattach
+	ESU_BlindChange,				// su致盲状态改变 true:atttach,  false:deattach
+	ESU_SilenceChange,				// su沉默状态改变 true:atttach,  false:deattach
 
 	ES_TestHeartBeat,				// 测试用
 };

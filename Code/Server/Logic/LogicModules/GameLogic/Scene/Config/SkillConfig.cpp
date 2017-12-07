@@ -60,6 +60,7 @@ namespace GameLogic
 				lvl_cfg->preparing_span = csv_lvl->preparing_span;
 				lvl_cfg->releasing_span = csv_lvl->releasing_span;
 				lvl_cfg->lasting_span = csv_lvl->lasting_span;
+				lvl_cfg->can_move = csv_lvl->can_move;
 			}
 
 			skills.insert(std::make_pair(skill_cfg->id, skill_cfg));

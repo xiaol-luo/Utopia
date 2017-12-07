@@ -96,11 +96,12 @@ enum ESkillBar
 
 enum ESkillState
 {
-	ESS_Preparing = 0;			// 吟唱
-	ESS_Releasing = 1;			// 前摇
-	ESS_Using = 2;				// 引导
-	ESS_Lasting = 3;			// 后摇
-	ESS_End = 4;				// 结束
+	ESS_ReadyGo = 0;			// 准备好释放
+	ESS_Preparing = 1;			// 吟唱
+	ESS_Releasing = 2;			// 前摇
+	ESS_Using = 3;				// 引导
+	ESS_Lasting = 4;			// 后摇
+	ESS_End = 5;				// 结束
 }
 
 enum ESkillUseWay

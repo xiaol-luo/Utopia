@@ -28,7 +28,7 @@ namespace GameLogic
 		bool Trace(uint64_t suid, float allow_distance);
 		bool MoveTo(Vector3 pos, float allow_distance);
 		void CancelMove();
-		bool UseSkill(int skill_id, uint64_t su_id, Vector3 pos);
+		bool UseSkill(int skill_id, uint64_t su_id, Vector2 pos);
 		bool CancelSkill();
 
 	protected:

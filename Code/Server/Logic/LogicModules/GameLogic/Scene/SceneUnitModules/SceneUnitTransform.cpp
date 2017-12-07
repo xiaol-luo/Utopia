@@ -109,25 +109,38 @@ namespace GameLogic
 		return m_local_pos;
 
 	}
-	void SceneUnitTransform::SetFaceDir(const Vector2 &face_dir)
+	void SceneUnitTransform::SetFaceDir(const Vector2 &face_dir, ESUFaceDir e_dir)
 	{
-		m_face_dir = face_dir;
-		m_face_dir.normalize();
-	}
-	const Vector2 & SceneUnitTransform::GetFaceDir()
-	{
-		return m_face_dir;
+		if (e_dir < 0 || e_dir >= ESUFaceDir_Count)
+			return;
+
+		m_face_dir[e_dir] = face_dir;
+		m_face_dir[e_dir].normalize();
 	}
 
-	void SceneUnitTransform::SetFaceAngle(float face_angle)
+	Vector2 SceneUnitTransform::GetFaceDir()
 	{
-		m_face_dir = GeometryUtils::CalVector2(Vector2::up, face_angle);
-		m_face_dir.normalize();
+		Vector2 face_dir = Vector2::up;
+		for (int i = ESUFaceDir_Count - 1; i >= 0; --i)
+		{
+			if (Vector2::zero != m_face_dir[i])
+			{
+				face_dir = m_face_dir[i];
+			}
+		}
+		return std::move(face_dir);
+	}
+
+	void SceneUnitTransform::SetFaceAngle(float face_angle, ESUFaceDir e_dir)
+	{
+		Vector2 face_dir = GeometryUtils::CalVector2(Vector2::up, face_angle);
+		this->SetFaceDir(face_dir, e_dir);
 	}
 
 	float SceneUnitTransform::GetFaceAngle()
 	{
-		float angle = GeometryUtils::DeltaAngle(Vector2::up, m_face_dir);
+		Vector2 face_dir = this->GetFaceDir();
+		float angle = GeometryUtils::DeltaAngle(Vector2::up, face_dir);
 		return angle;
 	}
 
@@ -145,7 +158,7 @@ namespace GameLogic
 		{
 			if (abs(new_val.x) > FLT_EPSILON || (abs(new_val.z) > FLT_EPSILON))
 			{
-				this->SetFaceDir(new_val.xz());
+				this->SetFaceDir(new_val.xz(), ESUFaceDir_Move);
 			}
 		}
 	}

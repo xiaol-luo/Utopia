@@ -51,4 +51,12 @@ namespace GameLogic
 		ESUAction_Trace,
 		ESUAction_UseSkill,
 	};
+
+	enum ESUFaceDir
+	{
+		ESUFaceDir_Move = 0,
+		ESUFaceDir_Skill,
+
+		ESUFaceDir_Count,
+	};
 }

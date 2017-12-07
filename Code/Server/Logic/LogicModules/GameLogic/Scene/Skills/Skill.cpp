@@ -1,5 +1,11 @@
 #include "Skill.h"
 #include "GameLogic/Scene/Config/SkillConfig.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "Common/Utils/NumUtils.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 
 namespace GameLogic
 {
@@ -40,7 +46,28 @@ namespace GameLogic
 
 	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)
 	{
-
+		this->ResetParams();
+		switch (m_cfg->target_case)
+		{
+			case NetProto::ESkillTarget_Target:
+			{
+				m_target_suid = target_suid;
+				m_target_su = m_su_skills->GetOwner()->GetScene()->GetUnit(target_suid);
+			}
+			break;
+			case NetProto::ESkillTarget_Position:
+			{
+				m_pos = pos;
+			}
+			case NetProto::ESkillTarget_Direction:
+			{
+				m_dir = dir;
+				if (m_dir == Vector2::zero)
+					m_dir = Vector2::up;
+			}
+			default:
+				break;
+		}
 	}
 
 	bool Skill::Begin()
@@ -48,71 +75,108 @@ namespace GameLogic
 		if (!this->CheckCanCast())
 			return false;
 
-		m_state = NetProto::ESS_Preparing;
-		m_state_span.Restart(m_lvl_cfg->preparing_span);
+		m_state = NetProto::ESS_ReadyGo;
+		m_stage_begin_ms = this->GetLogicMs();
+		m_can_move = m_lvl_cfg->can_move;
+		if (!m_can_move)
+			m_su_skills->GetModule<SceneUnitFightParam>()->AttachState(NetProto::EFP_Immobilized);
+
 		this->SyncClient();
 		return true;
 	}
 	void Skill::HeartBeat()
 	{
-		int old_state = m_state;
-		if (this->IsRunning() && !m_state_span.InCd())
-		{
-			while (m_state < NetProto::ESS_End && !m_state_span.InCd())
-			{
-				switch (m_state)
-				{
-					case NetProto::ESS_Preparing:
-					{
-						if (this->CheckCanCast())
-						{
-							++m_state;
-							m_state_span.Restart(m_lvl_cfg->releasing_span);
-						}
-						else
-						{
-							m_state = NetProto::ESS_End;
-						}
-					}
-					break;
-					case NetProto::ESS_Releasing:
-					{
-						if (this->CheckCanCast())
-						{
-							this->ReleaseEffects();
-							++m_state;
-						}
-						else
-						{
-							m_state = NetProto::ESS_End;
-						}
-					}
-					break;
-					case NetProto::ESS_Using:
-					{
-						bool using_skill = false;
-						if (using_skill)
-						{
+		if (!IsRunning())
+			return;
 
-						}
-						else
-						{
-							++m_state;
-							m_state_span.Restart(m_lvl_cfg->lasting_span);
-						}
-					}
-					break;
-					case NetProto::ESS_Lasting:
-					{
-						++m_state;
-					}
+		int old_state = m_state;
+		bool is_fail = false;
+		long now_ms = this->GetLogicMs();
+		do
+		{
+			// Ready状态
+			if (NetProto::ESS_ReadyGo == m_state)
+			{
+				if (this->CheckCanCast())
+				{
+					is_fail = true;
 					break;
 				}
+
+				this->SetFaceDir();
+				m_state = NetProto::ESS_Preparing;
+				m_stage_begin_ms = now_ms;
 			}
-			if (m_state >= NetProto::ESS_End)
+
+			// 吟唱
+			if (NetProto::ESS_Preparing == m_state)
 			{
-				this->End();
+				if (this->CheckCanCast())
+				{
+					is_fail = true;
+					break;
+				}
+
+				if (now_ms < m_stage_begin_ms + m_lvl_cfg->preparing_span)
+					break;
+
+				m_state = NetProto::ESS_Releasing;
+				m_stage_begin_ms = now_ms;
 			}
+
+			// 前摇
+			if (NetProto::ESS_Releasing == m_state)
+			{
+				if (this->CheckCanCast())
+				{
+					is_fail = true;
+					break;
+				}
+
+				int release_span = m_lvl_cfg->releasing_span;
+				{
+					// TODO:
+				}
+				release_span = NumUtil::GetInRange(release_span, 0, INT_MAX);
+				if (now_ms < m_stage_begin_ms + release_span)
+					break;
+
+				// 扣魔法
+				// 释放Efffect
+				this->ReleaseEffects();
+				
+				m_state = NetProto::ESS_Using;
+				m_stage_begin_ms = now_ms;
+			}
+
+			// 引导
+			if (NetProto::ESS_Using == m_state)
+			{
+				bool is_using = false;
+				{
+					// TODO:
+				}
+				if (is_using)
+					break;
+
+				m_state = NetProto::ESS_Lasting;
+				m_stage_begin_ms = now_ms;
+			}
+
+			// 后摇
+			if (NetProto::ESS_Lasting == m_state)
+			{
+				if (now_ms < m_stage_begin_ms + m_lvl_cfg->lasting_span)
+					break;
+
+				m_state = NetProto::ESS_End;
+				m_stage_begin_ms = now_ms;
+			}
+		} while (false);
+
+		if (is_fail || NetProto::ESS_End == m_state)
+		{
+			this->End();
 		}
 		if (old_state != m_state)
 		{
@@ -145,6 +209,10 @@ namespace GameLogic
 		return true;
 	}
 
+	void Skill::SetFaceDir()
+	{
+	}
+
 	void Skill::ReleaseEffects()
 	{
 		// TODO
@@ -152,8 +220,26 @@ namespace GameLogic
 
 	void Skill::End()
 	{
+		this->ResetParams();
 		m_state = NetProto::ESS_End;
-		m_state_span.Restart(0);
+		m_stage_begin_ms = LONG_MAX;
+		Vector2 face_dir = m_su_skills->GetOwner()->GetTransform()->GetFaceDir();
+		m_su_skills->GetOwner()->GetTransform()->SetFaceDir(Vector2::zero, ESUFaceDir_Skill);
+		m_su_skills->GetOwner()->GetTransform()->SetFaceDir(face_dir, ESUFaceDir_Move);
+		if (!m_can_move)
+			m_su_skills->GetModule<SceneUnitFightParam>()->DeattachState(NetProto::EFP_Immobilized);
+	}
+	void Skill::ResetParams()
+	{
+		m_target_suid = 0;
+		m_target_su.reset();
+		m_dir = Vector2::zero;
+		m_pos = Vector3::zero;
+	}
+	long Skill::GetLogicMs(long delta_ms)
+	{
+		long ret = m_su_skills->GetOwner()->GetScene()->GetLogicMs() + delta_ms;
+		return ret;
 	}
 }
 

@@ -2,6 +2,7 @@
 #include "Common/Utils/TupleUtil.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
+#include <assert.h>
 
 namespace GameLogic
 {
@@ -43,12 +44,16 @@ namespace GameLogic
 	}
 	void SceneUnitFightParam::AddBaseValueFix(NetProto::EFightParam efp, int val, bool recal, int unique_id)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return;
 		m_fix_params[efp]->AddBaseValue(val, recal, unique_id);
 	}
 	void SceneUnitFightParam::RemoveBaseValueFix(NetProto::EFightParam efp, int val, bool recal, int unique_id)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return;
 		m_fix_params[efp]->RemoveBaseValue(val, recal, unique_id);
@@ -67,12 +72,16 @@ namespace GameLogic
 	}
 	void SceneUnitFightParam::AddExtraPercentFix(NetProto::EFightParam efp, int val, bool recal, int unique_id)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return;
 		m_fix_params[efp]->AddExtraPercent(val, recal, unique_id);
 	}
 	void SceneUnitFightParam::RemoveExtraPercentFix(NetProto::EFightParam efp, int val, bool recal, int unique_id)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return;
 		m_fix_params[efp]->RemoveExtraPercent(val, recal, unique_id);
@@ -91,12 +100,16 @@ namespace GameLogic
 	}
 	void SceneUnitFightParam::AddExtraValueFix(NetProto::EFightParam efp, int val, bool recal, int unique_id)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return;
 		m_fix_params[efp]->AddExtraValue(val, recal, unique_id);
 	}
 	void SceneUnitFightParam::RemoveExtraValueFix(NetProto::EFightParam efp, int val, bool recal, int unique_id)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return;
 		m_fix_params[efp]->RemoveExtraValue(val, recal, unique_id);
@@ -131,9 +144,29 @@ namespace GameLogic
 	}
 	int SceneUnitFightParam::GetValueFix(NetProto::EFightParam efp, bool recal)
 	{
+		assert(this->HasFixParam(efp));
+
 		if (efp < 0 || efp >= NetProto::EFP_COUNT || nullptr == m_fix_params[efp])
 			return 0;
 		return m_fix_params[efp]->GetValue(true);
+	}
+
+	void SceneUnitFightParam::AttachState(NetProto::EFightParam efp)
+	{
+		assert(this->IsState(efp));
+		this->AddBaseValue(efp, 1);
+	}
+
+	void SceneUnitFightParam::DeattachState(NetProto::EFightParam efp)
+	{
+		assert(this->IsState(efp));
+		this->RemoveBaseValue(efp, 1);
+	}
+
+	bool SceneUnitFightParam::IsStateActive(NetProto::EFightParam efp)
+	{
+		assert(this->IsState(efp));
+		return this->GetValue(efp) > 0;
 	}
 
 	void SceneUnitFightParam::OnValueChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
@@ -160,6 +193,9 @@ namespace GameLogic
 	{
 		this->ForTestInitParam();
 		this->ForTestInitFixParam();
+		this->GetEvProxy()->Subscribe<bool, NetProto::EFightParam, int, int> (
+			ESU_FightParamChange, std::bind(&SceneUnitFightParam::OnStateChange, this, 
+			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	}
 
 	void SceneUnitFightParam::OnDestroy()
@@ -320,6 +356,62 @@ namespace GameLogic
 				m_fix_params[i] = DefaultFightParameter((NetProto::EFightParam)i, 0, 0, INT_MIN, INT_MIN, INT_MAX);
 				m_fix_params[i]->SetValueChangeCallback(value_change_cb);
 			}
+		}
+	}
+
+	bool SceneUnitFightParam::HasFixParam(NetProto::EFightParam efp)
+	{
+		bool ret = false;
+		switch (efp)
+		{
+
+		case NetProto::EFP_MaxHP:
+		case NetProto::EFP_MaxMP:
+			ret = true;
+			break;
+		}
+		return ret;
+	}
+
+	bool SceneUnitFightParam::IsState(NetProto::EFightParam efp)
+	{
+		bool ret = false;
+		switch (efp)
+		{
+		case NetProto::EFP_Dizziness:
+		case NetProto::EFP_Immobilized:
+		case NetProto::EFP_Blind:
+		case NetProto::EFP_Silence:
+			ret = true;
+			break;
+		}
+		return ret;
+	}
+
+	void SceneUnitFightParam::OnStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
+	{
+		if (!is_fix || !this->IsState(efp))
+			return;
+
+		bool attach_state = old_value <= 0 && new_value;
+		bool deattach_state = old_value > 0 && new_value <= 0;
+		if (!attach_state && !deattach_state)
+			return;
+
+		switch (efp)
+		{
+		case NetProto::EFP_Dizziness:
+			this->GetEvProxy()->Fire(ESU_DizzinessChange, attach_state);
+			break;
+		case NetProto::EFP_Immobilized:
+			this->GetEvProxy()->Fire(ESU_ImmobilizedChange, attach_state);
+			break;
+		case NetProto::EFP_Blind:
+			this->GetEvProxy()->Fire(ESU_BlindChange, attach_state);
+			break;
+		case NetProto::EFP_Silence:
+			this->GetEvProxy()->Fire(ESU_SilenceChange, attach_state);
+			break;
 		}
 	}
 }

@@ -28,23 +28,24 @@ namespace NetProto {
             "aGVyb19pZBgBIAEoBCIxCg1TZWxlY3RIZXJvUnNwEg8KB2hlcm9faWQYASAB",
             "KAQSDwoHaXNfc3VjYxgCIAEoCCImChRTY2VuZU9iamVjdERpc2FwcGVhchIO",
             "CgZvYmppZHMYASADKAQiLQoJTW92ZVRvUG9zEiAKA3BvcxgBIAEoCzITLk5l",
-            "dFByb3RvLlBCVmVjdG9yMiJ6Cg9CYXR0bGVPcGVyYXRpb24SJQoFb3BlcmEY",
-            "ASABKA4yFi5OZXRQcm90by5FUGxheWVyT3BlcmESEQoJdGFyZ2V0X2lkGAIg",
-            "ASgEEgsKA2RpchgDIAEoAhIgCgNwb3MYBCABKAsyEy5OZXRQcm90by5QQlZl",
-            "Y3RvcjIiQgoIVmlld0dyaWQSIwoGY2VudGVyGAEgASgLMhMuTmV0UHJvdG8u",
-            "UEJWZWN0b3IyEhEKCWdyaWRfdHlwZRgCIAEoBSI6ChBWaWV3U25hcHNob3RE",
-            "aWZmEhIKCm1vcmVfZ3JpZHMYASADKAUSEgoKbWlzc19ncmlkcxgCIAMoBSIj",
-            "CgxWaWV3U25hcHNob3QSEwoLbGlnaHRfZ3JpZHMYASADKAUiXgoMVmlld0Fs",
-            "bEdyaWRzEhEKCWdyaWRfc2l6ZRgBIAEoAhILCgNyb3cYAiABKAUSCwoDY29s",
-            "GAMgASgFEiEKBWdyaWRzGAQgAygLMhIuTmV0UHJvdG8uVmlld0dyaWQijgEK",
-            "DlNjZW5lVW5pdFN0YXRlEg0KBXN1X2lkGAEgASgEEhEKCXVuaXRfdHlwZRgC",
-            "IAEoBRIQCghtb2RlbF9pZBgDIAEoBRIgCgNwb3MYBCABKAsyEy5OZXRQcm90",
-            "by5QQlZlY3RvcjMSEAoIZmFjZV9kaXIYBSABKAISFAoMcGFyZW50X3N1X2lk",
-            "GAYgASgEIm0KElNjZW5lVW5pdFRyYW5zZm9ybRINCgVzdV9pZBgBIAEoBBIg",
-            "CgNwb3MYAiABKAsyEy5OZXRQcm90by5QQlZlY3RvcjMSEAoIZmFjZV9kaXIY",
-            "AyABKAISFAoMcGFyZW50X3N1X2lkGAQgASgEIlMKDVNjZW5lVW5pdE1vdmUS",
-            "DQoFc3VfaWQYASABKAQSMwoQbW92ZV9hZ2VudF9zdGF0ZRgCIAEoDjIZLk5l",
-            "dFByb3RvLkVNb3ZlQWdlbnRTdGF0ZUID+AEBYgZwcm90bzM="));
+            "dFByb3RvLlBCVmVjdG9yMiKkAQoPQmF0dGxlT3BlcmF0aW9uEiUKBW9wZXJh",
+            "GAEgASgOMhYuTmV0UHJvdG8uRVBsYXllck9wZXJhEhEKCXRhcmdldF9pZBgC",
+            "IAEoBBILCgNkaXIYAyABKAISIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8uUEJW",
+            "ZWN0b3IyEigKCnNraWxsX3Nsb3QYBSABKA4yFC5OZXRQcm90by5FU2tpbGxT",
+            "bG90IkIKCFZpZXdHcmlkEiMKBmNlbnRlchgBIAEoCzITLk5ldFByb3RvLlBC",
+            "VmVjdG9yMhIRCglncmlkX3R5cGUYAiABKAUiOgoQVmlld1NuYXBzaG90RGlm",
+            "ZhISCgptb3JlX2dyaWRzGAEgAygFEhIKCm1pc3NfZ3JpZHMYAiADKAUiIwoM",
+            "Vmlld1NuYXBzaG90EhMKC2xpZ2h0X2dyaWRzGAEgAygFIl4KDFZpZXdBbGxH",
+            "cmlkcxIRCglncmlkX3NpemUYASABKAISCwoDcm93GAIgASgFEgsKA2NvbBgD",
+            "IAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3RvLlZpZXdHcmlkIo4BCg5T",
+            "Y2VuZVVuaXRTdGF0ZRINCgVzdV9pZBgBIAEoBBIRCgl1bml0X3R5cGUYAiAB",
+            "KAUSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
+            "UEJWZWN0b3IzEhAKCGZhY2VfZGlyGAUgASgCEhQKDHBhcmVudF9zdV9pZBgG",
+            "IAEoBCJtChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASABKAQSIAoD",
+            "cG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAMg",
+            "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCJTCg1TY2VuZVVuaXRNb3ZlEg0K",
+            "BXN1X2lkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiABKA4yGS5OZXRQ",
+            "cm90by5FTW92ZUFnZW50U3RhdGVCA/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -53,7 +54,7 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SelectHeroRsp), global::NetProto.SelectHeroRsp.Parser, new[]{ "HeroId", "IsSucc" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneObjectDisappear), global::NetProto.SceneObjectDisappear.Parser, new[]{ "Objids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.MoveToPos), global::NetProto.MoveToPos.Parser, new[]{ "Pos" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BattleOperation), global::NetProto.BattleOperation.Parser, new[]{ "Opera", "TargetId", "Dir", "Pos", "SkillSlot" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewGrid), global::NetProto.ViewGrid.Parser, new[]{ "Center", "GridType" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshotDiff), global::NetProto.ViewSnapshotDiff.Parser, new[]{ "MoreGrids", "MissGrids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "LightGrids" }, null, null, null),
@@ -735,6 +736,7 @@ namespace NetProto {
       targetId_ = other.targetId_;
       dir_ = other.dir_;
       Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      skillSlot_ = other.skillSlot_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -786,6 +788,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "skill_slot" field.</summary>
+    public const int SkillSlotFieldNumber = 5;
+    private global::NetProto.ESkillSlot skillSlot_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.ESkillSlot SkillSlot {
+      get { return skillSlot_; }
+      set {
+        skillSlot_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as BattleOperation);
@@ -803,6 +816,7 @@ namespace NetProto {
       if (TargetId != other.TargetId) return false;
       if (Dir != other.Dir) return false;
       if (!object.Equals(Pos, other.Pos)) return false;
+      if (SkillSlot != other.SkillSlot) return false;
       return true;
     }
 
@@ -813,6 +827,7 @@ namespace NetProto {
       if (TargetId != 0UL) hash ^= TargetId.GetHashCode();
       if (Dir != 0F) hash ^= Dir.GetHashCode();
       if (pos_ != null) hash ^= Pos.GetHashCode();
+      if (SkillSlot != 0) hash ^= SkillSlot.GetHashCode();
       return hash;
     }
 
@@ -839,6 +854,10 @@ namespace NetProto {
         output.WriteRawTag(34);
         output.WriteMessage(Pos);
       }
+      if (SkillSlot != 0) {
+        output.WriteRawTag(40);
+        output.WriteEnum((int) SkillSlot);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -855,6 +874,9 @@ namespace NetProto {
       }
       if (pos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
+      if (SkillSlot != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) SkillSlot);
       }
       return size;
     }
@@ -878,6 +900,9 @@ namespace NetProto {
           pos_ = new global::NetProto.PBVector2();
         }
         Pos.MergeFrom(other.Pos);
+      }
+      if (other.SkillSlot != 0) {
+        SkillSlot = other.SkillSlot;
       }
     }
 
@@ -906,6 +931,10 @@ namespace NetProto {
               pos_ = new global::NetProto.PBVector2();
             }
             input.ReadMessage(pos_);
+            break;
+          }
+          case 40: {
+            skillSlot_ = (global::NetProto.ESkillSlot) input.ReadEnum();
             break;
           }
         }
