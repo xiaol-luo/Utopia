@@ -10,6 +10,8 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "Common/Geometry/GeometryUtils.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
 
 namespace GameLogic
 {
@@ -177,7 +179,7 @@ namespace GameLogic
 				}
 				else
 				{
-					std::shared_ptr<SceneUnitMove> su_move = target_su->GetModule<SceneUnitMove>();
+					std::shared_ptr<SceneUnitMove> su_move = m_owner->GetModule<SceneUnitMove>();
 					if (nullptr == su_move)
 					{
 						this->CancelMove();
@@ -185,6 +187,8 @@ namespace GameLogic
 					else
 					{
 						m_move_param.target_pos = target_su->GetTransform()->GetPos();
+						Vector3 delta_pos = m_move_param.target_pos - m_owner->GetTransform()->GetPos();
+						delta_pos.y = 0;
 						if (GeometryUtils::InFlatDistance(m_owner->GetTransform()->GetPos(), m_move_param.target_pos, m_move_param.allow_distance))
 						{
 							su_move->CancelMove();

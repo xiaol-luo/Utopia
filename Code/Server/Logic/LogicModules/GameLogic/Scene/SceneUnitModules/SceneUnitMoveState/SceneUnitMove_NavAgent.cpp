@@ -13,7 +13,7 @@ namespace GameLogic
 		dtCrowdAgentParams params;
 		{
 			memset(&params, 0, sizeof(params));
-			params.radius = 0.3f;
+			params.radius = 0.2f;
 			params.height = 2.0f;
 			params.maxAcceleration = 32 * 40;
 			params.maxSpeed = 6.0f;

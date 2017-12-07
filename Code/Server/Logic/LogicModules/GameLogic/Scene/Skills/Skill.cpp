@@ -97,7 +97,7 @@ namespace GameLogic
 			// Ready×´Ì¬
 			if (NetProto::ESS_ReadyGo == m_state)
 			{
-				if (this->CheckCanCast())
+				if (!this->CheckCanCast())
 				{
 					is_fail = true;
 					break;
@@ -111,7 +111,7 @@ namespace GameLogic
 			// Ò÷³ª
 			if (NetProto::ESS_Preparing == m_state)
 			{
-				if (this->CheckCanCast())
+				if (!this->CheckCanCast())
 				{
 					is_fail = true;
 					break;
@@ -127,7 +127,7 @@ namespace GameLogic
 			// Ç°Ò¡
 			if (NetProto::ESS_Releasing == m_state)
 			{
-				if (this->CheckCanCast())
+				if (!this->CheckCanCast())
 				{
 					is_fail = true;
 					break;

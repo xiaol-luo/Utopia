@@ -213,12 +213,12 @@ namespace GameLogic
 	{
 		if (NetProto::EMoveState_Move == this->GetMoveState())
 		{
+			this->GetNavAgent()->StopMove();
 			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 			this->EnterState(NetProto::EMoveAgentState_Idle);
 		}
 		else
 		{
-			this->GetNavAgent()->StopMove();
 			if (NetProto::EMoveState_Move == CalMoveState(m_next_state->GetState()))
 				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		}

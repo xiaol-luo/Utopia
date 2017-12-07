@@ -42,7 +42,8 @@ namespace GameLogic
 		google::protobuf::Message *msg;
 	};
 
-	const static float MOVE_TO_POS_IGNORE_SQR_DISTANCE = 0.25f;		// 移动时，距离目标点为N算到达
+	const static float MOVE_TO_POS_IGNORE_DISTANCE = 0.42f; // 移动时，距离目标点为N算到达
+	const static float MOVE_TO_POS_IGNORE_SQR_DISTANCE = MOVE_TO_POS_IGNORE_DISTANCE * MOVE_TO_POS_IGNORE_DISTANCE;		
 
 	enum ESUAction
 	{

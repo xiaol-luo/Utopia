@@ -297,28 +297,28 @@ namespace GameLogic
 			FightParam *fp = DefaultFightParameter(NetProto::EFP_Dizziness, 0, 0, 0, 0, 0);
 			assert(nullptr == m_params[fp->GetFightParam()]);
 			m_params[fp->GetFightParam()] = fp;
-			fp->SetBaseValueMax(0);
+			fp->SetBaseValueMax(INT_MAX);
 			fp->SetBaseValueMin(0);
 		}
 		{
 			FightParam *fp = DefaultFightParameter(NetProto::EFP_Silence, 0, 0, 0, 0, 0);
 			assert(nullptr == m_params[fp->GetFightParam()]);
 			m_params[fp->GetFightParam()] = fp;
-			fp->SetBaseValueMax(0);
+			fp->SetBaseValueMax(INT_MAX);
 			fp->SetBaseValueMin(0);
 		}
 		{
 			FightParam *fp = DefaultFightParameter(NetProto::EFP_Blind, 0, 0, 0, 0, 0);
 			assert(nullptr == m_params[fp->GetFightParam()]);
 			m_params[fp->GetFightParam()] = fp;
-			fp->SetBaseValueMax(0);
+			fp->SetBaseValueMax(INT_MAX);
 			fp->SetBaseValueMin(0);
 		}
 		{
 			FightParam *fp = DefaultFightParameter(NetProto::EFP_Immobilized, 0, 0, 0, 0, 0);
 			assert(nullptr == m_params[fp->GetFightParam()]);
 			m_params[fp->GetFightParam()] = fp;
-			fp->SetBaseValueMax(0);
+			fp->SetBaseValueMax(INT_MAX);
 			fp->SetBaseValueMin(0);
 		}
 
@@ -390,7 +390,7 @@ namespace GameLogic
 
 	void SceneUnitFightParam::OnStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
 	{
-		if (!is_fix || !this->IsState(efp))
+		if (is_fix || !this->IsState(efp))
 			return;
 
 		bool attach_state = old_value <= 0 && new_value;

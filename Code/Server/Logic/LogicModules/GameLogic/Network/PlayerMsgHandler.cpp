@@ -225,7 +225,7 @@ namespace GameLogic
 		switch (msg->opera())
 		{
 		case NetProto::EPO_Move:
-			su_action->MoveTo(Vector3(msg->pos().x(), 0, msg->pos().y()), 0.1f);
+			su_action->MoveTo(Vector3(msg->pos().x(), 0, msg->pos().y()), MOVE_TO_POS_IGNORE_DISTANCE);
 			break;
 
 		case NetProto::EPO_Stop:
@@ -234,7 +234,7 @@ namespace GameLogic
 			break;
 
 		case NetProto::EPO_Trace:
-			su_action->Trace(msg->target_id(), 3.0f);
+			su_action->Trace(msg->target_id(), MOVE_TO_POS_IGNORE_DISTANCE);
 			break;
 
 		case NetProto::EPO_CastSkill:
