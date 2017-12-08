@@ -36,9 +36,11 @@ namespace GameLogic
 
 		void SetParams(int64_t target_suid, Vector3 pos, Vector2 dir);
 		bool Begin();
+		bool InCd();
 		void HeartBeat();
 		bool IsRunning();
 		bool TryCancel();
+		bool CanCancel();
 		void SyncClient();
 		SyncClientMsg GetPbMsg();
 

@@ -130,6 +130,7 @@ namespace GameLogic
 			if (Vector2::zero != m_face_dir[i])
 			{
 				face_dir = m_face_dir[i];
+				break;
 			}
 		}
 		return std::move(face_dir);

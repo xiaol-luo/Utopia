@@ -57,8 +57,19 @@ namespace GameLogic
 		void ForTestInitParam();
 		void ForTestInitFixParam();
 
+		bool HasParam(NetProto::EFightParam efp);
 		bool HasFixParam(NetProto::EFightParam efp);
 		bool IsState(NetProto::EFightParam efp);
 		void OnStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value);
+
+	public:
+		int GetHp();
+		int AddHp(int delta);
+		int GetMp();
+		int AddMp(int delta);
+		
+	protected:
+		int m_hp = INT_MAX / 2;
+		int m_mp = INT_MAX / 2;
 	};
 }

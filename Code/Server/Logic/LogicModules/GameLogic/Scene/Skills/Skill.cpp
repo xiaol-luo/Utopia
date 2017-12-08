@@ -51,24 +51,31 @@ namespace GameLogic
 	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)
 	{
 		this->ResetParams();
-		switch (m_cfg->target_case)
+		m_pos = m_su_skills->GetOwner()->GetTransform()->GetPos();
+
+		switch (m_cfg->use_way)
 		{
 			case NetProto::ESkillTarget_Target:
-			{
-				m_target_suid = target_suid;
-				m_target_su = m_su_skills->GetOwner()->GetScene()->GetUnit(target_suid);
+			{		
+				std::shared_ptr<SceneUnit> target_su = m_su_skills->GetOwner()->GetScene()->GetUnit(target_suid);
+				if (nullptr != target_su)
+				{
+					m_target_suid = target_suid;
+					m_target_su = target_su;
+					m_pos = target_su->GetTransform()->GetPos();
+					m_dir = (m_pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+				}
 			}
 			break;
 			case NetProto::ESkillTarget_Position:
 			{
 				m_pos = pos;
+				m_dir = (m_pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
 			}
 			break;
 			case NetProto::ESkillTarget_Direction:
 			{
 				m_dir = dir;
-				if (m_dir == Vector2::zero)
-					m_dir = Vector2::up;
 			}
 			break;
 		}
@@ -87,6 +94,13 @@ namespace GameLogic
 		this->SyncClient();
 		return true;
 	}
+
+	bool Skill::InCd()
+	{
+		int64_t now_ms = this->GetLogicMs();
+		return now_ms < m_last_release_ms + m_lvl_cfg->cd;
+	}
+
 	void Skill::HeartBeat()
 	{
 		if (!IsRunning())
@@ -194,9 +208,24 @@ namespace GameLogic
 
 	bool Skill::TryCancel()
 	{
-		if (!IsRunning())
+		if (!this->IsRunning())
 			return true;
-		this->End();
+
+		if (this->CanCancel())
+		{
+			this->End();
+			return true;
+		}
+		return false;
+	}
+
+	bool Skill::CanCancel()
+	{
+		if (NetProto::ESS_Using == m_state)
+		{
+			// TODO:
+			return false;
+		}
 		return true;
 	}
 
@@ -220,16 +249,48 @@ namespace GameLogic
 
 	bool Skill::CheckCanCast()
 	{
+		if (this->InCd())
+			return false;
+		
+		std::shared_ptr<SceneUnitFightParam> su_fp = m_su_skills->GetModule<SceneUnitFightParam>();
+		assert(su_fp);
+		
+		if (su_fp->GetMp() < m_lvl_cfg->consume_mp)
+			return false;
+		if (su_fp->IsStateActive(NetProto::EFP_Silence) || su_fp->IsStateActive(NetProto::EFP_Dizziness))
+			return false;
+
 		return true;
 	}
 
 	void Skill::SetFaceDir()
 	{
+		Vector2 face_dir = m_dir;
+
+		switch (m_cfg->use_way)
+		{
+			case NetProto::ESkillTarget_Target:
+			{
+				std::shared_ptr<SceneUnit> target_su =  m_target_su.lock();
+				if (nullptr != target_su)
+				{
+					face_dir = (target_su->GetTransform()->GetPos() - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+				}
+			}
+			break;
+			case NetProto::ESkillTarget_Position:
+			{
+				face_dir = (m_pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+			}
+			break;
+		}
+		m_su_skills->GetOwner()->GetTransform()->SetFaceDir(face_dir, ESUFaceDir_Skill);
 	}
 
 	void Skill::ReleaseEffects()
 	{
-		// TODO
+		// ÉèÖÃcd
+		m_last_release_ms = this->GetLogicMs();
 	}
 
 	void Skill::End()
