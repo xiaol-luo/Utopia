@@ -45,14 +45,14 @@ namespace GameLogic
 
 	public:
 		float GetLogicSec();
-		inline long GetLogicMs() { return m_logic_ms; }
-		inline long GetLogicDetalMs() { return m_logic_detal_ms; }
+		inline int64_t GetLogicMs() { return m_logic_ms; }
+		inline int64_t GetLogicDetalMs() { return m_logic_detal_ms; }
 		inline EventDispacher * GetEvDispacher() { return m_ev_dispacher; }
 	protected:
 		bool m_is_pause = false;
-		uint64_t m_logic_ms = 0;
-		uint64_t m_logic_detal_ms = 0;
-		uint64_t m_last_real_ms = 0;
+		int64_t m_logic_ms = 0;
+		int64_t m_logic_detal_ms = 0;
+		int64_t m_last_real_ms = 0;
 		EventDispacher *m_ev_dispacher;
 
 	public:
@@ -98,8 +98,8 @@ namespace GameLogic
 		void SetPlayerViewCamp(Player *player, EViewCamp view_camp);
 		void SendPlayer(NetId netid, int protocol_id, google::protobuf::Message *msg);
 		void SendPlayer(NetId netid, const std::vector<SyncClientMsg> &msgs);
-		void SendClient(int64_t su_id, int protocol_id, google::protobuf::Message *msg);
-		void SendClient(int64_t su_id, const std::vector<SyncClientMsg> &msgs);
+		void SendObservers(int64_t su_id, int protocol_id, google::protobuf::Message *msg);
+		void SendObservers(int64_t su_id, const std::vector<SyncClientMsg> &msgs);
 		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg, bool to_ob=true);
 		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs, bool to_ob=true);
 		std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];

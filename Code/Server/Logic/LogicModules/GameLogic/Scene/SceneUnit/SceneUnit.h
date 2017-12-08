@@ -62,6 +62,7 @@ namespace GameLogic
 		std::vector<SyncClientMsg> CollectPBInit();
 		std::vector<SyncClientMsg> CollectPbMutable();
 
+
 	private:
 		NewScene *m_scene = nullptr;
 		uint64_t m_id = 0;
@@ -77,5 +78,12 @@ namespace GameLogic
 		EventDispacher *m_event_dispacher = nullptr;
 		EventDispacherProxy *m_scene_event_proxy = nullptr;
 		SceneUnitEventProxy *m_event_proxy = nullptr;
+
+	public:
+		void SendSelf(int protocol_id, google::protobuf::Message *msg);
+		void SendSelf(const std::vector<SyncClientMsg> &msgs);
+		void SendObservers(int protocol_id, google::protobuf::Message *msg);
+		void SendObservers(const std::vector<SyncClientMsg> &msgs);
+		void ClearPbDirty();
 	};
 }

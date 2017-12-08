@@ -44,8 +44,9 @@ public class Scene
         App.my.gameNetwork.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
         App.my.gameNetwork.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
         App.my.gameNetwork.Add<SceneUnitMove>((int)ProtoId.PidSceneUnitMove, OnRecvceneUnitMove);
-
         App.my.gameNetwork.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
+        App.my.gameNetwork.Add<SceneUnitSkillAction>((int)ProtoId.PidSceneUnitSkillAction, OnSceneUnitSkillAction);
+
         App.my.gameNetwork.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
         {
             m_vgg.SetAllGrids(msg);
@@ -122,6 +123,9 @@ public class Scene
         if (null == so)
             return;
 
+        if (so.IsPlayingSkill())
+            return;
+
         if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
                 msg.MoveAgentState == EMoveAgentState.MoveToDir)
         {
@@ -153,6 +157,29 @@ public class Scene
                 continue;
             m_sceneObjects.Remove(objid);
             GameObject.Destroy(obj.modelGo); 
+        }
+    }
+    void OnSceneUnitSkillAction(int id, SceneUnitSkillAction msg)
+    {
+        SceneObjcet so = this.GetSceneObject(msg.SuId);
+        if (null == so) return;
+
+        so.skillId = msg.SkillId;
+        so.skillStage = msg.Stage;
+        if (ESkillState.EssPreparing == msg.Stage)
+        {
+            Animation animation = so.modelGo.GetComponent<Animation>();
+            animation.Play("skill1");
+        }
+        if (ESkillState.EssReleasing == msg.Stage)
+        {
+            Animation animation = so.modelGo.GetComponent<Animation>();
+            animation.Play("skill2");
+        }
+        if (ESkillState.EssLasting == msg.Stage)
+        {
+            Animation animation = so.modelGo.GetComponent<Animation>();
+            animation.Play("skill3");
         }
     }
 

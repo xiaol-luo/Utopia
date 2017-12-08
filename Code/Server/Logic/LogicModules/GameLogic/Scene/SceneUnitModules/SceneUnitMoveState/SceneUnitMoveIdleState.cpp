@@ -24,7 +24,7 @@ void GameLogic::SceneUnitMoveIdleState::Exit()
 
 }
 
-void GameLogic::SceneUnitMoveIdleState::Update(long deltaMs)
+void GameLogic::SceneUnitMoveIdleState::Update(int64_t deltaMs)
 {
 
 }

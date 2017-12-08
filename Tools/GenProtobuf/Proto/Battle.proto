@@ -90,3 +90,11 @@ message SceneUnitMove
 	EMoveAgentState move_agent_state = 2;
 }
 
+message SceneUnitSkillAction
+{
+	uint64 su_id = 1;
+	ESkillState stage = 2;
+	int32 skill_id = 3;
+	int64 stage_begin_ms = 4;
+}
+

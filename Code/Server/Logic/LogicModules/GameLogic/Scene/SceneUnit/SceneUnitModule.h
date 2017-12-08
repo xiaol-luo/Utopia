@@ -62,5 +62,15 @@ namespace GameLogic
 		virtual void OnDestroy() {}
 		virtual std::vector<SyncClientMsg> CollectPBInit() { return std::move(std::vector<SyncClientMsg>()); }
 		virtual std::vector<SyncClientMsg> CollectPbMutable() { return std::move(std::vector<SyncClientMsg>()); }
+		virtual void SetPbDirty() { m_pb_dirty = true; }
+		virtual void ClearPbDirty() { m_pb_dirty = false; }
+		virtual bool IsPbDirty() { return m_pb_dirty; }
+		bool m_pb_dirty = false;
+
+	public:
+		void SendSelf(int protocol_id, google::protobuf::Message *msg);
+		void SendSelf(const std::vector<SyncClientMsg> &msgs);
+		void SendObservers(int protocol_id, google::protobuf::Message *msg);
+		void SendObservers(const std::vector<SyncClientMsg> &msgs);
 	};
 }

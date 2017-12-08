@@ -7,6 +7,13 @@ public class SceneObjcet
     public ulong id { get; protected set; }
     public int unitType { get; protected set; }
     public int modelId { get; protected set; }
+    public int skillId { get; set; }
+    public ESkillState skillStage { get; set; }
+
+    public bool IsPlayingSkill()
+    {
+        return skillId != 0 && ESkillState.EssEnd != skillStage;
+    }
     public float faceDir {
         get { return m_faceDir; }
         set {

@@ -21,7 +21,7 @@ namespace GameLogic
 	public: 
 		SceneUnitMove();
 		virtual ~SceneUnitMove() override;
-		void UpdateState(long deltaMs);
+		void UpdateState(int64_t deltaMs);
 
 	protected:
 		virtual void OnAwake() override;

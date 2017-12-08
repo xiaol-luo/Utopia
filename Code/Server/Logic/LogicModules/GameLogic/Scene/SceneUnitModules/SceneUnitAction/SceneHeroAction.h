@@ -81,6 +81,8 @@ namespace GameLogic
 	protected:
 		AIHero *m_bt_agent;
 
+	protected:
+		virtual std::vector<SyncClientMsg> CollectPBInit() override;
 	};
 }
 

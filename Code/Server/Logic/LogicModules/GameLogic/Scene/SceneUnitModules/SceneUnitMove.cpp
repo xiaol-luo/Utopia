@@ -45,7 +45,7 @@ namespace GameLogic
 		delete m_nav_agent; m_nav_agent = nullptr;
 	}
 
-	void SceneUnitMove::UpdateState(long deltaMs)
+	void SceneUnitMove::UpdateState(int64_t deltaMs)
 	{
 		if (nullptr == m_curr_state)
 			return;
@@ -133,6 +133,7 @@ namespace GameLogic
 		m_curr_state->Exit();
 		m_curr_state = m_states[new_state];
 		m_curr_state->Enter(param);
+		this->SetPbDirty();
 		this->GetEvProxy()->Fire<NetProto::EMoveAgentState, NetProto::EMoveAgentState>(
 			ESU_MoveStateChange, old_state, new_state);
 	}
@@ -217,10 +218,9 @@ namespace GameLogic
 			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 			this->EnterState(NetProto::EMoveAgentState_Idle);
 		}
-		else
+		if (NetProto::EMoveState_Move == CalMoveState(m_next_state->GetState()))
 		{
-			if (NetProto::EMoveState_Move == CalMoveState(m_next_state->GetState()))
-				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		}
 	}
 
@@ -230,13 +230,9 @@ namespace GameLogic
 		{
 			m_curr_state->ForceDone();
 		}
-		else
+		if (NetProto::EMoveState_ForceMove == CalMoveState(m_next_state->GetState()))
 		{
-			if (NetProto::EMoveState_ForceMove == CalMoveState(m_next_state->GetState()))
-			{
-				m_next_state->ForceDone();
-				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
-			}
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		}
 	}
 
@@ -284,17 +280,13 @@ namespace GameLogic
 
 	void SceneUnitMove::CancelImmobilized()
 	{
-		if (NetProto::EMoveState_Immobilized == this->GetMoveAgentState())
+		if (NetProto::EMoveState_Immobilized == this->GetMoveState())
 		{
 			m_curr_state->ForceDone();
 		}
-		else
+		if (NetProto::EMoveState_Immobilized == CalMoveState(m_next_state->GetState()))
 		{
-			if (NetProto::EMoveState_Immobilized == CalMoveState(m_next_state->GetState()))
-			{
-				m_next_state->ForceDone();
-				m_next_state = m_states[NetProto::EMoveAgentState_Idle];
-			}
+			m_next_state = m_states[NetProto::EMoveAgentState_Idle];
 		}
 	}
 

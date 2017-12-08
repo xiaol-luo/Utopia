@@ -30,7 +30,7 @@ namespace GameLogic
 
 	void SceneMove::OnUpdate()
 	{
-		long deltaMs = this->GetScene()->GetLogicDetalMs();
+		int64_t deltaMs = this->GetScene()->GetLogicDetalMs();
 		m_nav_mesh->GetCrowd()->update(deltaMs * 0.001, nullptr);
 
 		{

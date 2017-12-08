@@ -4,6 +4,8 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
 
 GameLogic::SceneUnitMoveImmobilizedState::SceneUnitMoveImmobilizedState(SceneUnitMove *move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Immobilized)
 {
@@ -17,6 +19,7 @@ GameLogic::SceneUnitMoveImmobilizedState::~SceneUnitMoveImmobilizedState()
 
 void GameLogic::SceneUnitMoveImmobilizedState::Enter(void * param)
 {
+	GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "SceneUnitMoveImmobilizedState::Enter");
 	m_is_done = false;
 	m_ticker.RestartWithEndTimestamp(m_end_timestamp_ms * 0.001);
 	m_is_done = !m_ticker.InCd();
@@ -31,7 +34,7 @@ void GameLogic::SceneUnitMoveImmobilizedState::Exit()
 	m_ticker.Restart(0);
 }
 
-void GameLogic::SceneUnitMoveImmobilizedState::Update(long deltaMs)
+void GameLogic::SceneUnitMoveImmobilizedState::Update(int64_t deltaMs)
 {
 	if (m_is_done)
 		return;
@@ -44,7 +47,7 @@ bool GameLogic::SceneUnitMoveImmobilizedState::IsDone()
 	return m_is_done;
 }
 
-void GameLogic::SceneUnitMoveImmobilizedState::ImmobilizeEndMs(long end_ms)
+void GameLogic::SceneUnitMoveImmobilizedState::ImmobilizeEndMs(int64_t end_ms)
 {
 	m_end_timestamp_ms = end_ms;
 }

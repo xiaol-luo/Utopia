@@ -27,7 +27,7 @@ void GameLogic::SceneUnitMoveForcePosState::Exit()
 
 }
 
-void GameLogic::SceneUnitMoveForcePosState::Update(long deltaMs)
+void GameLogic::SceneUnitMoveForcePosState::Update(int64_t deltaMs)
 {
 	if (m_is_done)
 		return;

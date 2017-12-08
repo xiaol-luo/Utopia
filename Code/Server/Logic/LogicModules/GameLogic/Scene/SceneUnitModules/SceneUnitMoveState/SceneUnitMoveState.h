@@ -15,7 +15,7 @@ namespace GameLogic
 
 		virtual void Enter(void *param) = 0;
 		virtual void Exit() = 0;
-		virtual void Update(long deltaMs) = 0;
+		virtual void Update(int64_t deltaMs) = 0;
 		virtual bool IsDone() { return false; }
 		virtual void ForceDone() {}
 		virtual void Flash(const Vector3 &val) {}

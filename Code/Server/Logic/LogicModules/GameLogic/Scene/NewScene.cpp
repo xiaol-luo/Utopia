@@ -203,20 +203,20 @@ namespace GameLogic
 		if (!m_awaked)
 			return;
 
-		long now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
+		uint64_t now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
 		if (0 == m_last_real_ms)
 		{
 			m_last_real_ms = now_ms;
 			return;
 		}
 
-		long long delta_ms = now_ms - m_last_real_ms;
+		uint64_t delta_ms = now_ms - m_last_real_ms;
 		m_last_real_ms = now_ms;
 		if (m_is_pause)
 			return;
 
 		m_logic_detal_ms = delta_ms;
-		// m_logic_detal_ms = 50;
+		m_logic_detal_ms = 100;
 		m_logic_ms += m_logic_detal_ms;
 
 		this->UpdateCachedSceneUnits();
@@ -371,7 +371,7 @@ namespace GameLogic
 			this->SendPlayer(netid, msg.protocol_id, msg.msg);
 	}
 
-	void NewScene::SendClient(int64_t su_id, int protocol_id, google::protobuf::Message * msg)
+	void NewScene::SendObservers(int64_t su_id, int protocol_id, google::protobuf::Message * msg)
 	{
 		SceneView *scene_view = this->GetModule<SceneView>();
 		ViewSnapshot **snapshots = scene_view->GetSnapshot();
@@ -383,10 +383,10 @@ namespace GameLogic
 		this->SendViewCamp(EViewCamp_Observer, protocol_id, msg, false);
 	}
 
-	void NewScene::SendClient(int64_t su_id, const std::vector<SyncClientMsg>& msgs)
+	void NewScene::SendObservers(int64_t su_id, const std::vector<SyncClientMsg>& msgs)
 	{
 		for (auto &msg : msgs)
-			this->SendClient(su_id, msg.protocol_id, msg.msg);
+			this->SendObservers(su_id, msg.protocol_id, msg.msg);
 	}
 
 	void NewScene::SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message * msg, bool to_ob)
@@ -502,6 +502,11 @@ namespace GameLogic
 
 					diff.Clear();
 				}
+			}
+
+			for (auto kv_pair : m_scene_units)
+			{
+				kv_pair.second->ClearPbDirty();
 			}
 		}
 	}

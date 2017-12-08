@@ -187,8 +187,6 @@ namespace GameLogic
 					else
 					{
 						m_move_param.target_pos = target_su->GetTransform()->GetPos();
-						Vector3 delta_pos = m_move_param.target_pos - m_owner->GetTransform()->GetPos();
-						delta_pos.y = 0;
 						if (GeometryUtils::InFlatDistance(m_owner->GetTransform()->GetPos(), m_move_param.target_pos, m_move_param.allow_distance))
 						{
 							su_move->CancelMove();
@@ -209,5 +207,15 @@ namespace GameLogic
 		{
 			m_use_skill_param.skill->HeartBeat();
 		}
+	}
+
+	std::vector<SyncClientMsg> SceneHeroAction::CollectPBInit()
+	{
+		std::vector<SyncClientMsg> msgs;
+		if (nullptr != m_use_skill_param.skill)
+		{
+			msgs.push_back(m_use_skill_param.skill->GetPbMsg());
+		}
+		return std::move(msgs);
 	}
 }

@@ -136,13 +136,46 @@ namespace GameLogic
 		std::vector<SyncClientMsg> msgs;
 		for (auto module : m_modules)
 		{
-			if (nullptr != module)
+			if (nullptr != module && module->IsPbDirty())
 			{
 				for (auto & msg : module->CollectPbMutable())
 					msgs.push_back(msg);
 			}
 		}
 		return std::move(msgs);
+	}
+	void SceneUnit::SendSelf(int protocol_id, google::protobuf::Message * msg)
+	{
+		if (0 == m_player_id || nullptr == m_scene)
+			return;
+		m_scene->SendPlayer(m_player_id, protocol_id, msg);
+	}
+
+	void SceneUnit::SendSelf(const std::vector<SyncClientMsg>& msgs)
+	{
+		if (0 == m_player_id || nullptr == m_scene)
+			return;
+		m_scene->SendPlayer(m_player_id, msgs);
+	}
+	void SceneUnit::SendObservers(int protocol_id, google::protobuf::Message * msg)
+	{
+		if (nullptr == m_scene)
+			return;
+		m_scene->SendObservers(m_id, protocol_id, msg);
+	}
+	void SceneUnit::SendObservers(const std::vector<SyncClientMsg>& msgs)
+	{
+		if (nullptr == m_scene)
+			return;
+		m_scene->SendObservers(m_id, msgs);
+	}
+	void SceneUnit::ClearPbDirty()
+	{
+		for (auto module : m_modules)
+		{
+			if (nullptr != m_modules)
+				module->ClearPbDirty();
+		}
 	}
 }
 

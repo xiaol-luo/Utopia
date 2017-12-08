@@ -32,4 +32,24 @@ namespace GameLogic
 		delete m_event_proxy; m_event_proxy = nullptr;
 		m_owner = nullptr;
 	}
+	void SceneUnitModule::SendSelf(int protocol_id, google::protobuf::Message * msg)
+	{
+		if (nullptr != m_owner)
+			m_owner->SendSelf(protocol_id, msg);
+	}
+	void SceneUnitModule::SendSelf(const std::vector<SyncClientMsg>& msgs)
+	{
+		if (nullptr != m_owner)
+			m_owner->SendSelf(msgs);
+	}
+	void SceneUnitModule::SendObservers(int protocol_id, google::protobuf::Message * msg)
+	{
+		if (nullptr != m_owner)
+			m_owner->SendObservers(protocol_id, msg);
+	}
+	void SceneUnitModule::SendObservers(const std::vector<SyncClientMsg>& msgs)
+	{
+		if (nullptr != m_owner)
+			m_owner->SendObservers(msgs);
+	}
 }

@@ -6,6 +6,10 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "Common/Utils/NumUtils.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
+#include "Network/Protobuf/BattleEnum.pb.h"
+#include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
+#include "GameLogic/Scene/NewScene.h"
 
 namespace GameLogic
 {
@@ -80,7 +84,6 @@ namespace GameLogic
 		m_can_move = m_lvl_cfg->can_move;
 		if (!m_can_move)
 			m_su_skills->GetModule<SceneUnitFightParam>()->AttachState(NetProto::EFP_Immobilized);
-
 		this->SyncClient();
 		return true;
 	}
@@ -193,15 +196,26 @@ namespace GameLogic
 	{
 		if (!IsRunning())
 			return true;
-
-		// TODO
 		this->End();
-		this->SyncClient();
 		return true;
 	}
 
 	void Skill::SyncClient()
 	{
+		SyncClientMsg msg = this->GetPbMsg();
+		m_su_skills->SendObservers(msg.protocol_id, msg.msg);
+	}
+
+	SyncClientMsg Skill::GetPbMsg()
+	{
+		NetProto::SceneUnitSkillAction *msg = m_su_skills->GetOwner()->GetScene()->CreateProtobuf<NetProto::SceneUnitSkillAction>();
+		msg->set_su_id(m_su_skills->GetOwner()->GetId());
+		{
+			msg->set_skill_id(this->GetSkillId());
+			msg->set_stage_begin_ms(this->GetStageBeginMs());
+			msg->set_stage((NetProto::ESkillState)this->GetStage());
+		}
+		return std::move(SyncClientMsg(NetProto::PID_SceneUnitSkillAction, msg));
 	}
 
 	bool Skill::CheckCanCast()
@@ -228,6 +242,7 @@ namespace GameLogic
 		m_su_skills->GetOwner()->GetTransform()->SetFaceDir(face_dir, ESUFaceDir_Move);
 		if (!m_can_move)
 			m_su_skills->GetModule<SceneUnitFightParam>()->DeattachState(NetProto::EFP_Immobilized);
+		this->SyncClient();
 	}
 	void Skill::ResetParams()
 	{
@@ -236,9 +251,9 @@ namespace GameLogic
 		m_dir = Vector2::zero;
 		m_pos = Vector3::zero;
 	}
-	long Skill::GetLogicMs(long delta_ms)
+	int64_t Skill::GetLogicMs(int64_t delta_ms)
 	{
-		long ret = m_su_skills->GetOwner()->GetScene()->GetLogicMs() + delta_ms;
+		int64_t ret = m_su_skills->GetOwner()->GetScene()->GetLogicMs() + delta_ms;
 		return ret;
 	}
 }

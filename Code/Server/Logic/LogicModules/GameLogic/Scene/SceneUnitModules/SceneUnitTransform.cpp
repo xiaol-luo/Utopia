@@ -90,6 +90,7 @@ namespace GameLogic
 	{
 		Vector3 old_Pos = this->GetPos();
 		m_local_pos = pos;
+		this->SetPbDirty();
 
 		if (nullptr != m_owner->GetScene())
 			this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, old_Pos, this->GetPos());
@@ -118,6 +119,7 @@ namespace GameLogic
 
 		m_face_dir[e_dir] = face_dir;
 		m_face_dir[e_dir].normalize();
+		this->SetPbDirty();
 	}
 
 	Vector2 SceneUnitTransform::GetFaceDir()

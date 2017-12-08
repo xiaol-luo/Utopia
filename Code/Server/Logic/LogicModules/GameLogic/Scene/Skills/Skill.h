@@ -5,6 +5,7 @@
 #include "Common/Geometry/Vector3.h"
 #include "Common/Utils/Ticker.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include "GameLogic/Scene/Defines/SceneDefine.h"
 
 namespace GameLogic
 {
@@ -30,6 +31,8 @@ namespace GameLogic
 		inline uint64_t GetSkillKey() { return m_skill_key; }
 		const SkillLevelConfig * GetLvlCfg() { return m_lvl_cfg; }
 		const SkillConfig * GetCfg() { return m_cfg; }
+		int GetStage() { return m_state; }
+		int GetStageBeginMs() { return m_stage_begin_ms; }
 
 		void SetParams(int64_t target_suid, Vector3 pos, Vector2 dir);
 		bool Begin();
@@ -37,6 +40,7 @@ namespace GameLogic
 		bool IsRunning();
 		bool TryCancel();
 		void SyncClient();
+		SyncClientMsg GetPbMsg();
 
 	protected:
 		bool CheckCanCast();
@@ -54,9 +58,9 @@ namespace GameLogic
 		Vector3 m_pos;
 		Vector2 m_dir;
 		bool m_can_move = true;
-		long m_last_release_ms = LONG_MIN;
+		int64_t m_last_release_ms = LONG_MIN;
 		int m_state = NetProto::ESS_End;
-		long m_stage_begin_ms = LONG_MAX;
-		long GetLogicMs(long delta_ms = 0);
+		int64_t m_stage_begin_ms = LONG_MAX;
+		int64_t GetLogicMs(int64_t delta_ms = 0);
 	};
 }

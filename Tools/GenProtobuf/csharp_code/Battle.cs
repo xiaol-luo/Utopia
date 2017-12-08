@@ -45,7 +45,10 @@ namespace NetProto {
             "cG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAMg",
             "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCJTCg1TY2VuZVVuaXRNb3ZlEg0K",
             "BXN1X2lkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiABKA4yGS5OZXRQ",
-            "cm90by5FTW92ZUFnZW50U3RhdGVCA/gBAWIGcHJvdG8z"));
+            "cm90by5FTW92ZUFnZW50U3RhdGUidQoUU2NlbmVVbml0U2tpbGxBY3Rpb24S",
+            "DQoFc3VfaWQYASABKAQSJAoFc3RhZ2UYAiABKA4yFS5OZXRQcm90by5FU2tp",
+            "bGxTdGF0ZRIQCghza2lsbF9pZBgDIAEoBRIWCg5zdGFnZV9iZWdpbl9tcxgE",
+            "IAEoA0ID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -61,7 +64,8 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitState), global::NetProto.SceneUnitState.Parser, new[]{ "SuId", "UnitType", "ModelId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitTransform), global::NetProto.SceneUnitTransform.Parser, new[]{ "SuId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitSkillAction), global::NetProto.SceneUnitSkillAction.Parser, new[]{ "SuId", "Stage", "SkillId", "StageBeginMs" }, null, null, null)
           }));
     }
     #endregion
@@ -2135,6 +2139,207 @@ namespace NetProto {
           }
           case 16: {
             moveAgentState_ = (global::NetProto.EMoveAgentState) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SceneUnitSkillAction : pb::IMessage<SceneUnitSkillAction> {
+    private static readonly pb::MessageParser<SceneUnitSkillAction> _parser = new pb::MessageParser<SceneUnitSkillAction>(() => new SceneUnitSkillAction());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneUnitSkillAction> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[13]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitSkillAction() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitSkillAction(SceneUnitSkillAction other) : this() {
+      suId_ = other.suId_;
+      stage_ = other.stage_;
+      skillId_ = other.skillId_;
+      stageBeginMs_ = other.stageBeginMs_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneUnitSkillAction Clone() {
+      return new SceneUnitSkillAction(this);
+    }
+
+    /// <summary>Field number for the "su_id" field.</summary>
+    public const int SuIdFieldNumber = 1;
+    private ulong suId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SuId {
+      get { return suId_; }
+      set {
+        suId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "stage" field.</summary>
+    public const int StageFieldNumber = 2;
+    private global::NetProto.ESkillState stage_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.ESkillState Stage {
+      get { return stage_; }
+      set {
+        stage_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "skill_id" field.</summary>
+    public const int SkillIdFieldNumber = 3;
+    private int skillId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int SkillId {
+      get { return skillId_; }
+      set {
+        skillId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "stage_begin_ms" field.</summary>
+    public const int StageBeginMsFieldNumber = 4;
+    private long stageBeginMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long StageBeginMs {
+      get { return stageBeginMs_; }
+      set {
+        stageBeginMs_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneUnitSkillAction);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneUnitSkillAction other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SuId != other.SuId) return false;
+      if (Stage != other.Stage) return false;
+      if (SkillId != other.SkillId) return false;
+      if (StageBeginMs != other.StageBeginMs) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SuId != 0UL) hash ^= SuId.GetHashCode();
+      if (Stage != 0) hash ^= Stage.GetHashCode();
+      if (SkillId != 0) hash ^= SkillId.GetHashCode();
+      if (StageBeginMs != 0L) hash ^= StageBeginMs.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SuId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SuId);
+      }
+      if (Stage != 0) {
+        output.WriteRawTag(16);
+        output.WriteEnum((int) Stage);
+      }
+      if (SkillId != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(SkillId);
+      }
+      if (StageBeginMs != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(StageBeginMs);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
+      }
+      if (Stage != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Stage);
+      }
+      if (SkillId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SkillId);
+      }
+      if (StageBeginMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(StageBeginMs);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneUnitSkillAction other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SuId != 0UL) {
+        SuId = other.SuId;
+      }
+      if (other.Stage != 0) {
+        Stage = other.Stage;
+      }
+      if (other.SkillId != 0) {
+        SkillId = other.SkillId;
+      }
+      if (other.StageBeginMs != 0L) {
+        StageBeginMs = other.StageBeginMs;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            SuId = input.ReadUInt64();
+            break;
+          }
+          case 16: {
+            stage_ = (global::NetProto.ESkillState) input.ReadEnum();
+            break;
+          }
+          case 24: {
+            SkillId = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            StageBeginMs = input.ReadInt64();
             break;
           }
         }

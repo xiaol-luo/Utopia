@@ -12,6 +12,6 @@ namespace GameLogic
 
 		virtual void Enter(void *param);
 		virtual void Exit();
-		virtual void Update(long deltaMs);
+		virtual void Update(int64_t deltaMs);
 	};
 }

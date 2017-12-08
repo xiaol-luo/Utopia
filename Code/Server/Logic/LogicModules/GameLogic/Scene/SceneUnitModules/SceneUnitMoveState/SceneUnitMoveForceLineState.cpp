@@ -37,7 +37,7 @@ void GameLogic::SceneUnitMoveForceLineState::Exit()
 	m_is_done = true;
 }
 
-void GameLogic::SceneUnitMoveForceLineState::Update(long deltaMs)
+void GameLogic::SceneUnitMoveForceLineState::Update(int64_t deltaMs)
 {
 	if (m_is_done)
 		return;

@@ -26,7 +26,7 @@ void GameLogic::SceneUnitMoveToDirState::Exit()
 	m_move_agent->GetNavAgent()->StopMove();
 }
 
-void GameLogic::SceneUnitMoveToDirState::Update(long deltaMs)
+void GameLogic::SceneUnitMoveToDirState::Update(int64_t deltaMs)
 {
 	m_move_agent->GetNavAgent()->OnMoved();
 }

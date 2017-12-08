@@ -35,7 +35,7 @@ void GameLogic::SceneUnitMoveToPosState::Exit()
 	m_move_agent->GetNavAgent()->StopMove();
 }
 
-void GameLogic::SceneUnitMoveToPosState::Update(long deltaMs)
+void GameLogic::SceneUnitMoveToPosState::Update(int64_t deltaMs)
 {
 	m_move_agent->GetNavAgent()->OnMoved();
 }

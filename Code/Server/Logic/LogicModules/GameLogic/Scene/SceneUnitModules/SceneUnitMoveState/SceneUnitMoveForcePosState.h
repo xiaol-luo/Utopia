@@ -12,7 +12,7 @@ namespace GameLogic
 
 		virtual void Enter(void *param);
 		virtual void Exit();
-		virtual void Update(long deltaMs);
+		virtual void Update(int64_t deltaMs);
 		virtual bool IsDone() { return m_is_done; }
 		virtual void ForceDone() { m_is_done = true; }
 

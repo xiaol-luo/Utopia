@@ -48,6 +48,9 @@ extern SceneObjectDisappearDefaultTypeInternal _SceneObjectDisappear_default_ins
 class SceneUnitMove;
 class SceneUnitMoveDefaultTypeInternal;
 extern SceneUnitMoveDefaultTypeInternal _SceneUnitMove_default_instance_;
+class SceneUnitSkillAction;
+class SceneUnitSkillActionDefaultTypeInternal;
+extern SceneUnitSkillActionDefaultTypeInternal _SceneUnitSkillAction_default_instance_;
 class SceneUnitState;
 class SceneUnitStateDefaultTypeInternal;
 extern SceneUnitStateDefaultTypeInternal _SceneUnitState_default_instance_;
@@ -1781,6 +1784,139 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
   mutable int _cached_size_;
   friend struct protobuf_Battle_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class SceneUnitSkillAction : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneUnitSkillAction) */ {
+ public:
+  SceneUnitSkillAction();
+  virtual ~SceneUnitSkillAction();
+
+  SceneUnitSkillAction(const SceneUnitSkillAction& from);
+
+  inline SceneUnitSkillAction& operator=(const SceneUnitSkillAction& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SceneUnitSkillAction(SceneUnitSkillAction&& from) noexcept
+    : SceneUnitSkillAction() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneUnitSkillAction& operator=(SceneUnitSkillAction&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const PROTOBUF_FINAL {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const PROTOBUF_FINAL {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SceneUnitSkillAction& default_instance();
+
+  static inline const SceneUnitSkillAction* internal_default_instance() {
+    return reinterpret_cast<const SceneUnitSkillAction*>(
+               &_SceneUnitSkillAction_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    13;
+
+  void UnsafeArenaSwap(SceneUnitSkillAction* other);
+  void Swap(SceneUnitSkillAction* other);
+  friend void swap(SceneUnitSkillAction& a, SceneUnitSkillAction& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneUnitSkillAction* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  SceneUnitSkillAction* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const SceneUnitSkillAction& from);
+  void MergeFrom(const SceneUnitSkillAction& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(SceneUnitSkillAction* other);
+  protected:
+  explicit SceneUnitSkillAction(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // uint64 su_id = 1;
+  void clear_su_id();
+  static const int kSuIdFieldNumber = 1;
+  ::google::protobuf::uint64 su_id() const;
+  void set_su_id(::google::protobuf::uint64 value);
+
+  // .NetProto.ESkillState stage = 2;
+  void clear_stage();
+  static const int kStageFieldNumber = 2;
+  ::NetProto::ESkillState stage() const;
+  void set_stage(::NetProto::ESkillState value);
+
+  // int32 skill_id = 3;
+  void clear_skill_id();
+  static const int kSkillIdFieldNumber = 3;
+  ::google::protobuf::int32 skill_id() const;
+  void set_skill_id(::google::protobuf::int32 value);
+
+  // int64 stage_begin_ms = 4;
+  void clear_stage_begin_ms();
+  static const int kStageBeginMsFieldNumber = 4;
+  ::google::protobuf::int64 stage_begin_ms() const;
+  void set_stage_begin_ms(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.SceneUnitSkillAction)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::google::protobuf::uint64 su_id_;
+  int stage_;
+  ::google::protobuf::int32 skill_id_;
+  ::google::protobuf::int64 stage_begin_ms_;
+  mutable int _cached_size_;
+  friend struct protobuf_Battle_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -2563,10 +2699,72 @@ inline void SceneUnitMove::set_move_agent_state(::NetProto::EMoveAgentState valu
   // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.move_agent_state)
 }
 
+// -------------------------------------------------------------------
+
+// SceneUnitSkillAction
+
+// uint64 su_id = 1;
+inline void SceneUnitSkillAction::clear_su_id() {
+  su_id_ = GOOGLE_ULONGLONG(0);
+}
+inline ::google::protobuf::uint64 SceneUnitSkillAction::su_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitSkillAction.su_id)
+  return su_id_;
+}
+inline void SceneUnitSkillAction::set_su_id(::google::protobuf::uint64 value) {
+  
+  su_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitSkillAction.su_id)
+}
+
+// .NetProto.ESkillState stage = 2;
+inline void SceneUnitSkillAction::clear_stage() {
+  stage_ = 0;
+}
+inline ::NetProto::ESkillState SceneUnitSkillAction::stage() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitSkillAction.stage)
+  return static_cast< ::NetProto::ESkillState >(stage_);
+}
+inline void SceneUnitSkillAction::set_stage(::NetProto::ESkillState value) {
+  
+  stage_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitSkillAction.stage)
+}
+
+// int32 skill_id = 3;
+inline void SceneUnitSkillAction::clear_skill_id() {
+  skill_id_ = 0;
+}
+inline ::google::protobuf::int32 SceneUnitSkillAction::skill_id() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitSkillAction.skill_id)
+  return skill_id_;
+}
+inline void SceneUnitSkillAction::set_skill_id(::google::protobuf::int32 value) {
+  
+  skill_id_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitSkillAction.skill_id)
+}
+
+// int64 stage_begin_ms = 4;
+inline void SceneUnitSkillAction::clear_stage_begin_ms() {
+  stage_begin_ms_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SceneUnitSkillAction::stage_begin_ms() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitSkillAction.stage_begin_ms)
+  return stage_begin_ms_;
+}
+inline void SceneUnitSkillAction::set_stage_begin_ms(::google::protobuf::int64 value) {
+  
+  stage_begin_ms_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitSkillAction.stage_begin_ms)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
