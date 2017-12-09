@@ -241,6 +241,7 @@ public class Scene
         msg.Opera = EPlayerOpera.EpoCastSkill;
         msg.TargetId = targetId;
         msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
+		msg.SkillSlot = skillSlot;
         App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
     void TraceUnit(ulong targetId)
