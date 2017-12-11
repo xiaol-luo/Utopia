@@ -42,6 +42,34 @@ out_cpp_file_path = skill/CsvSkillLevelConfig
 out_lua_file_path = skill/CsvSkillLevelConfig.lua
 
 
+[excel2csv-effect.hurt]
+file_path = effect/effects.xlsx
+sheet_name = hurt
+out_csv_file_path = effect/CsvEffectHurtConfig.csv
+class_name = CsvEffectHurtConfig
+out_cs_file_path = effect/CsvEffectHurtConfig.cs
+out_cpp_file_path = effect/CsvEffectHurtConfig
+out_lua_file_path = effect/CsvEffectHurtConfig.lua
+
+[excel2csv-effect.heal]
+file_path = effect/effects.xlsx
+sheet_name = heal
+out_csv_file_path = effect/CsvEffectHealConfig.csv
+class_name = CsvEffectHealConfig
+out_cs_file_path = effect/CsvEffectHealConfig.cs
+out_cpp_file_path = effect/CsvEffectHealConfig
+out_lua_file_path = effect/CsvEffectHealConfig.lua
+
+[excel2csv-effect.attrs]
+file_path = effect/effects.xlsx
+sheet_name = attrs
+out_csv_file_path = effect/CsvEffectAttrsConfig.csv
+class_name = CsvEffectAttrsConfig
+out_cs_file_path = effect/CsvEffectAttrsConfig.cs
+out_cpp_file_path = effect/CsvEffectAttrsConfig
+out_lua_file_path = effect/CsvEffectAttrsConfig.lua
+
+
 
 
 

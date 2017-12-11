@@ -18,6 +18,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
+#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace GameLogic
 {
@@ -43,6 +44,7 @@ namespace GameLogic
 		this->AddModule(new SceneMove());
 		this->AddModule(new SceneView());
 		this->AddModule(new SceneNavMesh());
+		this->AddModule(new SceneEffects());
 
 		m_ev_dispacher->Subscribe(ES_TestHeartBeat, std::bind(&TestScene::TestAction, this));
 

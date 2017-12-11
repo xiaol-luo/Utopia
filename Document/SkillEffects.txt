@@ -1,0 +1,11 @@
+1.Effect存在3个虚接口：
+Begin
+HeartBeat
+End
+
+2.现在设计Effect存在以下能力：
+Begin时 Create新的Effect,并执行新Effect的Begin
+HeartBeat时 根据 timeline 创建新的Effect，并执行Begin。检查timeline结束并调用End
+End时 Create新的Effect，并执行新Effect的Begin
+
+begin时候，如果timeline为0 并不执行end，因为想要保证同样timeline为0的Effect， 先begin的先end。

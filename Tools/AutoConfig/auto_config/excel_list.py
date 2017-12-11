@@ -81,7 +81,7 @@ class EnumFieldType:
                     val_type = sub_type
                     ret = True
         if not ret: # mapvec
-            m_ret = re.match(r"^<(.*), \[(.*)\]>$", type_str) 
+            m_ret = re.match(r"^<(.*),\[(.*)\]>$", type_str) 
             if m_ret:
                 parse_succ = False
                 sub_ret, sub_type = EnumFieldType._parse_base_type(m_ret.group(1))
@@ -104,7 +104,7 @@ class EnumFieldType:
                     val_type = sub_type
                     ret = True
         if not ret: # map
-            m_ret = re.match(r"^<(.*), (.*)>$", type_str) 
+            m_ret = re.match(r"^<(.*),(.*)>$", type_str) 
             if m_ret:
                 parse_succ = False
                 sub_ret, sub_type  = EnumFieldType._parse_base_type(m_ret.group(1))
@@ -122,8 +122,9 @@ class EnumFieldType:
 
     @staticmethod
     def _parse_base_type(type_str):
-        if type_str in EnumFieldType.Base_Type_Strs:
-            return True, EnumFieldType.Base_Type_Strs[type_str]
+        strip_str = type_str.strip()
+        if strip_str in EnumFieldType.Base_Type_Strs:
+            return True, EnumFieldType.Base_Type_Strs[strip_str]
         return False, None
 
 

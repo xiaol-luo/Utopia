@@ -16,6 +16,7 @@ namespace GameLogic
 		ESceneModule_NavMesh = 0,
 		ESceneModule_Move,
 		ESceneModule_View,
+		ESceneModule_Effects,
 
 		ESceneModule_Count,
 	};
