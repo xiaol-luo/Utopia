@@ -7,7 +7,9 @@ namespace Config
 
 namespace GameLogic
 {
+	class EffectConfigMgr;
 	struct SkillConfigSet;
+
 	struct SceneAllConfig
 	{
 		SceneAllConfig();
@@ -15,5 +17,6 @@ namespace GameLogic
 
 		Config::CsvSceneConfig *scene_cfg = nullptr;
 		SkillConfigSet *skill_cfgs = nullptr;
+		EffectConfigMgr *effect_cfg_mgr = nullptr;
 	};
 }

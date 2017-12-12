@@ -13,7 +13,7 @@ namespace GameLogic
 	struct SkillLevelConfig;
 	struct SkillConfig;
 	class SceneUnitSkills;
-
+	class EffectBase;
 
 	class Skill : public std::enable_shared_from_this<Skill>
 	{
@@ -44,6 +44,10 @@ namespace GameLogic
 		void SyncClient();
 		SyncClientMsg GetPbMsg();
 
+		void AddGuildEffect(std::shared_ptr<EffectBase> effect);
+		void RemoveGuildEffect(uint64_t effect_key);
+		void ClearGuildEffects();
+
 	protected:
 		bool CheckCanCast();
 		void SetFaceDir();
@@ -59,6 +63,8 @@ namespace GameLogic
 		std::weak_ptr<SceneUnit> m_target_su;
 		Vector3 m_pos;
 		Vector2 m_dir;
+
+		std::unordered_map<uint64_t, std::shared_ptr<EffectBase>> m_guild_effects;
 		bool m_can_move = true;
 		int64_t m_last_release_ms = LONG_MIN;
 		int m_state = NetProto::ESS_End;

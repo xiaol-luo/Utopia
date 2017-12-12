@@ -50,7 +50,7 @@ namespace GameLogic
 		~SkillConfigSet();
 
 		void Reset();
-		void Init(Config::CsvConfigSets *csv_cfgs, void *param);
+		bool LoadCfg(Config::CsvConfigSets *csv_cfgs, void *param);
 
 		const SkillConfig * GetSkill(int skill_id) const;
 		const SkillLevelConfig * GetSkill(int skill_id, int level) const;

@@ -49,17 +49,17 @@ namespace NetProto {
             "b3QQDBIRCg1FU1NfVGhyZWVTbG90EA0SEAoMRVNTX0ZvdXJTbG90EA4SEAoM",
             "RVNTX0ZpdmVTbG90EA8SDwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5T",
             "bG90EBEqNwoJRVNraWxsQmFyEhUKEUVTa2lsbEJhcl9EZWZhdWx0EAASEwoP",
-            "RVNraWxsQmFyX0V4dHJhEAEqcQoLRVNraWxsU3RhdGUSDwoLRVNTX1JlYWR5",
-            "R28QABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNTX1JlbGVhc2luZxACEg0K",
-            "CUVTU19Vc2luZxADEg8KC0VTU19MYXN0aW5nEAQSCwoHRVNTX0VuZBAFKl4K",
-            "DEVTa2lsbFVzZVdheRIXChNFU2tpbGxUYXJnZXRfVGFyZ2V0EAASGgoWRVNr",
-            "aWxsVGFyZ2V0X0RpcmVjdGlvbhABEhkKFUVTa2lsbFRhcmdldF9Qb3NpdGlv",
-            "bhACKu0BChBFU2tpbGxFZmZlY3RDYXNlEhkKFUVTa2lsbFRhcmdldENhc2Vf",
-            "U2VsZhAAEhsKF0VTa2lsbFRhcmdldENhc2VfRnJpZW5kEAESGgoWRVNraWxs",
-            "VGFyZ2V0Q2FzZV9FbmVteRACEh4KGkVTa2lsbFRhcmdldENhc2VfU2VsZkVu",
-            "ZW15EAMSJgoiRVNraWxsVGFyZ2V0Q2FzZV9GcmllbmRFeGNsdWRlU2VsZhAE",
-            "EiMKH0VTa2lsbFRhcmdldENhc2VfQWxsRXhjbHVkZVNlbGYQBRIYChRFU2tp",
-            "bGxUYXJnZXRDYXNlX0FsbBAGQgP4AQFiBnByb3RvMw=="));
+            "RVNraWxsQmFyX0V4dHJhEAEqdAoLRVNraWxsU3RhdGUSDwoLRVNTX1JlYWR5",
+            "R28QABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNTX1JlbGVhc2luZxACEhAK",
+            "DEVTU19HdWlsZGluZxADEg8KC0VTU19MYXN0aW5nEAQSCwoHRVNTX0VuZBAF",
+            "Kl4KDEVTa2lsbFVzZVdheRIXChNFU2tpbGxUYXJnZXRfVGFyZ2V0EAASGgoW",
+            "RVNraWxsVGFyZ2V0X0RpcmVjdGlvbhABEhkKFUVTa2lsbFRhcmdldF9Qb3Np",
+            "dGlvbhACKu0BChBFU2tpbGxFZmZlY3RDYXNlEhkKFUVTa2lsbFRhcmdldENh",
+            "c2VfU2VsZhAAEhsKF0VTa2lsbFRhcmdldENhc2VfRnJpZW5kEAESGgoWRVNr",
+            "aWxsVGFyZ2V0Q2FzZV9FbmVteRACEh4KGkVTa2lsbFRhcmdldENhc2VfU2Vs",
+            "ZkVuZW15EAMSJgoiRVNraWxsVGFyZ2V0Q2FzZV9GcmllbmRFeGNsdWRlU2Vs",
+            "ZhAEEiMKH0VTa2lsbFRhcmdldENhc2VfQWxsRXhjbHVkZVNlbGYQBRIYChRF",
+            "U2tpbGxUYXJnZXRDYXNlX0FsbBAGQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
@@ -224,7 +224,7 @@ namespace NetProto {
     /// <summary>
     /// 引导
     /// </summary>
-    [pbr::OriginalName("ESS_Using")] EssUsing = 3,
+    [pbr::OriginalName("ESS_Guilding")] EssGuilding = 3,
     /// <summary>
     /// 后摇
     /// </summary>

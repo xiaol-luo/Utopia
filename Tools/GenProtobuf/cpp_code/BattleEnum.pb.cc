@@ -110,22 +110,22 @@ void AddDescriptorsImpl() {
       "ot\020\014\022\021\n\rESS_ThreeSlot\020\r\022\020\n\014ESS_FourSlot\020"
       "\016\022\020\n\014ESS_FiveSlot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\r"
       "ESS_SevenSlot\020\021*7\n\tESkillBar\022\025\n\021ESkillBa"
-      "r_Default\020\000\022\023\n\017ESkillBar_Extra\020\001*q\n\013ESki"
+      "r_Default\020\000\022\023\n\017ESkillBar_Extra\020\001*t\n\013ESki"
       "llState\022\017\n\013ESS_ReadyGo\020\000\022\021\n\rESS_Preparin"
-      "g\020\001\022\021\n\rESS_Releasing\020\002\022\r\n\tESS_Using\020\003\022\017\n"
-      "\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*^\n\014ESkillUse"
-      "Way\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESkillTa"
-      "rget_Direction\020\001\022\031\n\025ESkillTarget_Positio"
-      "n\020\002*\355\001\n\020ESkillEffectCase\022\031\n\025ESkillTarget"
-      "Case_Self\020\000\022\033\n\027ESkillTargetCase_Friend\020\001"
-      "\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032ESkillTa"
-      "rgetCase_SelfEnemy\020\003\022&\n\"ESkillTargetCase"
-      "_FriendExcludeSelf\020\004\022#\n\037ESkillTargetCase"
-      "_AllExcludeSelf\020\005\022\030\n\024ESkillTargetCase_Al"
-      "l\020\006B\003\370\001\001b\006proto3"
+      "g\020\001\022\021\n\rESS_Releasing\020\002\022\020\n\014ESS_Guilding\020\003"
+      "\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*^\n\014ESkill"
+      "UseWay\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESkil"
+      "lTarget_Direction\020\001\022\031\n\025ESkillTarget_Posi"
+      "tion\020\002*\355\001\n\020ESkillEffectCase\022\031\n\025ESkillTar"
+      "getCase_Self\020\000\022\033\n\027ESkillTargetCase_Frien"
+      "d\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032ESkil"
+      "lTargetCase_SelfEnemy\020\003\022&\n\"ESkillTargetC"
+      "ase_FriendExcludeSelf\020\004\022#\n\037ESkillTargetC"
+      "ase_AllExcludeSelf\020\005\022\030\n\024ESkillTargetCase"
+      "_All\020\006B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1696);
+      descriptor, 1699);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }

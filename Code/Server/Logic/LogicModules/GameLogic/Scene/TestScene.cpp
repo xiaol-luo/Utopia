@@ -14,7 +14,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
-#include "GameLogic/Scene/Config/SkillConfig.h"
+#include "GameLogic/Scene/Skills/SkillConfig.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
@@ -37,10 +37,14 @@ namespace GameLogic
 			// init config
 			assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
 			m_cfg->scene_cfg = m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
-			m_cfg->skill_cfgs->Init(m_game_logic->GetCsvCfgSet(), nullptr);
+			
+			bool ret = true;
+			ret = ret & m_cfg->skill_cfgs->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+			ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+			if (!ret)
+				return false;
 		}
 		
-
 		this->AddModule(new SceneMove());
 		this->AddModule(new SceneView());
 		this->AddModule(new SceneNavMesh());

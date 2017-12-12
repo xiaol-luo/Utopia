@@ -10,6 +10,8 @@ namespace Config
     {
         int id = 0 ;
         std::map<int, int> attrs;
+        bool reversible = 0 ;
+        int last_time = 0 ;
 
         using ConfigCheckFunc = bool(*)(CsvEffectAttrsConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

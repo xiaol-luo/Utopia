@@ -17,7 +17,7 @@ namespace GameLogic
 		EffectConfigMgr();
 		~EffectConfigMgr();
 
-		bool LoadCfg(Config::CsvConfigSets *csv_cfgs);
+		bool LoadCfg(Config::CsvConfigSets *csv_cfgs, void *param);
 		const EffectConfigBase * GetCfg(int id);
 
 	protected:

@@ -20,7 +20,7 @@ namespace GameLogic
 		skills.clear();
 	}
 
-	void SkillConfigSet::Init(Config::CsvConfigSets * csv_cfgs, void * param)
+	bool SkillConfigSet::LoadCfg(Config::CsvConfigSets * csv_cfgs, void * param)
 	{
 		this->Reset();
 
@@ -65,6 +65,8 @@ namespace GameLogic
 
 			skills.insert(std::make_pair(skill_cfg->id, skill_cfg));
 		}
+
+		return true;
 	}
 
 	const SkillConfig * SkillConfigSet::GetSkill(int skill_id) const

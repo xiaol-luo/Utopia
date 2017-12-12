@@ -5,12 +5,16 @@ namespace Config
 {
      static const char * Field_Name_id = "id";
      static const char * Field_Name_attrs = "attrs";
+     static const char * Field_Name_reversible = "reversible";
+     static const char * Field_Name_last_time = "last_time";
 
     bool CsvEffectAttrsConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
         bool all_ok = true;
         all_ok = all_ok && kvPairs.count(Field_Name_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_id], id);
         all_ok = all_ok && kvPairs.count(Field_Name_attrs) > 0 && ConfigUtil::Str2Map (kvPairs[Field_Name_attrs], attrs);
+        all_ok = all_ok && kvPairs.count(Field_Name_reversible) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_reversible], reversible);
+        all_ok = all_ok && kvPairs.count(Field_Name_last_time) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_last_time], last_time);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -26,21 +30,27 @@ namespace Config
 
     bool CsvEffectAttrsConfigSet::Load(std::string file_path)
     {
-        io::CSVReader<2, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
+        io::CSVReader<4, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
-            Field_Name_attrs
+            Field_Name_attrs,
+            Field_Name_reversible,
+            Field_Name_last_time
             );
 
         std::map<std::string, std::string> kvParis;
         kvParis[Field_Name_id] = "";
         kvParis[Field_Name_attrs] = "";
+        kvParis[Field_Name_reversible] = "";
+        kvParis[Field_Name_last_time] = "";
 
         bool all_ok = true;
         int curr_row = 0;
         while (csv_reader.read_row(
             kvParis[Field_Name_id],
-            kvParis[Field_Name_attrs]
+            kvParis[Field_Name_attrs],
+            kvParis[Field_Name_reversible],
+            kvParis[Field_Name_last_time]
             ))
         {            
             if (++ curr_row <= 1)

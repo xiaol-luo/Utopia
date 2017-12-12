@@ -9,12 +9,16 @@ namespace Config
     {
         public const string Field_Name_id = "id";
         public const string Field_Name_attrs = "attrs";
+        public const string Field_Name_reversible = "reversible";
+        public const string Field_Name_last_time = "last_time";
     }
 
     public class CsvEffectAttrsConfig
     {
         public int id;
         public Dictionary<int, int> attrs = new Dictionary<int, int>();
+        public bool reversible;
+        public int last_time;
 
         public delegate bool ConfigCheckFunc(CsvEffectAttrsConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -22,6 +26,8 @@ namespace Config
             bool all_ok = true;
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_id], ref id);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_attrs) && ConfigUtil.Str2Map (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_attrs], ref attrs);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_reversible) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_reversible], ref reversible);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_last_time) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_last_time], ref last_time);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -49,6 +55,8 @@ namespace Config
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_id));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_attrs));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_reversible));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_last_time));
                 }
                 catch (Exception e)
                 {

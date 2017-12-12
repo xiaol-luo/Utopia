@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <unordered_map>
+#include "Common/Geometry/Vector2.h"
+#include "Common/Geometry/Vector3.h"
 
 namespace GameLogic
 {
@@ -23,17 +25,23 @@ namespace GameLogic
 
 	struct TimeLineEffectId
 	{
-		int id;
-		int wait_ms;
+		int id = 0;
+		int wait_ms = 0;
 	};
 	using TimeLineEffectIdVec = std::vector<TimeLineEffectId>;
+	struct TimeLineEffectIdsConfig
+	{
+		TimeLineEffectIdVec effect_ids;
+		int min_wait_ms = -1;
+		int max_wait_ms = -1;
+	};
 
 	enum EEffectStage
 	{
 		EEffectStage_Wait = 0,
 		EEffectStage_Begin,
-		EffectStage_Loop,
-		EffectStage_End,
+		EEffectStage_Loop,
+		EEffectStage_End,
 	};
 
 	enum EEffectType

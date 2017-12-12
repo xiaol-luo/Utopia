@@ -1,5 +1,5 @@
 #include "Skill.h"
-#include "GameLogic/Scene/Config/SkillConfig.h"
+#include "SkillConfig.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
@@ -10,6 +10,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/Effects/EffectBase.h"
 
 namespace GameLogic
 {
@@ -162,18 +163,25 @@ namespace GameLogic
 				// ÊÍ·ÅEfffect
 				this->ReleaseEffects();
 				
-				m_state = NetProto::ESS_Using;
+				m_state = NetProto::ESS_Guilding;
 				m_stage_begin_ms = now_ms;
 			}
 
 			// Òýµ¼
-			if (NetProto::ESS_Using == m_state)
+			if (NetProto::ESS_Guilding == m_state)
 			{
-				bool is_using = false;
+				bool is_guilding = false;
 				{
-					// TODO:
+					for (auto kv_pair : m_guild_effects)
+					{
+						if (kv_pair.second->IsGuilding())
+						{
+							is_guilding = true;
+							break;
+						}
+					}
 				}
-				if (is_using)
+				if (is_guilding)
 					break;
 
 				m_state = NetProto::ESS_Lasting;
@@ -221,12 +229,20 @@ namespace GameLogic
 
 	bool Skill::CanCancel()
 	{
-		if (NetProto::ESS_Using == m_state)
+		bool ret = true;
+		if (NetProto::ESS_Guilding == m_state)
 		{
-			// TODO:
-			return false;
+			bool can_cancel = true;
+			for (auto kv_pair : m_guild_effects)
+			{
+				if (!kv_pair.second->CanCancelGuild())
+				{
+					ret = false;
+					break;
+				}
+			}
 		}
-		return true;
+		return ret;
 	}
 
 	void Skill::SyncClient()
@@ -245,6 +261,23 @@ namespace GameLogic
 			msg->set_stage((NetProto::ESkillState)this->GetStage());
 		}
 		return std::move(SyncClientMsg(NetProto::PID_SceneUnitSkillAction, msg));
+	}
+
+	void Skill::AddGuildEffect(std::shared_ptr<EffectBase> effect)
+	{
+		if (nullptr == effect || effect->GetKey() <= 0)
+			return;
+		m_guild_effects.insert_or_assign(effect->GetKey(), effect);
+	}
+
+	void Skill::RemoveGuildEffect(uint64_t effect_key)
+	{
+		m_guild_effects.erase(effect_key);
+	}
+
+	void Skill::ClearGuildEffects()
+	{
+		m_guild_effects.clear();
 	}
 
 	bool Skill::CheckCanCast()
