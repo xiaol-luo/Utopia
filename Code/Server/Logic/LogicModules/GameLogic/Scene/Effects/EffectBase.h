@@ -15,7 +15,7 @@ namespace GameLogic
 	class EffectBase : public std::enable_shared_from_this<EffectBase>
 	{
 	public:
-		EffectBase(EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key);
+		EffectBase(const EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key);
 		virtual ~EffectBase();
 
 		uint64_t GetKey() { return m_effect_key; }

@@ -7,11 +7,12 @@
 namespace GameLogic
 {
 	class EffectBase;
+	class SceneEffects;
 
 	class EffectConfigBase
 	{
 	public:
-		virtual std::shared_ptr<EffectBase> CreateEffect() const = 0;
+		virtual std::shared_ptr<EffectBase> CreateEffect(SceneEffects *scene_effects, uint64_t effect_key) const = 0;
 		const EffectIdVec & GetBeginEffectIds() const { return m_begin_effect_ids; }
 		const EndEffectIdVec & GetEndEffectIds() const { return m_end_effect_ids; }
 		const TimeLineEffectIdsConfig & GetLoopEffectIds() const { return m_loop_effect_cfg; }

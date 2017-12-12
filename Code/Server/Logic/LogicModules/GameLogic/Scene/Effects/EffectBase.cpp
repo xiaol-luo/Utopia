@@ -7,7 +7,7 @@
 
 namespace GameLogic
 {
-	EffectBase::EffectBase(EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key)
+	EffectBase::EffectBase(const EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key)
 	{
 		assert(cfg && scene_effects);
 		m_cfg = cfg;

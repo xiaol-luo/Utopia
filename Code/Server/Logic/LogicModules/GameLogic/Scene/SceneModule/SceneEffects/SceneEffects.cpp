@@ -20,7 +20,10 @@ namespace GameLogic
 		EffectConfigMgr *cfg_mgr = this->GetScene()->GetCfg()->effect_cfg_mgr;
 		const EffectConfigBase *cfg = cfg_mgr->GetCfg(effect_id);
 		if (nullptr != cfg)
-			return cfg->CreateEffect();
+		{
+			0 == ++m_last_effect_key ? m_last_effect_key = 1 : 0;
+			return cfg->CreateEffect(this, m_last_effect_key);
+		}
 		return nullptr;
 	}
 	bool SceneEffects::AddEffect(std::shared_ptr<EffectBase> effect)
