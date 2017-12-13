@@ -12,7 +12,7 @@ namespace Config
         std::string name;
         bool is_normal_attack = 0 ;
         int use_way = 0 ;
-        int target_case = 0 ;
+        std::vector<int> target_case;
 
         using ConfigCheckFunc = bool(*)(CsvSkillConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

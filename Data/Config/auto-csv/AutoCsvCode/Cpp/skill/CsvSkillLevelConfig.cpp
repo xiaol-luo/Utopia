@@ -12,6 +12,7 @@ namespace Config
      static const char * Field_Name_cd = "cd";
      static const char * Field_Name_cast_distance = "cast_distance";
      static const char * Field_Name_can_move = "can_move";
+     static const char * Field_Name_effect_ids = "effect_ids";
 
     bool CsvSkillLevelConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
@@ -25,6 +26,7 @@ namespace Config
         all_ok = all_ok && kvPairs.count(Field_Name_cd) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_cd], cd);
         all_ok = all_ok && kvPairs.count(Field_Name_cast_distance) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_cast_distance], cast_distance);
         all_ok = all_ok && kvPairs.count(Field_Name_can_move) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_can_move], can_move);
+        all_ok = all_ok && kvPairs.count(Field_Name_effect_ids) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_effect_ids], effect_ids);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -40,7 +42,7 @@ namespace Config
 
     bool CsvSkillLevelConfigSet::Load(std::string file_path)
     {
-        io::CSVReader<9, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
+        io::CSVReader<10, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
             Field_Name_level,
@@ -50,7 +52,8 @@ namespace Config
             Field_Name_comsume_mp,
             Field_Name_cd,
             Field_Name_cast_distance,
-            Field_Name_can_move
+            Field_Name_can_move,
+            Field_Name_effect_ids
             );
 
         std::map<std::string, std::string> kvParis;
@@ -63,6 +66,7 @@ namespace Config
         kvParis[Field_Name_cd] = "";
         kvParis[Field_Name_cast_distance] = "";
         kvParis[Field_Name_can_move] = "";
+        kvParis[Field_Name_effect_ids] = "";
 
         bool all_ok = true;
         int curr_row = 0;
@@ -75,7 +79,8 @@ namespace Config
             kvParis[Field_Name_comsume_mp],
             kvParis[Field_Name_cd],
             kvParis[Field_Name_cast_distance],
-            kvParis[Field_Name_can_move]
+            kvParis[Field_Name_can_move],
+            kvParis[Field_Name_effect_ids]
             ))
         {            
             if (++ curr_row <= 1)

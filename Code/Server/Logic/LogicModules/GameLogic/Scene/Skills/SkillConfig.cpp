@@ -42,8 +42,11 @@ namespace GameLogic
 			skill_cfg->name = csv_skill->name;
 			skill_cfg->is_normal_attack = csv_skill->is_normal_attack;
 			skill_cfg->use_way = (NetProto::ESkillUseWay)csv_skill->use_way;
-			skill_cfg->target_case = (NetProto::ESkillEffectCase)csv_skill->target_case;
-
+			for (int target_case : csv_skill->target_case)
+			{
+				skill_cfg->target_case |= 1 << target_case;
+			}
+			
 			for (Config::CsvSkillLevelConfig *csv_lvl : kv_pair.second)
 			{
 				assert(csv_lvl->level <= SkillConfig::MAX_SKILL_LEVEL);
@@ -61,6 +64,7 @@ namespace GameLogic
 				lvl_cfg->releasing_span = csv_lvl->releasing_span;
 				lvl_cfg->lasting_span = csv_lvl->lasting_span;
 				lvl_cfg->can_move = csv_lvl->can_move;
+				lvl_cfg->release_effect_ids = csv_lvl->effect_ids;
 			}
 
 			skills.insert(std::make_pair(skill_cfg->id, skill_cfg));

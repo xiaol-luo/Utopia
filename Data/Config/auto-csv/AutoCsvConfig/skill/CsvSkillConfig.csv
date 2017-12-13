@@ -1,9 +1,9 @@
 id,name,is_normal_attack,use_way,target_case
-int;key,string,bool,int,int
-11,red_normal_attack,1,0,2
-12,red_magic_skill,0,1,0
-21,blue_normal_attack,1,0,2
-22,blue_magic_skill,0,2,1
+int;key,string,bool,int,[int]
+11,red_normal_attack,1,0,1;2
+12,red_magic_skill,0,1,1;2
+21,blue_normal_attack,1,0,1;2
+22,blue_magic_skill,0,2,1;2
 ,,,,
 ,,,,
 ,,,,

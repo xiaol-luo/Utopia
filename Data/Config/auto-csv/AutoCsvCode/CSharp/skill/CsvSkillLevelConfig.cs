@@ -16,6 +16,7 @@ namespace Config
         public const string Field_Name_cd = "cd";
         public const string Field_Name_cast_distance = "cast_distance";
         public const string Field_Name_can_move = "can_move";
+        public const string Field_Name_effect_ids = "effect_ids";
     }
 
     public class CsvSkillLevelConfig
@@ -29,6 +30,7 @@ namespace Config
         public int cd;
         public float cast_distance;
         public bool can_move;
+        public List<int> effect_ids = new List<int>();
 
         public delegate bool ConfigCheckFunc(CsvSkillLevelConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -43,6 +45,7 @@ namespace Config
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_cd) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_cd], ref cd);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_cast_distance) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_cast_distance], ref cast_distance);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_can_move) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_can_move], ref can_move);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillLevelConfig.Field_Name_effect_ids) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvSkillLevelConfig.Field_Name_effect_ids], ref effect_ids);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -77,6 +80,7 @@ namespace Config
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillLevelConfig.Field_Name_cd));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillLevelConfig.Field_Name_cast_distance));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillLevelConfig.Field_Name_can_move));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillLevelConfig.Field_Name_effect_ids));
                 }
                 catch (Exception e)
                 {

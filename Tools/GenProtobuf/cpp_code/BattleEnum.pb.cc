@@ -116,16 +116,13 @@ void AddDescriptorsImpl() {
       "\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*^\n\014ESkill"
       "UseWay\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESkil"
       "lTarget_Direction\020\001\022\031\n\025ESkillTarget_Posi"
-      "tion\020\002*\355\001\n\020ESkillEffectCase\022\031\n\025ESkillTar"
-      "getCase_Self\020\000\022\033\n\027ESkillTargetCase_Frien"
-      "d\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002\022\036\n\032ESkil"
-      "lTargetCase_SelfEnemy\020\003\022&\n\"ESkillTargetC"
-      "ase_FriendExcludeSelf\020\004\022#\n\037ESkillTargetC"
-      "ase_AllExcludeSelf\020\005\022\030\n\024ESkillTargetCase"
-      "_All\020\006B\003\370\001\001b\006proto3"
+      "tion\020\002*f\n\020ESkillEffectCase\022\031\n\025ESkillTarg"
+      "etCase_Self\020\000\022\033\n\027ESkillTargetCase_Friend"
+      "\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002B\003\370\001\001b\006pro"
+      "to3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1699);
+      descriptor, 1563);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -329,10 +326,6 @@ bool ESkillEffectCase_IsValid(int value) {
     case 0:
     case 1:
     case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
       return true;
     default:
       return false;

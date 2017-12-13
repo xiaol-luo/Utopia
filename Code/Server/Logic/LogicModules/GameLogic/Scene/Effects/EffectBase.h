@@ -19,7 +19,7 @@ namespace GameLogic
 		virtual ~EffectBase();
 
 		uint64_t GetKey() { return m_effect_key; }
-		const EffectConfigBase * GetCfg() { return m_cfg; }
+		const EffectConfigBase * GetCfg() { return m_base_cfg; }
 		std::shared_ptr<Skill> GetSkill() { return m_skill; }
 
 		void Begin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir);
@@ -40,6 +40,9 @@ namespace GameLogic
 		virtual void OnLateBegin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir) {}
 		virtual void OnLateEnd(EEffectEndCase end_case) {}
 		virtual void OnLateLoop(int64_t now_ms, int64_t delta_ms) {}
+		virtual bool IsDone();
+		void FireLoopEffects(int64_t elaspe_ms);
+		bool IsLoopEffectsDone();
 
 	protected:
 		uint64_t m_effect_key = 0;
@@ -47,7 +50,7 @@ namespace GameLogic
 		EEffectStage m_stage = EEffectStage_Wait;
 		size_t m_next_loop_effect_idx = 0;
 		SceneEffects *m_scene_effects = nullptr;
-		const EffectConfigBase *m_cfg = nullptr;
+		const EffectConfigBase *m_base_cfg = nullptr;
 		NewScene *m_scene = nullptr;
 		std::shared_ptr<Skill> m_skill = nullptr;
 		uint64_t m_target_suid = 0;

@@ -17,6 +17,7 @@ namespace Config
         int cd = 0 ;
         float cast_distance = 0 ;
         bool can_move = 0 ;
+        std::vector<int> effect_ids;
 
         using ConfigCheckFunc = bool(*)(CsvSkillLevelConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

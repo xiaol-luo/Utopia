@@ -11,6 +11,7 @@
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Effects/EffectBase.h"
+#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace GameLogic
 {
@@ -324,6 +325,14 @@ namespace GameLogic
 	{
 		// ÉèÖÃcd
 		m_last_release_ms = this->GetLogicMs();
+
+		for (int effect_id : m_lvl_cfg->release_effect_ids)
+		{
+			SceneEffects *ses = m_su_skills->GetScene()->GetModule<SceneEffects>();
+			std::shared_ptr<EffectBase> effect = ses->CreateEffect(effect_id);
+			if (nullptr != effect)
+				effect->Begin(this->shared_from_this(), m_target_suid, m_pos, m_dir);
+		}
 	}
 
 	void Skill::End()

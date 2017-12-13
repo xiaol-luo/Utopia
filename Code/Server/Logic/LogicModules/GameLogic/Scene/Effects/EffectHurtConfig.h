@@ -13,7 +13,7 @@ namespace GameLogic
 
 	public:
 		void SetHurt(int val) { m_hurt = val; }
-		int GetHurt() { return m_hurt; }
+		int GetHurt() const { return m_hurt; }
 	protected:
 		int m_hurt = 0;
 	};

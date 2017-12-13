@@ -26,6 +26,7 @@ namespace GameLogic
 		int releasing_span = 0;
 		int lasting_span = 0;
 		bool can_move = false;
+		std::vector<int> release_effect_ids;
 	};
 
 	struct SkillConfig
@@ -36,7 +37,7 @@ namespace GameLogic
 		std::string name;
 		bool is_normal_attack = false;
 		NetProto::ESkillUseWay use_way;
-		NetProto::ESkillEffectCase target_case;
+		int target_case;
 		int max_level = -1;
 		SkillLevelConfig *level_cfgs[MAX_SKILL_LEVEL + 1];
 

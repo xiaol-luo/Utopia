@@ -25,6 +25,8 @@ namespace GameLogic
 			cfg->SetReversible(false);
 			assert(item->value > 0);
 			cfg->SetHurt(item->value);
+			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
+			assert(ret.second);
 		}
 
 		return true;

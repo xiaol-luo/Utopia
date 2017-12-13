@@ -12,6 +12,12 @@ namespace GameLogic
 		delete m_event_proxy; m_event_proxy = nullptr;
 		m_owner = nullptr;
 	}
+	NewScene * SceneUnitModule::GetScene()
+	{
+		if (nullptr != m_owner)
+			return m_owner->GetScene();
+		return nullptr;
+	}
 	uint64_t GameLogic::SceneUnitModule::GetId()
 	{
 		if (nullptr == m_owner)

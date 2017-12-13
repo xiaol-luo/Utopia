@@ -51,5 +51,56 @@ namespace GameLogic
 		EEffectType_Attr,
 		EEffectType_ForceMove,
 	};
+
+	enum EEffectFilterAnchor
+	{
+		EEffectAnchor_Pos,
+		EEffectAnchor_SceneUnit,
+	};
+
+	enum EEffectFilterShape
+	{
+		EffectFilterShape_None = 0,
+		EEffectFilterShape_Circle,
+		EEffectFilterShape_Rect,
+		EEffectFilterShape_Sector,
+	};
+
+	union EffectFilterShapeParam
+	{
+		 struct circle
+		 {
+			 float radius = 0;
+			 int max_su_count = 0;
+		 };
+
+		 struct rect
+		 {
+			 float length = 0;
+			 float width = 0;
+			 int max_su_count = 0;
+		 };
+
+		 struct sector
+		 {
+			 float angles = 0;
+			 int max_su_count = 0;
+		 };
+	};
+
+	enum EEffectFilterRelation
+	{
+		EEffectFilterRelation_Self = 0,
+		EEffectFilterRelation_Friend,
+		EEffectFilterRelation_Enemy,
+	};
+
+	struct EffectFilterOption
+	{
+		EEffectFilterAnchor anchor = EEffectAnchor_Pos;
+		EEffectFilterShape shape = EffectFilterShape_None;
+		EffectFilterShapeParam shape_param;
+		int filter_relation;
+	};
 }
 

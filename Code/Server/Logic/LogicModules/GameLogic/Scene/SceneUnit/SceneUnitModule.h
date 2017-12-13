@@ -18,6 +18,7 @@ namespace GameLogic
 		virtual ~SceneUnitModule();
 
 		inline std::shared_ptr<SceneUnit> GetOwner() { return m_owner; }
+		NewScene * GetScene();
 		inline ESceneUnitModule GetModuleName() { return m_module_name; }
 		template <typename T>
 		std::shared_ptr<T> GetSharedPtr()

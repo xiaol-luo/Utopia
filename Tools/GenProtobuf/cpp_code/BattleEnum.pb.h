@@ -292,16 +292,12 @@ enum ESkillEffectCase {
   ESkillTargetCase_Self = 0,
   ESkillTargetCase_Friend = 1,
   ESkillTargetCase_Enemy = 2,
-  ESkillTargetCase_SelfEnemy = 3,
-  ESkillTargetCase_FriendExcludeSelf = 4,
-  ESkillTargetCase_AllExcludeSelf = 5,
-  ESkillTargetCase_All = 6,
   ESkillEffectCase_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESkillEffectCase_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ESkillEffectCase_IsValid(int value);
 const ESkillEffectCase ESkillEffectCase_MIN = ESkillTargetCase_Self;
-const ESkillEffectCase ESkillEffectCase_MAX = ESkillTargetCase_All;
+const ESkillEffectCase ESkillEffectCase_MAX = ESkillTargetCase_Enemy;
 const int ESkillEffectCase_ARRAYSIZE = ESkillEffectCase_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ESkillEffectCase_descriptor();

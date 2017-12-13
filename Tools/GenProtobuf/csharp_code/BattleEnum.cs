@@ -54,12 +54,9 @@ namespace NetProto {
             "DEVTU19HdWlsZGluZxADEg8KC0VTU19MYXN0aW5nEAQSCwoHRVNTX0VuZBAF",
             "Kl4KDEVTa2lsbFVzZVdheRIXChNFU2tpbGxUYXJnZXRfVGFyZ2V0EAASGgoW",
             "RVNraWxsVGFyZ2V0X0RpcmVjdGlvbhABEhkKFUVTa2lsbFRhcmdldF9Qb3Np",
-            "dGlvbhACKu0BChBFU2tpbGxFZmZlY3RDYXNlEhkKFUVTa2lsbFRhcmdldENh",
-            "c2VfU2VsZhAAEhsKF0VTa2lsbFRhcmdldENhc2VfRnJpZW5kEAESGgoWRVNr",
-            "aWxsVGFyZ2V0Q2FzZV9FbmVteRACEh4KGkVTa2lsbFRhcmdldENhc2VfU2Vs",
-            "ZkVuZW15EAMSJgoiRVNraWxsVGFyZ2V0Q2FzZV9GcmllbmRFeGNsdWRlU2Vs",
-            "ZhAEEiMKH0VTa2lsbFRhcmdldENhc2VfQWxsRXhjbHVkZVNlbGYQBRIYChRF",
-            "U2tpbGxUYXJnZXRDYXNlX0FsbBAGQgP4AQFiBnByb3RvMw=="));
+            "dGlvbhACKmYKEEVTa2lsbEVmZmVjdENhc2USGQoVRVNraWxsVGFyZ2V0Q2Fz",
+            "ZV9TZWxmEAASGwoXRVNraWxsVGFyZ2V0Q2FzZV9GcmllbmQQARIaChZFU2tp",
+            "bGxUYXJnZXRDYXNlX0VuZW15EAJCA/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
@@ -245,10 +242,6 @@ namespace NetProto {
     [pbr::OriginalName("ESkillTargetCase_Self")] EskillTargetCaseSelf = 0,
     [pbr::OriginalName("ESkillTargetCase_Friend")] EskillTargetCaseFriend = 1,
     [pbr::OriginalName("ESkillTargetCase_Enemy")] EskillTargetCaseEnemy = 2,
-    [pbr::OriginalName("ESkillTargetCase_SelfEnemy")] EskillTargetCaseSelfEnemy = 3,
-    [pbr::OriginalName("ESkillTargetCase_FriendExcludeSelf")] EskillTargetCaseFriendExcludeSelf = 4,
-    [pbr::OriginalName("ESkillTargetCase_AllExcludeSelf")] EskillTargetCaseAllExcludeSelf = 5,
-    [pbr::OriginalName("ESkillTargetCase_All")] EskillTargetCaseAll = 6,
   }
 
   #endregion

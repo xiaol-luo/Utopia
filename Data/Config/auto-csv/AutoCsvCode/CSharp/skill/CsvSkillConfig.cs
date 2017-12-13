@@ -20,7 +20,7 @@ namespace Config
         public string name = string.Empty;
         public bool is_normal_attack;
         public int use_way;
-        public int target_case;
+        public List<int> target_case = new List<int>();
 
         public delegate bool ConfigCheckFunc(CsvSkillConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -30,7 +30,7 @@ namespace Config
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvSkillConfig.Field_Name_name], ref name);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_is_normal_attack) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_is_normal_attack], ref is_normal_attack);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_use_way) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_use_way], ref use_way);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_case) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_case], ref target_case);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_case) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_case], ref target_case);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;

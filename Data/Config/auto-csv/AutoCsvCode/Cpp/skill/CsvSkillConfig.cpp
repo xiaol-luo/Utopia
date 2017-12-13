@@ -16,7 +16,7 @@ namespace Config
         all_ok = all_ok && kvPairs.count(Field_Name_name) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_name], name);
         all_ok = all_ok && kvPairs.count(Field_Name_is_normal_attack) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_is_normal_attack], is_normal_attack);
         all_ok = all_ok && kvPairs.count(Field_Name_use_way) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_use_way], use_way);
-        all_ok = all_ok && kvPairs.count(Field_Name_target_case) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_target_case], target_case);
+        all_ok = all_ok && kvPairs.count(Field_Name_target_case) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_target_case], target_case);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
