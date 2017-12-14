@@ -16,9 +16,9 @@ namespace GameLogic
 	{
 	}
 
-	void EffectHurt::OnBegin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir)
+	void EffectHurt::OnBegin(UseEffectParam use_effect_param)
 	{
-		std::shared_ptr<SceneUnit> target_su = m_scene->GetUnit(target_suid);
+		std::shared_ptr<SceneUnit> target_su = m_scene->GetUnit(use_effect_param.target_suid);
 		if (nullptr != target_su)
 		{
 			std::shared_ptr<SceneUnitFightParam> su_fp = target_su->GetModule<SceneUnitFightParam>();

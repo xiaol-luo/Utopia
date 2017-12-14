@@ -267,15 +267,16 @@ inline bool ESkillState_Parse(
     ESkillState_descriptor(), name, value);
 }
 enum ESkillUseWay {
-  ESkillTarget_Target = 0,
-  ESkillTarget_Direction = 1,
-  ESkillTarget_Position = 2,
+  ESkillUseWay_SceneUnit = 0,
+  ESkillUseWay_Direction = 1,
+  ESkillUseWay_Position = 2,
+  ESkillUseWay_PosAndDir = 3,
   ESkillUseWay_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESkillUseWay_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ESkillUseWay_IsValid(int value);
-const ESkillUseWay ESkillUseWay_MIN = ESkillTarget_Target;
-const ESkillUseWay ESkillUseWay_MAX = ESkillTarget_Position;
+const ESkillUseWay ESkillUseWay_MIN = ESkillUseWay_SceneUnit;
+const ESkillUseWay ESkillUseWay_MAX = ESkillUseWay_PosAndDir;
 const int ESkillUseWay_ARRAYSIZE = ESkillUseWay_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ESkillUseWay_descriptor();

@@ -52,11 +52,12 @@ namespace NetProto {
             "RVNraWxsQmFyX0V4dHJhEAEqdAoLRVNraWxsU3RhdGUSDwoLRVNTX1JlYWR5",
             "R28QABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNTX1JlbGVhc2luZxACEhAK",
             "DEVTU19HdWlsZGluZxADEg8KC0VTU19MYXN0aW5nEAQSCwoHRVNTX0VuZBAF",
-            "Kl4KDEVTa2lsbFVzZVdheRIXChNFU2tpbGxUYXJnZXRfVGFyZ2V0EAASGgoW",
-            "RVNraWxsVGFyZ2V0X0RpcmVjdGlvbhABEhkKFUVTa2lsbFRhcmdldF9Qb3Np",
-            "dGlvbhACKmYKEEVTa2lsbEVmZmVjdENhc2USGQoVRVNraWxsVGFyZ2V0Q2Fz",
-            "ZV9TZWxmEAASGwoXRVNraWxsVGFyZ2V0Q2FzZV9GcmllbmQQARIaChZFU2tp",
-            "bGxUYXJnZXRDYXNlX0VuZW15EAJCA/gBAWIGcHJvdG8z"));
+            "Kn0KDEVTa2lsbFVzZVdheRIaChZFU2tpbGxVc2VXYXlfU2NlbmVVbml0EAAS",
+            "GgoWRVNraWxsVXNlV2F5X0RpcmVjdGlvbhABEhkKFUVTa2lsbFVzZVdheV9Q",
+            "b3NpdGlvbhACEhoKFkVTa2lsbFVzZVdheV9Qb3NBbmREaXIQAypmChBFU2tp",
+            "bGxFZmZlY3RDYXNlEhkKFUVTa2lsbFRhcmdldENhc2VfU2VsZhAAEhsKF0VT",
+            "a2lsbFRhcmdldENhc2VfRnJpZW5kEAESGgoWRVNraWxsVGFyZ2V0Q2FzZV9F",
+            "bmVteRACQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
@@ -233,9 +234,10 @@ namespace NetProto {
   }
 
   public enum ESkillUseWay {
-    [pbr::OriginalName("ESkillTarget_Target")] EskillTargetTarget = 0,
-    [pbr::OriginalName("ESkillTarget_Direction")] EskillTargetDirection = 1,
-    [pbr::OriginalName("ESkillTarget_Position")] EskillTargetPosition = 2,
+    [pbr::OriginalName("ESkillUseWay_SceneUnit")] SceneUnit = 0,
+    [pbr::OriginalName("ESkillUseWay_Direction")] Direction = 1,
+    [pbr::OriginalName("ESkillUseWay_Position")] Position = 2,
+    [pbr::OriginalName("ESkillUseWay_PosAndDir")] PosAndDir = 3,
   }
 
   public enum ESkillEffectCase {

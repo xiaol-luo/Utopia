@@ -111,13 +111,13 @@ namespace GameLogic
 		su_move->CancelMove();
 	}
 
-	bool SceneHeroAction::UseSkill(int skill_id, uint64_t su_id, Vector2 _pos)
+	bool SceneHeroAction::UseSkill(int skill_id, uint64_t su_id, Vector2 _pos, float _dir)
 	{
 		if (!CancelSkill())
 			return false;
 
 		Vector3 pos = Vector3(_pos.x, 0, _pos.y);
-		m_use_skill_param.Reset();
+		m_using_skill = nullptr;
 		std::shared_ptr<SceneUnitSkills> su_skills = m_owner->GetModule<SceneUnitSkills>();
 		if (nullptr == su_skills)
 			return false;
@@ -132,10 +132,7 @@ namespace GameLogic
 		bool ret = skill->Begin();
 		if (ret)
 		{
-			m_use_skill_param.skill = skill;
-			m_use_skill_param.pos = pos;
-			m_use_skill_param.dir = dir;
-			m_use_skill_param.target_suid = su_id;
+			m_using_skill = skill;
 		}
 		return ret;
 	}
@@ -143,14 +140,16 @@ namespace GameLogic
 	bool SceneHeroAction::CancelSkill()
 	{
 		bool ret = false;
-		if (ret || nullptr == m_use_skill_param.skill)
+		if (ret || nullptr == m_using_skill)
 			ret = true;
-		if (ret || !m_use_skill_param.skill->IsRunning())
+		if (ret || ! m_using_skill->IsRunning())
 			ret = true;
-		if (ret || m_use_skill_param.skill->TryCancel())
+		if (ret || m_using_skill->TryCancel())
 			ret = true;
 		if (ret)
-			m_use_skill_param.Reset();
+		{
+			m_using_skill = nullptr;
+		}
 		return ret;
 	}
 
@@ -203,18 +202,18 @@ namespace GameLogic
 
 	void SceneHeroAction::ProcessUseSkill()
 	{
-		if (nullptr != m_use_skill_param.skill)
+		if (nullptr != m_using_skill)
 		{
-			m_use_skill_param.skill->HeartBeat();
+			m_using_skill->HeartBeat();
 		}
 	}
 
 	std::vector<SyncClientMsg> SceneHeroAction::CollectPBInit()
 	{
 		std::vector<SyncClientMsg> msgs;
-		if (nullptr != m_use_skill_param.skill)
+		if (nullptr != m_using_skill)
 		{
-			msgs.push_back(m_use_skill_param.skill->GetPbMsg());
+			msgs.push_back(m_using_skill->GetPbMsg());
 		}
 		return std::move(msgs);
 	}

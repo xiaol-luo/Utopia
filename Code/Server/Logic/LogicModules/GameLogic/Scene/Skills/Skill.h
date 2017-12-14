@@ -1,11 +1,10 @@
 #pragma once
 
 #include <memory>
-#include "Common/Geometry/Vector2.h"
-#include "Common/Geometry/Vector3.h"
 #include "Common/Utils/Ticker.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include "GameLogic/Scene/Defines/SceneDefine.h"
+#include "GameLogic/Scene/Defines/EffectDefine.h"
 
 namespace GameLogic
 {
@@ -58,11 +57,7 @@ namespace GameLogic
 		const SkillLevelConfig *m_lvl_cfg = nullptr;
 		uint64_t m_skill_key = 0;
 
-		void ResetParams();
-		uint64_t m_target_suid = 0;
-		std::weak_ptr<SceneUnit> m_target_su;
-		Vector3 m_pos;
-		Vector2 m_dir;
+		UseSkillParam m_use_skill_param;
 
 		std::unordered_map<uint64_t, std::shared_ptr<EffectBase>> m_guild_effects;
 		bool m_can_move = true;

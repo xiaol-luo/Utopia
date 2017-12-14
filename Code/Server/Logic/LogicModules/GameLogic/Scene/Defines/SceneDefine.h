@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <google/protobuf/message.h>
 #include "GameLogic/Scene/Defines/ViewDefine.h"
+#include "Common/Geometry/Vector2.h"
+#include "Common/Geometry/Vector3.h"
 
 namespace GameLogic
 {

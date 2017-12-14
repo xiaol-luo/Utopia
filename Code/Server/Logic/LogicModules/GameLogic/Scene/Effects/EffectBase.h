@@ -20,9 +20,9 @@ namespace GameLogic
 
 		uint64_t GetKey() { return m_effect_key; }
 		const EffectConfigBase * GetCfg() { return m_base_cfg; }
-		std::shared_ptr<Skill> GetSkill() { return m_skill; }
+		std::shared_ptr<Skill> GetSkill() { return m_user_effect_param.skill; }
 
-		void Begin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir);
+		void Begin(UseEffectParam use_effect_param);
 		void End(EEffectEndCase end_case);
 		void Loop(int64_t now_ms, int64_t delta_ms);
 
@@ -34,10 +34,10 @@ namespace GameLogic
 		virtual bool NeedGuild(); // 是否需要引导
 		// 是否可复原，true则执行完begin直接返回，不加入SceneEfffect，不执行Loop和end。用与heal和hurt等
 		virtual bool Reversible();
-		virtual void OnBegin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir) {}
+		virtual void OnBegin(UseEffectParam use_effect_param) {}
 		virtual void OnEnd(EEffectEndCase end_case) {}
 		virtual void OnLoop(int64_t now_ms, int64_t delta_ms) {}
-		virtual void OnLateBegin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir) {}
+		virtual void OnLateBegin(UseEffectParam use_effect_param) {}
 		virtual void OnLateEnd(EEffectEndCase end_case) {}
 		virtual void OnLateLoop(int64_t now_ms, int64_t delta_ms) {}
 		virtual bool IsDone();
@@ -52,9 +52,7 @@ namespace GameLogic
 		SceneEffects *m_scene_effects = nullptr;
 		const EffectConfigBase *m_base_cfg = nullptr;
 		NewScene *m_scene = nullptr;
-		std::shared_ptr<Skill> m_skill = nullptr;
-		uint64_t m_target_suid = 0;
-		Vector2 m_target_dir;
-		Vector3 m_target_pos;
+
+		UseEffectParam m_user_effect_param;
 	};
 }

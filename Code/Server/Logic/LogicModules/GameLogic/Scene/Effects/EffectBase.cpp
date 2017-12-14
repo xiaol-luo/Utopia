@@ -20,16 +20,14 @@ namespace GameLogic
 
 	EffectBase::~EffectBase()
 	{
+		m_user_effect_param.Reset();
 	}
 
-	void EffectBase::Begin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir)
+	void EffectBase::Begin(UseEffectParam use_effect_param)
 	{
 		assert(EEffectStage_Wait == m_stage);
-		assert(skill);
-		m_skill = skill;
-		m_target_suid = target_suid;
-		m_target_dir = dir;
-		m_target_pos = pos;
+		assert(use_effect_param.skill);
+		m_user_effect_param = use_effect_param;
 		m_stage = EEffectStage_Begin;
 		m_begin_ms = m_scene->GetLogicMs();
 
@@ -38,7 +36,7 @@ namespace GameLogic
 			m_scene_effects->AddEffect(this->shared_from_this());
 		}
 
-		this->OnBegin(m_skill, m_target_suid, m_target_pos, m_target_dir);
+		this->OnBegin(m_user_effect_param);
 		if (IsDone())
 			return;
 
@@ -48,16 +46,17 @@ namespace GameLogic
 			assert(begin_effect);
 			if (nullptr != begin_effect)
 			{
-				begin_effect->Begin(m_skill, m_target_suid, m_target_pos, m_target_dir);
+				begin_effect->Begin(m_user_effect_param);
 			}
 		}
-		this->OnLateBegin(skill, target_suid, pos, dir);
+		this->OnLateBegin(m_user_effect_param);
 		if (IsDone())
 			return;
 
 		if (this->NeedGuild())
 		{
-			skill->AddGuildEffect(this->shared_from_this());
+			assert(m_user_effect_param.skill);
+			m_user_effect_param.skill->AddGuildEffect(this->shared_from_this());
 		}
 	}
 
@@ -81,13 +80,14 @@ namespace GameLogic
 			assert(end_effect);
 			if (nullptr != end_effect)
 			{
-				end_effect->Begin(m_skill, m_target_suid, m_target_pos, m_target_dir);
+				end_effect->Begin(m_user_effect_param);
 			}
 		}
 		this->OnLateEnd(end_case);
 		m_stage = EEffectStage_End;
 
 		m_scene_effects->RemoveEffect(m_effect_key);
+		m_user_effect_param.Reset();
 	}
 
 	void EffectBase::Loop(int64_t now_ms, int64_t delta_ms)
@@ -168,7 +168,7 @@ namespace GameLogic
 			{
 				++m_next_loop_effect_idx;
 				std::shared_ptr<EffectBase> new_effect = m_scene_effects->CreateEffect(effect_id.id);
-				new_effect->Begin(m_skill, m_target_suid, m_target_pos, m_target_dir);
+				new_effect->Begin(m_user_effect_param);
 			}
 		}
 	}

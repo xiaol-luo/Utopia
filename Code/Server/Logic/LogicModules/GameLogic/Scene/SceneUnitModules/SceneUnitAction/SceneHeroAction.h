@@ -4,6 +4,7 @@
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/Vector3.h"
 #include "Common/Utils/Ticker.h"
+#include "GameLogic/Scene/Defines/EffectDefine.h"
 
 class AIHero;
 
@@ -28,7 +29,7 @@ namespace GameLogic
 		bool Trace(uint64_t suid, float allow_distance);
 		bool MoveTo(Vector3 pos, float allow_distance);
 		void CancelMove();
-		bool UseSkill(int skill_id, uint64_t su_id, Vector2 pos);
+		bool UseSkill(int skill_id, uint64_t su_id, Vector2 pos, float dir);
 		bool CancelSkill();
 
 	protected:
@@ -60,23 +61,7 @@ namespace GameLogic
 			bool first_check = true;
 		};
 		MoveParam m_move_param;
-
-		struct UseSkillParam
-		{
-			void Reset()
-			{
-				skill = nullptr;
-				target_suid = 0;
-				pos = Vector3::zero;
-				dir = Vector2::zero;
-			}
-
-			std::shared_ptr<Skill> skill;
-			uint64_t target_suid = 0;
-			Vector3 pos;
-			Vector2 dir;
-		};
-		UseSkillParam m_use_skill_param;
+		std::shared_ptr<Skill> m_using_skill = nullptr;
 
 	protected:
 		AIHero *m_bt_agent;

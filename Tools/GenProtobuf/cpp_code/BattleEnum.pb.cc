@@ -113,16 +113,16 @@ void AddDescriptorsImpl() {
       "r_Default\020\000\022\023\n\017ESkillBar_Extra\020\001*t\n\013ESki"
       "llState\022\017\n\013ESS_ReadyGo\020\000\022\021\n\rESS_Preparin"
       "g\020\001\022\021\n\rESS_Releasing\020\002\022\020\n\014ESS_Guilding\020\003"
-      "\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*^\n\014ESkill"
-      "UseWay\022\027\n\023ESkillTarget_Target\020\000\022\032\n\026ESkil"
-      "lTarget_Direction\020\001\022\031\n\025ESkillTarget_Posi"
-      "tion\020\002*f\n\020ESkillEffectCase\022\031\n\025ESkillTarg"
-      "etCase_Self\020\000\022\033\n\027ESkillTargetCase_Friend"
-      "\020\001\022\032\n\026ESkillTargetCase_Enemy\020\002B\003\370\001\001b\006pro"
-      "to3"
+      "\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*}\n\014ESkill"
+      "UseWay\022\032\n\026ESkillUseWay_SceneUnit\020\000\022\032\n\026ES"
+      "killUseWay_Direction\020\001\022\031\n\025ESkillUseWay_P"
+      "osition\020\002\022\032\n\026ESkillUseWay_PosAndDir\020\003*f\n"
+      "\020ESkillEffectCase\022\031\n\025ESkillTargetCase_Se"
+      "lf\020\000\022\033\n\027ESkillTargetCase_Friend\020\001\022\032\n\026ESk"
+      "illTargetCase_Enemy\020\002B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1563);
+      descriptor, 1594);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -311,6 +311,7 @@ bool ESkillUseWay_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;

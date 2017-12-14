@@ -242,7 +242,7 @@ namespace GameLogic
 			std::shared_ptr<SceneUnitSkills> su_skills = su_action->GetModule<SceneUnitSkills>();
 			std::shared_ptr<Skill> skill = su_skills->GetSlotActiveSkill(msg->skill_slot());
 			if (nullptr != skill)
-				su_action->UseSkill(skill->GetSkillId(), msg->target_id(), Vector2(msg->pos().x(), msg->pos().y()));
+				su_action->UseSkill(skill->GetSkillId(), msg->target_id(), Vector2(msg->pos().x(), msg->pos().y()), msg->dir());
 		}
 		break;
 

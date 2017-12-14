@@ -12,7 +12,7 @@ namespace GameLogic
 		virtual ~EffectHurt();
 
 	protected:
-		virtual void OnBegin(std::shared_ptr<Skill> skill, uint64_t target_suid, Vector3 pos, Vector2 dir);
+		virtual void OnBegin(UseEffectParam use_effect_param) override;
 		virtual bool IsDone() { return m_is_done; }
 	protected:
 		const EffectHurtConfig *m_cfg = nullptr;

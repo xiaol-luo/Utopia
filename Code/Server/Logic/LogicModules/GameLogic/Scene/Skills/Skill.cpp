@@ -52,32 +52,41 @@ namespace GameLogic
 
 	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)
 	{
-		this->ResetParams();
-		m_pos = m_su_skills->GetOwner()->GetTransform()->GetPos();
+		m_use_skill_param.Reset();
+		m_use_skill_param.pos = m_su_skills->GetOwner()->GetTransform()->GetPos();
 
 		switch (m_cfg->use_way)
 		{
-			case NetProto::ESkillTarget_Target:
+		case NetProto::ESkillUseWay_SceneUnit:
 			{		
 				std::shared_ptr<SceneUnit> target_su = m_su_skills->GetOwner()->GetScene()->GetUnit(target_suid);
 				if (nullptr != target_su)
 				{
-					m_target_suid = target_suid;
-					m_target_su = target_su;
-					m_pos = target_su->GetTransform()->GetPos();
-					m_dir = (m_pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+					m_use_skill_param.target_suid = target_suid;
+					m_use_skill_param.target_su = target_su;
+					m_use_skill_param.pos = target_su->GetTransform()->GetPos();
+					m_use_skill_param.dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+					m_use_skill_param.face_dir = m_use_skill_param.dir;
 				}
 			}
 			break;
-			case NetProto::ESkillTarget_Position:
+			case NetProto::ESkillUseWay_Position:
 			{
-				m_pos = pos;
-				m_dir = (m_pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+				m_use_skill_param.pos = pos;
+				m_use_skill_param.dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+				m_use_skill_param.face_dir = m_use_skill_param.dir;
+			}
+			case NetProto::ESkillUseWay_PosAndDir:
+			{
+				m_use_skill_param.pos = pos;
+				m_use_skill_param.dir = dir;
+				m_use_skill_param.face_dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
 			}
 			break;
-			case NetProto::ESkillTarget_Direction:
+			case NetProto::ESkillUseWay_Direction:
 			{
-				m_dir = dir;
+				m_use_skill_param.dir = dir;
+				m_use_skill_param.face_dir = dir;
 			}
 			break;
 		}
@@ -299,22 +308,23 @@ namespace GameLogic
 
 	void Skill::SetFaceDir()
 	{
-		Vector2 face_dir = m_dir;
+		Vector2 face_dir = m_use_skill_param.face_dir;
 
 		switch (m_cfg->use_way)
 		{
-			case NetProto::ESkillTarget_Target:
+			case NetProto::ESkillUseWay_SceneUnit:
 			{
-				std::shared_ptr<SceneUnit> target_su =  m_target_su.lock();
+				std::shared_ptr<SceneUnit> target_su =  m_use_skill_param.target_su.lock();
 				if (nullptr != target_su)
 				{
 					face_dir = (target_su->GetTransform()->GetPos() - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
 				}
 			}
 			break;
-			case NetProto::ESkillTarget_Position:
+			case NetProto::ESkillUseWay_Position:
+			case NetProto::ESkillUseWay_PosAndDir:
 			{
-				face_dir = (m_pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
+				face_dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).xz();
 			}
 			break;
 		}
@@ -331,13 +341,20 @@ namespace GameLogic
 			SceneEffects *ses = m_su_skills->GetScene()->GetModule<SceneEffects>();
 			std::shared_ptr<EffectBase> effect = ses->CreateEffect(effect_id);
 			if (nullptr != effect)
-				effect->Begin(this->shared_from_this(), m_target_suid, m_pos, m_dir);
+			{
+				UseEffectParam use_param;
+				use_param.skill = this->shared_from_this();
+				use_param.dir = m_use_skill_param.dir;
+				use_param.pos = m_use_skill_param.pos;
+				use_param.target_suid = m_use_skill_param.target_suid;
+				effect->Begin(use_param);
+			}
 		}
 	}
 
 	void Skill::End()
 	{
-		this->ResetParams();
+		m_use_skill_param.Reset();
 		m_state = NetProto::ESS_End;
 		m_stage_begin_ms = LONG_MAX;
 		Vector2 face_dir = m_su_skills->GetOwner()->GetTransform()->GetFaceDir();
@@ -347,13 +364,7 @@ namespace GameLogic
 			m_su_skills->GetModule<SceneUnitFightParam>()->DeattachState(NetProto::EFP_Immobilized);
 		this->SyncClient();
 	}
-	void Skill::ResetParams()
-	{
-		m_target_suid = 0;
-		m_target_su.reset();
-		m_dir = Vector2::zero;
-		m_pos = Vector3::zero;
-	}
+
 	int64_t Skill::GetLogicMs(int64_t delta_ms)
 	{
 		int64_t ret = m_su_skills->GetOwner()->GetScene()->GetLogicMs() + delta_ms;

@@ -107,9 +107,10 @@ enum ESkillState
 
 enum ESkillUseWay
 {
-	ESkillTarget_Target = 0;
-	ESkillTarget_Direction = 1;
-	ESkillTarget_Position = 2;
+	ESkillUseWay_SceneUnit = 0;
+	ESkillUseWay_Direction = 1;
+	ESkillUseWay_Position = 2;
+	ESkillUseWay_PosAndDir = 3;
 }
 
 enum ESkillEffectCase
