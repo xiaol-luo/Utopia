@@ -117,13 +117,14 @@ void AddDescriptorsImpl() {
       "*}\n\014ESkillUseWay\022\032\n\026ESkillUseWay_SceneUn"
       "it\020\000\022\032\n\026ESkillUseWay_Direction\020\001\022\031\n\025ESki"
       "llUseWay_Position\020\002\022\032\n\026ESkillUseWay_PosA"
-      "ndDir\020\003*\201\001\n\020ESkillEffectCase\022\031\n\025ESkillEf"
-      "fectCase_None\020\000\022\031\n\025ESkillEffectCase_Self"
-      "\020\001\022\033\n\027ESkillEffectCase_Friend\020\002\022\032\n\026ESkil"
-      "lEffectCase_Enemy\020\003B\003\370\001\001b\006proto3"
+      "ndDir\020\003*\213\001\n\022ESceneUnitRelation\022\033\n\027EScene"
+      "UnitRelation_None\020\000\022\033\n\027ESceneUnitRelatio"
+      "n_Self\020\001\022\035\n\031ESceneUnitRelation_Friend\020\002\022"
+      "\034\n\030ESceneUnitRelation_Enemy\020\003B\003\370\001\001b\006prot"
+      "o3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1632);
+      descriptor, 1642);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -320,11 +321,11 @@ bool ESkillUseWay_IsValid(int value) {
   }
 }
 
-const ::google::protobuf::EnumDescriptor* ESkillEffectCase_descriptor() {
+const ::google::protobuf::EnumDescriptor* ESceneUnitRelation_descriptor() {
   protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[9];
 }
-bool ESkillEffectCase_IsValid(int value) {
+bool ESceneUnitRelation_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:

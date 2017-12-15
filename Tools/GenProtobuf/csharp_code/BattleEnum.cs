@@ -55,13 +55,13 @@ namespace NetProto {
             "B0VTU19FbmQQBSp9CgxFU2tpbGxVc2VXYXkSGgoWRVNraWxsVXNlV2F5X1Nj",
             "ZW5lVW5pdBAAEhoKFkVTa2lsbFVzZVdheV9EaXJlY3Rpb24QARIZChVFU2tp",
             "bGxVc2VXYXlfUG9zaXRpb24QAhIaChZFU2tpbGxVc2VXYXlfUG9zQW5kRGly",
-            "EAMqgQEKEEVTa2lsbEVmZmVjdENhc2USGQoVRVNraWxsRWZmZWN0Q2FzZV9O",
-            "b25lEAASGQoVRVNraWxsRWZmZWN0Q2FzZV9TZWxmEAESGwoXRVNraWxsRWZm",
-            "ZWN0Q2FzZV9GcmllbmQQAhIaChZFU2tpbGxFZmZlY3RDYXNlX0VuZW15EANC",
-            "A/gBAWIGcHJvdG8z"));
+            "EAMqiwEKEkVTY2VuZVVuaXRSZWxhdGlvbhIbChdFU2NlbmVVbml0UmVsYXRp",
+            "b25fTm9uZRAAEhsKF0VTY2VuZVVuaXRSZWxhdGlvbl9TZWxmEAESHQoZRVNj",
+            "ZW5lVW5pdFJlbGF0aW9uX0ZyaWVuZBACEhwKGEVTY2VuZVVuaXRSZWxhdGlv",
+            "bl9FbmVteRADQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESceneUnitRelation), }, null));
     }
     #endregion
 
@@ -245,11 +245,11 @@ namespace NetProto {
     [pbr::OriginalName("ESkillUseWay_PosAndDir")] PosAndDir = 3,
   }
 
-  public enum ESkillEffectCase {
-    [pbr::OriginalName("ESkillEffectCase_None")] None = 0,
-    [pbr::OriginalName("ESkillEffectCase_Self")] Self = 1,
-    [pbr::OriginalName("ESkillEffectCase_Friend")] Friend = 2,
-    [pbr::OriginalName("ESkillEffectCase_Enemy")] Enemy = 3,
+  public enum ESceneUnitRelation {
+    [pbr::OriginalName("ESceneUnitRelation_None")] None = 0,
+    [pbr::OriginalName("ESceneUnitRelation_Self")] Self = 1,
+    [pbr::OriginalName("ESceneUnitRelation_Friend")] Friend = 2,
+    [pbr::OriginalName("ESceneUnitRelation_Enemy")] Enemy = 3,
   }
 
   #endregion

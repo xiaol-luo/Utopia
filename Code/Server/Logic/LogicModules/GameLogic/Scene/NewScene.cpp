@@ -511,18 +511,18 @@ namespace GameLogic
 		}
 	}
 
-	NetProto::ESkillEffectCase NewScene::SceneUnitRelation(std::shared_ptr<SceneUnit> one, std::shared_ptr<SceneUnit> another)
+	NetProto::ESceneUnitRelation NewScene::SceneUnitRelation(std::shared_ptr<SceneUnit> one, std::shared_ptr<SceneUnit> another)
 	{
 		if (nullptr == one || nullptr == another)
-			return NetProto::ESkillEffectCase_None;
+			return NetProto::ESceneUnitRelation_None;
 
 		if (one->GetId() == another->GetId())
 		{
-			return NetProto::ESkillEffectCase_Self;
+			return NetProto::ESceneUnitRelation_Self;
 		}
 		else
 		{
-			return NetProto::ESkillEffectCase_Enemy;
+			return NetProto::ESceneUnitRelation_Enemy;
 		}
 	}
 }

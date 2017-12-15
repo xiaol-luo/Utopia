@@ -310,17 +310,17 @@ namespace GameLogic
 				return false;
 
 			bool ret = false;
-			if (!ret && m_cfg->target_case & 1 << NetProto::ESkillEffectCase_Self)
+			if (!ret && m_cfg->target_case & 1 << NetProto::ESceneUnitRelation_Self)
 			{
-				ret |= NetProto::ESkillEffectCase_Self == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+				ret |= NetProto::ESceneUnitRelation_Self == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
 			}
-			if (!ret && m_cfg->target_case & 1 << NetProto::ESkillEffectCase_Friend)
+			if (!ret && m_cfg->target_case & 1 << NetProto::ESceneUnitRelation_Friend)
 			{
-				ret |= NetProto::ESkillEffectCase_Friend == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+				ret |= NetProto::ESceneUnitRelation_Friend == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
 			}
-			if (!ret && m_cfg->target_case & 1 << NetProto::ESkillEffectCase_Enemy)
+			if (!ret && m_cfg->target_case & 1 << NetProto::ESceneUnitRelation_Enemy)
 			{
-				ret |= NetProto::ESkillEffectCase_Enemy == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+				ret |= NetProto::ESceneUnitRelation_Enemy == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
 			}
 			if (!ret)
 				return false;

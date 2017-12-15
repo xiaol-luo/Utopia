@@ -114,12 +114,12 @@ enum ESkillUseWay
 	ESkillUseWay_PosAndDir = 3;
 }
 
-enum ESkillEffectCase
+enum ESceneUnitRelation
 {
-	ESkillEffectCase_None = 0;
-	ESkillEffectCase_Self = 1;
-	ESkillEffectCase_Friend = 2;
-	ESkillEffectCase_Enemy = 3;
+	ESceneUnitRelation_None = 0;
+	ESceneUnitRelation_Self = 1;
+	ESceneUnitRelation_Friend = 2;
+	ESceneUnitRelation_Enemy = 3;
 }
 
 

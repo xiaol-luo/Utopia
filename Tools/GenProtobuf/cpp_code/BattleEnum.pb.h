@@ -290,28 +290,28 @@ inline bool ESkillUseWay_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESkillUseWay>(
     ESkillUseWay_descriptor(), name, value);
 }
-enum ESkillEffectCase {
-  ESkillEffectCase_None = 0,
-  ESkillEffectCase_Self = 1,
-  ESkillEffectCase_Friend = 2,
-  ESkillEffectCase_Enemy = 3,
-  ESkillEffectCase_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  ESkillEffectCase_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum ESceneUnitRelation {
+  ESceneUnitRelation_None = 0,
+  ESceneUnitRelation_Self = 1,
+  ESceneUnitRelation_Friend = 2,
+  ESceneUnitRelation_Enemy = 3,
+  ESceneUnitRelation_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESceneUnitRelation_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool ESkillEffectCase_IsValid(int value);
-const ESkillEffectCase ESkillEffectCase_MIN = ESkillEffectCase_None;
-const ESkillEffectCase ESkillEffectCase_MAX = ESkillEffectCase_Enemy;
-const int ESkillEffectCase_ARRAYSIZE = ESkillEffectCase_MAX + 1;
+bool ESceneUnitRelation_IsValid(int value);
+const ESceneUnitRelation ESceneUnitRelation_MIN = ESceneUnitRelation_None;
+const ESceneUnitRelation ESceneUnitRelation_MAX = ESceneUnitRelation_Enemy;
+const int ESceneUnitRelation_ARRAYSIZE = ESceneUnitRelation_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* ESkillEffectCase_descriptor();
-inline const ::std::string& ESkillEffectCase_Name(ESkillEffectCase value) {
+const ::google::protobuf::EnumDescriptor* ESceneUnitRelation_descriptor();
+inline const ::std::string& ESceneUnitRelation_Name(ESceneUnitRelation value) {
   return ::google::protobuf::internal::NameOfEnum(
-    ESkillEffectCase_descriptor(), value);
+    ESceneUnitRelation_descriptor(), value);
 }
-inline bool ESkillEffectCase_Parse(
-    const ::std::string& name, ESkillEffectCase* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<ESkillEffectCase>(
-    ESkillEffectCase_descriptor(), name, value);
+inline bool ESceneUnitRelation_Parse(
+    const ::std::string& name, ESceneUnitRelation* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESceneUnitRelation>(
+    ESceneUnitRelation_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -384,10 +384,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillUseWay>() {
   return ::NetProto::ESkillUseWay_descriptor();
 }
-template <> struct is_proto_enum< ::NetProto::ESkillEffectCase> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::NetProto::ESceneUnitRelation> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESkillEffectCase>() {
-  return ::NetProto::ESkillEffectCase_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESceneUnitRelation>() {
+  return ::NetProto::ESceneUnitRelation_descriptor();
 }
 
 }  // namespace protobuf
