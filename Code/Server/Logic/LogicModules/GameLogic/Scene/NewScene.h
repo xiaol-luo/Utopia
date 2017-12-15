@@ -8,6 +8,7 @@
 #include "GameLogic/Scene/Defines/ViewDefine.h"
 #include "Common/Define/NetworkDefine.h"
 #include "Common/Geometry/Vector3.h"
+#include "Network/Protobuf/BattleEnum.pb.h"
 
 class EventDispacher;
 
@@ -133,5 +134,8 @@ namespace GameLogic
 		// msg logic
 		std::shared_ptr<SceneUnit> red_su = nullptr;
 		std::shared_ptr<SceneUnit> blue_su = nullptr;
+
+	public:
+		NetProto::ESkillEffectCase SceneUnitRelation(std::shared_ptr<SceneUnit> one, std::shared_ptr<SceneUnit> another);
 	};
 }

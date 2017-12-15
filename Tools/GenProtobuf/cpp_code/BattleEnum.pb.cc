@@ -94,35 +94,36 @@ void AddDescriptorsImpl() {
       "\013EPO_Invalid\020\000\022\014\n\010EPO_Stop\020\001\022\014\n\010EPO_Move"
       "\020\002\022\016\n\nEPO_Follow\020\003\022\014\n\010EPO_Hunt\020\004\022\021\n\rEPO_"
       "CastSkill\020\005\022\017\n\013EPO_UseItem\020\006\022\r\n\tEPO_Trac"
-      "e\020\007\022\020\n\014EBO_MaxCount\020 *\332\002\n\013EFightParam\022\014\n"
+      "e\020\007\022\020\n\014EBO_MaxCount\020 *\344\002\n\013EFightParam\022\014\n"
       "\010EFP_None\020\000\022\n\n\006EFP_HP\020\001\022\n\n\006EFP_MP\020\002\022\r\n\tE"
       "FP_MaxHP\020\t\022\r\n\tEFP_MaxMP\020\n\022\021\n\rEFP_MoveSpe"
       "ed\020\013\022\022\n\016EFP_AttackDist\020\014\022\023\n\017EFP_AttackSp"
       "eed\020\r\022\021\n\rEFP_PhyAttack\020\016\022\023\n\017EFP_MagicAtt"
       "ack\020\017\022\017\n\013EFP_PhyHurt\020\020\022\021\n\rEFP_MagicHurt\020"
       "\021\022\022\n\016EFP_PhyDefense\020\022\022\024\n\020EFP_MagicDefens"
-      "e\020\023\022\021\n\rEFP_Dizziness\020\024\022\017\n\013EFP_Silence\020\025\022"
-      "\r\n\tEFP_Blind\020\026\022\023\n\017EFP_Immobilized\020\027\022\r\n\tE"
-      "FP_COUNT\020 *\362\001\n\nESkillSlot\022\r\n\tESS_QSlot\020\000"
-      "\022\r\n\tESS_WSlot\020\001\022\r\n\tESS_ESlot\020\002\022\r\n\tESS_RS"
-      "lot\020\003\022\r\n\tESS_FSlot\020\004\022\r\n\tESS_GSlot\020\005\022\r\n\tE"
-      "SS_PSlot\020\006\022\017\n\013ESS_OneSlot\020\013\022\017\n\013ESS_TwoSl"
-      "ot\020\014\022\021\n\rESS_ThreeSlot\020\r\022\020\n\014ESS_FourSlot\020"
-      "\016\022\020\n\014ESS_FiveSlot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\r"
-      "ESS_SevenSlot\020\021*7\n\tESkillBar\022\025\n\021ESkillBa"
-      "r_Default\020\000\022\023\n\017ESkillBar_Extra\020\001*t\n\013ESki"
-      "llState\022\017\n\013ESS_ReadyGo\020\000\022\021\n\rESS_Preparin"
-      "g\020\001\022\021\n\rESS_Releasing\020\002\022\020\n\014ESS_Guilding\020\003"
-      "\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*}\n\014ESkill"
-      "UseWay\022\032\n\026ESkillUseWay_SceneUnit\020\000\022\032\n\026ES"
-      "killUseWay_Direction\020\001\022\031\n\025ESkillUseWay_P"
-      "osition\020\002\022\032\n\026ESkillUseWay_PosAndDir\020\003*f\n"
-      "\020ESkillEffectCase\022\031\n\025ESkillTargetCase_Se"
-      "lf\020\000\022\033\n\027ESkillTargetCase_Friend\020\001\022\032\n\026ESk"
-      "illTargetCase_Enemy\020\002B\003\370\001\001b\006proto3"
+      "e\020\023\022\r\n\tEFP_Dizzy\020\024\022\017\n\013EFP_Silence\020\025\022\r\n\tE"
+      "FP_Blind\020\026\022\023\n\017EFP_Immobilized\020\027\022\014\n\010EFP_D"
+      "ead\020\030\022\r\n\tEFP_COUNT\020 *\362\001\n\nESkillSlot\022\r\n\tE"
+      "SS_QSlot\020\000\022\r\n\tESS_WSlot\020\001\022\r\n\tESS_ESlot\020\002"
+      "\022\r\n\tESS_RSlot\020\003\022\r\n\tESS_FSlot\020\004\022\r\n\tESS_GS"
+      "lot\020\005\022\r\n\tESS_PSlot\020\006\022\017\n\013ESS_OneSlot\020\013\022\017\n"
+      "\013ESS_TwoSlot\020\014\022\021\n\rESS_ThreeSlot\020\r\022\020\n\014ESS"
+      "_FourSlot\020\016\022\020\n\014ESS_FiveSlot\020\017\022\017\n\013ESS_Six"
+      "Slot\020\020\022\021\n\rESS_SevenSlot\020\021*7\n\tESkillBar\022\025"
+      "\n\021ESkillBar_Default\020\000\022\023\n\017ESkillBar_Extra"
+      "\020\001*t\n\013ESkillState\022\017\n\013ESS_ReadyGo\020\000\022\021\n\rES"
+      "S_Preparing\020\001\022\021\n\rESS_Releasing\020\002\022\020\n\014ESS_"
+      "Guilding\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005"
+      "*}\n\014ESkillUseWay\022\032\n\026ESkillUseWay_SceneUn"
+      "it\020\000\022\032\n\026ESkillUseWay_Direction\020\001\022\031\n\025ESki"
+      "llUseWay_Position\020\002\022\032\n\026ESkillUseWay_PosA"
+      "ndDir\020\003*\201\001\n\020ESkillEffectCase\022\031\n\025ESkillEf"
+      "fectCase_None\020\000\022\031\n\025ESkillEffectCase_Self"
+      "\020\001\022\033\n\027ESkillEffectCase_Friend\020\002\022\032\n\026ESkil"
+      "lEffectCase_Enemy\020\003B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1594);
+      descriptor, 1632);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -237,6 +238,7 @@ bool EFightParam_IsValid(int value) {
     case 21:
     case 22:
     case 23:
+    case 24:
     case 32:
       return true;
     default:
@@ -327,6 +329,7 @@ bool ESkillEffectCase_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;

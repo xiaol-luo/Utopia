@@ -29,7 +29,7 @@ namespace GameLogic
 		std::shared_ptr<SceneUnitFightParam> sufp = sum->GetModule<SceneUnitFightParam>();
 		if (nullptr == sufp)
 			return false;
-		if (sufp->IsStateActive(NetProto::EFP_Immobilized) || sufp->IsStateActive(NetProto::EFP_Dizziness))
+		if (sufp->IsStateActive(NetProto::EFP_Immobilized) || sufp->IsStateActive(NetProto::EFP_Dizzy))
 			return true;
 		return false;
 	}

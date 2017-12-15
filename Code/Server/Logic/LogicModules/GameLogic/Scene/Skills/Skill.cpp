@@ -300,8 +300,31 @@ namespace GameLogic
 		
 		if (su_fp->GetMp() < m_lvl_cfg->consume_mp)
 			return false;
-		if (su_fp->IsStateActive(NetProto::EFP_Silence) || su_fp->IsStateActive(NetProto::EFP_Dizziness))
+		if (su_fp->IsSilence()|| su_fp->IsDizzy() || su_fp->IsDead())
 			return false;
+
+		if (NetProto::ESkillUseWay_SceneUnit == m_cfg->use_way)
+		{
+			std::shared_ptr<SceneUnit> target_su = m_use_skill_param.target_su.lock();
+			if (nullptr == target_su)
+				return false;
+
+			bool ret = false;
+			if (!ret && m_cfg->target_case & 1 << NetProto::ESkillEffectCase_Self)
+			{
+				ret |= NetProto::ESkillEffectCase_Self == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+			}
+			if (!ret && m_cfg->target_case & 1 << NetProto::ESkillEffectCase_Friend)
+			{
+				ret |= NetProto::ESkillEffectCase_Friend == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+			}
+			if (!ret && m_cfg->target_case & 1 << NetProto::ESkillEffectCase_Enemy)
+			{
+				ret |= NetProto::ESkillEffectCase_Enemy == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+			}
+			if (!ret)
+				return false;
+		}
 
 		return true;
 	}

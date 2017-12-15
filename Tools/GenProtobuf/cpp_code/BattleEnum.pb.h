@@ -164,10 +164,11 @@ enum EFightParam {
   EFP_MagicHurt = 17,
   EFP_PhyDefense = 18,
   EFP_MagicDefense = 19,
-  EFP_Dizziness = 20,
+  EFP_Dizzy = 20,
   EFP_Silence = 21,
   EFP_Blind = 22,
   EFP_Immobilized = 23,
+  EFP_Dead = 24,
   EFP_COUNT = 32,
   EFightParam_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   EFightParam_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
@@ -290,15 +291,16 @@ inline bool ESkillUseWay_Parse(
     ESkillUseWay_descriptor(), name, value);
 }
 enum ESkillEffectCase {
-  ESkillTargetCase_Self = 0,
-  ESkillTargetCase_Friend = 1,
-  ESkillTargetCase_Enemy = 2,
+  ESkillEffectCase_None = 0,
+  ESkillEffectCase_Self = 1,
+  ESkillEffectCase_Friend = 2,
+  ESkillEffectCase_Enemy = 3,
   ESkillEffectCase_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   ESkillEffectCase_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ESkillEffectCase_IsValid(int value);
-const ESkillEffectCase ESkillEffectCase_MIN = ESkillTargetCase_Self;
-const ESkillEffectCase ESkillEffectCase_MAX = ESkillTargetCase_Enemy;
+const ESkillEffectCase ESkillEffectCase_MIN = ESkillEffectCase_None;
+const ESkillEffectCase ESkillEffectCase_MAX = ESkillEffectCase_Enemy;
 const int ESkillEffectCase_ARRAYSIZE = ESkillEffectCase_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* ESkillEffectCase_descriptor();

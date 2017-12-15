@@ -306,7 +306,7 @@ namespace GameLogic
 
 		// 下面的是状态 限制base_value为0， 由extra_value来控制状态起效
 		{
-			FightParam *fp = DefaultFightParameter(NetProto::EFP_Dizziness, 0, 0, 0, 0, 0);
+			FightParam *fp = DefaultFightParameter(NetProto::EFP_Dizzy, 0, 0, 0, 0, 0);
 			assert(nullptr == m_params[fp->GetFightParam()]);
 			m_params[fp->GetFightParam()] = fp;
 			fp->SetBaseValueMax(INT_MAX);
@@ -321,6 +321,13 @@ namespace GameLogic
 		}
 		{
 			FightParam *fp = DefaultFightParameter(NetProto::EFP_Blind, 0, 0, 0, 0, 0);
+			assert(nullptr == m_params[fp->GetFightParam()]);
+			m_params[fp->GetFightParam()] = fp;
+			fp->SetBaseValueMax(INT_MAX);
+			fp->SetBaseValueMin(0);
+		}
+		{
+			FightParam *fp = DefaultFightParameter(NetProto::EFP_Dead, 0, 0, 0, 0, 0);
 			assert(nullptr == m_params[fp->GetFightParam()]);
 			m_params[fp->GetFightParam()] = fp;
 			fp->SetBaseValueMax(INT_MAX);
@@ -402,9 +409,10 @@ namespace GameLogic
 		bool ret = false;
 		switch (efp)
 		{
-		case NetProto::EFP_Dizziness:
+		case NetProto::EFP_Dizzy:
 		case NetProto::EFP_Immobilized:
 		case NetProto::EFP_Blind:
+		case NetProto::EFP_Dead:
 		case NetProto::EFP_Silence:
 			ret = true;
 			break;
@@ -424,7 +432,7 @@ namespace GameLogic
 
 		switch (efp)
 		{
-		case NetProto::EFP_Dizziness:
+		case NetProto::EFP_Dizzy:
 			this->GetEvProxy()->Fire(ESU_DizzinessChange, attach_state);
 			break;
 		case NetProto::EFP_Immobilized:
@@ -435,6 +443,9 @@ namespace GameLogic
 			break;
 		case NetProto::EFP_Silence:
 			this->GetEvProxy()->Fire(ESU_SilenceChange, attach_state);
+			break;
+		case NetProto::EFP_Dead:
+			this->GetEvProxy()->Fire(ESU_DeadChange, attach_state);
 			break;
 		}
 	}

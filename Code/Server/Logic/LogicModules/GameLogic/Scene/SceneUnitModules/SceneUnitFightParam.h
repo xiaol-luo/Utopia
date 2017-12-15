@@ -43,6 +43,10 @@ namespace GameLogic
 		void AttachState(NetProto::EFightParam efp);
 		void DeattachState(NetProto::EFightParam efp);
 		bool IsStateActive(NetProto::EFightParam efp);
+		bool IsDead() { return this->IsStateActive(NetProto::EFP_Dead); }
+		bool IsBlind() { return this->IsStateActive(NetProto::EFP_Blind); }
+		bool IsDizzy() { return this->IsStateActive(NetProto::EFP_Dizzy); }
+		bool IsSilence() { return this->IsStateActive(NetProto::EFP_Silence); }
 
 	protected:
 		FightParam *m_params[NetProto::EFP_COUNT];

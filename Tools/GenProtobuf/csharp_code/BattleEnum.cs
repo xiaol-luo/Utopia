@@ -34,30 +34,31 @@ namespace NetProto {
             "YXRlX0ZvcmNlTW92ZRADKp4BCgxFUGxheWVyT3BlcmESDwoLRVBPX0ludmFs",
             "aWQQABIMCghFUE9fU3RvcBABEgwKCEVQT19Nb3ZlEAISDgoKRVBPX0ZvbGxv",
             "dxADEgwKCEVQT19IdW50EAQSEQoNRVBPX0Nhc3RTa2lsbBAFEg8KC0VQT19V",
-            "c2VJdGVtEAYSDQoJRVBPX1RyYWNlEAcSEAoMRUJPX01heENvdW50ECAq2gIK",
+            "c2VJdGVtEAYSDQoJRVBPX1RyYWNlEAcSEAoMRUJPX01heENvdW50ECAq5AIK",
             "C0VGaWdodFBhcmFtEgwKCEVGUF9Ob25lEAASCgoGRUZQX0hQEAESCgoGRUZQ",
             "X01QEAISDQoJRUZQX01heEhQEAkSDQoJRUZQX01heE1QEAoSEQoNRUZQX01v",
             "dmVTcGVlZBALEhIKDkVGUF9BdHRhY2tEaXN0EAwSEwoPRUZQX0F0dGFja1Nw",
             "ZWVkEA0SEQoNRUZQX1BoeUF0dGFjaxAOEhMKD0VGUF9NYWdpY0F0dGFjaxAP",
             "Eg8KC0VGUF9QaHlIdXJ0EBASEQoNRUZQX01hZ2ljSHVydBAREhIKDkVGUF9Q",
-            "aHlEZWZlbnNlEBISFAoQRUZQX01hZ2ljRGVmZW5zZRATEhEKDUVGUF9EaXp6",
-            "aW5lc3MQFBIPCgtFRlBfU2lsZW5jZRAVEg0KCUVGUF9CbGluZBAWEhMKD0VG",
-            "UF9JbW1vYmlsaXplZBAXEg0KCUVGUF9DT1VOVBAgKvIBCgpFU2tpbGxTbG90",
-            "Eg0KCUVTU19RU2xvdBAAEg0KCUVTU19XU2xvdBABEg0KCUVTU19FU2xvdBAC",
-            "Eg0KCUVTU19SU2xvdBADEg0KCUVTU19GU2xvdBAEEg0KCUVTU19HU2xvdBAF",
-            "Eg0KCUVTU19QU2xvdBAGEg8KC0VTU19PbmVTbG90EAsSDwoLRVNTX1R3b1Ns",
-            "b3QQDBIRCg1FU1NfVGhyZWVTbG90EA0SEAoMRVNTX0ZvdXJTbG90EA4SEAoM",
-            "RVNTX0ZpdmVTbG90EA8SDwoLRVNTX1NpeFNsb3QQEBIRCg1FU1NfU2V2ZW5T",
-            "bG90EBEqNwoJRVNraWxsQmFyEhUKEUVTa2lsbEJhcl9EZWZhdWx0EAASEwoP",
-            "RVNraWxsQmFyX0V4dHJhEAEqdAoLRVNraWxsU3RhdGUSDwoLRVNTX1JlYWR5",
-            "R28QABIRCg1FU1NfUHJlcGFyaW5nEAESEQoNRVNTX1JlbGVhc2luZxACEhAK",
-            "DEVTU19HdWlsZGluZxADEg8KC0VTU19MYXN0aW5nEAQSCwoHRVNTX0VuZBAF",
-            "Kn0KDEVTa2lsbFVzZVdheRIaChZFU2tpbGxVc2VXYXlfU2NlbmVVbml0EAAS",
-            "GgoWRVNraWxsVXNlV2F5X0RpcmVjdGlvbhABEhkKFUVTa2lsbFVzZVdheV9Q",
-            "b3NpdGlvbhACEhoKFkVTa2lsbFVzZVdheV9Qb3NBbmREaXIQAypmChBFU2tp",
-            "bGxFZmZlY3RDYXNlEhkKFUVTa2lsbFRhcmdldENhc2VfU2VsZhAAEhsKF0VT",
-            "a2lsbFRhcmdldENhc2VfRnJpZW5kEAESGgoWRVNraWxsVGFyZ2V0Q2FzZV9F",
-            "bmVteRACQgP4AQFiBnByb3RvMw=="));
+            "aHlEZWZlbnNlEBISFAoQRUZQX01hZ2ljRGVmZW5zZRATEg0KCUVGUF9EaXp6",
+            "eRAUEg8KC0VGUF9TaWxlbmNlEBUSDQoJRUZQX0JsaW5kEBYSEwoPRUZQX0lt",
+            "bW9iaWxpemVkEBcSDAoIRUZQX0RlYWQQGBINCglFRlBfQ09VTlQQICryAQoK",
+            "RVNraWxsU2xvdBINCglFU1NfUVNsb3QQABINCglFU1NfV1Nsb3QQARINCglF",
+            "U1NfRVNsb3QQAhINCglFU1NfUlNsb3QQAxINCglFU1NfRlNsb3QQBBINCglF",
+            "U1NfR1Nsb3QQBRINCglFU1NfUFNsb3QQBhIPCgtFU1NfT25lU2xvdBALEg8K",
+            "C0VTU19Ud29TbG90EAwSEQoNRVNTX1RocmVlU2xvdBANEhAKDEVTU19Gb3Vy",
+            "U2xvdBAOEhAKDEVTU19GaXZlU2xvdBAPEg8KC0VTU19TaXhTbG90EBASEQoN",
+            "RVNTX1NldmVuU2xvdBARKjcKCUVTa2lsbEJhchIVChFFU2tpbGxCYXJfRGVm",
+            "YXVsdBAAEhMKD0VTa2lsbEJhcl9FeHRyYRABKnQKC0VTa2lsbFN0YXRlEg8K",
+            "C0VTU19SZWFkeUdvEAASEQoNRVNTX1ByZXBhcmluZxABEhEKDUVTU19SZWxl",
+            "YXNpbmcQAhIQCgxFU1NfR3VpbGRpbmcQAxIPCgtFU1NfTGFzdGluZxAEEgsK",
+            "B0VTU19FbmQQBSp9CgxFU2tpbGxVc2VXYXkSGgoWRVNraWxsVXNlV2F5X1Nj",
+            "ZW5lVW5pdBAAEhoKFkVTa2lsbFVzZVdheV9EaXJlY3Rpb24QARIZChVFU2tp",
+            "bGxVc2VXYXlfUG9zaXRpb24QAhIaChZFU2tpbGxVc2VXYXlfUG9zQW5kRGly",
+            "EAMqgQEKEEVTa2lsbEVmZmVjdENhc2USGQoVRVNraWxsRWZmZWN0Q2FzZV9O",
+            "b25lEAASGQoVRVNraWxsRWZmZWN0Q2FzZV9TZWxmEAESGwoXRVNraWxsRWZm",
+            "ZWN0Q2FzZV9GcmllbmQQAhIaChZFU2tpbGxFZmZlY3RDYXNlX0VuZW15EANC",
+            "A/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESkillEffectCase), }, null));
@@ -159,7 +160,7 @@ namespace NetProto {
     /// <summary>
     /// 眩晕
     /// </summary>
-    [pbr::OriginalName("EFP_Dizziness")] EfpDizziness = 20,
+    [pbr::OriginalName("EFP_Dizzy")] EfpDizzy = 20,
     /// <summary>
     /// 沉默
     /// </summary>
@@ -172,6 +173,10 @@ namespace NetProto {
     /// 定身
     /// </summary>
     [pbr::OriginalName("EFP_Immobilized")] EfpImmobilized = 23,
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    [pbr::OriginalName("EFP_Dead")] EfpDead = 24,
     [pbr::OriginalName("EFP_COUNT")] EfpCount = 32,
   }
 
@@ -241,9 +246,10 @@ namespace NetProto {
   }
 
   public enum ESkillEffectCase {
-    [pbr::OriginalName("ESkillTargetCase_Self")] EskillTargetCaseSelf = 0,
-    [pbr::OriginalName("ESkillTargetCase_Friend")] EskillTargetCaseFriend = 1,
-    [pbr::OriginalName("ESkillTargetCase_Enemy")] EskillTargetCaseEnemy = 2,
+    [pbr::OriginalName("ESkillEffectCase_None")] None = 0,
+    [pbr::OriginalName("ESkillEffectCase_Self")] Self = 1,
+    [pbr::OriginalName("ESkillEffectCase_Friend")] Friend = 2,
+    [pbr::OriginalName("ESkillEffectCase_Enemy")] Enemy = 3,
   }
 
   #endregion

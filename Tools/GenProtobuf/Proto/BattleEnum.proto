@@ -63,10 +63,11 @@ enum EFightParam
 	EFP_PhyDefense = 18;		// 物抗
 	EFP_MagicDefense = 19;		// 魔抗
 	
-	EFP_Dizziness = 20;			// 眩晕
+	EFP_Dizzy = 20;			// 眩晕
 	EFP_Silence = 21;			// 沉默
 	EFP_Blind = 22;				// 致盲
 	EFP_Immobilized = 23;		// 定身
+	EFP_Dead = 24;				// 死亡
 	
 	EFP_COUNT = 32;
 }
@@ -115,9 +116,10 @@ enum ESkillUseWay
 
 enum ESkillEffectCase
 {
-	ESkillTargetCase_Self = 0;
-	ESkillTargetCase_Friend = 1;
-	ESkillTargetCase_Enemy = 2;
+	ESkillEffectCase_None = 0;
+	ESkillEffectCase_Self = 1;
+	ESkillEffectCase_Friend = 2;
+	ESkillEffectCase_Enemy = 3;
 }
 
 
