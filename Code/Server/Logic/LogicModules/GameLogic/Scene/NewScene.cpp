@@ -520,9 +520,14 @@ namespace GameLogic
 		{
 			return NetProto::ESceneUnitRelation_Self;
 		}
-		else
+
+		NetProto::ESceneUnitCamp one_camp = one->GetCamp();
+		NetProto::ESceneUnitCamp another_camp = another->GetCamp();
+		if (NetProto::ESceneUnitCamp_Neutral == one_camp || NetProto::ESceneUnitCamp_Neutral == another_camp)
 		{
-			return NetProto::ESceneUnitRelation_Enemy;
+			return NetProto::ESceneUnitRelation_None;
 		}
+
+		return one_camp == another_camp ? NetProto::ESceneUnitRelation_Friend : NetProto::ESceneUnitRelation_Enemy;
 	}
 }

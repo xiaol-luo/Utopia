@@ -122,4 +122,22 @@ enum ESceneUnitRelation
 	ESceneUnitRelation_Enemy = 3;
 }
 
+enum ESceneUnitCamp
+{
+	ESceneUnitCamp_Red = 0;
+	ESceneUnitCamp_Blue = 1;
+	ESceneUnitCamp_Monster = 2;
+	ESceneUnitCamp_Neutral = 3;	// 中立的
+}
+
+enum ESceneUnitType
+{
+	EsceneUnitType_Unknown = 0;
+	EsceneUnitType_Hero = 1;
+	EsceneUnitType_Soldier = 2;
+	EsceneUnitType_Monster = 3;
+	EsceneUnitType_Building = 4;
+	EsceneUnitType_Effect = 5;	// 用于展示effect效果的，比如子弹、技能预警
+}
+
 

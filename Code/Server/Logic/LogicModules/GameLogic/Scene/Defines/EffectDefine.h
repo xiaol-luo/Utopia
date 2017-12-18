@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/Vector3.h"
 
@@ -139,6 +140,8 @@ namespace GameLogic
 		EEffectFilterShape shape = EffectFilterShape_None;
 		EffectFilterShapeParam shape_param;
 		int filter_relation;
+		int max_num;
+		std::unordered_set<uint64_t> exclude_suids;
 	};
 }
 

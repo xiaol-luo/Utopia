@@ -3,6 +3,7 @@
 #include <memory>
 #include "GameLogic/Scene/Defines/SceneDefine.h"
 #include <assert.h>
+#include "Network/Protobuf/BattleEnum.pb.h"
 
 class EventDispacher;
 class EventDispacherProxy;
@@ -57,8 +58,10 @@ namespace GameLogic
 		void SetPlayerId(uint64_t player_id) { m_player_id = player_id; }
 		int GetModelId() { return m_model_id; }
 		void SetModelId(int val) { m_model_id = val; }
-		int GetUnitType() { return m_unit_type; }
-		void SetUnitType(int unit_type) { m_unit_type = unit_type; }
+		NetProto::ESceneUnitType GetUnitType() { return m_unit_type; }
+		void SetUnitType(NetProto::ESceneUnitType unit_type) { m_unit_type = unit_type; }
+		NetProto::ESceneUnitCamp GetCamp() { return m_camp; }
+		void SetCamp(NetProto::ESceneUnitCamp val) { m_camp = val; }
 		std::vector<SyncClientMsg> CollectPBInit();
 		std::vector<SyncClientMsg> CollectPbMutable();
 
@@ -67,7 +70,8 @@ namespace GameLogic
 		NewScene *m_scene = nullptr;
 		uint64_t m_id = 0;
 		uint64_t m_player_id = 0;
-		int m_unit_type = 0;
+		NetProto::ESceneUnitType m_unit_type = NetProto::EsceneUnitType_Unknown;
+		NetProto::ESceneUnitCamp m_camp = NetProto::ESceneUnitCamp_Neutral;
 		int m_model_id = 0;
 		
 		bool m_inited = false;

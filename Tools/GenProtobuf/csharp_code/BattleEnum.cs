@@ -58,10 +58,17 @@ namespace NetProto {
             "EAMqiwEKEkVTY2VuZVVuaXRSZWxhdGlvbhIbChdFU2NlbmVVbml0UmVsYXRp",
             "b25fTm9uZRAAEhsKF0VTY2VuZVVuaXRSZWxhdGlvbl9TZWxmEAESHQoZRVNj",
             "ZW5lVW5pdFJlbGF0aW9uX0ZyaWVuZBACEhwKGEVTY2VuZVVuaXRSZWxhdGlv",
-            "bl9FbmVteRADQgP4AQFiBnByb3RvMw=="));
+            "bl9FbmVteRADKnkKDkVTY2VuZVVuaXRDYW1wEhYKEkVTY2VuZVVuaXRDYW1w",
+            "X1JlZBAAEhcKE0VTY2VuZVVuaXRDYW1wX0JsdWUQARIaChZFU2NlbmVVbml0",
+            "Q2FtcF9Nb25zdGVyEAISGgoWRVNjZW5lVW5pdENhbXBfTmV1dHJhbBADKrUB",
+            "Cg5FU2NlbmVVbml0VHlwZRIaChZFc2NlbmVVbml0VHlwZV9Vbmtub3duEAAS",
+            "FwoTRXNjZW5lVW5pdFR5cGVfSGVybxABEhoKFkVzY2VuZVVuaXRUeXBlX1Nv",
+            "bGRpZXIQAhIaChZFc2NlbmVVbml0VHlwZV9Nb25zdGVyEAMSGwoXRXNjZW5l",
+            "VW5pdFR5cGVfQnVpbGRpbmcQBBIZChVFc2NlbmVVbml0VHlwZV9FZmZlY3QQ",
+            "BUID+AEBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESceneUnitRelation), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESceneUnitRelation), typeof(global::NetProto.ESceneUnitCamp), typeof(global::NetProto.ESceneUnitType), }, null));
     }
     #endregion
 
@@ -250,6 +257,28 @@ namespace NetProto {
     [pbr::OriginalName("ESceneUnitRelation_Self")] Self = 1,
     [pbr::OriginalName("ESceneUnitRelation_Friend")] Friend = 2,
     [pbr::OriginalName("ESceneUnitRelation_Enemy")] Enemy = 3,
+  }
+
+  public enum ESceneUnitCamp {
+    [pbr::OriginalName("ESceneUnitCamp_Red")] Red = 0,
+    [pbr::OriginalName("ESceneUnitCamp_Blue")] Blue = 1,
+    [pbr::OriginalName("ESceneUnitCamp_Monster")] Monster = 2,
+    /// <summary>
+    /// 中立的
+    /// </summary>
+    [pbr::OriginalName("ESceneUnitCamp_Neutral")] Neutral = 3,
+  }
+
+  public enum ESceneUnitType {
+    [pbr::OriginalName("EsceneUnitType_Unknown")] Unknown = 0,
+    [pbr::OriginalName("EsceneUnitType_Hero")] Hero = 1,
+    [pbr::OriginalName("EsceneUnitType_Soldier")] Soldier = 2,
+    [pbr::OriginalName("EsceneUnitType_Monster")] Monster = 3,
+    [pbr::OriginalName("EsceneUnitType_Building")] Building = 4,
+    /// <summary>
+    /// 用于展示effect效果的，比如子弹、技能预警
+    /// </summary>
+    [pbr::OriginalName("EsceneUnitType_Effect")] Effect = 5,
   }
 
   #endregion

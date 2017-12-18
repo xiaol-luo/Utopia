@@ -12,6 +12,7 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Effects/EffectBase.h"
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
 {
@@ -308,22 +309,39 @@ namespace GameLogic
 			std::shared_ptr<SceneUnit> target_su = m_use_skill_param.target_su.lock();
 			if (nullptr == target_su)
 				return false;
+			if (!(m_cfg->target_types & 1 << target_su->GetUnitType()))
+				return false;
 
 			bool ret = false;
-			if (!ret && m_cfg->target_case & 1 << NetProto::ESceneUnitRelation_Self)
+			if (!ret && m_cfg->target_relations & 1 << NetProto::ESceneUnitRelation_Self)
 			{
 				ret |= NetProto::ESceneUnitRelation_Self == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
 			}
-			if (!ret && m_cfg->target_case & 1 << NetProto::ESceneUnitRelation_Friend)
+			if (!ret && m_cfg->target_relations & 1 << NetProto::ESceneUnitRelation_Friend)
 			{
 				ret |= NetProto::ESceneUnitRelation_Friend == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
 			}
-			if (!ret && m_cfg->target_case & 1 << NetProto::ESceneUnitRelation_Enemy)
+			if (!ret && m_cfg->target_relations & 1 << NetProto::ESceneUnitRelation_Enemy)
 			{
 				ret |= NetProto::ESceneUnitRelation_Enemy == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
 			}
 			if (!ret)
 				return false;
+
+			if (target_su->GetId() != m_su_skills->GetOwner()->GetId())
+			{
+				if (!GeometryUtils::InFlatDistance(target_su->GetTransform()->GetPos(), m_su_skills->GetOwner()->GetTransform()->GetPos(), m_lvl_cfg->cast_distance))
+				{
+					return false;
+				}
+			}
+		}
+		else if (NetProto::ESkillUseWay_PosAndDir == m_cfg->use_way || NetProto::ESkillUseWay_PosAndDir == m_cfg->use_way)
+		{
+			if (!GeometryUtils::InFlatDistance(m_use_skill_param.pos, m_su_skills->GetOwner()->GetTransform()->GetPos(), m_lvl_cfg->cast_distance))
+			{
+				return false;
+			}
 		}
 
 		return true;

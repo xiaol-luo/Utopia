@@ -19,6 +19,7 @@ namespace GameLogic
 		ESceneModule_Move,
 		ESceneModule_View,
 		ESceneModule_Effects,
+		ESceneModule_UnitFilter,
 
 		ESceneModule_Count,
 	};

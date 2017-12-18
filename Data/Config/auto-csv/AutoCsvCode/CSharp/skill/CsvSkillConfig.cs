@@ -11,7 +11,8 @@ namespace Config
         public const string Field_Name_name = "name";
         public const string Field_Name_is_normal_attack = "is_normal_attack";
         public const string Field_Name_use_way = "use_way";
-        public const string Field_Name_target_case = "target_case";
+        public const string Field_Name_target_relations = "target_relations";
+        public const string Field_Name_target_types = "target_types";
     }
 
     public class CsvSkillConfig
@@ -20,7 +21,8 @@ namespace Config
         public string name = string.Empty;
         public bool is_normal_attack;
         public int use_way;
-        public List<int> target_case = new List<int>();
+        public List<int> target_relations = new List<int>();
+        public List<int> target_types = new List<int>();
 
         public delegate bool ConfigCheckFunc(CsvSkillConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -30,7 +32,8 @@ namespace Config
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvSkillConfig.Field_Name_name], ref name);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_is_normal_attack) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_is_normal_attack], ref is_normal_attack);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_use_way) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvSkillConfig.Field_Name_use_way], ref use_way);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_case) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_case], ref target_case);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_relations) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_relations], ref target_relations);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvSkillConfig.Field_Name_target_types) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvSkillConfig.Field_Name_target_types], ref target_types);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -60,7 +63,8 @@ namespace Config
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillConfig.Field_Name_name));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillConfig.Field_Name_is_normal_attack));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillConfig.Field_Name_use_way));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillConfig.Field_Name_target_case));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillConfig.Field_Name_target_relations));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvSkillConfig.Field_Name_target_types));
                 }
                 catch (Exception e)
                 {

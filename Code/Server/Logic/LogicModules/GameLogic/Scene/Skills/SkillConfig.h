@@ -37,7 +37,8 @@ namespace GameLogic
 		std::string name;
 		bool is_normal_attack = false;
 		NetProto::ESkillUseWay use_way;
-		int target_case;
+		int target_relations = 0;
+		int target_types = 0;
 		int max_level = -1;
 		SkillLevelConfig *level_cfgs[MAX_SKILL_LEVEL + 1];
 

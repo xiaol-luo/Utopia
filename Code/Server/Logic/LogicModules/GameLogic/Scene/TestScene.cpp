@@ -19,6 +19,8 @@
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"
+#include "Network/Protobuf/Battle.pb.h"
 
 namespace GameLogic
 {
@@ -49,6 +51,7 @@ namespace GameLogic
 		this->AddModule(new SceneView());
 		this->AddModule(new SceneNavMesh());
 		this->AddModule(new SceneEffects());
+		this->AddModule(new SceneUnitFilter());
 
 		m_ev_dispacher->Subscribe(ES_TestHeartBeat, std::bind(&TestScene::TestAction, this));
 
@@ -60,6 +63,7 @@ namespace GameLogic
 	void BuildHero(std::shared_ptr<SceneUnit> su, NewScene *scene, 
 		Vector3 pos, EViewCamp view_camp)
 	{
+		su->SetUnitType(NetProto::EsceneUnitType_Hero);
 		su->GetTransform()->SetLocalPos(pos);
 		{
 			auto sus = su->AddModule(std::make_shared<SceneUnitSight>());
@@ -88,6 +92,7 @@ namespace GameLogic
 	bool TestScene::OnLateAwake()
 	{
 		red_su = std::make_shared<SceneUnit>();
+		red_su->SetCamp(NetProto::ESceneUnitCamp_Red);
 		BuildHero(red_su, this, Vector3(50, 0, 50), EViewCamp_Red);
 		this->AddUnit(red_su);
 		{
@@ -105,6 +110,7 @@ namespace GameLogic
 		}
 
 		blue_su = std::make_shared<SceneUnit>();
+		blue_su->SetCamp(NetProto::ESceneUnitCamp_Blue);
 		BuildHero(blue_su, this, Vector3(50, 0, 50), EViewCamp_Blue);
 		this->AddUnit(blue_su);
 		{

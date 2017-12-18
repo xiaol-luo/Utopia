@@ -24,7 +24,7 @@ namespace protobuf_BattleEnum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[10];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[12];
 
 }  // namespace
 
@@ -120,11 +120,18 @@ void AddDescriptorsImpl() {
       "ndDir\020\003*\213\001\n\022ESceneUnitRelation\022\033\n\027EScene"
       "UnitRelation_None\020\000\022\033\n\027ESceneUnitRelatio"
       "n_Self\020\001\022\035\n\031ESceneUnitRelation_Friend\020\002\022"
-      "\034\n\030ESceneUnitRelation_Enemy\020\003B\003\370\001\001b\006prot"
-      "o3"
+      "\034\n\030ESceneUnitRelation_Enemy\020\003*y\n\016ESceneU"
+      "nitCamp\022\026\n\022ESceneUnitCamp_Red\020\000\022\027\n\023EScen"
+      "eUnitCamp_Blue\020\001\022\032\n\026ESceneUnitCamp_Monst"
+      "er\020\002\022\032\n\026ESceneUnitCamp_Neutral\020\003*\265\001\n\016ESc"
+      "eneUnitType\022\032\n\026EsceneUnitType_Unknown\020\000\022"
+      "\027\n\023EsceneUnitType_Hero\020\001\022\032\n\026EsceneUnitTy"
+      "pe_Soldier\020\002\022\032\n\026EsceneUnitType_Monster\020\003"
+      "\022\033\n\027EsceneUnitType_Building\020\004\022\031\n\025EsceneU"
+      "nitType_Effect\020\005B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1642);
+      descriptor, 1949);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -331,6 +338,40 @@ bool ESceneUnitRelation_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESceneUnitCamp_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[10];
+}
+bool ESceneUnitCamp_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* ESceneUnitType_descriptor() {
+  protobuf_BattleEnum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_BattleEnum_2eproto::file_level_enum_descriptors[11];
+}
+bool ESceneUnitType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;

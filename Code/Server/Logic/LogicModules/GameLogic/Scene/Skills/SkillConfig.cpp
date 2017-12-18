@@ -42,9 +42,13 @@ namespace GameLogic
 			skill_cfg->name = csv_skill->name;
 			skill_cfg->is_normal_attack = csv_skill->is_normal_attack;
 			skill_cfg->use_way = (NetProto::ESkillUseWay)csv_skill->use_way;
-			for (int target_case : csv_skill->target_case)
+			for (int item : csv_skill->target_relations)
 			{
-				skill_cfg->target_case |= 1 << target_case;
+				skill_cfg->target_relations |= 1 << item;
+			}
+			for (int item : csv_skill->target_types)
+			{
+				skill_cfg->target_types |= 1 << item;
 			}
 			
 			for (Config::CsvSkillLevelConfig *csv_lvl : kv_pair.second)

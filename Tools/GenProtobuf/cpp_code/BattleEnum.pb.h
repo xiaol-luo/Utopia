@@ -313,6 +313,54 @@ inline bool ESceneUnitRelation_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<ESceneUnitRelation>(
     ESceneUnitRelation_descriptor(), name, value);
 }
+enum ESceneUnitCamp {
+  ESceneUnitCamp_Red = 0,
+  ESceneUnitCamp_Blue = 1,
+  ESceneUnitCamp_Monster = 2,
+  ESceneUnitCamp_Neutral = 3,
+  ESceneUnitCamp_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESceneUnitCamp_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESceneUnitCamp_IsValid(int value);
+const ESceneUnitCamp ESceneUnitCamp_MIN = ESceneUnitCamp_Red;
+const ESceneUnitCamp ESceneUnitCamp_MAX = ESceneUnitCamp_Neutral;
+const int ESceneUnitCamp_ARRAYSIZE = ESceneUnitCamp_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESceneUnitCamp_descriptor();
+inline const ::std::string& ESceneUnitCamp_Name(ESceneUnitCamp value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESceneUnitCamp_descriptor(), value);
+}
+inline bool ESceneUnitCamp_Parse(
+    const ::std::string& name, ESceneUnitCamp* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESceneUnitCamp>(
+    ESceneUnitCamp_descriptor(), name, value);
+}
+enum ESceneUnitType {
+  EsceneUnitType_Unknown = 0,
+  EsceneUnitType_Hero = 1,
+  EsceneUnitType_Soldier = 2,
+  EsceneUnitType_Monster = 3,
+  EsceneUnitType_Building = 4,
+  EsceneUnitType_Effect = 5,
+  ESceneUnitType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ESceneUnitType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool ESceneUnitType_IsValid(int value);
+const ESceneUnitType ESceneUnitType_MIN = EsceneUnitType_Unknown;
+const ESceneUnitType ESceneUnitType_MAX = EsceneUnitType_Effect;
+const int ESceneUnitType_ARRAYSIZE = ESceneUnitType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* ESceneUnitType_descriptor();
+inline const ::std::string& ESceneUnitType_Name(ESceneUnitType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    ESceneUnitType_descriptor(), value);
+}
+inline bool ESceneUnitType_Parse(
+    const ::std::string& name, ESceneUnitType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<ESceneUnitType>(
+    ESceneUnitType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -388,6 +436,16 @@ template <> struct is_proto_enum< ::NetProto::ESceneUnitRelation> : ::google::pr
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESceneUnitRelation>() {
   return ::NetProto::ESceneUnitRelation_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESceneUnitCamp> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESceneUnitCamp>() {
+  return ::NetProto::ESceneUnitCamp_descriptor();
+}
+template <> struct is_proto_enum< ::NetProto::ESceneUnitType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::NetProto::ESceneUnitType>() {
+  return ::NetProto::ESceneUnitType_descriptor();
 }
 
 }  // namespace protobuf

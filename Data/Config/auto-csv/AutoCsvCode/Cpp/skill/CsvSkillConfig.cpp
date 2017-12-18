@@ -7,7 +7,8 @@ namespace Config
      static const char * Field_Name_name = "name";
      static const char * Field_Name_is_normal_attack = "is_normal_attack";
      static const char * Field_Name_use_way = "use_way";
-     static const char * Field_Name_target_case = "target_case";
+     static const char * Field_Name_target_relations = "target_relations";
+     static const char * Field_Name_target_types = "target_types";
 
     bool CsvSkillConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
@@ -16,7 +17,8 @@ namespace Config
         all_ok = all_ok && kvPairs.count(Field_Name_name) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_name], name);
         all_ok = all_ok && kvPairs.count(Field_Name_is_normal_attack) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_is_normal_attack], is_normal_attack);
         all_ok = all_ok && kvPairs.count(Field_Name_use_way) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_use_way], use_way);
-        all_ok = all_ok && kvPairs.count(Field_Name_target_case) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_target_case], target_case);
+        all_ok = all_ok && kvPairs.count(Field_Name_target_relations) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_target_relations], target_relations);
+        all_ok = all_ok && kvPairs.count(Field_Name_target_types) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_target_types], target_types);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -32,13 +34,14 @@ namespace Config
 
     bool CsvSkillConfigSet::Load(std::string file_path)
     {
-        io::CSVReader<5, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
+        io::CSVReader<6, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
             Field_Name_name,
             Field_Name_is_normal_attack,
             Field_Name_use_way,
-            Field_Name_target_case
+            Field_Name_target_relations,
+            Field_Name_target_types
             );
 
         std::map<std::string, std::string> kvParis;
@@ -46,7 +49,8 @@ namespace Config
         kvParis[Field_Name_name] = "";
         kvParis[Field_Name_is_normal_attack] = "";
         kvParis[Field_Name_use_way] = "";
-        kvParis[Field_Name_target_case] = "";
+        kvParis[Field_Name_target_relations] = "";
+        kvParis[Field_Name_target_types] = "";
 
         bool all_ok = true;
         int curr_row = 0;
@@ -55,7 +59,8 @@ namespace Config
             kvParis[Field_Name_name],
             kvParis[Field_Name_is_normal_attack],
             kvParis[Field_Name_use_way],
-            kvParis[Field_Name_target_case]
+            kvParis[Field_Name_target_relations],
+            kvParis[Field_Name_target_types]
             ))
         {            
             if (++ curr_row <= 1)

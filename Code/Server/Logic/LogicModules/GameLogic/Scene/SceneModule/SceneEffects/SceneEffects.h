@@ -19,7 +19,12 @@ namespace GameLogic
 		void RemoveEffect(uint64_t effect_key);
 
 	protected:
+		virtual void OnUpdate() override;
+
+	protected:
 		uint64_t m_last_effect_key = 0;
 		std::unordered_map<uint64_t, std::shared_ptr<EffectBase>> m_effects;
+		std::unordered_set<uint64_t> m_removed_effects;
+		void CheckRemoveEffects();
 	};
 }

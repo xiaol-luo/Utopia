@@ -32,11 +32,34 @@ namespace GameLogic
 			return false;
 
 		auto ret = m_effects.insert(std::make_pair(effect->GetKey(), effect));
+		if (ret.second)
+			m_removed_effects.erase(effect->GetKey());
 		return ret.second;
 	}
 	void SceneEffects::RemoveEffect(uint64_t effect_key)
 	{
-		m_effects.erase(effect_key);
+		m_removed_effects.insert(effect_key);
+	}
+
+	void SceneEffects::OnUpdate()
+	{
+		this->CheckRemoveEffects();
+		uint64_t now_ms = m_scene->GetLogicMs();
+		uint64_t delta_ms = m_scene->GetLogicDetalMs();
+		for (auto kv_pair : m_effects)
+		{
+			kv_pair.second->Loop(now_ms, delta_ms);
+		}
+		this->CheckRemoveEffects();
+	}
+	void SceneEffects::CheckRemoveEffects()
+	{
+		if (m_removed_effects.empty())
+			return;
+
+		for (uint64_t id : m_removed_effects)
+			m_effects.erase(id);
+		m_removed_effects.clear();
 	}
 }
 
