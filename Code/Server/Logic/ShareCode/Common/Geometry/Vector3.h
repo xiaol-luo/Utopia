@@ -40,6 +40,7 @@ struct Vector3
 	static Vector3 Normalize(const Vector3 &val);
 	static Vector3 Scale(const Vector3 &val, float scale);
 	static Vector3 Inverse(const Vector3 &val);
+	static Vector3 FromVector2(const Vector2 &val);
 
 	static const Vector3 back;		//	Shorthand for writing Vector3(0, 0, -1).
 	static const Vector3 down;		//	Shorthand for writing Vector3(0, -1, 0).

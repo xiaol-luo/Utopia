@@ -29,7 +29,6 @@ struct Vector2
 	float Magnitude() const;
 
 	static float Dot(const Vector2 &lhs, const Vector2 &rhs);
-	static Vector2 Cross(const Vector2 &lhs, const Vector2 &rhs); // ?
 	static Vector2 Normalize(const Vector2 &val);
 	static Vector2 Scale(const Vector2 &val, float scale);
 	static Vector2 Inverse(const Vector2 &val);

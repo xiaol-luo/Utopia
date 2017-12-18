@@ -78,14 +78,6 @@ float Vector2::Dot(const Vector2 &lhs, const Vector2 &rhs)
 	return lhs.x * rhs.x + lhs.y * rhs.y;
 }
 
-Vector2 Vector2::Cross(const Vector2 & lhs, const Vector2 & rhs)
-{
-	Vector3 l = Vector3(lhs.x, 0, lhs.y);
-	Vector3 r = Vector3(rhs.x, 0, rhs.y);
-	Vector3 ret = Vector3::Cross(l, r);
-	return ret.XZ();
-}
-
 Vector2 Vector2::Normalize(const Vector2 & val)
 {
 	Vector2 ret = val;

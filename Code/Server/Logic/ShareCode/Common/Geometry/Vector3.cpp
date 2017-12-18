@@ -138,3 +138,8 @@ Vector3 Vector3::Inverse(const Vector3 & val)
 	return std::move(ret);
 }
 
+Vector3 Vector3::FromVector2(const Vector2 & val)
+{
+	return Vector3(val.x, 0, val.y); 
+}
+

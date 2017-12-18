@@ -15,7 +15,7 @@ namespace GeometryUtils
 	// 逆时针为正
 	float DeltaAngle(Vector3 from, Vector3 to);
 	float DeltaAngle(Vector2 from, Vector2 to);
-	Vector2 CalVector2(Vector2 from, float rotation);
+	Vector2 CalVector2(Vector2 from, float rotationDeg);
 
 	void IsPointInRect(Vector2 &r1, Vector2 &r2, Vector2 &r3, Vector2 &r4, Vector2 &p1, Vector2 &p2, Vector2 &result);
 	bool IsLineSegmentIntersect(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2);

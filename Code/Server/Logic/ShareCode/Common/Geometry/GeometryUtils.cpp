@@ -36,9 +36,9 @@ float GeometryUtils::DeltaAngle(Vector2 from, Vector2 to)
 	return DeltaAngle(Vector3(from.x, 0, from.y), Vector3(to.x, 0, to.y));
 }
 
-Vector2 GeometryUtils::CalVector2(Vector2 from, float rotation)
+Vector2 GeometryUtils::CalVector2(Vector2 from, float rotationDeg)
 {
-	float radians = GeometryUtils::DegToRad(rotation);
+	float radians = GeometryUtils::DegToRad(rotationDeg);
 	float x = from.x * cos(radians) + from.y * -sin(radians);
 	float y = from.x * sin(radians) + from.y * cos(radians);
 	return Vector2(x, y);
