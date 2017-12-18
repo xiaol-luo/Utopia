@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include "GeometryDefine.h"
 
-class Vector2;
-class Vector3;
+struct Vector2;
+struct Vector3;
 
 namespace GeometryUtils
 {

@@ -126,8 +126,8 @@ namespace GameLogic
 			return false;
 
 		Vector3 locate_pos = m_owner->GetTransform()->GetPos();
-		Vector2 dir = (pos - locate_pos).xz();
-		dir.normalize();
+		Vector2 dir = (pos - locate_pos).XZ();
+		dir.Normalize();
 		skill->SetParams(su_id, pos, dir);
 		bool ret = skill->Begin();
 		if (ret)

@@ -118,7 +118,7 @@ namespace GameLogic
 			return;
 
 		m_face_dir[e_dir] = face_dir;
-		m_face_dir[e_dir].normalize();
+		m_face_dir[e_dir].Normalize();
 		this->SetPbDirty();
 	}
 
@@ -163,7 +163,7 @@ namespace GameLogic
 		{
 			if (abs(new_val.x) > FLT_EPSILON || (abs(new_val.z) > FLT_EPSILON))
 			{
-				this->SetFaceDir(new_val.xz(), ESUFaceDir_Move);
+				this->SetFaceDir(new_val.XZ(), ESUFaceDir_Move);
 			}
 		}
 	}

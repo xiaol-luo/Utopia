@@ -66,13 +66,13 @@ void GameLogic::SceneUnitMoveForceLineState::Update(int64_t deltaMs)
 	else
 	{
 		Vector3 now_distance = m_hit_pos - m_move_agent->GetPos();
-		if (now_distance.sqrMagnitude() > FLT_MIN)
+		if (now_distance.SqrMagnitude() > FLT_MIN)
 		{
 			Vector3 nor1 = now_distance;
 			Vector3 nor2 = ret_pos - m_hit_pos; // 获得从m_hit_pos指向ret_pos的向量
 			nor1.y = 0; nor2.y = 0;
-			nor1.normalize(); nor2.normalize();
-			if (Vector3::dot(nor1, nor2) > 0) // 夹角小于90度，也即ret_pos越过了m_hit_pos
+			nor1.Normalize(); nor2.Normalize();
+			if (Vector3::Dot(nor1, nor2) > 0) // 夹角小于90度，也即ret_pos越过了m_hit_pos
 			{
 				ret_pos = m_hit_pos;
 			}
@@ -92,7 +92,7 @@ void GameLogic::SceneUnitMoveForceLineState::Flash(const Vector3 &val)
 	{
 		Vector3 end_pos = val + m_velocity * m_ticker.LeftTime();
 		m_move_agent->GetNavMesh()->Raycast(val, end_pos, m_hit_pos);
-		if (m_move_agent->GetVelocity().sqrMagnitude() < FLT_MIN)
+		if (m_move_agent->GetVelocity().SqrMagnitude() < FLT_MIN)
 			m_move_agent->SetVelocity(m_velocity);
 	}
 }
@@ -100,7 +100,7 @@ void GameLogic::SceneUnitMoveForceLineState::Flash(const Vector3 &val)
 void GameLogic::SceneUnitMoveForceLineState::ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian)
 {
 	Vector2 velocity = dir;
-	velocity.normalize();
+	velocity.Normalize();
 	velocity = velocity * speed;
 	m_velocity.x = velocity.x;
 	m_velocity.y = 0;

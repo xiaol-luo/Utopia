@@ -1,5 +1,6 @@
 
 #include "Vector2.h"
+#include "Vector3.h"
 #include <cassert>
 #include <algorithm>
 #include <math.h>
@@ -17,28 +18,28 @@ const Vector2 Vector2::down = Vector2(0, -1);
 
 float Vector2::operator[] (int i)
 { 
-	assert(i >= 0 && i <= 1); 
+	assert(i >= 0 && i < 2); 
 	return (&x)[i]; 
 }
 
-Vector2 Vector2::operator + (const Vector2& inV) 
+Vector2 Vector2::operator + (const Vector2& inV) const
 {
 	return Vector2(x+inV.x, y+inV.y); 
 }
 
-Vector2 Vector2::operator - (const Vector2& inV) 
+Vector2 Vector2::operator - (const Vector2& inV) const
 { 
 	return Vector2(x-inV.x, y-inV.y); 
 }
 
-Vector2 Vector2::operator * (const float s) 
+Vector2 Vector2::operator * (const float s) const
 { 
 	return Vector2(x*s, y*s); 
 }
 
-Vector2 Vector2::operator / (float s) 
+Vector2 Vector2::operator / (float s) const
 {
-	assert(s < 1e-5);	
+	assert(std::abs(s) > FLT_EPSILON);	
 	return Vector2(x/s, y/s); 
 }
 
@@ -49,7 +50,7 @@ bool Vector2::operator == (const Vector2& v)const
 
 bool Vector2::operator != (const Vector2& v)const 
 { 
-	return x != v.x || y != v.y; 
+	return !(this->operator ==(v));
 }
 
 Vector2 Vector2::operator -() const 
@@ -67,51 +68,73 @@ Vector2::operator float *()
 	return &x; 
 }
 
-Vector2 Vector2::scale(const Vector2& inV) 
+void Vector2::Scale(float scale) 
 { 
-	x *= inV.x; y *= inV.y; 
-	return *this; 
+	x *= scale; y *= scale; 
 }
 
-float Vector2::dot(const Vector2 &lhs, const Vector2 &rhs) 
+float Vector2::Dot(const Vector2 &lhs, const Vector2 &rhs) 
 { 
 	return lhs.x * rhs.x + lhs.y * rhs.y;
 }
 
-float Vector2::sqrMagnitude() 
+Vector2 Vector2::Cross(const Vector2 & lhs, const Vector2 & rhs)
+{
+	Vector3 l = Vector3(lhs.x, 0, lhs.y);
+	Vector3 r = Vector3(rhs.x, 0, rhs.y);
+	Vector3 ret = Vector3::Cross(l, r);
+	return ret.XZ();
+}
+
+Vector2 Vector2::Normalize(const Vector2 & val)
+{
+	Vector2 ret = val;
+	ret.Normalize();
+	return std::move(ret);
+}
+
+Vector2 Vector2::Scale(const Vector2 & val, float scale)
+{
+	Vector2 ret = val;
+	ret.Scale(scale);
+	return std::move(ret);
+}
+
+Vector2 Vector2::Inverse(const Vector2 & val)
+{
+	Vector2 ret = val;
+	ret.Inverse();
+	return ret;
+}
+
+float Vector2::SqrMagnitude() const
 { 
 	return x*x + y*y; 
 }
 
-float Vector2::magnitude() 
+float Vector2::Magnitude() const
 { 
-	return sqrtf(sqrMagnitude()); 
+	return sqrtf(SqrMagnitude()); 
 }
 
-void Vector2::normalize() 
+void Vector2::Normalize() 
 { 
-	float mag = magnitude();
+	float mag = Magnitude();
 	if (mag <= FLT_EPSILON)
 		return;
 	x /= mag; y /= mag;
 }
 
-void Vector2::set(float inX, float inY) 
+void Vector2::Set(float inX, float inY) 
 { 
 	x = inX; y = inY; 
 }
 
-Vector2 Vector2::inverse() 
+void Vector2::Inverse() 
 { 
-	return Vector2(1.0F / x, 1.0F / y);
+	if (std::abs(x) >= FLT_EPSILON)
+		x = 1.0f / x;
+	if (std::abs(y) >= FLT_EPSILON)
+		y = 1.0f / y;
 }
 
-float Vector2::angle(Vector2 &rhs) 
-{ 
-	return acos(std::min(1.0f, std::max(-1.0f, (*this|rhs) / (magnitude() * rhs.magnitude())))); 
-}
-
-Vector2 Vector2::rotate(float radian)
-{
-	return Vector2(x * cos(radian) - y * sin(radian), y * cos(radian) + x * sin(radian));
-}

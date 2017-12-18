@@ -47,7 +47,7 @@ void GameLogic::SceneUnitMoveToPosState::Flash(const Vector3 & val)
 
 bool GameLogic::SceneUnitMoveToPosState::IsDone()
 {
-	bool ret = (m_desired_pos.xz() - m_move_agent->GetPos().xz()).sqrMagnitude() < MOVE_TO_POS_IGNORE_SQR_DISTANCE;
+	bool ret = (m_desired_pos.XZ() - m_move_agent->GetPos().XZ()).SqrMagnitude() < MOVE_TO_POS_IGNORE_SQR_DISTANCE;
 	return ret;
 }
 

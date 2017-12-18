@@ -23,10 +23,10 @@ float GeometryUtils::DeltaAngle(Vector3 from, Vector3 to)
 {
 	Vector3  tmp_from(from);
 	Vector3 tmp_to(to);
-	tmp_from.normalize();
-	tmp_to.normalize();
-	Vector3 cross_vec3 = Vector3::cross(tmp_from, tmp_to);
-	float cos_val = Vector3::dot(tmp_from, tmp_to);
+	tmp_from.Normalize();
+	tmp_to.Normalize();
+	Vector3 cross_vec3 = Vector3::Cross(tmp_from, tmp_to);
+	float cos_val = Vector3::Dot(tmp_from, tmp_to);
 	float angle = GeometryUtils::RadToDeg(acos(cos_val));
 	return cross_vec3.y >= 0 ? angle : -angle; // 这里cross_vec3.y > 0 则为逆时针，我以逆时针作为旋转正向
 }
@@ -150,7 +150,7 @@ bool GeometryUtils::IsCirlceRectIntersect(const Vector2 & circle_center, float r
 	if (v.y < FLT_MIN)
 		v.y = 0;
 
-	float l1 = Vector2::dot(v, v);
+	float l1 = Vector2::Dot(v, v);
 	float l2 = radius *radius;
 	return l1 < l2;
 }
@@ -189,11 +189,11 @@ bool GeometryUtils::InFlatDistance(const Vector2 & from, const Vector2 & to, flo
 
 	Vector2 delta = from; 
 	delta = delta - to;
-	float delta_sqr = delta.sqrMagnitude();
+	float delta_sqr = delta.SqrMagnitude();
 	return delta_sqr <= distance * distance;
 }
 
 bool GeometryUtils::InFlatDistance(const Vector3 & from, const Vector3 & to, float distance)
 {
-	return GeometryUtils::InFlatDistance(from.xz(), to.xz(), distance);
+	return GeometryUtils::InFlatDistance(from.XZ(), to.XZ(), distance);
 }

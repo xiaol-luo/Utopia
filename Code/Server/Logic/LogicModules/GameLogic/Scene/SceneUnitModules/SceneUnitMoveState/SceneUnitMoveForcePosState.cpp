@@ -33,7 +33,7 @@ void GameLogic::SceneUnitMoveForcePosState::Update(int64_t deltaMs)
 		return;
 
 	Vector3 curr_pos = m_move_agent->GetPos();
-	if ((m_destination - curr_pos).sqrMagnitude() < FLT_MIN)
+	if ((m_destination - curr_pos).SqrMagnitude() < FLT_MIN)
 	{
 		m_is_done = true;
 		return;
@@ -42,15 +42,15 @@ void GameLogic::SceneUnitMoveForcePosState::Update(int64_t deltaMs)
 	// cal pos
 	Vector3 move_dir = m_destination - curr_pos;
 	move_dir.y = 0;
-	move_dir.normalize();
+	move_dir.Normalize();
 	float delta_time = deltaMs * 1.0 / ITimerModule::MS_PER_SEC;
 	Vector3 next_pos = curr_pos + move_dir * m_speed * delta_time;
 	{
 		Vector3 nor1 = move_dir;
 		Vector3 nor2 = next_pos - m_destination; // 获得从m_destination指向next_pos的向量
 		nor1.y = 0; nor2.y = 0;
-		nor1.normalize(); nor2.normalize();
-		if (Vector3::dot(nor1, nor2) > 0) // 夹角小于90度，也即ret_pos越过了m_hit_pos
+		nor1.Normalize(); nor2.Normalize();
+		if (Vector3::Dot(nor1, nor2) > 0) // 夹角小于90度，也即ret_pos越过了m_hit_pos
 		{
 			next_pos = m_destination;
 			m_is_done = true;
@@ -79,7 +79,7 @@ const Vector3 GameLogic::SceneUnitMoveForcePosState::CalNextVolecity()
 {
 	Vector3 next_move_dir = m_destination - m_move_agent->GetPos();
 	next_move_dir.y = 0;
-	next_move_dir.normalize();
+	next_move_dir.Normalize();
 	Vector3 next_velocity = next_move_dir * m_speed;
 	return next_velocity;
 }
