@@ -26,7 +26,7 @@ namespace GameLogic
 		void Fire(int id, Args... args)
 		{
 			m_unit_proxy->Fire(id, args...);
-			m_scene_proxy->Fire(id, m_unit, args...);
+			m_scene_proxy->Fire(id, m_unit.lock(), args...);
 		}
 
 		template <typename...Args>
@@ -52,7 +52,7 @@ namespace GameLogic
 
 
 	private:
-		std::shared_ptr<SceneUnit> m_unit = nullptr;
+		std::weak_ptr<SceneUnit> m_unit;
 		EventDispacherProxy *m_unit_proxy = nullptr;
 		EventDispacherProxy *m_scene_proxy = nullptr;
 	};
