@@ -315,15 +315,15 @@ namespace GameLogic
 			bool ret = false;
 			if (!ret && m_cfg->target_relations & 1 << NetProto::ESceneUnitRelation_Self)
 			{
-				ret |= NetProto::ESceneUnitRelation_Self == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+				ret |= NetProto::ESceneUnitRelation_Self == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner()->shared_from_this(), target_su);
 			}
 			if (!ret && m_cfg->target_relations & 1 << NetProto::ESceneUnitRelation_Friend)
 			{
-				ret |= NetProto::ESceneUnitRelation_Friend == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+				ret |= NetProto::ESceneUnitRelation_Friend == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner()->shared_from_this(), target_su);
 			}
 			if (!ret && m_cfg->target_relations & 1 << NetProto::ESceneUnitRelation_Enemy)
 			{
-				ret |= NetProto::ESceneUnitRelation_Enemy == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner(), target_su);
+				ret |= NetProto::ESceneUnitRelation_Enemy == m_su_skills->GetScene()->SceneUnitRelation(m_su_skills->GetOwner()->shared_from_this(), target_su);
 			}
 			if (!ret)
 				return false;

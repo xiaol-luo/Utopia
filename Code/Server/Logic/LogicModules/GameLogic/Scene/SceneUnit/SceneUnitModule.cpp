@@ -24,11 +24,11 @@ namespace GameLogic
 			return 0;
 		return m_owner->GetId();
 	}
-	void SceneUnitModule::Init(std::shared_ptr<SceneUnit> owner)
+	void SceneUnitModule::Init(SceneUnit *owner)
 	{
 		m_owner = owner;
 		m_scene_event_proxy = new EventDispacherProxy(m_owner->GetScene()->GetEvDispacher());
-		m_event_proxy = new SceneUnitEventProxy(m_owner->GetEvDispacher(), m_scene_event_proxy, m_owner);
+		m_event_proxy = new SceneUnitEventProxy(m_owner->GetEvDispacher(), m_scene_event_proxy, m_owner->shared_from_this());
 		this->OnInit();
 	}
 	void SceneUnitModule::Destroy()

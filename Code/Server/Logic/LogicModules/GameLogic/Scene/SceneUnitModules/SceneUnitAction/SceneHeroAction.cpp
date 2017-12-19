@@ -171,8 +171,7 @@ namespace GameLogic
 			}
 			else
 			{
-				auto target_su = m_move_param.target_su.lock();
-				if (nullptr == target_su)
+				if (nullptr == m_move_param.target_su)
 				{
 					this->CancelMove();
 				}
@@ -185,7 +184,7 @@ namespace GameLogic
 					}
 					else
 					{
-						m_move_param.target_pos = target_su->GetTransform()->GetPos();
+						m_move_param.target_pos = m_move_param.target_su->GetTransform()->GetPos();
 						if (GeometryUtils::InFlatDistance(m_owner->GetTransform()->GetPos(), m_move_param.target_pos, m_move_param.allow_distance))
 						{
 							su_move->CancelMove();

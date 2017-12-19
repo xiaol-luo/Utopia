@@ -131,6 +131,8 @@ namespace GameLogic
 		assert(ret);
 		this->GetSceneEvProxy()->Subscribe<std::shared_ptr<SceneUnit>>(ESU_EnterScene,
 			std::bind(&SceneView::OnSceneUnitEnterScene, this, std::placeholders::_1));
+		this->GetSceneEvProxy()->Subscribe<std::shared_ptr<SceneUnit>>(ESU_LeaveScene,
+			std::bind(&SceneView::OnSceneUnitLeaveScene, this, std::placeholders::_1));
 		return ret;
 	}
 
@@ -427,6 +429,10 @@ namespace GameLogic
 		auto su_body = su->GetModule<SceneUnitBody>();
 		if (nullptr != su_sight || nullptr != su_body)
 			m_scene_units.insert_or_assign(su->GetId(), su->shared_from_this());
+	}
+	void SceneView::OnSceneUnitLeaveScene(std::shared_ptr<SceneUnit> su)
+	{
+		m_scene_units.erase(su->GetId());
 	}
 }
 

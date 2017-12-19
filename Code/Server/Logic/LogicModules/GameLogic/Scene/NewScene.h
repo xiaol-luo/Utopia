@@ -136,6 +136,7 @@ namespace GameLogic
 		std::shared_ptr<SceneUnit> blue_su = nullptr;
 
 	public:
-		NetProto::ESceneUnitRelation SceneUnitRelation(std::shared_ptr<SceneUnit> one, std::shared_ptr<SceneUnit> another);
+		virtual NetProto::ESceneUnitRelation SceneUnitRelation(std::shared_ptr<SceneUnit> one, std::shared_ptr<SceneUnit> another);
+		virtual NetProto::ESceneUnitRelation SceneUnitRelation(SceneUnit *one, SceneUnit *another);
 	};
 }

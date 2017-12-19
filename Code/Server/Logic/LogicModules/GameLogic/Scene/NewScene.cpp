@@ -530,4 +530,11 @@ namespace GameLogic
 
 		return one_camp == another_camp ? NetProto::ESceneUnitRelation_Friend : NetProto::ESceneUnitRelation_Enemy;
 	}
+
+	NetProto::ESceneUnitRelation NewScene::SceneUnitRelation(SceneUnit * one, SceneUnit * another)
+	{
+		if (nullptr == one || nullptr == another)
+			return NetProto::ESceneUnitRelation_None;
+		return this->SceneUnitRelation(one->shared_from_this(), another->shared_from_this());
+	}
 }

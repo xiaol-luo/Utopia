@@ -18,49 +18,6 @@ namespace GameLogic
 
 	SceneUnit::~SceneUnit()
 	{
-		for (auto &&module : m_modules)
-		{
-			module = nullptr;
-		}
-		m_transform = nullptr;
-		delete m_event_proxy;  m_event_proxy = nullptr;
-		delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
-		delete m_event_dispacher; m_event_dispacher = nullptr;
-	}
-
-	void SceneUnit::EnterScene(NewScene *scene, uint64_t id)
-	{
-		if (m_inited)
-			return;
-		m_inited = true;
-		m_started = false;
-
-		this->GetTransform();
-		{
-			m_scene = scene;
-			m_id = id;
-			m_scene_event_proxy = new EventDispacherProxy(m_scene->GetEvDispacher());
-			m_event_proxy = new SceneUnitEventProxy(m_event_dispacher, m_scene_event_proxy, this->shared_from_this());
-		}
-
-		for (auto &&module : m_modules)
-		{
-			if (nullptr != module)
-				module->Init(this->shared_from_this());
-		}
-		for (auto &&module : m_modules)
-		{
-			if (nullptr != module)
-				module->Awake();
-		}
-
-		this->GetEvProxy()->Fire(ESU_EnterScene);
-	}
-
-	void SceneUnit::LeaveScene()
-	{
-		this->GetEvProxy()->Fire(ESU_LeaveScene);
-
 		if (m_inited)
 		{
 			m_inited = false;
@@ -83,8 +40,47 @@ namespace GameLogic
 		{
 			delete m_event_proxy;  m_event_proxy = nullptr;
 			delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
+			delete m_event_dispacher; m_event_dispacher = nullptr;
+			m_transform = nullptr;
 			m_scene = nullptr;
+			
 		}
+	}
+
+	void SceneUnit::EnterScene(NewScene *scene, uint64_t id)
+	{
+		if (m_inited)
+			return;
+		m_inited = true;
+		m_started = false;
+		m_inScene = true;
+
+		this->GetTransform();
+		{
+			m_scene = scene;
+			m_id = id;
+			m_scene_event_proxy = new EventDispacherProxy(m_scene->GetEvDispacher());
+			m_event_proxy = new SceneUnitEventProxy(m_event_dispacher, m_scene_event_proxy, this->shared_from_this());
+		}
+
+		for (auto &&module : m_modules)
+		{
+			if (nullptr != module)
+				module->Init(this);
+		}
+		for (auto &&module : m_modules)
+		{
+			if (nullptr != module)
+				module->Awake();
+		}
+
+		this->GetEvProxy()->Fire(ESU_EnterScene);
+	}
+
+	void SceneUnit::LeaveScene()
+	{
+		m_inScene = false;
+		this->GetEvProxy()->Fire(ESU_LeaveScene);
 	}
 
 	int Test(int a, int b)

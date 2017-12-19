@@ -66,5 +66,6 @@ namespace GameLogic
 
 		std::unordered_map<int64_t, std::weak_ptr<SceneUnit>> m_scene_units;
 		void OnSceneUnitEnterScene(std::shared_ptr<SceneUnit> su);
+		void OnSceneUnitLeaveScene(std::shared_ptr<SceneUnit> su);
 	};
 }

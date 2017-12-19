@@ -53,7 +53,7 @@ namespace GameLogic
 			}
 
 			uint64_t target_suid = 0;
-			std::weak_ptr<SceneUnit> target_su;
+			std::shared_ptr<SceneUnit> target_su;
 			Vector3 target_pos;
 			float allow_distance = 0;
 			Ticker check_span;

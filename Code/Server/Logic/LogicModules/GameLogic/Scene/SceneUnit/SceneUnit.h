@@ -27,7 +27,7 @@ namespace GameLogic
 			assert(!m_inited);
 			assert(nullptr == m_modules[module->GetModuleName()]);
 			m_modules[module->GetModuleName()] = module;
-			module->m_owner = this->shared_from_this();
+			module->m_owner = this;
 			return module;
 		}
 
@@ -65,7 +65,6 @@ namespace GameLogic
 		std::vector<SyncClientMsg> CollectPBInit();
 		std::vector<SyncClientMsg> CollectPbMutable();
 
-
 	private:
 		NewScene *m_scene = nullptr;
 		uint64_t m_id = 0;
@@ -76,6 +75,7 @@ namespace GameLogic
 		
 		bool m_inited = false;
 		bool m_started = false;
+		bool m_inScene = false;
 		std::shared_ptr<SceneUnitModule> m_modules[ESceneUnitModule_Count];
 		std::shared_ptr<SceneUnitTransform> m_transform = nullptr;
 
