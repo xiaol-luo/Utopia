@@ -9,8 +9,10 @@ struct Vector3
 	Vector3(const float *p) : x(p[0]), y(p[1]), z(p[2]) {}
 	Vector3() : x(0), y(0), z(0) {}
 	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
+	Vector3(const Vector3 &other) : x(other.x), y(other.y), z(other.z) {}
 
 	float operator [] (int index) const;
+	void operator = (const Vector3 &other);
 	Vector3 operator + (const Vector3 &other) const;
 	Vector3 operator - (const Vector3 &other) const;
 	Vector3 operator * (float scale) const;

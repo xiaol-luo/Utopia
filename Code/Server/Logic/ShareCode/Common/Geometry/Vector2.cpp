@@ -22,6 +22,12 @@ float Vector2::operator[] (int i)
 	return (&x)[i]; 
 }
 
+void Vector2::operator=(const Vector2 & inV)
+{
+	x = inV.x;
+	y = inV.y;
+}
+
 Vector2 Vector2::operator + (const Vector2& inV) const
 {
 	return Vector2(x+inV.x, y+inV.y); 

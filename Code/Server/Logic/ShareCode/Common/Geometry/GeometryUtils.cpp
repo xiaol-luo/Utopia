@@ -36,12 +36,18 @@ float GeometryUtils::DeltaAngle(Vector2 from, Vector2 to)
 	return DeltaAngle(Vector3(from.x, 0, from.y), Vector3(to.x, 0, to.y));
 }
 
-Vector2 GeometryUtils::CalVector2(Vector2 from, float rotationDeg)
+Vector2 GeometryUtils::RotateVector2(const Vector2 &from, float rotationDeg)
 {
 	float radians = GeometryUtils::DegToRad(rotationDeg);
 	float x = from.x * cos(radians) + from.y * -sin(radians);
 	float y = from.x * sin(radians) + from.y * cos(radians);
 	return Vector2(x, y);
+}
+
+Vector2 GeometryUtils::RotateVector2(const Vector2 &from, const Vector2 &newYAxis)
+{
+	float angle = DeltaAngle(Vector2::up, newYAxis);
+	return GeometryUtils::RotateVector2(from, angle);
 }
 
 float GeometryUtils::Cross(Vector2 p1, Vector2 p2)
@@ -197,3 +203,102 @@ bool GeometryUtils::InFlatDistance(const Vector3 & from, const Vector3 & to, flo
 {
 	return GeometryUtils::InFlatDistance(from.XZ(), to.XZ(), distance);
 }
+
+AABB2 GeometryUtils::BuildAABB2(const OBB2 & obb2)
+{
+	Vector2 v = Vector2(obb2.x_size / 2, obb2.y_size / 2);
+	Vector2 v1 = RotateVector2(Vector2(v.x, v.y), obb2.y_dir);
+	Vector2 v2 = RotateVector2(Vector2(-v.x, v.y), obb2.y_dir);
+	Vector2 v3 = RotateVector2(Vector2(-v.x, -v.y), obb2.y_dir);
+	Vector2 v4 = RotateVector2(Vector2(v.x, -v.y), obb2.y_dir);
+
+	float xs[4] = { v1.x, v2.x, v3.x, v4.x };
+	float ys[4] = { v1.y, v2.y, v3.y, v4.y };
+	auto x_ret = std::minmax_element(&xs[0], &xs[4]);
+	auto y_ret = std::minmax_element(&ys[0], &ys[4]);
+
+	AABB2 ret;
+	ret.lt = Vector2(*x_ret.first, *y_ret.first) + obb2.center;
+	ret.rb = Vector2(*x_ret.second, *y_ret.second) + obb2.center;
+	return ret;
+}
+
+AABB2 GeometryUtils::BuildAABB2(const Circle & circle2)
+{
+	AABB2 ret;
+	ret.lt = circle2.center + Vector2(-circle2.radius, -circle2.radius);
+	ret.rb = circle2.center + Vector2(circle2.radius, circle2.radius);
+	return ret;
+}
+
+AABB2 GeometryUtils::BuildAABB2(const Sector & sector)
+{
+	float x_size = sector.radius * sin(sector.halfAngle);
+	float y_size = sector.radius * cos(sector.halfAngle);
+	Vector2 v1 = Vector2(0, 0);
+	Vector2 v2 = RotateVector2(Vector2(0, sector.radius), sector.y_dir);
+	Vector2 v3 = RotateVector2(Vector2(x_size, y_size), sector.y_dir);
+	Vector2 v4 = RotateVector2(Vector2(-x_size, y_size), sector.y_dir);
+	
+	float xs[4] = { v1.x, v2.x, v3.x, v4.x };
+	float ys[4] = { v1.y, v2.y, v3.y, v4.y };
+	auto x_ret = std::minmax_element(&xs[0], &xs[4]);
+	auto y_ret = std::minmax_element(&ys[0], &ys[4]);
+
+	AABB2 ret;
+	ret.lt = Vector2(*x_ret.first, *y_ret.first) + sector.center;
+	ret.rb = Vector2(*x_ret.second, *y_ret.second) + sector.center;
+	return ret;
+}
+
+static bool InRange(float val, float min_val, float max_val)
+{
+	return min_val <= val && val <= max_val;
+}
+
+bool GeometryUtils::IsAABB2Intersect(const AABB2 & l, const AABB2 & r)
+{
+	if (l.IsEmpty() || r.IsEmpty())
+		return false;
+
+	bool x_intersect = false;
+	x_intersect = x_intersect | InRange(l.lt.x, r.lt.x, r.rb.x);
+	x_intersect = x_intersect | InRange(l.rb.x, r.lt.x, r.rb.x);
+	x_intersect = x_intersect | InRange(r.lt.x, l.lt.x, l.rb.x);
+	x_intersect = x_intersect | InRange(r.rb.x, l.lt.x, l.rb.x);
+
+	bool y_intersect = false;
+	y_intersect = y_intersect | InRange(l.lt.y, r.lt.y, r.rb.y);
+	y_intersect = y_intersect | InRange(l.rb.y, r.lt.y, r.rb.y);
+	y_intersect = y_intersect | InRange(r.lt.y, l.lt.y, l.rb.y);
+	y_intersect = y_intersect | InRange(r.rb.y, l.lt.y, l.rb.y);
+
+	return x_intersect && y_intersect;
+}
+
+bool GeometryUtils::IsAABB2Include(const AABB2 & area, const AABB2 & target)
+{
+	if (area.IsEmpty())
+		return false;
+
+	bool ret = InRange(target.lt.x, area.lt.x, area.rb.x)
+		&& InRange(target.rb.x, area.lt.x, area.rb.x)
+		&& InRange(target.lt.y, area.lt.y, area.rb.y)
+		&& InRange(target.rb.y, area.lt.y, area.rb.y);
+	return ret;
+
+}
+
+bool GeometryUtils::CalAABB2Intersect(const AABB2 & l, const AABB2 & r, AABB2 * out)
+{
+	bool ret = GeometryUtils::IsAABB2Intersect(l, r);
+	if (ret && nullptr != out)
+	{
+		AABB2 rect;
+		rect.lt = Vector2(std::max(l.lt.x, r.lt.x), std::max(l.lt.y, r.lt.y));
+		rect.rb = Vector2(std::min(l.rb.x, r.rb.x), std::min(l.rb.y, r.rb.y));
+		*out = rect;
+	}
+	return ret;
+}
+

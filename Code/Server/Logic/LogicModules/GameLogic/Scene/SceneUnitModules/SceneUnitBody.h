@@ -2,6 +2,7 @@
 
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 #include "GameLogic/Scene/Defines/ViewDefine.h"
+#include "Common/Geometry/GeometryDefine.h"
 
 namespace GameLogic
 {
@@ -19,6 +20,9 @@ namespace GameLogic
 		void SetRadius(float val);
 		float GetRadius();
 		void UpdateState();
+
+		AABB2 CovertRect();
+		ESceneObjectShape GetShape() { return m_shape; }
 
 	protected:
 		ESceneObjectShape m_shape = ESceneObjectShape_Circle;

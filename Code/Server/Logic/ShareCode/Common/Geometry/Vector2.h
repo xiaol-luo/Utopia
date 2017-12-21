@@ -7,8 +7,10 @@ struct Vector2
 	Vector2(const float *p) : x(p[0]), y(p[1]) {}
 	Vector2() : x(0), y(0) {}
 	Vector2(float _x, float _y) : x(_x), y(_y) { }
+	Vector2(const Vector2 &other) : x(other.x), y(other.y) {}
 
 	float operator[] (int i);
+	void operator = (const Vector2& inV);
 	Vector2 operator + (const Vector2& inV) const;
 	Vector2 operator - (const Vector2& inV) const;
 	Vector2 operator * (const float s) const;

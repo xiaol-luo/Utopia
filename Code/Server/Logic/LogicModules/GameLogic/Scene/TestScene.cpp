@@ -74,6 +74,7 @@ namespace GameLogic
 			auto sub = su->AddModule(std::make_shared<SceneUnitBody>());
 			sub->SetSceneView(scene->GetModule<SceneView>());
 			sub->SetRadius(1);
+			sub->CovertRect();
 		}
 		{
 			auto sum = su->AddModule(std::make_shared<SceneUnitMove>());
@@ -131,7 +132,7 @@ namespace GameLogic
 
 	void TestScene::OnLateUpdate()
 	{
-		// this->GetEvDispacher()->Fire(ES_TestHeartBeat);
+		this->GetEvDispacher()->Fire(ES_TestHeartBeat);
 	}
 
 	void TestScene::TestAction()

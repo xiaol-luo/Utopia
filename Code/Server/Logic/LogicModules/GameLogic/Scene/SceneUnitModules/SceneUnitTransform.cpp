@@ -138,7 +138,7 @@ namespace GameLogic
 
 	void SceneUnitTransform::SetFaceAngle(float face_angle, ESUFaceDir e_dir)
 	{
-		Vector2 face_dir = GeometryUtils::CalVector2(Vector2::up, face_angle);
+		Vector2 face_dir = GeometryUtils::RotateVector2(Vector2::up, face_angle);
 		this->SetFaceDir(face_dir, e_dir);
 	}
 

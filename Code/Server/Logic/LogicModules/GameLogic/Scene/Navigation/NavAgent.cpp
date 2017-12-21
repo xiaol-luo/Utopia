@@ -125,7 +125,7 @@ namespace GameLogic
 			// m_crowd->requestMoveVelocity()
 			if (abs(m_desired_move_dir) >= FLT_EPSILON)
 			{
-				Vector2 dir = GeometryUtils::CalVector2(Vector2::up, m_desired_move_dir);
+				Vector2 dir = GeometryUtils::RotateVector2(Vector2::up, m_desired_move_dir);
 				Vector3 velocity = Vector3(dir.x, 0, dir.y) * this->GetMaxSpeed();
 				m_crowd->requestMoveVelocity(m_dt_agent_id, velocity.toPointer());
 			}

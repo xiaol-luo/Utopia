@@ -11,6 +11,7 @@ namespace GameLogic
 	enum ESceneObjectShape
 	{
 		ESceneObjectShape_Circle = 0,
+		ESceneObjectShape_Rect,
 	};
 
 	enum ESceneModule

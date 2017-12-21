@@ -15,7 +15,8 @@ namespace GeometryUtils
 	// 逆时针为正
 	float DeltaAngle(Vector3 from, Vector3 to);
 	float DeltaAngle(Vector2 from, Vector2 to);
-	Vector2 CalVector2(Vector2 from, float rotationDeg);
+	Vector2 RotateVector2(const Vector2 &from, float rotationDeg);
+	Vector2 RotateVector2(const Vector2 &from, const Vector2 &newYAxis);
 
 	void IsPointInRect(Vector2 &r1, Vector2 &r2, Vector2 &r3, Vector2 &r4, Vector2 &p1, Vector2 &p2, Vector2 &result);
 	bool IsLineSegmentIntersect(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2);
@@ -28,6 +29,14 @@ namespace GeometryUtils
 
 	bool InFlatDistance(const Vector2 &from, const Vector2 &to, float distance);
 	bool InFlatDistance(const Vector3 &from, const Vector3 &to, float distance);
+
+	AABB2 BuildAABB2(const OBB2 &obb2);
+	AABB2 BuildAABB2(const Circle &circle);
+	AABB2 BuildAABB2(const Sector &sector);
+
+	bool IsAABB2Intersect(const AABB2 &l, const AABB2 &r);
+	bool IsAABB2Include(const AABB2 &area, const AABB2  &target);	// area include target
+	bool CalAABB2Intersect(const AABB2 &l, const AABB2 &r, AABB2 *out);
 };
 
 

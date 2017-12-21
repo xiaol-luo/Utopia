@@ -12,22 +12,28 @@ const float K180OverPi = 180.0f / KPi;
 
 struct AABB2
 {
-	Vector2 ltNode;
-	Vector2 rbNode;
+	Vector2 lt;
+	Vector2 rb;
+
+	bool IsEmpty() const { return lt == rb; }
 };
 
 struct OBB2
 {
 	Vector2 center;
-	float width = 0;
-	float length = 0;
-	Vector2 faceDir = 0;
+	float x_size = 0;
+	float y_size = 0;
+	Vector2 y_dir;
+
+	bool IsEmpty() const { return 0 == x_size || 0 == y_size; }
 };
 
 struct Circle
 {
 	Vector2 center;
 	float radius = 0;
+
+	bool IsEmpty() const { return radius <= 0; }
 };
 
 struct Sector
@@ -35,6 +41,9 @@ struct Sector
 	Vector2 center;
 	float radius = 0;
 	float halfAngle = 0;
+	Vector2 y_dir;
+
+	bool IsEmpty() const { return radius <= 0 || halfAngle <= 0; }
 };
 
 

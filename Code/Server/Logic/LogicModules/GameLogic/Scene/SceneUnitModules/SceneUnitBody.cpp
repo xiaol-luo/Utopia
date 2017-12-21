@@ -64,6 +64,29 @@ namespace GameLogic
 		}
 	}
 
+	AABB2 SceneUnitBody::CovertRect()
+	{
+		AABB2 ret;
+		Vector2 pos = m_owner->GetTransform()->GetPos();
+		if (ESceneObjectShape_Circle == m_shape)
+		{
+			Circle circle;
+			circle.center = pos;
+			circle.radius = m_size_x;
+			ret = GeometryUtils::BuildAABB2(circle);
+		}
+		if (ESceneObjectShape_Rect == m_shape)
+		{
+			OBB2 obb;
+			obb.center = pos;
+			obb.x_size = m_size_x;
+			obb.y_size = m_size_y;
+			obb.y_dir = m_owner->GetTransform()->GetFaceDir();
+			ret = GeometryUtils::BuildAABB2(obb);
+		}
+		return ret;
+	}
+
 	void SceneUnitBody::ResetCoverGrids()
 	{
 		if (m_cover_girds.empty())

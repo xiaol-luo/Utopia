@@ -156,6 +156,9 @@ namespace GameLogic
 			cfg.detailSampleMaxError = b_setting->cellHeight * b_setting->detailSampleMaxError;
 			rcVcopy(cfg.bmin, bmin);
 			rcVcopy(cfg.bmax, bmax);
+			
+			m_area.lt = Vector3(cfg.bmin).XZ();
+			m_area.rb = Vector3(cfg.bmax).XZ();
 
 			// Tile cache params.
 			dtTileCacheParams tcparams;
