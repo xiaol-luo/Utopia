@@ -43,6 +43,7 @@ namespace GameLogic
 		SceneUnitQTreeNode *children[EChild_Count] = { nullptr };
 		std::unordered_set<SceneUnitQTreeNodeUnit *> node_units;
 
+		void FindUnits(const AABB2 &rect, std::unordered_set<SceneUnitQTreeNodeUnit *> &out_units);
 		void AddUnit(SceneUnitQTreeNodeUnit *unit, const AABB2 &cover_rect);
 		bool HasChildren() { return nullptr != children[0]; }
 		void Travel(std::function<void(SceneUnitQTreeNode *)> func);
@@ -71,5 +72,7 @@ namespace GameLogic
 		void UpdateNodeUnit(SceneUnitQTreeNodeUnit *unit);
 		bool CanSplitBody(SceneUnitQTreeNode *node);
 		bool CanOwnChildren(SceneUnitQTreeNode *node);
+
+		void FindUnits(const AABB2 &rect, std::unordered_set<SceneUnitQTreeNodeUnit *> &out_units);
 	};
 }

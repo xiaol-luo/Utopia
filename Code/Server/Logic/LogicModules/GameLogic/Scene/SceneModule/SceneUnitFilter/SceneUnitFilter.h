@@ -4,6 +4,7 @@
 #include "GameLogic/Scene/Defines/EffectDefine.h"
 #include "Common/Geometry/GeometryDefine.h"
 #include "SceneUnitQTree.h"
+#include <vector>
 
 namespace GameLogic
 {
@@ -16,7 +17,51 @@ namespace GameLogic
 		virtual ~SceneUnitFilter() override;
 
 	public:
-		std::unordered_set<std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterOption filter_option);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterShape shape);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterShape shape, std::shared_ptr<SceneUnit> caster, int relation);
+
+	protected:
+		enum EFilterWay
+		{
+			EFilterWay_ExculdeSuids,
+			EFilterWay_Relation,
+			EFilterWay_Count,
+		};
+
+		struct FilterParams
+		{
+			FilterParams()
+			{
+				memset(is_active, 0, sizeof(is_active));
+			}
+
+			bool is_active[EFilterWay_Count];
+
+			struct
+			{
+				std::unordered_set<uint64_t> excludeSuids;
+			} exclude_suids;
+			
+			struct
+			{
+				std::shared_ptr<SceneUnit> caster;
+				int relation;
+			} relation;
+			
+		};
+
+		using FilterWay = void(const FilterParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		FilterWay *m_filter_way[EFilterWay_Count];
+
+		static void FilterExcludeSuids(const FilterParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterRelation(const FilterParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+
+	protected:
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindUnits(AABB2 rect);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindUnits(OBB2 obb);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindUnits(Circle circle);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindUnits(Sector sector);
+		void FindUnits(AABB2 rect, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &out_ret);
 
 	protected:
 		virtual bool OnAwake() override;

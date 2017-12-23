@@ -78,6 +78,19 @@ namespace GameLogic
 		return node->layer < max_layer;
 	}
 
+	void SceneUnitQTree::FindUnits(const AABB2 & rect, std::unordered_set<SceneUnitQTreeNodeUnit*>& out_units)
+	{
+		if (nullptr == root)
+			return;
+
+		AABB2 cover_rect;
+		bool ret = GeometryUtils::CalAABB2Intersect(root->area, rect, &cover_rect);
+		if (!ret || cover_rect.IsEmpty())
+			return;
+
+		root->FindUnits(cover_rect, out_units);
+	}
+
 	void SceneUnitQTree::UpdateNodeUnit(SceneUnitQTreeNodeUnit * node_unit)
 	{
 		if (nullptr == node_unit)
@@ -90,10 +103,39 @@ namespace GameLogic
 		if (nullptr == su_body)
 			return;
 
-		AABB2 cover_rect = su_body->CovertRect();
+		AABB2 cover_rect;
 		bool ret = GeometryUtils::CalAABB2Intersect(root->area, su_body->CovertRect(), &cover_rect);
 		if (ret)
 			root->AddUnit(node_unit, cover_rect);
+	}
+
+	void SceneUnitQTreeNode::FindUnits(const AABB2 & rect, std::unordered_set<SceneUnitQTreeNodeUnit*>& out_units)
+	{
+		AABB2 cover_rect;
+		bool ret = GeometryUtils::IsAABB2Intersect(this->area, rect);
+		if (!ret)
+			return;
+
+		std::vector<SceneUnitQTreeNode *> nodes;
+		nodes.push_back(this);
+
+		while (!nodes.empty())
+		{
+			SceneUnitQTreeNode *node = nodes.back();
+			nodes.pop_back();
+
+			if (GeometryUtils::IsAABB2Intersect(node->area, rect))
+			{
+				out_units.insert(node->node_units.begin(), node->node_units.end());
+				if (node->HasChildren())
+				{
+					for (int i = 0; i < SceneUnitQTreeNode::EChild_Count; ++i)
+					{
+						nodes.push_back(node->children[i]);
+					}
+				}
+			}
+		}
 	}
 
 	void SceneUnitQTreeNode::AddUnit(SceneUnitQTreeNodeUnit * unit, const AABB2 &cover_rect)

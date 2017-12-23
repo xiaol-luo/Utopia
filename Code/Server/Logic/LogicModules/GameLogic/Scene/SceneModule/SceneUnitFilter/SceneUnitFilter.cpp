@@ -9,12 +9,14 @@
 #include "GameLogic/Scene/SceneModule/SceneNavMesh/SceneNavMesh.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
 #include "GameLogic/Scene/NewScene.h"
+#include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
 {
 	SceneUnitFilter::SceneUnitFilter() : SceneModule(MODULE_TYPE)
 	{
-
+		m_filter_way[EFilterWay_ExculdeSuids] = &SceneUnitFilter::FilterExcludeSuids;
+		m_filter_way[EFilterWay_Relation] = &SceneUnitFilter::FilterRelation;
 	}
 
 	SceneUnitFilter::~SceneUnitFilter()
@@ -22,12 +24,82 @@ namespace GameLogic
 		m_qtree.Release();
 	}
 
-	std::unordered_set<std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterOption filter_option)
+	void BuildAABB2(EffectFilterShape shape)
 	{
-		std::unordered_set<std::shared_ptr<SceneUnit>> ret_sus = std::unordered_set<std::shared_ptr<SceneUnit>>();
+		switch (shape.shape)
+		{
+		case EEffectFilterShape_Circle:
+		{
 
+		}
+		break;
+		case EEffectFilterShape_Rect:
+		{
+			
+		}
+		break;
+		case EEffectFilterShape_Sector:
+		{
+			
+		}
+		break;
+		}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape)
+	{
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret_sus = std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
+
+		m_qtree.FindUnits()
 
 		return ret_sus;
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, std::shared_ptr<SceneUnit> caster, int relation)
+	{
+		return std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
+	}
+
+	void SceneUnitFilter::FilterExcludeSuids(const FilterParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+	}
+
+	void SceneUnitFilter::FilterRelation(const FilterParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(AABB2 rect)
+	{
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret_sus;
+		this->FindUnits(rect, ret_sus);
+		return std::move(ret_sus);
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(OBB2 obb)
+	{
+		AABB2 rect = GeometryUtils::BuildAABB2(obb);
+		return std::move(this->FindUnits(rect));
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(Circle circle)
+	{
+		AABB2 rect = GeometryUtils::BuildAABB2(circle);
+		return std::move(this->FindUnits(rect));
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(Sector sector)
+	{
+		AABB2 rect = GeometryUtils::BuildAABB2(sector);
+		return std::move(this->FindUnits(rect));
+	}
+
+	void SceneUnitFilter::FindUnits(AABB2 rect, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& out_ret)
+	{
+		std::unordered_set<SceneUnitQTreeNodeUnit *> node_units;
+		m_qtree.FindUnits(rect, node_units);
+		for (SceneUnitQTreeNodeUnit *node_unit : node_units)
+		{
+			out_ret.insert_or_assign(node_unit->unit->GetId(), node_unit->unit);
+		}
 	}
 
 	bool SceneUnitFilter::OnAwake()
@@ -61,7 +133,6 @@ namespace GameLogic
 		m_id_unit_map.insert(std::make_pair(unit_node->unit->GetId(), unit_node));
 
 		m_qtree.UpdateNodeUnit(unit_node);
-		// ²åÈëËÄ²æÊ÷ÖÐ
 	}
 
 	void SceneUnitFilter::OnSceneUnitLeaveScene(std::shared_ptr<SceneUnit> su)
@@ -87,6 +158,8 @@ namespace GameLogic
 			}
 		}
 		if (nullptr != unit_node)
+		{
 			m_qtree.UpdateNodeUnit(unit_node);
+		}		
 	}
 }

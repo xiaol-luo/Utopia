@@ -134,6 +134,14 @@ namespace GameLogic
 		EEffectFilterRelation_Enemy,
 	};
 
+	struct EffectFilterShape 
+	{
+		Vector2 pos;
+		Vector2 dir;
+		EEffectFilterShape shape = EffectFilterShape_None;
+		EffectFilterShapeParam shape_param;
+	};
+
 	struct EffectFilterOption
 	{
 		EEffectFilterAnchor anchor = EEffectAnchor_Pos;
