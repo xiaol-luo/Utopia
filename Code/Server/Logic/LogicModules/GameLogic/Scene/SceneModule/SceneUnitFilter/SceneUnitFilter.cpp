@@ -15,8 +15,8 @@ namespace GameLogic
 {
 	SceneUnitFilter::SceneUnitFilter() : SceneModule(MODULE_TYPE)
 	{
-		m_filter_way[EFilterWay_ExculdeSuids] = &SceneUnitFilter::FilterExcludeSuids;
-		m_filter_way[EFilterWay_Relation] = &SceneUnitFilter::FilterRelation;
+		m_filter_way[ESceneUnitFilterWay_ExculdeSuids] = &SceneUnitFilter::FilterExcludeSuids;
+		m_filter_way[ESceneUnitFilterWay_Relation] = &SceneUnitFilter::FilterRelation;
 	}
 
 	SceneUnitFilter::~SceneUnitFilter()
@@ -24,47 +24,92 @@ namespace GameLogic
 		m_qtree.Release();
 	}
 
-	void BuildAABB2(EffectFilterShape shape)
+	AABB2 BuildAABB2(EffectFilterShape shape)
 	{
+		AABB2 rect;
+
 		switch (shape.shape)
 		{
 		case EEffectFilterShape_Circle:
 		{
-
+			Circle circle;
+			circle.center = shape.pos;
+			circle.radius = shape.shape_param.circle.radius;
+			rect = GeometryUtils::BuildAABB2(circle);
 		}
 		break;
 		case EEffectFilterShape_Rect:
 		{
-			
+			OBB2 obb2;
+			obb2.center = shape.pos;
+			obb2.y_dir = shape.dir;
+			obb2.x_size = shape.shape_param.rect.length;
+			obb2.y_size = shape.shape_param.rect.width;
+			rect = GeometryUtils::BuildAABB2(obb2);
 		}
 		break;
 		case EEffectFilterShape_Sector:
 		{
-			
+			Sector sector;
+			sector.center = shape.pos;
+			sector.y_dir = shape.dir;
+			sector.radius = shape.shape_param.sector.radius;
+			sector.halfAngle = shape.shape_param.sector.angles / 2;
+			rect = GeometryUtils::BuildAABB2(sector);
 		}
 		break;
 		}
 
+		return std::move(rect);
+	}
+
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape)
 	{
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret_sus = std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
+		AABB2 rect = BuildAABB2(shape);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret;
+		this->FindUnits(rect, out_ret);
+		return std::move(out_ret);
+	}
 
-		m_qtree.FindUnits()
-
-		return ret_sus;
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, const ESceneUnitFilterWayParams & params)
+	{
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret = this->FilterSceneUnit(shape);
+		ExtraFilterProcess(params, out_ret);
+		return std::move(out_ret);
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, std::shared_ptr<SceneUnit> caster, int relation)
 	{
-		return std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
+		ESceneUnitFilterWayParams params;
+		{
+			params.is_active[ESceneUnitFilterWay_Relation] = true;
+			params.relation.caster = caster;
+			params.relation.relation = relation;
+		}
+
+		auto ret = this->FilterSceneUnit(shape, params);
+		return std::move(ret);
 	}
 
-	void SceneUnitFilter::FilterExcludeSuids(const FilterParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::ExtraFilterProcess(const ESceneUnitFilterWayParams & params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+		for (int i = 0; i < ESceneUnitFilterWay_Count; ++i)
+		{
+			if (params.is_active[i])
+			{
+				m_filter_way[i](params, units);
+			}
+		}
 	}
 
-	void SceneUnitFilter::FilterRelation(const FilterParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterExcludeSuids(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+
+	}
+
+	void SceneUnitFilter::FilterRelation(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(AABB2 rect)

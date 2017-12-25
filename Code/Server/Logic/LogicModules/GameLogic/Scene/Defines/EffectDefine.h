@@ -107,24 +107,26 @@ namespace GameLogic
 
 	union EffectFilterShapeParam
 	{
-		 struct circle
+		EffectFilterShapeParam() {}
+		 struct
 		 {
 			 float radius = 0;
 			 int max_su_count = 0;
-		 };
+		 } circle;
 
-		 struct rect
+		 struct
 		 {
 			 float length = 0;
 			 float width = 0;
 			 int max_su_count = 0;
-		 };
+		 } rect;
 
-		 struct sector
+		 struct
 		 {
+			 float radius = 0;
 			 float angles = 0;
 			 int max_su_count = 0;
-		 };
+		 } sector;
 	};
 
 	enum EEffectFilterRelation
