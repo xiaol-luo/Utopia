@@ -12,6 +12,10 @@ namespace GameLogic
 	{
 		ESceneUnitFilterWay_ExculdeSuids,
 		ESceneUnitFilterWay_Relation,
+		ESceneUnitFilterWay_ShapeCircle,
+		ESceneUnitFilterWay_ShapeObb2,
+		ESceneUnitFilterWay_ShapeSector,
+		ESceneUnitFilterWay_LimitNum,
 		ESceneUnitFilterWay_Count,
 	};
 
@@ -34,6 +38,26 @@ namespace GameLogic
 			std::shared_ptr<SceneUnit> caster;
 			int relation;
 		} relation;
+
+		struct
+		{
+			OBB2 oob2;
+		} shape_obb2;
+
+		struct
+		{
+			Circle circle;
+		} shape_circle;
+		
+		struct
+		{
+			Sector sector;
+		} shape_sector;
+
+		struct
+		{
+			int num;
+		} limit_num;
 	};
 
 	class SceneUnitFilter : public SceneModule
@@ -46,7 +70,7 @@ namespace GameLogic
 
 	public:
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterShape shape);
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterShape shape, const ESceneUnitFilterWayParams &params);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterShape shape, ESceneUnitFilterWayParams &params);
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnit(EffectFilterShape shape, std::shared_ptr<SceneUnit> caster, int relation);
 
 	protected:
@@ -56,6 +80,10 @@ namespace GameLogic
 
 		static void FilterExcludeSuids(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 		static void FilterRelation(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterShapeObb2(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterShapeCircle(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterShapeSector(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterLimitNum(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 
 	protected:
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindUnits(AABB2 rect);

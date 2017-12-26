@@ -17,6 +17,10 @@ namespace GameLogic
 	{
 		m_filter_way[ESceneUnitFilterWay_ExculdeSuids] = &SceneUnitFilter::FilterExcludeSuids;
 		m_filter_way[ESceneUnitFilterWay_Relation] = &SceneUnitFilter::FilterRelation;
+		m_filter_way[ESceneUnitFilterWay_ShapeObb2] = &SceneUnitFilter::FilterShapeObb2;
+		m_filter_way[ESceneUnitFilterWay_ShapeCircle] = &SceneUnitFilter::FilterShapeCircle;
+		m_filter_way[ESceneUnitFilterWay_ShapeSector] = &SceneUnitFilter::FilterShapeSector;
+		m_filter_way[ESceneUnitFilterWay_LimitNum] = &SceneUnitFilter::FilterLimitNum;
 	}
 
 	SceneUnitFilter::~SceneUnitFilter()
@@ -24,10 +28,16 @@ namespace GameLogic
 		m_qtree.Release();
 	}
 
-	AABB2 BuildAABB2(EffectFilterShape shape)
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape)
+	{
+		ESceneUnitFilterWayParams params;
+		std::move(this->FilterSceneUnit(shape, params));
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, ESceneUnitFilterWayParams & params)
 	{
 		AABB2 rect;
-
+		int limit_num = 0;
 		switch (shape.shape)
 		{
 		case EEffectFilterShape_Circle:
@@ -36,6 +46,9 @@ namespace GameLogic
 			circle.center = shape.pos;
 			circle.radius = shape.shape_param.circle.radius;
 			rect = GeometryUtils::BuildAABB2(circle);
+			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
+			params.shape_circle.circle = circle;
+			limit_num = shape.shape_param.circle.max_su_count;
 		}
 		break;
 		case EEffectFilterShape_Rect:
@@ -46,6 +59,8 @@ namespace GameLogic
 			obb2.x_size = shape.shape_param.rect.length;
 			obb2.y_size = shape.shape_param.rect.width;
 			rect = GeometryUtils::BuildAABB2(obb2);
+			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
+			limit_num = shape.shape_param.rect.max_su_count;
 		}
 		break;
 		case EEffectFilterShape_Sector:
@@ -56,24 +71,19 @@ namespace GameLogic
 			sector.radius = shape.shape_param.sector.radius;
 			sector.halfAngle = shape.shape_param.sector.angles / 2;
 			rect = GeometryUtils::BuildAABB2(sector);
+			limit_num = shape.shape_param.sector.max_su_count;
 		}
 		break;
 		}
 
-		return std::move(rect);
-	}
+		if (limit_num > 0)
+		{
+			params.is_active[ESceneUnitFilterWay_LimitNum] = true;
+			params.limit_num.num = limit_num;
+		}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape)
-	{
-		AABB2 rect = BuildAABB2(shape);
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret;
 		this->FindUnits(rect, out_ret);
-		return std::move(out_ret);
-	}
-
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, const ESceneUnitFilterWayParams & params)
-	{
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret = this->FilterSceneUnit(shape);
 		ExtraFilterProcess(params, out_ret);
 		return std::move(out_ret);
 	}
@@ -110,6 +120,22 @@ namespace GameLogic
 	void SceneUnitFilter::FilterRelation(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 
+	}
+
+	void SceneUnitFilter::FilterShapeObb2(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+	}
+
+	void SceneUnitFilter::FilterShapeCircle(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+	}
+
+	void SceneUnitFilter::FilterShapeSector(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+	}
+
+	void SceneUnitFilter::FilterLimitNum(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(AABB2 rect)
