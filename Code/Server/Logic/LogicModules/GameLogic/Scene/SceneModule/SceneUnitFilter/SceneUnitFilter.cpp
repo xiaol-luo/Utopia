@@ -114,28 +114,55 @@ namespace GameLogic
 
 	void SceneUnitFilter::FilterExcludeSuids(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
-
+		for (uint64_t suid : param.exclude_suids.excludeSuids)
+		{
+			units.erase(suid);
+		}
 	}
 
 	void SceneUnitFilter::FilterRelation(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+		int allowRelation = param.relation.relation;
+		std::shared_ptr<SceneUnit> caster = param.relation.caster;
+		if (nullptr == caster)
+			return;
 
+		std::vector<uint64_t> unfitSuids;
+		for (auto kv_pair : units)
+		{
+			NetProto::ESceneUnitRelation esur = caster->GetScene()->SceneUnitRelation(caster, kv_pair.second);
+			if(!(allowRelation & (1 << esur)))
+			{
+				unfitSuids.push_back(kv_pair.first);
+			}
+		}
+		for (uint64_t suid : unfitSuids)
+		{
+			units.erase(suid);
+		}
 	}
 
 	void SceneUnitFilter::FilterShapeObb2(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+		OBB2 obb2 = param.shape_obb2.oob2;
 	}
 
 	void SceneUnitFilter::FilterShapeCircle(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+		Circle circle = param.shape_circle.circle;
 	}
 
 	void SceneUnitFilter::FilterShapeSector(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+		Sector sector = param.shape_sector.sector;
 	}
 
 	void SceneUnitFilter::FilterLimitNum(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
+		while (units.size() > param.limit_num.num)
+		{
+			units.erase(units.begin());
+		}
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(AABB2 rect)
