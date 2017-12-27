@@ -93,7 +93,7 @@ void GeometryUtils::IsPointInRect(Vector2 &r1, Vector2 &r2, Vector2 &r3, Vector2
 	}
 }
 
-bool GeometryUtils::IsLineSegmentIntersect(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2)
+bool GeometryUtils::IsIntersectLineSegment(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2)
 {
 	if (std::max(p1.x, p2.x) < std::min(q1.x, q2.x))
 	{
@@ -143,7 +143,7 @@ float GeometryUtils::GetLineIntersectPoint(Vector2 &a1, Vector2 &a2, Vector2 &b1
 	return -1;
 }
 
-bool GeometryUtils::IsCirlceRectIntersect(const Vector2 & circle_center, float radius, Vector2 rect_center, float length, float width)
+bool GeometryUtils::IsIntersectCirlceRect(const Vector2 & circle_center, float radius, Vector2 rect_center, float length, float width)
 {
 	Vector2 tmp = circle_center;
 	tmp = tmp - rect_center;
@@ -161,7 +161,7 @@ bool GeometryUtils::IsCirlceRectIntersect(const Vector2 & circle_center, float r
 	return l1 < l2;
 }
 
-bool GeometryUtils::IsRectLineSegmentIntersect(const Vector2 &r1, const Vector2 &r2, const Vector2 &lp1, const Vector2 &lp2)
+bool GeometryUtils::IsIntersectRectLineSegment(const Vector2 &r1, const Vector2 &r2, const Vector2 &lp1, const Vector2 &lp2)
 {
 	float min_x = std::min(r1.x, r2.x);
 	float max_x = std::max(r1.x, r2.x);
@@ -172,9 +172,9 @@ bool GeometryUtils::IsRectLineSegmentIntersect(const Vector2 &r1, const Vector2 
 		return true;
 	if (lp2.x >= min_x && lp2.x <= max_x && lp2.y >= min_y && lp2.y <= max_y)
 		return true;
-	if (GeometryUtils::IsLineSegmentIntersect(lp1, lp2, Vector2(min_x, min_y), Vector2(max_x, max_y)))
+	if (GeometryUtils::IsIntersectLineSegment(lp1, lp2, Vector2(min_x, min_y), Vector2(max_x, max_y)))
 		return true;
-	if (GeometryUtils::IsLineSegmentIntersect(lp1, lp2, Vector2(min_x, max_y), Vector2(max_x, min_y)))
+	if (GeometryUtils::IsIntersectLineSegment(lp1, lp2, Vector2(min_x, max_y), Vector2(max_x, min_y)))
 		return true;
 	return false;
 }
@@ -256,7 +256,7 @@ static bool InRange(float val, float min_val, float max_val)
 	return min_val <= val && val <= max_val;
 }
 
-bool GeometryUtils::IsAABB2Intersect(const AABB2 & l, const AABB2 & r)
+bool GeometryUtils::IsIntersectAABB2(const AABB2 & l, const AABB2 & r)
 {
 	if (l.IsEmpty() || r.IsEmpty())
 		return false;
@@ -276,7 +276,7 @@ bool GeometryUtils::IsAABB2Intersect(const AABB2 & l, const AABB2 & r)
 	return x_intersect && y_intersect;
 }
 
-bool GeometryUtils::IsAABB2Include(const AABB2 & area, const AABB2 & target)
+bool GeometryUtils::IsIncludeAABB2(const AABB2 & area, const AABB2 & target)
 {
 	if (area.IsEmpty())
 		return false;
@@ -289,9 +289,9 @@ bool GeometryUtils::IsAABB2Include(const AABB2 & area, const AABB2 & target)
 
 }
 
-bool GeometryUtils::CalAABB2Intersect(const AABB2 & l, const AABB2 & r, AABB2 * out)
+bool GeometryUtils::CalIntersectAABB2(const AABB2 & l, const AABB2 & r, AABB2 * out)
 {
-	bool ret = GeometryUtils::IsAABB2Intersect(l, r);
+	bool ret = GeometryUtils::IsIntersectAABB2(l, r);
 	if (ret && nullptr != out)
 	{
 		AABB2 rect;
@@ -300,5 +300,35 @@ bool GeometryUtils::CalAABB2Intersect(const AABB2 & l, const AABB2 & r, AABB2 * 
 		*out = rect;
 	}
 	return ret;
+}
+
+bool GeometryUtils::IsIntersectCircle(const Circle & c1, const Circle & c2)
+{
+	return true;
+}
+
+bool GeometryUtils::IsIntersectObb2(const OBB2 & b1, const OBB2 & b2)
+{
+	return true;
+}
+
+bool GeometryUtils::IsIntersectSector(const Sector & s1, const Sector & s2)
+{
+	return true;
+}
+
+bool GeometryUtils::IsIntersectCircleOBB2(const Circle & circle, const OBB2 & obb2)
+{
+	return true;
+}
+
+bool GeometryUtils::IsIntersectCircleSector(const Circle & circle, const Sector & sector)
+{
+	return true;
+}
+
+bool GeometryUtils::IsIntersectObb2Sector(const OBB2 & obb2, const Sector & sector)
+{
+	return true;
 }
 

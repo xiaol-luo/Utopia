@@ -11,6 +11,7 @@ namespace GameLogic
 	enum ESceneUnitFilterWay
 	{
 		ESceneUnitFilterWay_ExculdeSuids,
+		ESceneUnitFilterWay_UnitType,
 		ESceneUnitFilterWay_Relation,
 		ESceneUnitFilterWay_ShapeCircle,
 		ESceneUnitFilterWay_ShapeObb2,
@@ -58,6 +59,11 @@ namespace GameLogic
 		{
 			int num;
 		} limit_num;
+
+		struct  
+		{
+			int allow_types;
+		} unit_type;
 	};
 
 	class SceneUnitFilter : public SceneModule
@@ -78,6 +84,7 @@ namespace GameLogic
 		FilterWay *m_filter_way[ESceneUnitFilterWay_Count];
 		void ExtraFilterProcess(const ESceneUnitFilterWayParams &params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 
+		static void FilterUnitType(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 		static void FilterExcludeSuids(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 		static void FilterRelation(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 		static void FilterShapeObb2(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);

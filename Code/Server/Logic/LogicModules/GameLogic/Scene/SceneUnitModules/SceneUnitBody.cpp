@@ -67,7 +67,7 @@ namespace GameLogic
 	AABB2 SceneUnitBody::CovertRect()
 	{
 		AABB2 ret;
-		Vector2 pos = m_owner->GetTransform()->GetPos();
+		Vector2 pos = m_owner->GetTransform()->GetPos().XZ();
 		if (ESceneObjectShape_Circle == m_shape)
 		{
 			Circle circle;
@@ -85,6 +85,24 @@ namespace GameLogic
 			ret = GeometryUtils::BuildAABB2(obb);
 		}
 		return ret;
+	}
+
+	OBB2 SceneUnitBody::GetShapeObb2()
+	{
+		OBB2 obb;
+		obb.center = m_owner->GetTransform()->GetPos().XZ();
+		obb.x_size = m_size_x;
+		obb.y_size = m_size_y;
+		obb.y_dir = m_owner->GetTransform()->GetFaceDir();
+		return std::move(obb);
+	}
+
+	Circle SceneUnitBody::GetShapeCircle()
+	{
+		Circle circle;
+		circle.center = m_owner->GetTransform()->GetPos().XZ();
+		circle.radius = m_size_x;
+		return circle;
 	}
 
 	void SceneUnitBody::ResetCoverGrids()

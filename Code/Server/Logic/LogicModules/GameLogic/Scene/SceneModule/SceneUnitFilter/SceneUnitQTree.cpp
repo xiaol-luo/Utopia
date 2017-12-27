@@ -84,7 +84,7 @@ namespace GameLogic
 			return;
 
 		AABB2 cover_rect;
-		bool ret = GeometryUtils::CalAABB2Intersect(root->area, rect, &cover_rect);
+		bool ret = GeometryUtils::CalIntersectAABB2(root->area, rect, &cover_rect);
 		if (!ret || cover_rect.IsEmpty())
 			return;
 
@@ -104,7 +104,7 @@ namespace GameLogic
 			return;
 
 		AABB2 cover_rect;
-		bool ret = GeometryUtils::CalAABB2Intersect(root->area, su_body->CovertRect(), &cover_rect);
+		bool ret = GeometryUtils::CalIntersectAABB2(root->area, su_body->CovertRect(), &cover_rect);
 		if (ret)
 			root->AddUnit(node_unit, cover_rect);
 	}
@@ -112,7 +112,7 @@ namespace GameLogic
 	void SceneUnitQTreeNode::FindUnits(const AABB2 & rect, std::unordered_set<SceneUnitQTreeNodeUnit*>& out_units)
 	{
 		AABB2 cover_rect;
-		bool ret = GeometryUtils::IsAABB2Intersect(this->area, rect);
+		bool ret = GeometryUtils::IsIntersectAABB2(this->area, rect);
 		if (!ret)
 			return;
 
@@ -124,7 +124,7 @@ namespace GameLogic
 			SceneUnitQTreeNode *node = nodes.back();
 			nodes.pop_back();
 
-			if (GeometryUtils::IsAABB2Intersect(node->area, rect))
+			if (GeometryUtils::IsIntersectAABB2(node->area, rect))
 			{
 				out_units.insert(node->node_units.begin(), node->node_units.end());
 				if (node->HasChildren())
@@ -213,7 +213,7 @@ namespace GameLogic
 			int include_child = -1;
 			for (int i = 0; i < SceneUnitQTreeNode::EChild_Count; ++i)
 			{
-				if (GeometryUtils::IsAABB2Include(this->children[i]->area, cover_rect))
+				if (GeometryUtils::IsIncludeAABB2(this->children[i]->area, cover_rect))
 				{
 					include_child = i;
 					break;
@@ -241,7 +241,7 @@ namespace GameLogic
 			for (int i = 0; i < SceneUnitQTreeNode::EChild_Count; ++i)
 			{
 				AABB2 rect_intersect;
-				if (GeometryUtils::CalAABB2Intersect(this->children[i]->area, cover_rect, &rect_intersect))
+				if (GeometryUtils::CalIntersectAABB2(this->children[i]->area, cover_rect, &rect_intersect))
 				{
 					this->children[i]->AddUnit(unit, rect_intersect);
 				}

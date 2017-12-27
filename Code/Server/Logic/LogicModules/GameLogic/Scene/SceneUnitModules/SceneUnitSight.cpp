@@ -105,7 +105,7 @@ namespace GameLogic
 					if (cover_grid->grid_type == block_grid->grid_type &&
 						cover_grid->grid_type_group == block_grid->grid_type_group)
 						continue;
-					bool isIntersect = GeometryUtils::IsRectLineSegmentIntersect(r1, r2, locate_grid->center, cover_grid->center);
+					bool isIntersect = GeometryUtils::IsIntersectRectLineSegment(r1, r2, locate_grid->center, cover_grid->center);
 					if (isIntersect)
 						blind_grids.insert(cover_grid);
 				}

@@ -183,7 +183,7 @@ namespace GameLogic
 		ViewGridVec grids;
 		for (auto grid : possible_grids)
 		{
-			if (GeometryUtils::IsCirlceRectIntersect(
+			if (GeometryUtils::IsIntersectCirlceRect(
 				Vector2(center_x, center_y), radius,
 				grid->center, m_grid_edge_length, m_grid_edge_length))
 			{

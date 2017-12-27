@@ -21,6 +21,7 @@ namespace GameLogic
 		m_filter_way[ESceneUnitFilterWay_ShapeCircle] = &SceneUnitFilter::FilterShapeCircle;
 		m_filter_way[ESceneUnitFilterWay_ShapeSector] = &SceneUnitFilter::FilterShapeSector;
 		m_filter_way[ESceneUnitFilterWay_LimitNum] = &SceneUnitFilter::FilterLimitNum;
+		m_filter_way[ESceneUnitFilterWay_UnitType] = &SceneUnitFilter::FilterUnitType;
 	}
 
 	SceneUnitFilter::~SceneUnitFilter()
@@ -112,6 +113,11 @@ namespace GameLogic
 		}
 	}
 
+	void SceneUnitFilter::FilterUnitType(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	{
+
+	}
+
 	void SceneUnitFilter::FilterExcludeSuids(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		for (uint64_t suid : param.exclude_suids.excludeSuids)
@@ -145,16 +151,94 @@ namespace GameLogic
 	void SceneUnitFilter::FilterShapeObb2(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		OBB2 obb2 = param.shape_obb2.oob2;
+		for (auto it = units.begin(); it != units.end();)
+		{
+			uint64_t id = it->first;
+			std::shared_ptr<SceneUnitBody> su_body = it->second->GetModule<SceneUnitBody>();
+			bool is_intersect = false;
+
+			switch (su_body->GetEShape())
+			{
+			case ESceneObjectShape_Circle:
+			{
+				is_intersect = GeometryUtils::IsIntersectCircleOBB2(su_body->GetShapeCircle(), obb2);
+			}
+			break;
+			case ESceneObjectShape_Rect:
+			{
+				is_intersect = GeometryUtils::IsIntersectObb2(su_body->GetShapeObb2(), obb2);
+			}
+			break;
+			default:
+				break;
+			}
+			if (is_intersect)
+				++it;
+			else
+				it = units.erase(it);
+		}
 	}
 
 	void SceneUnitFilter::FilterShapeCircle(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		Circle circle = param.shape_circle.circle;
+		for (auto it = units.begin(); it != units.end();)
+		{
+			uint64_t id = it->first;
+			std::shared_ptr<SceneUnitBody> su_body = it->second->GetModule<SceneUnitBody>();
+			bool is_intersect = false;
+
+			switch (su_body->GetEShape())
+			{
+			case ESceneObjectShape_Circle:
+			{
+				is_intersect = GeometryUtils::IsIntersectCircle(su_body->GetShapeCircle(), circle);
+			}
+			break;
+			case ESceneObjectShape_Rect:
+			{
+				is_intersect = GeometryUtils::IsIntersectCircleOBB2(circle, su_body->GetShapeObb2());
+			}
+			break;
+			default:
+				break;
+			}
+			if (is_intersect)
+				++it;
+			else
+				it = units.erase(it);
+		}
 	}
 
 	void SceneUnitFilter::FilterShapeSector(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		Sector sector = param.shape_sector.sector;
+		for (auto it = units.begin(); it != units.end();)
+		{
+			uint64_t id = it->first;
+			std::shared_ptr<SceneUnitBody> su_body = it->second->GetModule<SceneUnitBody>();
+			bool is_intersect = false;
+
+			switch (su_body->GetEShape())
+			{
+			case ESceneObjectShape_Circle:
+			{
+				is_intersect = GeometryUtils::IsIntersectCircleSector(su_body->GetShapeCircle(), sector);
+			}
+			break;
+			case ESceneObjectShape_Rect:
+			{
+				is_intersect = GeometryUtils::IsIntersectObb2Sector(su_body->GetShapeObb2(), sector);
+			}
+			break;
+			default:
+				break;
+			}
+			if (is_intersect)
+				++it;
+			else
+				it = units.erase(it);
+		}
 	}
 
 	void SceneUnitFilter::FilterLimitNum(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)

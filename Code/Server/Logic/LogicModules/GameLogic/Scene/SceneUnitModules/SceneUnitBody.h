@@ -22,7 +22,9 @@ namespace GameLogic
 		void UpdateState();
 
 		AABB2 CovertRect();
-		ESceneObjectShape GetShape() { return m_shape; }
+		ESceneObjectShape GetEShape() { return m_shape; }
+		OBB2 GetShapeObb2();
+		Circle GetShapeCircle();
 
 	protected:
 		ESceneObjectShape m_shape = ESceneObjectShape_Circle;
