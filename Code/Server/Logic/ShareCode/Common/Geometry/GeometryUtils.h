@@ -13,8 +13,8 @@ namespace GeometryUtils
 	float RadToDeg(float rad);
 	
 	// 逆时针为正
-	float DeltaAngle(Vector3 from, Vector3 to);
-	float DeltaAngle(Vector2 from, Vector2 to);
+	float DeltaAngle(const Vector3 &from, const Vector3 & to);
+	float DeltaAngle(const Vector2 &from, const Vector2 &to);
 	Vector2 RotateVector2(const Vector2 &from, float rotationDeg);
 	Vector2 RotateVector2(const Vector2 &from, const Vector2 &newYAxis);
 
@@ -45,6 +45,9 @@ namespace GeometryUtils
 	bool IsIntersectCircleSector(const Circle &circle, const Sector &sector);
 	bool IsIntersectObb2Sector(const OBB2 &obb2, const Sector &sector);
 
+	// 不考虑伸缩只考虑旋转和平移
+	bool WorldSpaceToObjectSpace(const Vector2 &y_axis_point, const Vector2 &y_axis_dir, const Vector2 &world_point, Vector2 &object_point);
+	bool ObjectSpaceToWorldSpace(const Vector2 &y_axis_point, const Vector2 &y_axis_dir, const Vector2 &object_point, Vector2 &world_point);
 };
 
 

@@ -56,7 +56,7 @@ namespace GameLogic
 		{
 			OBB2 obb2;
 			obb2.center = shape.pos;
-			obb2.y_dir = shape.dir;
+			obb2.y_axis = shape.dir;
 			obb2.x_size = shape.shape_param.rect.length;
 			obb2.y_size = shape.shape_param.rect.width;
 			rect = GeometryUtils::BuildAABB2(obb2);
@@ -68,7 +68,7 @@ namespace GameLogic
 		{
 			Sector sector;
 			sector.center = shape.pos;
-			sector.y_dir = shape.dir;
+			sector.y_axis = shape.dir;
 			sector.radius = shape.shape_param.sector.radius;
 			sector.halfAngle = shape.shape_param.sector.angles / 2;
 			rect = GeometryUtils::BuildAABB2(sector);

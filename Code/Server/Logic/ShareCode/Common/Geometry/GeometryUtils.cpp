@@ -19,7 +19,7 @@ float GeometryUtils::RadToDeg(float rad)
 	return rad * K180OverPi;
 }
 
-float GeometryUtils::DeltaAngle(Vector3 from, Vector3 to)
+float GeometryUtils::DeltaAngle(const Vector3 &from, const Vector3 &to)
 {
 	Vector3  tmp_from(from);
 	Vector3 tmp_to(to);
@@ -31,7 +31,7 @@ float GeometryUtils::DeltaAngle(Vector3 from, Vector3 to)
 	return cross_vec3.y >= 0 ? angle : -angle; // 这里cross_vec3.y > 0 则为逆时针，我以逆时针作为旋转正向
 }
 
-float GeometryUtils::DeltaAngle(Vector2 from, Vector2 to)
+float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
 {
 	return DeltaAngle(Vector3(from.x, 0, from.y), Vector3(to.x, 0, to.y));
 }
@@ -207,10 +207,10 @@ bool GeometryUtils::InFlatDistance(const Vector3 & from, const Vector3 & to, flo
 AABB2 GeometryUtils::BuildAABB2(const OBB2 & obb2)
 {
 	Vector2 v = Vector2(obb2.x_size / 2, obb2.y_size / 2);
-	Vector2 v1 = RotateVector2(Vector2(v.x, v.y), obb2.y_dir);
-	Vector2 v2 = RotateVector2(Vector2(-v.x, v.y), obb2.y_dir);
-	Vector2 v3 = RotateVector2(Vector2(-v.x, -v.y), obb2.y_dir);
-	Vector2 v4 = RotateVector2(Vector2(v.x, -v.y), obb2.y_dir);
+	Vector2 v1 = RotateVector2(Vector2(v.x, v.y), obb2.y_axis);
+	Vector2 v2 = RotateVector2(Vector2(-v.x, v.y), obb2.y_axis);
+	Vector2 v3 = RotateVector2(Vector2(-v.x, -v.y), obb2.y_axis);
+	Vector2 v4 = RotateVector2(Vector2(v.x, -v.y), obb2.y_axis);
 
 	float xs[4] = { v1.x, v2.x, v3.x, v4.x };
 	float ys[4] = { v1.y, v2.y, v3.y, v4.y };
@@ -236,9 +236,9 @@ AABB2 GeometryUtils::BuildAABB2(const Sector & sector)
 	float x_size = sector.radius * sin(sector.halfAngle);
 	float y_size = sector.radius * cos(sector.halfAngle);
 	Vector2 v1 = Vector2(0, 0);
-	Vector2 v2 = RotateVector2(Vector2(0, sector.radius), sector.y_dir);
-	Vector2 v3 = RotateVector2(Vector2(x_size, y_size), sector.y_dir);
-	Vector2 v4 = RotateVector2(Vector2(-x_size, y_size), sector.y_dir);
+	Vector2 v2 = RotateVector2(Vector2(0, sector.radius), sector.y_axis);
+	Vector2 v3 = RotateVector2(Vector2(x_size, y_size), sector.y_axis);
+	Vector2 v4 = RotateVector2(Vector2(-x_size, y_size), sector.y_axis);
 	
 	float xs[4] = { v1.x, v2.x, v3.x, v4.x };
 	float ys[4] = { v1.y, v2.y, v3.y, v4.y };
@@ -304,7 +304,9 @@ bool GeometryUtils::CalIntersectAABB2(const AABB2 & l, const AABB2 & r, AABB2 * 
 
 bool GeometryUtils::IsIntersectCircle(const Circle & c1, const Circle & c2)
 {
-	return true;
+	Vector2 o1o2 = c2.center - c1.center;
+	bool is_intersect = o1o2.SqrMagnitude() < (c1.radius + c2.radius) * (c1.radius + c2.radius);
+	return is_intersect;
 }
 
 bool GeometryUtils::IsIntersectObb2(const OBB2 & b1, const OBB2 & b2)
@@ -331,4 +333,24 @@ bool GeometryUtils::IsIntersectObb2Sector(const OBB2 & obb2, const Sector & sect
 {
 	return true;
 }
+
+bool GeometryUtils::WorldSpaceToObjectSpace(const Vector2 & y_axis_point, const Vector2 & y_axis_dir, const Vector2 & world_point, Vector2 & object_point)
+{
+	if (y_axis_dir.SqrMagnitude() <= FLT_EPSILON)
+		return false;
+
+	// world space to inertial space
+	Vector2 intertial_point = world_point - y_axis_point;
+	// intertial space to object space. y_axis_point is compare to world space y axis and get the rotation. 
+	float delta_angle = DeltaAngle(Vector2::up, y_axis_point);
+	// conver the intertial_point to object_point
+	object_point = RotateVector2(intertial_point, delta_angle);
+	return true;
+}
+
+bool GeometryUtils::ObjectSpaceToWorldSpace(const Vector2 & y_axis_point, const Vector2 & y_axis_dir, const Vector2 & object_point, Vector2 & world_point)
+{
+	return false;
+}
+
 
