@@ -32,7 +32,7 @@ namespace GameLogic
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape)
 	{
 		ESceneUnitFilterWayParams params;
-		std::move(this->FilterSceneUnit(shape, params));
+		return std::move(this->FilterSceneUnit(shape, params));
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, ESceneUnitFilterWayParams & params)
@@ -243,7 +243,7 @@ namespace GameLogic
 
 	void SceneUnitFilter::FilterLimitNum(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
-		while (units.size() > param.limit_num.num)
+		while ((int)units.size() > param.limit_num.num)
 		{
 			units.erase(units.begin());
 		}

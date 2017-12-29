@@ -26,7 +26,7 @@ struct OBB2
 	Vector2 y_axis;
 
 	bool IsEmpty() const { return 0 == x_size || 0 == y_size; }
-	Vector2 XAxis() { return GeometryUtils::RotateVector2(y_axis, -90); }
+	// Vector2 XAxis() { return GeometryUtils::RotateVector2(y_axis, -90); }
 };
 
 struct Circle
@@ -45,7 +45,7 @@ struct Sector
 	Vector2 y_axis;
 
 	bool IsEmpty() const { return radius <= 0 || halfAngle <= 0; }
-	Vector2 XAxis() { return GeometryUtils::RotateVector2(y_axis, -90); }
+	// Vector2 XAxis() { return GeometryUtils::RotateVector2(y_axis, -90); }
 };
 
 
