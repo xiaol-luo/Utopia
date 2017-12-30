@@ -38,10 +38,30 @@ void TestSol(lua_State *l)
 	ret = lua.script_file("LuaScript/test_sol.lua");
 }
 
+#include "Common/Geometry/GeometryUtils.h"
 void test(int a, float b)
 {
-	a++;
-	b++;
+	Vector2 axis_point = Vector2(10, 10);
+	Vector2 axis_dir = Vector2(1, 1);
+	Vector2 test_world_point = Vector2(2, 22);
+	Vector2 test_object_point = Vector2(3, 4);
+	{
+		Vector2 ret;
+		GeometryUtils::WorldSpaceToObjectSpace(axis_point, axis_dir, test_world_point, ret);
+		Vector2 ret2;
+		GeometryUtils::ObjectSpaceToWorldSpace(axis_point, axis_dir, ret, ret2);
+	}
+	{
+		Vector2 ret;
+		GeometryUtils::ObjectSpaceToWorldSpace(axis_point, axis_dir, test_object_point, ret);
+	}
+	{
+		Vector2 ret;
+		float distance;
+		GeometryUtils::ProjectPointOnAxis(axis_point, axis_dir, test_world_point, &distance, &ret);
+		++distance;
+
+	}
 }
 
 int main(int argc, char **argv)

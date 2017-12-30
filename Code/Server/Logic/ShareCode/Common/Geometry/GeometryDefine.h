@@ -23,7 +23,7 @@ struct OBB2
 	Vector2 center;
 	float x_size = 0;
 	float y_size = 0;
-	Vector2 y_axis;
+	Vector2 y_axis_dir;
 
 	bool IsEmpty() const { return 0 == x_size || 0 == y_size; }
 	// Vector2 XAxis() { return GeometryUtils::RotateVector2(y_axis, -90); }
@@ -42,10 +42,21 @@ struct Sector
 	Vector2 center;
 	float radius = 0;
 	float halfAngle = 0;
-	Vector2 y_axis;
+	Vector2 y_axis_dir;
 
 	bool IsEmpty() const { return radius <= 0 || halfAngle <= 0; }
 	// Vector2 XAxis() { return GeometryUtils::RotateVector2(y_axis, -90); }
 };
 
+struct Axis2
+{
+	Vector2 original_point;
+	Vector2 direction;
+};
+
+struct LineSegment
+{
+	Vector2 p1;
+	Vector2 p2;
+};
 

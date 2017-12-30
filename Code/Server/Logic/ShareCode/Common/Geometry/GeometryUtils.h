@@ -46,8 +46,13 @@ namespace GeometryUtils
 	bool IsIntersectObb2Sector(const OBB2 &obb2, const Sector &sector);
 
 	// 不考虑伸缩只考虑旋转和平移
+	bool WorldSpaceToObjectSpace(const Axis2 y_axis, const Vector2 &world_point, Vector2 &object_point);
+	bool ObjectSpaceToWorldSpace(const Axis2 y_axis, const Vector2 &object_point, Vector2 &world_point);
 	bool WorldSpaceToObjectSpace(const Vector2 &y_axis_point, const Vector2 &y_axis_dir, const Vector2 &world_point, Vector2 &object_point);
 	bool ObjectSpaceToWorldSpace(const Vector2 &y_axis_point, const Vector2 &y_axis_dir, const Vector2 &object_point, Vector2 &world_point);
+	bool ProjectPointOnAxis(const Vector2 &axis_point, const Vector2 &axis_dir, const Vector2 &world_point, float *distance, Vector2 *projected_point/*world space point*/);
+	bool ProjectPointOnAxis(const Axis2 &axis, const Vector2 &world_point, float *distance, Vector2 *projected_point/*world space point*/);
+	bool ProjectLineSegmentOnAxis(const Axis2 &axis, const LineSegment line_seg, LineSegment *projected_line_seg/*world space*/, float projected_distances[2]);
 };
 
 
