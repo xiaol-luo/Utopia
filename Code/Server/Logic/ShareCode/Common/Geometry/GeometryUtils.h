@@ -21,7 +21,6 @@ namespace GeometryUtils
 	void IsPointInRect(Vector2 &r1, Vector2 &r2, Vector2 &r3, Vector2 &r4, Vector2 &p1, Vector2 &p2, Vector2 &result);
 	bool IsIntersectLineSegment(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2);
 	float GetLineIntersectPoint(Vector2 &a1, Vector2 &a2, Vector2 &b1, Vector2 &b2);
-	float Cross(Vector2 p1, Vector2 p2);
 
 	bool IsIntersectCirlceRect(const Vector2 &circle_center, float radius, Vector2 rect_center, float length, float width);
 	bool IsIntersectRectLineSegment(const Vector2 &r1, const Vector2 &r2, const Vector2 &lp1, const Vector2 &lp2);
@@ -46,13 +45,25 @@ namespace GeometryUtils
 	bool IsIntersectObb2Sector(const OBB2 &obb2, const Sector &sector);
 
 	// 不考虑伸缩只考虑旋转和平移
-	bool WorldSpaceToObjectSpace(const Axis2 y_axis, const Vector2 &world_point, Vector2 &object_point);
-	bool ObjectSpaceToWorldSpace(const Axis2 y_axis, const Vector2 &object_point, Vector2 &world_point);
-	bool WorldSpaceToObjectSpace(const Vector2 &y_axis_point, const Vector2 &y_axis_dir, const Vector2 &world_point, Vector2 &object_point);
-	bool ObjectSpaceToWorldSpace(const Vector2 &y_axis_point, const Vector2 &y_axis_dir, const Vector2 &object_point, Vector2 &world_point);
-	bool ProjectPointOnAxis(const Vector2 &axis_point, const Vector2 &axis_dir, const Vector2 &world_point, float *distance, Vector2 *projected_point/*world space point*/);
+	bool WorldAxisToObjectAxis(const Axis2 &object_y_axis, const Vector2 &world_point, Vector2 &object_point);
+	bool ObjectAxisToWorldAxis(const Axis2 &object_y_axis, const Vector2 &object_point, Vector2 &world_point);
 	bool ProjectPointOnAxis(const Axis2 &axis, const Vector2 &world_point, float *distance, Vector2 *projected_point/*world space point*/);
-	bool ProjectLineSegmentOnAxis(const Axis2 &axis, const LineSegment line_seg, LineSegment *projected_line_seg/*world space*/, float projected_distances[2]);
+	bool ProjectLineSegmentOnAxis(const Axis2 &axis, const LineSegment line_seg, LineSegment *projected_line_seg/*world space*/, float **projected_distances);
+	bool ProjectAABBOnAxis(const Axis2 &axis, AABB2 rect, float *min_distance, float *max_distance);
+	bool ProjectOBB2OnAxis(const Axis2 &axis, OBB2 rect, float *min_distance, float *max_distance);
+
+	bool IsAxisValid(const Axis2 &axis);
+
+	// used to transform from world space to object space 
+	bool AxisPointMoveRotate(const Axis2 &old_axis, const Axis2 &new_axis,
+		const Vector2 *old_points, size_t old_points_len, Vector2 **out_points, size_t out_points_len);
+	bool AxisPointMoveRotate(const Axis2 &old_axis, const Axis2 &new_axis, const Vector2 &old_point, Vector2 &out_point);
+
+	// used to transform from object space to world space 
+	bool AxisPointRotateMove(const Axis2 &old_axis, const Axis2 &new_axis,
+		const Vector2 *old_points, size_t old_points_len, Vector2 **out_points, size_t out_points_len);
+	bool AxisPointRotateMove(const Axis2 &old_axis, const Axis2 &new_axis, const Vector2 &old_point, Vector2 &out_point);
+
 };
 
 

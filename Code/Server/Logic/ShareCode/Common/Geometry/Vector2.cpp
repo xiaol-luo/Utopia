@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <math.h>
 #include <float.h>
+#include "GeometryDefine.h"
 
 using namespace std;
 
@@ -79,7 +80,12 @@ void Vector2::Scale(float scale)
 	x *= scale; y *= scale; 
 }
 
-float Vector2::Dot(const Vector2 &lhs, const Vector2 &rhs) 
+float Vector2::Cross(const Vector2 & lhs, const Vector2 & rhs)
+{
+	return lhs.x * rhs.y - rhs.x * lhs.y;
+}
+
+float Vector2::Dot(const Vector2 &lhs, const Vector2 &rhs)
 { 
 	return lhs.x * rhs.x + lhs.y * rhs.y;
 }

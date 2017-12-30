@@ -1,5 +1,8 @@
 #pragma once
 
+#include <map>
+#include <vector>
+
 namespace NumUtil
 {
 	template <typename T>

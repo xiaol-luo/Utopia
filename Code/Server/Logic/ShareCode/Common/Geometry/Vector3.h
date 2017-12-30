@@ -4,7 +4,7 @@ struct Vector2;
 
 struct Vector3
 {
-	float x, y, z;
+	float x = 0.0f, y = 0.0f, z = 0.0f;
 
 	Vector3(const float *p) : x(p[0]), y(p[1]), z(p[2]) {}
 	Vector3() : x(0), y(0), z(0) {}

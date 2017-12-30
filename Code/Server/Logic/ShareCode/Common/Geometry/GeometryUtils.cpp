@@ -6,8 +6,7 @@
 #include <stdlib.h>
 #include <cassert>
 #include <algorithm>
-
-
+#include "Common/Utils/NumUtils.h"
 
 float GeometryUtils::DegToRad(float deg)
 {
@@ -30,13 +29,31 @@ float GeometryUtils::DeltaAngle(const Vector3 &from, const Vector3 &to)
 	float angle = GeometryUtils::RadToDeg(acos(cos_val));
 	return cross_vec3.y >= 0 ? angle : -angle; 
 	// 使用左手坐标系，
-	// angle为正值表示拇指向上，顺着四指方向旋转angle。
-	// angle为负值表示拇指向下，顺着四指方向旋转angle。
+	// angle为正值表示拇指向+y，顺着四指方向旋转angle。
+	// angle为负值表示拇指向-y，顺着四指方向旋转angle。
 }
 
 float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
 {
-	return DeltaAngle(Vector3(from.x, 0, from.y), Vector3(to.x, 0, to.y));
+	float xx = DeltaAngle(Vector3(from.x, 0, from.y), Vector3(to.x, 0, to.y));
+	float angle = 0;
+	{
+		float cos_val = Vector2::Dot(from, to) / (from.Magnitude() * to.Magnitude());
+		cos_val = NumUtil::GetInRange(cos_val, -1.0f, 1.0f);
+		angle = RadToDeg(acos(cos_val));
+
+
+
+		// 原因：以逆时针方向为旋转角度正方向
+		// sign > 0 to在from的顺时针方向, 根据"原因", angle取负
+		// sign = 0 to和from同向或者反向
+		// sign < 0 to在from的逆时针方向，根据"原因", angle取正
+
+		float sign = Vector2::Cross(from, to);
+		if (sign > 0)
+			angle = -angle;
+	}
+	return angle;
 }
 
 Vector2 GeometryUtils::RotateVector2(const Vector2 &from, float rotationDeg)
@@ -51,11 +68,6 @@ Vector2 GeometryUtils::RotateVector2(const Vector2 &from, const Vector2 &newYAxi
 {
 	float angle = DeltaAngle(Vector2::up, newYAxis);
 	return GeometryUtils::RotateVector2(from, angle);
-}
-
-float GeometryUtils::Cross(Vector2 p1, Vector2 p2)
-{
-	return p1.x * p2.y - p2.x * p1.y;
 }
 
 //   r2-----r3
@@ -114,11 +126,11 @@ bool GeometryUtils::IsIntersectLineSegment(Vector2 p1, Vector2 p2, Vector2 q1, V
 	{
 		return false;
 	}
-	if (Cross(q1 - p1, p2 - p1)*Cross(p2 - p1, q2 - p1) < 0)
+	if (Vector2::Cross(q1 - p1, p2 - p1)* Vector2::Cross(p2 - p1, q2 - p1) < 0)
 	{
 		return false;
 	}
-	if (Cross(p1 - q1, q2 - q1)*Cross(q2 - q1, p2 - q1) < 0)
+	if (Vector2::Cross(p1 - q1, q2 - q1)* Vector2::Cross(q2 - q1, p2 - q1) < 0)
 	{
 		return false; 
 	}
@@ -337,50 +349,23 @@ bool GeometryUtils::IsIntersectObb2Sector(const OBB2 & obb2, const Sector & sect
 	return true;
 }
 
-bool GeometryUtils::WorldSpaceToObjectSpace(const Axis2 y_axis, const Vector2 & world_point, Vector2 & object_point)
+bool GeometryUtils::WorldAxisToObjectAxis(const Axis2 &object_y_axis, const Vector2 & world_point, Vector2 & object_point)
 {
-	return WorldSpaceToObjectSpace(y_axis.original_point, y_axis.direction, world_point, object_point);
+	return AxisPointMoveRotate(Axis2::y_axis, object_y_axis, world_point, object_point);
 }
 
-bool GeometryUtils::ObjectSpaceToWorldSpace(const Axis2 y_axis, const Vector2 & object_point, Vector2 & world_point)
+bool GeometryUtils::ObjectAxisToWorldAxis(const Axis2 &object_y_axis, const Vector2 & object_point, Vector2 & world_point)
 {
-	return ObjectSpaceToWorldSpace(y_axis.original_point, y_axis.direction, object_point, world_point);
+	return AxisPointRotateMove(object_y_axis, Axis2::y_axis, object_point, world_point);
 }
 
-bool GeometryUtils::WorldSpaceToObjectSpace(const Vector2 & y_axis_point, const Vector2 & y_axis_dir, const Vector2 & world_point, Vector2 & object_point)
+bool GeometryUtils::ProjectPointOnAxis(const Axis2 & axis, const Vector2 & world_point, float * distance, Vector2 * projected_point)
 {
-	if (y_axis_dir.SqrMagnitude() <= FLT_EPSILON)
-		return false;
-
-	// world space to inertial space
-	Vector2 intertial_point = world_point - y_axis_point;
-	// intertial space to object space. y_axis_point is compare to world space y axis and get the rotation. 
-	float delta_angle = DeltaAngle(Vector2::up, y_axis_dir);
-	// conver the intertial_point to object_point
-	object_point = RotateVector2(intertial_point, delta_angle);
-	return true;
-}
-
-bool GeometryUtils::ObjectSpaceToWorldSpace(const Vector2 & y_axis_point, const Vector2 & y_axis_dir, const Vector2 & object_point, Vector2 & world_point)
-{
-	if (y_axis_dir.SqrMagnitude() <= FLT_EPSILON)
-		return false;
-
-	float delta_angle = DeltaAngle(y_axis_dir, Vector2::up);
-	// conver the object_point to intertial_point 
-	Vector2 intertial_point = RotateVector2(object_point, delta_angle);
-	// inertial space to world space 
-	world_point = intertial_point + y_axis_point;
-	return true;
-}
-
-bool GeometryUtils::ProjectPointOnAxis(const Vector2 & axis_point, const Vector2 & axis_dir, const Vector2 &world_point, float * distance, Vector2 * projected_point)
-{
-	if (axis_dir.SqrMagnitude() <= FLT_EPSILON)
+	if (!axis.IsValid())
 		return false;
 
 	Vector2 object_point;
-	bool ret = WorldSpaceToObjectSpace(axis_point, axis_dir, world_point, object_point);
+	bool ret = WorldAxisToObjectAxis(axis, world_point, object_point);
 	if (!ret)
 		return ret;
 
@@ -391,7 +376,7 @@ bool GeometryUtils::ProjectPointOnAxis(const Vector2 & axis_point, const Vector2
 	if (nullptr != projected_point)
 	{
 		Vector2 world_hit_point;
-		ret = ObjectSpaceToWorldSpace(axis_point, axis_dir, Vector2(0, object_point.y), world_hit_point);
+		ret = ObjectAxisToWorldAxis(axis, Vector2(0, object_point.y), world_hit_point);
 		if (ret)
 		{
 			*projected_point = world_hit_point;
@@ -400,17 +385,153 @@ bool GeometryUtils::ProjectPointOnAxis(const Vector2 & axis_point, const Vector2
 	return ret;
 }
 
-bool GeometryUtils::ProjectPointOnAxis(const Axis2 & axis, const Vector2 & world_point, float * distance, Vector2 * projected_point)
-{
-	return false;
-}
-
-bool GeometryUtils::ProjectLineSegmentOnAxis(const Axis2 & axis, const LineSegment line_seg, LineSegment * projected_line_seg, float projected_distances[2])
+bool GeometryUtils::ProjectLineSegmentOnAxis(const Axis2 & axis, const LineSegment line_seg, LineSegment * projected_line_seg, float **projected_distances)
 {
 	if (axis.direction.SqrMagnitude() <= FLT_EPSILON)
 		return false;
 
-	return false;
+	Vector2 *ret_point2[2]; memset(ret_point2, 0, sizeof(ret_point2));
+	float *ret_distances[2]; memset(ret_distances, 0, sizeof(ret_distances));
+
+	if (nullptr != projected_line_seg)
+	{
+		ret_point2[0] = &projected_line_seg->p1;
+		ret_point2[1] = &projected_line_seg->p2;
+	}
+	if (nullptr != projected_distances)
+	{
+		ret_distances[0] = projected_distances[0];
+		ret_distances[1] = projected_distances[1];
+	}
+	if (!ProjectPointOnAxis(axis, line_seg.p1, ret_distances[0], ret_point2[0]))
+		return false;
+	if (!ProjectPointOnAxis(axis, line_seg.p2, ret_distances[1], ret_point2[1]))
+		return false;
+	return true;
+}
+
+bool GeometryUtils::ProjectAABBOnAxis(const Axis2 & axis, AABB2 rect, float * min_distance, float * max_distance)
+{
+	if (axis.direction.SqrMagnitude() <= FLT_EPSILON)
+		return false;
+
+	float ret_distances[4];
+	ProjectPointOnAxis(axis, rect.lt, &ret_distances[0], nullptr);
+	ProjectPointOnAxis(axis, rect.rb, &ret_distances[1], nullptr);
+	ProjectPointOnAxis(axis, rect.lt + Vector2(rect.rb.x - rect.lt.x, 0), &ret_distances[2], nullptr);
+	ProjectPointOnAxis(axis, rect.lt + Vector2(0, rect.rb.y - rect.lt.y), &ret_distances[4], nullptr);
+
+	auto ret_min_max = std::minmax_element(ret_distances, ret_distances + 4);
+	if (nullptr != min_distance)
+		*min_distance = *ret_min_max.first;
+	if (nullptr != max_distance)
+		*max_distance = *ret_min_max.second;
+	return true;
+}
+
+bool GeometryUtils::ProjectOBB2OnAxis(const Axis2 & axis, OBB2 rect, float * min_distance, float * max_distance)
+{
+	if (!axis.IsValid() || rect.y_axis_dir.SqrMagnitude() < FLT_EPSILON)
+		return false;
+
+	const static size_t OBB_POINTS = 4;
+	Vector2 points[OBB_POINTS];
+	points[0] = Vector2(-rect.x_size, -rect.y_size);	// lt
+	points[1] = Vector2(rect.x_size, -rect.y_size);		// rt
+	points[2] = Vector2(rect.x_size, rect.y_size);		// rb
+	points[3] = Vector2(-rect.x_size, rect.y_size);		// lb
+
+	Vector2 out_points[OBB_POINTS];
+	Vector2 *p_out_points[OBB_POINTS];
+	for (int i = 0; i < OBB_POINTS; ++i)
+		p_out_points[i] = out_points + i;
+
+	bool ret = AxisPointRotateMove(Axis2(rect.center, rect.y_axis_dir), axis, 
+		points, OBB_POINTS, p_out_points, OBB_POINTS);
+
+	float min_val = out_points[0].y;
+	float max_val = out_points[0].y;
+	for (int i = 1; i < OBB_POINTS; ++i)
+	{
+		if (out_points[i].y < min_val)
+			min_val = out_points[i].y;
+		if (out_points[i].y > max_val)
+			max_val = out_points[i].y;
+	}
+	if (nullptr != min_distance)
+		*min_distance = min_val;
+	if (nullptr != max_distance)
+		*max_distance = max_val;
+	return true;
+}
+
+bool GeometryUtils::IsAxisValid(const Axis2 &axis)
+{
+	return axis.IsValid();
+}
+
+bool GeometryUtils::AxisPointMoveRotate(const Axis2 & old_axis, const Axis2 & new_axis, const Vector2 * old_points, size_t old_points_len, Vector2 ** out_points, size_t out_points_len)
+{
+	if (!IsAxisValid(old_axis) || !IsAxisValid(new_axis) || 
+		nullptr == old_points || old_points_len <= 0 ||
+		nullptr == out_points || out_points_len <= 0)
+		return false;
+
+	float delta_angle = DeltaAngle(old_axis.direction, new_axis.direction);
+	Vector2 delta_v = new_axis.original_point - old_axis.original_point;
+	bool need_rotate = std::abs(delta_angle) > FLT_EPSILON;
+	for (size_t i = 0; i < old_points_len && i < out_points_len; ++i)
+	{
+		if (nullptr == out_points[i])
+			continue;
+
+		Vector2 p1 = old_points[i] - delta_v;			// 平移
+		Vector2 p2 = p1;
+		if (need_rotate)
+			p2 = RotateVector2(p1, delta_angle);		// 旋转
+		*(out_points[i]) = p2;
+	}
+	return true;
+}
+
+bool GeometryUtils::AxisPointMoveRotate(const Axis2 & old_axis, const Axis2 & new_axis, const Vector2 & old_point, Vector2 &out_point)
+{
+	Vector2 tmp; Vector2 *p_tmp = &tmp;
+	bool ret = AxisPointMoveRotate(old_axis, new_axis, &old_point, 1, &p_tmp, 1);
+	if (ret) out_point = tmp;
+	return ret;
+}
+
+bool GeometryUtils::AxisPointRotateMove(const Axis2 & old_axis, const Axis2 & new_axis, const Vector2 * old_points, size_t old_points_len, Vector2 ** out_points, size_t out_points_len)
+{
+	if (!IsAxisValid(old_axis) || !IsAxisValid(new_axis) ||
+		nullptr == old_points || old_points_len <= 0 ||
+		nullptr == out_points || out_points_len <= 0)
+		return false;
+
+	float delta_angle = DeltaAngle(old_axis.direction, new_axis.direction);
+	Vector2 delta_v = new_axis.original_point - old_axis.original_point;
+	bool need_rotate = std::abs(delta_angle) > FLT_EPSILON;
+	for (size_t i = 0; i < old_points_len && i < out_points_len; ++i)
+	{
+		if (nullptr == out_points[i])
+			continue;
+
+		Vector2 p1 = old_points[i];
+		if (need_rotate)
+			p1 = RotateVector2(p1, delta_angle);	// 旋转
+		Vector2 p2 = p1 - delta_v;					// 平移
+		*(out_points[i]) = p2;
+	}
+	return true;
+}
+
+bool GeometryUtils::AxisPointRotateMove(const Axis2 & old_axis, const Axis2 & new_axis, const Vector2 & old_point, Vector2 & out_point)
+{
+	Vector2 tmp; Vector2 *p_tmp = &tmp;
+	bool ret = AxisPointRotateMove(old_axis, new_axis, &old_point, 1, &p_tmp, 1);
+	if (ret) out_point = tmp;
+	return ret;
 }
 
 

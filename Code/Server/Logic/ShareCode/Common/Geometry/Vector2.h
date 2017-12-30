@@ -2,7 +2,7 @@
 
 struct Vector2
 {
-	float x, y;
+	float x = 0.0f, y = 0.0f;
 
 	Vector2(const float *p) : x(p[0]), y(p[1]) {}
 	Vector2() : x(0), y(0) {}
@@ -30,6 +30,7 @@ struct Vector2
 	// Returns the length of this vector
 	float Magnitude() const;
 
+	static float Cross(const Vector2 &lhs, const Vector2 &rhs);
 	static float Dot(const Vector2 &lhs, const Vector2 &rhs);
 	static Vector2 Normalize(const Vector2 &val);
 	static Vector2 Scale(const Vector2 &val, float scale);
