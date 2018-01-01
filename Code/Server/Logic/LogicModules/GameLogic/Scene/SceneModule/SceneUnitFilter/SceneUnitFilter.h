@@ -62,7 +62,7 @@ namespace GameLogic
 
 		struct  
 		{
-			int allow_types;
+			int64_t allow_types;
 		} unit_type;
 	};
 

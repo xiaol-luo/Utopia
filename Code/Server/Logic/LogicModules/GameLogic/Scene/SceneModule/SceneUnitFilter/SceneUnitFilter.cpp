@@ -57,8 +57,8 @@ namespace GameLogic
 			OBB2 obb2;
 			obb2.center = shape.pos;
 			obb2.y_axis_dir = shape.dir;
-			obb2.x_size = shape.shape_param.rect.length;
-			obb2.y_size = shape.shape_param.rect.width;
+			obb2.x_half_size = shape.shape_param.rect.length;
+			obb2.y_half_size = shape.shape_param.rect.width;
 			rect = GeometryUtils::BuildAABB2(obb2);
 			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
 			limit_num = shape.shape_param.rect.max_su_count;
@@ -115,7 +115,15 @@ namespace GameLogic
 
 	void SceneUnitFilter::FilterUnitType(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
-
+		int64_t allow_types = param.unit_type.allow_types;
+		for (auto it = units.begin(); it != units.end();)
+		{
+			NetProto::ESceneUnitType unit_type = it->second->GetUnitType();
+			if (allow_types & 1L << unit_type)
+				++it;
+			else
+				it = units.erase(it);
+		}
 	}
 
 	void SceneUnitFilter::FilterExcludeSuids(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)

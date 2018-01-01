@@ -28,7 +28,7 @@ float GeometryUtils::DeltaAngle(const Vector3 &from, const Vector3 &to)
 	float cos_val = Vector3::Dot(tmp_from, tmp_to);
 	float angle = GeometryUtils::RadToDeg(acos(cos_val));
 	return cross_vec3.y >= 0 ? angle : -angle; 
-	// 使用左手坐标系，
+	// 使用左手坐标系，顺时针为旋转正方向
 	// angle为正值表示拇指向+y，顺着四指方向旋转angle。
 	// angle为负值表示拇指向-y，顺着四指方向旋转angle。
 }
@@ -44,10 +44,10 @@ float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
 
 
 
-		// 原因：以逆时针方向为旋转角度正方向
-		// sign > 0 to在from的顺时针方向, 根据"原因", angle取负
+		// 原因：以顺时针方向为旋转角度正方向
+		// sign > 0 to在from的左边（逆时针）, 根据"原因", angle取负
 		// sign = 0 to和from同向或者反向
-		// sign < 0 to在from的逆时针方向，根据"原因", angle取正
+		// sign < 0 to在from的右边（顺时针），根据"原因", angle取正
 
 		float sign = Vector2::Cross(from, to);
 		if (sign > 0)
@@ -58,6 +58,8 @@ float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
 
 Vector2 GeometryUtils::RotateVector2(const Vector2 &from, float rotationDeg)
 {
+	// 因为顺时针为正，和书逆时针为正的假设刚刚相反。下边的计算方式来自书本
+	rotationDeg = -rotationDeg; 
 	float radians = GeometryUtils::DegToRad(rotationDeg);
 	float x = from.x * cos(radians) + from.y * -sin(radians);
 	float y = from.x * sin(radians) + from.y * cos(radians);
@@ -158,13 +160,13 @@ float GeometryUtils::GetLineIntersectPoint(Vector2 &a1, Vector2 &a2, Vector2 &b1
 	return -1;
 }
 
-bool GeometryUtils::IsIntersectCirlceRect(const Vector2 & circle_center, float radius, Vector2 rect_center, float length, float width)
+bool GeometryUtils::IsIntersectCirlceRect(const Vector2 & circle_center, float radius, Vector2 rect_center, float x_size, float y_size)
 {
 	Vector2 tmp = circle_center;
 	tmp = tmp - rect_center;
 
 	Vector2 v = Vector2(abs(tmp.x), abs(tmp.y));
-	Vector2 h = Vector2(length / 2, width / 2);
+	Vector2 h = Vector2(x_size / 2, y_size / 2);
 	v = v - h;
 	if (v.x < FLT_MIN)
 		v.x = 0;
@@ -221,7 +223,7 @@ bool GeometryUtils::InFlatDistance(const Vector3 & from, const Vector3 & to, flo
 
 AABB2 GeometryUtils::BuildAABB2(const OBB2 & obb2)
 {
-	Vector2 v = Vector2(obb2.x_size / 2, obb2.y_size / 2);
+	Vector2 v = Vector2(obb2.x_half_size / 2, obb2.y_half_size / 2);
 	Vector2 v1 = RotateVector2(Vector2(v.x, v.y), obb2.y_axis_dir);
 	Vector2 v2 = RotateVector2(Vector2(-v.x, v.y), obb2.y_axis_dir);
 	Vector2 v3 = RotateVector2(Vector2(-v.x, -v.y), obb2.y_axis_dir);
@@ -326,27 +328,89 @@ bool GeometryUtils::IsIntersectCircle(const Circle & c1, const Circle & c2)
 
 bool GeometryUtils::IsIntersectObb2(const OBB2 & b1, const OBB2 & b2)
 {
+	static const int X_AXIS_ROTATE_DEGREE = 90;
+	float min_val = 0, max_val = 0;
+	{
+		if (!ProjectOBB2OnAxis(Axis2(b1.center, b1.y_axis_dir), b2, &min_val, &max_val))
+			return false;
+		if (min_val > b1.y_half_size || max_val < -b1.y_half_size)
+			return false;
+		if (!ProjectOBB2OnAxis(Axis2(b1.center, RotateVector2(b1.y_axis_dir, X_AXIS_ROTATE_DEGREE)), b2, &min_val, &max_val))
+			return false;
+		if (min_val > b1.x_half_size || max_val < -b1.x_half_size)
+			return false;
+	}
+	{
+		if (!ProjectOBB2OnAxis(Axis2(b2.center, b2.y_axis_dir), b1, &min_val, &max_val))
+			return false;
+		if (min_val > b1.y_half_size || max_val < -b1.y_half_size)
+			return false;
+		if (!ProjectOBB2OnAxis(Axis2(b2.center, RotateVector2(b2.y_axis_dir, X_AXIS_ROTATE_DEGREE)), b1, &min_val, &max_val))
+			return false;
+		if (min_val > b1.y_half_size || max_val < -b1.y_half_size)
+			return false;
+	}
 	return true;
 }
 
 bool GeometryUtils::IsIntersectSector(const Sector & s1, const Sector & s2)
 {
-	return true;
+	assert(false);
+	return false;
 }
 
 bool GeometryUtils::IsIntersectCircleOBB2(const Circle & circle, const OBB2 & obb2)
 {
-	return true;
+	Vector2 object_point;
+	if (!WorldAxisToObjectAxis(obb2.GetAxis(), circle.center, object_point))
+		return false;
+
+	return IsIntersectCirlceRect(object_point, circle.radius, Vector2::zero, obb2.x_half_size * 2, obb2.y_half_size * 2);
 }
 
 bool GeometryUtils::IsIntersectCircleSector(const Circle & circle, const Sector & sector)
 {
-	return true;
+	if (!IsIntersectCircle(circle, Circle(sector.center, sector.radius)))
+		return false;
+
+	if (std::abs(DeltaAngle(sector.y_axis_dir, circle.center - sector.center)) <= sector.halfAngle)
+		return true;
+
+	// 扇形弧中点-扇形圆心的向量
+	Vector2 v = Vector2::Normalize(sector.y_axis_dir) * sector.radius; 
+	LineSegment line = LineSegment(sector.center, sector.center + RotateVector2(v, sector.halfAngle));
+	if (IsCircleIntersectLineSegment(circle, line))
+		return true;
+	line = LineSegment(sector.center, sector.center + RotateVector2(v, -sector.halfAngle));
+	if (IsCircleIntersectLineSegment(circle, line))
+		return true;
+	return false;
 }
 
 bool GeometryUtils::IsIntersectObb2Sector(const OBB2 & obb2, const Sector & sector)
 {
-	return true;
+	assert(false);
+	return false;
+}
+
+bool GeometryUtils::IsCircleIntersectLineSegment(const Circle & circle, const LineSegment & line_seg)
+{
+	Vector2 v1 = circle.center - line_seg.p1;
+	Vector2 v2 = line_seg.p2 - line_seg.p1;
+
+	float v2_len = v2.SqrMagnitude();
+	float u = Vector2::Dot(v1, v2) / v2_len;
+
+	Vector2 nearest_point;
+	if (u <= 0)
+		nearest_point = line_seg.p1;
+	else if (u >= v2_len)
+		nearest_point = line_seg.p2;
+	else
+		nearest_point = line_seg.p1 + Vector2::Normalize(v2) * u;
+
+	Vector2 v3 = circle.center - nearest_point;
+	return v3.Magnitude() < circle.radius * circle.radius;
 }
 
 bool GeometryUtils::WorldAxisToObjectAxis(const Axis2 &object_y_axis, const Vector2 & world_point, Vector2 & object_point)
@@ -436,10 +500,10 @@ bool GeometryUtils::ProjectOBB2OnAxis(const Axis2 & axis, OBB2 rect, float * min
 
 	const static size_t OBB_POINTS = 4;
 	Vector2 points[OBB_POINTS];
-	points[0] = Vector2(-rect.x_size, -rect.y_size);	// lt
-	points[1] = Vector2(rect.x_size, -rect.y_size);		// rt
-	points[2] = Vector2(rect.x_size, rect.y_size);		// rb
-	points[3] = Vector2(-rect.x_size, rect.y_size);		// lb
+	points[0] = Vector2(-rect.x_half_size, -rect.y_half_size);		// lt
+	points[1] = Vector2(rect.x_half_size, -rect.y_half_size);		// rt
+	points[2] = Vector2(rect.x_half_size, rect.y_half_size);		// rb
+	points[3] = Vector2(-rect.x_half_size, rect.y_half_size);		// lb
 
 	Vector2 out_points[OBB_POINTS];
 	Vector2 *p_out_points[OBB_POINTS];
@@ -532,6 +596,16 @@ bool GeometryUtils::AxisPointRotateMove(const Axis2 & old_axis, const Axis2 & ne
 	bool ret = AxisPointRotateMove(old_axis, new_axis, &old_point, 1, &p_tmp, 1);
 	if (ret) out_point = tmp;
 	return ret;
+}
+
+bool GeometryUtils::IsIntersectProjectedAxisLineSegment(float o1, float o2, float p1, float p2)
+{
+	std::pair<float, float> o = std::minmax(01, 02);
+	std::pair<float, float> p = std::minmax(p1, p2);
+
+	if (p.second <= o.first || p.first >= o.second)
+		return false;
+	return true;
 }
 
 

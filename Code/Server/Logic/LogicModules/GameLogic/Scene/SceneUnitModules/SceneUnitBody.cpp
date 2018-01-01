@@ -79,8 +79,8 @@ namespace GameLogic
 		{
 			OBB2 obb;
 			obb.center = pos;
-			obb.x_size = m_size_x;
-			obb.y_size = m_size_y;
+			obb.x_half_size = m_size_x / 2;
+			obb.y_half_size = m_size_y / 2;
 			obb.y_axis_dir = m_owner->GetTransform()->GetFaceDir();
 			ret = GeometryUtils::BuildAABB2(obb);
 		}
@@ -91,8 +91,8 @@ namespace GameLogic
 	{
 		OBB2 obb;
 		obb.center = m_owner->GetTransform()->GetPos().XZ();
-		obb.x_size = m_size_x;
-		obb.y_size = m_size_y;
+		obb.x_half_size = m_size_x;
+		obb.y_half_size = m_size_y;
 		obb.y_axis_dir = m_owner->GetTransform()->GetFaceDir();
 		return std::move(obb);
 	}

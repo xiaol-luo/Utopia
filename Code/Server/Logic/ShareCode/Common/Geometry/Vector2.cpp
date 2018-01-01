@@ -82,7 +82,7 @@ void Vector2::Scale(float scale)
 
 float Vector2::Cross(const Vector2 & lhs, const Vector2 & rhs)
 {
-	return lhs.x * rhs.y - rhs.x * lhs.y;
+	return lhs.x * rhs.y - lhs.y * rhs.x;
 }
 
 float Vector2::Dot(const Vector2 &lhs, const Vector2 &rhs)
