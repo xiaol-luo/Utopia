@@ -144,13 +144,29 @@ namespace GameLogic
 		EffectFilterShapeParam shape_param;
 	};
 
-	struct EffectFilterOption
+	enum EEffectFilterLimitNumPriority
+	{
+		EEffectFilterLimitNumPriority_None = 0,
+		EEffectFilterLimitNumPriority_NearCaster,
+		EEffectFilterLimitNumPriority_AwayCaster,
+		EEffectFilterLimitNumPriority_NearTarget,
+		EEffectFilterLimitNumPriority_AwayTarget,
+	};
+
+	struct EffectFilterConfig
 	{
 		EEffectFilterAnchor anchor = EEffectAnchor_Pos;
 		EEffectFilterShape shape = EffectFilterShape_None;
 		EffectFilterShapeParam shape_param;
-		int filter_relation;
-		int max_num;
+		int relations = 0;
+		int64_t unit_types = 0;
+		int max_num = -1;
+		EEffectFilterLimitNumPriority limit_num_priority = EEffectFilterLimitNumPriority_None;
+	};
+
+	struct EffectFilterParams
+	{
+		const EffectFilterConfig *cfg;
 		std::unordered_set<uint64_t> exclude_suids;
 	};
 }

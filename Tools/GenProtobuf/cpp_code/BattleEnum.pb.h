@@ -246,7 +246,7 @@ enum ESkillState {
   ESS_ReadyGo = 0,
   ESS_Preparing = 1,
   ESS_Releasing = 2,
-  ESS_Guilding = 3,
+  ESS_Guiding = 3,
   ESS_Lasting = 4,
   ESS_End = 5,
   ESkillState_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,

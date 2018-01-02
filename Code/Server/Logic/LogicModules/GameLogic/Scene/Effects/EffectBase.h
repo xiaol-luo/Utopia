@@ -26,12 +26,12 @@ namespace GameLogic
 		void End(EEffectEndCase end_case);
 		void Loop(int64_t now_ms, int64_t delta_ms);
 
-		bool IsGuilding();
-		virtual bool CanCancelGuild();
-		virtual bool CanCelGuild(bool is_force);
+		bool IsGuiding();
+		virtual bool CanCancelGuide();
+		virtual bool CanCelGuide(bool is_force);
 
 	protected:
-		virtual bool NeedGuild(); // 是否需要引导
+		virtual bool NeedGuide(); // 是否需要引导
 		// 是否可复原，true则执行完begin直接返回，不加入SceneEfffect，不执行Loop和end。用与heal和hurt等
 		virtual bool Reversible();
 		virtual void OnBegin(UseEffectParam use_effect_param) {}

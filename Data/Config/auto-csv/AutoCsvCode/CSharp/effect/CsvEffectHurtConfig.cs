@@ -9,12 +9,14 @@ namespace Config
     {
         public const string Field_Name_id = "id";
         public const string Field_Name_value = "value";
+        public const string Field_Name_filter_id = "filter_id";
     }
 
     public class CsvEffectHurtConfig
     {
         public int id;
         public int value;
+        public int filter_id;
 
         public delegate bool ConfigCheckFunc(CsvEffectHurtConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -22,6 +24,7 @@ namespace Config
             bool all_ok = true;
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectHurtConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectHurtConfig.Field_Name_id], ref id);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectHurtConfig.Field_Name_value) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectHurtConfig.Field_Name_value], ref value);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectHurtConfig.Field_Name_filter_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectHurtConfig.Field_Name_filter_id], ref filter_id);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -49,6 +52,7 @@ namespace Config
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectHurtConfig.Field_Name_id));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectHurtConfig.Field_Name_value));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectHurtConfig.Field_Name_filter_id));
                 }
                 catch (Exception e)
                 {

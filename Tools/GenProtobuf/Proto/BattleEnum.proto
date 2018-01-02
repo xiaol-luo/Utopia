@@ -101,7 +101,7 @@ enum ESkillState
 	ESS_ReadyGo = 0;			// 准备好释放
 	ESS_Preparing = 1;			// 吟唱
 	ESS_Releasing = 2;			// 前摇
-	ESS_Guilding = 3;			// 引导
+	ESS_Guiding = 3;			// 引导
 	ESS_Lasting = 4;			// 后摇
 	ESS_End = 5;				// 结束
 }

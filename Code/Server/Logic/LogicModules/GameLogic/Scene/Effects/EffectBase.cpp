@@ -53,10 +53,10 @@ namespace GameLogic
 		if (IsDone())
 			return;
 
-		if (this->NeedGuild())
+		if (this->NeedGuide())
 		{
 			assert(m_user_effect_param.skill);
-			m_user_effect_param.skill->AddGuildEffect(this->shared_from_this());
+			m_user_effect_param.skill->AddGuideEffect(this->shared_from_this());
 		}
 	}
 
@@ -116,34 +116,34 @@ namespace GameLogic
 		}
 	}
 
-	bool EffectBase::IsGuilding()
+	bool EffectBase::IsGuiding()
 	{
-		if (NeedGuild() && (EEffectStage_Begin == m_stage || EEffectStage_Loop == m_stage) &&
+		if (NeedGuide() && (EEffectStage_Begin == m_stage || EEffectStage_Loop == m_stage) &&
 			m_next_loop_effect_idx < m_base_cfg->GetLoopEffectIds().effect_ids.size())
 			return true;
 		return false;
 	}
 
-	bool EffectBase::CanCancelGuild()
+	bool EffectBase::CanCancelGuide()
 	{
-		if (this->CanCancelGuild())
+		if (this->CanCancelGuide())
 			return true;
-		return !this->IsGuilding();
+		return !this->IsGuiding();
 	}
 
-	bool EffectBase::CanCelGuild(bool is_force)
+	bool EffectBase::CanCelGuide(bool is_force)
 	{
-		if (!is_force && !this->CanCancelGuild())
+		if (!is_force && !this->CanCancelGuide())
 			return false;
 		this->End(EEffectEndCase_Break);
 		return true;
 	}
 
-	bool EffectBase::NeedGuild()
+	bool EffectBase::NeedGuide()
 	{
 		if (!this->Reversible())
 			return false;
-		return m_base_cfg->NeedGuild();
+		return m_base_cfg->NeedGuide();
 	}
 
 	bool EffectBase::Reversible()

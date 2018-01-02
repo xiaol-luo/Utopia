@@ -43,9 +43,9 @@ namespace GameLogic
 		void SyncClient();
 		SyncClientMsg GetPbMsg();
 
-		void AddGuildEffect(std::shared_ptr<EffectBase> effect);
-		void RemoveGuildEffect(uint64_t effect_key);
-		void ClearGuildEffects();
+		void AddGuideEffect(std::shared_ptr<EffectBase> effect);
+		void RemoveGuideEffect(uint64_t effect_key);
+		void ClearGuideEffects();
 
 	protected:
 		bool CheckCanCast();
@@ -59,7 +59,7 @@ namespace GameLogic
 
 		UseSkillParam m_use_skill_param;
 
-		std::unordered_map<uint64_t, std::shared_ptr<EffectBase>> m_guild_effects;
+		std::unordered_map<uint64_t, std::shared_ptr<EffectBase>> m_guide_effects;
 		bool m_can_move = true;
 		int64_t m_last_release_ms = LONG_MIN;
 		int m_state = NetProto::ESS_End;

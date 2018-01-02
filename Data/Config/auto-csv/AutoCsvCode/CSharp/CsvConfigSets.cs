@@ -13,6 +13,7 @@ namespace Config
         public CsvEffectHurtConfigSet csv_CsvEffectHurtConfigSet = new CsvEffectHurtConfigSet();
         public CsvEffectHealConfigSet csv_CsvEffectHealConfigSet = new CsvEffectHealConfigSet();
         public CsvEffectAttrsConfigSet csv_CsvEffectAttrsConfigSet = new CsvEffectAttrsConfigSet();
+        public CsvEffectFilterConfigSet csv_CsvEffectFilterConfigSet = new CsvEffectFilterConfigSet();
 
         public bool Load(string root_path)
         {
@@ -49,6 +50,11 @@ namespace Config
             if (!csv_CsvEffectAttrsConfigSet.Load(Path.Combine(root_path, "effect/CsvEffectAttrsConfig.csv")))
             {
                 errMsg = "Load csv_CsvEffectAttrsConfigSet fail";
+                return false;
+            }
+            if (!csv_CsvEffectFilterConfigSet.Load(Path.Combine(root_path, "effect/CsvEffectFilterConfig.csv")))
+            {
+                errMsg = "Load csv_CsvEffectFilterConfigSet fail";
                 return false;
             }
 

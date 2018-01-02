@@ -16,16 +16,16 @@ namespace GameLogic
 		const EffectIdVec & GetBeginEffectIds() const { return m_begin_effect_ids; }
 		const EndEffectIdVec & GetEndEffectIds() const { return m_end_effect_ids; }
 		const TimeLineEffectIdsConfig & GetLoopEffectIds() const { return m_loop_effect_cfg; }
-		bool NeedGuild() const { return m_need_guild; }
+		bool NeedGuide() const { return m_need_guide; }
 		bool Reversible() const { return m_reversible; }
-		bool CanCancelGuild() const { return m_can_cancel_guild; }
-		int GetId() { return m_id; }\
+		bool CanCancelGuide() const { return m_can_cancel_guide; }
+		int GetId() { return m_id; }
 
 	public:
 		void SetId(int val) { m_id = val; }
-		void SetNeedGuild(bool val) { m_need_guild = val; }
+		void SetNeedGuide(bool val) { m_need_guide = val; }
 		void SetReversible(bool val) { m_reversible = val; }
-		void SetCanCancelGuild(bool val) { m_can_cancel_guild = val; }
+		void SetCanCancelGuide(bool val) { m_can_cancel_guide = val; }
 		void SetBeginEffectIds(const EffectIdVec &val) { m_begin_effect_ids = val; }
 		void SetEndEffectIds(const EndEffectIdVec &val) { m_end_effect_ids = val; }
 		void SetLoopEffectCfg(const TimeLineEffectIdsConfig &val) { m_loop_effect_cfg = val; }
@@ -34,9 +34,9 @@ namespace GameLogic
 		EffectIdVec m_begin_effect_ids;
 		EndEffectIdVec m_end_effect_ids;
 		TimeLineEffectIdsConfig m_loop_effect_cfg;
-		bool m_need_guild = false;
-		bool m_reversible = true;
-		bool m_can_cancel_guild = true;
-		EffectFilterOption m_filter_option;
+		bool m_need_guide = false;
+		bool m_reversible = true;	// 是否可逆，hurt heal类型明显不可逆, 其他大多可逆
+		bool m_can_cancel_guide = true;
+		EffectFilterConfig m_filter_option;
 	};
 }

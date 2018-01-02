@@ -119,7 +119,7 @@ namespace GameLogic
 		for (auto it = units.begin(); it != units.end();)
 		{
 			NetProto::ESceneUnitType unit_type = it->second->GetUnitType();
-			if (allow_types & 1L << unit_type)
+			if (allow_types & ((int64_t)1 << unit_type))
 				++it;
 			else
 				it = units.erase(it);

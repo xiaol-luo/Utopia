@@ -49,23 +49,23 @@ namespace NetProto {
             "C0VTU19Ud29TbG90EAwSEQoNRVNTX1RocmVlU2xvdBANEhAKDEVTU19Gb3Vy",
             "U2xvdBAOEhAKDEVTU19GaXZlU2xvdBAPEg8KC0VTU19TaXhTbG90EBASEQoN",
             "RVNTX1NldmVuU2xvdBARKjcKCUVTa2lsbEJhchIVChFFU2tpbGxCYXJfRGVm",
-            "YXVsdBAAEhMKD0VTa2lsbEJhcl9FeHRyYRABKnQKC0VTa2lsbFN0YXRlEg8K",
+            "YXVsdBAAEhMKD0VTa2lsbEJhcl9FeHRyYRABKnMKC0VTa2lsbFN0YXRlEg8K",
             "C0VTU19SZWFkeUdvEAASEQoNRVNTX1ByZXBhcmluZxABEhEKDUVTU19SZWxl",
-            "YXNpbmcQAhIQCgxFU1NfR3VpbGRpbmcQAxIPCgtFU1NfTGFzdGluZxAEEgsK",
-            "B0VTU19FbmQQBSp9CgxFU2tpbGxVc2VXYXkSGgoWRVNraWxsVXNlV2F5X1Nj",
-            "ZW5lVW5pdBAAEhoKFkVTa2lsbFVzZVdheV9EaXJlY3Rpb24QARIZChVFU2tp",
-            "bGxVc2VXYXlfUG9zaXRpb24QAhIaChZFU2tpbGxVc2VXYXlfUG9zQW5kRGly",
-            "EAMqiwEKEkVTY2VuZVVuaXRSZWxhdGlvbhIbChdFU2NlbmVVbml0UmVsYXRp",
-            "b25fTm9uZRAAEhsKF0VTY2VuZVVuaXRSZWxhdGlvbl9TZWxmEAESHQoZRVNj",
-            "ZW5lVW5pdFJlbGF0aW9uX0ZyaWVuZBACEhwKGEVTY2VuZVVuaXRSZWxhdGlv",
-            "bl9FbmVteRADKnkKDkVTY2VuZVVuaXRDYW1wEhYKEkVTY2VuZVVuaXRDYW1w",
-            "X1JlZBAAEhcKE0VTY2VuZVVuaXRDYW1wX0JsdWUQARIaChZFU2NlbmVVbml0",
-            "Q2FtcF9Nb25zdGVyEAISGgoWRVNjZW5lVW5pdENhbXBfTmV1dHJhbBADKrUB",
-            "Cg5FU2NlbmVVbml0VHlwZRIaChZFc2NlbmVVbml0VHlwZV9Vbmtub3duEAAS",
-            "FwoTRXNjZW5lVW5pdFR5cGVfSGVybxABEhoKFkVzY2VuZVVuaXRUeXBlX1Nv",
-            "bGRpZXIQAhIaChZFc2NlbmVVbml0VHlwZV9Nb25zdGVyEAMSGwoXRXNjZW5l",
-            "VW5pdFR5cGVfQnVpbGRpbmcQBBIZChVFc2NlbmVVbml0VHlwZV9FZmZlY3QQ",
-            "BUID+AEBYgZwcm90bzM="));
+            "YXNpbmcQAhIPCgtFU1NfR3VpZGluZxADEg8KC0VTU19MYXN0aW5nEAQSCwoH",
+            "RVNTX0VuZBAFKn0KDEVTa2lsbFVzZVdheRIaChZFU2tpbGxVc2VXYXlfU2Nl",
+            "bmVVbml0EAASGgoWRVNraWxsVXNlV2F5X0RpcmVjdGlvbhABEhkKFUVTa2ls",
+            "bFVzZVdheV9Qb3NpdGlvbhACEhoKFkVTa2lsbFVzZVdheV9Qb3NBbmREaXIQ",
+            "AyqLAQoSRVNjZW5lVW5pdFJlbGF0aW9uEhsKF0VTY2VuZVVuaXRSZWxhdGlv",
+            "bl9Ob25lEAASGwoXRVNjZW5lVW5pdFJlbGF0aW9uX1NlbGYQARIdChlFU2Nl",
+            "bmVVbml0UmVsYXRpb25fRnJpZW5kEAISHAoYRVNjZW5lVW5pdFJlbGF0aW9u",
+            "X0VuZW15EAMqeQoORVNjZW5lVW5pdENhbXASFgoSRVNjZW5lVW5pdENhbXBf",
+            "UmVkEAASFwoTRVNjZW5lVW5pdENhbXBfQmx1ZRABEhoKFkVTY2VuZVVuaXRD",
+            "YW1wX01vbnN0ZXIQAhIaChZFU2NlbmVVbml0Q2FtcF9OZXV0cmFsEAMqtQEK",
+            "DkVTY2VuZVVuaXRUeXBlEhoKFkVzY2VuZVVuaXRUeXBlX1Vua25vd24QABIX",
+            "ChNFc2NlbmVVbml0VHlwZV9IZXJvEAESGgoWRXNjZW5lVW5pdFR5cGVfU29s",
+            "ZGllchACEhoKFkVzY2VuZVVuaXRUeXBlX01vbnN0ZXIQAxIbChdFc2NlbmVV",
+            "bml0VHlwZV9CdWlsZGluZxAEEhkKFUVzY2VuZVVuaXRUeXBlX0VmZmVjdBAF",
+            "QgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESceneUnitRelation), typeof(global::NetProto.ESceneUnitCamp), typeof(global::NetProto.ESceneUnitType), }, null));
@@ -234,7 +234,7 @@ namespace NetProto {
     /// <summary>
     /// 引导
     /// </summary>
-    [pbr::OriginalName("ESS_Guilding")] EssGuilding = 3,
+    [pbr::OriginalName("ESS_Guiding")] EssGuiding = 3,
     /// <summary>
     /// 后摇
     /// </summary>

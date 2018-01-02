@@ -11,6 +11,7 @@ namespace Config
     struct CsvEffectHurtConfigSet;
     struct CsvEffectHealConfigSet;
     struct CsvEffectAttrsConfigSet;
+    struct CsvEffectFilterConfigSet;
 
     struct CsvConfigSets
     {
@@ -21,6 +22,7 @@ namespace Config
         CsvEffectHurtConfigSet *csv_CsvEffectHurtConfigSet = nullptr;
         CsvEffectHealConfigSet *csv_CsvEffectHealConfigSet = nullptr;
         CsvEffectAttrsConfigSet *csv_CsvEffectAttrsConfigSet = nullptr;
+        CsvEffectFilterConfigSet *csv_CsvEffectFilterConfigSet = nullptr;
 
         ~CsvConfigSets();
         bool Load(std::string root_path);

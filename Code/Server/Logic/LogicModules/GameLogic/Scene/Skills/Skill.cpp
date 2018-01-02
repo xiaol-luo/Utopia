@@ -174,25 +174,25 @@ namespace GameLogic
 				// ÊÍ·ÅEfffect
 				this->ReleaseEffects();
 				
-				m_state = NetProto::ESS_Guilding;
+				m_state = NetProto::ESS_Guiding;
 				m_stage_begin_ms = now_ms;
 			}
 
 			// Òýµ¼
-			if (NetProto::ESS_Guilding == m_state)
+			if (NetProto::ESS_Guiding == m_state)
 			{
-				bool is_guilding = false;
+				bool is_guiding = false;
 				{
-					for (auto kv_pair : m_guild_effects)
+					for (auto kv_pair : m_guide_effects)
 					{
-						if (kv_pair.second->IsGuilding())
+						if (kv_pair.second->IsGuiding())
 						{
-							is_guilding = true;
+							is_guiding = true;
 							break;
 						}
 					}
 				}
-				if (is_guilding)
+				if (is_guiding)
 					break;
 
 				m_state = NetProto::ESS_Lasting;
@@ -241,12 +241,12 @@ namespace GameLogic
 	bool Skill::CanCancel()
 	{
 		bool ret = true;
-		if (NetProto::ESS_Guilding == m_state)
+		if (NetProto::ESS_Guiding == m_state)
 		{
 			bool can_cancel = true;
-			for (auto kv_pair : m_guild_effects)
+			for (auto kv_pair : m_guide_effects)
 			{
-				if (!kv_pair.second->CanCancelGuild())
+				if (!kv_pair.second->CanCancelGuide())
 				{
 					ret = false;
 					break;
@@ -274,21 +274,21 @@ namespace GameLogic
 		return std::move(SyncClientMsg(NetProto::PID_SceneUnitSkillAction, msg));
 	}
 
-	void Skill::AddGuildEffect(std::shared_ptr<EffectBase> effect)
+	void Skill::AddGuideEffect(std::shared_ptr<EffectBase> effect)
 	{
 		if (nullptr == effect || effect->GetKey() <= 0)
 			return;
-		m_guild_effects.insert_or_assign(effect->GetKey(), effect);
+		m_guide_effects.insert_or_assign(effect->GetKey(), effect);
 	}
 
-	void Skill::RemoveGuildEffect(uint64_t effect_key)
+	void Skill::RemoveGuideEffect(uint64_t effect_key)
 	{
-		m_guild_effects.erase(effect_key);
+		m_guide_effects.erase(effect_key);
 	}
 
-	void Skill::ClearGuildEffects()
+	void Skill::ClearGuideEffects()
 	{
-		m_guild_effects.clear();
+		m_guide_effects.clear();
 	}
 
 	bool Skill::CheckCanCast()
