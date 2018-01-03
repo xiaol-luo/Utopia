@@ -21,10 +21,7 @@ namespace GameLogic
 		for (Config::CsvEffectHurtConfig *item : csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec)
 		{
 			EffectHurtConfig *cfg = new EffectHurtConfig();
-			cfg->SetId(item->id);
-			cfg->SetReversible(false);
-			assert(item->value > 0);
-			cfg->SetHurt(item->value);
+			assert(cfg->InitCfg(item));
 			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
 			assert(ret.second);
 		}

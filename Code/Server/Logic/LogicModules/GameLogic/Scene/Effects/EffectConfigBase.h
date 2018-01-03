@@ -22,6 +22,7 @@ namespace GameLogic
 		int GetId() { return m_id; }
 
 	public:
+		/*
 		void SetId(int val) { m_id = val; }
 		void SetNeedGuide(bool val) { m_need_guide = val; }
 		void SetReversible(bool val) { m_reversible = val; }
@@ -29,6 +30,7 @@ namespace GameLogic
 		void SetBeginEffectIds(const EffectIdVec &val) { m_begin_effect_ids = val; }
 		void SetEndEffectIds(const EndEffectIdVec &val) { m_end_effect_ids = val; }
 		void SetLoopEffectCfg(const TimeLineEffectIdsConfig &val) { m_loop_effect_cfg = val; }
+		*/
 	protected:
 		int m_id = 0;
 		EffectIdVec m_begin_effect_ids;
@@ -37,6 +39,6 @@ namespace GameLogic
 		bool m_need_guide = false;
 		bool m_reversible = true;	// 是否可逆，hurt heal类型明显不可逆, 其他大多可逆
 		bool m_can_cancel_guide = true;
-		EffectFilterConfig m_filter_option;
+		int m_filter_id = 0;
 	};
 }

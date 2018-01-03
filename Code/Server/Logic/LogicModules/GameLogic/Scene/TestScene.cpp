@@ -21,6 +21,7 @@
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 #include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"
 #include "Network/Protobuf/Battle.pb.h"
+#include "GameLogic/Scene/Effects/EffectFilterConfig.h"
 
 namespace GameLogic
 {
@@ -43,6 +44,7 @@ namespace GameLogic
 			bool ret = true;
 			ret = ret & m_cfg->skill_cfgs->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
 			ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+			ret = ret & m_cfg->effect_filter_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
 			if (!ret)
 				return false;
 		}
