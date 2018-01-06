@@ -112,21 +112,18 @@ namespace GameLogic
 		 struct
 		 {
 			 float radius = 0;
-			 int max_su_count = 0;
 		 } circle;
 
 		 struct
 		 {
-			 float length = 0;
-			 float width = 0;
-			 int max_su_count = 0;
+			 float x_size = 0;
+			 float y_size = 0;
 		 } rect;
 
 		 struct
 		 {
 			 float radius = 0;
-			 float angles = 0;
-			 int max_su_count = 0;
+			 float angle = 0;
 		 } sector;
 	};
 

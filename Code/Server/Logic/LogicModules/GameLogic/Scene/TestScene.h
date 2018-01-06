@@ -16,7 +16,10 @@ namespace GameLogic
 		virtual bool OnLateAwake() override;
 		virtual void OnLateUpdate() override;
 
+		bool CheckConfigValid();
+
 		void TestAction();
 		Ticker m_test_ticker;
+
 	};
 }

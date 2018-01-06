@@ -19,7 +19,8 @@ namespace GameLogic
 		bool NeedGuide() const { return m_need_guide; }
 		bool Reversible() const { return m_reversible; }
 		bool CanCancelGuide() const { return m_can_cancel_guide; }
-		int GetId() { return m_id; }
+		int GetId() const { return m_id; }
+		int GetFilterId() const { return m_filter_id; }
 
 	public:
 		/*

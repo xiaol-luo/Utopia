@@ -2,22 +2,112 @@
 #include "Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"
 #include "Config/AutoCsvCode/CsvConfigSets.h"
 #include <assert.h>
+#include "Network/Protobuf/BattleEnum.pb.h"
 
 namespace GameLogic
 {
-	EffectFilterConfig::EffectFilterConfig()
+	template <typename T>
+	T ConvertUtil(std::unordered_map<std::string, T> &match_map, const std::string &val)
 	{
-
+		auto it = match_map.find(val);
+		if (match_map.end() != it)
+			return it->second;
+		assert(false);
+		return (T)0;
 	}
 
-	EffectFilterConfig::~EffectFilterConfig()
+	// EEffectFilterLimitNumPriority
+	static std::unordered_map<std::string, EEffectFilterLimitNumPriority> Limit_Num_Prioriry_Map ({
+		{ "near_caster", EEffectFilterLimitNumPriority_NearCaster },
+		{ "away_caster", EEffectFilterLimitNumPriority_AwayCaster },
+		{ "near_target", EEffectFilterLimitNumPriority_NearTarget },
+		{ "away_target", EEffectFilterLimitNumPriority_AwayTarget },
+		{ "", EEffectFilterLimitNumPriority_None},
+	});
+	EEffectFilterLimitNumPriority ConvertEEffectFilterLimitNumPriority(std::string val)
 	{
-
+		return ConvertUtil(Limit_Num_Prioriry_Map, val);
 	}
+
+	// EsceneUnitType
+	static std::unordered_map<std::string, NetProto::ESceneUnitType> UNIT_TYPES_MAP({
+		{ "hero", NetProto::EsceneUnitType_Hero },
+		{ "monster", NetProto::EsceneUnitType_Monster },
+		{ "soldier", NetProto::EsceneUnitType_Soldier },
+		{ "building", NetProto::EsceneUnitType_Building },
+		{ "effect", NetProto::EsceneUnitType_Effect },
+	});
+	NetProto::ESceneUnitType ConvertSceneUnitType(std::string val)
+	{
+		return ConvertUtil(UNIT_TYPES_MAP, val);
+	}
+	uint64_t ConvertESceneUnitTypes(std::string val)
+	{
+		uint64_t ret = 0;
+		std::vector<std::string> unit_types;
+		assert(ConfigUtil::Str2Vec(val, unit_types));
+		for (std::string &unit_type : unit_types)
+		{
+			ret |= uint64_t(1) << ConvertSceneUnitType(unit_type);
+		}
+		return ret;
+	}
+
+	// EEffectFilterRelation
+	std::unordered_map<std::string, EEffectFilterRelation> Effect_Relation_Map({
+		{ "self", EEffectFilterRelation_Self },
+		{ "friend", EEffectFilterRelation_Friend },
+		{ "enemy", EEffectFilterRelation_Enemy },
+	});
+	int ConvertERelations(std::string val)
+	{
+		int ret = 0;
+		std::vector<std::string> relation_vals;
+		assert(ConfigUtil::Str2Vec(val, relation_vals));
+		for (std::string &relation_val : relation_vals)
+		{
+			ret |= 1 << ConvertUtil(Effect_Relation_Map, relation_val);
+		}
+		return ret;
+	}
+
+	// EEffectFilterRelation
+	std::unordered_map<std::string, EEffectFilterAnchor> Effect_Anchor_Map({
+		{ "pos", EEffectAnchor_Pos},
+		{ "target", EEffectAnchor_Target },
+		{ "owner", EEffectAnchor_SkillOwner },
+	});
 
 	bool EffectFilterConfig::InitCfg(Config::CsvEffectFilterConfig * csv_cfg)
 	{
-		m_id = csv_cfg->id;
+		id = csv_cfg->id;
+		limit_num = csv_cfg->limit_num;
+		limit_num_priority = ConvertUtil(Limit_Num_Prioriry_Map, csv_cfg->limit_num_priority);
+		unit_types = ConvertESceneUnitTypes(csv_cfg->unit_types);
+		relations = ConvertERelations(csv_cfg->relations);
+		anchor = ConvertUtil(Effect_Anchor_Map, csv_cfg->anchor);
+
+		if (csv_cfg->shape_circle > 0)
+		{
+			shape = EEffectFilterShape_Circle;
+			shape_param.circle.radius = csv_cfg->shape_circle;
+		}
+		else if (!csv_cfg->shape_rect.empty())
+		{
+			assert(2 == csv_cfg->shape_rect.size());
+			shape = EEffectFilterShape_Rect;
+			shape_param.rect.x_size = csv_cfg->shape_rect[0];
+			shape_param.rect.y_size = csv_cfg->shape_rect[1];
+		}
+		else if (!csv_cfg->shape_sector.empty())
+		{
+			assert(2 == csv_cfg->shape_sector.size());
+			shape = EEffectFilterShape_Sector;
+			shape_param.sector.radius = csv_cfg->shape_sector[0];
+			shape_param.sector.angle = csv_cfg->shape_sector[1];
+		}
+
+		assert(EffectFilterShape_None != shape);
 		return true;
 	}
 
@@ -41,7 +131,7 @@ namespace GameLogic
 		{
 			EffectFilterConfig *cfg = new EffectFilterConfig();
 			assert(cfg->InitCfg(item));
-			auto ret = m_filter_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
+			auto ret = m_filter_cfgs.insert(std::make_pair(cfg->id, cfg));
 			assert(ret.second);
 		}
 

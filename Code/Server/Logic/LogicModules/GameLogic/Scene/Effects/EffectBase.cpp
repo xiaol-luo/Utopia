@@ -5,6 +5,11 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/Skills/Skill.h"
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/Effects/EffectFilterConfig.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 
 namespace GameLogic
 {
@@ -21,6 +26,16 @@ namespace GameLogic
 	EffectBase::~EffectBase()
 	{
 		m_user_effect_param.Reset();
+	}
+
+	std::shared_ptr<SceneUnit> EffectBase::GetCaster()
+	{
+		return m_user_effect_param.skill->GetCaster();
+	}
+
+	std::shared_ptr<SceneUnit> EffectBase::GetEffectTarget()
+	{
+		return m_scene->GetUnit(m_user_effect_param.target_suid);
 	}
 
 	void EffectBase::Begin(UseEffectParam use_effect_param)
@@ -177,5 +192,71 @@ namespace GameLogic
 	{
 		const TimeLineEffectIdsConfig &cfg = m_base_cfg->GetLoopEffectIds();
 		return m_next_loop_effect_idx >= cfg.effect_ids.size();
+	}
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::FilterSceneUnits()
+	{
+		SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
+		const EffectFilterConfig *filter_cfg = m_scene->GetCfg()->effect_filter_cfg_mgr->GetCfg(m_base_cfg->GetFilterId());
+		assert(filter_cfg);
+
+		std::shared_ptr<SceneUnit> caster = this->GetCaster();
+		EffectFilterShape shape;
+		shape.shape = filter_cfg->shape;
+		shape.shape_param = filter_cfg->shape_param;
+		
+		// todo
+		switch (filter_cfg->anchor)
+		{
+			case EEffectAnchor_Pos:
+			{
+				shape.pos = m_user_effect_param.pos.XZ();
+				break;
+			}	
+			case EEffectAnchor_SkillOwner:
+			{
+				shape.pos = caster->GetTransform()->GetPos().XZ();
+			}
+			break;
+			case EEffectAnchor_Target:
+			{
+				std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
+				if (nullptr == target_su)
+				{
+					shape.pos = m_user_effect_param.pos.XZ();
+				}
+				else
+				{
+					shape.pos = target_su->GetTransform()->GetPos().XZ();
+				}
+			}
+			break;
+			default:
+				break;
+		}
+
+		shape.dir = m_user_effect_param.dir;
+
+		ESceneUnitFilterWayParams params;
+		if (0 != filter_cfg->relations)
+		{
+			params.is_active[ESceneUnitFilterWay_Relation] = true;
+			params.relations.caster = caster;
+			params.relations.relations = filter_cfg->relations;
+		}
+		if (filter_cfg->limit_num > 0)
+		{
+			params.is_active[ESceneUnitFilterWay_LimitNum] = true;
+			params.limit_num.num = filter_cfg->limit_num;
+			params.limit_num.priority = filter_cfg->limit_num_priority;
+		}
+		if (0 != filter_cfg->unit_types)
+		{
+			params.is_active[ESceneUnitFilterWay_UnitType] = true;
+			params.relations.caster = caster;
+			params.relations.relations = filter_cfg->relations;
+		}
+
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret = su_filter->FilterSceneUnit(shape, params);
+		return ret;
 	}
 }

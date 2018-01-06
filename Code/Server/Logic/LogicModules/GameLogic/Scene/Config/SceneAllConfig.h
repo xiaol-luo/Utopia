@@ -17,8 +17,8 @@ namespace GameLogic
 		~SceneAllConfig();
 
 		Config::CsvSceneConfig *scene_cfg = nullptr;
+		EffectFilterConfigMgr *effect_filter_cfg_mgr = nullptr;
 		SkillConfigSet *skill_cfgs = nullptr;
 		EffectConfigMgr *effect_cfg_mgr = nullptr;
-		EffectFilterConfigMgr *effect_filter_cfg_mgr = nullptr;
 	};
 }

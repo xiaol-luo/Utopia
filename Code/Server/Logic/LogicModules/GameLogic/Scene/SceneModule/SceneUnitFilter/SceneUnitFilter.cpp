@@ -38,7 +38,6 @@ namespace GameLogic
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, ESceneUnitFilterWayParams & params)
 	{
 		AABB2 rect;
-		int limit_num = 0;
 		switch (shape.shape)
 		{
 		case EEffectFilterShape_Circle:
@@ -49,7 +48,6 @@ namespace GameLogic
 			rect = GeometryUtils::BuildAABB2(circle);
 			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
 			params.shape_circle.circle = circle;
-			limit_num = shape.shape_param.circle.max_su_count;
 		}
 		break;
 		case EEffectFilterShape_Rect:
@@ -57,11 +55,10 @@ namespace GameLogic
 			OBB2 obb2;
 			obb2.center = shape.pos;
 			obb2.y_axis_dir = shape.dir;
-			obb2.x_half_size = shape.shape_param.rect.length;
-			obb2.y_half_size = shape.shape_param.rect.width;
+			obb2.x_half_size = shape.shape_param.rect.x_size;
+			obb2.y_half_size = shape.shape_param.rect.y_size;
 			rect = GeometryUtils::BuildAABB2(obb2);
 			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
-			limit_num = shape.shape_param.rect.max_su_count;
 		}
 		break;
 		case EEffectFilterShape_Sector:
@@ -70,17 +67,10 @@ namespace GameLogic
 			sector.center = shape.pos;
 			sector.y_axis_dir = shape.dir;
 			sector.radius = shape.shape_param.sector.radius;
-			sector.halfAngle = shape.shape_param.sector.angles / 2;
+			sector.halfAngle = shape.shape_param.sector.angle / 2;
 			rect = GeometryUtils::BuildAABB2(sector);
-			limit_num = shape.shape_param.sector.max_su_count;
 		}
 		break;
-		}
-
-		if (limit_num > 0)
-		{
-			params.is_active[ESceneUnitFilterWay_LimitNum] = true;
-			params.limit_num.num = limit_num;
 		}
 
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret;
@@ -94,8 +84,8 @@ namespace GameLogic
 		ESceneUnitFilterWayParams params;
 		{
 			params.is_active[ESceneUnitFilterWay_Relation] = true;
-			params.relation.caster = caster;
-			params.relation.relation = relation;
+			params.relations.caster = caster;
+			params.relations.relations = relation;
 		}
 
 		auto ret = this->FilterSceneUnit(shape, params);
@@ -136,8 +126,8 @@ namespace GameLogic
 
 	void SceneUnitFilter::FilterRelation(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
-		int allowRelation = param.relation.relation;
-		std::shared_ptr<SceneUnit> caster = param.relation.caster;
+		int allowRelation = param.relations.relations;
+		std::shared_ptr<SceneUnit> caster = param.relations.caster;
 		if (nullptr == caster)
 			return;
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
 #include <exception>
 
 using ConfigCheckFunc = bool (*)(void* item);
@@ -10,18 +11,23 @@ using ConfigSetCheckFunc = bool (*)(void* items);
 
 namespace ConfigUtil
 {
-    bool Str2BaseValue(const std::string & s, bool &out_val);
-    bool Str2BaseValue(const std::string & s, int &out_val);
-    bool Str2BaseValue(const std::string & s, float &out_val);
-    bool Str2BaseValue(const std::string & s, double &out_val);
-    bool Str2BaseValue(const std::string & s, long long &out_val);
-    bool Str2Str(const std::string & s, std::string &out_val);
-    std::vector<std::string> SplitStr(const std::string s, char c);
+	void Trim(std::string &val, std::set<char> chars);
+	void Trim(std::string &val);
+
+    bool Str2BaseValue(std::string s, bool &out_val);
+    bool Str2BaseValue(std::string s, int &out_val);
+    bool Str2BaseValue(std::string s, float &out_val);
+    bool Str2BaseValue(std::string s, double &out_val);
+    bool Str2BaseValue(std::string s, long long &out_val);
+	bool Str2BaseValue(std::string s, std::string &out_val);
+    bool Str2Str(std::string s, std::string &out_val);
+    std::vector<std::string> SplitStr(const std::string &s, char c);
 
     template<typename T>
-    bool Str2Vec(const std::string s, std::vector<T> &out_val)
+    bool Str2Vec(std::string s, std::vector<T> &out_val)
     {
         // v1; v2
+		Trim(s);
         bool all_ok = true;
         for (std::string str : SplitStr(s, ';'))
         {
@@ -37,9 +43,10 @@ namespace ConfigUtil
     }
 
     template<typename K, typename V>
-    bool Str2Map(const std::string s, std::map<K, V> &out_val)
+    bool Str2Map(std::string s, std::map<K, V> &out_val)
     {
         // k1:v1; k2:v2
+		Trim(s);
         bool all_ok = true;
         for (std::string str : SplitStr(s, ';'))
         {
@@ -58,9 +65,10 @@ namespace ConfigUtil
     }
 
     template<typename T>
-    bool Str2VecVec(const std::string s, std::vector<std::vector<T>> &out_val)
+    bool Str2VecVec(std::string s, std::vector<std::vector<T>> &out_val)
     {
         // a1|a2; b1|b2
+		Trim(s);
         bool all_ok = true;
         for (std::string vec_str : SplitStr(s, ';'))
         {
@@ -81,9 +89,10 @@ namespace ConfigUtil
     }
 
     template <typename K, typename V>
-    bool Str2MapVec(const std::string s, std::map<K, std::vector<V>> &out_val)
+    bool Str2MapVec(std::string s, std::map<K, std::vector<V>> &out_val)
     {
         // k1:v1|v2; kk1: vv1|vv2
+		Trim(s);
         bool all_ok = true;
         for (std::string vec_str : SplitStr(s, ';'))
         {

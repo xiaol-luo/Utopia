@@ -23,6 +23,7 @@ namespace GameLogic
 		int GetSkillId();
 		void SetSceneUnitSkills(std::shared_ptr<SceneUnitSkills> su_skills) { m_su_skills = su_skills; }
 		std::shared_ptr<SceneUnitSkills> GetSceneUnitSkills() { return m_su_skills; }
+		std::shared_ptr<SceneUnit> GetCaster();
 		bool SetLevel(int lvl);
 		int GetLevel();
 		int GetMaxLevel();

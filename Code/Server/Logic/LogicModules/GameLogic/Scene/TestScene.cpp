@@ -45,7 +45,7 @@ namespace GameLogic
 			ret = ret & m_cfg->skill_cfgs->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
 			ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
 			ret = ret & m_cfg->effect_filter_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
-			if (!ret)
+			if (!ret || !this->CheckConfigValid())
 				return false;
 		}
 		
@@ -135,6 +135,21 @@ namespace GameLogic
 	void TestScene::OnLateUpdate()
 	{
 		//this->GetEvDispacher()->Fire(ES_TestHeartBeat);
+	}
+
+	bool TestScene::CheckConfigValid()
+	{
+		for (auto &&item : m_cfg->effect_cfg_mgr->GetAllCfg())
+		{
+			const EffectConfigBase * cfg = item.second;
+			int filter_id = cfg->GetFilterId();
+			if (0 != filter_id && nullptr == m_cfg->effect_filter_cfg_mgr->GetCfg(filter_id))
+			{
+				assert(false);
+				return false;
+			}
+		}
+		return true;
 	}
 
 	void TestScene::TestAction()

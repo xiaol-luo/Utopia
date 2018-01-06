@@ -33,6 +33,11 @@ namespace GameLogic
 		return m_cfg->id;
 	}
 
+	std::shared_ptr<SceneUnit> Skill::GetCaster()
+	{
+		return m_su_skills->GetOwner()->shared_from_this();
+	}
+
 	bool Skill::SetLevel(int lvl)
 	{
 		if (lvl < 0 || lvl > m_cfg->max_level)

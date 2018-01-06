@@ -37,8 +37,8 @@ namespace GameLogic
 		struct
 		{
 			std::shared_ptr<SceneUnit> caster;
-			int relation;
-		} relation;
+			int relations;
+		} relations;
 
 		struct
 		{
@@ -58,6 +58,7 @@ namespace GameLogic
 		struct
 		{
 			int num;
+			EEffectFilterLimitNumPriority priority;
 		} limit_num;
 
 		struct  

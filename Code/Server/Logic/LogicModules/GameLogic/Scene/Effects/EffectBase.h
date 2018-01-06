@@ -21,6 +21,8 @@ namespace GameLogic
 		uint64_t GetKey() { return m_effect_key; }
 		const EffectConfigBase * GetCfg() { return m_base_cfg; }
 		std::shared_ptr<Skill> GetSkill() { return m_user_effect_param.skill; }
+		std::shared_ptr<SceneUnit> GetCaster();
+		std::shared_ptr<SceneUnit> GetEffectTarget();
 
 		void Begin(UseEffectParam use_effect_param);
 		void End(EEffectEndCase end_case);
@@ -52,7 +54,9 @@ namespace GameLogic
 		SceneEffects *m_scene_effects = nullptr;
 		const EffectConfigBase *m_base_cfg = nullptr;
 		NewScene *m_scene = nullptr;
-
 		UseEffectParam m_user_effect_param;
+
+	protected:
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();
 	};
 }

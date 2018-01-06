@@ -11,25 +11,18 @@ namespace Config
 
 namespace GameLogic
 {
-	class EffectFilterConfig
+	struct EffectFilterConfig
 	{
-	public:
-		EffectFilterConfig();
-		~EffectFilterConfig();
-
 		bool InitCfg(Config::CsvEffectFilterConfig *csv_cfg);
-		int GetId() { return m_id; }
-
-	private:
-		int m_id = 0;
-		int m_limit_num = 0;
-		EEffectFilterLimitNumPriority m_limit_num_priority = EEffectFilterLimitNumPriority_None;
-		uint64_t m_unit_types;
-		int m_relations;
-
-		EEffectFilterAnchor m_anchor = EEffectAnchor_Pos;
-		EEffectFilterShape m_shape = EffectFilterShape_None;
-		EffectFilterShapeParam m_shape_param;
+		
+		int id = 0;
+		int limit_num = 0;
+		EEffectFilterLimitNumPriority limit_num_priority = EEffectFilterLimitNumPriority_None;
+		uint64_t unit_types = 0;
+		int relations = 0;
+		EEffectFilterAnchor anchor = EEffectAnchor_Pos;
+		EEffectFilterShape shape = EffectFilterShape_None;
+		EffectFilterShapeParam shape_param;
 	};
 
 	struct EffectFilterParams
