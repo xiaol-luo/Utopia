@@ -51,7 +51,7 @@ namespace GameLogic
 			m_scene_effects->AddEffect(this->shared_from_this());
 		}
 
-		this->OnBegin(m_user_effect_param);
+		this->OnBegin();
 		if (IsDone())
 			return;
 
@@ -64,7 +64,7 @@ namespace GameLogic
 				begin_effect->Begin(m_user_effect_param);
 			}
 		}
-		this->OnLateBegin(m_user_effect_param);
+		this->OnLateBegin();
 		if (IsDone())
 			return;
 
@@ -195,8 +195,14 @@ namespace GameLogic
 	}
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::FilterSceneUnits()
 	{
+		int filter_id = m_base_cfg->GetFilterId();
+		if (0 == filter_id)
+		{
+			return std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
+		}
+
 		SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
-		const EffectFilterConfig *filter_cfg = m_scene->GetCfg()->effect_filter_cfg_mgr->GetCfg(m_base_cfg->GetFilterId());
+		const EffectFilterConfig *filter_cfg = m_scene->GetCfg()->effect_filter_cfg_mgr->GetCfg(filter_id);
 		assert(filter_cfg);
 
 		std::shared_ptr<SceneUnit> caster = this->GetCaster();

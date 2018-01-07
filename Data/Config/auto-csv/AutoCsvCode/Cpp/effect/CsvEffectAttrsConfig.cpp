@@ -4,17 +4,21 @@
 namespace Config
 {
      static const char * Field_Name_id = "id";
-     static const char * Field_Name_attrs = "attrs";
-     static const char * Field_Name_reversible = "reversible";
-     static const char * Field_Name_last_time = "last_time";
+     static const char * Field_Name_base_attrs = "base_attrs";
+     static const char * Field_Name_extra_attrs = "extra_attrs";
+     static const char * Field_Name_percent_attrs = "percent_attrs";
+     static const char * Field_Name_hold_time_ms = "hold_time_ms";
+     static const char * Field_Name_unique_id = "unique_id";
 
     bool CsvEffectAttrsConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
         bool all_ok = true;
         all_ok = all_ok && kvPairs.count(Field_Name_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_id], id);
-        all_ok = all_ok && kvPairs.count(Field_Name_attrs) > 0 && ConfigUtil::Str2Map (kvPairs[Field_Name_attrs], attrs);
-        all_ok = all_ok && kvPairs.count(Field_Name_reversible) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_reversible], reversible);
-        all_ok = all_ok && kvPairs.count(Field_Name_last_time) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_last_time], last_time);
+        all_ok = all_ok && kvPairs.count(Field_Name_base_attrs) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_base_attrs], base_attrs);
+        all_ok = all_ok && kvPairs.count(Field_Name_extra_attrs) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_extra_attrs], extra_attrs);
+        all_ok = all_ok && kvPairs.count(Field_Name_percent_attrs) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_percent_attrs], percent_attrs);
+        all_ok = all_ok && kvPairs.count(Field_Name_hold_time_ms) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_hold_time_ms], hold_time_ms);
+        all_ok = all_ok && kvPairs.count(Field_Name_unique_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_unique_id], unique_id);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -30,27 +34,33 @@ namespace Config
 
     bool CsvEffectAttrsConfigSet::Load(std::string file_path)
     {
-        io::CSVReader<4, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
+        io::CSVReader<6, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
-            Field_Name_attrs,
-            Field_Name_reversible,
-            Field_Name_last_time
+            Field_Name_base_attrs,
+            Field_Name_extra_attrs,
+            Field_Name_percent_attrs,
+            Field_Name_hold_time_ms,
+            Field_Name_unique_id
             );
 
         std::map<std::string, std::string> kvParis;
         kvParis[Field_Name_id] = "";
-        kvParis[Field_Name_attrs] = "";
-        kvParis[Field_Name_reversible] = "";
-        kvParis[Field_Name_last_time] = "";
+        kvParis[Field_Name_base_attrs] = "";
+        kvParis[Field_Name_extra_attrs] = "";
+        kvParis[Field_Name_percent_attrs] = "";
+        kvParis[Field_Name_hold_time_ms] = "";
+        kvParis[Field_Name_unique_id] = "";
 
         bool all_ok = true;
         int curr_row = 0;
         while (csv_reader.read_row(
             kvParis[Field_Name_id],
-            kvParis[Field_Name_attrs],
-            kvParis[Field_Name_reversible],
-            kvParis[Field_Name_last_time]
+            kvParis[Field_Name_base_attrs],
+            kvParis[Field_Name_extra_attrs],
+            kvParis[Field_Name_percent_attrs],
+            kvParis[Field_Name_hold_time_ms],
+            kvParis[Field_Name_unique_id]
             ))
         {            
             if (++ curr_row <= 1)

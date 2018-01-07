@@ -8,26 +8,32 @@ namespace Config
     internal class FieldName_CsvEffectAttrsConfig
     {
         public const string Field_Name_id = "id";
-        public const string Field_Name_attrs = "attrs";
-        public const string Field_Name_reversible = "reversible";
-        public const string Field_Name_last_time = "last_time";
+        public const string Field_Name_base_attrs = "base_attrs";
+        public const string Field_Name_extra_attrs = "extra_attrs";
+        public const string Field_Name_percent_attrs = "percent_attrs";
+        public const string Field_Name_hold_time_ms = "hold_time_ms";
+        public const string Field_Name_unique_id = "unique_id";
     }
 
     public class CsvEffectAttrsConfig
     {
         public int id;
-        public Dictionary<int, int> attrs = new Dictionary<int, int>();
-        public bool reversible;
-        public int last_time;
+        public List<List<int>> base_attrs = new List<List<int>>();
+        public List<List<int>> extra_attrs = new List<List<int>>();
+        public List<List<int>> percent_attrs = new List<List<int>>();
+        public int hold_time_ms;
+        public int unique_id;
 
         public delegate bool ConfigCheckFunc(CsvEffectAttrsConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_id], ref id);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_attrs) && ConfigUtil.Str2Map (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_attrs], ref attrs);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_reversible) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_reversible], ref reversible);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_last_time) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_last_time], ref last_time);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_base_attrs) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_base_attrs], ref base_attrs);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_extra_attrs) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_extra_attrs], ref extra_attrs);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_percent_attrs) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_percent_attrs], ref percent_attrs);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_hold_time_ms) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_hold_time_ms], ref hold_time_ms);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectAttrsConfig.Field_Name_unique_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectAttrsConfig.Field_Name_unique_id], ref unique_id);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -54,9 +60,11 @@ namespace Config
                 try
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_id));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_attrs));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_reversible));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_last_time));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_base_attrs));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_extra_attrs));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_percent_attrs));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_hold_time_ms));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectAttrsConfig.Field_Name_unique_id));
                 }
                 catch (Exception e)
                 {

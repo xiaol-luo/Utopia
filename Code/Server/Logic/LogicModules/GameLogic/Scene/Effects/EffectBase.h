@@ -36,10 +36,10 @@ namespace GameLogic
 		virtual bool NeedGuide(); // 是否需要引导
 		// 是否可复原，true则执行完begin直接返回，不加入SceneEfffect，不执行Loop和end。用与heal和hurt等
 		virtual bool Reversible();
-		virtual void OnBegin(UseEffectParam use_effect_param) {}
+		virtual void OnBegin() {}
 		virtual void OnEnd(EEffectEndCase end_case) {}
 		virtual void OnLoop(int64_t now_ms, int64_t delta_ms) {}
-		virtual void OnLateBegin(UseEffectParam use_effect_param) {}
+		virtual void OnLateBegin() {}
 		virtual void OnLateEnd(EEffectEndCase end_case) {}
 		virtual void OnLateLoop(int64_t now_ms, int64_t delta_ms) {}
 		virtual bool IsDone();

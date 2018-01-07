@@ -4,6 +4,7 @@
 #include "FightParam.h"
 #include <queue>
 #include <tuple>
+#include <vector>
 
 namespace GameLogic
 {

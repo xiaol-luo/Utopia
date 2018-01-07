@@ -3,8 +3,10 @@
 #include "Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"
 #include "Config/AutoCsvCode/effect/CsvEffectHealConfig.h"
 #include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
-#include "GameLogic/Scene/Effects/EffectHurtConfig.h"
+#include "GameLogic/Scene/Effects/EffectHurt/EffectHurtConfig.h"
 #include <assert.h>
+#include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
+#include "GameLogic/Scene/Effects/EffectAttrs/EffectAttrsConfig.h"
 
 namespace GameLogic
 {
@@ -21,6 +23,13 @@ namespace GameLogic
 		for (Config::CsvEffectHurtConfig *item : csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec)
 		{
 			EffectHurtConfig *cfg = new EffectHurtConfig();
+			assert(cfg->InitCfg(item));
+			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
+			assert(ret.second);
+		}
+		for (Config::CsvEffectAttrsConfig *item : csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec)
+		{
+			EffectAttrsConfig *cfg = new EffectAttrsConfig();
 			assert(cfg->InitCfg(item));
 			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
 			assert(ret.second);

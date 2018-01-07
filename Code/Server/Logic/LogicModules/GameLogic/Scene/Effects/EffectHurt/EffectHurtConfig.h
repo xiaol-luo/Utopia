@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EffectConfigBase.h"
+#include "GameLogic/Scene/Effects/EffectConfigBase.h"
 
 namespace Config
 {

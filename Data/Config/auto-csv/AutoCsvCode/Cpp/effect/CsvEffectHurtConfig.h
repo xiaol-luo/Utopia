@@ -10,7 +10,6 @@ namespace Config
     {
         int id = 0 ;
         int value = 0 ;
-        int filter_id = 0 ;
 
         using ConfigCheckFunc = bool(*)(CsvEffectHurtConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

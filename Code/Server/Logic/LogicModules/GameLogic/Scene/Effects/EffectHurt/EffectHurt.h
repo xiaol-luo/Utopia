@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EffectBase.h"
+#include "GameLogic/Scene/Effects/EffectBase.h"
 
 namespace GameLogic
 {
@@ -12,7 +12,7 @@ namespace GameLogic
 		virtual ~EffectHurt();
 
 	protected:
-		virtual void OnBegin(UseEffectParam use_effect_param) override;
+		virtual void OnBegin() override;
 		virtual bool IsDone() { return m_is_done; }
 	protected:
 		const EffectHurtConfig *m_cfg = nullptr;

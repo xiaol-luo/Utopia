@@ -9,9 +9,11 @@ namespace Config
     struct CsvEffectAttrsConfig // 
     {
         int id = 0 ;
-        std::map<int, int> attrs;
-        bool reversible = 0 ;
-        int last_time = 0 ;
+        std::vector<std::vector<int>> base_attrs;
+        std::vector<std::vector<int>> extra_attrs;
+        std::vector<std::vector<int>> percent_attrs;
+        int hold_time_ms = 0 ;
+        int unique_id = 0 ;
 
         using ConfigCheckFunc = bool(*)(CsvEffectAttrsConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

@@ -16,7 +16,6 @@ namespace GameLogic
 		m_reversible = false;
 		assert(csv_cfg->value > 0);
 		m_hurt = csv_cfg->value;
-		m_filter_id = csv_cfg->filter_id;
 		return true;
 	}
 }
