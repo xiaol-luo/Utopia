@@ -20,16 +20,19 @@ namespace GameLogic
 
 	void EffectHurt::OnBegin()
 	{
-		std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
-		if (nullptr != target_su && EffectUtil::UnitCanBeHurt(target_su))
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> effected_units = this->FilterSceneUnits();
+		for (auto kv_pair : effected_units)
 		{
-			std::shared_ptr<SceneUnitFightParam> su_fp = target_su->GetModule<SceneUnitFightParam>();
-			if (nullptr != su_fp)
+			std::shared_ptr<SceneUnit> target_su = kv_pair.second;
+			if (nullptr != target_su && EffectUtil::UnitCanBeHurt(target_su))
 			{
-				su_fp->AddHp(-m_cfg->GetHurt());
+				std::shared_ptr<SceneUnitFightParam> su_fp = target_su->GetModule<SceneUnitFightParam>();
+				if (nullptr != su_fp)
+				{
+					su_fp->AddHp(-m_cfg->GetHurt());
+				}
 			}
 		}
-
 		m_is_done = true;
 	}
 }

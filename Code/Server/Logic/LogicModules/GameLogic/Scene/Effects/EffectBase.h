@@ -11,6 +11,8 @@ namespace GameLogic
 	class NewScene;
 	class SceneEffects;
 	class SceneUnit;
+	struct EffectFilterShape;
+	struct ESceneUnitFilterWayParams;
 
 	class EffectBase : public std::enable_shared_from_this<EffectBase>
 	{
@@ -57,6 +59,7 @@ namespace GameLogic
 		UseEffectParam m_user_effect_param;
 
 	protected:
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();
+		virtual std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();
+		bool GenFilterWayParamByCfg(EffectFilterShape &shape, ESceneUnitFilterWayParams &filter_way_param);
 	};
 }
