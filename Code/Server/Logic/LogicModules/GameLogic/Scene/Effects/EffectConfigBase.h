@@ -23,6 +23,8 @@ namespace GameLogic
 		int GetFilterId() const { return m_filter_id; }
 
 	public:
+		virtual bool FinalCheck() { return true; }
+
 		/*
 		void SetId(int val) { m_id = val; }
 		void SetNeedGuide(bool val) { m_need_guide = val; }

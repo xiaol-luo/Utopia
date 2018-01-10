@@ -78,6 +78,16 @@ out_cs_file_path = effect/CsvEffectFilterConfig.cs
 out_cpp_file_path = effect/CsvEffectFilterConfig
 out_lua_file_path = effect/CsvEffectFilterConfig.lua
 
+[excel2csv-effect.effect_group]
+file_path = effect/effects.xlsx
+sheet_name = effect_group
+out_csv_file_path = effect/CsvEffectGroupConfig.csv
+class_name = CsvEffectGroupConfig
+out_cs_file_path = effect/CsvEffectGroupConfig.cs
+out_cpp_file_path = effect/CsvEffectGroupConfig
+out_lua_file_path = effect/CsvEffectGroupConfig.lua
+
+
 
 
 

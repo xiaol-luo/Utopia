@@ -59,13 +59,17 @@ namespace GameLogic
 	{
 		EEffectEndCase end_case = EEffectEndCase_Both;
 		int id = 0;
+
+		static bool Generate(EndEffectId &out_ret, const std::vector<int> &input_vals);
 	};
 	using EndEffectIdVec = std::vector<EndEffectId>;
+	bool GenerateEndEffectIdVec(EndEffectIdVec &out_ret, const std::vector<std::vector<int>> &input_vals);
 
 	struct TimeLineEffectId
 	{
 		int id = 0;
 		int wait_ms = 0;
+		static bool Generate(TimeLineEffectId &out_ret, const std::vector<int> &input_vals);
 	};
 	using TimeLineEffectIdVec = std::vector<TimeLineEffectId>;
 	struct TimeLineEffectIdsConfig
@@ -73,6 +77,8 @@ namespace GameLogic
 		TimeLineEffectIdVec effect_ids;
 		int min_wait_ms = -1;
 		int max_wait_ms = -1;
+
+		static bool Generate(TimeLineEffectIdVec &out_ret, const std::vector<std::vector<int>> &input_vals);
 	};
 
 	enum EEffectStage
