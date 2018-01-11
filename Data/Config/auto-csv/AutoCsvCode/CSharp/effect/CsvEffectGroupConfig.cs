@@ -8,9 +8,9 @@ namespace Config
     internal class FieldName_CsvEffectGroupConfig
     {
         public const string Field_Name_id = "id";
-        public const string Field_Name_base_attrs = "base_attrs";
-        public const string Field_Name_extra_attrs = "extra_attrs";
-        public const string Field_Name_percent_attrs = "percent_attrs";
+        public const string Field_Name_begin_effect_ids = "begin_effect_ids";
+        public const string Field_Name_end_effect_ids = "end_effect_ids";
+        public const string Field_Name_timeline_effect_ids = "timeline_effect_ids";
         public const string Field_Name_need_guide = "need_guide";
         public const string Field_Name_can_cancel_guide = "can_cancel_guide";
     }
@@ -18,9 +18,9 @@ namespace Config
     public class CsvEffectGroupConfig
     {
         public int id;
-        public List<int> base_attrs = new List<int>();
-        public List<List<int>> extra_attrs = new List<List<int>>();
-        public List<List<int>> percent_attrs = new List<List<int>>();
+        public List<int> begin_effect_ids = new List<int>();
+        public List<List<int>> end_effect_ids = new List<List<int>>();
+        public List<List<int>> timeline_effect_ids = new List<List<int>>();
         public int need_guide;
         public int can_cancel_guide;
 
@@ -29,9 +29,9 @@ namespace Config
         {
             bool all_ok = true;
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_id], ref id);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_base_attrs) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_base_attrs], ref base_attrs);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_extra_attrs) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_extra_attrs], ref extra_attrs);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_percent_attrs) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_percent_attrs], ref percent_attrs);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_begin_effect_ids) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_begin_effect_ids], ref begin_effect_ids);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_end_effect_ids) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_end_effect_ids], ref end_effect_ids);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_timeline_effect_ids) && ConfigUtil.Str2VecVec (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_timeline_effect_ids], ref timeline_effect_ids);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_need_guide) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_need_guide], ref need_guide);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectGroupConfig.Field_Name_can_cancel_guide) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectGroupConfig.Field_Name_can_cancel_guide], ref can_cancel_guide);
             if (all_ok && null != func)
@@ -60,9 +60,9 @@ namespace Config
                 try
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_id));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_base_attrs));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_extra_attrs));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_percent_attrs));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_begin_effect_ids));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_end_effect_ids));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_timeline_effect_ids));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_need_guide));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectGroupConfig.Field_Name_can_cancel_guide));
                 }

@@ -4,9 +4,9 @@
 namespace Config
 {
      static const char * Field_Name_id = "id";
-     static const char * Field_Name_base_attrs = "base_attrs";
-     static const char * Field_Name_extra_attrs = "extra_attrs";
-     static const char * Field_Name_percent_attrs = "percent_attrs";
+     static const char * Field_Name_begin_effect_ids = "begin_effect_ids";
+     static const char * Field_Name_end_effect_ids = "end_effect_ids";
+     static const char * Field_Name_timeline_effect_ids = "timeline_effect_ids";
      static const char * Field_Name_need_guide = "need_guide";
      static const char * Field_Name_can_cancel_guide = "can_cancel_guide";
 
@@ -14,9 +14,9 @@ namespace Config
     {
         bool all_ok = true;
         all_ok = all_ok && kvPairs.count(Field_Name_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_id], id);
-        all_ok = all_ok && kvPairs.count(Field_Name_base_attrs) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_base_attrs], base_attrs);
-        all_ok = all_ok && kvPairs.count(Field_Name_extra_attrs) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_extra_attrs], extra_attrs);
-        all_ok = all_ok && kvPairs.count(Field_Name_percent_attrs) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_percent_attrs], percent_attrs);
+        all_ok = all_ok && kvPairs.count(Field_Name_begin_effect_ids) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_begin_effect_ids], begin_effect_ids);
+        all_ok = all_ok && kvPairs.count(Field_Name_end_effect_ids) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_end_effect_ids], end_effect_ids);
+        all_ok = all_ok && kvPairs.count(Field_Name_timeline_effect_ids) > 0 && ConfigUtil::Str2VecVec (kvPairs[Field_Name_timeline_effect_ids], timeline_effect_ids);
         all_ok = all_ok && kvPairs.count(Field_Name_need_guide) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_need_guide], need_guide);
         all_ok = all_ok && kvPairs.count(Field_Name_can_cancel_guide) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_can_cancel_guide], can_cancel_guide);
         if (all_ok && nullptr != func)
@@ -37,18 +37,18 @@ namespace Config
         io::CSVReader<6, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
-            Field_Name_base_attrs,
-            Field_Name_extra_attrs,
-            Field_Name_percent_attrs,
+            Field_Name_begin_effect_ids,
+            Field_Name_end_effect_ids,
+            Field_Name_timeline_effect_ids,
             Field_Name_need_guide,
             Field_Name_can_cancel_guide
             );
 
         std::map<std::string, std::string> kvParis;
         kvParis[Field_Name_id] = "";
-        kvParis[Field_Name_base_attrs] = "";
-        kvParis[Field_Name_extra_attrs] = "";
-        kvParis[Field_Name_percent_attrs] = "";
+        kvParis[Field_Name_begin_effect_ids] = "";
+        kvParis[Field_Name_end_effect_ids] = "";
+        kvParis[Field_Name_timeline_effect_ids] = "";
         kvParis[Field_Name_need_guide] = "";
         kvParis[Field_Name_can_cancel_guide] = "";
 
@@ -56,9 +56,9 @@ namespace Config
         int curr_row = 0;
         while (csv_reader.read_row(
             kvParis[Field_Name_id],
-            kvParis[Field_Name_base_attrs],
-            kvParis[Field_Name_extra_attrs],
-            kvParis[Field_Name_percent_attrs],
+            kvParis[Field_Name_begin_effect_ids],
+            kvParis[Field_Name_end_effect_ids],
+            kvParis[Field_Name_timeline_effect_ids],
             kvParis[Field_Name_need_guide],
             kvParis[Field_Name_can_cancel_guide]
             ))

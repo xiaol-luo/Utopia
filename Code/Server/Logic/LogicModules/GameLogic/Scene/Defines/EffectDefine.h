@@ -78,7 +78,7 @@ namespace GameLogic
 		int min_wait_ms = -1;
 		int max_wait_ms = -1;
 
-		static bool Generate(TimeLineEffectIdVec &out_ret, const std::vector<std::vector<int>> &input_vals);
+		static bool Generate(TimeLineEffectIdsConfig &out_ret, const std::vector<std::vector<int>> &input_vals);
 	};
 
 	enum EEffectStage

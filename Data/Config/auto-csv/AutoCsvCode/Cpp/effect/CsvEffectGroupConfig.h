@@ -9,9 +9,9 @@ namespace Config
     struct CsvEffectGroupConfig // 
     {
         int id = 0 ;
-        std::vector<int> base_attrs;
-        std::vector<std::vector<int>> extra_attrs;
-        std::vector<std::vector<int>> percent_attrs;
+        std::vector<int> begin_effect_ids;
+        std::vector<std::vector<int>> end_effect_ids;
+        std::vector<std::vector<int>> timeline_effect_ids;
         int need_guide = 0 ;
         int can_cancel_guide = 0 ;
 

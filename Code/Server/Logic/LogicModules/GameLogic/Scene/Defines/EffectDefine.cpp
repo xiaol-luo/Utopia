@@ -1,5 +1,6 @@
 #include "EffectDefine.h"
 #include "assert.h"
+#include <algorithm>
 
 namespace GameLogic
 {
@@ -32,14 +33,23 @@ namespace GameLogic
 		return true;
 	}
 
-	bool TimeLineEffectIdsConfig::Generate(TimeLineEffectIdVec & out_ret, const std::vector<std::vector<int>>& input_vals)
+	bool TimeLineEffectIdsConfig::Generate(TimeLineEffectIdsConfig & out_ret, const std::vector<std::vector<int>>& input_vals)
 	{
+		int min_wait_ms = INT_MAX;
+		int max_wait_ms = INT_MIN;
+
 		for (auto &&item : input_vals)
 		{
 			TimeLineEffectId eid;
 			assert(TimeLineEffectId::Generate(eid, item));
-			out_ret.push_back(eid);
+			out_ret.effect_ids.push_back(eid);
+
+			min_wait_ms = std::min(min_wait_ms, eid.wait_ms);
+			max_wait_ms = std::max(max_wait_ms, eid.wait_ms);
 		}
+
+		out_ret.min_wait_ms = min_wait_ms;
+		out_ret.max_wait_ms = max_wait_ms;
 		return true;
 	}
 }
