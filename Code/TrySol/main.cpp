@@ -1,45 +1,33 @@
 
 #include <sol.hpp>
-
+#include <lua.h>
 #include <iostream>
 #include <assert.h>
-
-sol::object fancy_func(sol::object a, sol::object b, sol::this_state s) {
-	sol::state_view lua(s);
-	if (a.is<int>() && b.is<int>()) {
-		return sol::object(lua, sol::in_place, a.as<int>() + b.as<int>());
-	}
-	else if (a.is<bool>()) {
-		bool do_triple = a.as<bool>();
-		return sol::object(lua, sol::in_place_type<double>, b.as<double>() * (do_triple ? 3 : 1));
-	}
-	// Can also use make_object
-	return sol::make_object(lua, sol::nil);
-}
+#include "OwnType/TryOwnTypeSolDefine.h"
+#include <stdio.h>
 
 int main(int argc, char **argv)
 {
 	sol::state lua;
+	lua.open_libraries(sol::lib::base);
 
-	lua["f"] = fancy_func;
+	lua.script("function f (a, b, c) print(a, b) return a, b, c end");
+	sol::function fn = lua["f"];
 
-	int result = lua["f"](1, 2);
-	// result == 3
-	assert(result == 3);
-	double result2 = lua["f"](false, 2.5);
-	// result2 == 2.5
-	assert(result2 == 2.5);
+	TryOwnType::Head one_head;
+	one_head.weight = 10.0f;
+	one_head.param_int = 20;
+	// fn(one_head);
 
-	// call in Lua, get result
-	// notice we only need 2 arguments here, not 3 (sol::this_state is transparent)
-	lua.script("result3 = f(true, 5.5)");
-	double result3 = lua["result3"];
-	// result3 == 16.5
-	assert(result3 == 16.5);
+	// TryOwnType::Head another_head = fn(one_head);
+	// printf("another_head { %f, %d } \n", another_head.weight, another_head.param_int);
 
-	std::cout << "=== any_return example ===" << std::endl;
-	std::cout << "result : " << result << std::endl;
-	std::cout << "result2: " << result2 << std::endl;
-	std::cout << "result3: " << result3 << std::endl;
-	std::cout << std::endl;
+	TryOwnType::Human one_human;
+	one_human.name = "lxl";
+	one_human.head = one_head;
+
+	fn(one_human);
+	TryOwnType::Human anohter_human = fn(one_human);
+
+	printf("anohter_human {%s, %f, %d } \n", anohter_human.name.c_str(), anohter_human.head.weight, anohter_human.head.param_int);
 }
