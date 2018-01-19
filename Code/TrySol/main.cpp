@@ -52,8 +52,23 @@ int main(int argc, char **argv)
 	TryUserType::RegisterUserType(sol::state_view(lua));
 
 	sol::protected_function_result fpr;
-	fpr = lua.script_file("LuaCode/main.lua", LuaErrorProtectedFn);
-	if (fpr.valid())
+	fpr = lua.script_file("LuaCode/src_file_list.lua", LuaErrorProtectedFn);
+	if (!fpr.valid())
+		return -100;
+
+	sol::table src_file_list = lua["src_file_list"];
+	if (!src_file_list.valid())
+		return -200;
+
+	for (auto kv_pair : src_file_list)
+	{
+		sol::object ss = kv_pair.second;
+		std::string str = ss.as<std::string>();
+		fpr = lua.script_file("LuaCode/" + str, LuaErrorProtectedFn);
+		if (!fpr.valid())
+			return -300;
+	}
+
 	{
 		int loop = 0;
 		while (loop++ < 100)
@@ -62,5 +77,7 @@ int main(int argc, char **argv)
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		}
 	}
+
+	return 0;
 }
 
