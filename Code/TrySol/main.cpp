@@ -5,10 +5,25 @@
 #include <assert.h>
 #include "OwnType/TryOwnTypeSolDefine.h"
 #include <stdio.h>
+#include "UserType/TryUserType.h"
+#include <thread>
+
+int LuaErrorFn(lua_State *L)
+{
+	return 0;
+}
+
+sol::protected_function_result LuaErrorProtectedFn(lua_State *L, sol::protected_function_result pfr)
+{
+	sol::error err = pfr;
+	printf("LuaErrorProtectedFn %s\n", err.what());
+	return pfr;
+}
 
 int main(int argc, char **argv)
 {
 	sol::state lua;
+	lua.set_panic(LuaErrorFn);
 	lua.open_libraries(sol::lib::base);
 
 	lua.script("function f (a, b) print(a, b) return a, b end");
@@ -28,4 +43,24 @@ int main(int argc, char **argv)
 	g(one_human);
 	TryOwnType::Human anohter_human = g(one_human);
 	printf("anohter_human {%s, %f, %d } \n", anohter_human.name.c_str(), anohter_human.head.weight, anohter_human.head.param_int);
+
+	TryUserType::Scene scene;
+	TryUserType::Sheep sheep("sheep", 10, 10, 10, 10, 10);
+	TryUserType::Wolf wolf("wolf", 10, 10, 10, 10, 10, 10);
+	TryUserType::Plant plant("plant", 10, 10, 10);
+
+	TryUserType::RegisterUserType(sol::state_view(lua));
+
+	sol::protected_function_result fpr;
+	fpr = lua.script_file("LuaCode/main.lua", LuaErrorProtectedFn);
+	if (fpr.valid())
+	{
+		int loop = 0;
+		while (loop++ < 100)
+		{
+			fpr = lua.script("MainTick()", LuaErrorProtectedFn);
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		}
+	}
 }
+
