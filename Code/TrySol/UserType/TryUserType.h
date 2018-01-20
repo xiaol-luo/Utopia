@@ -22,6 +22,9 @@ namespace TryUserType
 		~Scene();
 		void Reset();
 		void Tick();
+		void Start();
+		bool IsDone();
+		void SetIsDone(bool _is_done);
 
 		/*
 		bool AddUnit(std::string name, Unit *unit);
@@ -29,7 +32,12 @@ namespace TryUserType
 		Unit * FindUnit(std::string name);
 		*/
 	protected:
+		bool is_done = false;
 		std::unordered_map<std::string, Unit *> units;
+
+	protected:
+		sol::protected_function lua_fn_tick;
+		sol::protected_function lua_fn_start;
 	};
 
 	class Unit
@@ -37,6 +45,8 @@ namespace TryUserType
 	public:
 		Unit(UnitType _unit_type, const std::string &_name, float _pos) : unit_type(_unit_type), name(_name), pos(_pos) {}
 		virtual ~Unit() {}
+
+		static void DoLuaBind(lua_State *L, const std::string &name_space = "", const std::string &name = "");
 
 	public:
 		UnitType GetUnitType();
@@ -47,6 +57,11 @@ namespace TryUserType
 		void SetIsDead(bool _is_dead);
 		Scene * GetScene();
 		void SetScene(Scene *_scene);
+
+	private: 
+		int test_get_val = 0;
+		int TestGet();
+		void TestSet(int val);
 
 	protected:
 		UnitType unit_type = UnitType::UnitType_Unknown;

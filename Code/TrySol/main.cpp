@@ -6,6 +6,7 @@
 #include "OwnType/TryOwnTypeSolDefine.h"
 #include <stdio.h>
 #include "UserType/TryUserType.h"
+#include "UserType/TryUserTypeUtil.h"
 #include <thread>
 
 int LuaErrorFn(lua_State *L)
@@ -20,9 +21,16 @@ sol::protected_function_result LuaErrorProtectedFn(lua_State *L, sol::protected_
 	return pfr;
 }
 
+lua_State *main_lua = nullptr;
+lua_State * MainLua()
+{
+	return main_lua;
+}
+
 int main(int argc, char **argv)
 {
 	sol::state lua;
+	main_lua = lua.lua_state();
 	lua.set_panic(LuaErrorFn);
 	lua.open_libraries(sol::lib::base);
 
@@ -44,37 +52,41 @@ int main(int argc, char **argv)
 	TryOwnType::Human anohter_human = g(one_human);
 	printf("anohter_human {%s, %f, %d } \n", anohter_human.name.c_str(), anohter_human.head.weight, anohter_human.head.param_int);
 
+	TryUserType::RegisterUserType(sol::state_view(lua));
+	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
+
+	sol::protected_function_result fpr;
+	{
+		// load lua file
+		fpr = lua.script_file("LuaCode/src_file_list.lua", LuaErrorProtectedFn);
+		if (!fpr.valid())
+			return -100;
+		sol::table src_file_list = lua["src_file_list"];
+		if (!src_file_list.valid())
+			return -200;
+		for (auto kv_pair : src_file_list)
+		{
+			sol::object ss = kv_pair.second;
+			std::string str = ss.as<std::string>();
+			fpr = lua.script_file("LuaCode/" + str, LuaErrorProtectedFn);
+			if (!fpr.valid())
+				return -300;
+		}
+	}
+
 	TryUserType::Scene scene;
 	TryUserType::Sheep sheep("sheep", 10, 10, 10, 10, 10);
 	TryUserType::Wolf wolf("wolf", 10, 10, 10, 10, 10, 10);
 	TryUserType::Plant plant("plant", 10, 10, 10);
 
-	TryUserType::RegisterUserType(sol::state_view(lua));
-
-	sol::protected_function_result fpr;
-	fpr = lua.script_file("LuaCode/src_file_list.lua", LuaErrorProtectedFn);
-	if (!fpr.valid())
-		return -100;
-
-	sol::table src_file_list = lua["src_file_list"];
-	if (!src_file_list.valid())
-		return -200;
-
-	for (auto kv_pair : src_file_list)
 	{
-		sol::object ss = kv_pair.second;
-		std::string str = ss.as<std::string>();
-		fpr = lua.script_file("LuaCode/" + str, LuaErrorProtectedFn);
-		if (!fpr.valid())
-			return -300;
-	}
-
-	{
-		int loop = 0;
-		while (loop++ < 100)
+		while (true)
 		{
-			fpr = lua.script("MainTick()", LuaErrorProtectedFn);
-			std::this_thread::sleep_for(std::chrono::milliseconds(500));
+			if (scene.IsDone())
+				scene.Start();
+			scene.Tick();
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 	}
 

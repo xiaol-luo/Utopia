@@ -1,5 +1,9 @@
 #include "TryUserType.h"
 #include <assert.h>
+#include "TryUserTypeUtil.h"
+#include <string.h>
+
+extern lua_State * MainLua();
 
 namespace TryUserType
 {
@@ -53,6 +57,12 @@ namespace TryUserType
 
 	Scene::Scene()
 	{
+		sol::state_view lua(MainLua());
+		lua_fn_tick = lua["TryUserType"]["Scene"]["LuaTick"]; 
+		lua_fn_start = lua["TryUserType"]["Scene"]["LuaStart"];
+
+		assert(lua_fn_tick.valid());
+		assert(lua_fn_start.valid());
 	}
 
 	Scene::~Scene()
@@ -62,6 +72,7 @@ namespace TryUserType
 
 	void Scene::Reset()
 	{
+		is_done = false;
 		for (auto kv_pair : units)
 		{
 			delete kv_pair.second;
@@ -72,6 +83,47 @@ namespace TryUserType
 	void Scene::Tick()
 	{
 		printf("-- C++ Scene Tick \n");
+		// lua_fn_tick(this, 1024);
+		lua_fn_tick.call(this, 1024);
+	}
+
+	void Scene::Start()
+	{
+		printf("-- C++ Scene Start \n");
+		this->Reset();
+		lua_fn_start(this);
+	}
+
+	bool Scene::IsDone()
+	{
+		return is_done;
+	}
+
+	void Scene::SetIsDone(bool _is_done)
+	{
+		is_done = _is_done;
+	}
+
+	void Unit::DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+	{
+		/*
+		sol::usertype<Unit> meta_table(
+			"Unit", sol::constructors < Unit(UnitType, const std::string &, float)>(),
+			"TestProperty", sol::property(&Unit::TestGet, &Unit::TestSet),
+			"TestProperty2", &Unit::test_get_val
+		);
+		*/
+
+		std::string class_name = !name.empty() ? name : "Unit";
+
+		std::vector<std::string> ns_vec;
+		ns_vec = PraseNameSpace(name_space);
+		ns_vec = PraseNameSpace("");
+
+		sol::state_view lua(L);
+		lua.new_usertype<Unit>(class_name, sol::constructors < Unit(UnitType, const std::string &, float)>(),
+			"TestProperty", sol::property(&Unit::TestGet, &Unit::TestSet),
+			"TestProperty2", &Unit::test_get_val);
 	}
 
 	UnitType Unit::GetUnitType()
@@ -111,6 +163,16 @@ namespace TryUserType
 	void Unit::SetScene(Scene * _scene)
 	{
 		scene = _scene;
+	}
+
+	int Unit::TestGet()
+	{
+		return test_get_val;
+	}
+
+	void Unit::TestSet(int val)
+	{
+		test_get_val = val;
 	}
 
 	Plant::Plant(std::string _name, float _pos, int _recover_hp, int _recover_energy)
@@ -249,7 +311,9 @@ namespace TryUserType
 		ns.new_usertype<Scene>(
 			"Scene", sol::constructors<Scene()>(),
 			"Reset", &Scene::Reset,
-			"Tick", &Scene::Tick	
+			"Tick", &Scene::Tick,
+			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
+			"Start", &Scene::Start
 			);
 
 		ns.new_usertype<Unit>(
@@ -260,5 +324,7 @@ namespace TryUserType
 			"is_dead", sol::property(&Unit::GetIsDead, &Unit::SetIsDead),
 			"scene", sol::property(&Unit::GetScene, &Unit::SetScene)
 			);
+
+		AddLuaBindUserTypeFn([](lua_State *L) {Unit::DoLuaBind(L, "TryUserType"); });
 	}
 }
