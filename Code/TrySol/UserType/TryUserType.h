@@ -20,6 +20,9 @@ namespace TryUserType
 	public:
 		Scene();
 		~Scene();
+
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
+	public:
 		void Reset();
 		void Tick();
 		void Start();
@@ -46,7 +49,7 @@ namespace TryUserType
 		Unit(UnitType _unit_type, const std::string &_name, float _pos) : unit_type(_unit_type), name(_name), pos(_pos) {}
 		virtual ~Unit() {}
 
-		static void DoLuaBind(lua_State *L, const std::string &name_space = "", const std::string &name = "");
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
 
 	public:
 		UnitType GetUnitType();

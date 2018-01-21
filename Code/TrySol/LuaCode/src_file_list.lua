@@ -1,6 +1,8 @@
 
 src_file_list = 
 {
-    "main.lua",
-    "scene_extend.lua"
+    "scene_extend.lua",
+    "unit_extend.lua",
+    "main.lua"
 }
+

@@ -70,6 +70,19 @@ namespace TryUserType
 		this->Reset();
 	}
 
+	void Scene::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "Scene";
+		sol::usertype<Scene> meta_table(
+			sol::constructors<Scene()>(),
+			"Reset", &Scene::Reset,
+			"Tick", &Scene::Tick,
+			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
+			"Start", &Scene::Start
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+	}
+
 	void Scene::Reset()
 	{
 		is_done = false;
@@ -106,24 +119,16 @@ namespace TryUserType
 
 	void Unit::DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
 	{
-		/*
-		sol::usertype<Unit> meta_table(
-			"Unit", sol::constructors < Unit(UnitType, const std::string &, float)>(),
-			"TestProperty", sol::property(&Unit::TestGet, &Unit::TestSet),
-			"TestProperty2", &Unit::test_get_val
-		);
-		*/
-
 		std::string class_name = !name.empty() ? name : "Unit";
-
-		std::vector<std::string> ns_vec;
-		ns_vec = PraseNameSpace(name_space);
-		ns_vec = PraseNameSpace("");
-
-		sol::state_view lua(L);
-		lua.new_usertype<Unit>(class_name, sol::constructors < Unit(UnitType, const std::string &, float)>(),
-			"TestProperty", sol::property(&Unit::TestGet, &Unit::TestSet),
-			"TestProperty2", &Unit::test_get_val);
+		sol::usertype<Unit> meta_table(
+			sol::constructors<Unit(UnitType, const std::string&, float)>(),
+			"unit_type", sol::property(&Unit::GetUnitType),
+			"name", sol::property(&Unit::GetName),
+			"pos", sol::property(&Unit::GetPos, &Unit::SetPos),
+			"is_dead", sol::property(&Unit::GetIsDead, &Unit::SetIsDead),
+			"scene", sol::property(&Unit::GetScene, &Unit::SetScene)
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 	}
 
 	UnitType Unit::GetUnitType()
@@ -307,6 +312,7 @@ namespace TryUserType
 
 	void RegisterUserType(sol::state_view & lua)
 	{
+		/*
 		sol::table ns = lua.create_named_table("TryUserType");
 		ns.new_usertype<Scene>(
 			"Scene", sol::constructors<Scene()>(),
@@ -324,7 +330,9 @@ namespace TryUserType
 			"is_dead", sol::property(&Unit::GetIsDead, &Unit::SetIsDead),
 			"scene", sol::property(&Unit::GetScene, &Unit::SetScene)
 			);
+		*/
 
 		AddLuaBindUserTypeFn([](lua_State *L) {Unit::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Scene::DoLuaBind(L, "TryUserType"); });
 	}
 }

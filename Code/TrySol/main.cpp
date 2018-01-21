@@ -74,20 +74,20 @@ int main(int argc, char **argv)
 		}
 	}
 
-	TryUserType::Scene scene;
-	TryUserType::Sheep sheep("sheep", 10, 10, 10, 10, 10);
-	TryUserType::Wolf wolf("wolf", 10, 10, 10, 10, 10, 10);
-	TryUserType::Plant plant("plant", 10, 10, 10);
-
 	{
-		while (true)
-		{
-			if (scene.IsDone())
-				scene.Start();
-			scene.Tick();
+		TryUserType::Scene scene;
+		TryUserType::Sheep sheep("sheep", 10, 10, 10, 10, 10);
+		TryUserType::Wolf wolf("wolf", 10, 10, 10, 10, 10, 10);
+		TryUserType::Plant plant("plant", 10, 10, 10);
+	}
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		}
+	sol::protected_function lua_main_tick_fn = lua["MainTick"];
+	bool game_exit = lua["game_exit"];
+	while (!game_exit)
+	{
+		lua_main_tick_fn();
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		game_exit = lua["game_exit"];
 	}
 
 	return 0;
