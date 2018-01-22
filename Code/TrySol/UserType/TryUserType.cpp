@@ -17,6 +17,24 @@ namespace TryUserType
 	{
 	}
 
+	void Wolf::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "Wolf";
+		sol::usertype<Wolf> meta_table(
+			sol::constructors<Wolf(std::string, float, int, int, float, float, float)>(),
+			"attack_range", &Wolf::attack_range,
+			"attack", &Wolf::attack,
+			"TryBite", &Wolf::TryBite,
+			sol::base_classes, sol::bases<Animal, Unit>()
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+	}
+
+	void Wolf::TryAction()
+	{
+
+	}
+
 	bool Wolf::TryBite(Animal * animal)
 	{
 		if (nullptr == animal || animal->GetIsDead())
@@ -170,16 +188,6 @@ namespace TryUserType
 		scene = _scene;
 	}
 
-	int Unit::TestGet()
-	{
-		return test_get_val;
-	}
-
-	void Unit::TestSet(int val)
-	{
-		test_get_val = val;
-	}
-
 	Plant::Plant(std::string _name, float _pos, int _recover_hp, int _recover_energy)
 		: Unit(UnitType::UnitType_Plant, _name, _pos), recover_hp(_recover_hp), recover_energy(_recover_energy)
 	{
@@ -188,6 +196,18 @@ namespace TryUserType
 
 	Plant::~Plant()
 	{
+	}
+
+	void Plant::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "Plant";
+		sol::usertype<Plant> meta_table(
+			sol::constructors<Plant(std::string, float, int, int)>(),
+			"recover_energy", &Plant::recover_energy,
+			"recover_hp", &Plant::recover_hp,
+			sol::base_classes, sol::bases<Unit>()
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 	}
 
 	int Plant::GetRecoverHp()
@@ -215,6 +235,17 @@ namespace TryUserType
 		assert(animal && move_speed > 0);
 	}
 
+	void Foot::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "Foot";
+		sol::usertype<Foot> meta_table(
+			sol::constructors<Foot(Animal*, float)>(),
+			"move_speed", &Foot::move_speed,
+			"Run", &Foot::Run
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+	}
+
 	void Foot::Run()
 	{
 		if (animal->GetIsDead())
@@ -240,6 +271,27 @@ namespace TryUserType
 		if (nullptr != foot)
 			delete foot;
 		foot = nullptr;
+	}
+
+	void Animal::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "Animal";
+		sol::usertype<Animal> meta_table(
+			sol::constructors<Animal(std::string, float, int, int, float)>(),
+			"energy", &Animal::energy,
+			"hp", &Animal::hp,
+			"foot", sol::property(&Animal::GetFoot),
+			"Run", &Animal::Run,
+			"Rest", &Animal::Rest,
+			"TryAction", &Animal::TryAction,
+			sol::base_classes, sol::bases<Unit>()
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+	}
+
+	void Animal::TryAction()
+	{
+		printf("Animal TryAction \n");
 	}
 
 	void Animal::Run()
@@ -286,6 +338,23 @@ namespace TryUserType
 	{
 	}
 
+	void Sheep::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "Sheep";
+		sol::usertype<Sheep> meta_table(
+			sol::constructors<Sheep(std::string, float, int, int, float, float)>(),
+			"eat_plant_range", &Sheep::eat_plant_range,
+			"TryEatPlant", &Sheep::TryEatPlant,
+			sol::base_classes, sol::bases<Animal, Unit>()
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+	}
+
+	void Sheep::TryAction()
+	{
+
+	}
+
 	bool Sheep::TryEatPlant(Plant * plant)
 	{
 		if (nullptr == plant || plant->GetIsDead())
@@ -310,29 +379,14 @@ namespace TryUserType
 		eat_plant_range = _eat_plant_range;
 	}
 
-	void RegisterUserType(sol::state_view & lua)
+	void RegisterUserType()
 	{
-		/*
-		sol::table ns = lua.create_named_table("TryUserType");
-		ns.new_usertype<Scene>(
-			"Scene", sol::constructors<Scene()>(),
-			"Reset", &Scene::Reset,
-			"Tick", &Scene::Tick,
-			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
-			"Start", &Scene::Start
-			);
-
-		ns.new_usertype<Unit>(
-			"Unit", sol::constructors<Unit(UnitType, const std::string&, float)>(),
-			"unit_type", sol::property(&Unit::GetUnitType),
-			"name", sol::property(&Unit::GetName),
-			"pos", sol::property(&Unit::GetPos, &Unit::SetPos),
-			"is_dead", sol::property(&Unit::GetIsDead, &Unit::SetIsDead),
-			"scene", sol::property(&Unit::GetScene, &Unit::SetScene)
-			);
-		*/
-
-		AddLuaBindUserTypeFn([](lua_State *L) {Unit::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Scene::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Unit::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Plant::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Animal::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Wolf::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Sheep::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {Foot::DoLuaBind(L, "TryUserType"); });
 	}
 }

@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	TryOwnType::Human anohter_human = g(one_human);
 	printf("anohter_human {%s, %f, %d } \n", anohter_human.name.c_str(), anohter_human.head.weight, anohter_human.head.param_int);
 
-	TryUserType::RegisterUserType(sol::state_view(lua));
+	TryUserType::RegisterUserType();
 	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
 
 	sol::protected_function_result fpr;

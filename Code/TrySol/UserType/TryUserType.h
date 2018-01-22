@@ -61,11 +61,6 @@ namespace TryUserType
 		Scene * GetScene();
 		void SetScene(Scene *_scene);
 
-	private: 
-		int test_get_val = 0;
-		int TestGet();
-		void TestSet(int val);
-
 	protected:
 		UnitType unit_type = UnitType::UnitType_Unknown;
 		std::string name;
@@ -80,6 +75,9 @@ namespace TryUserType
 		Plant(std::string _name, float _pos, int _recover_hp, int _recover_energy);
 		virtual ~Plant();
 
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
+
+	public:
 		int GetRecoverHp();
 		void SetRecoverHp(int _recover_hp);
 		int GetRecoverEnergy();
@@ -95,6 +93,8 @@ namespace TryUserType
 	{
 	public: 
 		Foot(Animal *_animal, float _move_speed);
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
+
 		void Run();
 
 	protected:
@@ -107,9 +107,10 @@ namespace TryUserType
 	public:
 		Animal(std::string name, float _pos, int _hp, int _energy, float _move_speed);
 		virtual ~Animal();
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
 
 	public: 
-		virtual void TryAction() {}
+		virtual void TryAction();
 
 	protected:
 		void Run();
@@ -134,6 +135,8 @@ namespace TryUserType
 		Wolf(std::string _name, float _pos, int _hp, int _energy, float _move_speed, float _attack, float _attack_range);
 		virtual ~Wolf();
 
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
+		virtual void TryAction() override;
 		bool TryBite(Animal *animal);
 
 	public:
@@ -154,6 +157,8 @@ namespace TryUserType
 		virtual ~Sheep();
 
 	public:
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
+		virtual void TryAction() override;
 		bool TryEatPlant(Plant *plant);
 
 	public:
@@ -164,5 +169,5 @@ namespace TryUserType
 		float eat_plant_range = 0;
 	};
 
-	void RegisterUserType(sol::state_view &lua);
+	void RegisterUserType();
 }
