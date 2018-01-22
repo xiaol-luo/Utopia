@@ -20,15 +20,8 @@
             "name": "attach",
             "type": "lua",
             "request": "attach",
-            "stopOnEntry": true,
-            "ip": "localhost",
-            "port": 4278,
-            "sourceMaps": [
-                [
-                    "./",
-                    "${workspaceRoot}"
-                ]
-            ]
+            "stopOnEntry": false,
+            "debugServer" : 4278
         }
     ]
 }

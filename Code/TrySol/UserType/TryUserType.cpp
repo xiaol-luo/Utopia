@@ -104,18 +104,13 @@ namespace TryUserType
 	void Scene::Reset()
 	{
 		is_done = false;
-		for (auto kv_pair : units)
-		{
-			delete kv_pair.second;
-		}
-		units.clear();
 	}
 
 	void Scene::Tick()
 	{
 		printf("-- C++ Scene Tick \n");
 		// lua_fn_tick(this, 1024);
-		lua_fn_tick.call(this, 1024);
+		lua_fn_tick.call(this);
 	}
 
 	void Scene::Start()

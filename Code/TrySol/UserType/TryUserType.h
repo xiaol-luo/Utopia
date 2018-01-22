@@ -36,11 +36,10 @@ namespace TryUserType
 		*/
 	protected:
 		bool is_done = false;
-		std::unordered_map<std::string, Unit *> units;
 
 	protected:
-		sol::protected_function lua_fn_tick;
-		sol::protected_function lua_fn_start;
+		sol::function lua_fn_tick;
+		sol::function lua_fn_start;
 	};
 
 	class Unit

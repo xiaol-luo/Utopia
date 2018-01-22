@@ -74,14 +74,16 @@ int main(int argc, char **argv)
 		}
 	}
 
-	{
-		TryUserType::Scene scene;
-		TryUserType::Sheep sheep("sheep", 10, 10, 10, 10, 10);
-		TryUserType::Wolf wolf("wolf", 10, 10, 10, 10, 10, 10);
-		TryUserType::Plant plant("plant", 10, 10, 10);
-	}
-
+	lua.script(R"(
+		function DefaultErrorHandler(msg) 
+			local out_msg = "Lua Error Handler" .. msg 
+			print(out_msg)
+			return out_msg
+		end 
+		)");
 	sol::protected_function lua_main_tick_fn = lua["MainTick"];
+	lua_main_tick_fn.error_handler = lua["DefaultErrorHandler"];
+
 	bool game_exit = lua["game_exit"];
 	while (!game_exit)
 	{
