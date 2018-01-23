@@ -20,7 +20,15 @@ namespace TryUserType
 
 		void DynamicSet(std::string key, sol::stack_object value)
 		{
-			entries.insert_or_assign(std::move(key), std::move(value));
+			auto it = entries.find(key);
+			if (it == entries.cend()) {
+				entries.insert(it, { std::move(key), std::move(value) });
+			}
+			else {
+				std::pair<const std::string, sol::object>& kvp = *it;
+				sol::object& entry = kvp.second;
+				entry = sol::object(std::move(value));
+			}
 		}
 		
 		sol::object DynamicGet(std::string key)
@@ -59,7 +67,6 @@ namespace TryUserType
 	protected:
 		sol::function lua_fn_tick;
 		sol::function lua_fn_start;
-		std::unordered_map<sol::object, sol::object> params;
 	};
 
 	class Unit

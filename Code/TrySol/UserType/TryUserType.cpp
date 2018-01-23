@@ -94,8 +94,7 @@ namespace TryUserType
 			sol::constructors<Scene()>(),
 			"Tick", &Scene::Tick,
 			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
-			"Start", &Scene::Start,
-			"params", &Scene::params
+			"Start", &Scene::Start
 		);
 		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 	}
@@ -377,7 +376,9 @@ namespace TryUserType
 		AddLuaBindUserTypeFn([](lua_State *L) {Wolf::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Sheep::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Foot::DoLuaBind(L, "TryUserType"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {DynamicObject::DoLuaBind(L, ""); });
 	}
+
 	void DynamicObject::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
 	{
 		std::string class_name = !name.empty() ? name : "NativeDynamicObject";
