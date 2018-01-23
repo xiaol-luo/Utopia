@@ -85,7 +85,6 @@ namespace TryUserType
 
 	Scene::~Scene()
 	{
-		this->Reset();
 	}
 
 	void Scene::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
@@ -93,17 +92,12 @@ namespace TryUserType
 		std::string class_name = !name.empty() ? name : "Scene";
 		sol::usertype<Scene> meta_table(
 			sol::constructors<Scene()>(),
-			"Reset", &Scene::Reset,
 			"Tick", &Scene::Tick,
 			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
-			"Start", &Scene::Start
+			"Start", &Scene::Start,
+			"params", &Scene::params
 		);
 		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
-	}
-
-	void Scene::Reset()
-	{
-		is_done = false;
 	}
 
 	void Scene::Tick()
@@ -116,7 +110,7 @@ namespace TryUserType
 	void Scene::Start()
 	{
 		printf("-- C++ Scene Start \n");
-		this->Reset();
+		is_done = false;
 		lua_fn_start(this);
 	}
 
@@ -383,5 +377,18 @@ namespace TryUserType
 		AddLuaBindUserTypeFn([](lua_State *L) {Wolf::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Sheep::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Foot::DoLuaBind(L, "TryUserType"); });
+	}
+	void DynamicObject::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
+	{
+		std::string class_name = !name.empty() ? name : "NativeDynamicObject";
+
+		sol::usertype<DynamicObject> meta_table(
+			sol::constructors<DynamicObject()>(),
+			sol::meta_function::index, &DynamicObject::DynamicSet,
+			sol::meta_function::new_index, &DynamicObject::DynamicGet,
+			sol::meta_function::length, [](DynamicObject& d) {
+			return d.entries.size(); }
+		);
+		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 	}
 }

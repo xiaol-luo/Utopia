@@ -14,6 +14,26 @@ namespace TryUserType
 		UnitType_Plant,
 	};
 
+	struct DynamicObject
+	{
+		std::unordered_map<std::string, sol::object> entries;
+
+		void DynamicSet(std::string key, sol::stack_object value)
+		{
+			entries.insert_or_assign(std::move(key), std::move(value));
+		}
+		
+		sol::object DynamicGet(std::string key)
+		{
+			auto it = entries.find(key);
+			if (it == entries.end())
+				return sol::nil;
+			return it->second;
+		}
+
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
+	};
+
 	class Unit;
 	class Scene
 	{
@@ -23,7 +43,6 @@ namespace TryUserType
 
 		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name = "");
 	public:
-		void Reset();
 		void Tick();
 		void Start();
 		bool IsDone();
@@ -35,11 +54,12 @@ namespace TryUserType
 		Unit * FindUnit(std::string name);
 		*/
 	protected:
-		bool is_done = false;
+		bool is_done = true;
 
 	protected:
 		sol::function lua_fn_tick;
 		sol::function lua_fn_start;
+		std::unordered_map<sol::object, sol::object> params;
 	};
 
 	class Unit

@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	sol::state lua;
 	main_lua = lua.lua_state();
 	lua.set_panic(LuaErrorFn);
-	lua.open_libraries(sol::lib::base);
+	lua.open_libraries(sol::lib::base, sol::lib::table);
 
 	lua.script("function f (a, b) print(a, b) return a, b end");
 	sol::function f = lua["f"];
