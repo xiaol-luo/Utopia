@@ -94,7 +94,9 @@ namespace TryUserType
 			sol::constructors<Scene()>(),
 			"Tick", &Scene::Tick,
 			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
-			"Start", &Scene::Start
+			"Start", &Scene::Start,
+			"params", &Scene::params
+
 		);
 		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 	}
@@ -369,6 +371,7 @@ namespace TryUserType
 
 	void RegisterUserType()
 	{
+		AddLuaBindUserTypeFn([](lua_State *L) {DoLuaBind<UnitType>(L, "TryUserType", ""); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Scene::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Unit::DoLuaBind(L, "TryUserType"); });
 		AddLuaBindUserTypeFn([](lua_State *L) {Plant::DoLuaBind(L, "TryUserType"); });
@@ -385,8 +388,8 @@ namespace TryUserType
 
 		sol::usertype<DynamicObject> meta_table(
 			sol::constructors<DynamicObject()>(),
-			sol::meta_function::index, &DynamicObject::DynamicSet,
-			sol::meta_function::new_index, &DynamicObject::DynamicGet,
+			sol::meta_function::index, &DynamicObject::DynamicGet,
+			sol::meta_function::new_index, &DynamicObject::DynamicSet,
 			sol::meta_function::length, [](DynamicObject& d) {
 			return d.entries.size(); }
 		);

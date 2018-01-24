@@ -5,23 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "launch",
-            "type": "lua",
-            "request": "launch",
-            "stopOnEntry": true,
-            "program": "${workspaceRoot}/main.lua",
-            "cwd": "${workspaceRoot}",
-            "path": "${workspaceRoot}/?.lua",
-            "cpath": "${workspaceRoot}/?.dll",
-            "arg": [],
-            "console": "utf8"
-        },
-        {
-            "name": "attach",
-            "type": "lua",
+            "type": "lrdb",
             "request": "attach",
-            "stopOnEntry": false,
-            "debugServer" : 4278
+            "name": "lrdb_attach",
+            "host": "localhost",
+            "port": 21110,
+            "sourceRoot": "${workspaceFolder}/..",
+            "stopOnEntry": false
         }
     ]
 }

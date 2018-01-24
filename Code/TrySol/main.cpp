@@ -8,6 +8,7 @@
 #include "UserType/TryUserType.h"
 #include "UserType/TryUserTypeUtil.h"
 #include <thread>
+#include "lrdb/server.hpp"
 
 int LuaErrorFn(lua_State *L)
 {
@@ -31,6 +32,10 @@ int main(int argc, char **argv)
 {
 	sol::state lua;
 	main_lua = lua.lua_state();
+
+	lrdb::server debug_server(21110);
+	debug_server.reset(main_lua);
+
 	lua.set_panic(LuaErrorFn);
 	lua.open_libraries(sol::lib::base, sol::lib::table);
 
@@ -92,6 +97,7 @@ int main(int argc, char **argv)
 		game_exit = lua["game_exit"];
 	}
 
+	debug_server.reset();
 	return 0;
 }
 

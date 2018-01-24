@@ -1,5 +1,5 @@
 
-src_file_list = 
+src_file_list =
 {
     "scene_extend.lua",
     "unit_extend.lua",

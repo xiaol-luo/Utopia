@@ -4,15 +4,38 @@
 #include <unordered_map>
 #include <memory>
 #include <sol.hpp>
+#include "TryUserTypeUtil.h"
 
 namespace TryUserType
 {
-	enum class UnitType
+	enum UnitType
 	{
 		UnitType_Unknown,
 		UnitType_Animal,
 		UnitType_Plant,
 	};
+	template <typename T>
+	static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+	{
+		assert(false);
+	}
+
+	template <>
+	static void DoLuaBind<UnitType>(lua_State *L, const std::string &name_space, const std::string &name)
+	{
+		std::string enum_name = !name.empty() ? name : "UnitType";
+		sol::state_view lua(L);
+		sol::table ns_table = GetOrNewLuaNameSpaceTable(lua, name_space);
+		{
+			sol::optional<sol::object> opt_object = ns_table[enum_name];
+			assert(!opt_object);
+		}
+		ns_table.new_enum(enum_name, 
+			"UnitType_Unknown", UnitType::UnitType_Unknown,
+			"UnitType_Animal", UnitType::UnitType_Animal,
+			"UnitType_Plant", UnitType::UnitType_Plant
+			);
+	}
 
 	struct DynamicObject
 	{
@@ -67,6 +90,7 @@ namespace TryUserType
 	protected:
 		sol::function lua_fn_tick;
 		sol::function lua_fn_start;
+		DynamicObject params;
 	};
 
 	class Unit
