@@ -78,6 +78,7 @@ namespace TryUserType
 		sol::state_view lua(MainLua());
 		lua_fn_tick = lua["TryUserType"]["Scene"]["LuaTick"]; 
 		lua_fn_start = lua["TryUserType"]["Scene"]["LuaStart"];
+		tb = sol::table(MainLua(), sol::create);
 
 		assert(lua_fn_tick.valid());
 		assert(lua_fn_start.valid());
@@ -85,6 +86,7 @@ namespace TryUserType
 
 	Scene::~Scene()
 	{
+
 	}
 
 	void Scene::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
@@ -95,8 +97,8 @@ namespace TryUserType
 			"Tick", &Scene::Tick,
 			"is_done", sol::property(&Scene::IsDone, &Scene::SetIsDone),
 			"Start", &Scene::Start,
-			"params", &Scene::params
-
+			// "params", &Scene::params,
+			"params", &Scene::tb
 		);
 		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 	}
@@ -394,5 +396,7 @@ namespace TryUserType
 			return d.entries.size(); }
 		);
 		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+		sol::state_view lua(L);
+		sol::table xx(L, sol::create);
 	}
 }

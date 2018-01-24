@@ -91,6 +91,7 @@ namespace TryUserType
 		sol::function lua_fn_tick;
 		sol::function lua_fn_start;
 		DynamicObject params;
+		sol::table tb;
 	};
 
 	class Unit
