@@ -8,6 +8,21 @@ extern std::vector<std::function<void(lua_State *)>> LUA_BIND_USER_TYPE_FNS;
 
 namespace TryUserType
 {
+	template <typename T>
+	static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+	{
+		assert(false);
+	}
+
+	template <typename T>
+	struct PBMsgLuaBinder
+	{
+		static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+		{
+			assert(false);
+		}
+	};
+
 	void AddLuaBindUserTypeFn(std::function<void(lua_State *)> fn);
 	void ExecuteLuaBindUserTypeFns(lua_State *L);
 

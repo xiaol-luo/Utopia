@@ -7,6 +7,7 @@ TryUserType[ClassName]["LuaTick"] = function (self)
         self.params.sheep:TryEatPlant(self.params.plants[i])
     end
     self.params.wolf:TryBite(self.params.sheep)
+	self.params.wolf:ExTryBite(self.params.sheep)
 
     if self.params.sheep.is_dead then 
         self.is_done = true

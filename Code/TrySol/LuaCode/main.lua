@@ -11,6 +11,24 @@ function MainTick()
         return
     end
 
+	local a
+	local zz
+	a = NetProto.TryItem.new()
+	a.id = 10
+	zz = a.id
+	a.name = "1234"
+	zz = a.name
+	
+	a = NetProto.TryMsg.new()
+	a.int_val = 10
+	zz = a.int_val
+	a.str_val = "224"
+	zz = a.str_val
+	a.nest_enum_val = NetProto.TryMsg.TryNestEnum.a
+    zz = a.nest_enum_val
+    a.nest_enum_array[1] = 1234
+	zz = a.nest_enum_array[1]
+	
     local enum_unknown = TryUserType.UnitType.UnitType_Unknown
     local enum_animal = TryUserType.UnitType.UnitType_Animal
     local enum_plant = TryUserType.UnitType.UnitType_Plant

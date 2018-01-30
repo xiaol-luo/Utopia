@@ -14,11 +14,6 @@ namespace TryUserType
 		UnitType_Animal,
 		UnitType_Plant,
 	};
-	template <typename T>
-	static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
-	{
-		assert(false);
-	}
 
 	template <>
 	static void DoLuaBind<UnitType>(lua_State *L, const std::string &name_space, const std::string &name)

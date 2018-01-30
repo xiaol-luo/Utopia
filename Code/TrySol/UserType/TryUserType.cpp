@@ -17,6 +17,11 @@ namespace TryUserType
 	{
 	}
 
+	void WolfExBite(Wolf *wolf, Animal * animal)
+	{
+		wolf->TryBite(animal);
+	}
+
 	void Wolf::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
 	{
 		std::string class_name = !name.empty() ? name : "Wolf";
@@ -25,6 +30,7 @@ namespace TryUserType
 			"attack_range", &Wolf::attack_range,
 			"attack", &Wolf::attack,
 			"TryBite", &Wolf::TryBite,
+			"ExTryBite", WolfExBite,
 			sol::base_classes, sol::bases<Animal, Unit>()
 		);
 		BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);

@@ -9,6 +9,7 @@
 #include "UserType/TryUserTypeUtil.h"
 #include <thread>
 #include "lrdb/server.hpp"
+#include "protobuf/ProtobufLuaBind.h"
 
 int LuaErrorFn(lua_State *L)
 {
@@ -58,6 +59,8 @@ int main(int argc, char **argv)
 	printf("anohter_human {%s, %f, %d } \n", anohter_human.name.c_str(), anohter_human.head.weight, anohter_human.head.param_int);
 
 	TryUserType::RegisterUserType();
+	TryUserType::RegisterProtobuf(main_lua);
+	TryUserType::LuaBindPB_TryItem();
 	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
 
 	sol::protected_function_result fpr;
@@ -92,6 +95,8 @@ int main(int argc, char **argv)
 	bool game_exit = lua["game_exit"];
 	while (!game_exit)
 	{
+		NetProto::TryMsg xx;
+
 		lua_main_tick_fn();
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		game_exit = lua["game_exit"];
