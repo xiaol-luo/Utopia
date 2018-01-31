@@ -1,4 +1,5 @@
 #include "ProtobufLuaBind.h"
+#include <sol.hpp>
 
 namespace TryUserType
 {
@@ -80,6 +81,7 @@ namespace TryUserType
 					"str_val", sol::property(PBMsg::GetStrVal, PBMsg::SetStrVal),
 					"nest_enum_val", sol::property(PBMsg::GetNestEnumVal, PBMsg::SetNestEnumVal),
 					"nest_enum_array", sol::property(PBMsg::GetNestEnumArray)
+					// "nest_enum_array", sol::property([](NetProto::TryMsg &self) {return sol::as_container(self.mutable_nest_enum_array());})
 				);
 				BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 			}
@@ -104,23 +106,57 @@ namespace TryUserType
 			return 0;
 		return self.Get(idx);
 	}
-	void PBLuaBindRepeatedField(lua_State *L)
+	void PBLuaBindRepeatedField_int(lua_State *L, const std::string &name_space, const std::string &name)
 	{
-		std::string class_name = "";
+		struct PBBind
+		{
+			static int GetLuaABSIdx(int idx, int len)
+			{
+				int ret = idx;
+				assert(0 != idx);
+				if (idx < 0)
+					ret = len + idx + 1;
+				if (ret <= 0)
+					ret = 1;
+				return ret;
+			}
 
-		sol::usertype<google::protobuf::RepeatedField<int>> meta_table(
-			sol::constructors<google::protobuf::RepeatedField<int>()>(),
-			sol::meta_function::index, PBLuaBindRepeatedFieldGet,
-			sol::meta_function::new_index, PBLuaBindRepeatedFieldSet,
-			sol::meta_function::length, &google::protobuf::RepeatedField<int>::size
-		);
-		BindLuaUserType(sol::state_view(L), meta_table, class_name, "");
+			static sol::optional<int> GetElem(google::protobuf::RepeatedField<int> &self, int idx)
+			{
+				int luaAbsIdx = GetLuaABSIdx(idx, self.size());
+				if (luaAbsIdx > self.size())
+					return 0;
+				return self.Get(luaAbsIdx - 1);
+			}
+			static void SetElem(google::protobuf::RepeatedField<int> &self, int idx, int val)
+			{
+				int luaAbsIdx = GetLuaABSIdx(idx, self.size());
+				if (luaAbsIdx > self.size())
+					self.Resize(luaAbsIdx, 0);
+				self.Set(luaAbsIdx - 1, val);
+			}
+
+			static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+			{
+				std::string class_name = !name.empty() ? name : "PBLuaBindRepeatedField_int";
+				sol::usertype<google::protobuf::RepeatedField<int>> meta_table(
+					sol::constructors<google::protobuf::RepeatedField<int>(),
+					google::protobuf::RepeatedField<int>(const google::protobuf::RepeatedField<int> &)>(), 
+					sol::meta_function::index, &PBBind::GetElem,
+					sol::meta_function::new_index, &PBBind::SetElem,
+					sol::meta_function::length, &google::protobuf::RepeatedField<int>::size
+				);
+				BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+			}
+		};
+
+		PBBind::DoLuaBind(L, name_space, name);
 	}
 
 	void RegisterProtobuf(lua_State *l)
 	{
-		PBLuaBindRepeatedField(l);
 		LuaBindPB_TryMsg();
+		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedField_int(L, "", ""); });
 		AddLuaBindUserTypeFn([](lua_State *L) {DoLuaBind<NetProto::TryEnum>(L, "NetProto", ""); });
 		AddLuaBindUserTypeFn([](lua_State *L) {DoLuaBind<NetProto::TryMsg_TryNestEnum>(L, "NetProto.TryMsg", ""); });
 	}
