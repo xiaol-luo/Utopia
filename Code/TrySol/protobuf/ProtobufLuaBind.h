@@ -34,8 +34,13 @@ namespace TryUserType {
 			"b", NetProto::TryMsg_TryNestEnum::TryMsg_TryNestEnum_b
 		);
 	}
-
 	void RegisterProtobuf(lua_State *l);
 	void LuaBindPB_TryItem();
 	void LuaBindPB_TryMsg();
 }
+
+namespace sol {
+	template<>
+	struct is_container<google::protobuf::RepeatedField<int>> : std::false_type {};
+}
+

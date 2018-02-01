@@ -106,6 +106,8 @@ namespace TryUserType
 			return 0;
 		return self.Get(idx);
 	}
+
+
 	void PBLuaBindRepeatedField_int(lua_State *L, const std::string &name_space, const std::string &name)
 	{
 		struct PBBind
@@ -121,12 +123,13 @@ namespace TryUserType
 				return ret;
 			}
 
-			static sol::optional<int> GetElem(google::protobuf::RepeatedField<int> &self, int idx)
+			static sol::object GetElem(google::protobuf::RepeatedField<int> &self, int idx, sol::this_state l)
 			{
 				int luaAbsIdx = GetLuaABSIdx(idx, self.size());
 				if (luaAbsIdx > self.size())
-					return 0;
-				return self.Get(luaAbsIdx - 1);
+					return sol::object(l, sol::in_place, sol::lua_nil);
+				int val = self.Get(luaAbsIdx - 1);
+				return sol::object(l, sol::in_place, val);
 			}
 			static void SetElem(google::protobuf::RepeatedField<int> &self, int idx, int val)
 			{
@@ -136,15 +139,78 @@ namespace TryUserType
 				self.Set(luaAbsIdx - 1, val);
 			}
 
+			static void EraseRange(google::protobuf::RepeatedField<int> &self, int begin, int end)
+			{
+				int abs_begin_idx = GetLuaABSIdx(begin, self.size()) - 1;
+				int abs_end_idx = GetLuaABSIdx(end, self.size()) - 1;
+				self.erase(self.begin() + abs_begin_idx, self.begin() + abs_end_idx);
+			}
+			static void Erase(google::protobuf::RepeatedField<int> &self, int begin)
+			{
+				int abs_idx = GetLuaABSIdx(begin, self.size());
+				EraseRange(self, abs_idx, abs_idx + 1);
+			}
+			static int AddEmpty(google::protobuf::RepeatedField<int> &self)
+			{
+				int val = 0;
+				self.Add(val);
+				return val;
+			}
+			static void AddElem(google::protobuf::RepeatedField<int> &self, int val)
+			{
+				self.Add(val);
+			}
+			static std::tuple<std::function<std::tuple<sol::object, sol::object>(google::protobuf::RepeatedField<int> &, int, sol::this_state)>, google::protobuf::RepeatedField<int>, int>
+				Pairs(google::protobuf::RepeatedField<int> &self)
+			{
+				auto fn = std::function<std::tuple<sol::object, sol::object>(google::protobuf::RepeatedField<int> &, int, sol::this_state)>(PBBind::Next);
+				return std::make_tuple(fn, self, 0);
+			}
+
+			static std::tuple<sol::object, sol::object> Next(google::protobuf::RepeatedField<int> &self, int idx, sol::this_state l)
+			{
+				++idx;
+				if (idx > self.size())
+					return std::make_tuple(sol::object(sol::lua_nil), sol::object(sol::lua_nil));
+				auto v = sol::object(l, sol::in_place, GetElem(self, idx, l));
+				return std::make_tuple(sol::object(l, sol::in_place, idx), v);
+			}
+
 			static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
 			{
 				std::string class_name = !name.empty() ? name : "PBLuaBindRepeatedField_int";
 				sol::usertype<google::protobuf::RepeatedField<int>> meta_table(
-					sol::constructors<google::protobuf::RepeatedField<int>(),
-					google::protobuf::RepeatedField<int>(const google::protobuf::RepeatedField<int> &)>(), 
-					sol::meta_function::index, &PBBind::GetElem,
-					sol::meta_function::new_index, &PBBind::SetElem,
+					sol::constructors<
+						google::protobuf::RepeatedField<int>(),
+						google::protobuf::RepeatedField<int>(google::protobuf::Arena*),
+						google::protobuf::RepeatedField<int>(const google::protobuf::RepeatedField<int> &)
+					>(), 
+					"Get", &google::protobuf::RepeatedField<int>::Get,
+					"Mutable", &google::protobuf::RepeatedField<int>::Mutable,
+					"Set", &google::protobuf::RepeatedField<int>::Set,
+					"Add", sol::overload(
+							&PBBind::AddEmpty, 
+							&PBBind::AddElem
+					),
+					"RemoveLast", &google::protobuf::RepeatedField<int>::RemoveLast,
+					"Clear", &google::protobuf::RepeatedField<int>::Clear,
+					"Reserve", &google::protobuf::RepeatedField<int>::Reserve,
+					"Truncate", &google::protobuf::RepeatedField<int>::Truncate,
+					"Capacity", &google::protobuf::RepeatedField<int>::Capacity,
+					"Resize", &google::protobuf::RepeatedField<int>::Resize,
+					"mutable_data", &google::protobuf::RepeatedField<int>::mutable_data,
+					"data", &google::protobuf::RepeatedField<int>::data,
+					"Swap", &google::protobuf::RepeatedField<int>::Swap,
+					"SwapElements", &google::protobuf::RepeatedField<int>::SwapElements,
+					"erase", sol::overload(
+						&PBBind::Erase,
+						&PBBind::EraseRange
+					),
+					sol::meta_function::pairs, &PBBind::Pairs,
 					sol::meta_function::length, &google::protobuf::RepeatedField<int>::size
+					// sol::meta_function::next, &PBBind::Next
+					// sol::meta_function::index, &PBBind::GetElem,
+					// sol::meta_function::new_index, &PBBind::SetElem,
 				);
 				BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
 			}

@@ -26,13 +26,28 @@ function MainTick()
 	zz = a.str_val
 	a.nest_enum_val = NetProto.TryMsg.TryNestEnum.a
     zz = a.nest_enum_val
-    -- a.nest_enum_array[5] = 2456
     zz = a.nest_enum_array
+    local num = a.nest_enum_array:Add()
+    a.nest_enum_array:Add(10)
+    a.nest_enum_array:Add(11)
+    a.nest_enum_array:Add(12)
+    print("add num", num)
+    
+    for i, v in pairs(a.nest_enum_array) do
+        print("pair", i, v)
+    end
+    
+    for i, v in ipairs(a.nest_enum_array) do
+        print("ipair", i, v)
+    end
+    --a.nest_enum_array:erase(1)
+    --[[
     a.nest_enum_array[2] = 777
     cc = a.nest_enum_array[-1]
     a.nest_enum_array[-1] = 888
 	zz[1] = 2345
-	len = #zz
+    len = #zz
+    --]]
 	-- zz = a.nest_enum_array[1]
 	
     local enum_unknown = TryUserType.UnitType.UnitType_Unknown
