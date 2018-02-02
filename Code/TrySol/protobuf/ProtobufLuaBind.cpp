@@ -1,8 +1,54 @@
 #include "ProtobufLuaBind.h"
 #include <sol.hpp>
+#include "ProtobufLuaBindRepeated.h"
+#include "ProtobufLuaBindRepeatedPtr.h"
 
 namespace TryUserType
 {
+	void LuaBindPBEnum_TryEnum()
+	{
+		struct PBMsg 
+		{
+			static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+			{
+				assert(!name.empty());
+				sol::state_view lua(L);
+				sol::table ns_table = GetOrNewLuaNameSpaceTable(lua, name_space);
+				{
+					sol::optional<sol::object> opt_object = ns_table[name];
+					assert(!opt_object);
+				}
+				ns_table.new_enum(name,
+					"a", NetProto::TryEnum::a,
+					"b", NetProto::TryEnum::b
+				);
+			}
+		};
+		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto", "TryEnum"); });
+	}
+
+	void LuaBindPBEnum_TryNestEnum()
+	{
+		struct PBMsg
+		{
+			static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
+			{
+				assert(!name.empty());
+				sol::state_view lua(L);
+				sol::table ns_table = GetOrNewLuaNameSpaceTable(lua, name_space);
+				{
+					sol::optional<sol::object> opt_object = ns_table[name];
+					assert(!opt_object);
+				}
+				ns_table.new_enum(name,
+					"a", NetProto::TryMsg_TryNestEnum::TryMsg_TryNestEnum_a,
+					"b", NetProto::TryMsg_TryNestEnum::TryMsg_TryNestEnum_b
+				);
+			}
+		};
+		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto.TryMsg", "TryNestEnum"); });
+	}
+
 	void LuaBindPB_TryItem()
 	{
 		struct PBMsg
@@ -26,17 +72,17 @@ namespace TryUserType
 
 			static void PBMsg::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
 			{
-				std::string class_name = !name.empty() ? name : "TryItem";
+				assert(!name.empty());
 				sol::usertype<NetProto::TryItem> meta_table(
 					sol::constructors<NetProto::TryItem(), NetProto::TryItem(NetProto::TryItem &)>(),
 					"id", sol::property(PBMsg::GetId, PBMsg::SetId),
 					"name", sol::property(PBMsg::GetName, PBMsg::SetName)
 				);
-				BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+				BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 			}
 		};
 
-		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto", ""); });
+		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto", "TryItem"); });
 	}
 
 	void LuaBindPB_TryMsg()
@@ -71,159 +117,41 @@ namespace TryUserType
 			{
 				return self.mutable_nest_enum_array();
 			}
+			static ::google::protobuf::RepeatedPtrField< ::NetProto::TryItem >* GetMsgArray(NetProto::TryMsg &self)
+			{
+				return self.mutable_msg_array();
+			}
 
 			static void PBMsg::DoLuaBind(lua_State * L, const std::string & name_space, const std::string & name)
 			{
-				std::string class_name = !name.empty() ? name : "TryMsg";
+				assert(!name.empty());
 				sol::usertype<NetProto::TryMsg> meta_table(
 					sol::constructors<NetProto::TryMsg(), NetProto::TryMsg(NetProto::TryMsg &)>(),
 					"int_val", sol::property(PBMsg::GetIntVal, PBMsg::SetIntVal),
 					"str_val", sol::property(PBMsg::GetStrVal, PBMsg::SetStrVal),
 					"nest_enum_val", sol::property(PBMsg::GetNestEnumVal, PBMsg::SetNestEnumVal),
-					"nest_enum_array", sol::property(PBMsg::GetNestEnumArray)
+					"nest_enum_array", sol::property(PBMsg::GetNestEnumArray),
+					"msg_array", sol::property(PBMsg::GetMsgArray)
 					// "nest_enum_array", sol::property([](NetProto::TryMsg &self) {return sol::as_container(self.mutable_nest_enum_array());})
 				);
-				BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
+				BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 			}
 		};
 
-		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto", ""); });
-	}
-
-	void PBLuaBindRepeatedFieldSet(google::protobuf::RepeatedField<int> &self, int idx, int val)
-	{
-		assert(idx >= 0);
-		if (idx >= self.size())
-		{
-			self.Resize(idx + 1, 0);
-		}
-		self.Set(idx, val);
-	}
-	int PBLuaBindRepeatedFieldGet(google::protobuf::RepeatedField<int> &self, int idx)
-	{
-		assert(idx >= 0);
-		if (idx >= self.size())
-			return 0;
-		return self.Get(idx);
-	}
-
-
-	void PBLuaBindRepeatedField_int(lua_State *L, const std::string &name_space, const std::string &name)
-	{
-		struct PBBind
-		{
-			static int GetLuaABSIdx(int idx, int len)
-			{
-				int ret = idx;
-				assert(0 != idx);
-				if (idx < 0)
-					ret = len + idx + 1;
-				if (ret <= 0)
-					ret = 1;
-				return ret;
-			}
-
-			static sol::object GetElem(google::protobuf::RepeatedField<int> &self, int idx, sol::this_state l)
-			{
-				int luaAbsIdx = GetLuaABSIdx(idx, self.size());
-				if (luaAbsIdx > self.size())
-					return sol::object(l, sol::in_place, sol::lua_nil);
-				int val = self.Get(luaAbsIdx - 1);
-				return sol::object(l, sol::in_place, val);
-			}
-			static void SetElem(google::protobuf::RepeatedField<int> &self, int idx, int val)
-			{
-				int luaAbsIdx = GetLuaABSIdx(idx, self.size());
-				if (luaAbsIdx > self.size())
-					self.Resize(luaAbsIdx, 0);
-				self.Set(luaAbsIdx - 1, val);
-			}
-
-			static void EraseRange(google::protobuf::RepeatedField<int> &self, int begin, int end)
-			{
-				int abs_begin_idx = GetLuaABSIdx(begin, self.size()) - 1;
-				int abs_end_idx = GetLuaABSIdx(end, self.size()) - 1;
-				self.erase(self.begin() + abs_begin_idx, self.begin() + abs_end_idx);
-			}
-			static void Erase(google::protobuf::RepeatedField<int> &self, int begin)
-			{
-				int abs_idx = GetLuaABSIdx(begin, self.size());
-				EraseRange(self, abs_idx, abs_idx + 1);
-			}
-			static int AddEmpty(google::protobuf::RepeatedField<int> &self)
-			{
-				int val = 0;
-				self.Add(val);
-				return val;
-			}
-			static void AddElem(google::protobuf::RepeatedField<int> &self, int val)
-			{
-				self.Add(val);
-			}
-			static std::tuple<std::function<std::tuple<sol::object, sol::object>(google::protobuf::RepeatedField<int> &, int, sol::this_state)>, google::protobuf::RepeatedField<int>, int>
-				Pairs(google::protobuf::RepeatedField<int> &self)
-			{
-				auto fn = std::function<std::tuple<sol::object, sol::object>(google::protobuf::RepeatedField<int> &, int, sol::this_state)>(PBBind::Next);
-				return std::make_tuple(fn, self, 0);
-			}
-
-			static std::tuple<sol::object, sol::object> Next(google::protobuf::RepeatedField<int> &self, int idx, sol::this_state l)
-			{
-				++idx;
-				if (idx > self.size())
-					return std::make_tuple(sol::object(sol::lua_nil), sol::object(sol::lua_nil));
-				auto v = sol::object(l, sol::in_place, GetElem(self, idx, l));
-				return std::make_tuple(sol::object(l, sol::in_place, idx), v);
-			}
-
-			static void DoLuaBind(lua_State *L, const std::string &name_space, const std::string &name)
-			{
-				std::string class_name = !name.empty() ? name : "PBLuaBindRepeatedField_int";
-				sol::usertype<google::protobuf::RepeatedField<int>> meta_table(
-					sol::constructors<
-						google::protobuf::RepeatedField<int>(),
-						google::protobuf::RepeatedField<int>(google::protobuf::Arena*),
-						google::protobuf::RepeatedField<int>(const google::protobuf::RepeatedField<int> &)
-					>(), 
-					"Get", &google::protobuf::RepeatedField<int>::Get,
-					"Mutable", &google::protobuf::RepeatedField<int>::Mutable,
-					"Set", &google::protobuf::RepeatedField<int>::Set,
-					"Add", sol::overload(
-							&PBBind::AddEmpty, 
-							&PBBind::AddElem
-					),
-					"RemoveLast", &google::protobuf::RepeatedField<int>::RemoveLast,
-					"Clear", &google::protobuf::RepeatedField<int>::Clear,
-					"Reserve", &google::protobuf::RepeatedField<int>::Reserve,
-					"Truncate", &google::protobuf::RepeatedField<int>::Truncate,
-					"Capacity", &google::protobuf::RepeatedField<int>::Capacity,
-					"Resize", &google::protobuf::RepeatedField<int>::Resize,
-					"mutable_data", &google::protobuf::RepeatedField<int>::mutable_data,
-					"data", &google::protobuf::RepeatedField<int>::data,
-					"Swap", &google::protobuf::RepeatedField<int>::Swap,
-					"SwapElements", &google::protobuf::RepeatedField<int>::SwapElements,
-					"erase", sol::overload(
-						&PBBind::Erase,
-						&PBBind::EraseRange
-					),
-					sol::meta_function::pairs, &PBBind::Pairs,
-					sol::meta_function::length, &google::protobuf::RepeatedField<int>::size
-					// sol::meta_function::next, &PBBind::Next
-					// sol::meta_function::index, &PBBind::GetElem,
-					// sol::meta_function::new_index, &PBBind::SetElem,
-				);
-				BindLuaUserType(sol::state_view(L), meta_table, class_name, name_space);
-			}
-		};
-
-		PBBind::DoLuaBind(L, name_space, name);
+		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto", "TryMsg"); });
 	}
 
 	void RegisterProtobuf(lua_State *l)
 	{
-		LuaBindPB_TryMsg();
-		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedField_int(L, "", ""); });
-		AddLuaBindUserTypeFn([](lua_State *L) {DoLuaBind<NetProto::TryEnum>(L, "NetProto", ""); });
-		AddLuaBindUserTypeFn([](lua_State *L) {DoLuaBind<NetProto::TryMsg_TryNestEnum>(L, "NetProto.TryMsg", ""); });
+		LuaBindPB_TryItem();
+		LuaBindPB_TryMsg(); 
+		LuaBindPBEnum_TryEnum();
+		LuaBindPBEnum_TryNestEnum();
+
+		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedField<int>(L, "", "PBLuaBindRepeatedField_int"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedField<float>(L, "", "PBLuaBindRepeatedField_float"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedField<double>(L, "", "PBLuaBindRepeatedField_double"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedField<uint32_t>(L, "", "PBLuaBindRepeatedField_uint32_t"); });
+		AddLuaBindUserTypeFn([](lua_State *L) {PBLuaBindRepeatedPtrField<NetProto::TryItem>(L, "", "PBLuaBindRepeatedField_NetProto_TryItem"); });
 	}
 }

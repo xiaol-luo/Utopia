@@ -31,6 +31,8 @@ function MainTick()
     a.nest_enum_array:Add(10)
     a.nest_enum_array:Add(11)
     a.nest_enum_array:Add(12)
+    a.nest_enum_array[11] = 1234
+    zz = a.nest_enum_array[11]
     print("add num", num)
     
     for i, v in pairs(a.nest_enum_array) do
@@ -40,6 +42,21 @@ function MainTick()
     for i, v in ipairs(a.nest_enum_array) do
         print("ipair", i, v)
     end
+
+    zz = a.msg_array
+    msg = zz:Add()
+    msg.id = 10
+    msg.name = "string_name"
+    zz:Add()
+    xx = zz:Data()
+    print("xx len", #xx)
+    e1 = xx[1]
+    e2 = xx[2]
+    e3 = xx[3]
+
+    print("e: ", e1, e2, e3, zz:Get(2), zz:Get(3))
+    zz:Set(2, zz:Get(2))
+
     --a.nest_enum_array:erase(1)
     --[[
     a.nest_enum_array[2] = 777
