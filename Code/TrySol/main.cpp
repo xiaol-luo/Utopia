@@ -60,7 +60,6 @@ int main(int argc, char **argv)
 
 	TryUserType::RegisterUserType();
 	TryUserType::RegisterProtobuf(main_lua);
-	TryUserType::LuaBindPB_TryItem();
 	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
 
 	sol::protected_function_result fpr;
