@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 	printf("anohter_human {%s, %f, %d } \n", anohter_human.name.c_str(), anohter_human.head.weight, anohter_human.head.param_int);
 
 	TryUserType::RegisterUserType();
-	TryUserType::RegisterProtobuf(main_lua);
+	TryUserType::SolLuaBindProtobuf(main_lua);
 	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
 
 	sol::protected_function_result fpr;

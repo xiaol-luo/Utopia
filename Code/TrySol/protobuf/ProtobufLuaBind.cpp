@@ -141,7 +141,7 @@ namespace TryUserType
 		AddLuaBindUserTypeFn([](lua_State *L) {PBMsg::DoLuaBind(L, "NetProto", "TryMsg"); });
 	}
 
-	void RegisterProtobuf(lua_State *l)
+	void SolLuaBindProtobuf(lua_State *l)
 	{
 		LuaBindPB_TryItem();
 		LuaBindPB_TryMsg(); 
