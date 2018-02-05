@@ -9,7 +9,14 @@
 #include "UserType/TryUserTypeUtil.h"
 #include <thread>
 #include "lrdb/server.hpp"
-#include "protobuf/ProtobufLuaBind.h"
+#include "protobuf/try.pb.h"
+#include "protobuf/ProtobufLuaBindRepeated.h"
+#include "protobuf/ProtobufLuaBindRepeatedPtr.h"
+
+namespace TryUserType
+{
+	extern void SolLuaBindProtobuf(lua_State *L);
+}
 
 int LuaErrorFn(lua_State *L)
 {
@@ -60,7 +67,9 @@ int main(int argc, char **argv)
 
 	TryUserType::RegisterUserType();
 	TryUserType::SolLuaBindProtobuf(main_lua);
+
 	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
+
 
 	sol::protected_function_result fpr;
 	{
