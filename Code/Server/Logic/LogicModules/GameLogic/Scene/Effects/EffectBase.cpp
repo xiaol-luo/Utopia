@@ -1,4 +1,4 @@
- #include "EffectBase.h"
+#include "EffectBase.h"
 #include "EffectConfigBase.h"
 #include <assert.h>
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
@@ -77,7 +77,7 @@ namespace GameLogic
 
 	void EffectBase::End(EEffectEndCase end_case)
 	{
-		if (EEffectStage_Wait == m_stage || EEffectStage_End == end_case)
+		if (EEffectStage_Wait == m_stage || EEffectStage_End == m_stage)
 			return;
 
 		this->OnEnd(end_case);
@@ -208,7 +208,7 @@ namespace GameLogic
 		{
 			std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
 			if (nullptr != target_su)
-				ret.insert_or_assign(target_su->GetId(), target_su);
+				ret[target_su->GetId()] = target_su;
 		}
 		return std::move(ret);
 	}

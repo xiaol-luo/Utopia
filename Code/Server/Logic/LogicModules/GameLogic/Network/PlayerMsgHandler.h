@@ -28,7 +28,7 @@ namespace GameLogic
 		virtual ~IClientMsgHandlerDescript() {}
 		inline int Id() { return protocol_id; }
 		inline google::protobuf::Message *Msg() { return msg; }
-		inline virtual void Handle(int protocol_id, google::protobuf::Message *msg, Player *player) = 0;
+		virtual void Handle(int protocol_id, google::protobuf::Message *msg, Player *player) = 0;
 
 	protected:
 		int protocol_id = 0;

@@ -1,4 +1,4 @@
-#include "player.h"
+#include "Player.h"
 #include "PlayerMgr.h"
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Handlers/LenCtxNetStreamCnnHandler.h"
@@ -59,7 +59,7 @@ namespace GameLogic
 		m_player->m_player_mgr->RemovePlayer(this->GetNetId());
 	}
 
-	Player::Player(PlayerMgr *player_mgr, NetId netid) 
+	Player::Player(PlayerMgr *player_mgr, NetId netid)
 		: m_player_mgr(player_mgr)
 	{
 		m_cnn_handler = std::make_shared<PlayerCnnHandler>(netid, this);
@@ -86,7 +86,7 @@ namespace GameLogic
 
 	void Player::SendMsg(google::protobuf::Message * msg)
 	{
-		
+
 	}
 
 	void Player::Send(int protocol_id, char * msg, uint32_t msg_len)

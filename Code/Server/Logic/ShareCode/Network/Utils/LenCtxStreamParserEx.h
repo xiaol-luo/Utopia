@@ -23,6 +23,11 @@ struct StreamLenPraser
 	}
 };
 
+#ifndef WIN32
+extern uint64_t htonll(uint64_t val);
+extern uint64_t ntohll(uint64_t val);
+#endif
+
 template <typename T, int LenDescriptSize>
 struct NetSteamLenPraser
 {
@@ -48,13 +53,13 @@ template <typename T, typename LenParseType = StreamLenPraser<T, sizeof(T)>>
 class LenCtxStreamParserEx
 {
 public:
-	LenCtxStreamParserEx::LenCtxStreamParserEx(uint32_t max_buffer_size)
+	LenCtxStreamParserEx(uint32_t max_buffer_size)
 		: m_max_buffer_size(max_buffer_size)
 	{
 		assert(max_buffer_size >= BUFFER_INIT_SIZE);
 	}
 
-	LenCtxStreamParserEx::~LenCtxStreamParserEx()
+	~LenCtxStreamParserEx()
 	{
 		if (nullptr != m_buffer)
 		{
@@ -63,7 +68,7 @@ public:
 		}
 	}
 
-	inline bool LenCtxStreamParserEx::AppendBuffer(char *data, uint32_t data_len)
+	inline bool AppendBuffer(char *data, uint32_t data_len)
 	{
 		if (m_input_data_p != m_input_data_q || m_is_fail)
 			return false;
@@ -77,7 +82,7 @@ public:
 		return true;
 	}
 
-	bool LenCtxStreamParserEx::ParseNext()
+	bool ParseNext()
 	{
 		m_parse_result = nullptr;
 		m_parse_result_len = 0;
@@ -178,13 +183,13 @@ public:
 	inline char * Content() { return m_parse_result; }
 	inline uint32_t ContentLen() { return m_parse_result_len; }
 	inline bool IsFail() { return m_is_fail; }
-	void * operator new(size_t size) { return MemoryUtil::Malloc(size); } 
-	void operator delete(void *ptr) { MemoryUtil::Free(ptr); } 
-	void * operator new[](size_t size) { return MemoryUtil::Malloc(size); } 
+	void * operator new(size_t size) { return MemoryUtil::Malloc(size); }
+	void operator delete(void *ptr) { MemoryUtil::Free(ptr); }
+	void * operator new[](size_t size) { return MemoryUtil::Malloc(size); }
 	void operator delete[](void *ptr) { MemoryUtil::Free(ptr); }
 
 protected:
-	bool LenCtxStreamParserEx::CheckExpendBuffer(uint32_t lower_limit)
+	bool CheckExpendBuffer(uint32_t lower_limit)
 	{
 		if (lower_limit > m_max_buffer_size)
 			return false;
@@ -207,7 +212,7 @@ protected:
 	uint32_t m_max_buffer_size = 0;
 	static const int BUFFER_INIT_SIZE = 64;
 	static const int BUFFER_INCREASE_STEP = 16;
-	
+
 	char *m_input_data_p = nullptr;
 	char *m_input_data_q = nullptr;
 	bool m_is_fail = false;

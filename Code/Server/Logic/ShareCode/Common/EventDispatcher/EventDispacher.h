@@ -10,7 +10,7 @@ public:
 	static const uint64_t INVALID_ID = 0;
 	union SubscribeId
 	{
-		struct 
+		struct
 		{
 			int event_id;
 			int f_key;
@@ -28,15 +28,11 @@ public:
 		auto it = m_subscribes.find(id);
 		if (m_subscribes.end() == it)
 			return;
-
-		SubscribeData<Args...> xx;
-		SubscribeData<Args...> *subscribe = dynamic_cast<SubscribeData<Args...> *>(it->second);
-		assert(subscribe); // 如果不能动态转换，那么肯定是Args...和之前设置的类型不匹配，要检查
-		subscribe->ForeachFs(args...);
+		it->second->ForeachFs(args...);
 	}
 
-	template <typename...Args>
-	int64_t Subscribe(int id, std::function<void(Args...)> f)
+	template <typename return_type, typename... Args>
+	int64_t Subscribe(int id, std::function<return_type(Args...)>& f)
 	{
 		auto it = m_subscribes.find(id);
 		if (m_subscribes.end() == it)
@@ -46,7 +42,7 @@ public:
 			if (!ret) return INVALID_ID;
 		}
 		SubscribeData<Args...> *subscribe = dynamic_cast<SubscribeData<Args...> *>(it->second);
-		assert(subscribe); // 如果不能动态转换，那么肯定是Args...和之前设置的类型不匹配，要检查
+		assert(subscribe);
 		uint32_t f_key = subscribe->Add(f);
 		if (SubcribeDataBase::INVALID_ID == f_key)
 			return INVALID_ID;
@@ -57,25 +53,18 @@ public:
 		return sid.id;
 	}
 
-	int64_t Subscribe(int id, std::function<void()> f)
+	template <typename return_type, typename... Args>
+	int64_t Subscribe(int id, return_type(*f)(Args...))
 	{
-		auto it = m_subscribes.find(id);
-		if (m_subscribes.end() == it)
-		{
-			bool ret = false;
-			std::tie(it, ret) = m_subscribes.insert(std::make_pair(id, new SubscribeData<>()));
-			if (!ret) return INVALID_ID;
-		}
-		SubscribeData<> *subscribe = dynamic_cast<SubscribeData<> *>(it->second);
-		assert(subscribe); // 如果不能动态转换，那么肯定是Args...和之前设置的类型不匹配，要检查
-		uint32_t f_key = subscribe->Add(f);
-		if (SubcribeDataBase::INVALID_ID == f_key)
-			return INVALID_ID;
+		std::function<void(Args...)> fn = f;
+		return Subscribe(id, fn);
+	}
 
-		SubscribeId sid;
-		sid.event_id = id;
-		sid.f_key = f_key;
-		return sid.id;
+	template <typename... Args, typename binder>
+	int64_t Subscribe(int id, binder b)
+	{
+		std::function<void(Args...)> fn = b;
+		return Subscribe(id, fn);
 	}
 
 	void Cancel(int64_t subscribe_id)
@@ -92,7 +81,7 @@ public:
 	}
 
 private:
-	class SubcribeDataBase 
+	class SubcribeDataBase
 	{
 	public:
 		const static uint32_t INVALID_ID = 0;
@@ -103,63 +92,40 @@ private:
 		virtual void Remove(uint32_t id) = 0;
 		virtual size_t Count() = 0;
 		uint32_t next_id = 0;
+
+		std::unordered_map<uint32_t, void*> fs_ptr;
+		template <typename... Params>
+		void ForeachFs(Params... params)
+		{
+			for (auto &&kv_pair : fs_ptr)
+			{
+				auto fn = (std::function<void(Params...)> *)(kv_pair.second);
+				(*fn)(params...);
+			}
+		}
 	};
 
 	template <typename...Args>
 	class SubscribeData : public SubcribeDataBase
 	{
 	public:
-		using stl_function_type = std::function<void(Args...)>;
+		using stl_function_type = typename std::function<void(Args...)>;
 		std::unordered_map<uint32_t, stl_function_type> fs;
-		void ForeachFs(Args... args)
-		{
-			for (auto &&kv_pair : fs)
-				kv_pair.second(args...);
-		}
-		uint32_t Add(stl_function_type f)
-		{
-			++next_id;
-			(INVALID_ID == next_id) ? next_id = 1 : 0;
-			bool ret = false;
-			std::tie(std::ignore, ret) = fs.insert(std::make_pair(next_id, f));
-			return ret ? next_id : INVALID_ID;
-		}
-		virtual void Remove(uint32_t id) override
-		{
-			fs.erase(id);
-		}
-		virtual size_t Count() override
-		{
-			return fs.size();
-		}
-		virtual void Release() override
-		{
-			fs.clear();
-		}
-	};
 
-	template <>
-	class SubscribeData<> : public SubcribeDataBase
-	{
-	public:
-		using stl_function_type = std::function<void(void)>;
-		std::unordered_map<uint32_t, stl_function_type> fs;
-		void ForeachFs()
-		{
-			for (auto &&kv_pair : fs)
-				kv_pair.second();
-		}
 		uint32_t Add(stl_function_type f)
 		{
 			++next_id;
 			(INVALID_ID == next_id) ? next_id = 1 : 0;
 			bool ret = false;
-			std::tie(std::ignore, ret) = fs.insert(std::make_pair(next_id, f));
+			typename std::unordered_map<uint32_t, stl_function_type>::iterator it;
+			std::tie(it, ret) = fs.insert(std::make_pair(next_id, f));
+			if (ret) fs_ptr.insert(std::make_pair(next_id, (void*)&it->second));
 			return ret ? next_id : INVALID_ID;
 		}
 		virtual void Remove(uint32_t id) override
 		{
 			fs.erase(id);
+			fs_ptr.erase(id);
 		}
 		virtual size_t Count() override
 		{
@@ -168,6 +134,7 @@ private:
 		virtual void Release() override
 		{
 			fs.clear();
+			fs_ptr.clear();
 		}
 	};
 

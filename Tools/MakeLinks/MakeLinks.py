@@ -2,6 +2,7 @@ import os
 import sys
 import configparser
 import logging
+import platform
 
 log = logging
 log.basicConfig(level=logging.DEBUG)
@@ -9,6 +10,8 @@ log.basicConfig(level=logging.DEBUG)
 BASE_SECTION = "base-section"
 ROOT_DIR = "root_dir"
 LINK_SECTION = "link-section"
+WIN_LINK_SECTION = 'win-link-section'
+LINUX_LINK_SECTION = 'linux-link-section'
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -28,6 +31,12 @@ if __name__ == "__main__":
         root_dir_path = os.path.abspath(ini_cfg[BASE_SECTION][ROOT_DIR])
         for key in ini_cfg[LINK_SECTION]:
             link_maps[key] = ini_cfg[LINK_SECTION][key]
+        if platform.system() == 'Windows':
+            for key in ini_cfg[WIN_LINK_SECTION]:
+                link_maps[key] = ini_cfg[WIN_LINK_SECTION][key]
+        else:
+            for key in ini_cfg[LINUX_LINK_SECTION]:
+                link_maps[key] = ini_cfg[LINUX_LINK_SECTION][key]
     if not root_dir_path or not os.path.isdir(root_dir_path):
         sys.exit(3)
     exist_links = []
@@ -51,7 +60,8 @@ if __name__ == "__main__":
             link_path = os.path.join(root_dir_path, key)
             if (not os.path.exists(os.path.dirname(link_path))):
                 os.makedirs(os.path.dirname(link_path))
-            os.symlink(real_path, link_path)
+            is_dir = os.path.isdir(real_path)
+            os.symlink(real_path, link_path, is_dir)
         except FileExistsError as e:
             log.error(e)
         except FileNotFoundError as e:

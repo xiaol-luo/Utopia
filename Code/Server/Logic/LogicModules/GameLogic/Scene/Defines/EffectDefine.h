@@ -6,6 +6,7 @@
 #include <memory>
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/Vector3.h"
+#include <limits.h>
 
 namespace GameLogic
 {

@@ -1,5 +1,3 @@
-#pragma once
-
 #include "ViewSnapshot.h"
 #include "ViewGrid.h"
 #include "Common/Macro/ServerLogicMacro.h"

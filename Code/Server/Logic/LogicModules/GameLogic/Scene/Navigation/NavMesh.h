@@ -18,6 +18,7 @@ class dtNavMeshQuery;
 #include "Common/Geometry/Vector3.h"
 #include "Common/Geometry/GeometryDefine.h"
 #include "DetourNavMeshQuery.h"
+#include <string.h>
 
 namespace GameLogic
 {
@@ -51,7 +52,7 @@ namespace GameLogic
 		dtCrowd *m_dtCrowd = nullptr;
 		dtNavMeshQuery *m_dtNavMeshQuery = nullptr;
 		void Reset();
-		int NavMesh::rasterizeTileLayers(const int tx, const int ty, 
+		int rasterizeTileLayers(const int tx, const int ty, 
 			const rcConfig& cfg, TileCacheData* tiles, const int maxTiles);
 		const dtQueryFilter * DefaultFilter();
 

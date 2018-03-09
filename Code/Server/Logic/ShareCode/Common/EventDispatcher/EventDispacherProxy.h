@@ -18,8 +18,8 @@ public:
 		m_ev_dispacher->Fire(id, args...);
 	}
 
-	template <typename...Args>
-	int64_t Subscribe(int id, std::function<void(Args...)> f)
+	template <typename return_type, typename... Args>
+	int64_t Subscribe(int id, std::function<return_type(Args...)>& f)
 	{
 		int64_t ret = m_ev_dispacher->Subscribe(id, f);
 		if (EventDispacher::INVALID_ID != ret)
@@ -27,9 +27,19 @@ public:
 		return ret;
 	}
 
-	int64_t Subscribe(int id, std::function<void()> f)
+	template <typename return_type, typename... Args>
+	int64_t Subscribe(int id, return_type(*f)(Args...))
 	{
 		int64_t ret = m_ev_dispacher->Subscribe(id, f);
+		if (EventDispacher::INVALID_ID != ret)
+			m_subscribe_ids.insert(ret);
+		return ret;
+	}
+
+	template <typename... Args, typename binder>
+	int64_t Subscribe(int id, binder b)
+	{
+		int64_t ret = m_ev_dispacher->Subscribe<Args...>(id, b);
 		if (EventDispacher::INVALID_ID != ret)
 			m_subscribe_ids.insert(ret);
 		return ret;

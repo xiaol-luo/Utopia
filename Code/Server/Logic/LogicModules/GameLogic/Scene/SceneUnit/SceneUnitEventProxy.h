@@ -40,6 +40,24 @@ namespace GameLogic
 			return m_unit_proxy->Subscribe(id, f);
 		}
 
+		template <typename return_type, typename... Args>
+		int64_t Subscribe(int id, std::function<return_type(Args...)>& f)
+		{
+			return m_unit_proxy->Subscribe(id, f);
+		}
+
+		template <typename return_type, typename... Args>
+		int64_t Subscribe(int id, return_type(*f)(Args...))
+		{
+			return m_unit_proxy->Subscribe(id, f);
+		}
+
+		template <typename... Args, typename binder>
+		int64_t Subscribe(int id, binder b)
+		{
+			return m_unit_proxy->Subscribe<Args...>(id, b);
+		}
+
 		void Cancel(int64_t subscribe_id)
 		{
 			m_unit_proxy->Cancel(subscribe_id);

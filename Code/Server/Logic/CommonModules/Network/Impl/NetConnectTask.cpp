@@ -1,5 +1,12 @@
 #include "NetConnectTask.h"
 #include "Common/Utils/MemoryUtil.h"
+#include <fcntl.h>
+
+#ifndef WIN32
+#include <unistd.h>
+#endif // !WIN32
+
+
 
 namespace Net
 {
@@ -53,7 +60,7 @@ namespace Net
 
 		m_task_state = EConnectTask_Process;
 		SOCKET sock = -1;
-		do 
+		do
 		{
 			sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 			if (INVALID_SOCKET == sock)
@@ -96,7 +103,7 @@ namespace Net
 
 		m_task_state = EConnectTask_Process;
 		SOCKET sock = -1;
-		do 
+		do
 		{
 			sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 			if (INVALID_SOCKET == sock)
@@ -144,7 +151,7 @@ namespace Net
 #include <arpa/inet.h>
 #include <errno.h>
 
-typedef int SOCKET;
+	typedef int SOCKET;
 
 	void ConnectTaskConnect::Process()
 	{
@@ -208,7 +215,7 @@ typedef int SOCKET;
 
 			struct sockaddr_in listen_addr;
 			listen_addr.sin_family = AF_INET;
-			listen_addr.sin_addr = inet_addr(m_ip.c_str());
+			listen_addr.sin_addr.s_addr = inet_addr(m_ip.c_str());
 			listen_addr.sin_port = htons(m_port);
 			if (0 != bind(sock, (struct sockaddr *)&listen_addr, sizeof(listen_addr)))
 			{

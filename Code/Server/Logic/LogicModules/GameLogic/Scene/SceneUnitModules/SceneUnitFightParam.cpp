@@ -1,5 +1,5 @@
 #include "SceneUnitFightParam.h"
-#include "Common/Utils/TupleUtil.h"
+// #include "Common/Utils/TupleUtil.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 #include <assert.h>
@@ -188,9 +188,14 @@ namespace GameLogic
 		{
 			auto t = m_ev_queue.front();
 			m_ev_queue.pop();
+
+			FireEventHelp(std::get<0>(t), std::get<1>(t), std::get<2>(t), std::get<3>(t));
+
+			/*
 			Tuple::Apply(std::bind(&SceneUnitFightParam::FireEventHelp, this, 
 				std::placeholders::_1, std::placeholders::_2, 
 				std::placeholders::_3, std::placeholders::_4), t);
+				*/
 		}
 	}
 

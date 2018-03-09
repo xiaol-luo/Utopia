@@ -40,3 +40,18 @@ namespace GameLogic
 		EViewGrid_Grass
 	};
 }
+
+namespace std
+{
+	template<>
+	struct hash<GameLogic::EViewCamp>
+	{
+		typedef GameLogic::EViewCamp argument_type;
+		typedef std::size_t result_type;
+
+		result_type operator()(argument_type const &s) const
+		{
+			return (result_type)s;
+		}
+	};
+}

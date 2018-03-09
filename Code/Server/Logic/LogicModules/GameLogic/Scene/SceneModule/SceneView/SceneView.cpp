@@ -88,7 +88,7 @@ namespace GameLogic
 						std::shared_ptr<SceneUnit> su = it.second.lock();
 						if (nullptr == su)
 							continue;
-						snapshot->scene_units.insert_or_assign(su->GetId(), su);
+						snapshot->scene_units[su->GetId()] = su;
 					}
 				}
 			}
@@ -428,7 +428,7 @@ namespace GameLogic
 		auto su_sight = su->GetModule<SceneUnitSight>();;
 		auto su_body = su->GetModule<SceneUnitBody>();
 		if (nullptr != su_sight || nullptr != su_body)
-			m_scene_units.insert_or_assign(su->GetId(), su->shared_from_this());
+			m_scene_units[su->GetId()] = su->shared_from_this();
 	}
 	void SceneView::OnSceneUnitLeaveScene(std::shared_ptr<SceneUnit> su)
 	{

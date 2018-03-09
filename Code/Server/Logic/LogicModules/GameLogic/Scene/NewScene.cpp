@@ -452,7 +452,7 @@ namespace GameLogic
 			for (auto kv_pair : diff.more_su)
 			{
 				camp_diff.miss_su_ids.erase(kv_pair.first);
-				camp_diff.more_sus.insert_or_assign(kv_pair.first, kv_pair.second);
+				camp_diff.more_sus[kv_pair.first] = kv_pair.second;
 			}
 		}
 		if (syncClient)

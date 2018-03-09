@@ -67,8 +67,8 @@ void * MemoryUtil::Realloc(void * ptr, size_t size)
 	if (nullptr != ptr)
 	{
 		void *real_ptr = (char *)ptr - MemoryPoolMgr::BLOCK_SIZE_DESCRIPT_LEN;
-		uint32_t old_size = *(uint32_t *)real_ptr;
-		uint32_t copy_size = std::min(old_size, size);
+		size_t old_size = *(uint32_t *)real_ptr;
+		size_t copy_size = std::min(old_size, size);
 		memcpy(new_ptr, ptr, copy_size);
 		memory_pool_mgr->Free(ptr);
 	}

@@ -4,6 +4,7 @@
 #include "DetourTileCacheBuilder.h"
 #include <string>
 #include "InputGeom.h"
+#include <string.h>
 
 /// These are just sample areas to use consistent values across the samples.
 /// The use should specify these base on his needs.

@@ -283,7 +283,7 @@ namespace GameLogic
 	{
 		if (nullptr == effect || effect->GetKey() <= 0)
 			return;
-		m_guide_effects.insert_or_assign(effect->GetKey(), effect);
+		m_guide_effects[effect->GetKey()] = effect;
 	}
 
 	void Skill::RemoveGuideEffect(uint64_t effect_key)

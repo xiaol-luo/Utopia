@@ -226,7 +226,7 @@ namespace GameLogic
 
 	void SceneUnitMove::CancelForceMove()
 	{
-		if (NetProto::EMoveState_ForceMove == this->GetMoveAgentState())
+		if (NetProto::EMoveState_ForceMove == CalMoveState(this->GetMoveAgentState()))
 		{
 			m_curr_state->ForceDone();
 		}

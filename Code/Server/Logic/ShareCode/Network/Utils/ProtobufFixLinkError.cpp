@@ -1,3 +1,4 @@
+#ifdef WIN32
 #include <google/protobuf/message_lite.h>
 
 namespace google
@@ -9,3 +10,4 @@ namespace google
 		}
 	}
 }
+#endif

@@ -13,7 +13,7 @@ namespace Net
 
 	NetWorker::NetWorker()
 	{
-		
+
 	}
 
 	NetWorker::~NetWorker()
@@ -157,11 +157,11 @@ namespace Net
 		NetConnectionData *cnn_data = (NetConnectionData *)ctx;
 		NetWorker *net_worker = cnn_data->net_worker;
 
-		if (events & BEV_EVENT_CONNECTED) 
+		if (events & BEV_EVENT_CONNECTED)
 		{
 
 		}
-		else if (events & BEV_EVENT_ERROR) 
+		else if (events & BEV_EVENT_ERROR)
 		{
 			cnn_data->is_expired = true;
 			net_worker->m_internal_wait_remove_netids.insert(cnn_data->netid);
@@ -225,6 +225,12 @@ namespace Net
 		a++;
 	}
 
+#ifndef WIN32
+	int GetLastError()
+	{
+		return errno;
+	}
+#endif
 
 	void NetWorker::Loop()
 	{
@@ -248,7 +254,7 @@ namespace Net
 			}
 
 			this->CheckRemoveCnnDatas();
-		} 
+		}
 		for (auto kv_pair : m_cnn_datas)
 			m_internal_wait_remove_netids.insert(kv_pair.first);
 		for (auto kv_pair : m_wait_add_cnn_datas)
@@ -284,7 +290,7 @@ namespace Net
 				NetConnectionData *cnn_data = kv_pair.second;
 
 				bool is_ok = true;
-				do 
+				do
 				{
 					if (0 != evutil_make_socket_nonblocking(cnn_data->fd))
 					{

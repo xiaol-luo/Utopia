@@ -2,6 +2,7 @@
 
 #include "Common/Geometry/Vector3.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include <float.h>
 
 namespace GameLogic
 {

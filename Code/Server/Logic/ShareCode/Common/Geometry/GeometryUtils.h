@@ -1,8 +1,10 @@
-﻿
+
 #pragma once
 
 #include <stdint.h>
 #include "GeometryDefine.h"
+#include <float.h>
+#include <cstddef>
 
 struct Vector2;
 struct Vector3;

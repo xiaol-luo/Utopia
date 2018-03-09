@@ -3,6 +3,8 @@
 #include <queue>
 #include <vector>
 #include <functional>
+#include <string.h>
+
 struct BlockSet;
 
 class MemoryPool

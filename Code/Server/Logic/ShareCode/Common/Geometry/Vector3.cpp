@@ -2,9 +2,9 @@
 #include "Vector3.h"
 #include "Vector2.h"
 #include "GeometryUtils.h"
-#include <math.h>
 #include <cfloat>
 #include <memory>
+#include <algorithm>
 
 const Vector3 Vector3::back(0, 0, -1);		//	Shorthand for writing Vector3(0, 0, -1).
 const Vector3 Vector3::down(0, -1, 0);		//	Shorthand for writing Vector3(0, -1, 0).

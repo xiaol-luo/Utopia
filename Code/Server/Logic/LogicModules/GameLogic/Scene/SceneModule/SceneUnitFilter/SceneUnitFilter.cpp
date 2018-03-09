@@ -278,7 +278,7 @@ namespace GameLogic
 		m_qtree.FindUnits(rect, node_units);
 		for (SceneUnitQTreeNodeUnit *node_unit : node_units)
 		{
-			out_ret.insert_or_assign(node_unit->unit->GetId(), node_unit->unit);
+			out_ret[node_unit->unit->GetId()] = node_unit->unit;
 		}
 	}
 

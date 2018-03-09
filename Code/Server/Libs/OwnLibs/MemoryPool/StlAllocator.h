@@ -8,11 +8,11 @@ class StlAllocator : public std::allocator<T>
 {
 public:
 	typedef size_t   size_type;
-	typedef typename allocator<T>::pointer              pointer;
-	typedef typename allocator<T>::value_type           value_type;
-	typedef typename allocator<T>::const_pointer        const_pointer;
-	typedef typename allocator<T>::reference            reference;
-	typedef typename allocator<T>::const_reference      const_reference;
+	typedef typename std::allocator<T>::pointer              pointer;
+	typedef typename std::allocator<T>::value_type           value_type;
+	typedef typename std::allocator<T>::const_pointer        const_pointer;
+	typedef typename std::allocator<T>::reference            reference;
+	typedef typename std::allocator<T>::const_reference      const_reference;
 
 	pointer allocate(size_type _Count, const void* _Hint = NULL)
 	{
@@ -33,7 +33,7 @@ public:
 	};
 
 	StlAllocator() throw() {}
-	StlAllocator(const StlAllocator& __a) throw() : allocator<T>(__a) {}
+	StlAllocator(const StlAllocator& __a) throw() : std::allocator<T>(__a) {}
 	template<typename _Tp1> StlAllocator(const StlAllocator<_Tp1>&) throw() {}
 	~StlAllocator() throw() {}
 };

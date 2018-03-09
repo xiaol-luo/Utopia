@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameLogic/Scene/Defines/ViewDefine.h"
+#include <string.h>
 
 namespace GameLogic
 {

@@ -1,8 +1,8 @@
-﻿
+
 #include "GeometryUtils.h"
 #include "Vector2.h"
 #include "Vector3.h"
-
+#include <string.h>
 #include <stdlib.h>
 #include <cassert>
 #include <algorithm>

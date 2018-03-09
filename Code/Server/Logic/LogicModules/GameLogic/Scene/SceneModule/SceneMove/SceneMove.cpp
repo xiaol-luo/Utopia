@@ -59,7 +59,7 @@ namespace GameLogic
 	{
 		auto su_move = su->GetModule<SceneUnitMove>();
 		if (nullptr != su_move)
-			m_su_moves.insert_or_assign(su->GetId(), su_move);
+			m_su_moves[su->GetId()] = su_move;
 	}
 }
 

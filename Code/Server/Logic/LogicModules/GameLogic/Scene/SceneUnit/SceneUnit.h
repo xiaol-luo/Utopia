@@ -4,6 +4,7 @@
 #include "GameLogic/Scene/Defines/SceneDefine.h"
 #include <assert.h>
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include <float.h>
 
 class EventDispacher;
 class EventDispacherProxy;

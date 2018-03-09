@@ -3,6 +3,21 @@
 #include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
 #include "EffectAttrs.h"
 
+namespace std
+{
+	template<>
+	struct hash<NetProto::EFightParam>
+	{
+		typedef NetProto::EFightParam argument_type;
+		typedef std::size_t result_type;
+
+		result_type operator()(argument_type const &s) const
+		{
+			return (result_type)s;
+		}
+	};
+}
+
 namespace GameLogic
 {
 	FightParamKV::FightParamKV(FightParamAddType _add_type, NetProto::EFightParam _key, int _val, int _unique_key)
@@ -110,7 +125,7 @@ namespace GameLogic
 		{
 			assert(attr_cfg.size() >= 2);
 			m_fight_params.kvs.push_back(FightParamKV(
-				FightParamAddType_Base, 
+				FightParamAddType_Base,
 				(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
 				attr_cfg.size() > 2 ? attr_cfg[2] : 0
 			));

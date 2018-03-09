@@ -59,7 +59,7 @@ namespace GameLogic
 				m_cover_girds = m_scene_view->GetCircleCoverGrids(locate_grid->center.x, locate_grid->center.y, this->GetRadius());
 			for (auto grid : m_cover_girds)
 			{
-				grid->su_bodies.insert_or_assign(this->GetId(), this->GetOwner()->shared_from_this());
+				grid->su_bodies[this->GetId()] = this->GetOwner()->shared_from_this();
 			}
 		}
 	}

@@ -16,5 +16,3 @@ namespace Tuple
 		return ApplyImpl(f, t, std::make_index_sequence<std::tuple_size<T>::value>());
 	}
 }
-
-
