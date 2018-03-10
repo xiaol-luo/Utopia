@@ -28,9 +28,9 @@ float GeometryUtils::DeltaAngle(const Vector3 &from, const Vector3 &to)
 	float cos_val = Vector3::Dot(tmp_from, tmp_to);
 	float angle = GeometryUtils::RadToDeg(acos(cos_val));
 	return cross_vec3.y >= 0 ? angle : -angle; 
-	// ä½¿ç”¨å·¦æ‰‹åæ ‡ç³»ï¼Œé¡ºæ—¶é’ˆä¸ºæ—‹è½¬æ­£æ–¹å‘
-	// angleä¸ºæ­£å€¼è¡¨ç¤ºæ‹‡æŒ‡å‘+yï¼Œé¡ºç€å››æŒ‡æ–¹å‘æ—‹è½¬angleã€‚
-	// angleä¸ºè´Ÿå€¼è¡¨ç¤ºæ‹‡æŒ‡å‘-yï¼Œé¡ºç€å››æŒ‡æ–¹å‘æ—‹è½¬angleã€‚
+	// Ê¹ÓÃ×óÊÖ×ø±êÏµ£¬Ë³Ê±ÕëÎªĞı×ªÕı·½Ïò
+	// angleÎªÕıÖµ±íÊ¾Ä´Ö¸Ïò+y£¬Ë³×ÅËÄÖ¸·½ÏòĞı×ªangle¡£
+	// angleÎª¸ºÖµ±íÊ¾Ä´Ö¸Ïò-y£¬Ë³×ÅËÄÖ¸·½ÏòĞı×ªangle¡£
 }
 
 float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
@@ -44,10 +44,10 @@ float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
 
 
 
-		// åŸå› ï¼šä»¥é¡ºæ—¶é’ˆæ–¹å‘ä¸ºæ—‹è½¬è§’åº¦æ­£æ–¹å‘
-		// sign > 0 toåœ¨fromçš„å·¦è¾¹ï¼ˆé€†æ—¶é’ˆï¼‰, æ ¹æ®"åŸå› ", angleå–è´Ÿ
-		// sign = 0 toå’ŒfromåŒå‘æˆ–è€…åå‘
-		// sign < 0 toåœ¨fromçš„å³è¾¹ï¼ˆé¡ºæ—¶é’ˆï¼‰ï¼Œæ ¹æ®"åŸå› ", angleå–æ­£
+		// Ô­Òò£ºÒÔË³Ê±Õë·½ÏòÎªĞı×ª½Ç¶ÈÕı·½Ïò
+		// sign > 0 toÔÚfromµÄ×ó±ß£¨ÄæÊ±Õë£©, ¸ù¾İ"Ô­Òò", angleÈ¡¸º
+		// sign = 0 toºÍfromÍ¬Ïò»òÕß·´Ïò
+		// sign < 0 toÔÚfromµÄÓÒ±ß£¨Ë³Ê±Õë£©£¬¸ù¾İ"Ô­Òò", angleÈ¡Õı
 
 		float sign = Vector2::Cross(from, to);
 		if (sign > 0)
@@ -58,7 +58,7 @@ float GeometryUtils::DeltaAngle(const Vector2 &from, const Vector2 &to)
 
 Vector2 GeometryUtils::RotateVector2(const Vector2 &from, float rotationDeg)
 {
-	// å› ä¸ºé¡ºæ—¶é’ˆä¸ºæ­£ï¼Œå’Œä¹¦é€†æ—¶é’ˆä¸ºæ­£çš„å‡è®¾åˆšåˆšç›¸åã€‚ä¸‹è¾¹çš„è®¡ç®—æ–¹å¼æ¥è‡ªä¹¦æœ¬
+	// ÒòÎªË³Ê±ÕëÎªÕı£¬ºÍÊéÄæÊ±ÕëÎªÕıµÄ¼ÙÉè¸Õ¸ÕÏà·´¡£ÏÂ±ßµÄ¼ÆËã·½Ê½À´×ÔÊé±¾
 	rotationDeg = -rotationDeg; 
 	float radians = GeometryUtils::DegToRad(rotationDeg);
 	float x = from.x * cos(radians) + from.y * -sin(radians);
@@ -376,7 +376,7 @@ bool GeometryUtils::IsIntersectCircleSector(const Circle & circle, const Sector 
 	if (std::abs(DeltaAngle(sector.y_axis_dir, circle.center - sector.center)) <= sector.halfAngle)
 		return true;
 
-	// æ‰‡å½¢å¼§ä¸­ç‚¹-æ‰‡å½¢åœ†å¿ƒçš„å‘é‡
+	// ÉÈĞÎ»¡ÖĞµã-ÉÈĞÎÔ²ĞÄµÄÏòÁ¿
 	Vector2 v = Vector2::Normalize(sector.y_axis_dir) * sector.radius; 
 	LineSegment line = LineSegment(sector.center, sector.center + RotateVector2(v, sector.halfAngle));
 	if (IsCircleIntersectLineSegment(circle, line))
@@ -549,10 +549,10 @@ bool GeometryUtils::AxisPointMoveRotate(const Axis2 & old_axis, const Axis2 & ne
 		if (nullptr == out_points[i])
 			continue;
 
-		Vector2 p1 = old_points[i] - delta_v;			// å¹³ç§»
+		Vector2 p1 = old_points[i] - delta_v;			// Æ½ÒÆ
 		Vector2 p2 = p1;
 		if (need_rotate)
-			p2 = RotateVector2(p1, delta_angle);		// æ—‹è½¬
+			p2 = RotateVector2(p1, delta_angle);		// Ğı×ª
 		*(out_points[i]) = p2;
 	}
 	return true;
@@ -583,8 +583,8 @@ bool GeometryUtils::AxisPointRotateMove(const Axis2 & old_axis, const Axis2 & ne
 
 		Vector2 p1 = old_points[i];
 		if (need_rotate)
-			p1 = RotateVector2(p1, delta_angle);	// æ—‹è½¬
-		Vector2 p2 = p1 - delta_v;					// å¹³ç§»
+			p1 = RotateVector2(p1, delta_angle);	// Ğı×ª
+		Vector2 p2 = p1 - delta_v;					// Æ½ÒÆ
 		*(out_points[i]) = p2;
 	}
 	return true;

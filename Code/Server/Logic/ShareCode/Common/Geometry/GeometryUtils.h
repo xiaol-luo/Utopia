@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <stdint.h>
@@ -13,8 +12,8 @@ namespace GeometryUtils
 {
 	float DegToRad(float deg);
 	float RadToDeg(float rad);
-	
-	// ä½¿ç”¨å·¦æ‰‹åæ ‡ç³»ï¼Œé¡ºæ—¶é’ˆä¸ºæ—‹è½¬æ­£æ–¹å‘ï¼Œ2d 3déƒ½ä»¥unity 3dçš„SignAngleå‡½æ•°çš„ç»“æœä¸ºæ ‡å‡†
+
+	// Ê¹ÓÃ×óÊÖ×ø±êÏµ£¬Ë³Ê±ÕëÎªĞı×ªÕı·½Ïò£¬2d 3d¶¼ÒÔunity 3dµÄSignAngleº¯ÊıµÄ½á¹ûÎª±ê×¼
 	float DeltaAngle(const Vector3 &from, const Vector3 & to);
 	float DeltaAngle(const Vector2 &from, const Vector2 &to);
 	Vector2 RotateVector2(const Vector2 &from, float rotationDeg);
@@ -47,7 +46,7 @@ namespace GeometryUtils
 	bool IsIntersectObb2Sector(const OBB2 &obb2, const Sector &sector);
 	bool IsCircleIntersectLineSegment(const Circle &circle, const LineSegment &line_seg);
 
-	// ä¸è€ƒè™‘ä¼¸ç¼©åªè€ƒè™‘æ—‹è½¬å’Œå¹³ç§»
+	// ²»¿¼ÂÇÉìËõÖ»¿¼ÂÇĞı×ªºÍÆ½ÒÆ
 	bool WorldAxisToObjectAxis(const Axis2 &object_y_axis, const Vector2 &world_point, Vector2 &object_point);
 	bool ObjectAxisToWorldAxis(const Axis2 &object_y_axis, const Vector2 &object_point, Vector2 &world_point);
 	bool ProjectPointOnAxis(const Axis2 &axis, const Vector2 &world_point, float *distance, Vector2 *projected_point/*world space point*/);

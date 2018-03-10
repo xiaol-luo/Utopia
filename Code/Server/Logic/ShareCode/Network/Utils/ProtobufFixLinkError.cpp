@@ -1,4 +1,4 @@
-#ifdef WIN32
+#ifdef False
 #include <google/protobuf/message_lite.h>
 
 namespace google
