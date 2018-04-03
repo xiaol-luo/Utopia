@@ -11,7 +11,7 @@ SET(SourceFiles ${SourceFiles} ${dir_files})
 FileGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Server/Libs/3rdpartLibs/lua)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Server/Libs/3rdpartLibs/lua/include)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Server/Libs/3rdpartLibs/sol)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Server/Libs/3rdpartLibs/protobuf/include)
 
@@ -21,8 +21,8 @@ INCLUDE_DIRECTORIES(${LRDB_Parent_Dir}/LRDB/third_party/asio/asio/include)
 INCLUDE_DIRECTORIES(${LRDB_Parent_Dir}/LRDB/third_party/picojson)
 
 IF (WIN32)
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../Tools/MakeLinks/Libs/win/Server/lua)
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../Tools/MakeLinks/Libs/win/Server/protobuf)
+	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../Tools/MakeLinks/Libs/win/Server/lua/libs)
+	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../../Tools/MakeLinks/Libs/win/Server/protobuf/libs)
 	ADD_DEFINITIONS(/D NOMINMAX)
 	ADD_DEFINITIONS(/D _WIN32_WINNT=0x0601) #LRDB define  
 ELSE ()

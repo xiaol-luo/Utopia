@@ -63,7 +63,7 @@ std::vector<std::string> TryUserType::PraseNameSpace(std::string ns)
 	for (auto it = ns.begin(); it != ns.end(); ++it)
 	{
 		char c = *it;
-		if (!std::isalpha(c) && '.' != c)
+		if (!std::isalpha(c) && '.' != c && '_' != c)
 		{
 			assert(false);
 		}

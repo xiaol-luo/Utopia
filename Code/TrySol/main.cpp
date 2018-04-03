@@ -12,6 +12,7 @@
 #include "protobuf/try.pb.h"
 #include "protobuf/ProtobufLuaBindRepeated.h"
 #include "protobuf/ProtobufLuaBindRepeatedPtr.h"
+#include "AutoBind/AutoHead.h"
 
 namespace TryUserType
 {
@@ -38,6 +39,10 @@ lua_State * MainLua()
 
 int main(int argc, char **argv)
 {
+	{
+		OK::OuterClass outer_class;
+	}
+
 	sol::state lua;
 	main_lua = lua.lua_state();
 

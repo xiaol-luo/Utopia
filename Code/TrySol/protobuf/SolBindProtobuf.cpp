@@ -9,9 +9,13 @@ namespace TryUserType
 	extern void LuaBindPB_NetProto_TryItem(lua_State *L);
 	extern void LuaBindPB_NetProto_TryMsg(lua_State *L);
 	extern void LuaBindPB_NetProto_TryMsg_TryNestEnum(lua_State *L);
+	extern void LuaBind_TryEnum(lua_State *L);
+	extern void LuaBind_OK(lua_State *L);
+	extern void LuaBind_OK_OuterClass(lua_State *L);
 
 	void SolLuaBindProtobuf(lua_State *L)
 	{
+		PBLuaBindRepeatedField<double>(L, "google_protobuf_double", "Test");
 		PBLuaBindRepeatedField<double>(L, "", "google_protobuf_double");
 		PBLuaBindRepeatedField<float>(L, "", "google_protobuf_float");
 		PBLuaBindRepeatedField<google::protobuf::int32>(L, "", "google_protobuf_int32");
@@ -30,5 +34,8 @@ namespace TryUserType
 		PBLuaBindRepeatedPtrField<NetProto::TryItem>(L, "", "NetProto_TryItem");
 		PBLuaBindRepeatedPtrField<NetProto::TryMsg>(L, "", "NetProto_TryMsg");
 
+		LuaBind_TryEnum(L);
+		LuaBind_OK(L);
+		LuaBind_OK_OuterClass(L);
 	}
 }
