@@ -12,7 +12,7 @@ namespace TryUserType
 
 	void SolLuaBindProtobuf(lua_State *L)
 	{
-		/*
+		
 		PBLuaBindRepeatedField<double>(L, "google_protobuf_double", "Test");
 		PBLuaBindRepeatedField<double>(L, "", "google_protobuf_double");
 		PBLuaBindRepeatedField<float>(L, "", "google_protobuf_float");
@@ -21,7 +21,7 @@ namespace TryUserType
 		PBLuaBindRepeatedField<bool>(L, "", "google_protobuf_bool");
 		PBLuaBindRepeatedField<google::protobuf::uint32>(L, "", "google_protobuf_uint32");
 		PBLuaBindRepeatedField<google::protobuf::uint64>(L, "", "google_protobuf_uint64");
-		*/
+		
 		PBLuaBindRepeatedField<google::protobuf::int32>(L, "", "google_protobuf_int32");
 		PBLuaBindRepeatedField<google::protobuf::int64>(L, "", "google_protobuf_int64");
 		PBLuaBindRepeatedField<google::protobuf::string>(L, "", "google_protobuf_string");

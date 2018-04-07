@@ -15,17 +15,33 @@ namespace OK
 {
 	int CommonIVal = 444;
 	int OuterClass::siVal = 100;
+
+	int OuterClass::TestOuterFun(InnerClass & param, int param2)
+	{
+		return param.ival + param2;
+	}
+
 	int OuterClass::TestStaticFun(int param)
 	{
 		return param;
 	}
-
-	/*
 	int OuterClass::TestStaticFun(int param, float p2)
 	{
 		return param;
 	}
-	*/
+	int OuterClass::TestStaticFun2(int param, float p2)
+	{
+		return param;
+	}
+
+	int OuterClass::TestOverload(int param2)
+	{
+		return param2;
+	}
+	int OuterClass::TestOverload(int param2, float p2)
+	{
+		return param2 + p2;
+	}
 }
 
 void TestStr(std::string xxx)

@@ -57,9 +57,14 @@ function MainTick()
     print("e: ", e1, e2, e3, zz:Get(2), zz:Get(3), TryEnum.E3, OK.CommonIVal, OK.CommonFunc(777), OK.OuterClass.siVal)
     zz:Set(2, zz:Get(2))
 	
-	print("OK.OuterClass.TestStaticFun 1", OK.OuterClass.TestStaticFun(100)) 
 	otc = OK.OuterClass.new()
-	print("OK.OuterClass.TestStaticFun 2", otc.TestStaticFun(111)) 
+	inc = OK.OuterClass.InnerClass.new()
+	inc.ival = 100
+	print("inc", inc)
+	print("OK.OuterClass.TestStaticFun", otc.TestStaticFun(111), otc.TestStaticFun(1, 2.0)) 
+	print("OK.OuterClass.TestOverload", otc:TestOverload(2), otc:TestOverload(3, 1.0)) 
+	print("OK.OuterClass.TestOuterFun", otc:TestOuterFun(inc, 2)) 
+	
 	
     --a.nest_enum_array:erase(1)
     --[[

@@ -38,7 +38,7 @@ namespace SolLuaBind
 					std::string name = "Test3";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
-					ns_table.set_function(name, sol::overload([](int p0){ OK::Test3(p0); },[](int p0,float p1){ OK::Test3(p0,p1); }));
+					ns_table.set_function(name, sol::overload([](int p0){ return OK::Test3(p0); },[](int p0,float p1){ return OK::Test3(p0,p1); }));
 				}			
 			}
 		};

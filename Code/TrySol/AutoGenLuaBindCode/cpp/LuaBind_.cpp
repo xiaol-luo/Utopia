@@ -17,16 +17,16 @@ namespace SolLuaBind
 
 				sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(lua, name_space);				
 				{
-					std::string name = "TestStr2";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set_function(name, TestStr2);
-				}				
-				{
 					std::string name = "TestStr";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set_function(name, TestStr);
+				}				
+				{
+					std::string name = "TestStr2";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set_function(name, TestStr2);
 				}			
 			}
 		};

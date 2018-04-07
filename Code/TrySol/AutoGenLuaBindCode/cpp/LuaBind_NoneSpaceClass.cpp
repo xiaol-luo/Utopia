@@ -24,7 +24,10 @@ namespace SolLuaBind
 				}
             
 				{
-					sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view(L), name_space)[name];				
+					sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view(L), name_space)[name];	
+
+
+				
 				}
 			}
 		};

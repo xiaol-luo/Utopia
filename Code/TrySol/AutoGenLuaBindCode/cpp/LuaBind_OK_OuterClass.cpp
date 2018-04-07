@@ -23,8 +23,7 @@ namespace SolLuaBind
 						,"inClass", &OK::OuterClass::inClass				
 						,"fval", &OK::OuterClass::fval				
 						,"TestOuterFun", &OK::OuterClass::TestOuterFun				
-						,"TestOverload", &OK::OuterClass::TestOverload				
-						,"TestStaticFun", &OK::OuterClass::TestStaticFun				
+						,"TestOverload", sol::overload([](OK::OuterClass &cls, int p0){ return cls.TestOverload(p0); },[](OK::OuterClass &cls, int p0,float p1){ return cls.TestOverload(p0,p1); })				
 						, sol::base_classes, sol::bases<
 							OK::Base \
 						>()
@@ -35,6 +34,11 @@ namespace SolLuaBind
 				{
 					sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view(L), name_space)[name];				
 					ns_table.set("siVal", OK::OuterClass::siVal);				
+					ns_table.set_function("TestStaticFun2", OK::OuterClass::TestStaticFun2);				
+					ns_table.set_function("TestStaticFun", sol::overload([](int p0){ return OK::OuterClass::TestStaticFun(p0); },[](int p0,float p1){ return OK::OuterClass::TestStaticFun(p0,p1); }));	
+
+
+				
 				}
 			}
 		};
