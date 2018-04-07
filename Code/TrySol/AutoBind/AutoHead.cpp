@@ -1,4 +1,5 @@
 #include "AutoHead.h"
+#include "AutoHeadOther.h"
 
 int OK::CommonFunc(int param)
 {
@@ -18,4 +19,37 @@ namespace OK
 	{
 		return param;
 	}
+
+	/*
+	int OuterClass::TestStaticFun(int param, float p2)
+	{
+		return param;
+	}
+	*/
 }
+
+void TestStr(std::string xxx)
+{
+
+}
+
+void TestStr2(std::string xxx)
+{
+
+}
+
+void OK::Test3(int a)
+{
+
+}
+
+void OK::Test3(int a, float b)
+{
+
+}
+
+void OK::Test2(int a)
+{
+
+}
+

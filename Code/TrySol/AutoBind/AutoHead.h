@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace OK
 {
 	class Test;
@@ -26,13 +28,21 @@ namespace OK
 		InnerClass inClass;
 		const float fval = 2;
 		static int siVal;
-		int TestOuterFun(InnerClass && param, int param2) { return 0; }
+		int TestOuterFun(InnerClass & param, int param2) { return 0; }
+		int TestOverload(int param2) { return 0; }
+		// int TestOverload(int param2, float p2) { return 0; }
 		static int TestStaticFun(int param);
+		// static int TestStaticFun(int param, float p2);
+
 	};
 	
 	extern int CommonFunc(int param);
 	extern int CommonIVal;
+	void Test3(int a);
+	void Test3(int a, float b);
 }
+
+void TestStr(std::string xxx);
 
 class NoneSpaceClass
 {

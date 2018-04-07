@@ -19,6 +19,11 @@ namespace TryUserType
 	extern void SolLuaBindProtobuf(lua_State *L);
 }
 
+namespace SolLuaBind
+{
+	extern void SolLuaBind(lua_State *L);
+}
+
 int LuaErrorFn(lua_State *L)
 {
 	return 0;
@@ -72,6 +77,7 @@ int main(int argc, char **argv)
 
 	TryUserType::RegisterUserType();
 	TryUserType::SolLuaBindProtobuf(main_lua);
+	SolLuaBind::SolLuaBind(main_lua);
 
 	TryUserType::ExecuteLuaBindUserTypeFns(lua.lua_state());
 
@@ -103,7 +109,8 @@ int main(int argc, char **argv)
 		end 
 		)");
 	sol::protected_function lua_main_tick_fn = lua["MainTick"];
-	lua_main_tick_fn.error_handler = lua["DefaultErrorHandler"];
+	sol::protected_function xx = lua["DefaultErrorHandler"];
+	lua_main_tick_fn.error_handler  = xx;
 
 	bool game_exit = lua["game_exit"];
 	while (!game_exit)
