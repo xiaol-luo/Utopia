@@ -29,39 +29,39 @@ namespace GameLogic
 
 		bool is_active[ESceneUnitFilterWay_Count];
 
-		struct
+		struct _exclude_suids
 		{
 			std::unordered_set<uint64_t> excludeSuids;
 		} exclude_suids;
 
-		struct
+		struct _relations
 		{
 			std::shared_ptr<SceneUnit> caster;
 			int relations;
 		} relations;
 
-		struct
+		struct _shape_obb2
 		{
 			OBB2 oob2;
 		} shape_obb2;
 
-		struct
+		struct _shape_circle
 		{
 			Circle circle;
 		} shape_circle;
 		
-		struct
+		struct _shape_sector
 		{
 			Sector sector;
 		} shape_sector;
 
-		struct
+		struct _limit_num
 		{
 			int num;
 			EEffectFilterLimitNumPriority priority;
 		} limit_num;
 
-		struct  
+		struct _unit_type
 		{
 			int64_t allow_types;
 		} unit_type;

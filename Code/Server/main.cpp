@@ -43,10 +43,16 @@ void test(int a, float b)
 	
 }
 
+namespace SolLuaBind
+{
+	extern void SolLuaBind(lua_State *L);
+}
+
 int main(int argc, char **argv)
 {
 	L = luaL_newstate();
 	TestSol(L);
+	SolLuaBind::SolLuaBind(L);
 	lua_close(L); L = nullptr;
 
 	if (argc <= 2)

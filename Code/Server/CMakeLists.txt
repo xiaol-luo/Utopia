@@ -47,6 +47,7 @@ SET(SourceFiles ${SourceFiles} ${dir_files})
 SourceGroupByDir(${CMAKE_CURRENT_SOURCE_DIR} "${dir_files}" "")
 
 INCLUDE_DIRECTORIES(. ./Libs/3rdpartLibs ./Libs/OwnLibs ./Libs/3rdpartLibs/Libevent/include ./Libs/3rdpartLibs/protobuf/include)
+INCLUDE_DIRECTORIES(./Libs/OwnLibs/SolLuaBindUtils)
 INCLUDE_DIRECTORIES(./Logic ./Logic/ShareCode ./Logic/ShareCode/Config/AutoCsvCode ./Logic/LogicModules)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/lua/include)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/sol)

@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "AutoBind/AutoHeadOther.h"	
-#include "AutoBind/AutoHead.h"
+#include "AutoBind/AutoHead.h"	
+#include "AutoBind/AutoHeadOther.h"
 
 namespace SolLuaBind
 {

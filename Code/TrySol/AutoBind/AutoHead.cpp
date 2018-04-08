@@ -38,6 +38,10 @@ namespace OK
 	{
 		return param2;
 	}
+	void OuterClass::TestOverload(int param2) const
+	{
+		
+	}
 	int OuterClass::TestOverload(int param2, float p2)
 	{
 		return param2 + p2;

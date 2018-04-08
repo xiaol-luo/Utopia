@@ -29,12 +29,14 @@ namespace OK
 		const float fval = 2;
 		static int siVal;
 		int TestOuterFun(InnerClass & param, int param2);
+		void TestOverload(int param2) const;
 		int TestOverload(int param2);
-		int TestOverload(int param2, float p2);
+	public:
+		static int TestOverload(int param2, float p2);
+	public:
 		static int TestStaticFun(int param);
 		static int TestStaticFun(int param, float p2);
 		static int TestStaticFun2(int param, float p2);
-
 	};
 	
 	extern int CommonFunc(int param);
