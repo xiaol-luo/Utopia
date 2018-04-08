@@ -1,18 +1,18 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "AutoBind/AutoHead.h"
+#include "Logic/ShareCode/Common/Utils/NumUtils.h"
 
 namespace SolLuaBind
 {
-	void LuaBind_TryEnum(lua_State *L)
+	void LuaBind_NumUtil_ECalculateStrategy(lua_State *L)
 	{
 		struct LuaBindImpl
 		{
 			static void DoLuaBind(lua_State *L)
 			{
-				std::string name = "TryEnum";
-				std::string name_space = "";
+				std::string name = "ECalculateStrategy";
+				std::string name_space = "NumUtil";
 
 				sol::state_view lua(L);
 				sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(lua, name_space);
@@ -21,10 +21,10 @@ namespace SolLuaBind
 					assert(!opt_object);
 				}
 				ns_table.new_enum(name,
-					"E1", 0,
-					"E2", 3,
-					"E3", 4,
-					"E4", 5
+					"ECS_Overlay", 0,
+					"ECS_MaxPriority", 1,
+					"ECS_MinPriority", 2,
+					"ECS_Count", 3
 				);
 			}
 		};

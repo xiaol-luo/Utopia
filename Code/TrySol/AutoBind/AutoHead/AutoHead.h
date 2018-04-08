@@ -30,8 +30,12 @@ namespace OK
 		static int siVal;
 		int TestOuterFun(InnerClass & param, int param2);
 		int TestOverload(int param2);
-		int TestOverload(int param2, float p2);
+	private:
+		int TestOverload(int param2) const;
+		static int TestOverload(int param2, float p2);
 		static int TestStaticFun(int param);
+
+	public:
 		static int TestStaticFun(int param, float p2);
 		static int TestStaticFun2(int param, float p2);
 

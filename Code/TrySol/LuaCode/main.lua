@@ -61,8 +61,8 @@ function MainTick()
 	inc = OK.OuterClass.InnerClass.new()
 	inc.ival = 100
 	print("inc", inc)
-	print("OK.OuterClass.TestStaticFun", otc.TestStaticFun(111), otc.TestStaticFun(1, 2.0)) 
-	print("OK.OuterClass.TestOverload", otc:TestOverload(2), otc:TestOverload(3, 1.0)) 
+	print("OK.OuterClass.TestStaticFun", otc.TestStaticFun(1, 2.0)) 
+	print("OK.OuterClass.TestOverload", otc:TestOverload(2), otc:TestOverload(3)) 
 	print("OK.OuterClass.TestOuterFun", otc:TestOuterFun(inc, 2)) 
 	
 	
