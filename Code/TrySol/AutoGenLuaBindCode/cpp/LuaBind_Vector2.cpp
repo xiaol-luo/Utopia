@@ -1,6 +1,5 @@
 #include "SolLuaBindUtils.h"
-#include <sol.hpp>
-
+#include <sol.hpp>	
 #include "AutoBind/Geometry/Vector2.h"
 
 namespace SolLuaBind
