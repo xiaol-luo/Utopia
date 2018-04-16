@@ -37,33 +37,115 @@ void TestSol(lua_State *l)
 	ret = lua.script_file("LuaScript/test_sol.lua");
 }
 
-void test(int a, float b)
-{
-	
-}
-
 namespace SolLuaBind
 {
 	extern void SolLuaBind(lua_State *L);
 }
 
+struct ParseArgsRet
+{
+	bool isOk = true;
+	std::string reason;
+
+	std::string workDir;
+	std::string settingFile;
+};
+
+ParseArgsRet ParseArgs(int argc, char **argv)
+{
+	struct Fns
+	{
+		static void ReadWorkDir(const std::string &arg, ParseArgsRet &ret)
+		{
+			ret.workDir = arg;
+		}
+		static void CheckWorkDir(ParseArgsRet &ret)
+		{
+			if (ret.workDir.empty())
+			{
+				ret.isOk = false;
+				ret.reason = "work dir is empty";
+			}
+		}
+		static void ReadSettingFile(const std::string &arg, ParseArgsRet &ret)
+		{
+			ret.settingFile = arg;
+		}
+		static void CheckSettingFile(ParseArgsRet &ret)
+		{
+			if (ret.settingFile.empty())
+			{
+				ret.isOk = false;
+				ret.reason = "setting file is empty";
+			}
+		}
+	};
+	using Fn = void (*)(const std::string &arg, ParseArgsRet &ret);
+	using CheckFn = void(*)(ParseArgsRet &ret);
+	struct OptFns
+	{
+		OptFns(Fn _fn, CheckFn _checkFn)
+		{
+			fn = _fn;
+			checkFn = _checkFn;
+		}
+		Fn fn;
+		CheckFn checkFn;
+	};
+	std::map<std::string, OptFns> optProcessFns = {
+		{ "-wd", OptFns(Fns::ReadWorkDir, Fns::CheckWorkDir) },
+		{ "-sf", OptFns(Fns::ReadSettingFile, Fns::CheckSettingFile) },
+	};
+
+	ParseArgsRet ret;
+	OptFns *lastFns = nullptr;
+	for (int i = 1; i < argc; ++i)
+	{
+		std::string arg = argv[i];
+		auto it = optProcessFns.find(arg);
+		if (optProcessFns.end() != it)
+		{
+			lastFns = &it->second;
+			continue;
+		}
+		if (nullptr == lastFns)
+		{
+			ret.isOk = false;
+			ret.reason = "cmd format error!";
+			break;
+		}
+		lastFns->fn(arg, ret);
+		if (!ret.isOk)
+			break;
+	}
+	if (ret.isOk)
+	{
+		for (auto &&it : optProcessFns)
+		{
+			it.second.checkFn(ret);
+			if (!ret.isOk)
+				break;
+		}
+	}
+	return ret;
+}
+
 int main(int argc, char **argv)
 {
-	if (argc < 2)
+	ParseArgsRet parseArgsRet = ParseArgs(argc, argv);
+	if (!parseArgsRet.isOk)
 	{
-		printf("cmd foramt : executable setting_file \n");
+		printf("ParseArgs fail, reason is %s", parseArgsRet.reason.c_str());
 		exit(1);
 	}
 
 	MemoryUtil::Init();
 	LuaUtils::Init();
 	sol::state_view lsv(LuaUtils::luaState);
-	SolLuaBind::SolLuaBind(LuaUtils::luaState);
 
 	std::vector<std::string, StlAllocator<std::string>> params;
-	std::string loadLuaCfgFile;
 	{
-		std::string settingPath = argv[1];
+		std::string settingPath = parseArgsRet.settingFile;
 		sol::protected_function_result pfr = lsv.script_file(settingPath, LuaUtils::ErrorFn);
 		if (!pfr.valid())
 		{
@@ -72,16 +154,37 @@ int main(int argc, char **argv)
 			exit(2);
 		}
 
+		const char *ConfigTable = "ConfigTable";
 		const char *LOG_CONFIG_FILE = "LogConfigFile";
 		const char *CONFIG_DIR = "ConfigDir";
-		const char *LOAD_LUA_CONFIG_FILE = "LoadLuaConfigFile";
 
-		loadLuaCfgFile = lsv[LOAD_LUA_CONFIG_FILE];
-		std::string logConfigFile = lsv[LOG_CONFIG_FILE];
-		std::string configDir = lsv[CONFIG_DIR];
+		sol::table cfgTable = lsv[ConfigTable];
+		lsv[ConfigTable] = nullptr;
+		std::string logConfigFile = cfgTable[LOG_CONFIG_FILE];
+		std::string configDir = cfgTable[CONFIG_DIR];
 		assert(!logConfigFile.empty() && !configDir.empty());
 		params.push_back(logConfigFile);
 		params.push_back(configDir);
+
+		{
+			const char *LOAD_LUA_FILES = "LoadLuaFiles";
+			sol::table luaFiles = lsv[LOAD_LUA_FILES];
+			lsv[LOAD_LUA_FILES] = nullptr;
+			SolLuaBind::SolLuaBind(LuaUtils::luaState);
+			for (auto kv_pair : luaFiles)
+			{
+				sol::object ss = kv_pair.second;
+				std::string filePath = ss.as<std::string>();
+				sol::protected_function_result ret = lsv.script_file(filePath, LuaUtils::ErrorFn);
+				if (!ret.valid())
+				{
+					sol::error e = ret;
+					printf("error: %s", e.what());
+					exit(3);
+				}
+			}
+		}
+		
 	}
 
 #ifdef WIN32
