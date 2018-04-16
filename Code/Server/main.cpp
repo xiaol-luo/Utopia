@@ -9,7 +9,7 @@
 #include "ShareCode/Network/Utils/LenCtxStreamParserEx.h"
 #include <stdint.h>
 #include "MemoryPool/StlAllocator.h"
-// #include "Common/Utils/TupleUtil.h"
+#include "Utils/LuaUtils.h"
 
 #include <sol.hpp>
 
@@ -49,20 +49,40 @@ namespace SolLuaBind
 
 int main(int argc, char **argv)
 {
-	L = luaL_newstate();
-	sol::state_view lua_view(L);
-	lua_view.open_libraries(sol::lib::base, sol::lib::debug);
-	SolLuaBind::SolLuaBind(L);
-	TestSol(L);
-	lua_close(L); L = nullptr;
-
-	if (argc <= 2)
+	if (argc < 2)
 	{
-		printf("cmd foramt : executable log_cfg_file cfg_dir\n");
+		printf("cmd foramt : executable setting_file \n");
 		exit(1);
 	}
 
 	MemoryUtil::Init();
+	LuaUtils::Init();
+	sol::state_view lsv(LuaUtils::luaState);
+	SolLuaBind::SolLuaBind(LuaUtils::luaState);
+
+	std::vector<std::string, StlAllocator<std::string>> params;
+	std::string loadLuaCfgFile;
+	{
+		std::string settingPath = argv[1];
+		sol::protected_function_result pfr = lsv.script_file(settingPath, LuaUtils::ErrorFn);
+		if (!pfr.valid())
+		{
+			sol::error e = pfr;
+			printf("error: %s", e.what());
+			exit(2);
+		}
+
+		const char *LOG_CONFIG_FILE = "LogConfigFile";
+		const char *CONFIG_DIR = "ConfigDir";
+		const char *LOAD_LUA_CONFIG_FILE = "LoadLuaConfigFile";
+
+		loadLuaCfgFile = lsv[LOAD_LUA_CONFIG_FILE];
+		std::string logConfigFile = lsv[LOG_CONFIG_FILE];
+		std::string configDir = lsv[CONFIG_DIR];
+		assert(!logConfigFile.empty() && !configDir.empty());
+		params.push_back(logConfigFile);
+		params.push_back(configDir);
+	}
 
 #ifdef WIN32
 	WSADATA wsa_data;
@@ -75,14 +95,12 @@ int main(int argc, char **argv)
 #endif
 
 	std::srand(time(NULL));
-	std::vector<std::string, StlAllocator<std::string>> params;
-	params.push_back(argv[1]);
-	params.push_back(argv[2]);
 
 
 	server_logic = new GameServerLogic();
 	server_logic->SetInitParams(&params);
 	server_logic->Loop();
 	delete server_logic;
+	LuaUtils::Uninit();
 	MemoryUtil::Destroy();
 }
