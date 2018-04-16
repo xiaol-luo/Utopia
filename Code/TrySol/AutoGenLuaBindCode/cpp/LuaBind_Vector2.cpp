@@ -1,28 +1,32 @@
 #include "SolLuaBindUtils.h"
-#include <sol.hpp>
-
-#include "AutoBind/AutoHead.h"
+#include <sol.hpp>	
+#include "AutoBind/Geometry/Vector2.h"
 
 namespace SolLuaBind
 {
-	void LuaBind_NoneSpaceClass(lua_State *L)
+	void LuaBind_Vector2(lua_State *L)
 	{
 		struct LuaBindImpl
 		{
 			struct ForOverloadFns
 			{
 			};
+			
+			struct ForPropertyField
+			{
+			};			
+			
 
 			static void DoLuaBind(lua_State *L)
 			{
-                std::string name = "NoneSpaceClass";
+                std::string name = "Vector2";
 				std::string name_space = "";
 
 				{
-					sol::usertype<NoneSpaceClass> meta_table(
-					"__StructName__", sol::property([]() {return "NoneSpaceClass"; })				
-						,"iVal", &NoneSpaceClass::iVal				
-						,"Test", &NoneSpaceClass::Test
+					sol::usertype<Vector2> meta_table(
+						"__StructName__", sol::property([]() {return "Vector2"; })				
+						,"x", &Vector2::x				
+						,"y", &Vector2::y
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

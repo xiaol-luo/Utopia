@@ -39,7 +39,7 @@ struct AABB2
 
 struct OBB2
 {
-	OBB2() {}
+	OBB2() {}m
 	OBB2(const Vector2 &_center, const Vector2 &_y_axis_dir, float _x_size, float _y_size)
 		: center(_center), y_axis_dir(_y_axis_dir), x_half_size(_x_size), y_half_size(_y_size) {}
 

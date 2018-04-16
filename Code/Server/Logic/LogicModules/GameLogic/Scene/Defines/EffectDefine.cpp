@@ -13,7 +13,7 @@ namespace GameLogic
 		return true;
 	}
 	
-	bool GenerateEndEffectIdVec(EndEffectIdVec & out_ret, const std::vector<std::vector<int>>& input_vals)
+	bool GenerateEndEffectIdVec(std::vector<EndEffectId> & out_ret, const std::vector<std::vector<int>>& input_vals)
 	{
 		for (auto &&item : input_vals)
 		{

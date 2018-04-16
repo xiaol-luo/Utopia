@@ -345,7 +345,7 @@ namespace GameLogic
 			}
 		}
 
-		ViewSnapshot **snapshots = this->GetModule<SceneView>()->GetSnapshot();
+		auto snapshots = this->GetModule<SceneView>()->GetSnapshot();
 		for (EViewCamp camp : camps)
 		{
 			for (auto kv_pair : snapshots[camp]->scene_units)
@@ -374,7 +374,7 @@ namespace GameLogic
 	void NewScene::SendObservers(int64_t su_id, int protocol_id, google::protobuf::Message * msg)
 	{
 		SceneView *scene_view = this->GetModule<SceneView>();
-		ViewSnapshot **snapshots = scene_view->GetSnapshot();
+		auto snapshots = scene_view->GetSnapshot();
 		for (int camp = 0; camp < EViewCamp_Observer; ++camp)
 		{
 			if (snapshots[camp]->CanSeeSu(su_id))
@@ -427,8 +427,8 @@ namespace GameLogic
 	{
 		SceneView *scene_view = this->GetModule<SceneView>();
 		scene_view->MakeSnapshot();
-		ViewSnapshot **curr_snapshot = scene_view->GetSnapshot();
-		ViewSnapshot **pre_snapshot = scene_view->GetPreSnapshot();
+		auto curr_snapshot = scene_view->GetSnapshot();
+		auto pre_snapshot = scene_view->GetPreSnapshot();
 		
 		for (int camp = 0; camp < EViewCamp_Observer; ++camp)
 		{

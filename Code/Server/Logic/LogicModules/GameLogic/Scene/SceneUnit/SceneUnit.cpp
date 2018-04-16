@@ -147,11 +147,14 @@ namespace GameLogic
 		m_scene->SendPlayer(m_player_id, protocol_id, msg);
 	}
 
-	void SceneUnit::SendSelf(const std::vector<SyncClientMsg>& msgs)
+	void SceneUnit::SendSelfEx(std::vector<SyncClientMsg>& msgs)
 	{
 		if (0 == m_player_id || nullptr == m_scene)
 			return;
 		m_scene->SendPlayer(m_player_id, msgs);
+	}
+	void SceneUnit::SendSelf(std::vector<SyncClientMsg>& msgs)
+	{
 	}
 	void SceneUnit::SendObservers(int protocol_id, google::protobuf::Message * msg)
 	{
@@ -159,7 +162,7 @@ namespace GameLogic
 			return;
 		m_scene->SendObservers(m_id, protocol_id, msg);
 	}
-	void SceneUnit::SendObservers(const std::vector<SyncClientMsg>& msgs)
+	void SceneUnit::SendObserversEx(std::vector<SyncClientMsg>& msgs)
 	{
 		if (nullptr == m_scene)
 			return;

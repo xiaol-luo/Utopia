@@ -2,6 +2,7 @@
 
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
+#include <memory>
 
 namespace GameLogic
 {

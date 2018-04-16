@@ -35,10 +35,10 @@ namespace GameLogic
 		dtCrowd * GetCrowd() { return m_dtCrowd; }
 		dtNavMeshQuery * GetNavMeshQuery() { return m_dtNavMeshQuery; }
 
-		bool FindNearestPoint(const Vector3 &center, dtPolyRef &target_ref, Vector3 &target_pos);
-		bool FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef &target_ref, Vector3 &target_pos);
+		bool FindNearestPoint(const Vector3 &center, dtPolyRef *target_ref, Vector3 &target_pos);
+		bool FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef *target_ref, Vector3 &target_pos);
 		bool Raycast(const Vector3 &start_pos, const Vector3 &end_pos, Vector3 &hit_pos);
-		bool GetPolyRef(const Vector3 &pos, dtPolyRef &out_ref);
+		bool GetPolyRef(const Vector3 &pos, dtPolyRef *out_ref);
 		AABB2 GetArea() { return m_area; }
 
 	protected:

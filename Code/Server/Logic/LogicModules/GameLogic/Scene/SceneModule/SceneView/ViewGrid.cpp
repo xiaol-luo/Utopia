@@ -12,7 +12,6 @@ namespace GameLogic
 		center = _center;
 		grid_size = _size;
 		grid_type = _grid_type;
-		memset(observing_num, 0, sizeof(observing_num));
 	}
 
 	ViewGrid::~ViewGrid()

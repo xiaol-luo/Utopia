@@ -1,17 +1,17 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "AutoBind/AutoHead.h"
+#include "GameLogic/Scene/Navigation/NavMeshUtil.h"
 
 namespace SolLuaBind
 {
-	void LuaBind_TryEnum(lua_State *L)
+	void LuaBind_SamplePolyFlags(lua_State *L)
 	{
 		struct LuaBindImpl
 		{
 			static void DoLuaBind(lua_State *L)
 			{
-				std::string name = "TryEnum";
+				std::string name = "SamplePolyFlags";
 				std::string name_space = "";
 
 				sol::state_view lua(L);
@@ -21,10 +21,12 @@ namespace SolLuaBind
 					assert(!opt_object);
 				}
 				ns_table.new_enum(name,
-					"E1", 0,
-					"E2", 3,
-					"E3", 4,
-					"E4", 5
+					"SAMPLE_POLYFLAGS_WALK", 1,
+					"SAMPLE_POLYFLAGS_SWIM", 2,
+					"SAMPLE_POLYFLAGS_DOOR", 4,
+					"SAMPLE_POLYFLAGS_JUMP", 8,
+					"SAMPLE_POLYFLAGS_DISABLED", 16,
+					"SAMPLE_POLYFLAGS_ALL", 65535
 				);
 			}
 		};

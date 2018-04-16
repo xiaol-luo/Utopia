@@ -8,8 +8,6 @@
 
 namespace GameLogic
 {
-	class FightParameterMgr;
-
 	class FightParam
 	{
 	public:

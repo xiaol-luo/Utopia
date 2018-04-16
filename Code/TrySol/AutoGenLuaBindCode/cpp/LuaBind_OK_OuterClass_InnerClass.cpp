@@ -1,7 +1,6 @@
 #include "SolLuaBindUtils.h"
-#include <sol.hpp>
-
-#include "AutoBind/AutoHead.h"
+#include <sol.hpp>	
+#include "AutoBind/AutoHead/AutoHead.h"
 
 namespace SolLuaBind
 {
@@ -12,6 +11,11 @@ namespace SolLuaBind
 			struct ForOverloadFns
 			{
 			};
+			
+			struct ForPropertyField
+			{
+			};			
+			
 
 			static void DoLuaBind(lua_State *L)
 			{
@@ -20,7 +24,7 @@ namespace SolLuaBind
 
 				{
 					sol::usertype<OK::OuterClass::InnerClass> meta_table(
-					"__StructName__", sol::property([]() {return "InnerClass"; })				
+						"__StructName__", sol::property([]() {return "InnerClass"; })				
 						,"ival", &OK::OuterClass::InnerClass::ival				
 						,"TestInnerFunc", &OK::OuterClass::InnerClass::TestInnerFunc
 					);

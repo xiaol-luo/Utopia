@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include <array>
 
 namespace Config
 {
@@ -40,8 +41,8 @@ namespace GameLogic
 		int target_relations = 0;
 		int target_types = 0;
 		int max_level = -1;
-		SkillLevelConfig *level_cfgs[MAX_SKILL_LEVEL + 1];
-
+		// SkillLevelConfig *level_cfgs[MAX_SKILL_LEVEL + 1];
+		std::array<SkillLevelConfig *, MAX_SKILL_LEVEL + 1> level_cfgs;
 		const SkillLevelConfig * GetLvlCfg(int lvl) const;
 	};
 

@@ -15,6 +15,7 @@ namespace GameLogic
 	class SceneUnitTransform;
 	class SceneUnitModule;
 	class SceneUnitEventProxy;
+	class SyncClientMsg;
 
 	class SceneUnit : public std::enable_shared_from_this<SceneUnit>
 	{
@@ -86,9 +87,10 @@ namespace GameLogic
 
 	public:
 		void SendSelf(int protocol_id, google::protobuf::Message *msg);
-		void SendSelf(const std::vector<SyncClientMsg> &msgs);
+		void SendSelfEx(std::vector<SyncClientMsg> &msgs);
+		void SendSelf(std::vector<SyncClientMsg> &msgs);
 		void SendObservers(int protocol_id, google::protobuf::Message *msg);
-		void SendObservers(const std::vector<SyncClientMsg> &msgs);
+		void SendObserversEx(std::vector<SyncClientMsg> &msgs);
 		void ClearPbDirty();
 	};
 }

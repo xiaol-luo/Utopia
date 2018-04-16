@@ -9,6 +9,7 @@
 #include "Common/Define/NetworkDefine.h"
 #include "Common/Geometry/Vector3.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include <array>
 
 class EventDispacher;
 
@@ -103,7 +104,10 @@ namespace GameLogic
 		void SendObservers(int64_t su_id, const std::vector<SyncClientMsg> &msgs);
 		void SendViewCamp(EViewCamp view_camp, int protocol_id, google::protobuf::Message *msg, bool to_ob=true);
 		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs, bool to_ob=true);
-		std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];
+
+		std::array<std::unordered_map<NetId, Player *>, EViewCamp_Observer + 1> m_player_view_camps;
+		// std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];
+		
 		template <typename T>
 		T * CreateProtobuf()
 		{

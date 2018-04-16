@@ -4,21 +4,19 @@
 #include <unordered_set>
 #include <vector>
 #include <memory>
+#include <array>
 #include "stdint.h"
 #include "Common/Geometry/Vector2.h"
+#include "StdHashDefines.h"
 
 namespace GameLogic
 {
 	class ViewMgr;
 	struct ViewGrid;
-	class ViewUnit;
 
 	using ViewGridMap = std::unordered_map<int32_t, ViewGrid *>;
 	using ViewGridSet = std::unordered_set<ViewGrid *>;
 	using ViewGridVec = std::vector<ViewGrid *>;
-
-	using ViewUnitMap = std::unordered_map<int64_t, ViewUnit *>;
-	using ViewUnitSet = std::unordered_set<ViewUnit *>;
 
 
 	extern const Vector2 InvalidViewPos;
@@ -43,6 +41,7 @@ namespace GameLogic
 
 namespace std
 {
+	/// sol_ignore
 	template<>
 	struct hash<GameLogic::EViewCamp>
 	{

@@ -5,6 +5,7 @@
 #include "Common/Geometry/GeometryDefine.h"
 #include "SceneUnitQTree.h"
 #include <vector>
+#include <array>
 
 namespace GameLogic
 {
@@ -24,10 +25,10 @@ namespace GameLogic
 	{
 		ESceneUnitFilterWayParams()
 		{
-			memset(is_active, 0, sizeof(is_active));
+
 		}
 
-		bool is_active[ESceneUnitFilterWay_Count];
+		std::array<bool, ESceneUnitFilterWay_Count> is_active = { false };
 
 		struct _exclude_suids
 		{
@@ -82,7 +83,8 @@ namespace GameLogic
 
 	protected:
 		using FilterWay = void(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		FilterWay *m_filter_way[ESceneUnitFilterWay_Count];
+		// FilterWay *m_filter_way[ESceneUnitFilterWay_Count];
+		std::array<FilterWay *, ESceneUnitFilterWay_Count> m_filter_way;
 		void ExtraFilterProcess(const ESceneUnitFilterWayParams &params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 
 		static void FilterUnitType(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);

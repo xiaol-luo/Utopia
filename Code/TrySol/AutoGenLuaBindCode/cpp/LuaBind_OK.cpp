@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "AutoBind/AutoHead.h"	
-#include "AutoBind/AutoHeadOther.h"
+#include "AutoBind/AutoHead/AutoHeadOther.h"	
+#include "AutoBind/AutoHead/AutoHead.h"
 
 namespace SolLuaBind
 {
@@ -9,6 +9,23 @@ namespace SolLuaBind
 	{
 		struct LuaBindImpl
 		{
+			struct ForOverloadFns
+			{
+				using TypeAlias_1 = int;
+				using TypeAlias_2 = void;
+				static TypeAlias_2 Test31(TypeAlias_1 p1)
+				{
+					return OK::Test3(p1);
+				}
+				using TypeAlias_3 = int;
+				using TypeAlias_4 = float;
+				using TypeAlias_5 = void;
+				static TypeAlias_5 Test32(TypeAlias_3 p1, TypeAlias_4 p2)
+				{
+					return OK::Test3(p1, p2);
+				}
+			};
+
 			static void DoLuaBind(lua_State *L)
 			{
 				std::string name_space = "OK";
@@ -38,7 +55,7 @@ namespace SolLuaBind
 					std::string name = "Test3";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
-					ns_table.set_function(name, sol::overload([](int p0){ return OK::Test3(p0); },[](int p0,float p1){ return OK::Test3(p0,p1); }));
+					ns_table.set_function(name, sol::overload(ForOverloadFns::Test31, ForOverloadFns::Test32));
 				}			
 			}
 		};

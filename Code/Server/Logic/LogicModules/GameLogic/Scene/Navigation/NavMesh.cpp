@@ -313,18 +313,20 @@ namespace GameLogic
 		return ret;
 	}
 
-	bool NavMesh::FindNearestPoint(const Vector3 &center, dtPolyRef &target_ref, Vector3 &target_pos)
+	bool NavMesh::FindNearestPoint(const Vector3 &center, dtPolyRef *target_ref, Vector3 &target_pos)
 	{
+		assert(target_ref);
 		const float *ext = m_dtCrowd->getQueryExtents();
 		return this->FindNearestPoint(center, Vector3(ext), target_ref, target_pos);
 	}
 
-	bool NavMesh::FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef &target_ref, Vector3 &target_pos)
+	bool NavMesh::FindNearestPoint(const Vector3 &center, const Vector3 range, dtPolyRef *target_ref, Vector3 &target_pos)
 	{
+		assert(target_ref);
 		const dtNavMeshQuery *navquery = m_dtCrowd->getNavMeshQuery();
 		float out_pos[3]; memset(out_pos, 0, sizeof(out_pos));
-		dtStatus state = navquery->findNearestPoly(center.toPointer(), range.toPointer(), DefaultFilter(), &target_ref, out_pos);
-		if (dtStatusSucceed(state) && 0 != target_ref)
+		dtStatus state = navquery->findNearestPoly(center.toPointer(), range.toPointer(), DefaultFilter(), target_ref, out_pos);
+		if (dtStatusSucceed(state) && 0 != *target_ref)
 		{
 			target_pos = Vector3(out_pos);
 			return true;
@@ -335,7 +337,7 @@ namespace GameLogic
 	bool NavMesh::Raycast(const Vector3 &start_pos, const Vector3 &end_pos, Vector3 &hit_pos)
 	{
 		dtPolyRef start_poly_ref = 0; Vector3 tmp_pos;
-		if (this->FindNearestPoint(start_pos, Vector3(0.1f, 1.0f, 0.1f), start_poly_ref, tmp_pos))
+		if (this->FindNearestPoint(start_pos, Vector3(0.1f, 1.0f, 0.1f), &start_poly_ref, tmp_pos))
 		{
 			dtRaycastHit hit; memset(&hit, 0, sizeof(hit));
 			dtStatus state = m_dtNavMeshQuery->raycast(start_poly_ref, tmp_pos.toPointer(),
@@ -352,14 +354,15 @@ namespace GameLogic
 		return false;
 	}
 
-	bool NavMesh::GetPolyRef(const Vector3 &pos, dtPolyRef &out_ref)
+	bool NavMesh::GetPolyRef(const Vector3 &pos, dtPolyRef *out_ref)
 	{
 		dtPolyRef ref = 0; int ref_count = 0;
 		dtStatus status = m_dtNavMeshQuery->queryPolygons(
 			pos.toPointer(), Vector3(0.1f, 1.0f, 0.1f).toPointer(), DefaultFilter(), &ref, &ref_count, 1);
 		if (dtStatusSucceed(status) && ref_count > 0)
 		{
-			out_ref = ref;
+			if (nullptr != out_ref)
+				*out_ref = ref;
 			return true;
 		}
 		return false;

@@ -3,6 +3,7 @@
 #include "GameLogic/Scene/SceneModule/SceneModule.h"
 #include "GameLogic/Scene/Defines/ViewDefine.h"
 #include <functional>
+#include <array>
 
 namespace NetProto
 {
@@ -29,7 +30,7 @@ namespace GameLogic
 		ViewGridVec GetCircleCoverGrids(float center_x, float center_y, float radius);
 		ViewGridVec GetAABBConverGrids(float min_x, float min_y, float max_x, float max_y);
 		int CalGridIdx(int row, int col);
-		bool CalRowCol(int grid_idx, int &row, int &col);
+		bool CalRowCol(int grid_idx, int *row, int *col);
 		int InRowIdx(float y);
 		int InColIdx(float x);
 		int InGridIdx(float x, float y);
@@ -39,9 +40,8 @@ namespace GameLogic
 		ViewGrid * GetRightGrid(int grid_idx);
 		ViewGrid * GetButtomGrid(int grid_idx);
 		ViewGrid * GetLeftGrid(int grid_idx);
-
-		ViewSnapshot ** GetSnapshot() { return m_curr_snapshots; }
-		ViewSnapshot ** GetPreSnapshot() { return m_pre_snapshots; }
+		std::array<ViewSnapshot *, EViewCamp_Observer> GetSnapshot() { return m_curr_snapshots; }
+		std::array<ViewSnapshot *, EViewCamp_Observer> GetPreSnapshot() { return m_pre_snapshots; }
 		void MakeSnapshot();
 		void FillPbViewSnapshot(EViewCamp camp, NetProto::ViewSnapshot *msg);
 		void FillPbViewAllGrids(NetProto::ViewAllGrids * msg);
@@ -61,8 +61,11 @@ namespace GameLogic
 		float m_max_y = 0;
 		ViewGrid **m_grids = nullptr;
 
-		ViewSnapshot **m_curr_snapshots = nullptr;
-		ViewSnapshot **m_pre_snapshots = nullptr;
+		std::array<ViewSnapshot *, EViewCamp_Observer> m_curr_snapshots = { nullptr };
+		std::array<ViewSnapshot *, EViewCamp_Observer> m_pre_snapshots = { nullptr };
+
+		// ViewSnapshot **m_curr_snapshots = nullptr;
+		// ViewSnapshot **m_pre_snapshots = nullptr;
 
 		std::unordered_map<int64_t, std::weak_ptr<SceneUnit>> m_scene_units;
 		void OnSceneUnitEnterScene(std::shared_ptr<SceneUnit> su);

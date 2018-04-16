@@ -27,7 +27,6 @@ void TestSol(lua_State *l)
 {
 	sol::state_view lua(l);
 	sol::protected_function_result ret;
-	lua.open_libraries(sol::lib::base, sol::lib::debug);
 	{
 		int x = 0;
 		lua.set_function("beep", [&x] { ++x; });
@@ -51,8 +50,10 @@ namespace SolLuaBind
 int main(int argc, char **argv)
 {
 	L = luaL_newstate();
-	TestSol(L);
+	sol::state_view lua_view(L);
+	lua_view.open_libraries(sol::lib::base, sol::lib::debug);
 	SolLuaBind::SolLuaBind(L);
+	TestSol(L);
 	lua_close(L); L = nullptr;
 
 	if (argc <= 2)

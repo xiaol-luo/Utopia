@@ -182,7 +182,7 @@ namespace GameLogic
 	{
 		SceneUnitMoveToPosState *state = dynamic_cast<SceneUnitMoveToPosState *>(m_states[NetProto::EMoveAgentState_MoveToPos]);
 		dtPolyRef poly_ref = 0; Vector3 fix_pos = pos;
-		m_nav_mesh->FindNearestPoint(pos, poly_ref, fix_pos);
+		m_nav_mesh->FindNearestPoint(pos, &poly_ref, fix_pos);
 		state->SetDesiredPos(fix_pos);
 		if (!IsLoseControl())
 		{
@@ -293,7 +293,7 @@ namespace GameLogic
 	void SceneUnitMove::Flash(const Vector3 & val)
 	{
 		Vector3 fix_pos; dtPolyRef poly_ref;
-		if (!m_nav_mesh->FindNearestPoint(val, poly_ref, fix_pos))
+		if (!m_nav_mesh->FindNearestPoint(val, &poly_ref, fix_pos))
 		{
 			Vector3 now_pos = this->GetPos();
 			if (!m_nav_mesh->Raycast(now_pos, val, fix_pos))

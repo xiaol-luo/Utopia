@@ -70,8 +70,8 @@ namespace GameLogic
 
 	public:
 		void SendSelf(int protocol_id, google::protobuf::Message *msg);
-		void SendSelf(const std::vector<SyncClientMsg> &msgs);
+		void SendSelfEx(std::vector<SyncClientMsg> msgs);
 		void SendObservers(int protocol_id, google::protobuf::Message *msg);
-		void SendObservers(const std::vector<SyncClientMsg> &msgs);
+		void SendObserversEx(std::vector<SyncClientMsg> msgs);
 	};
 }

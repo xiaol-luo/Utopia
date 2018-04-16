@@ -58,6 +58,7 @@ INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/DetourCrowd/Include)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/DetourTileCache/Include)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/Recast/Include)
 INCLUDE_DIRECTORIES(./Libs/3rdpartLibs/recastnavigation/RecastDemo/Include)
+INCLUDE_DIRECTORIES(./Libs/OwnLibs/SolLuaBindUtils)
 
 LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/Libevent/libs)
 LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Libs/3rdpartLibs/protobuf/libs)

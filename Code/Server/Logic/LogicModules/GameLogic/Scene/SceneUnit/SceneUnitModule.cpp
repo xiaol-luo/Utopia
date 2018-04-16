@@ -43,19 +43,19 @@ namespace GameLogic
 		if (nullptr != m_owner)
 			m_owner->SendSelf(protocol_id, msg);
 	}
-	void SceneUnitModule::SendSelf(const std::vector<SyncClientMsg>& msgs)
+	void SceneUnitModule::SendSelfEx(std::vector<SyncClientMsg> msgs)
 	{
 		if (nullptr != m_owner)
-			m_owner->SendSelf(msgs);
+			m_owner->SendSelfEx(msgs);
 	}
 	void SceneUnitModule::SendObservers(int protocol_id, google::protobuf::Message * msg)
 	{
 		if (nullptr != m_owner)
 			m_owner->SendObservers(protocol_id, msg);
 	}
-	void SceneUnitModule::SendObservers(const std::vector<SyncClientMsg>& msgs)
+	void SceneUnitModule::SendObserversEx(std::vector<SyncClientMsg> msgs)
 	{
 		if (nullptr != m_owner)
-			m_owner->SendObservers(msgs);
+			m_owner->SendObserversEx(msgs);
 	}
 }

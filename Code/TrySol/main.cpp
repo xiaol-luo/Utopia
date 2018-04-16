@@ -12,7 +12,7 @@
 #include "protobuf/try.pb.h"
 #include "protobuf/ProtobufLuaBindRepeated.h"
 #include "protobuf/ProtobufLuaBindRepeatedPtr.h"
-#include "AutoBind/AutoHead.h"
+#include "AutoBind/AutoHead/AutoHead.h"
 
 namespace TryUserType
 {

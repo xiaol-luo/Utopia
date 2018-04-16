@@ -64,7 +64,7 @@ void GameLogic::SceneUnitMoveForcePosState::ForcePos(const Vector3 &destination,
 {
 	m_speed = speed;
 	dtPolyRef poly_ref;
-	if (!m_move_agent->GetNavMesh()->FindNearestPoint(destination, poly_ref, m_destination))
+	if (!m_move_agent->GetNavMesh()->FindNearestPoint(destination, &poly_ref, m_destination))
 	{
 		m_destination = m_move_agent->GetPos();
 	}

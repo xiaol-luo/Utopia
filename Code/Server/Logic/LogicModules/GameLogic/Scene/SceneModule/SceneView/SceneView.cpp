@@ -23,8 +23,6 @@ namespace GameLogic
 {
 	SceneView::SceneView() : SceneModule(MODULE_TYPE)
 	{
-		m_pre_snapshots = (ViewSnapshot **)Malloc(sizeof(ViewSnapshot *) * EViewCamp_Observer);
-		m_curr_snapshots = (ViewSnapshot **)Malloc(sizeof(ViewSnapshot *) * EViewCamp_Observer);
 		for (int i = 0; i < EViewCamp_Observer; ++i)
 		{
 			m_pre_snapshots[i] = new ViewSnapshot();
@@ -39,8 +37,6 @@ namespace GameLogic
 			delete m_pre_snapshots[i];
 			delete m_curr_snapshots[i];
 		}
-		Free(m_pre_snapshots); m_pre_snapshots = nullptr;
-		Free(m_curr_snapshots); m_curr_snapshots = nullptr;
 	}
 
 	void SceneView::MakeSnapshot()
@@ -69,7 +65,7 @@ namespace GameLogic
 			}
 		}
 		{
-			ViewSnapshot **tmp_snapshot = m_pre_snapshots;
+			auto tmp_snapshot = m_pre_snapshots;
 			m_pre_snapshots = m_curr_snapshots;
 			m_curr_snapshots = tmp_snapshot;
 
@@ -230,13 +226,15 @@ namespace GameLogic
 		return row * m_col_num + col;
 	}
 
-	bool SceneView::CalRowCol(int grid_idx, int & row, int & col)
+	bool SceneView::CalRowCol(int grid_idx, int * row, int * col)
 	{
 		if (0 == m_col_num || 0 == m_row_num || grid_idx < 0 || grid_idx >= m_grid_count)
 			return false;
 
-		row = grid_idx / m_col_num;
-		col = grid_idx % m_col_num;
+		if (row)
+			*row = grid_idx / m_col_num;
+		if (col)
+			*col = grid_idx % m_col_num;
 		return true;
 	}
 
@@ -281,7 +279,7 @@ namespace GameLogic
 	ViewGrid * SceneView::GetUpGrid(int grid_idx)
 	{
 		int row, col;
-		if (!this->CalRowCol(grid_idx, row, col))
+		if (!this->CalRowCol(grid_idx, &row, &col))
 			return nullptr;
 		int idx = this->CalGridIdx(row - 1, col);
 		return this->GetGrid(idx);
@@ -290,7 +288,7 @@ namespace GameLogic
 	ViewGrid * SceneView::GetRightGrid(int grid_idx)
 	{
 		int row, col;
-		if (!this->CalRowCol(grid_idx, row, col))
+		if (!this->CalRowCol(grid_idx, &row, &col))
 			return nullptr;
 		int idx = this->CalGridIdx(row, col + 1);
 		return this->GetGrid(idx);
@@ -299,7 +297,7 @@ namespace GameLogic
 	ViewGrid * SceneView::GetButtomGrid(int grid_idx)
 	{
 		int row, col;
-		if (!this->CalRowCol(grid_idx, row, col))
+		if (!this->CalRowCol(grid_idx, &row, &col))
 			return nullptr;
 		int idx = this->CalGridIdx(row + 1, col);
 		return this->GetGrid(idx);
@@ -308,7 +306,7 @@ namespace GameLogic
 	ViewGrid * SceneView::GetLeftGrid(int grid_idx)
 	{
 		int row, col;
-		if (!this->CalRowCol(grid_idx, row, col))
+		if (!this->CalRowCol(grid_idx, &row, &col))
 			return nullptr;
 		int idx = this->CalGridIdx(row, col - 1);
 		return this->GetGrid(idx);

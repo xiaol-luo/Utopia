@@ -22,8 +22,8 @@ namespace GameLogic
 		float grid_size = 0;
 		EViewGridType grid_type = EViewGrid_Ground;
 		int grid_type_group = 0;
-		int observing_num[EViewCamp_Observer + 1];
-		ViewUnitMap body_units;
+		
+		std::array<int, EViewCamp_Observer + 1> observing_num = { 0 };
 		std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> su_bodies;
 	};
 }

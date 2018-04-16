@@ -1,8 +1,10 @@
+#pragma once
 #include "Common/Geometry/GeometryDefine.h"
 #include <memory>
 #include <unordered_map>
 #include <unordered_set>
 #include <functional>
+#include <array>
 
 namespace GameLogic
 {
@@ -40,7 +42,8 @@ namespace GameLogic
 		int layer = 0;
 
 		SceneUnitQTree *tree = nullptr;
-		SceneUnitQTreeNode *children[EChild_Count] = { nullptr };
+		std::array<SceneUnitQTreeNode *, EChild_Count> children = { nullptr };
+		// SceneUnitQTreeNode *children[EChild_Count] = { nullptr };
 		std::unordered_set<SceneUnitQTreeNodeUnit *> node_units;
 
 		void FindUnits(const AABB2 &rect, std::unordered_set<SceneUnitQTreeNodeUnit *> &out_units);

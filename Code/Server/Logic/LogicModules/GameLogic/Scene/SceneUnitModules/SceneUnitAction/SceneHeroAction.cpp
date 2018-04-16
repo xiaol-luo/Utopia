@@ -65,7 +65,7 @@ namespace GameLogic
 		NavMesh *nav_mesh = scene->GetModule<SceneNavMesh>()->GetNavMesh();
 		Vector3 fit_pos = su_move->GetPos();
 		dtPolyRef poly_ref;
-		if (!nav_mesh->FindNearestPoint(target_su->GetTransform()->GetPos(), poly_ref, fit_pos))
+		if (!nav_mesh->FindNearestPoint(target_su->GetTransform()->GetPos(), &poly_ref, fit_pos))
 			nav_mesh->Raycast(su_move->GetPos(), target_su->GetTransform()->GetPos(), fit_pos);
 		
 		m_move_param.Reset();
@@ -90,7 +90,7 @@ namespace GameLogic
 		NavMesh *nav_mesh = scene->GetModule<SceneNavMesh>()->GetNavMesh();
 		Vector3 fit_pos = m_owner->GetTransform()->GetPos();
 		dtPolyRef poly_ref;
-		if (!nav_mesh->FindNearestPoint(pos, poly_ref, fit_pos))
+		if (!nav_mesh->FindNearestPoint(pos, &poly_ref, fit_pos))
 			return false;
 
 		m_move_param.Reset();

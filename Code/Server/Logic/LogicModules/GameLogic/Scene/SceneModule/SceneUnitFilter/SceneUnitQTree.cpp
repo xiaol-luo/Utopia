@@ -26,7 +26,6 @@ namespace GameLogic
 		node->area = rect;
 		node->layer = layer;
 		node->tree = tree;
-		memset(node->children, 0, sizeof(node->children));
 		return node;
 	}
 

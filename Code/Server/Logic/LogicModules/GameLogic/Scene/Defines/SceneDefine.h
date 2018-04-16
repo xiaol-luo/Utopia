@@ -40,8 +40,9 @@ namespace GameLogic
 
 	const static uint64_t SCENE_UNIT_INVALID_ID = 0;
 
-	struct SyncClientMsg
+	class SyncClientMsg
 	{
+	public:
 		SyncClientMsg(int id, google::protobuf::Message *_msg) : protocol_id(id), msg(_msg) {}
 		int protocol_id;
 		google::protobuf::Message *msg;
