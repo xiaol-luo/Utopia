@@ -3,12 +3,14 @@
 #include "Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"
 #include "Config/AutoCsvCode/effect/CsvEffectHealConfig.h"
 #include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
+#include "Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"
 #include "GameLogic/Scene/Effects/EffectHurt/EffectHurtConfig.h"
 #include <assert.h>
 #include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
 #include "GameLogic/Scene/Effects/EffectAttrs/EffectAttrsConfig.h"
 #include "Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"
 #include "GameLogic/Scene/Effects/EffectGroup/EffectGroupConfig.h"
+#include "GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"
 
 namespace GameLogic
 {
@@ -20,29 +22,24 @@ namespace GameLogic
 	{
 	}
 
+	template <typename OutCfgType, typename CsvCfgVec>
+	void BuildCfgHelp(CsvCfgVec &csvCfgVec, std::unordered_map<int, EffectConfigBase *> &effect_cfgs)
+	{
+		for (auto item : csvCfgVec)
+		{
+			auto cfg = new OutCfgType();
+			assert(cfg->InitCfg(item));
+			auto ret = effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
+			assert(ret.second);
+		}
+	}
+
 	bool EffectConfigMgr::LoadCfg(Config::CsvConfigSets * csv_cfgs, void *param)
 	{
-		for (auto item : csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec)
-		{
-			auto cfg = new EffectHurtConfig();
-			assert(cfg->InitCfg(item));
-			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
-			assert(ret.second);
-		}
-		for (auto item : csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec)
-		{
-			auto cfg = new EffectAttrsConfig();
-			assert(cfg->InitCfg(item));
-			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
-			assert(ret.second);
-		}
-		for (auto *item : csv_cfgs->csv_CsvEffectGroupConfigSet->cfg_vec)
-		{
-			auto cfg = new EffectGroupConfig();
-			assert(cfg->InitCfg(item));
-			auto ret = m_effect_cfgs.insert(std::make_pair(cfg->GetId(), cfg));
-			assert(ret.second);
-		}
+		BuildCfgHelp<EffectHurtConfig>(csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec, m_effect_cfgs);
+		BuildCfgHelp<EffectAttrsConfig>(csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec, m_effect_cfgs);
+		BuildCfgHelp<EffectGroupConfig>(csv_cfgs->csv_CsvEffectGroupConfigSet->cfg_vec, m_effect_cfgs);
+		BuildCfgHelp<EffectScriptConfig>(csv_cfgs->csv_CsvEffectScriptConfigSet->cfg_vec, m_effect_cfgs);
 		return true;
 	}
 

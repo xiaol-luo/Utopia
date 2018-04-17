@@ -87,6 +87,14 @@ out_cs_file_path = effect/CsvEffectGroupConfig.cs
 out_cpp_file_path = effect/CsvEffectGroupConfig
 out_lua_file_path = effect/CsvEffectGroupConfig.lua
 
+[excel2csv-effect.effect_script]
+file_path = effect/effects.xlsx
+sheet_name = effect_script
+out_csv_file_path = effect/CsvEffectScriptConfig.csv
+class_name = CsvEffectScriptConfig
+out_cs_file_path = effect/CsvEffectScriptConfig.cs
+out_cpp_file_path = effect/CsvEffectScriptConfig
+out_lua_file_path = effect/CsvEffectScriptConfig.lua
 
 
 

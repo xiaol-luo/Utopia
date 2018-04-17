@@ -8,6 +8,7 @@
 #include "effect/CsvEffectAttrsConfig.h"
 #include "effect/CsvEffectFilterConfig.h"
 #include "effect/CsvEffectGroupConfig.h"
+#include "effect/CsvEffectScriptConfig.h"
 
 namespace Config
 {
@@ -22,6 +23,7 @@ namespace Config
         delete csv_CsvEffectAttrsConfigSet;
         delete csv_CsvEffectFilterConfigSet;
         delete csv_CsvEffectGroupConfigSet;
+        delete csv_CsvEffectScriptConfigSet;
     }
 
     bool CsvConfigSets::Load(std::string root_path)
@@ -41,6 +43,7 @@ namespace Config
         csv_CsvEffectAttrsConfigSet = new CsvEffectAttrsConfigSet;
         csv_CsvEffectFilterConfigSet = new CsvEffectFilterConfigSet;
         csv_CsvEffectGroupConfigSet = new CsvEffectGroupConfigSet;
+        csv_CsvEffectScriptConfigSet = new CsvEffectScriptConfigSet;
 
         bool all_ok = true;
         if (all_ok)
@@ -79,6 +82,10 @@ namespace Config
         {
             all_ok = csv_CsvEffectGroupConfigSet->Load(root_path + '/' + "effect/CsvEffectGroupConfig.csv");
         }
+        if (all_ok)
+        {
+            all_ok = csv_CsvEffectScriptConfigSet->Load(root_path + '/' + "effect/CsvEffectScriptConfig.csv");
+        }
 
         if (!all_ok)
         {
@@ -91,6 +98,7 @@ namespace Config
             delete csv_CsvEffectAttrsConfigSet; csv_CsvEffectAttrsConfigSet = nullptr;
             delete csv_CsvEffectFilterConfigSet; csv_CsvEffectFilterConfigSet = nullptr;
             delete csv_CsvEffectGroupConfigSet; csv_CsvEffectGroupConfigSet = nullptr;
+            delete csv_CsvEffectScriptConfigSet; csv_CsvEffectScriptConfigSet = nullptr;
         }
 
         return all_ok;

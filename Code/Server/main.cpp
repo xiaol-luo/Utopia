@@ -10,36 +10,19 @@
 #include <stdint.h>
 #include "MemoryPool/StlAllocator.h"
 #include "Utils/LuaUtils.h"
-
 #include <sol.hpp>
+#include "Utils/PlatformCompat.h"
 
 extern ServerLogic *server_logic;
+namespace SolLuaBind
+{
+	extern void SolLuaBind(lua_State *L);
+}
 
 void QuitGame(int signal)
 {
 	if (nullptr != server_logic)
 		server_logic->Quit();
-}
-
-lua_State *L;
-
-void TestSol(lua_State *l)
-{
-	sol::state_view lua(l);
-	sol::protected_function_result ret;
-	{
-		int x = 0;
-		lua.set_function("beep", [&x] { ++x; });
-		lua.script("beep()");
-		printf("c++ beep result %d\n", x);
-	}
-	
-	ret = lua.script_file("LuaScript/test_sol.lua");
-}
-
-namespace SolLuaBind
-{
-	extern void SolLuaBind(lua_State *L);
 }
 
 struct ParseArgsRet
@@ -132,45 +115,60 @@ ParseArgsRet ParseArgs(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+	// parse argv
 	ParseArgsRet parseArgsRet = ParseArgs(argc, argv);
 	if (!parseArgsRet.isOk)
 	{
 		printf("ParseArgs fail, reason is %s", parseArgsRet.reason.c_str());
-		exit(1);
+		exit(10);
+	}
+
+	// change work dir
+	int ret = chdir(parseArgsRet.workDir.c_str());
+	char pathBuf[1024] = { 0 };
+	printf("current work dir is %s\n", getcwd(pathBuf, sizeof(pathBuf)));
+	if (0 != ret)
+	{
+		printf("chdir fail ret %d, error %d %s\n", ret, errno, strerror(errno));
+		exit(20);
 	}
 
 	MemoryUtil::Init();
 	LuaUtils::Init();
-	sol::state_view lsv(LuaUtils::luaState);
 
 	std::vector<std::string, StlAllocator<std::string>> params;
 	{
+		sol::state_view lsv(LuaUtils::luaState);
 		std::string settingPath = parseArgsRet.settingFile;
 		sol::protected_function_result pfr = lsv.script_file(settingPath, LuaUtils::ErrorFn);
 		if (!pfr.valid())
 		{
 			sol::error e = pfr;
-			printf("error: %s", e.what());
-			exit(2);
+			printf("error: %s\n", e.what());
+			exit(30);
 		}
 
-		const char *ConfigTable = "ConfigTable";
-		const char *LOG_CONFIG_FILE = "LogConfigFile";
-		const char *CONFIG_DIR = "ConfigDir";
+		{
+			// params
+			const char *ConfigTable = "ConfigTable";
+			const char *LOG_CONFIG_FILE = "LogConfigFile";
+			const char *CONFIG_DIR = "ConfigDir";
 
-		sol::table cfgTable = lsv[ConfigTable];
-		lsv[ConfigTable] = nullptr;
-		std::string logConfigFile = cfgTable[LOG_CONFIG_FILE];
-		std::string configDir = cfgTable[CONFIG_DIR];
-		assert(!logConfigFile.empty() && !configDir.empty());
-		params.push_back(logConfigFile);
-		params.push_back(configDir);
+			sol::table cfgTable = lsv[ConfigTable];
+			lsv[ConfigTable] = nullptr;
+			std::string logConfigFile = cfgTable[LOG_CONFIG_FILE];
+			std::string configDir = cfgTable[CONFIG_DIR];
+			assert(!logConfigFile.empty() && !configDir.empty());
+			params.push_back(logConfigFile);
+			params.push_back(configDir);
+		}
 
 		{
+			// load lua scripts
+			SolLuaBind::SolLuaBind(LuaUtils::luaState);
 			const char *LOAD_LUA_FILES = "LoadLuaFiles";
 			sol::table luaFiles = lsv[LOAD_LUA_FILES];
 			lsv[LOAD_LUA_FILES] = nullptr;
-			SolLuaBind::SolLuaBind(LuaUtils::luaState);
 			for (auto kv_pair : luaFiles)
 			{
 				sol::object ss = kv_pair.second;
@@ -180,11 +178,10 @@ int main(int argc, char **argv)
 				{
 					sol::error e = ret;
 					printf("error: %s", e.what());
-					exit(3);
+					exit(40);
 				}
 			}
 		}
-		
 	}
 
 #ifdef WIN32
@@ -198,8 +195,6 @@ int main(int argc, char **argv)
 #endif
 
 	std::srand(time(NULL));
-
-
 	server_logic = new GameServerLogic();
 	server_logic->SetInitParams(&params);
 	server_logic->Loop();

@@ -18,9 +18,5 @@ namespace GameLogic
 
 	public:
 		bool InitCfg(const Config::CsvEffectGroupConfig *csv_cfg);
-		int GetHurt() const { return m_hurt; }
-
-	protected:
-		int m_hurt = 0;
 	};
 }
