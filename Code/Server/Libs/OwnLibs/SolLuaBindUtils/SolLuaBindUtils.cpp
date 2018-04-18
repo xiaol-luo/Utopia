@@ -73,3 +73,11 @@ sol::table SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view &lua, cons
 	assert(SolLuaBindUtils::GetLuaTable(lua, ns_vec, out_table, true));
 	return out_table;
 }
+
+sol::table SolLuaBindUtils::GetLuaNameSpaceTable(sol::state_view & lua, const std::string & ns)
+{
+	std::vector<std::string> ns_vec = ParseNameSpace(ns);
+	sol::table out_table;
+	SolLuaBindUtils::GetLuaTable(lua, ns_vec, out_table, false);
+	return out_table;
+}

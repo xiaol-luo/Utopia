@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "DetourCrowd.h"	
-#include "DetourNavMeshQuery.h"	
 #include "GameLogic/Scene/Navigation/NavMesh.h"	
-#include "GameLogic/Scene/Navigation/NavAgent.h"	
-#include "Logic/ShareCode/Common/Geometry/Vector3.h"
+#include "Common/Geometry/Vector3.h"	
+#include "Libs/3rdpartLibs/recastnavigation/Detour/Include/DetourNavMeshQuery.h"	
+#include "Libs/3rdpartLibs/recastnavigation/DetourCrowd/Include/DetourCrowd.h"	
+#include "GameLogic/Scene/Navigation/NavAgent.h"
 
 namespace SolLuaBind
 {

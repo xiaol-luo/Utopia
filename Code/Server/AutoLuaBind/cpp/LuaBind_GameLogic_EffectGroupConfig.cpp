@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
+#include "GameLogic/Scene/Effects/EffectConfigBase.h"	
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "Logic/ShareCode/Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"	
+#include "GameLogic/Scene/Effects/EffectBase.h"	
 #include "GameLogic/Scene/Effects/EffectGroup/EffectGroupConfig.h"	
-#include "GameLogic/Scene/Effects/EffectConfigBase.h"
+#include "Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"
 
 namespace SolLuaBind
 {
@@ -31,7 +31,6 @@ namespace SolLuaBind
 						"__StructName__", sol::property([]() {return "EffectGroupConfig"; })				
 						,"CreateEffect", &GameLogic::EffectGroupConfig::CreateEffect				
 						,"InitCfg", &GameLogic::EffectGroupConfig::InitCfg				
-						,"GetHurt", &GameLogic::EffectGroupConfig::GetHurt				
 						, sol::base_classes, sol::bases<
 							GameLogic::EffectConfigBase 
 						>()

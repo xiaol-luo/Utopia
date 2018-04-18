@@ -6,8 +6,11 @@ ConfigTable =
 
 LoadLuaFiles = 
 {
-	"LuaScript/Init.lua",
-	"LuaScript/EffectScript/EffectDemo.lua",
+	"LuaScript/init.lua",
+	"LuaScript/class.lua",
+	"LuaScript/effect_script/effect_script_base.lua",
+	"LuaScript/effect_script/effect_script_demo.lua",
 
+	"LuaScript/MainTest.lua",
 	"LuaScript/HoldPlace.lua"
 }

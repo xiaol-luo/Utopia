@@ -25,15 +25,6 @@ namespace GameLogic
 	public:
 		virtual bool FinalCheck() { return true; }
 
-		/*
-		void SetId(int val) { m_id = val; }
-		void SetNeedGuide(bool val) { m_need_guide = val; }
-		void SetReversible(bool val) { m_reversible = val; }
-		void SetCanCancelGuide(bool val) { m_can_cancel_guide = val; }
-		void SetBeginEffectIds(const EffectIdVec &val) { m_begin_effect_ids = val; }
-		void SetEndEffectIds(const EndEffectIdVec &val) { m_end_effect_ids = val; }
-		void SetLoopEffectCfg(const TimeLineEffectIdsConfig &val) { m_loop_effect_cfg = val; }
-		*/
 	protected:
 		int m_id = 0;
 		EffectIdVec m_begin_effect_ids;

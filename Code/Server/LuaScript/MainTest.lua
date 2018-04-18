@@ -1,56 +1,30 @@
+xxxx = AABB2:new()
+print("AABB", xxxx)
 
-LuaObject = {}
+local lua_object = {}
+lua_object.__index = lua_object
 
-local Base = {}
-local Base_mt = { __index = Base }
--- setmetatable(Base, LuaObject)
+local base = inherit_from(lua_object)
 
-function Base.new(weight)
-    local ret = setmetatable({}, Base_mt)
-    ret.weight = weight
-    return ret
-end
-
-function Base.SetWeight(self, weight)
+function base.init(self, weight)
     self.weight = weight
 end
 
-function Base.GetWeight(self)
-    print("Base.GetWeight")
-    return self.weight
-end
+b1 = base(10)
+b2 = base:new(20)
+print("b", b1.weight, b2.weight)
 
-local Derivied = {}
-local Derivied_mt = { __index = Derivied }
-setmetatable(Derivied, { __index = Base })
+local derive = inherit_from(base)
 
-Derivied.height = 1000
-
-function Derivied.new(weight, height)
-    local ret = setmetatable(Base.new(weight), Derivied_mt)
-    -- ret.height = height
-    return ret
-end
-
-function Derivied.SetHeight(self, height)
+function derive.init(self, weight, height)
+    base.init(self, weight)
     self.height = height
 end
 
-function Derivied.GetHeight(self)
-    return self.height
-end
+d1 = derive(100, 10)
+d2 = derive:new(200, 20)
+print("d", d1.weight, d1.height, d2.weight, d2.height)
 
-print("classes", Base, Base_mt, Derivied, Derivied_mt)
 
-local t1 = Base.new(10)
-local t3 = Derivied.new(10, 20)
-
-print("instance", t1, t3)
-mt_t1 = getmetatable(t1)
-mt_t3 = getmetatable(t3)
-print("meta t1", mt_t1, mt_t1.__index, mt_t1.__newindex)
-print("meta t2", mt_t3, mt_t3.__index, mt_t3.__newindex)
-
-print("before set weight",  t3.height, mt_t3.__index.height)
-t3.height = 100
-print("after set weight",  t3.height, mt_t3.__index.height)
+local es = effect_script.effect_script_demo:new(1, 2)
+print("es", es)

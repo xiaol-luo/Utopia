@@ -2,7 +2,7 @@
 #include <sol.hpp>	
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "Logic/ShareCode/Common/Geometry/Vector3.h"
+#include "Common/Geometry/Vector3.h"
 
 namespace SolLuaBind
 {

@@ -145,7 +145,7 @@ namespace Config
                     {
                         try
                         {
-                            T tmp_val = (T)Convert.ChangeType(str, typeof(T));
+                            T tmp_val = (T)Convert.ChangeType(val_str, typeof(T));
                             val_vec.Add(tmp_val);
                         }
                         catch (Exception)

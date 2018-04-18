@@ -1,2 +1,2 @@
 
-EffectScript = {}
+effect_script = {}

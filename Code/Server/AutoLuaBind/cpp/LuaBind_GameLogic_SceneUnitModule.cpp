@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"	
-#include "Logic/ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
 #include "GameLogic/Scene/NewScene.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"	
+#include "Common/EventDispatcher/EventDispacherProxy.h"	
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "google/protobuf/message.h"	
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 
 namespace SolLuaBind

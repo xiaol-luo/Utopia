@@ -1,15 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/ShareCode/Common/EventDispatcher/EventDispacher.h"	
-#include "Logic/ShareCode/Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
-#include "GameLogic/Player/Player.h"	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/arena.h"	
 #include "GameLogic/Scene/NewScene.h"	
-#include "GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
+#include "GameLogic/Player/Player.h"	
 #include "GameLogic/Scene/SceneModule/SceneModule.h"	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "google/protobuf/message.h"	
+#include "GameLogic/Scene/Config/SceneAllConfig.h"	
+#include "Common/EventDispatcher/EventDispacher.h"	
+#include "google/protobuf/arena.h"	
 #include "GameLogic/GameLogicModule.h"
 
 namespace SolLuaBind

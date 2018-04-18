@@ -1,11 +1,11 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
+#include "GameLogic/Scene/NewScene.h"	
 #include "GameLogic/Player/Player.h"	
 #include "GameLogic/Player/PlayerMgr.h"	
-#include "GameLogic/Scene/NewScene.h"	
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Logic/CommonModules/Network/INetworkHandler.h"	
+#include "google/protobuf/message.h"	
+#include "CommonModules/Network/INetworkHandler.h"	
 #include "GameLogic/GameLogicModule.h"
 
 namespace SolLuaBind

@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/ShareCode/Config/AutoCsvCode/CsvConfigSets.h"	
+#include "Config/AutoCsvCode/CsvConfigSets.h"	
 #include "GameLogic/Scene/Skills/SkillConfig.h"
 
 namespace SolLuaBind

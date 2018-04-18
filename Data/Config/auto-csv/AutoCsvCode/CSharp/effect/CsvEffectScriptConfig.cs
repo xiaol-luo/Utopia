@@ -8,20 +8,20 @@ namespace Config
     internal class FieldName_CsvEffectScriptConfig
     {
         public const string Field_Name_id = "id";
-        public const string Field_Name_params = "params";
+        public const string Field_Name_class_name = "class_name";
     }
 
     public class CsvEffectScriptConfig
     {
         public int id;
-        public string params = string.Empty;
+        public string class_name = string.Empty;
 
         public delegate bool ConfigCheckFunc(CsvEffectScriptConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_id], ref id);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_params) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_params], ref params);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_class_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_class_name], ref class_name);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -48,7 +48,7 @@ namespace Config
                 try
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_id));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_params));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_class_name));
                 }
                 catch (Exception e)
                 {

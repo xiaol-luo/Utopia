@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/ShareCode/Common/Utils/TupleUtil.h"
+#include "Common/Utils/TupleUtil.h"
 
 namespace SolLuaBind
 {

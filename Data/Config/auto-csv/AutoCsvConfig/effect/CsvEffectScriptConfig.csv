@@ -1,7 +1,7 @@
-id,params
+id,class_name
 int;key,string
-5000001,EffectScript.Demo
-5000002,EffectScript.Demo
-5000003,EffectScript.Demo
-5000004,EffectScript.Demo
-5000005,EffectScript.Demo
+5000001,effect_script.effect_script_demo
+5000002,effect_script.effect_script_demo
+5000003,effect_script.effect_script_demo
+5000004,effect_script.effect_script_demo
+5000005,effect_script.effect_script_demo

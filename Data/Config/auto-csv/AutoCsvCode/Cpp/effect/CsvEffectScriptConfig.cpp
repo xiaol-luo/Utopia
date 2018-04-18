@@ -4,13 +4,13 @@
 namespace Config
 {
      static const char * Field_Name_id = "id";
-     static const char * Field_Name_params = "params";
+     static const char * Field_Name_class_name = "class_name";
 
     bool CsvEffectScriptConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
         bool all_ok = true;
         all_ok = all_ok && kvPairs.count(Field_Name_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_id], id);
-        all_ok = all_ok && kvPairs.count(Field_Name_params) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_params], params);
+        all_ok = all_ok && kvPairs.count(Field_Name_class_name) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_class_name], class_name);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -29,18 +29,18 @@ namespace Config
         io::CSVReader<2, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
-            Field_Name_params
+            Field_Name_class_name
             );
 
         std::map<std::string, std::string> kvParis;
         kvParis[Field_Name_id] = "";
-        kvParis[Field_Name_params] = "";
+        kvParis[Field_Name_class_name] = "";
 
         bool all_ok = true;
         int curr_row = 0;
         while (csv_reader.read_row(
             kvParis[Field_Name_id],
-            kvParis[Field_Name_params]
+            kvParis[Field_Name_class_name]
             ))
         {            
             if (++ curr_row <= 1)
