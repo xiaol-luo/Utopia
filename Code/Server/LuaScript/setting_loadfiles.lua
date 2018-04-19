@@ -1,5 +1,5 @@
 
-local files_init =
+_load_files_init =
 {
 	"LuaScript/init.lua",
     "LuaScript/class.lua",
@@ -7,7 +7,7 @@ local files_init =
 	"LuaScript/HoldPlace.lua"
 }
 
-local files_effect_script =
+_load_files_effect_script =
 {
     "LuaScript/effect_script/init.lua",
     "LuaScript/effect_script/effect_script_base.lua",
@@ -17,8 +17,8 @@ local files_effect_script =
 
 _load_files_map =
 {
-    init = files_init,
-    effect_script = files_effect_script
+    _load_files_init,
+    _load_files_effect_script,
 }
 
 
