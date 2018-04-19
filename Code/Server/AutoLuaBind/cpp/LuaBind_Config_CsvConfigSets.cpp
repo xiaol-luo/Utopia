@@ -1,16 +1,16 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Config/AutoCsvCode/skill/CsvSkillConfig.h"	
-#include "Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
-#include "Config/AutoCsvCode/CsvConfigSets.h"	
-#include "Config/AutoCsvCode/skill/CsvSkillLevelConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"	
-#include "Config/AutoCsvCode/log/CsvLogConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectHealConfig.h"
+#include "ShareCode/Config/AutoCsvCode/skill/CsvSkillLevelConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"	
+#include "ShareCode/Config/AutoCsvCode/skill/CsvSkillConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/log/CsvLogConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectHealConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
 
 namespace SolLuaBind
 {

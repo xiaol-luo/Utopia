@@ -12,6 +12,7 @@
 #include "Utils/LuaUtils.h"
 #include <sol.hpp>
 #include "Utils/PlatformCompat.h"
+#include <LuaHelps/LuaLoadFiles.h>
 
 extern ServerLogic *server_logic;
 namespace SolLuaBind
@@ -149,7 +150,7 @@ int main(int argc, char **argv)
 		}
 
 		{
-			// params
+			// load setting
 			const char *ConfigTable = "ConfigTable";
 			const char *LOG_CONFIG_FILE = "LogConfigFile";
 			const char *CONFIG_DIR = "ConfigDir";
@@ -162,24 +163,12 @@ int main(int argc, char **argv)
 			params.push_back(logConfigFile);
 			params.push_back(configDir);
 		}
-
 		{
 			// load lua scripts
 			SolLuaBind::SolLuaBind(LuaUtils::luaState);
-			const char *LOAD_LUA_FILES = "LoadLuaFiles";
-			sol::table luaFiles = lsv[LOAD_LUA_FILES];
-			lsv[LOAD_LUA_FILES] = nullptr;
-			for (auto kv_pair : luaFiles)
+			if (!LuaUtils::LoadScripts_DoLoadScript(false, std::set<std::string>()))
 			{
-				sol::object ss = kv_pair.second;
-				std::string filePath = ss.as<std::string>();
-				sol::protected_function_result ret = lsv.script_file(filePath, LuaUtils::ErrorFn);
-				if (!ret.valid())
-				{
-					sol::error e = ret;
-					printf("error: %s", e.what());
-					exit(40);
-				}
+				exit(40);
 			}
 		}
 	}

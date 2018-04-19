@@ -1,2 +1,1 @@
 
-effect_script = {}

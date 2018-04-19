@@ -1,14 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Defines/EffectDefine.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Defines/ViewDefine.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/Skills/Skill.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "google/protobuf/message.h"	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"
 
 namespace SolLuaBind
 {

@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
-#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "GameLogic/Scene/SceneModule/SceneModule.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace SolLuaBind
 {

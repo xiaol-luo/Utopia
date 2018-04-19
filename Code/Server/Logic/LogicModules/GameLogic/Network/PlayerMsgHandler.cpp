@@ -21,6 +21,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 #include "GameLogic/Scene/Skills/Skill.h"
+#include "LuaHelps/LuaLoadFiles.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -59,6 +60,7 @@ namespace GameLogic
 		RegPlayerMsgHandler(NetProto::PID_MoveToPos, NetProto::MoveToPos, OnMoveToPos);
 		RegPlayerHandler(NetProto::PID_StopMove, OnStopMove);
 		RegPlayerMsgHandler(NetProto::PID_BattleOperaReq, NetProto::BattleOperation, OnHandleBattleOperation);
+		RegPlayerMsgHandler(NetProto::PID_ReloadLuaScripts, NetProto::ReloadLuaScripts, OnReloadLuaScripts);
 
 		for (auto desc : msg_handle_descripts)
 		{
@@ -249,5 +251,17 @@ namespace GameLogic
 		default:
 			break;
 		}
+	}
+
+	void PlayerMsgHandler::OnReloadLuaScripts(int id, NetProto::ReloadLuaScripts * msg, GameLogic::Player * player)
+	{
+		std::set<std::string> scripts;
+		for (auto item : msg->scripts())
+		{
+			std::string script = item;
+			scripts.insert(script);
+		}
+		LuaUtils::LoadScripts_DoLoadScript(true, scripts);
+		LuaUtils::LoadScripts_ReloadEffectScripts();
 	}
 }

@@ -1,4 +1,5 @@
 #include "LuaUtils.h"
+#include "lrdb/server.hpp"
 
 namespace LuaUtils
 {
@@ -9,10 +10,17 @@ namespace LuaUtils
 		return 0;
 	}
 
+	lrdb::server *lrdb_debug_srv = nullptr;
+
 	void Init()
 	{
 		Uninit();
 		luaState = luaL_newstate();
+		{
+			const int LRDB_LISTEN_PORT = 21110;
+			lrdb_debug_srv = new lrdb::server(LRDB_LISTEN_PORT);
+			lrdb_debug_srv->reset(LuaUtils::luaState);
+		}
 		sol::state_view luaSv(luaState);
 		luaSv.set_panic(LuaPanicFn);
 		luaSv.script(R"(
@@ -38,6 +46,12 @@ namespace LuaUtils
 	}
 	void Uninit()
 	{
+		if (nullptr != lrdb_debug_srv)
+		{
+			lrdb_debug_srv->reset();
+			delete lrdb_debug_srv;
+			lrdb_debug_srv = nullptr;
+		}
 		if (nullptr != luaState)
 		{
 			lua_close(luaState);

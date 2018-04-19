@@ -18,11 +18,18 @@ function effect_script_demo.on_late_end(self)
 end
 
 function effect_script_demo.on_late_loop(self, now_ms, delta_ms)
-    print("effect_script_demo.on_loop")
     self.loop_times = self.loop_times + 1
     if self.loop_times > 10 then 
         self.is_done = true
     end
+    print("effect_script_demo.on_loop")
+    local key = self.effect:GetKey()
+    local cfg = self.effect:GetCfg()
+    print("loop key", key, cfg)
+    print("loop cfg id", cfg:GetId())
+    cfg = LuaDyCast.ToEffectScriptConfig(cfg)
+    local class_name = cfg:GetClassName(cfg)
+    print("loop cfg className", class_name)
 end
 
 

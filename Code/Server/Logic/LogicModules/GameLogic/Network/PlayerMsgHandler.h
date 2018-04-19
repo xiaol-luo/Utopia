@@ -5,6 +5,7 @@
 #include "Network/Protobuf/Empty.pb.h"
 #include "Common/Utils/MemoryUtil.h"
 #include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/Instruction.pb.h"
 
 class GameLogicModule;
 
@@ -108,5 +109,6 @@ namespace GameLogic
 		void OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player *player);
 		void OnStopMove(int id, GameLogic::Player *player);
 		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
+		void OnReloadLuaScripts(int id, NetProto::ReloadLuaScripts *msg, GameLogic::Player *player);
 	};
 }

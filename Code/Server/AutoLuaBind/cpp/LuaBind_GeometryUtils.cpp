@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Geometry/GeometryUtils.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "Common/Geometry/GeometryDefine.h"	
-#include "Common/Geometry/Vector3.h"
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "ShareCode/Common/Geometry/GeometryDefine.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "ShareCode/Common/Geometry/GeometryUtils.h"
 
 namespace SolLuaBind
 {

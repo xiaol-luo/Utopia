@@ -14,6 +14,7 @@ proto_files = [
 	"Empty.proto",
 	"BattleEnum.proto",
 	"try.proto",
+	"Instruction.proto",
 ]
 
 out_options = [
