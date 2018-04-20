@@ -188,14 +188,15 @@ inline bool EFightParam_Parse(
     EFightParam_descriptor(), name, value);
 }
 enum ESkillSlot {
-  ESS_QSlot = 0,
-  ESS_WSlot = 1,
-  ESS_ESlot = 2,
-  ESS_RSlot = 3,
-  ESS_FSlot = 4,
-  ESS_GSlot = 5,
-  ESS_PSlot = 6,
-  ESS_OneSlot = 11,
+  ESS_InvalidSolt = 0,
+  ESS_QSlot = 1,
+  ESS_WSlot = 2,
+  ESS_ESlot = 3,
+  ESS_RSlot = 4,
+  ESS_FSlot = 5,
+  ESS_GSlot = 6,
+  ESS_PSlot = 7,
+  ESS_OneSlot = 8,
   ESS_TwoSlot = 12,
   ESS_ThreeSlot = 13,
   ESS_FourSlot = 14,
@@ -206,7 +207,7 @@ enum ESkillSlot {
   ESkillSlot_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ESkillSlot_IsValid(int value);
-const ESkillSlot ESkillSlot_MIN = ESS_QSlot;
+const ESkillSlot ESkillSlot_MIN = ESS_InvalidSolt;
 const ESkillSlot ESkillSlot_MAX = ESS_SevenSlot;
 const int ESkillSlot_ARRAYSIZE = ESkillSlot_MAX + 1;
 

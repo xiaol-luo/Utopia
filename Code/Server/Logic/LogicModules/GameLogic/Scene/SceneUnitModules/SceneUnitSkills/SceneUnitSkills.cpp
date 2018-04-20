@@ -15,7 +15,7 @@ namespace GameLogic
 			{
 				for (int bar = 0; bar < NetProto::ESkillBar_ARRAYSIZE; ++bar)
 				{
-						m_slots[slot][bar] = nullptr;
+					m_slots[slot][bar] = nullptr;
 				}
 			}
 		}

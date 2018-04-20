@@ -108,7 +108,10 @@ namespace GameLogic
 			}
 			char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;
 			if (nullptr != handler_descript->Msg())
-				handler_descript->Msg()->ParseFromArray(protobuf_data, data_len);
+			{
+				handler_descript->Msg()->Clear();
+				handler_descript->Msg()->ParsePartialFromArray(protobuf_data, data_len);
+			}
 			handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
 			if (m_protobuf_arena->SpaceAllocated() > 1024 * 10)
 				m_protobuf_arena->Reset();
@@ -262,6 +265,5 @@ namespace GameLogic
 			scripts.insert(script);
 		}
 		LuaUtils::LoadScripts_DoLoadScript(true, scripts);
-		LuaUtils::LoadScripts_ReloadEffectScripts();
 	}
 }

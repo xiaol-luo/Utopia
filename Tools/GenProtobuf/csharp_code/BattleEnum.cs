@@ -44,30 +44,30 @@ namespace NetProto {
             "Eg8KC0VGUF9QaHlIdXJ0EBASEQoNRUZQX01hZ2ljSHVydBAREhIKDkVGUF9Q",
             "aHlEZWZlbnNlEBISFAoQRUZQX01hZ2ljRGVmZW5zZRATEg0KCUVGUF9EaXp6",
             "eRAUEg8KC0VGUF9TaWxlbmNlEBUSDQoJRUZQX0JsaW5kEBYSEwoPRUZQX0lt",
-            "bW9iaWxpemVkEBcSDAoIRUZQX0RlYWQQGBINCglFRlBfQ09VTlQQICryAQoK",
-            "RVNraWxsU2xvdBINCglFU1NfUVNsb3QQABINCglFU1NfV1Nsb3QQARINCglF",
-            "U1NfRVNsb3QQAhINCglFU1NfUlNsb3QQAxINCglFU1NfRlNsb3QQBBINCglF",
-            "U1NfR1Nsb3QQBRINCglFU1NfUFNsb3QQBhIPCgtFU1NfT25lU2xvdBALEg8K",
-            "C0VTU19Ud29TbG90EAwSEQoNRVNTX1RocmVlU2xvdBANEhAKDEVTU19Gb3Vy",
-            "U2xvdBAOEhAKDEVTU19GaXZlU2xvdBAPEg8KC0VTU19TaXhTbG90EBASEQoN",
-            "RVNTX1NldmVuU2xvdBARKjcKCUVTa2lsbEJhchIVChFFU2tpbGxCYXJfRGVm",
-            "YXVsdBAAEhMKD0VTa2lsbEJhcl9FeHRyYRABKnMKC0VTa2lsbFN0YXRlEg8K",
-            "C0VTU19SZWFkeUdvEAASEQoNRVNTX1ByZXBhcmluZxABEhEKDUVTU19SZWxl",
-            "YXNpbmcQAhIPCgtFU1NfR3VpZGluZxADEg8KC0VTU19MYXN0aW5nEAQSCwoH",
-            "RVNTX0VuZBAFKn0KDEVTa2lsbFVzZVdheRIaChZFU2tpbGxVc2VXYXlfU2Nl",
-            "bmVVbml0EAASGgoWRVNraWxsVXNlV2F5X0RpcmVjdGlvbhABEhkKFUVTa2ls",
-            "bFVzZVdheV9Qb3NpdGlvbhACEhoKFkVTa2lsbFVzZVdheV9Qb3NBbmREaXIQ",
-            "AyqLAQoSRVNjZW5lVW5pdFJlbGF0aW9uEhsKF0VTY2VuZVVuaXRSZWxhdGlv",
-            "bl9Ob25lEAASGwoXRVNjZW5lVW5pdFJlbGF0aW9uX1NlbGYQARIdChlFU2Nl",
-            "bmVVbml0UmVsYXRpb25fRnJpZW5kEAISHAoYRVNjZW5lVW5pdFJlbGF0aW9u",
-            "X0VuZW15EAMqeQoORVNjZW5lVW5pdENhbXASFgoSRVNjZW5lVW5pdENhbXBf",
-            "UmVkEAASFwoTRVNjZW5lVW5pdENhbXBfQmx1ZRABEhoKFkVTY2VuZVVuaXRD",
-            "YW1wX01vbnN0ZXIQAhIaChZFU2NlbmVVbml0Q2FtcF9OZXV0cmFsEAMqtQEK",
-            "DkVTY2VuZVVuaXRUeXBlEhoKFkVzY2VuZVVuaXRUeXBlX1Vua25vd24QABIX",
-            "ChNFc2NlbmVVbml0VHlwZV9IZXJvEAESGgoWRXNjZW5lVW5pdFR5cGVfU29s",
-            "ZGllchACEhoKFkVzY2VuZVVuaXRUeXBlX01vbnN0ZXIQAxIbChdFc2NlbmVV",
-            "bml0VHlwZV9CdWlsZGluZxAEEhkKFUVzY2VuZVVuaXRUeXBlX0VmZmVjdBAF",
-            "QgP4AQFiBnByb3RvMw=="));
+            "bW9iaWxpemVkEBcSDAoIRUZQX0RlYWQQGBINCglFRlBfQ09VTlQQICqHAgoK",
+            "RVNraWxsU2xvdBITCg9FU1NfSW52YWxpZFNvbHQQABINCglFU1NfUVNsb3QQ",
+            "ARINCglFU1NfV1Nsb3QQAhINCglFU1NfRVNsb3QQAxINCglFU1NfUlNsb3QQ",
+            "BBINCglFU1NfRlNsb3QQBRINCglFU1NfR1Nsb3QQBhINCglFU1NfUFNsb3QQ",
+            "BxIPCgtFU1NfT25lU2xvdBAIEg8KC0VTU19Ud29TbG90EAwSEQoNRVNTX1Ro",
+            "cmVlU2xvdBANEhAKDEVTU19Gb3VyU2xvdBAOEhAKDEVTU19GaXZlU2xvdBAP",
+            "Eg8KC0VTU19TaXhTbG90EBASEQoNRVNTX1NldmVuU2xvdBARKjcKCUVTa2ls",
+            "bEJhchIVChFFU2tpbGxCYXJfRGVmYXVsdBAAEhMKD0VTa2lsbEJhcl9FeHRy",
+            "YRABKnMKC0VTa2lsbFN0YXRlEg8KC0VTU19SZWFkeUdvEAASEQoNRVNTX1By",
+            "ZXBhcmluZxABEhEKDUVTU19SZWxlYXNpbmcQAhIPCgtFU1NfR3VpZGluZxAD",
+            "Eg8KC0VTU19MYXN0aW5nEAQSCwoHRVNTX0VuZBAFKn0KDEVTa2lsbFVzZVdh",
+            "eRIaChZFU2tpbGxVc2VXYXlfU2NlbmVVbml0EAASGgoWRVNraWxsVXNlV2F5",
+            "X0RpcmVjdGlvbhABEhkKFUVTa2lsbFVzZVdheV9Qb3NpdGlvbhACEhoKFkVT",
+            "a2lsbFVzZVdheV9Qb3NBbmREaXIQAyqLAQoSRVNjZW5lVW5pdFJlbGF0aW9u",
+            "EhsKF0VTY2VuZVVuaXRSZWxhdGlvbl9Ob25lEAASGwoXRVNjZW5lVW5pdFJl",
+            "bGF0aW9uX1NlbGYQARIdChlFU2NlbmVVbml0UmVsYXRpb25fRnJpZW5kEAIS",
+            "HAoYRVNjZW5lVW5pdFJlbGF0aW9uX0VuZW15EAMqeQoORVNjZW5lVW5pdENh",
+            "bXASFgoSRVNjZW5lVW5pdENhbXBfUmVkEAASFwoTRVNjZW5lVW5pdENhbXBf",
+            "Qmx1ZRABEhoKFkVTY2VuZVVuaXRDYW1wX01vbnN0ZXIQAhIaChZFU2NlbmVV",
+            "bml0Q2FtcF9OZXV0cmFsEAMqtQEKDkVTY2VuZVVuaXRUeXBlEhoKFkVzY2Vu",
+            "ZVVuaXRUeXBlX1Vua25vd24QABIXChNFc2NlbmVVbml0VHlwZV9IZXJvEAES",
+            "GgoWRXNjZW5lVW5pdFR5cGVfU29sZGllchACEhoKFkVzY2VuZVVuaXRUeXBl",
+            "X01vbnN0ZXIQAxIbChdFc2NlbmVVbml0VHlwZV9CdWlsZGluZxAEEhkKFUVz",
+            "Y2VuZVVuaXRUeXBlX0VmZmVjdBAFQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.EUnitType), typeof(global::NetProto.EMoveAgentState), typeof(global::NetProto.EMoveState), typeof(global::NetProto.EPlayerOpera), typeof(global::NetProto.EFightParam), typeof(global::NetProto.ESkillSlot), typeof(global::NetProto.ESkillBar), typeof(global::NetProto.ESkillState), typeof(global::NetProto.ESkillUseWay), typeof(global::NetProto.ESceneUnitRelation), typeof(global::NetProto.ESceneUnitCamp), typeof(global::NetProto.ESceneUnitType), }, null));
@@ -190,23 +190,24 @@ namespace NetProto {
   }
 
   public enum ESkillSlot {
-    [pbr::OriginalName("ESS_QSlot")] EssQslot = 0,
-    [pbr::OriginalName("ESS_WSlot")] EssWslot = 1,
-    [pbr::OriginalName("ESS_ESlot")] EssEslot = 2,
-    [pbr::OriginalName("ESS_RSlot")] EssRslot = 3,
+    [pbr::OriginalName("ESS_InvalidSolt")] EssInvalidSolt = 0,
+    [pbr::OriginalName("ESS_QSlot")] EssQslot = 1,
+    [pbr::OriginalName("ESS_WSlot")] EssWslot = 2,
+    [pbr::OriginalName("ESS_ESlot")] EssEslot = 3,
+    [pbr::OriginalName("ESS_RSlot")] EssRslot = 4,
     /// <summary>
     /// 召唤师技能1
     /// </summary>
-    [pbr::OriginalName("ESS_FSlot")] EssFslot = 4,
+    [pbr::OriginalName("ESS_FSlot")] EssFslot = 5,
     /// <summary>
     /// 召唤师技能2
     /// </summary>
-    [pbr::OriginalName("ESS_GSlot")] EssGslot = 5,
+    [pbr::OriginalName("ESS_GSlot")] EssGslot = 6,
     /// <summary>
     /// 被动
     /// </summary>
-    [pbr::OriginalName("ESS_PSlot")] EssPslot = 6,
-    [pbr::OriginalName("ESS_OneSlot")] EssOneSlot = 11,
+    [pbr::OriginalName("ESS_PSlot")] EssPslot = 7,
+    [pbr::OriginalName("ESS_OneSlot")] EssOneSlot = 8,
     [pbr::OriginalName("ESS_TwoSlot")] EssTwoSlot = 12,
     [pbr::OriginalName("ESS_ThreeSlot")] EssThreeSlot = 13,
     [pbr::OriginalName("ESS_FourSlot")] EssFourSlot = 14,

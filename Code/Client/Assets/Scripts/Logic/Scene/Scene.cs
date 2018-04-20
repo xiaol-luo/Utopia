@@ -233,6 +233,12 @@ public class Scene
         {
             this.TraceUnit(targetSuid);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ReloadLuaScripts msg = new ReloadLuaScripts();
+            msg.Scripts.Add("_load_files_effect_script");
+            App.my.gameNetwork.Send(ProtoId.PidReloadLuaScripts, msg);
+        }
 
     }
     void CastSkill(ESkillSlot skillSlot, ulong targetId, Vector3 pos)

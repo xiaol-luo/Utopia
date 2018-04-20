@@ -15,5 +15,6 @@ enum ESUEventId
 	ESU_SilenceChange,				// su沉默状态改变 true:atttach,  false:deattach
 	ESU_DeadChange,					// su死亡状态改变 true:atttach,  false:deattach
 
+	ES_ReloadConfig,				// 重载了配置
 	ES_TestHeartBeat,				// 测试用
 };

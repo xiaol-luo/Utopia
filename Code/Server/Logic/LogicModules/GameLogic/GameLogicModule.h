@@ -3,6 +3,7 @@
 #include "google/protobuf/message.h"
 #include "IGameLogicModule.h"
 #include <functional>
+#include <vector>
 #include "Common/Macro/MemoryPoolMacro.h"
 
 namespace GameLogic 
@@ -25,7 +26,6 @@ class NetworkAgent;
 namespace GameLogic
 {
 	class NewScene;
-	class Scene;
 	class Player;
 	class PlayerMsgHandler;
 }
@@ -48,14 +48,14 @@ public:
 	const std::string & GetCfgRootPath() { return m_cfg_root_path; }
 	Config::CsvConfigSets * GetCsvCfgSet() { return m_csv_cfg_sets; }
 	GameLogic::PlayerMgr * GetPlayerMgr() { return m_player_mgr; }
+	void ReloadConfig();
 
 private:
 	Config::CsvConfigSets *m_csv_cfg_sets = nullptr;
 	GameLogic::PlayerMgr *m_player_mgr = nullptr;
-	GameLogic::Scene *m_scene = nullptr;
 	GameLogic::PlayerMsgHandler *m_player_msg_handler = nullptr;
 	GameLogic::NewScene *m_new_scene = nullptr;
-
 	std::string m_cfg_root_path;
+	std::vector<Config::CsvConfigSets *> m_expired_csv_cfg_sets;
 };
 

@@ -71,35 +71,36 @@ void AddDescriptorsImpl() {
       "\021\022\022\n\016EFP_PhyDefense\020\022\022\024\n\020EFP_MagicDefens"
       "e\020\023\022\r\n\tEFP_Dizzy\020\024\022\017\n\013EFP_Silence\020\025\022\r\n\tE"
       "FP_Blind\020\026\022\023\n\017EFP_Immobilized\020\027\022\014\n\010EFP_D"
-      "ead\020\030\022\r\n\tEFP_COUNT\020 *\362\001\n\nESkillSlot\022\r\n\tE"
-      "SS_QSlot\020\000\022\r\n\tESS_WSlot\020\001\022\r\n\tESS_ESlot\020\002"
-      "\022\r\n\tESS_RSlot\020\003\022\r\n\tESS_FSlot\020\004\022\r\n\tESS_GS"
-      "lot\020\005\022\r\n\tESS_PSlot\020\006\022\017\n\013ESS_OneSlot\020\013\022\017\n"
-      "\013ESS_TwoSlot\020\014\022\021\n\rESS_ThreeSlot\020\r\022\020\n\014ESS"
-      "_FourSlot\020\016\022\020\n\014ESS_FiveSlot\020\017\022\017\n\013ESS_Six"
-      "Slot\020\020\022\021\n\rESS_SevenSlot\020\021*7\n\tESkillBar\022\025"
-      "\n\021ESkillBar_Default\020\000\022\023\n\017ESkillBar_Extra"
-      "\020\001*s\n\013ESkillState\022\017\n\013ESS_ReadyGo\020\000\022\021\n\rES"
-      "S_Preparing\020\001\022\021\n\rESS_Releasing\020\002\022\017\n\013ESS_"
-      "Guiding\020\003\022\017\n\013ESS_Lasting\020\004\022\013\n\007ESS_End\020\005*"
-      "}\n\014ESkillUseWay\022\032\n\026ESkillUseWay_SceneUni"
-      "t\020\000\022\032\n\026ESkillUseWay_Direction\020\001\022\031\n\025ESkil"
-      "lUseWay_Position\020\002\022\032\n\026ESkillUseWay_PosAn"
-      "dDir\020\003*\213\001\n\022ESceneUnitRelation\022\033\n\027ESceneU"
-      "nitRelation_None\020\000\022\033\n\027ESceneUnitRelation"
-      "_Self\020\001\022\035\n\031ESceneUnitRelation_Friend\020\002\022\034"
-      "\n\030ESceneUnitRelation_Enemy\020\003*y\n\016ESceneUn"
-      "itCamp\022\026\n\022ESceneUnitCamp_Red\020\000\022\027\n\023EScene"
-      "UnitCamp_Blue\020\001\022\032\n\026ESceneUnitCamp_Monste"
-      "r\020\002\022\032\n\026ESceneUnitCamp_Neutral\020\003*\265\001\n\016ESce"
-      "neUnitType\022\032\n\026EsceneUnitType_Unknown\020\000\022\027"
-      "\n\023EsceneUnitType_Hero\020\001\022\032\n\026EsceneUnitTyp"
-      "e_Soldier\020\002\022\032\n\026EsceneUnitType_Monster\020\003\022"
-      "\033\n\027EsceneUnitType_Building\020\004\022\031\n\025EsceneUn"
-      "itType_Effect\020\005B\003\370\001\001b\006proto3"
+      "ead\020\030\022\r\n\tEFP_COUNT\020 *\207\002\n\nESkillSlot\022\023\n\017E"
+      "SS_InvalidSolt\020\000\022\r\n\tESS_QSlot\020\001\022\r\n\tESS_W"
+      "Slot\020\002\022\r\n\tESS_ESlot\020\003\022\r\n\tESS_RSlot\020\004\022\r\n\t"
+      "ESS_FSlot\020\005\022\r\n\tESS_GSlot\020\006\022\r\n\tESS_PSlot\020"
+      "\007\022\017\n\013ESS_OneSlot\020\010\022\017\n\013ESS_TwoSlot\020\014\022\021\n\rE"
+      "SS_ThreeSlot\020\r\022\020\n\014ESS_FourSlot\020\016\022\020\n\014ESS_"
+      "FiveSlot\020\017\022\017\n\013ESS_SixSlot\020\020\022\021\n\rESS_Seven"
+      "Slot\020\021*7\n\tESkillBar\022\025\n\021ESkillBar_Default"
+      "\020\000\022\023\n\017ESkillBar_Extra\020\001*s\n\013ESkillState\022\017"
+      "\n\013ESS_ReadyGo\020\000\022\021\n\rESS_Preparing\020\001\022\021\n\rES"
+      "S_Releasing\020\002\022\017\n\013ESS_Guiding\020\003\022\017\n\013ESS_La"
+      "sting\020\004\022\013\n\007ESS_End\020\005*}\n\014ESkillUseWay\022\032\n\026"
+      "ESkillUseWay_SceneUnit\020\000\022\032\n\026ESkillUseWay"
+      "_Direction\020\001\022\031\n\025ESkillUseWay_Position\020\002\022"
+      "\032\n\026ESkillUseWay_PosAndDir\020\003*\213\001\n\022ESceneUn"
+      "itRelation\022\033\n\027ESceneUnitRelation_None\020\000\022"
+      "\033\n\027ESceneUnitRelation_Self\020\001\022\035\n\031ESceneUn"
+      "itRelation_Friend\020\002\022\034\n\030ESceneUnitRelatio"
+      "n_Enemy\020\003*y\n\016ESceneUnitCamp\022\026\n\022ESceneUni"
+      "tCamp_Red\020\000\022\027\n\023ESceneUnitCamp_Blue\020\001\022\032\n\026"
+      "ESceneUnitCamp_Monster\020\002\022\032\n\026ESceneUnitCa"
+      "mp_Neutral\020\003*\265\001\n\016ESceneUnitType\022\032\n\026Escen"
+      "eUnitType_Unknown\020\000\022\027\n\023EsceneUnitType_He"
+      "ro\020\001\022\032\n\026EsceneUnitType_Soldier\020\002\022\032\n\026Esce"
+      "neUnitType_Monster\020\003\022\033\n\027EsceneUnitType_B"
+      "uilding\020\004\022\031\n\025EsceneUnitType_Effect\020\005B\003\370\001"
+      "\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1948);
+      descriptor, 1969);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "BattleEnum.proto", &protobuf_RegisterTypes);
 }
@@ -233,7 +234,8 @@ bool ESkillSlot_IsValid(int value) {
     case 4:
     case 5:
     case 6:
-    case 11:
+    case 7:
+    case 8:
     case 12:
     case 13:
     case 14:

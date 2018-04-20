@@ -42,8 +42,8 @@ struct NetSteamLenPraser
 			return (uint32_t)(ntohs(*(T*)data));
 		if (LEN_DESCRIPT_SIZE <= sizeof(uint32_t))
 			return (uint32_t)(ntohl(*(T*)data));
-		if (LEN_DESCRIPT_SIZE <= sizeof(uint64_t))
-			return (uint32_t)(ntohll(*(T*)data));
+		// if (LEN_DESCRIPT_SIZE <= sizeof(uint64_t))
+		// 	return (uint32_t)(ntohll(*(T*)data));
 		assert(false);
 		return 0;
 	}

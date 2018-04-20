@@ -13,6 +13,11 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "GameLogic/Scene/TestScene.h"
 #include "behaviac/behaviac.h"
+#include "Scene/Defines/SceneEventID.h"
+#include "Common/EventDispatcher/EventDispacher.h"
+
+static const char * AI_CONFIG_RELATE_PATH = "AI";
+static const char * CSV_CONFIG_RELATE_PATH = "auto-csv/AutoCsvConfig";
 
 GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(module_mgr)
 {
@@ -43,11 +48,14 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	m_cfg_root_path = *(std::string *)param;
 	while ('/' == m_cfg_root_path.back() || '\\' == m_cfg_root_path.back())
 		m_cfg_root_path.pop_back();
+	m_cfg_root_path.append("/"); // format like: dir_path/
 
-	behaviac::Workspace::GetInstance()->SetFilePath((m_cfg_root_path + "/AI").c_str());
+	behaviac::Workspace::GetInstance()->SetFilePath((m_cfg_root_path + AI_CONFIG_RELATE_PATH).c_str());
 	behaviac::Workspace::GetInstance()->SetFileFormat(behaviac::Workspace::EFF_xml);
-	std::string csv_cfg_path = m_cfg_root_path + "/auto-csv/AutoCsvConfig";
+
+	std::string csv_cfg_path = m_cfg_root_path + CSV_CONFIG_RELATE_PATH;
 	bool ret = m_csv_cfg_sets->Load(csv_cfg_path);
+
 	m_state = ret ? EModuleState_Inited : EModuleState_Error;
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
@@ -86,5 +94,20 @@ EModuleRetCode GameLogicModule::Destroy()
 void GameLogicModule::HandlePlayerMsg(char *data, uint32_t data_len, GameLogic::Player *player)
 {
 	m_player_msg_handler->HandlePlayerMsg(data, data_len, player);
+}
+
+void GameLogicModule::ReloadConfig()
+{
+	Config::CsvConfigSets *new_cfg = new Config::CsvConfigSets();
+	bool ret = new_cfg->Load(m_cfg_root_path + CSV_CONFIG_RELATE_PATH);
+	if (ret)
+	{
+		if (nullptr != m_csv_cfg_sets)
+			m_expired_csv_cfg_sets.push_back(m_csv_cfg_sets);
+		m_csv_cfg_sets = new_cfg;
+
+		m_new_scene->GetEvDispacher()->Fire(ES_ReloadConfig);
+	}
+	GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "reload csv config {0}", ret ? "success" : "fail");
 }
 

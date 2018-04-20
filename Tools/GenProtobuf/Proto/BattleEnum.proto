@@ -74,14 +74,15 @@ enum EFightParam
 
 enum ESkillSlot
 {
-	ESS_QSlot = 0;
-	ESS_WSlot = 1;
-	ESS_ESlot = 2;
-	ESS_RSlot = 3;
-	ESS_FSlot = 4;				// 召唤师技能1
-	ESS_GSlot = 5;				// 召唤师技能2
-	ESS_PSlot = 6;				// 被动
-	ESS_OneSlot = 11;
+	ESS_InvalidSolt = 0;
+	ESS_QSlot = 1;
+	ESS_WSlot = 2;
+	ESS_ESlot = 3;
+	ESS_RSlot = 4;
+	ESS_FSlot = 5;				// 召唤师技能1
+	ESS_GSlot = 6;				// 召唤师技能2
+	ESS_PSlot = 7;				// 被动
+	ESS_OneSlot = 8;
 	ESS_TwoSlot = 12;
 	ESS_ThreeSlot = 13;
 	ESS_FourSlot = 14;
