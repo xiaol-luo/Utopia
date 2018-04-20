@@ -10,7 +10,8 @@
 #include "Common/Geometry/Vector3.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include <array>
-
+#include <functional>
+ 
 class EventDispacher;
 
 namespace Config
@@ -80,6 +81,7 @@ namespace GameLogic
 		uint64_t AddUnit(std::shared_ptr<SceneUnit> su);
 		void RemoveUnit(uint64_t id);
 		std::shared_ptr<SceneUnit> GetUnit(uint64_t id);
+		void ForeachSceneUnit(std::function<void(std::shared_ptr<SceneUnit>, void *param)> fn, void *param);
 
 	protected:
 		uint64_t m_last_scene_unit_id;

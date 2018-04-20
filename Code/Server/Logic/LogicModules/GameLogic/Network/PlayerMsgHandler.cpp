@@ -134,45 +134,56 @@ namespace GameLogic
 		
 	}
 
+	static std::vector<std::shared_ptr<SceneUnit> > FindSceneHerosByCamp(NetProto::ESceneUnitCamp camp)
+	{
+		std::vector<std::shared_ptr<SceneUnit> > ret;
+		auto fn = [&](std::shared_ptr<SceneUnit> su, void *p) {
+			if (0 == su->GetPlayerId() 
+				&& NetProto::ESceneUnitType::EsceneUnitType_Hero == su->GetUnitType()
+				&& camp == su->GetCamp())
+			{
+				ret.push_back(su);
+			}
+		};
+
+		return std::move(ret);
+	}
+
 	void PlayerMsgHandler::OnQueryFreeHero(int protocol_id, GameLogic::Player *player)
 	{
-		auto red_hero = m_logic_module->m_new_scene->red_su;
-		auto blue_hero = m_logic_module->m_new_scene->blue_su;
+		std::vector<std::shared_ptr<SceneUnit> > redCampHeros;
+		std::vector<std::shared_ptr<SceneUnit> > blueCampHeros;
+		auto fn = [&](std::shared_ptr<SceneUnit> su, void *p) {
+			if (0 == su->GetPlayerId() && NetProto::ESceneUnitType::EsceneUnitType_Hero == su->GetUnitType())
+			{
+				if (NetProto::ESceneUnitCamp_Blue == su->GetCamp())
+					blueCampHeros.push_back(su);
+				if (NetProto::ESceneUnitCamp_Red == su->GetCamp())
+					redCampHeros.push_back(su);
+			}
+		};
+		m_logic_module->m_new_scene->ForeachSceneUnit(fn, nullptr);
 
 		NetProto::RspFreeHero *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::RspFreeHero>(m_protobuf_arena);
-		if (0 == red_hero->GetPlayerId())
-			rsp_msg->set_red_hero_id(red_hero->GetId());
-		if (0 == blue_hero->GetPlayerId())
-			rsp_msg->set_blue_hero_id(blue_hero->GetId());
-
+		if (redCampHeros.size() > 0)
+			rsp_msg->set_red_hero_id(redCampHeros[0]->GetId());
+		if (blueCampHeros.size() > 0)
+			rsp_msg->set_blue_hero_id(blueCampHeros[0]->GetId());
 		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_RspFreeHero, rsp_msg);
 	}
 
 	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player)
 	{
-		auto red_hero = m_logic_module->m_new_scene->red_su;
-		auto blue_hero = m_logic_module->m_new_scene->blue_su;
 		NetProto::SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::SelectHeroRsp>(m_protobuf_arena);
-		
 		auto hero = player->GetSu();
 		if (nullptr == hero)
 		{
 			rsp_msg->set_hero_id(msg->hero_id());
-			if (msg->hero_id() == red_hero->GetId())
+			auto su = m_logic_module->m_new_scene->GetUnit(msg->hero_id());
+			if (nullptr != su && 0 == su->GetPlayerId())
 			{
-				if (0 == red_hero->GetPlayerId())
-				{
-					m_logic_module->m_new_scene->PlayerSelectHero(player, red_hero->GetId());
-					rsp_msg->set_is_succ(true);
-				}
-			}
-			if (msg->hero_id() == blue_hero->GetId())
-			{
-				if (0 == blue_hero->GetPlayerId())
-				{
-					m_logic_module->m_new_scene->PlayerSelectHero(player, blue_hero->GetId());
-					rsp_msg->set_is_succ(true);
-				}
+				m_logic_module->m_new_scene->PlayerSelectHero(player, su->GetId());
+				rsp_msg->set_is_succ(true);
 			}
 		}
 		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_SelectHeroRsp, rsp_msg);

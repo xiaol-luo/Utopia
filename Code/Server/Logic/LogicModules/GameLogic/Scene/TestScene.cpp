@@ -94,7 +94,7 @@ namespace GameLogic
 
 	bool TestScene::OnLateAwake()
 	{
-		red_su = std::make_shared<SceneUnit>();
+		auto red_su = std::make_shared<SceneUnit>();
 		red_su->SetCamp(NetProto::ESceneUnitCamp_Red);
 		BuildHero(red_su, this, Vector3(50, 0, 50), EViewCamp_Red);
 		this->AddUnit(red_su);
@@ -112,7 +112,7 @@ namespace GameLogic
 			}
 		}
 
-		blue_su = std::make_shared<SceneUnit>();
+		auto blue_su = std::make_shared<SceneUnit>();
 		blue_su->SetCamp(NetProto::ESceneUnitCamp_Blue);
 		BuildHero(blue_su, this, Vector3(50, 0, 50), EViewCamp_Blue);
 		this->AddUnit(blue_su);

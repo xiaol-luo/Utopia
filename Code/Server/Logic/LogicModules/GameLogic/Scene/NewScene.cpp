@@ -19,6 +19,9 @@
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
+#include "LuaHelps/LuaLoadFiles.h"
+
+static int64_t xxxx = 0;
 
 namespace GameLogic
 {
@@ -176,6 +179,14 @@ namespace GameLogic
 		return ret;
 	}
 
+	void NewScene::ForeachSceneUnit(std::function<void(std::shared_ptr<SceneUnit>, void*param)> fn, void * param)
+	{
+		for (auto & it : m_scene_units)
+		{
+			fn(it.second, param);
+		}
+	}
+
 	void NewScene::UpdateCachedSceneUnits()
 	{
 		if (!m_removed_scene_unit_ids.empty())
@@ -197,7 +208,7 @@ namespace GameLogic
 			m_removed_scene_unit_ids.clear();
 		}
 	}
-	
+
 	void NewScene::Update()
 	{
 		if (!m_awaked)
