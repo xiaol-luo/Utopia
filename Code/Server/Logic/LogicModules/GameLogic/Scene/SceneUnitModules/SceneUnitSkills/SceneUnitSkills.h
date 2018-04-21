@@ -3,6 +3,7 @@
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 #include <unordered_map>
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include <functional>
 
 namespace GameLogic
 {
@@ -25,6 +26,7 @@ namespace GameLogic
 		bool SetSlotLevel(NetProto::ESkillSlot  slot, int level);
 		int GetSlotLevel(NetProto::ESkillSlot slot);
 		int GetSlotMaxLevel(NetProto::ESkillSlot slot);
+		void ForeachSkill(std::function<void(std::shared_ptr<Skill>, void* param)> fn, void *param);
 
 	protected:
 		std::shared_ptr<Skill> m_slots[NetProto::ESkillSlot_ARRAYSIZE][NetProto::ESkillBar_ARRAYSIZE];

@@ -29,6 +29,9 @@ GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(modul
 
 GameLogicModule::~GameLogicModule()
 {
+	for (auto item : m_expired_csv_cfg_sets)
+		delete item;
+	m_expired_csv_cfg_sets.clear();
 	delete m_csv_cfg_sets;
 	if (nullptr != m_player_mgr)
 	{

@@ -19,7 +19,8 @@ namespace GameLogic
 	{
 		bool ret;
 		Config::CsvSceneConfig *scene_cfg = m_scene->GetCfg()->scene_cfg;
-		ret = m_nav_mesh->LoadTerrain(m_scene->GetGameLogic()->GetCfgRootPath() + "/" + scene_cfg->terrain_file_path);
+		std::string terrainPath = m_scene->GetGameLogic()->GetCfgRootPath() + scene_cfg->terrain_file_path;
+		ret = m_nav_mesh->LoadTerrain(terrainPath);
 		assert(ret);
 		return ret;
 	}

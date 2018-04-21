@@ -13,6 +13,7 @@ namespace GameLogic
 	struct SkillConfig;
 	class SceneUnitSkills;
 	class EffectBase;
+	struct SceneAllConfig;
 
 	class Skill : public std::enable_shared_from_this<Skill>
 	{
@@ -31,6 +32,7 @@ namespace GameLogic
 		inline uint64_t GetSkillKey() { return m_skill_key; }
 		const SkillLevelConfig * GetLvlCfg() { return m_lvl_cfg; }
 		const SkillConfig * GetCfg() { return m_cfg; }
+		void ReloadCfg(SceneAllConfig *sceneAllCfg);
 		int GetStage() { return m_state; }
 		int GetStageBeginMs() { return m_stage_begin_ms; }
 

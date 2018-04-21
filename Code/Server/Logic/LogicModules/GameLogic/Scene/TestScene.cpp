@@ -32,23 +32,19 @@ namespace GameLogic
 
 	TestScene::~TestScene()
 	{
+		for (auto item : m_expiredCfg)
+		{
+			delete item;
+		}
+		m_expiredCfg.clear();
 	}
 
 	bool TestScene::OnAwake()
 	{
-		{
-			// init config
-			assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
-			m_cfg->scene_cfg = m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
-			
-			bool ret = true;
-			ret = ret & m_cfg->skill_cfgs->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
-			ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
-			ret = ret & m_cfg->effect_filter_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
-			if (!ret || !this->CheckConfigValid())
-				return false;
-		}
-		
+		bool ret = DoLoadConfig(false);
+		if (!ret)
+			return false;
+
 		this->AddModule(new SceneMove());
 		this->AddModule(new SceneView());
 		this->AddModule(new SceneNavMesh());
@@ -56,6 +52,7 @@ namespace GameLogic
 		this->AddModule(new SceneUnitFilter());
 
 		m_ev_dispacher->Subscribe(ES_TestHeartBeat, std::bind(&TestScene::TestAction, this));
+		m_ev_dispacher->Subscribe(ES_ReloadConfig, std::bind(&TestScene::DoLoadConfig, this, true));
 
 		m_test_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, this));
 		m_test_ticker.SetCd(1);
@@ -164,6 +161,44 @@ namespace GameLogic
 				this->AddUnit(hero);
 			}
 		}
+	}
+
+	bool TestScene::DoLoadConfig(bool isReload)
+	{
+		// init config
+		SceneAllConfig *newCfg = new SceneAllConfig();
+		SceneAllConfig *oldCfg = m_cfg;
+		m_cfg = newCfg;
+		assert(m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec.size() > 0);
+		m_cfg->scene_cfg = m_game_logic->GetCsvCfgSet()->csv_CsvSceneConfigSet->cfg_vec[0];
+		bool ret = true;
+		ret = ret & m_cfg->skill_cfgs->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+		ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+		ret = ret & m_cfg->effect_filter_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+		ret = ret & this->CheckConfigValid();
+		if (!ret)
+		{
+			m_cfg = oldCfg;
+			delete newCfg; newCfg = nullptr;
+		}
+		else
+		{
+			if (nullptr != oldCfg)
+				m_expiredCfg.push_back(oldCfg);
+			if (isReload)
+			{
+				auto fn = [this](std::shared_ptr<SceneUnit> su, void *param) {
+					std::shared_ptr<SceneUnitSkills> skills = su->GetModule<SceneUnitSkills>();
+					auto modifySkillFn = [this](std::shared_ptr<Skill> skill, void *param) {
+						skill->ReloadCfg(m_cfg);
+					};
+					skills->ForeachSkill(modifySkillFn, nullptr);
+
+				};
+				this->ForeachSceneUnit(fn, nullptr);
+			}
+		}
+		return ret;
 	}
 }
 

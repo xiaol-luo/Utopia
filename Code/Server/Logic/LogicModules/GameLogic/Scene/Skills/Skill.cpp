@@ -13,6 +13,7 @@
 #include "GameLogic/Scene/Effects/EffectBase.h"
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 #include "Common/Geometry/GeometryUtils.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
 
 namespace GameLogic
 {
@@ -54,6 +55,15 @@ namespace GameLogic
 	int Skill::GetMaxLevel()
 	{
 		return m_cfg->max_level;
+	}
+
+	void Skill::ReloadCfg(SceneAllConfig *sceneAllCfg)
+	{
+		if (nullptr == sceneAllCfg || nullptr == m_cfg)
+			return;
+		auto newCfg = sceneAllCfg->skill_cfgs->GetSkill(m_cfg->id);
+		if (nullptr != newCfg)
+			m_cfg = newCfg;
 	}
 
 	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)

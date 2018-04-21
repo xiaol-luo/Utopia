@@ -123,4 +123,19 @@ namespace GameLogic
 			return -1;
 		return skill->GetMaxLevel();
 	}
+	
+	void SceneUnitSkills::ForeachSkill(std::function<void(std::shared_ptr<Skill>, void*param)> fn, void * param)
+	{
+		for (int slotIdx = 0; slotIdx < NetProto::ESkillSlot_ARRAYSIZE; ++slotIdx)
+		{
+			for (int barIdx = 0; barIdx < NetProto::ESkillBar_ARRAYSIZE; ++barIdx)
+			{
+				auto skill = m_slots[slotIdx][barIdx];
+				if (nullptr != skill)
+				{
+					fn(skill, param);
+				}
+			}
+		}
+	}
 }

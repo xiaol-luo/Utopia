@@ -21,5 +21,8 @@ namespace GameLogic
 		void TestAction();
 		Ticker m_test_ticker;
 
+	protected:
+		bool DoLoadConfig(bool isReload);
+		std::vector<SceneAllConfig *> m_expiredCfg;
 	};
 }

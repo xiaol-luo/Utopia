@@ -276,5 +276,6 @@ namespace GameLogic
 			scripts.insert(script);
 		}
 		LuaUtils::LoadScripts_DoLoadScript(true, scripts);
+		m_logic_module->ReloadConfig();
 	}
 }
