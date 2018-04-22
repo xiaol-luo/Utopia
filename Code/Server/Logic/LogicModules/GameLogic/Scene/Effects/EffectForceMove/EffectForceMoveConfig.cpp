@@ -13,7 +13,7 @@ namespace GameLogic
 	bool EffectForceMoveConfig::InitCfg(const Config::CsvEffectForceMoveConfig * csv_cfg)
 	{
 		m_id = csv_cfg->id;
-		m_reversible = false;
+		m_reversible = true;
 		return true;
 	}
 }

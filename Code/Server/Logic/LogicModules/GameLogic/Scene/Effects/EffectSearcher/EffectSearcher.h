@@ -12,6 +12,10 @@ namespace GameLogic
 		virtual ~EffectSearcher();
 
 	protected:
+		virtual void OnBegin() override;
+		virtual bool IsDone() { return m_is_done; }
+	protected:
 		const EffectSearcherConfig *m_cfg = nullptr;
+		bool m_is_done = false;
 	};
 }

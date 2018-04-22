@@ -4,6 +4,12 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "EffectSearcherConfig.h"
 #include "GameLogic/Scene/Defines/EffectUtils.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/Config/SceneAllConfig.h"
+#include "GameLogic/Scene/Effects/EffectConfigMgr.h"
+#include "Common/Macro/ServerLogicMacro.h"
+#include "CommonModules/Log/LogModule.h"
+#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace GameLogic
 {
@@ -16,5 +22,27 @@ namespace GameLogic
 
 	EffectSearcher::~EffectSearcher()
 	{
+	}
+
+	void EffectSearcher::OnBegin()
+	{
+		UseEffectParam user_effect_param = m_user_effect_param;
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> effected_units = this->FilterSceneUnits();
+		for (auto kv_pair : effected_units)
+		{
+			std::shared_ptr<SceneUnit> target_su = kv_pair.second;
+			user_effect_param.target_suid = target_su->GetId();
+			for (int cfgId : m_cfg->m_effect_ids)
+			{
+				std::shared_ptr<EffectBase> effect = m_scene_effects->CreateEffect(cfgId);
+				if (nullptr != effect)
+				{
+					GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "create effect is fail id = {0}", cfgId);
+					continue;
+				}
+				effect->Begin(user_effect_param);
+			}
+		}
+		m_is_done = true;
 	}
 }

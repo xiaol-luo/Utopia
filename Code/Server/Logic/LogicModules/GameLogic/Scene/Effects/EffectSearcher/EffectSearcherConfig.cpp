@@ -15,6 +15,7 @@ namespace GameLogic
 		m_id = csv_cfg->id;
 		m_reversible = false;
 		m_filter_id = csv_cfg->filter_id;
+		m_effect_ids = csv_cfg->effect_ids;
 		return true;
 	}
 }
