@@ -9,6 +9,8 @@
 #include "effect/CsvEffectFilterConfig.h"
 #include "effect/CsvEffectGroupConfig.h"
 #include "effect/CsvEffectScriptConfig.h"
+#include "effect/CsvEffectForceMoveConfig.h"
+#include "effect/CsvEffectSearcherConfig.h"
 
 namespace Config
 {
@@ -24,6 +26,8 @@ namespace Config
         delete csv_CsvEffectFilterConfigSet;
         delete csv_CsvEffectGroupConfigSet;
         delete csv_CsvEffectScriptConfigSet;
+        delete csv_CsvEffectForceMoveConfigSet;
+        delete csv_CsvEffectSearcherConfigSet;
     }
 
     bool CsvConfigSets::Load(std::string root_path)
@@ -44,6 +48,8 @@ namespace Config
         csv_CsvEffectFilterConfigSet = new CsvEffectFilterConfigSet;
         csv_CsvEffectGroupConfigSet = new CsvEffectGroupConfigSet;
         csv_CsvEffectScriptConfigSet = new CsvEffectScriptConfigSet;
+        csv_CsvEffectForceMoveConfigSet = new CsvEffectForceMoveConfigSet;
+        csv_CsvEffectSearcherConfigSet = new CsvEffectSearcherConfigSet;
 
         bool all_ok = true;
         if (all_ok)
@@ -86,6 +92,14 @@ namespace Config
         {
             all_ok = csv_CsvEffectScriptConfigSet->Load(root_path + '/' + "effect/CsvEffectScriptConfig.csv");
         }
+        if (all_ok)
+        {
+            all_ok = csv_CsvEffectForceMoveConfigSet->Load(root_path + '/' + "effect/CsvEffectForceMoveConfig.csv");
+        }
+        if (all_ok)
+        {
+            all_ok = csv_CsvEffectSearcherConfigSet->Load(root_path + '/' + "effect/CsvEffectSearcherConfig.csv");
+        }
 
         if (!all_ok)
         {
@@ -99,6 +113,8 @@ namespace Config
             delete csv_CsvEffectFilterConfigSet; csv_CsvEffectFilterConfigSet = nullptr;
             delete csv_CsvEffectGroupConfigSet; csv_CsvEffectGroupConfigSet = nullptr;
             delete csv_CsvEffectScriptConfigSet; csv_CsvEffectScriptConfigSet = nullptr;
+            delete csv_CsvEffectForceMoveConfigSet; csv_CsvEffectForceMoveConfigSet = nullptr;
+            delete csv_CsvEffectSearcherConfigSet; csv_CsvEffectSearcherConfigSet = nullptr;
         }
 
         return all_ok;

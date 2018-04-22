@@ -14,6 +14,8 @@ namespace Config
     struct CsvEffectFilterConfigSet;
     struct CsvEffectGroupConfigSet;
     struct CsvEffectScriptConfigSet;
+    struct CsvEffectForceMoveConfigSet;
+    struct CsvEffectSearcherConfigSet;
 
     struct CsvConfigSets
     {
@@ -27,6 +29,8 @@ namespace Config
         CsvEffectFilterConfigSet *csv_CsvEffectFilterConfigSet = nullptr;
         CsvEffectGroupConfigSet *csv_CsvEffectGroupConfigSet = nullptr;
         CsvEffectScriptConfigSet *csv_CsvEffectScriptConfigSet = nullptr;
+        CsvEffectForceMoveConfigSet *csv_CsvEffectForceMoveConfigSet = nullptr;
+        CsvEffectSearcherConfigSet *csv_CsvEffectSearcherConfigSet = nullptr;
 
         ~CsvConfigSets();
         bool Load(std::string root_path);

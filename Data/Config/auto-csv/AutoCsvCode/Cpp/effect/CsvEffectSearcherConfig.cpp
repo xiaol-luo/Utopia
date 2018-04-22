@@ -1,24 +1,24 @@
-#include "effect/CsvEffectScriptConfig.h"
+#include "effect/CsvEffectSearcherConfig.h"
 #include "CsvParser/csv.h"
 
 namespace Config
 {
      static const char * Field_Name_id = "id";
-     static const char * Field_Name_class_name = "class_name";
-     static const char * Field_Name_script_param = "script_param";
+     static const char * Field_Name_filter_id = "filter_id";
+     static const char * Field_Name_effect_ids = "effect_ids";
 
-    bool CsvEffectScriptConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
+    bool CsvEffectSearcherConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
         bool all_ok = true;
         all_ok = all_ok && kvPairs.count(Field_Name_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_id], id);
-        all_ok = all_ok && kvPairs.count(Field_Name_class_name) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_class_name], class_name);
-        all_ok = all_ok && kvPairs.count(Field_Name_script_param) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_script_param], script_param);
+        all_ok = all_ok && kvPairs.count(Field_Name_filter_id) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_filter_id], filter_id);
+        all_ok = all_ok && kvPairs.count(Field_Name_effect_ids) > 0 && ConfigUtil::Str2Vec (kvPairs[Field_Name_effect_ids], effect_ids);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
     }
 
-    CsvEffectScriptConfigSet::~CsvEffectScriptConfigSet()
+    CsvEffectSearcherConfigSet::~CsvEffectSearcherConfigSet()
     {
         for (auto cfg : cfg_vec)
         {
@@ -26,33 +26,33 @@ namespace Config
         }
     }
 
-    bool CsvEffectScriptConfigSet::Load(std::string file_path)
+    bool CsvEffectSearcherConfigSet::Load(std::string file_path)
     {
         io::CSVReader<3, io::trim_chars<' ', '\t'>, io::double_quote_escape<',', '\"'>, io::no_comment> csv_reader(file_path);
         csv_reader.read_header(io::ignore_extra_column,
             Field_Name_id,
-            Field_Name_class_name,
-            Field_Name_script_param
+            Field_Name_filter_id,
+            Field_Name_effect_ids
             );
 
         std::map<std::string, std::string> kvParis;
         kvParis[Field_Name_id] = "";
-        kvParis[Field_Name_class_name] = "";
-        kvParis[Field_Name_script_param] = "";
+        kvParis[Field_Name_filter_id] = "";
+        kvParis[Field_Name_effect_ids] = "";
 
         bool all_ok = true;
         int curr_row = 0;
         while (csv_reader.read_row(
             kvParis[Field_Name_id],
-            kvParis[Field_Name_class_name],
-            kvParis[Field_Name_script_param]
+            kvParis[Field_Name_filter_id],
+            kvParis[Field_Name_effect_ids]
             ))
         {            
             if (++ curr_row <= 1)
                 continue;
             if (kvParis[Field_Name_id].empty())
                 continue;
-            CsvEffectScriptConfig *cfg = new CsvEffectScriptConfig();
+            CsvEffectSearcherConfig *cfg = new CsvEffectSearcherConfig();
             all_ok &= cfg->Init(kvParis, cfg_check_fun);
             if (!all_ok)
                 break;

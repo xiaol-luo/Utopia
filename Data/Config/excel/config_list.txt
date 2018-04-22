@@ -96,6 +96,24 @@ out_cs_file_path = effect/CsvEffectScriptConfig.cs
 out_cpp_file_path = effect/CsvEffectScriptConfig
 out_lua_file_path = effect/CsvEffectScriptConfig.lua
 
+[excel2csv-effect.effect_force_move]
+file_path = effect/effects.xlsx
+sheet_name = force_move
+out_csv_file_path = effect/CsvEffectForceMoveConfig.csv
+class_name = CsvEffectForceMoveConfig
+out_cs_file_path = effect/CsvEffectForceMoveConfig.cs
+out_cpp_file_path = effect/CsvEffectForceMoveConfig
+out_lua_file_path = effect/CsvEffectForceMoveConfig.lua
+
+[excel2csv-effect.effect_searcher]
+file_path = effect/effects.xlsx
+sheet_name = effect_searcher
+out_csv_file_path = effect/CsvEffectSearcherConfig.csv
+class_name = CsvEffectSearcherConfig
+out_cs_file_path = effect/CsvEffectSearcherConfig.cs
+out_cpp_file_path = effect/CsvEffectSearcherConfig
+out_lua_file_path = effect/CsvEffectSearcherConfig.lua
+
 
 
 

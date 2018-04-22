@@ -10,6 +10,7 @@ namespace Config
     {
         int id = 0 ;
         std::string class_name;
+        std::string script_param;
 
         using ConfigCheckFunc = bool(*)(CsvEffectScriptConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

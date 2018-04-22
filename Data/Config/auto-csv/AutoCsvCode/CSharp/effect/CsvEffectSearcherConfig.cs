@@ -5,41 +5,41 @@ using System.IO;
 
 namespace Config
 {
-    internal class FieldName_CsvEffectScriptConfig
+    internal class FieldName_CsvEffectSearcherConfig
     {
         public const string Field_Name_id = "id";
-        public const string Field_Name_class_name = "class_name";
-        public const string Field_Name_script_param = "script_param";
+        public const string Field_Name_filter_id = "filter_id";
+        public const string Field_Name_effect_ids = "effect_ids";
     }
 
-    public class CsvEffectScriptConfig
+    public class CsvEffectSearcherConfig
     {
         public int id;
-        public string class_name = string.Empty;
-        public string script_param = string.Empty;
+        public int filter_id;
+        public List<int> effect_ids = new List<int>();
 
-        public delegate bool ConfigCheckFunc(CsvEffectScriptConfig cfg);
+        public delegate bool ConfigCheckFunc(CsvEffectSearcherConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
         {
             bool all_ok = true;
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_id], ref id);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_class_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_class_name], ref class_name);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_script_param) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_script_param], ref script_param);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectSearcherConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectSearcherConfig.Field_Name_id], ref id);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectSearcherConfig.Field_Name_filter_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectSearcherConfig.Field_Name_filter_id], ref filter_id);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectSearcherConfig.Field_Name_effect_ids) && ConfigUtil.Str2Vec (kvPairs[FieldName_CsvEffectSearcherConfig.Field_Name_effect_ids], ref effect_ids);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
         }
     }
 
-    public class CsvEffectScriptConfigSet
+    public class CsvEffectSearcherConfigSet
     {
         public string errMsg = string.Empty;
 
-        public CsvEffectScriptConfig.ConfigCheckFunc cfg_check_fun = null;
-        public delegate bool ConfigSetCheckFunc(CsvEffectScriptConfigSet items);
+        public CsvEffectSearcherConfig.ConfigCheckFunc cfg_check_fun = null;
+        public delegate bool ConfigSetCheckFunc(CsvEffectSearcherConfigSet items);
         public ConfigSetCheckFunc cfg_set_check_fun = null;
-        public List<CsvEffectScriptConfig> cfg_vec = new List<CsvEffectScriptConfig> ();
-        public Dictionary<int, CsvEffectScriptConfig> id_to_key = new Dictionary<int, CsvEffectScriptConfig>();
+        public List<CsvEffectSearcherConfig> cfg_vec = new List<CsvEffectSearcherConfig> ();
+        public Dictionary<int, CsvEffectSearcherConfig> id_to_key = new Dictionary<int, CsvEffectSearcherConfig>();
 
         public bool Load(string file_path)
         {
@@ -50,9 +50,9 @@ namespace Config
                 List<int> fieldIdxList = new List<int>();
                 try
                 {
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_id));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_class_name));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_script_param));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectSearcherConfig.Field_Name_id));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectSearcherConfig.Field_Name_filter_id));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectSearcherConfig.Field_Name_effect_ids));
                 }
                 catch (Exception e)
                 {
@@ -70,10 +70,10 @@ namespace Config
                     }
                     if (string.IsNullOrWhiteSpace(kvPairs[headers[0]]))
                         continue;
-                    CsvEffectScriptConfig cfg = new CsvEffectScriptConfig();
+                    CsvEffectSearcherConfig cfg = new CsvEffectSearcherConfig();
                     if (!cfg.Init(kvPairs, cfg_check_fun))
                     {
-                        errMsg = string.Format("CsvEffectScriptConfig Init Fail, row {0}", csv.CurrentRecordIndex);
+                        errMsg = string.Format("CsvEffectSearcherConfig Init Fail, row {0}", csv.CurrentRecordIndex);
                         return false;
                     }
                     cfg_vec.Add(cfg);
@@ -85,7 +85,7 @@ namespace Config
                 {
                     if (id_to_key.ContainsKey(cfg.id))
                     {
-                        errMsg = string.Format("CsvEffectScriptConfigSet repeated key id = {0}", cfg.id);
+                        errMsg = string.Format("CsvEffectSearcherConfigSet repeated key id = {0}", cfg.id);
                         return false;
                     }
                     id_to_key[cfg.id] = cfg;
@@ -96,7 +96,7 @@ namespace Config
             {
                 if (!cfg_set_check_fun(this))
                 {
-                    errMsg = "CsvEffectScriptConfigSet cfg_set_check_fun fail";
+                    errMsg = "CsvEffectSearcherConfigSet cfg_set_check_fun fail";
                     return false;
                 }
             }
