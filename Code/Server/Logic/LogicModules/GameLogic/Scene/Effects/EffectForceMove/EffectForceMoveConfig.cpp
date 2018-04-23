@@ -21,9 +21,9 @@ namespace GameLogic
 		m_anchor = StrToEffectFilterAnchor(csv_cfg->anchor);
 
 		{
-			int timeMs = INT_MAX;
-			float speed = FLT_MAX;
-			float distance = FLT_MAX;
+			int timeMs = 0;
+			float speed = 0;
+			float distance = 0;
 			ConvertibleValue cv(csv_cfg->result, ';');
 			assert(cv.ValueCount() >= 3);
 			std::string flag = cv.GetStr(0);
