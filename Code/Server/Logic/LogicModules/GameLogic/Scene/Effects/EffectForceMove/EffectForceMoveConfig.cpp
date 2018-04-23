@@ -29,7 +29,7 @@ namespace GameLogic
 			std::string flag = cv.GetStr(0);
 			bool isOk = true;
 			bool tmpOk = false;
-			// 备注：t时间毫秒 d距离 s速度。知道任意2个可以推导出第三个。
+			// 备注：t时间毫秒 s速度 d距离。知道任意2个可以推导出第三个。
 			if ("ts" == flag) 
 			{
 				timeMs = cv.GetInt(1, &tmpOk); isOk &= tmpOk;
