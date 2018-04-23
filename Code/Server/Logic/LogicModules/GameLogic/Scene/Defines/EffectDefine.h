@@ -7,6 +7,7 @@
 #include "Common/Geometry/Vector2.h"
 #include "Common/Geometry/Vector3.h"
 #include <limits.h>
+#include "Utils/ConfigUtil.h"
 
 namespace GameLogic
 {
@@ -104,6 +105,7 @@ namespace GameLogic
 		EEffectAnchor_SkillOwner,
 		EEffectAnchor_Target,
 	};
+	EEffectFilterAnchor StrToEffectFilterAnchor(const std::string &str);
 
 	enum EEffectFilterShape
 	{

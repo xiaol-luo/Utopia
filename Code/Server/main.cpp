@@ -13,6 +13,7 @@
 #include <sol.hpp>
 #include "Utils/PlatformCompat.h"
 #include <LuaHelps/LuaLoadFiles.h>
+#include "Utils/ConvertibleValue.h"
 
 extern ServerLogic *server_logic;
 namespace SolLuaBind
@@ -123,7 +124,7 @@ int main(int argc, char **argv)
 		printf("ParseArgs fail, reason is %s", parseArgsRet.reason.c_str());
 		exit(10);
 	}
-
+	
 	// change work dir
 	int ret = chdir(parseArgsRet.workDir.c_str());
 	char pathBuf[1024] = { 0 };

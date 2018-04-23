@@ -1,7 +1,9 @@
 
+local cfg_root = "F:/git-dir/Utopia/Data/Config/"
+
 ConfigTable =
 {
-	LogConfigFile = "D:/2017code/git-dir/Utopia/Data/Config/auto-csv/AutoCsvConfig/Log/CsvLogConfig.csv",
-	ConfigDir = "D:/2017code/git-dir/Utopia/Data/Config",
+	LogConfigFile = cfg_root .. "auto-csv/AutoCsvConfig/Log/CsvLogConfig.csv",
+	ConfigDir = cfg_root,
 }
 

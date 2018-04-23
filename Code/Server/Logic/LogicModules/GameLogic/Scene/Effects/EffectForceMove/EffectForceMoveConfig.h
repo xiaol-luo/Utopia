@@ -20,5 +20,10 @@ namespace GameLogic
 		bool InitCfg(const Config::CsvEffectForceMoveConfig *csv_cfg);
 
 	protected:
+		EEffectFilterAnchor m_anchor;
+		int m_timeMs = 0;
+		float m_speed = 0;
+		bool m_ignoreTerrian = false;
+		float m_dir = 0;
 	};
 }

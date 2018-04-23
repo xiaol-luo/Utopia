@@ -3,18 +3,10 @@
 #include "Config/AutoCsvCode/CsvConfigSets.h"
 #include <assert.h>
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include "Utils/ConfigUtil.h"
 
 namespace GameLogic
 {
-	template <typename T>
-	T ConvertUtil(std::unordered_map<std::string, T> &match_map, const std::string &val)
-	{
-		auto it = match_map.find(val);
-		if (match_map.end() != it)
-			return it->second;
-		assert(false);
-		return (T)0;
-	}
 
 	// EEffectFilterLimitNumPriority
 	static std::unordered_map<std::string, EEffectFilterLimitNumPriority> Limit_Num_Prioriry_Map ({
@@ -26,7 +18,7 @@ namespace GameLogic
 	});
 	EEffectFilterLimitNumPriority ConvertEEffectFilterLimitNumPriority(std::string val)
 	{
-		return ConvertUtil(Limit_Num_Prioriry_Map, val);
+		return ConfigUtil::ConvertUtil(Limit_Num_Prioriry_Map, val);
 	}
 
 	// EsceneUnitType
@@ -39,7 +31,7 @@ namespace GameLogic
 	});
 	NetProto::ESceneUnitType ConvertSceneUnitType(std::string val)
 	{
-		return ConvertUtil(UNIT_TYPES_MAP, val);
+		return ConfigUtil::ConvertUtil(UNIT_TYPES_MAP, val);
 	}
 	uint64_t ConvertESceneUnitTypes(std::string val)
 	{
@@ -66,7 +58,7 @@ namespace GameLogic
 		assert(ConfigUtil::Str2Vec(val, relation_vals));
 		for (std::string &relation_val : relation_vals)
 		{
-			ret |= 1 << ConvertUtil(Effect_Relation_Map, relation_val);
+			ret |= 1 << ConfigUtil::ConvertUtil(Effect_Relation_Map, relation_val);
 		}
 		return ret;
 	}
@@ -82,10 +74,10 @@ namespace GameLogic
 	{
 		id = csv_cfg->id;
 		limit_num = csv_cfg->limit_num;
-		limit_num_priority = ConvertUtil(Limit_Num_Prioriry_Map, csv_cfg->limit_num_priority);
+		limit_num_priority = ConfigUtil::ConvertUtil(Limit_Num_Prioriry_Map, csv_cfg->limit_num_priority);
 		unit_types = ConvertESceneUnitTypes(csv_cfg->unit_types);
 		relations = ConvertERelations(csv_cfg->relations);
-		anchor = ConvertUtil(Effect_Anchor_Map, csv_cfg->anchor);
+		anchor = StrToEffectFilterAnchor(csv_cfg->anchor);
 
 		if (csv_cfg->shape_circle > 0)
 		{

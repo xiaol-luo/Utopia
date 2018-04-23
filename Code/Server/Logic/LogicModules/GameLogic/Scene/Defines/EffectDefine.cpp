@@ -23,6 +23,17 @@ namespace GameLogic
 		}
 		return true;
 	}
+
+	// EEffectFilterRelation
+	static std::unordered_map<std::string, EEffectFilterAnchor> Effect_Anchor_Map({
+		{ "pos", EEffectAnchor_Pos },
+		{ "target", EEffectAnchor_Target },
+		{ "owner", EEffectAnchor_SkillOwner },
+	});
+	EEffectFilterAnchor StrToEffectFilterAnchor(const std::string & str)
+	{
+		return ConfigUtil::ConvertUtil(Effect_Anchor_Map, str);
+	}
 	
 	bool TimeLineEffectId::Generate(TimeLineEffectId & out_ret, const std::vector<int>& input_vals)
 	{

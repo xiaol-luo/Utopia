@@ -5,6 +5,8 @@
 #include <map>
 #include <set>
 #include <exception>
+#include <unordered_map>
+#include <assert.h>
 
 using ConfigCheckFunc = bool (*)(void* item);
 using ConfigSetCheckFunc = bool (*)(void* items);
@@ -16,9 +18,11 @@ namespace ConfigUtil
 
     bool Str2BaseValue(std::string s, bool &out_val);
     bool Str2BaseValue(std::string s, int &out_val);
+	bool Str2BaseValue(std::string s, uint32_t &out_val);
     bool Str2BaseValue(std::string s, float &out_val);
     bool Str2BaseValue(std::string s, double &out_val);
-    bool Str2BaseValue(std::string s, long long &out_val);
+    bool Str2BaseValue(std::string s, int64_t &out_val);
+	bool Str2BaseValue(std::string s, uint64_t &out_val);
 	bool Str2BaseValue(std::string s, std::string &out_val);
     bool Str2Str(std::string s, std::string &out_val);
     std::vector<std::string> SplitStr(const std::string &s, char c);
@@ -116,4 +120,14 @@ namespace ConfigUtil
         }
         return all_ok;
     };
+
+	template <typename T>
+	T ConvertUtil(std::unordered_map<std::string, T> &match_map, const std::string &val)
+	{
+		auto it = match_map.find(val);
+		if (match_map.end() != it)
+			return it->second;
+		assert(false);
+		return (T)0;
+	}
 }

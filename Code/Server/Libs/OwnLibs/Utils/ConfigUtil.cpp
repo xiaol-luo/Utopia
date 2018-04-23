@@ -64,6 +64,20 @@ namespace ConfigUtil
         }
     }
 
+	bool Str2BaseValue(std::string s, uint32_t & out_val)
+	{
+		try
+		{
+			Trim(s);
+			out_val = s.empty() ? 0 : (uint32_t)std::stoi(s);
+			return true;
+		}
+		catch (std::exception e)
+		{
+			return false;
+		}
+	}
+
     bool Str2BaseValue(std::string s, float &out_val)
     {
         try 
@@ -92,7 +106,7 @@ namespace ConfigUtil
         }
     }
 
-    bool Str2BaseValue(std::string s, long long &out_val)
+    bool Str2BaseValue(std::string s, int64_t &out_val)
     {
         try 
         {
@@ -105,6 +119,20 @@ namespace ConfigUtil
             return false;
         }
     }
+
+	bool Str2BaseValue(std::string s, uint64_t & out_val)
+	{
+		try
+		{
+			Trim(s);
+			out_val = s.empty() ? 0 : std::stoull(s);
+			return true;
+		}
+		catch (std::exception e)
+		{
+			return false;
+		}
+	}
 
 	bool Str2BaseValue(std::string s, std::string & out_val)
 	{

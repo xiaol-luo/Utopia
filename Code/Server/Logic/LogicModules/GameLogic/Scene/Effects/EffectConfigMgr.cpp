@@ -12,6 +12,12 @@
 #include "GameLogic/Scene/Effects/EffectGroup/EffectGroupConfig.h"
 #include "GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"
 
+#include "GameLogic/Scene/Effects/EffectSearcher/EffectSearcherConfig.h"
+#include "Config/AutoCsvCode/effect/CsvEffectSearcherConfig.h"
+
+#include "GameLogic/Scene/Effects/EffectForceMove/EffectForceMoveConfig.h"
+#include "Config/AutoCsvCode/effect/CsvEffectForceMoveConfig.h"
+
 namespace GameLogic
 {
 	EffectConfigMgr::EffectConfigMgr()
@@ -40,6 +46,8 @@ namespace GameLogic
 		BuildCfgHelp<EffectAttrsConfig>(csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec, m_effect_cfgs);
 		BuildCfgHelp<EffectGroupConfig>(csv_cfgs->csv_CsvEffectGroupConfigSet->cfg_vec, m_effect_cfgs);
 		BuildCfgHelp<EffectScriptConfig>(csv_cfgs->csv_CsvEffectScriptConfigSet->cfg_vec, m_effect_cfgs);
+		BuildCfgHelp<EffectSearcherConfig>(csv_cfgs->csv_CsvEffectSearcherConfigSet->cfg_vec, m_effect_cfgs);
+		BuildCfgHelp<EffectForceMoveConfig>(csv_cfgs->csv_CsvEffectForceMoveConfigSet->cfg_vec, m_effect_cfgs);
 		return true;
 	}
 
