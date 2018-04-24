@@ -35,7 +35,7 @@ namespace GameLogic
 			for (int cfgId : m_cfg->m_effect_ids)
 			{
 				std::shared_ptr<EffectBase> effect = m_scene_effects->CreateEffect(cfgId);
-				if (nullptr != effect)
+				if (nullptr == effect)
 				{
 					GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "create effect is fail id = {0}", cfgId);
 					continue;

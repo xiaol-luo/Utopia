@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "LogicModules/GameLogic/Scene/Navigation/NavAgent.h"
+#include "GameLogic/Scene/Navigation/NavAgent.h"
 
 namespace SolLuaBind
 {

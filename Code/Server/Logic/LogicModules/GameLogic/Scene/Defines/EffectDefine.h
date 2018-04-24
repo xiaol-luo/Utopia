@@ -136,13 +136,6 @@ namespace GameLogic
 		 } sector;
 	};
 
-	enum EEffectFilterRelation
-	{
-		EEffectFilterRelation_Self = 0,
-		EEffectFilterRelation_Friend,
-		EEffectFilterRelation_Enemy,
-	};
-
 	struct EffectFilterShape 
 	{
 		Vector2 pos;

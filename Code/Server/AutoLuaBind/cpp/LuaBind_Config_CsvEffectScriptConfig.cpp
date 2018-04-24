@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"
+#include "effect/CsvEffectScriptConfig.h"
 
 namespace SolLuaBind
 {
@@ -27,6 +27,7 @@ namespace SolLuaBind
 						"__StructName__", sol::property([]() {return "CsvEffectScriptConfig"; })				
 						,"id", &Config::CsvEffectScriptConfig::id				
 						,"class_name", &Config::CsvEffectScriptConfig::class_name				
+						,"script_param", &Config::CsvEffectScriptConfig::script_param				
 						,"Init", &Config::CsvEffectScriptConfig::Init
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);

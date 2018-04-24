@@ -1,15 +1,15 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Navigation/NavMesh.h"	
-#include "Recast.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"	
-#include "DetourNavMesh.h"	
-#include "LogicModules/GameLogic/Scene/Navigation/NavMeshUtil.h"	
-#include "DetourNavMeshQuery.h"	
-#include "Libs/3rdpartLibs/recastnavigation/DetourTileCache/Include/DetourTileCache.h"	
-#include "ShareCode/Common/Geometry/GeometryDefine.h"	
-#include "Libs/3rdpartLibs/recastnavigation/DetourCrowd/Include/DetourCrowd.h"	
-#include "Libs/3rdpartLibs/recastnavigation/RecastDemo/Include/InputGeom.h"
+#include "Common/Geometry/GeometryDefine.h"	
+#include "recastnavigation/Recast/Include/Recast.h"	
+#include "recastnavigation/DetourCrowd/Include/DetourCrowd.h"	
+#include "Common/Geometry/Vector3.h"	
+#include "recastnavigation/DetourTileCache/Include/DetourTileCache.h"	
+#include "GameLogic/Scene/Navigation/NavMesh.h"	
+#include "recastnavigation/Detour/Include/DetourNavMesh.h"	
+#include "GameLogic/Scene/Navigation/NavMeshUtil.h"	
+#include "recastnavigation/Detour/Include/DetourNavMeshQuery.h"	
+#include "recastnavigation/RecastDemo/Include/InputGeom.h"
 
 namespace SolLuaBind
 {

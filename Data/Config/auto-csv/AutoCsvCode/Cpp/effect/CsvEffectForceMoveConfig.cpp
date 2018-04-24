@@ -7,7 +7,7 @@ namespace Config
      static const char * Field_Name_ignore_terrian = "ignore_terrian";
      static const char * Field_Name_result = "result";
      static const char * Field_Name_anchor = "anchor";
-     static const char * Field_Name_dir = "dir";
+     static const char * Field_Name_angle = "angle";
 
     bool CsvEffectForceMoveConfig::Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func)
     {
@@ -16,7 +16,7 @@ namespace Config
         all_ok = all_ok && kvPairs.count(Field_Name_ignore_terrian) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_ignore_terrian], ignore_terrian);
         all_ok = all_ok && kvPairs.count(Field_Name_result) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_result], result);
         all_ok = all_ok && kvPairs.count(Field_Name_anchor) > 0 && ConfigUtil::Str2Str (kvPairs[Field_Name_anchor], anchor);
-        all_ok = all_ok && kvPairs.count(Field_Name_dir) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_dir], dir);
+        all_ok = all_ok && kvPairs.count(Field_Name_angle) > 0 && ConfigUtil::Str2BaseValue (kvPairs[Field_Name_angle], angle);
         if (all_ok && nullptr != func)
             all_ok &= func(this);
         return all_ok;
@@ -38,7 +38,7 @@ namespace Config
             Field_Name_ignore_terrian,
             Field_Name_result,
             Field_Name_anchor,
-            Field_Name_dir
+            Field_Name_angle
             );
 
         std::map<std::string, std::string> kvParis;
@@ -46,7 +46,7 @@ namespace Config
         kvParis[Field_Name_ignore_terrian] = "";
         kvParis[Field_Name_result] = "";
         kvParis[Field_Name_anchor] = "";
-        kvParis[Field_Name_dir] = "";
+        kvParis[Field_Name_angle] = "";
 
         bool all_ok = true;
         int curr_row = 0;
@@ -55,7 +55,7 @@ namespace Config
             kvParis[Field_Name_ignore_terrian],
             kvParis[Field_Name_result],
             kvParis[Field_Name_anchor],
-            kvParis[Field_Name_dir]
+            kvParis[Field_Name_angle]
             ))
         {            
             if (++ curr_row <= 1)

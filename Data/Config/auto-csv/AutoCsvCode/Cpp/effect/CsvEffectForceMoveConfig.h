@@ -12,7 +12,7 @@ namespace Config
         bool ignore_terrian = 0 ;
         std::string result;
         std::string anchor;
-        float dir = 0 ;
+        float angle = 0 ;
 
         using ConfigCheckFunc = bool(*)(CsvEffectForceMoveConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);

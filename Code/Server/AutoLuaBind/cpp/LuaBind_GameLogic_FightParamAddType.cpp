@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "LogicModules/GameLogic/Scene/Effects/EffectAttrs/EffectAttrsConfig.h"
+#include "GameLogic/Scene/Effects/EffectAttrs/EffectAttrsConfig.h"
 
 namespace SolLuaBind
 {

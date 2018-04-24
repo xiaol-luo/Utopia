@@ -1,16 +1,18 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Config/AutoCsvCode/skill/CsvSkillLevelConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"	
-#include "ShareCode/Config/AutoCsvCode/skill/CsvSkillConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/log/CsvLogConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectHealConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
+#include "effect/CsvEffectFilterConfig.h"	
+#include "skill/CsvSkillLevelConfig.h"	
+#include "effect/CsvEffectHurtConfig.h"	
+#include "effect/CsvEffectScriptConfig.h"	
+#include "effect/CsvEffectGroupConfig.h"	
+#include "CsvConfigSets.h"	
+#include "effect/CsvEffectSearcherConfig.h"	
+#include "effect/CsvEffectHealConfig.h"	
+#include "log/CsvLogConfig.h"	
+#include "effect/CsvEffectForceMoveConfig.h"	
+#include "effect/CsvEffectAttrsConfig.h"	
+#include "skill/CsvSkillConfig.h"	
+#include "Scene/CsvSceneConfig.h"
 
 namespace SolLuaBind
 {
@@ -45,6 +47,8 @@ namespace SolLuaBind
 						,"csv_CsvEffectFilterConfigSet", &Config::CsvConfigSets::csv_CsvEffectFilterConfigSet				
 						,"csv_CsvEffectGroupConfigSet", &Config::CsvConfigSets::csv_CsvEffectGroupConfigSet				
 						,"csv_CsvEffectScriptConfigSet", &Config::CsvConfigSets::csv_CsvEffectScriptConfigSet				
+						,"csv_CsvEffectForceMoveConfigSet", &Config::CsvConfigSets::csv_CsvEffectForceMoveConfigSet				
+						,"csv_CsvEffectSearcherConfigSet", &Config::CsvConfigSets::csv_CsvEffectSearcherConfigSet				
 						,"Load", &Config::CsvConfigSets::Load
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);

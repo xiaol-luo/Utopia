@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
-#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"	
+#include "GameLogic/Scene/Skills/Skill.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 
 namespace SolLuaBind
 {
@@ -39,6 +39,7 @@ namespace SolLuaBind
 						,"SetSlotLevel", &GameLogic::SceneUnitSkills::SetSlotLevel				
 						,"GetSlotLevel", &GameLogic::SceneUnitSkills::GetSlotLevel				
 						,"GetSlotMaxLevel", &GameLogic::SceneUnitSkills::GetSlotMaxLevel				
+						,"ForeachSkill", &GameLogic::SceneUnitSkills::ForeachSkill				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitModule 
 						>()

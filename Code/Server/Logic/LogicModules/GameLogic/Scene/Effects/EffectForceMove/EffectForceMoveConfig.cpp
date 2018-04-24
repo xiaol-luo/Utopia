@@ -17,7 +17,7 @@ namespace GameLogic
 		m_id = csv_cfg->id;
 		m_reversible = false;
 		m_ignoreTerrian = csv_cfg->ignore_terrian;
-		m_dir = csv_cfg->dir;
+		m_moveDeg = csv_cfg->angle;
 		m_anchor = StrToEffectFilterAnchor(csv_cfg->anchor);
 
 		{
@@ -51,6 +51,8 @@ namespace GameLogic
 				timeMs = distance / speed;
 			}
 			assert(isOk && timeMs > 0 && speed > 0);
+			m_timeMs = timeMs;
+			m_speed = speed;
 		}
 		return true;
 	}

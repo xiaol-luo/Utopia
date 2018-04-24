@@ -259,24 +259,22 @@ namespace GameLogic
 		shape.dir = m_user_effect_param.dir;
 
 		// gen filter param
-		ESceneUnitFilterWayParams params;
 		if (0 != filter_cfg->relations)
 		{
-			params.is_active[ESceneUnitFilterWay_Relation] = true;
-			params.relations.caster = caster;
-			params.relations.relations = filter_cfg->relations;
+			filter_way_param.is_active[ESceneUnitFilterWay_Relation] = true;
+			filter_way_param.relations.caster = caster;
+			filter_way_param.relations.relations = filter_cfg->relations;
 		}
 		if (filter_cfg->limit_num > 0)
 		{
-			params.is_active[ESceneUnitFilterWay_LimitNum] = true;
-			params.limit_num.num = filter_cfg->limit_num;
-			params.limit_num.priority = filter_cfg->limit_num_priority;
+			filter_way_param.is_active[ESceneUnitFilterWay_LimitNum] = true;
+			filter_way_param.limit_num.num = filter_cfg->limit_num;
+			filter_way_param.limit_num.priority = filter_cfg->limit_num_priority;
 		}
 		if (0 != filter_cfg->unit_types)
 		{
-			params.is_active[ESceneUnitFilterWay_UnitType] = true;
-			params.relations.caster = caster;
-			params.relations.relations = filter_cfg->relations;
+			filter_way_param.is_active[ESceneUnitFilterWay_UnitType] = true;
+			filter_way_param.unit_type.allow_types = filter_cfg->unit_types;
 		}
 
 		return true;

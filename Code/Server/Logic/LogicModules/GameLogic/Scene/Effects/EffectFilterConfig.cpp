@@ -46,10 +46,10 @@ namespace GameLogic
 	}
 
 	// EEffectFilterRelation
-	std::unordered_map<std::string, EEffectFilterRelation> Effect_Relation_Map({
-		{ "self", EEffectFilterRelation_Self },
-		{ "friend", EEffectFilterRelation_Friend },
-		{ "enemy", EEffectFilterRelation_Enemy },
+	std::unordered_map<std::string, NetProto::ESceneUnitRelation> Effect_Relation_Map({
+		{ "self", NetProto::ESceneUnitRelation::ESceneUnitRelation_Self },
+		{ "friend", NetProto::ESceneUnitRelation::ESceneUnitRelation_Friend },
+		{ "enemy", NetProto::ESceneUnitRelation::ESceneUnitRelation_Enemy },
 	});
 	int ConvertERelations(std::string val)
 	{

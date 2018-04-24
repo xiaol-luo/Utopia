@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"
 
 namespace SolLuaBind
 {

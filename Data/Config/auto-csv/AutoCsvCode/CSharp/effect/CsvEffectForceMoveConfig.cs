@@ -11,7 +11,7 @@ namespace Config
         public const string Field_Name_ignore_terrian = "ignore_terrian";
         public const string Field_Name_result = "result";
         public const string Field_Name_anchor = "anchor";
-        public const string Field_Name_dir = "dir";
+        public const string Field_Name_angle = "angle";
     }
 
     public class CsvEffectForceMoveConfig
@@ -20,7 +20,7 @@ namespace Config
         public bool ignore_terrian;
         public string result = string.Empty;
         public string anchor = string.Empty;
-        public float dir;
+        public float angle;
 
         public delegate bool ConfigCheckFunc(CsvEffectForceMoveConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -30,7 +30,7 @@ namespace Config
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectForceMoveConfig.Field_Name_ignore_terrian) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectForceMoveConfig.Field_Name_ignore_terrian], ref ignore_terrian);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectForceMoveConfig.Field_Name_result) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectForceMoveConfig.Field_Name_result], ref result);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectForceMoveConfig.Field_Name_anchor) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectForceMoveConfig.Field_Name_anchor], ref anchor);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectForceMoveConfig.Field_Name_dir) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectForceMoveConfig.Field_Name_dir], ref dir);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectForceMoveConfig.Field_Name_angle) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectForceMoveConfig.Field_Name_angle], ref angle);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -60,7 +60,7 @@ namespace Config
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectForceMoveConfig.Field_Name_ignore_terrian));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectForceMoveConfig.Field_Name_result));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectForceMoveConfig.Field_Name_anchor));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectForceMoveConfig.Field_Name_dir));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectForceMoveConfig.Field_Name_angle));
                 }
                 catch (Exception e)
                 {
