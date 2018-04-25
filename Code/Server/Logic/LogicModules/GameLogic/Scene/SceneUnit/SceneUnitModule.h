@@ -50,7 +50,7 @@ namespace GameLogic
 	private:
 		void Init(SceneUnit *owner);
 		void Awake() { this->OnAwake(); }
-		void Start() { this->OnUpdate(); }
+		void Start() { this->OnStart(); }
 		void Update() { this->OnUpdate(); }
 		void Realse() { this->OnRelease(); }
 		void Destroy();
@@ -58,6 +58,7 @@ namespace GameLogic
 	protected:
 		virtual void OnInit() {}
 		virtual void OnAwake() {}
+		virtual void OnStart() {}
 		virtual void OnUpdate() {}
 		virtual void OnRelease() {}
 		virtual void OnDestroy() {}

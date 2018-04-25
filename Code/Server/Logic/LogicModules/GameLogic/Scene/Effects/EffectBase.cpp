@@ -71,7 +71,9 @@ namespace GameLogic
 		if (this->NeedGuide())
 		{
 			assert(m_user_effect_param.skill);
-			m_user_effect_param.skill->AddGuideEffect(this->shared_from_this());
+			std::shared_ptr<Skill> skill = std::dynamic_pointer_cast<Skill>(m_user_effect_param.skill);
+			if (nullptr != skill)
+				skill->AddGuideEffect(this->shared_from_this());
 		}
 	}
 

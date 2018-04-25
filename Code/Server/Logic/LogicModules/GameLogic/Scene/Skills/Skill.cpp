@@ -17,7 +17,7 @@
 
 namespace GameLogic
 {
-	Skill::Skill(const SkillConfig * cfg)
+	Skill::Skill(const SkillConfig * cfg) : SkillBase(cfg)
 	{
 		assert(cfg && cfg->max_level >= 0);
 		m_cfg = cfg;
@@ -27,16 +27,6 @@ namespace GameLogic
 	Skill::~Skill()
 	{
 
-	}
-
-	int Skill::GetSkillId()
-	{
-		return m_cfg->id;
-	}
-
-	std::shared_ptr<SceneUnit> Skill::GetCaster()
-	{
-		return m_su_skills->GetOwner()->shared_from_this();
 	}
 
 	bool Skill::SetLevel(int lvl)
@@ -274,7 +264,8 @@ namespace GameLogic
 	void Skill::SyncClient()
 	{
 		SyncClientMsg msg = this->GetPbMsg();
-		m_su_skills->SendObservers(msg.protocol_id, msg.msg);
+		if (msg.protocol_id >= 0)
+			m_su_skills->SendObservers(msg.protocol_id, msg.msg);
 	}
 
 	SyncClientMsg Skill::GetPbMsg()

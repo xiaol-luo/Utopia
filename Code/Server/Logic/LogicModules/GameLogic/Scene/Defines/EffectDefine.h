@@ -11,7 +11,7 @@
 
 namespace GameLogic
 {
-	class Skill;
+	class SkillBase;
 	class SceneUnit;
 
 	struct UseSkillParam
@@ -22,7 +22,7 @@ namespace GameLogic
 			target_su.reset();
 			pos = Vector3::zero;			// 技能目标点
 			dir = Vector2::zero;			// 技能方向
-			face_dir = Vector2::zero;		//  技能使的角色的朝向
+			face_dir = Vector2::zero;		// 技能使的角色的朝向
 		}
 
 		uint64_t target_suid = 0;
@@ -42,7 +42,7 @@ namespace GameLogic
 			dir = Vector2::zero;
 		}
 
-		std::shared_ptr<Skill> skill;
+		std::shared_ptr<SkillBase> skill;
 		uint64_t target_suid = 0;
 		Vector3 pos;
 		Vector2 dir;

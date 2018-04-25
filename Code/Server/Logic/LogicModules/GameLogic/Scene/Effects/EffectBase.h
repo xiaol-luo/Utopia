@@ -7,7 +7,7 @@
 
 namespace GameLogic
 {
-	class Skill;
+	class SkillBase;
 	class NewScene;
 	class SceneEffects;
 	class SceneUnit;
@@ -22,7 +22,7 @@ namespace GameLogic
 
 		uint64_t GetKey() { return m_effect_key; }
 		const EffectConfigBase * GetCfg() { return m_base_cfg; }
-		std::shared_ptr<Skill> GetSkill() { return m_user_effect_param.skill; }
+		std::shared_ptr<SkillBase> GetSkill() { return m_user_effect_param.skill; }
 		std::shared_ptr<SceneUnit> GetCaster();
 		std::shared_ptr<SceneUnit> GetEffectTarget();
 

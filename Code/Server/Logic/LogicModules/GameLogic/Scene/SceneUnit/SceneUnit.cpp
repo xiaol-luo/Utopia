@@ -172,7 +172,7 @@ namespace GameLogic
 	{
 		for (auto module : m_modules)
 		{
-			if (nullptr != m_modules)
+			if (nullptr != module)
 				module->ClearPbDirty();
 		}
 	}

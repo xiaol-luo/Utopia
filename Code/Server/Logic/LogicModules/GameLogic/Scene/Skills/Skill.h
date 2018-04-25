@@ -5,34 +5,28 @@
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include "GameLogic/Scene/Defines/SceneDefine.h"
 #include "GameLogic/Scene/Defines/EffectDefine.h"
+#include "SkillBase.h"
 
 namespace GameLogic
 {
 	class SceneUnit;
 	struct SkillLevelConfig;
-	struct SkillConfig;
+	class SkillConfig;
 	class SceneUnitSkills;
 	class EffectBase;
 	struct SceneAllConfig;
 
-	class Skill : public std::enable_shared_from_this<Skill>
+	class Skill : public SkillBase
 	{
 	public:
 		Skill(const SkillConfig *cfg);
 		~Skill();
 
-		int GetSkillId();
-		void SetSceneUnitSkills(std::shared_ptr<SceneUnitSkills> su_skills) { m_su_skills = su_skills; }
-		std::shared_ptr<SceneUnitSkills> GetSceneUnitSkills() { return m_su_skills; }
-		std::shared_ptr<SceneUnit> GetCaster();
-		bool SetLevel(int lvl);
+		virtual bool SetLevel(int lvl) override;
 		int GetLevel();
 		int GetMaxLevel();
-		inline void SetSkillKey(uint64_t skill_key) { m_skill_key = skill_key; }
-		inline uint64_t GetSkillKey() { return m_skill_key; }
-		const SkillLevelConfig * GetLvlCfg() { return m_lvl_cfg; }
 		const SkillConfig * GetCfg() { return m_cfg; }
-		void ReloadCfg(SceneAllConfig *sceneAllCfg);
+		virtual void ReloadCfg(SceneAllConfig *sceneAllCfg) override;
 		int GetStage() { return m_state; }
 		int GetStageBeginMs() { return m_stage_begin_ms; }
 
@@ -43,8 +37,8 @@ namespace GameLogic
 		bool IsRunning();
 		bool TryCancel();
 		bool CanCancel();
-		void SyncClient();
-		SyncClientMsg GetPbMsg();
+		virtual void SyncClient() override;
+		virtual SyncClientMsg GetPbMsg() override;
 
 		void AddGuideEffect(std::shared_ptr<EffectBase> effect);
 		void RemoveGuideEffect(uint64_t effect_key);

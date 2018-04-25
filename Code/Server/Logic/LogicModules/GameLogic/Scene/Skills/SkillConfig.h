@@ -4,6 +4,7 @@
 #include <string>
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include <array>
+#include "SkillConfigBase.h"
 
 namespace Config
 {
@@ -12,7 +13,7 @@ namespace Config
 
 namespace GameLogic
 {
-	struct SkillConfig;
+	class SkillConfig;
 	struct SkillLevelConfig
 	{
 		~SkillLevelConfig();
@@ -30,18 +31,16 @@ namespace GameLogic
 		std::vector<int> release_effect_ids;
 	};
 
-	struct SkillConfig
+	class SkillConfig : public SkillConfigBase
 	{
+	public:
 		const static int MAX_SKILL_LEVEL = 5;
 		~SkillConfig();
-		int id = 0;
-		std::string name;
 		bool is_normal_attack = false;
 		NetProto::ESkillUseWay use_way;
 		int target_relations = 0;
 		int target_types = 0;
 		int max_level = -1;
-		// SkillLevelConfig *level_cfgs[MAX_SKILL_LEVEL + 1];
 		std::array<SkillLevelConfig *, MAX_SKILL_LEVEL + 1> level_cfgs;
 		const SkillLevelConfig * GetLvlCfg(int lvl) const;
 	};

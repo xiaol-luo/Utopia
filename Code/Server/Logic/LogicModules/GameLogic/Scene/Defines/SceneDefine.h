@@ -34,6 +34,7 @@ namespace GameLogic
 		ESceneUnitModule_Sight,
 		ESceneUnitModule_Action,
 		ESceneUnitModule_Skills,
+		ESceneUnitModule_Missle,
 
 		ESceneUnitModule_Count
 	};

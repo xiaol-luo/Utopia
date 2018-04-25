@@ -212,7 +212,11 @@ namespace GameLogic
 		std::vector<SyncClientMsg> msgs;
 		if (nullptr != m_using_skill)
 		{
-			msgs.push_back(m_using_skill->GetPbMsg());
+			SyncClientMsg msg = m_using_skill->GetPbMsg();
+			if (msg.protocol_id >= 0)
+			{
+				msgs.push_back(msg);
+			}
 		}
 		return std::move(msgs);
 	}
