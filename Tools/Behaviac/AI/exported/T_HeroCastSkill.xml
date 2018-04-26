@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: T_HeroCastSkill.xml-->
+<behavior name="T_HeroCastSkill" agenttype="AISceneUnitHero" version="5">
+  <node class="Sequence" id="0">
+    <node class="IfElse" id="1">
+      <node class="Condition" id="3">
+        <property Operator="Equal" />
+        <property Opl="ulong Self.AISceneUnitHero::skill_keyid" />
+        <property Opr="const ulong 0" />
+      </node>
+      <node class="Action" id="2">
+        <property Method="Self.AISceneUnitHero::PickSkill()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+      <node class="Noop" id="7" />
+    </node>
+    <node class="IfElse" id="4">
+      <node class="Condition" id="5">
+        <property Operator="NotEqual" />
+        <property Opl="ulong Self.AISceneUnitHero::skill_keyid" />
+        <property Opr="const ulong 0" />
+      </node>
+      <node class="Action" id="6">
+        <property Method="Self.AISceneUnitHero::CaskSkill()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+      <node class="Noop" id="8" />
+    </node>
+  </node>
+</behavior>

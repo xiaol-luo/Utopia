@@ -111,6 +111,8 @@ namespace GameLogic
 	std::shared_ptr<SceneUnit> AddGuidedMissileToScene(GuidedMissileParam param)
 	{
 		auto su = std::make_shared<SceneUnit>();
+		su->SetUnitType(NetProto::EsceneUnitType_Effect);
+		su->SetModelId(1);
 		auto sugm = su->AddModule(std::make_shared<SceneUnitGuidedMissile>());
 		sugm->SetParam(param);
 		auto scene = param.use_effect_param.skill->GetCaster()->GetScene();

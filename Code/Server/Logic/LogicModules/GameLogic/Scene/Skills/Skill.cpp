@@ -411,11 +411,5 @@ namespace GameLogic
 			m_su_skills->GetModule<SceneUnitFightParam>()->DeattachState(NetProto::EFP_Immobilized);
 		this->SyncClient();
 	}
-
-	int64_t Skill::GetLogicMs(int64_t delta_ms)
-	{
-		int64_t ret = m_su_skills->GetOwner()->GetScene()->GetLogicMs() + delta_ms;
-		return ret;
-	}
 }
 

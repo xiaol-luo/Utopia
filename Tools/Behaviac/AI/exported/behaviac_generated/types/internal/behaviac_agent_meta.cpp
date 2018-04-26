@@ -237,7 +237,7 @@ namespace behaviac
 
 		virtual bool load()
 		{
-			AgentMeta::SetTotalSignature(2988284549u);
+			AgentMeta::SetTotalSignature(3379815797u);
 
 			AgentMeta* meta = NULL;
 			BEHAVIAC_UNUSED_VAR(meta);
@@ -291,10 +291,26 @@ namespace behaviac
 			meta->RegisterMethod(505785840u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorLength());
 			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
 
+			// AISceneUnitHero
+			meta = BEHAVIAC_NEW AgentMeta(3386506320u);
+			AgentMeta::GetAgentMetas()[1895349304u] = meta;
+			meta->RegisterMemberProperty(773471248u, BEHAVIAC_NEW CMemberProperty< long long >("hero", Set_AISceneUnitHero_hero, Get_AISceneUnitHero_hero));
+			meta->RegisterMemberProperty(2514773374u, BEHAVIAC_NEW CMemberProperty< unsigned long >("skill_keyid", Set_AISceneUnitHero_skill_keyid, Get_AISceneUnitHero_skill_keyid));
+			meta->RegisterMethod(3170843310u, BEHAVIAC_NEW CAgentMethodVoid_1<long long>(FunctionPointer_AISceneUnitHero_Init));
+			meta->RegisterMethod(1045109914u, BEHAVIAC_NEW CAgentStaticMethodVoid_1<char*>(FunctionPointer_AISceneUnitHero_LogMessage));
+			meta->RegisterMethod(1375450046u, BEHAVIAC_NEW CAgentMethodVoid(FunctionPointer_AISceneUnitHero_PickSkill));
+			meta->RegisterMethod(1510021734u, BEHAVIAC_NEW CAgentMethodVoid(FunctionPointer_AISceneUnitHero_CaskSkill));
+			meta->RegisterMethod(2521019022u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorAdd());
+			meta->RegisterMethod(2306090221u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorClear());
+			meta->RegisterMethod(3483755530u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorContains());
+			meta->RegisterMethod(505785840u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorLength());
+			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
+
 			AgentMeta::Register<behaviac::Agent>("behaviac::Agent");
 			AgentMeta::Register<AIHero>("AIHero");
 			AgentMeta::Register<SecondAgent>("SecondAgent");
 			AgentMeta::Register<FirstAgent>("FirstAgent");
+			AgentMeta::Register<AISceneUnitHero>("AISceneUnitHero");
 
 			Agent::RegisterInstanceName<SecondAgent>("SecondAgentInstance");
 
@@ -309,6 +325,7 @@ namespace behaviac
 			AgentMeta::UnRegister<AIHero>("AIHero");
 			AgentMeta::UnRegister<SecondAgent>("SecondAgent");
 			AgentMeta::UnRegister<FirstAgent>("FirstAgent");
+			AgentMeta::UnRegister<AISceneUnitHero>("AISceneUnitHero");
 
 			Agent::UnRegisterInstanceName<SecondAgent>("SecondAgentInstance");
 

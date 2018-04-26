@@ -6,7 +6,7 @@
 #include "Common/Utils/Ticker.h"
 #include "GameLogic/Scene/Defines/EffectDefine.h"
 
-class AIHero;
+class AISceneUnitHero;
 
 namespace GameLogic
 {
@@ -64,7 +64,7 @@ namespace GameLogic
 		std::shared_ptr<Skill> m_using_skill = nullptr;
 
 	protected:
-		AIHero *m_bt_agent;
+		AISceneUnitHero *m_bt_agent;
 
 	protected:
 		virtual std::vector<SyncClientMsg> CollectPBInit() override;

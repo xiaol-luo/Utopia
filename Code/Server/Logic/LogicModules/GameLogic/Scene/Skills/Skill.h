@@ -49,18 +49,13 @@ namespace GameLogic
 		void SetFaceDir();
 		void ReleaseEffects();
 		void End();
-		std::shared_ptr<SceneUnitSkills> m_su_skills;
 		const SkillConfig *m_cfg = nullptr;
 		const SkillLevelConfig *m_lvl_cfg = nullptr;
-		uint64_t m_skill_key = 0;
-
-		UseSkillParam m_use_skill_param;
 
 		std::unordered_map<uint64_t, std::shared_ptr<EffectBase>> m_guide_effects;
 		bool m_can_move = true;
 		int64_t m_last_release_ms = LONG_MIN;
 		int m_state = NetProto::ESS_End;
 		int64_t m_stage_begin_ms = LONG_MAX;
-		int64_t GetLogicMs(int64_t delta_ms = 0);
 	};
 }

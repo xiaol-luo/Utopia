@@ -2,7 +2,7 @@
 <meta>
   <types />
   <agents>
-    <agent classfullname="behaviac::Agent" DisplayName="behaviac::Agent" Desc="" IsRefType="true" IsImplemented="true">
+    <agent classfullname="behaviac::Agent" DisplayName="behaviac::Agent" Desc="behaviac::Agent" IsRefType="true" IsImplemented="true">
       <Method Name="VectorLength" DisplayName="VectorLength" Desc="VectorLength" Class="behaviac::Agent" ReturnType="int" ReturnTypeFullName="System.Int32" Static="true" Public="true" istask="false">
         <Param Name="param0" Type="const IList&amp;" TypeFullName="System.Collections.IList" DisplayName="param0" Desc="param0" />
       </Method>
@@ -43,7 +43,16 @@
         <Param Name="param0" Type="string" TypeFullName="System.String" DisplayName="param0" Desc="param0" />
       </Method>
       <Method Name="event_task" DisplayName="event_task" Desc="event_task" Class="FirstAgent" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="false" istask="true">
-        <Param Name="param0" Type="int" TypeFullName="System.Int32" DisplayName="param0" Desc="" />
+        <Param Name="param0" Type="int" TypeFullName="System.Int32" DisplayName="param0" Desc="param0" />
+      </Method>
+    </agent>
+    <agent classfullname="AISceneUnitHero" base="behaviac::Agent" DisplayName="AISceneUnitHero" Desc="the AI of Hero" IsRefType="true" IsCustomized="true">
+      <Member Name="hero" DisplayName="hero" Desc="引用的玩家" Class="AISceneUnitHero" Type="llong" TypeFullName="Behaviac.Design.llong" defaultvalue="0" Static="false" Public="true" Readonly="false" />
+      <Member Name="skill_keyid" DisplayName="skill_keyid" Desc="将要使用的技能id" Class="AISceneUnitHero" Type="ulong" TypeFullName="System.UInt64" defaultvalue="0" Static="false" Public="true" Readonly="false" />
+      <Method Name="CaskSkill" DisplayName="TryCaskSkill" Desc="释放技能" Class="AISceneUnitHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+      <Method Name="PickSkill" DisplayName="PickOneSkill" Desc="选择一个技能" Class="AISceneUnitHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
+      <Method Name="Init" DisplayName="Init" Desc="Init" Class="AISceneUnitHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
+        <Param Name="param" Type="llong" TypeFullName="System.UInt64" DisplayName="param" Desc="param" />
       </Method>
     </agent>
   </agents>

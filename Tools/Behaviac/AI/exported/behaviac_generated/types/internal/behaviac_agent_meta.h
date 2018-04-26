@@ -38,5 +38,16 @@ namespace behaviac
 	inline void FunctionPointer_FirstAgent_Say(Agent* self, behaviac::string param0) { ((FirstAgent*)self)->_Execute_Method_<METHOD_TYPE_FirstAgent_Say, void, behaviac::string >(param0); }
 	inline void FunctionPointer_FirstAgent_SayHello(Agent* self) { ((FirstAgent*)self)->_Execute_Method_<METHOD_TYPE_FirstAgent_SayHello, void >(); }
 	inline void FunctionPointer_FirstAgent_t1(Agent* self, int param0) { } /* t1 */
+
+	inline void Set_AISceneUnitHero_hero(Agent* self, long long value) { ((AISceneUnitHero*)self)->hero = value; };
+	inline const void* Get_AISceneUnitHero_hero(Agent* self) { return &((AISceneUnitHero*)self)->hero; };
+
+	inline void Set_AISceneUnitHero_skill_keyid(Agent* self, unsigned long value) { ((AISceneUnitHero*)self)->skill_keyid = value; };
+	inline const void* Get_AISceneUnitHero_skill_keyid(Agent* self) { return &((AISceneUnitHero*)self)->skill_keyid; };
+
+	inline void FunctionPointer_AISceneUnitHero_Init(Agent* self, long long param) { ((AISceneUnitHero*)self)->Init(param); }
+	inline void FunctionPointer_AISceneUnitHero_LogMessage(char* param0) { AISceneUnitHero::LogMessage(param0); }
+	inline void FunctionPointer_AISceneUnitHero_PickSkill(Agent* self) { ((AISceneUnitHero*)self)->PickSkill(); }
+	inline void FunctionPointer_AISceneUnitHero_CaskSkill(Agent* self) { ((AISceneUnitHero*)self)->CaskSkill(); }
 }
 #endif // _BEHAVIAC_AGENT_PROPERTIES_H_

@@ -208,9 +208,19 @@ namespace GameLogic
 		}
 		else
 		{
-			std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
-			if (nullptr != target_su)
-				ret[target_su->GetId()] = target_su;
+			int filter_id = m_base_cfg->GetFilterId();
+			if (SELECT_TARGET_FILTER_CONFIG_ID == filter_id)
+			{
+				std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
+				if (nullptr != target_su)
+					ret[target_su->GetId()] = target_su;
+			}
+			if (SELECT_SELF_FILTER_CONFIG_ID == filter_id)
+			{
+				std::shared_ptr<SceneUnit> self_su = this->GetCaster();
+				if (nullptr != self_su)
+					ret[self_su->GetId()] = self_su;
+			}
 		}
 		return std::move(ret);
 	}

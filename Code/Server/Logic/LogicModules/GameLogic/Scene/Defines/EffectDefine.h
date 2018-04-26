@@ -152,5 +152,8 @@ namespace GameLogic
 		EEffectFilterLimitNumPriority_NearTarget,
 		EEffectFilterLimitNumPriority_AwayTarget,
 	};
+
+	const static int SELECT_SELF_FILTER_CONFIG_ID = -1; // 选择自己的过滤器配置id
+	const static int SELECT_TARGET_FILTER_CONFIG_ID = 0; // 选择目标的过滤器配置id
 }
 

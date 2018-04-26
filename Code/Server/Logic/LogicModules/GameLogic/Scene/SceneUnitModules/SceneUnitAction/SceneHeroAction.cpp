@@ -27,8 +27,9 @@ namespace GameLogic
 
 	void SceneHeroAction::OnAwake()
 	{
-		m_bt_agent = behaviac::Agent::Create<AIHero>();
-		const char *bt_tree_name = "FirstBT";
+		m_bt_agent = behaviac::Agent::Create<AISceneUnitHero>();
+		m_bt_agent->Init((long long)this);
+		const char *bt_tree_name = "T_HeroCastSkill";
 		bool ret = m_bt_agent->btload(bt_tree_name);
 		m_bt_agent->btsetcurrent(bt_tree_name);
 		assert(ret);

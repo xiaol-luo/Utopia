@@ -11,5 +11,6 @@
 #include "AIHero.h"
 #include "SecondAgent.h"
 #include "FirstAgent.h"
+#include "AISceneUnitHero.h"
 
 #endif // _BEHAVIAC_AGENT_HEADERS_H_
