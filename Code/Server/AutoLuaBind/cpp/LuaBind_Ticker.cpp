@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Utils/Ticker.h"
+#include "ShareCode/Common/Utils/Ticker.h"
 
 namespace SolLuaBind
 {

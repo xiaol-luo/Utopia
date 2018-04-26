@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneModule/SceneModule.h"	
-#include "GameLogic/Scene/Navigation/NavMesh.h"	
-#include "GameLogic/Scene/SceneModule/SceneMove/SceneMove.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/Navigation/NavMesh.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneMove/SceneMove.h"
 
 namespace SolLuaBind
 {

@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "GameLogic/Scene/Effects/EffectGroup/EffectGroupConfig.h"	
-#include "effect/CsvEffectGroupConfig.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
-#include "GameLogic/Scene/Effects/EffectConfigBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectGroup/EffectGroupConfig.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {

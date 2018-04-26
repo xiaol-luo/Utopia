@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "GameLogic/Scene/Defines/SceneDefine.h"
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"
 
 namespace SolLuaBind
 {
@@ -28,7 +28,8 @@ namespace SolLuaBind
 					"ESceneUnitModule_Sight", 4,
 					"ESceneUnitModule_Action", 5,
 					"ESceneUnitModule_Skills", 6,
-					"ESceneUnitModule_Count", 7
+					"ESceneUnitModule_Missle", 7,
+					"ESceneUnitModule_Count", 8
 				);
 			}
 		};

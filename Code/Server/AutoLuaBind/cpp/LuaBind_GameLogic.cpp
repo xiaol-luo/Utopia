@@ -1,23 +1,19 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "Common/Geometry/GeometryDefine.h"	
-#include "recastnavigation/Recast/Include/Recast.h"	
-#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "GameLogic/Scene/Defines/EffectDefine.h"	
-#include "GameLogic/Scene/Skills/Skill.h"	
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
 #include "protobuf/include/google/protobuf/message.h"	
-#include "recastnavigation/DetourCrowd/Include/DetourCrowd.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "recastnavigation/DetourTileCache/Include/DetourTileCache.h"	
-#include "GameLogic/Scene/Navigation/NavMesh.h"	
-#include "recastnavigation/Detour/Include/DetourNavMesh.h"	
-#include "GameLogic/Scene/Navigation/NavMeshUtil.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Defines/ViewDefine.h"	
-#include "recastnavigation/Detour/Include/DetourNavMeshQuery.h"	
-#include "recastnavigation/RecastDemo/Include/InputGeom.h"
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"
 
 namespace SolLuaBind
 {
@@ -77,6 +73,12 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set_function(name, GameLogic::StrToEffectFilterAnchor);
+				}				
+				{
+					std::string name = "AddGuidedMissileToScene";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set_function(name, GameLogic::AddGuidedMissileToScene);
 				}			
 			}
 		};

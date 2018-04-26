@@ -1,12 +1,12 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Skills/Skill.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "Common/Utils/Ticker.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitAction/SceneHeroAction.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 
 namespace SolLuaBind
 {

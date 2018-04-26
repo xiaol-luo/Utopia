@@ -1,15 +1,16 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"	
-#include "GameLogic/Scene/Skills/Skill.h"	
-#include "GameLogic/Scene/Defines/EffectDefine.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "LogicModules/GameLogic/Scene/Config/SceneAllConfig.h"
 
 namespace SolLuaBind
 {
@@ -37,16 +38,9 @@ namespace SolLuaBind
 						GameLogic::Skill(const GameLogic::SkillConfig *)
 						>(),
 						"__StructName__", sol::property([]() {return "Skill"; })				
-						,"GetSkillId", &GameLogic::Skill::GetSkillId				
-						,"SetSceneUnitSkills", &GameLogic::Skill::SetSceneUnitSkills				
-						,"GetSceneUnitSkills", &GameLogic::Skill::GetSceneUnitSkills				
-						,"GetCaster", &GameLogic::Skill::GetCaster				
 						,"SetLevel", &GameLogic::Skill::SetLevel				
 						,"GetLevel", &GameLogic::Skill::GetLevel				
 						,"GetMaxLevel", &GameLogic::Skill::GetMaxLevel				
-						,"SetSkillKey", &GameLogic::Skill::SetSkillKey				
-						,"GetSkillKey", &GameLogic::Skill::GetSkillKey				
-						,"GetLvlCfg", &GameLogic::Skill::GetLvlCfg				
 						,"GetCfg", &GameLogic::Skill::GetCfg				
 						,"ReloadCfg", &GameLogic::Skill::ReloadCfg				
 						,"GetStage", &GameLogic::Skill::GetStage				
@@ -64,7 +58,7 @@ namespace SolLuaBind
 						,"RemoveGuideEffect", &GameLogic::Skill::RemoveGuideEffect				
 						,"ClearGuideEffects", &GameLogic::Skill::ClearGuideEffects				
 						, sol::base_classes, sol::bases<
-							std::enable_shared_from_this<GameLogic::Skill> 
+							GameLogic::SkillBase 
 						>()
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);

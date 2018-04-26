@@ -1,7 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Skills/SkillConfig.h"	
-#include "CsvConfigSets.h"
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"
 
 namespace SolLuaBind
 {
@@ -26,15 +27,16 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::SkillConfig> meta_table(
 						"__StructName__", sol::property([]() {return "SkillConfig"; })				
-						,"id", &GameLogic::SkillConfig::id				
-						,"name", &GameLogic::SkillConfig::name				
 						,"is_normal_attack", &GameLogic::SkillConfig::is_normal_attack				
 						,"use_way", &GameLogic::SkillConfig::use_way				
 						,"target_relations", &GameLogic::SkillConfig::target_relations				
 						,"target_types", &GameLogic::SkillConfig::target_types				
 						,"max_level", &GameLogic::SkillConfig::max_level				
 						,"level_cfgs", &GameLogic::SkillConfig::level_cfgs				
-						,"GetLvlCfg", &GameLogic::SkillConfig::GetLvlCfg
+						,"GetLvlCfg", &GameLogic::SkillConfig::GetLvlCfg				
+						, sol::base_classes, sol::bases<
+							GameLogic::SkillConfigBase 
+						>()
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}
