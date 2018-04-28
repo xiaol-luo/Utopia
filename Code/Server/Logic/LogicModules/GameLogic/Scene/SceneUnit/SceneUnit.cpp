@@ -51,11 +51,13 @@ namespace GameLogic
 	{
 		if (m_inited)
 			return;
+
+		this->GetTransform();
+		
 		m_inited = true;
 		m_started = false;
 		m_inScene = true;
 
-		this->GetTransform();
 		{
 			m_scene = scene;
 			m_id = id;

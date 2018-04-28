@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Utils/MemoryUtil.h"	
-#include "MemoryPool/MemoryPoolMgr.h"	
-#include "protobuf/include/google/protobuf/arena.h"
+#include "Libs/OwnLibs/MemoryPool/MemoryPoolMgr.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/arena.h"	
+#include "Logic/ShareCode/Common/Utils/MemoryUtil.h"
 
 namespace SolLuaBind
 {

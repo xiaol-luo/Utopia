@@ -2,7 +2,27 @@
 <!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
 <!--Source File: T_HeroCastSkill.xml-->
 <behavior name="T_HeroCastSkill" agenttype="AISceneUnitHero" version="5">
+  <pars>
+    <par name="m_is_active" type="bool" value="true" />
+  </pars>
   <node class="Sequence" id="0">
+    <node class="Assignment" id="11">
+      <property CastRight="false" />
+      <property Opl="bool Self.AISceneUnitHero::m_is_active" />
+      <property Opr="Self.AISceneUnitHero::IsActive()" />
+    </node>
+    <node class="IfElse" id="9">
+      <node class="Condition" id="10">
+        <property Operator="NotEqual" />
+        <property Opl="bool Self.AISceneUnitHero::m_is_active" />
+        <property Opr="const bool true" />
+      </node>
+      <node class="End" id="13">
+        <property EndOutside="false" />
+        <property EndStatus="const behaviac::EBTStatus BT_FAILURE" />
+      </node>
+      <node class="Noop" id="12" />
+    </node>
     <node class="IfElse" id="1">
       <node class="Condition" id="3">
         <property Operator="Equal" />

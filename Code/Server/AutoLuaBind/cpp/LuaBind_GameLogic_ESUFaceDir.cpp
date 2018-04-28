@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"
+#include "Logic/LogicModules/GameLogic/Scene/Defines/SceneDefine.h"
 
 namespace SolLuaBind
 {

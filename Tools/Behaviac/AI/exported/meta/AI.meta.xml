@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
-<agents version="1" signature="3379815797">
+<agents version="1" signature="140634361">
   <agent type="AIHero" base="behaviac::Agent" signature="263444190">
     <properties>
       <property name="name" type="string" member="false" static="false" defaultvalue="" />
@@ -17,7 +17,7 @@
       <property name="p1" type="int" member="false" static="false" defaultvalue="0" />
     </properties>
   </agent>
-  <agent type="AISceneUnitHero" base="behaviac::Agent" signature="3386506320">
+  <agent type="AISceneUnitHero" base="behaviac::Agent" signature="3866549451">
     <properties>
       <property name="hero" type="llong" member="false" static="false" defaultvalue="0" />
       <property name="skill_keyid" type="ulong" member="false" static="false" defaultvalue="0" />

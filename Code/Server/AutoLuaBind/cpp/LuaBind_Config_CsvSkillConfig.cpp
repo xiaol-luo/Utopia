@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Config/AutoCsvCode/skill/CsvSkillConfig.h"
+#include "skill/CsvSkillConfig.h"
 
 namespace SolLuaBind
 {

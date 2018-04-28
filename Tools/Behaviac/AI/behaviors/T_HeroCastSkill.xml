@@ -2,11 +2,35 @@
 <Behavior Version="5" NoError="true">
   <Node Class="Behaviac.Design.Nodes.Behavior" AgentType="AISceneUnitHero" Domains="" Enable="true" HasOwnPrefabData="false" Id="-1" PrefabName="" PrefabNodeId="-1">
     <Comment Background="NoColor" Text="" />
+    <Parameters>
+      <Parameter Name="m_is_active" Type="System.Boolean" DefaultValue="true" DisplayName="m_is_active" Desc="m_is_active" Display="true" />
+    </Parameters>
     <DescriptorRefs value="0:" />
     <Connector Identifier="GenericChildren">
       <Node Class="PluginBehaviac.Nodes.Sequence" Enable="true" HasOwnPrefabData="false" Id="0" PrefabName="" PrefabNodeId="-1">
         <Comment Background="NoColor" Text="" />
         <Connector Identifier="GenericChildren">
+          <Node Class="PluginBehaviac.Nodes.Assignment" CastRight="false" Enable="true" HasOwnPrefabData="false" Id="11" Opl="bool Self.AISceneUnitHero::m_is_active" Opr="Self.AISceneUnitHero::IsActive()" PrefabName="" PrefabNodeId="-1">
+            <Comment Background="NoColor" Text="" />
+          </Node>
+          <Node Class="PluginBehaviac.Nodes.IfElse" Enable="true" HasOwnPrefabData="false" Id="9" PrefabName="" PrefabNodeId="-1">
+            <Comment Background="NoColor" Text="" />
+            <Connector Identifier="_condition">
+              <Node Class="PluginBehaviac.Nodes.Condition" Enable="true" HasOwnPrefabData="false" Id="10" Operator="NotEqual" Opl="bool Self.AISceneUnitHero::m_is_active" Opr="const bool true" PrefabName="" PrefabNodeId="-1">
+                <Comment Background="NoColor" Text="" />
+              </Node>
+            </Connector>
+            <Connector Identifier="_if">
+              <Node Class="PluginBehaviac.Nodes.End" Enable="true" EndOutside="false" EndStatus="const behaviac::EBTStatus BT_FAILURE" HasOwnPrefabData="false" Id="13" PrefabName="" PrefabNodeId="-1">
+                <Comment Background="NoColor" Text="" />
+              </Node>
+            </Connector>
+            <Connector Identifier="_else">
+              <Node Class="PluginBehaviac.Nodes.Noop" Enable="true" HasOwnPrefabData="false" Id="12" PrefabName="" PrefabNodeId="-1">
+                <Comment Background="NoColor" Text="" />
+              </Node>
+            </Connector>
+          </Node>
           <Node Class="PluginBehaviac.Nodes.IfElse" Enable="true" HasOwnPrefabData="false" Id="1" PrefabName="" PrefabNodeId="-1">
             <Comment Background="NoColor" Text="" />
             <Connector Identifier="_condition">

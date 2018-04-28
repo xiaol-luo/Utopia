@@ -25,6 +25,7 @@ namespace GameLogic
 		std::shared_ptr<SkillBase> GetSkill() { return m_user_effect_param.skill; }
 		std::shared_ptr<SceneUnit> GetCaster();
 		std::shared_ptr<SceneUnit> GetEffectTarget();
+		UseEffectParam GetUseEffectParam() { return m_user_effect_param; }
 
 		void Begin(UseEffectParam use_effect_param);
 		void End(EEffectEndCase end_case);

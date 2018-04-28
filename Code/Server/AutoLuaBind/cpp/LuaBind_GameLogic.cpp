@@ -1,19 +1,19 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "ShareCode/Common/Utils/Ticker.h"	
-#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
-#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
-#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
-#include "protobuf/include/google/protobuf/message.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "ShareCode/Common/Geometry/Vector2.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
-#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"
+#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/ViewDefine.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "Logic/ShareCode/Common/Utils/Ticker.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
+#include "Logic/ShareCode/Common/Geometry/Vector3.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "Logic/ShareCode/Common/Geometry/Vector2.h"
 
 namespace SolLuaBind
 {
@@ -43,6 +43,18 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set(name, GameLogic::VIEW_GRID_INVALID_IDX);
+				}				
+				{
+					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
+				}				
+				{
+					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
 				}				
 				{
 					std::string name = "SCENE_UNIT_INVALID_ID";

@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LuaHelps/LuaLoadFiles.h"
+#include "Logic/LuaHelps/LuaLoadFiles.h"
 
 namespace SolLuaBind
 {

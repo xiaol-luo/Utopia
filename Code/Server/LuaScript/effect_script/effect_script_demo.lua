@@ -11,6 +11,16 @@ end
 
 function effect_script_demo.on_late_begin(self)
     print("effect_script_demo.on_begin")
+    local param = GameLogic.GuidedMissileParam.new()
+    param.target_type = GameLogic.GuidedMissileParam.TargetType.TargetType_Pos
+    param.target_pos.x = 60
+    param.target_pos.y = 0
+    param.target_pos.z = 60
+    param.move_speed = 5
+    param.max_alive_sec  = 10000
+    param.effect_ids:add(7000005)
+    param.use_effect_param = self.effect:GetUseEffectParam()
+    local gm = GameLogic.AddGuidedMissileToScene(param.use_effect_param.pos, param.use_effect_param.dir, param)
 end
 
 function effect_script_demo.on_late_end(self)
@@ -22,14 +32,8 @@ function effect_script_demo.on_late_loop(self, now_ms, delta_ms)
     if self.loop_times > 10 then 
         self.is_done = true
     end
-    print("effect_script_demo.on_loop")
-    local key = self.effect:GetKey()
-    local cfg = self.effect:GetCfg()
-    print("loop key", key, cfg)
-    print("loop cfg id", cfg:GetId())
-    cfg = LuaDyCast.ToEffectScriptConfig(cfg)
-    local class_name = cfg:GetClassName(cfg)
-    print("loop cfg className", class_name)
+
+
 end
 
 

@@ -20,7 +20,7 @@ namespace GameLogic
 		Vector3 target_pos;
 		std::shared_ptr<SceneUnit> target_su;
 		float move_speed = 0;
-		float maxAliveSec = 20.0f;
+		float max_alive_sec = 20.0f;
 		UseEffectParam use_effect_param;
 		std::vector<int> effect_ids;
 	};
@@ -56,5 +56,5 @@ namespace GameLogic
 		int m_wait_frame_for_destroy = 0;
 	};
 
-	std::shared_ptr<SceneUnit> AddGuidedMissileToScene(GuidedMissileParam param);
+	std::shared_ptr<SceneUnit> AddGuidedMissileToScene(const Vector2 &pos, Vector2 face_dir, GuidedMissileParam param);
 }

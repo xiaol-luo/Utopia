@@ -18,11 +18,10 @@ namespace GameLogic
 
 	bool SceneUnitGuidedMissile::SetParam(const GuidedMissileParam &param)
 	{
-		if (GuidedMissileState_None == m_curr_state)
+		if (GuidedMissileState_None != m_curr_state)
 			return false;
 		m_param = param;
 		m_curr_state = GuidedMissileState_Ready;
-		m_ticker.Restart(m_param.maxAliveSec);
 		return true;
 	}
 
@@ -35,6 +34,9 @@ namespace GameLogic
 	{
 		if (GuidedMissileState_Ready == m_curr_state)
 		{
+			m_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, this->GetScene()));
+			m_ticker.Restart(m_param.max_alive_sec);
+
 			m_curr_state = GuidedMissileState_Moving;
 			if (GuidedMissileParam::TargetType_Pos == m_param.target_type)
 			{
@@ -65,14 +67,21 @@ namespace GameLogic
 			Vector3 nor1 = m_param.target_pos - m_transform->GetPos();
 			Vector3 nor2 = ret_pos - m_param.target_pos;
 			nor1.y = 0; nor2.y = 0;
+			bool isHitPoint = false;
 			if (nor2.SqrMagnitude() > FLT_MIN)
 			{
 				nor1.Normalize(); nor2.Normalize();
 				if (Vector3::Dot(nor1, nor2) > 0) // 夹角小于90度，也即ret_pos越过了target_pos
-				{
-					ret_pos = m_param.target_pos;
-					m_curr_state = GuidedMissileState_Hit;
-				}
+					isHitPoint = true;
+			}
+			else
+			{
+				isHitPoint = true;
+			}
+			if (isHitPoint)
+			{
+				ret_pos = m_param.target_pos;
+				m_curr_state = GuidedMissileState_Hit;
 			}
 			m_transform->SetLocalPos(ret_pos);
 		}
@@ -108,13 +117,15 @@ namespace GameLogic
 		}
 	}
 
-	std::shared_ptr<SceneUnit> AddGuidedMissileToScene(GuidedMissileParam param)
+	std::shared_ptr<SceneUnit> AddGuidedMissileToScene(const Vector2 &pos, Vector2 face_dir, GuidedMissileParam param)
 	{
 		auto su = std::make_shared<SceneUnit>();
 		su->SetUnitType(NetProto::EsceneUnitType_Effect);
 		su->SetModelId(1);
 		auto sugm = su->AddModule(std::make_shared<SceneUnitGuidedMissile>());
 		sugm->SetParam(param);
+		su->GetTransform()->SetLocalPos(Vector3(pos));
+		su->GetTransform()->SetFaceDir(face_dir, ESUFaceDir::ESUFaceDir_Move);
 		auto scene = param.use_effect_param.skill->GetCaster()->GetScene();
 		scene->AddUnit(su);
 		return su;

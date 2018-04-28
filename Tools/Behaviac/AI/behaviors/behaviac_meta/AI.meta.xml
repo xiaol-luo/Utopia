@@ -52,8 +52,9 @@
       <Method Name="CaskSkill" DisplayName="TryCaskSkill" Desc="释放技能" Class="AISceneUnitHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="PickSkill" DisplayName="PickOneSkill" Desc="选择一个技能" Class="AISceneUnitHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false" />
       <Method Name="Init" DisplayName="Init" Desc="Init" Class="AISceneUnitHero" ReturnType="void" ReturnTypeFullName="System.Void" Static="false" Public="true" istask="false">
-        <Param Name="param" Type="llong" TypeFullName="System.UInt64" DisplayName="param" Desc="param" />
+        <Param Name="param" Type="llong" TypeFullName="Behaviac.Design.llong" DisplayName="param" Desc="param" />
       </Method>
+      <Method Name="IsActive" DisplayName="IsActive" Desc="是否被激活" Class="AISceneUnitHero" ReturnType="bool" ReturnTypeFullName="System.Boolean" Static="false" Public="true" istask="false" />
     </agent>
   </agents>
   <instances>

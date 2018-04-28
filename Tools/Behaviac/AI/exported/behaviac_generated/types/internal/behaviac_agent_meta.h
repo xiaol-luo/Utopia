@@ -46,6 +46,7 @@ namespace behaviac
 	inline const void* Get_AISceneUnitHero_skill_keyid(Agent* self) { return &((AISceneUnitHero*)self)->skill_keyid; };
 
 	inline void FunctionPointer_AISceneUnitHero_Init(Agent* self, long long param) { ((AISceneUnitHero*)self)->Init(param); }
+	inline bool FunctionPointer_AISceneUnitHero_IsActive(Agent* self) { return ((AISceneUnitHero*)self)->IsActive(); }
 	inline void FunctionPointer_AISceneUnitHero_LogMessage(char* param0) { AISceneUnitHero::LogMessage(param0); }
 	inline void FunctionPointer_AISceneUnitHero_PickSkill(Agent* self) { ((AISceneUnitHero*)self)->PickSkill(); }
 	inline void FunctionPointer_AISceneUnitHero_CaskSkill(Agent* self) { ((AISceneUnitHero*)self)->CaskSkill(); }

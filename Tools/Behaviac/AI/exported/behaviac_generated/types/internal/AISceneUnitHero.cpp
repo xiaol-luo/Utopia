@@ -40,6 +40,17 @@ void AISceneUnitHero::Init(long long param)
 ///<<< END WRITING YOUR CODE
 }
 
+bool AISceneUnitHero::IsActive()
+{
+///<<< BEGIN WRITING YOUR CODE IsActive
+	if (nullptr == m_su)
+		return false;
+	if (0 != m_su->GetPlayerId())
+		return false;
+	return true;
+///<<< END WRITING YOUR CODE
+}
+
 void AISceneUnitHero::PickSkill()
 {
 ///<<< BEGIN WRITING YOUR CODE PickSkill
@@ -61,6 +72,12 @@ void AISceneUnitHero::PickSkill()
 void AISceneUnitHero::CaskSkill()
 {
 ///<<< BEGIN WRITING YOUR CODE CaskSkill
+
+	auto skill = m_skills->GetSkill(skill_keyid);
+	if (nullptr != skill)
+	{
+		auto cfg = skill->GetCfg();
+	}
 
 	this->ResetData();
 

@@ -237,7 +237,7 @@ namespace behaviac
 
 		virtual bool load()
 		{
-			AgentMeta::SetTotalSignature(3379815797u);
+			AgentMeta::SetTotalSignature(140634361u);
 
 			AgentMeta* meta = NULL;
 			BEHAVIAC_UNUSED_VAR(meta);
@@ -292,11 +292,12 @@ namespace behaviac
 			meta->RegisterMethod(502968959u, BEHAVIAC_NEW CMethod_behaviac_Agent_VectorRemove());
 
 			// AISceneUnitHero
-			meta = BEHAVIAC_NEW AgentMeta(3386506320u);
+			meta = BEHAVIAC_NEW AgentMeta(3866549451u);
 			AgentMeta::GetAgentMetas()[1895349304u] = meta;
 			meta->RegisterMemberProperty(773471248u, BEHAVIAC_NEW CMemberProperty< long long >("hero", Set_AISceneUnitHero_hero, Get_AISceneUnitHero_hero));
 			meta->RegisterMemberProperty(2514773374u, BEHAVIAC_NEW CMemberProperty< unsigned long >("skill_keyid", Set_AISceneUnitHero_skill_keyid, Get_AISceneUnitHero_skill_keyid));
 			meta->RegisterMethod(3170843310u, BEHAVIAC_NEW CAgentMethodVoid_1<long long>(FunctionPointer_AISceneUnitHero_Init));
+			meta->RegisterMethod(693450483u, BEHAVIAC_NEW CAgentMethod< bool >(FunctionPointer_AISceneUnitHero_IsActive));
 			meta->RegisterMethod(1045109914u, BEHAVIAC_NEW CAgentStaticMethodVoid_1<char*>(FunctionPointer_AISceneUnitHero_LogMessage));
 			meta->RegisterMethod(1375450046u, BEHAVIAC_NEW CAgentMethodVoid(FunctionPointer_AISceneUnitHero_PickSkill));
 			meta->RegisterMethod(1510021734u, BEHAVIAC_NEW CAgentMethodVoid(FunctionPointer_AISceneUnitHero_CaskSkill));

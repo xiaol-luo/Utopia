@@ -36,6 +36,8 @@ public:
 
 	public: void Init(long long param);
 
+	public: bool IsActive();
+
 	public: void PickSkill();
 
 	public: void CaskSkill();
