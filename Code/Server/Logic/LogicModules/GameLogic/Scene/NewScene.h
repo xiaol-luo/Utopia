@@ -84,7 +84,7 @@ namespace GameLogic
 		void ForeachSceneUnit(std::function<void(std::shared_ptr<SceneUnit>, void *param)> fn, void *param);
 
 	protected:
-		uint64_t m_last_scene_unit_id;
+		uint64_t m_last_scene_unit_id = SCENE_UNIT_INVALID_ID;
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> m_scene_units;
 		std::unordered_map<uint64_t, std::weak_ptr<SceneUnit>> m_cached_scene_units;
 		std::unordered_set<uint64_t> m_removed_scene_unit_ids;

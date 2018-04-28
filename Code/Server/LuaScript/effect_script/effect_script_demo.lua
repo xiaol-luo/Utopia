@@ -13,14 +13,13 @@ function effect_script_demo.on_late_begin(self)
     print("effect_script_demo.on_begin")
     local param = GameLogic.GuidedMissileParam.new()
     param.target_type = GameLogic.GuidedMissileParam.TargetType.TargetType_Pos
-    param.target_pos.x = 60
-    param.target_pos.y = 0
-    param.target_pos.z = 60
     param.move_speed = 5
     param.max_alive_sec  = 10000
     param.effect_ids:add(7000005)
     param.use_effect_param = self.effect:GetUseEffectParam()
-    local gm = GameLogic.AddGuidedMissileToScene(param.use_effect_param.pos, param.use_effect_param.dir, param)
+	param.target_pos = param.use_effect_param.pos
+	local start_pos = self.effect:GetSkill():GetCaster(): GetTransform():GetPos():XZ()
+    local gm = GameLogic.AddGuidedMissileToScene(start_pos, param.use_effect_param.dir, param)
 end
 
 function effect_script_demo.on_late_end(self)

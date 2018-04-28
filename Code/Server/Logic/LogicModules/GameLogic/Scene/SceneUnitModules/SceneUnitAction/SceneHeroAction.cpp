@@ -25,7 +25,7 @@ namespace GameLogic
 
 	}
 
-	void SceneHeroAction::OnAwake()
+	void SceneHeroAction::OnEnterScene()
 	{
 		m_bt_agent = behaviac::Agent::Create<AISceneUnitHero>();
 		m_bt_agent->Init((long long)this);

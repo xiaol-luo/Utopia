@@ -37,7 +37,6 @@ namespace GameLogic
 		}
 
 		virtual uint64_t GetId();
-		virtual void SetId(uint64_t val) {}
 		inline SceneUnitEventProxy * GetEvProxy() { return m_event_proxy; }
 		inline EventDispacherProxy * GetSceneEvProxy() { return m_scene_event_proxy; }
 
@@ -49,17 +48,19 @@ namespace GameLogic
 
 	private:
 		void Init(SceneUnit *owner);
-		void Awake() { this->OnAwake(); }
+		void EnterScene() { this->OnEnterScene(); }
 		void Start() { this->OnStart(); }
 		void Update() { this->OnUpdate(); }
+		void LeaveScene() { this->OnLeaveScene(); }
 		void Realse() { this->OnRelease(); }
 		void Destroy();
 
 	protected:
 		virtual void OnInit() {}
-		virtual void OnAwake() {}
+		virtual void OnEnterScene() {}
 		virtual void OnStart() {}
 		virtual void OnUpdate() {}
+		virtual void OnLeaveScene() {}
 		virtual void OnRelease() {}
 		virtual void OnDestroy() {}
 		virtual std::vector<SyncClientMsg> CollectPBInit() { return std::move(std::vector<SyncClientMsg>()); }

@@ -125,7 +125,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitSight::OnAwake()
+	void SceneUnitSight::OnEnterScene()
 	{
 	}
 

@@ -59,7 +59,7 @@ namespace GameLogic
 						link_vec2 = target_su->GetTransform()->GetFaceDir();
 					Vector2 mv_dir = GeometryUtils::RotateVector2(link_vec2, m_cfg->GetMoveDeg());
 
-					su_mv->ForceMoveLine(mv_dir, m_cfg->GetSpeed(), m_cfg->GetTimeMs() * 0.001, m_cfg->IgnoreTerrian());
+					su_mv->ForceMoveLine(mv_dir, m_cfg->GetSpeed(), m_cfg->GetTimeSec(), m_cfg->IgnoreTerrian());
 				}
 			}
 		}

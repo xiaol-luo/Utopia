@@ -96,9 +96,10 @@ namespace GameLogic
 			return;
 		node_unit->Deattach();
 
-		if (nullptr == root || nullptr == node_unit->unit)
+		auto unit = node_unit->unit.lock();
+		if (nullptr == root || nullptr == unit)
 			return;
-		std::shared_ptr<SceneUnitBody> su_body = node_unit->unit->GetModule<SceneUnitBody>();
+		std::shared_ptr<SceneUnitBody> su_body = unit->GetModule<SceneUnitBody>();
 		if (nullptr == su_body)
 			return;
 

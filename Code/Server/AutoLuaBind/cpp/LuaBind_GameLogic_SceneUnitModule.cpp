@@ -37,7 +37,6 @@ namespace SolLuaBind
 						,"GetScene", &GameLogic::SceneUnitModule::GetScene				
 						,"GetModuleName", &GameLogic::SceneUnitModule::GetModuleName				
 						,"GetId", &GameLogic::SceneUnitModule::GetId				
-						,"SetId", &GameLogic::SceneUnitModule::SetId				
 						,"GetEvProxy", &GameLogic::SceneUnitModule::GetEvProxy				
 						,"GetSceneEvProxy", &GameLogic::SceneUnitModule::GetSceneEvProxy				
 						,"SendSelf", &GameLogic::SceneUnitModule::SendSelf				

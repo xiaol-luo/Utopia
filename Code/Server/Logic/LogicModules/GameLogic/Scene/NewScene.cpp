@@ -165,8 +165,8 @@ namespace GameLogic
 
 		std::shared_ptr<SceneUnit> su = it->second;
 		su->LeaveScene();
-		m_removed_scene_unit_ids.insert(m_last_scene_unit_id);
-		m_new_scene_unit_ids.erase(m_last_scene_unit_id);
+		m_removed_scene_unit_ids.insert(id);
+		m_new_scene_unit_ids.erase(id);
 		m_scene_units.erase(it);
 	}
 
@@ -227,7 +227,7 @@ namespace GameLogic
 			return;
 
 		m_logic_detal_ms = delta_ms;
-		m_logic_detal_ms = 100;
+		m_logic_detal_ms = 100; // for test
 		m_logic_ms += m_logic_detal_ms;
 
 		this->UpdateCachedSceneUnits();

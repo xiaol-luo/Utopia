@@ -278,7 +278,8 @@ namespace GameLogic
 		m_qtree.FindUnits(rect, node_units);
 		for (SceneUnitQTreeNodeUnit *node_unit : node_units)
 		{
-			out_ret[node_unit->unit->GetId()] = node_unit->unit;
+			auto unit = node_unit->unit.lock();
+			out_ret[unit->GetId()] = unit;
 		}
 	}
 
@@ -310,7 +311,7 @@ namespace GameLogic
 
 		SceneUnitQTreeNodeUnit *unit_node = new SceneUnitQTreeNodeUnit();
 		unit_node->unit = su;
-		m_id_unit_map.insert(std::make_pair(unit_node->unit->GetId(), unit_node));
+		m_id_unit_map.insert(std::make_pair(su->GetId(), unit_node));
 
 		m_qtree.UpdateNodeUnit(unit_node);
 	}

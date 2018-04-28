@@ -28,7 +28,7 @@ public class Scene
         {
             foreach (var kv_pair in m_sceneObjects)
             {
-                if (kv_pair.Key != mainHero.id)
+                if (kv_pair.Key != mainHero.id && kv_pair.Value.unitType == mainHero.unitType)
                     return kv_pair.Key;
             }
             return 0;

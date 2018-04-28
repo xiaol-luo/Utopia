@@ -51,7 +51,7 @@ namespace GameLogic
 				timeMs = distance / speed;
 			}
 			assert(isOk && timeMs > 0 && speed > 0);
-			m_timeMs = timeMs;
+			m_timeSec = timeMs;
 			m_speed = speed;
 		}
 		return true;

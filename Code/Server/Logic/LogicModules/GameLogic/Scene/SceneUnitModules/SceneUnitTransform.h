@@ -41,7 +41,7 @@ namespace GameLogic
 		Vector2 m_face_dir[ESUFaceDir_Count];
 
 	protected:
-		virtual void OnAwake() override;
+		virtual void OnEnterScene() override;
 		void OnMoveVolecityChange(Vector3 old_val, Vector3 new_pos);
 
 	public:

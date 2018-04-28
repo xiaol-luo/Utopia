@@ -63,7 +63,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitMove::OnAwake()
+	void SceneUnitMove::OnEnterScene()
 	{
 		m_states[NetProto::EMoveAgentState_Idle] = new SceneUnitMoveIdleState(this);
 		m_states[NetProto::EMoveAgentState_MoveToDir] = new SceneUnitMoveToDirState(this);

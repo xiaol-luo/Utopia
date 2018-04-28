@@ -37,7 +37,7 @@ namespace SolLuaBind
 						>(),
 						"__StructName__", sol::property([]() {return "SceneUnitGuidedMissile"; })				
 						,"SetParam", &GameLogic::SceneUnitGuidedMissile::SetParam				
-						,"OnAwake", &GameLogic::SceneUnitGuidedMissile::OnAwake				
+						,"OnAwake", &GameLogic::SceneUnitGuidedMissile::OnEnterScene				
 						,"OnUpdate", &GameLogic::SceneUnitGuidedMissile::OnUpdate				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitMissile 

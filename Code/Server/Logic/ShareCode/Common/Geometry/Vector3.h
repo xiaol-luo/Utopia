@@ -1,6 +1,6 @@
 #pragma once
 
-struct Vector2;
+#include "Vector2.h"
 
 struct Vector3
 {
@@ -10,6 +10,7 @@ struct Vector3
 	Vector3() : x(0), y(0), z(0) {}
 	Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
 	Vector3(const Vector3 &other) : x(other.x), y(other.y), z(other.z) {}
+	Vector3(const Vector2 &other) : x(other.x), y(0), z(other.y) {}
 
 	float operator [] (int index) const;
 	void operator = (const Vector3 &other);

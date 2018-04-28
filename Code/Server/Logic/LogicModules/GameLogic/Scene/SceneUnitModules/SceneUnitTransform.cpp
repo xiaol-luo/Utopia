@@ -149,7 +149,7 @@ namespace GameLogic
 		return angle;
 	}
 
-	void SceneUnitTransform::OnAwake()
+	void SceneUnitTransform::OnEnterScene()
 	{
 		this->GetEvProxy()->Subscribe<Vector3, Vector3>(ESU_VolecityChange, 
 			std::bind(&SceneUnitTransform::OnMoveVolecityChange,

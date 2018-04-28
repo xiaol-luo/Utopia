@@ -51,6 +51,7 @@ namespace GameLogic
 		if (ESceneObjectShape_Circle == m_shape && this->GetRadius() < FLT_EPSILON)
 			return;
 
+		int unitType = this->GetOwner()->GetUnitType();
 		Vector3 pos = this->GetOwner()->GetTransform()->GetPos();
 		ViewGrid *locate_grid = m_scene_view->GetGrid(pos.x, pos.z);
 		if (nullptr != locate_grid)
@@ -103,6 +104,11 @@ namespace GameLogic
 		circle.center = m_owner->GetTransform()->GetPos().XZ();
 		circle.radius = m_size_x;
 		return circle;
+	}
+
+	void SceneUnitBody::OnLeaveScene()
+	{
+		this->ResetCoverGrids();
 	}
 
 	void SceneUnitBody::ResetCoverGrids()

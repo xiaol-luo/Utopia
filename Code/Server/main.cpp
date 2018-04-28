@@ -13,7 +13,6 @@
 #include <sol.hpp>
 #include "Utils/PlatformCompat.h"
 #include <LuaHelps/LuaLoadFiles.h>
-#include "Utils/ConvertibleValue.h"
 
 extern ServerLogic *server_logic;
 namespace SolLuaBind

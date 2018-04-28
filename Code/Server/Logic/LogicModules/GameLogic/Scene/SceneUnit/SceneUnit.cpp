@@ -64,7 +64,6 @@ namespace GameLogic
 			m_scene_event_proxy = new EventDispacherProxy(m_scene->GetEvDispacher());
 			m_event_proxy = new SceneUnitEventProxy(m_event_dispacher, m_scene_event_proxy, this->shared_from_this());
 		}
-
 		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
@@ -73,15 +72,19 @@ namespace GameLogic
 		for (auto &&module : m_modules)
 		{
 			if (nullptr != module)
-				module->Awake();
+				module->EnterScene();
 		}
-
 		this->GetEvProxy()->Fire(ESU_EnterScene);
 	}
 
 	void SceneUnit::LeaveScene()
 	{
 		m_inScene = false;
+		for (auto &&module : m_modules)
+		{
+			if (nullptr != module)
+				module->LeaveScene();
+		}
 		this->GetEvProxy()->Fire(ESU_LeaveScene);
 	}
 

@@ -14,7 +14,7 @@ namespace GameLogic
 
 	struct SceneUnitQTreeNodeUnit
 	{
-		std::shared_ptr<SceneUnit> unit = nullptr;
+		std::weak_ptr<SceneUnit> unit;
 		std::unordered_set<SceneUnitQTreeNode *> attached_qtree_nodes;
 
 		void Deattach();

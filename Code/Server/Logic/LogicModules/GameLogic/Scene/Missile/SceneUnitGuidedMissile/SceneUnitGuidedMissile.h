@@ -43,7 +43,7 @@ namespace GameLogic
 		virtual ~SceneUnitGuidedMissile() override;
 
 		bool SetParam(const GuidedMissileParam &param);
-		void virtual OnAwake() override;
+		void virtual OnEnterScene() override;
 		virtual void OnUpdate() override;
 
 	protected:

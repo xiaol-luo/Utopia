@@ -24,7 +24,7 @@ namespace GameLogic
 		void UpdateState();
 
 	protected:
-		virtual void OnAwake() override;
+		virtual void OnEnterScene() override;
 		virtual void OnDestroy() override;
 		void ClearSight();
 		SceneView *m_scene_view = nullptr;

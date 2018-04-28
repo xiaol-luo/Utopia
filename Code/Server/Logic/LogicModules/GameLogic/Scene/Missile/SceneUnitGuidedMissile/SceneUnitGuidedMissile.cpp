@@ -2,8 +2,10 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/Skills/Skill.h"
+#include "GameLogic/Scene/SceneModule/SceneView/SceneView.h"
 
 namespace GameLogic
 {
@@ -25,13 +27,16 @@ namespace GameLogic
 		return true;
 	}
 
-	void SceneUnitGuidedMissile::OnAwake()
+	void SceneUnitGuidedMissile::OnEnterScene()
 	{
 		m_transform = this->GetModule<SceneUnitTransform>();
 	}
 
 	void SceneUnitGuidedMissile::OnUpdate()
 	{
+		if (GuidedMissileState_None == m_curr_state || GuidedMissileState_AllFinish == m_curr_state)
+			return;
+
 		if (GuidedMissileState_Ready == m_curr_state)
 		{
 			m_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, this->GetScene()));
@@ -122,11 +127,14 @@ namespace GameLogic
 		auto su = std::make_shared<SceneUnit>();
 		su->SetUnitType(NetProto::EsceneUnitType_Effect);
 		su->SetModelId(1);
+		auto scene = param.use_effect_param.skill->GetCaster()->GetScene();
 		auto sugm = su->AddModule(std::make_shared<SceneUnitGuidedMissile>());
+		auto subd = su->AddModule(std::make_shared<SceneUnitBody>());
+		subd->SetSceneView(scene->GetModule<SceneView>());
+		subd->SetRadius(1);
 		sugm->SetParam(param);
 		su->GetTransform()->SetLocalPos(Vector3(pos));
 		su->GetTransform()->SetFaceDir(face_dir, ESUFaceDir::ESUFaceDir_Move);
-		auto scene = param.use_effect_param.skill->GetCaster()->GetScene();
 		scene->AddUnit(su);
 		return su;
 	}

@@ -189,11 +189,13 @@ namespace GameLogic
 			{
 				auto fn = [this](std::shared_ptr<SceneUnit> su, void *param) {
 					std::shared_ptr<SceneUnitSkills> skills = su->GetModule<SceneUnitSkills>();
-					auto modifySkillFn = [this](std::shared_ptr<Skill> skill, void *param) {
-						skill->ReloadCfg(m_cfg);
-					};
-					skills->ForeachSkill(modifySkillFn, nullptr);
-
+					if (nullptr != skills)
+					{
+						auto modifySkillFn = [this](std::shared_ptr<Skill> skill, void *param) {
+							skill->ReloadCfg(m_cfg);
+						};
+						skills->ForeachSkill(modifySkillFn, nullptr);
+					}
 				};
 				this->ForeachSceneUnit(fn, nullptr);
 			}

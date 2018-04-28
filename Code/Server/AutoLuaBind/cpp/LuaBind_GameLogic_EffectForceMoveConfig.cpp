@@ -30,7 +30,7 @@ namespace SolLuaBind
 					sol::usertype<GameLogic::EffectForceMoveConfig> meta_table(
 						"__StructName__", sol::property([]() {return "EffectForceMoveConfig"; })				
 						,"CreateEffect", &GameLogic::EffectForceMoveConfig::CreateEffect				
-						,"GetTimeMs", &GameLogic::EffectForceMoveConfig::GetTimeMs				
+						,"GetTimeMs", &GameLogic::EffectForceMoveConfig::GetTimeSec				
 						,"GetSpeed", &GameLogic::EffectForceMoveConfig::GetSpeed				
 						,"IgnoreTerrian", &GameLogic::EffectForceMoveConfig::IgnoreTerrian				
 						,"GetMoveDeg", &GameLogic::EffectForceMoveConfig::GetMoveDeg				

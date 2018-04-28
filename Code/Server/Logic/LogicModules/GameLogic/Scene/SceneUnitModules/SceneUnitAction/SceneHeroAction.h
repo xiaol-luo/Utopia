@@ -21,7 +21,7 @@ namespace GameLogic
 		virtual ~SceneHeroAction() override;
 
 	protected:
-		virtual void OnAwake() override;
+		virtual void OnEnterScene() override;
 		virtual void OnUpdate() override;
 		virtual void OnDestroy() override;
 

@@ -15,7 +15,7 @@ namespace GameLogic
 	{
 	public:
 		virtual std::shared_ptr<EffectBase> CreateEffect(SceneEffects *scene_effects, uint64_t effect_key) const;
-		int GetTimeMs() const { return m_timeMs; }
+		float GetTimeSec() const { return m_timeSec; }
 		float GetSpeed() const { return m_speed; }
 		bool IgnoreTerrian() const { return m_ignoreTerrian; }
 		float GetMoveDeg() const { return m_moveDeg; }
@@ -26,7 +26,7 @@ namespace GameLogic
 
 	protected:
 		EEffectFilterAnchor m_anchor;
-		int m_timeMs = 0;
+		int m_timeSec = 0;
 		float m_speed = 0;
 		bool m_ignoreTerrian = false;
 		float m_moveDeg = 0;

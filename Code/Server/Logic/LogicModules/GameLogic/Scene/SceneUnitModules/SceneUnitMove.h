@@ -24,7 +24,7 @@ namespace GameLogic
 		void UpdateState(int64_t deltaMs);
 
 	protected:
-		virtual void OnAwake() override;
+		virtual void OnEnterScene() override;
 		virtual void OnDestroy() override;
 
 	public:
