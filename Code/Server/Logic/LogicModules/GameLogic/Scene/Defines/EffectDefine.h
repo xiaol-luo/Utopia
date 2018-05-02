@@ -13,6 +13,7 @@ namespace GameLogic
 {
 	class SkillBase;
 	class SceneUnit;
+	class EffectBase;
 
 	struct UseSkillParam
 	{
@@ -20,16 +21,18 @@ namespace GameLogic
 		{
 			target_suid = 0;				// 技能目标
 			target_su.reset();
-			pos = Vector3::zero;			// 技能目标点
+			pos = Vector2::zero;			// 技能目标点
 			dir = Vector2::zero;			// 技能方向
-			face_dir = Vector2::zero;		// 技能使的角色的朝向
+			cast_face_dir = Vector2::zero;	// 技能开始施放时的朝向
+			cast_pos = Vector2::zero;		// 技能开始施放时位置	
 		}
 
 		uint64_t target_suid = 0;
 		std::weak_ptr<SceneUnit> target_su;
-		Vector3 pos;
+		Vector2 pos;
 		Vector2 dir;
-		Vector2 face_dir;
+		Vector2 cast_face_dir;
+		Vector2 cast_pos;
 	};
 
 	struct UseEffectParam
@@ -38,13 +41,13 @@ namespace GameLogic
 		{
 			skill = nullptr;
 			target_suid = 0;
-			pos = Vector3::zero;
+			pos = Vector2::zero;
 			dir = Vector2::zero;
 		}
 
 		std::shared_ptr<SkillBase> skill;
 		uint64_t target_suid = 0;
-		Vector3 pos;
+		Vector2 pos;
 		Vector2 dir;
 	};
 
@@ -101,15 +104,18 @@ namespace GameLogic
 
 	enum EEffectFilterAnchor
 	{
-		EEffectAnchor_Pos,
-		EEffectAnchor_SkillOwner,
-		EEffectAnchor_Target,
+		EEffectFilterAnchor_Caster,
+		EEffectFilterAnchor_CastPos,
+		EEffectFilterAnchor_TargetPos,
+		EEffectFilterAnchor_TargetUnit,
+		EEffectFilterAnchor_EffectTargetUnit,
+		EEffectFilterAnchor_EffectTargetPos,
 	};
 	EEffectFilterAnchor StrToEffectFilterAnchor(const std::string &str);
 
 	enum EEffectFilterShape
 	{
-		EffectFilterShape_None = 0,
+		EEffectFilterShape_None = 0,
 		EEffectFilterShape_Circle,
 		EEffectFilterShape_Rect,
 		EEffectFilterShape_Sector,
@@ -140,7 +146,7 @@ namespace GameLogic
 	{
 		Vector2 pos;
 		Vector2 dir;
-		EEffectFilterShape shape = EffectFilterShape_None;
+		EEffectFilterShape shape = EEffectFilterShape_None;
 		EffectFilterShapeParam shape_param;
 	};
 
@@ -155,5 +161,19 @@ namespace GameLogic
 
 	const static int SELECT_SELF_FILTER_CONFIG_ID = -1; // 选择自己的过滤器配置id
 	const static int SELECT_TARGET_FILTER_CONFIG_ID = 0; // 选择目标的过滤器配置id
-}
 
+	enum EForceMoveAnchor
+	{
+		EForceMoveAnchor_Caster,
+		EForceMoveAnchor_CastPos,
+		EForceMoveAnchor_TargetPos,
+		EForceMoveAnchor_TargetUnit,
+		EForceMoveAnchor_EffectTargetUnit,
+		EForceMoveAnchor_EffectTargetPos,
+		EForceMoveAnchor_EffectDir,
+		EForceMoveAnchor_SkillDir,
+		EForceMoveAnchor_CastFaceDir,
+	};
+	EForceMoveAnchor StrToForceMoveAnchor(const std::string &str);
+	bool CalForceMoveDir(const std::shared_ptr<EffectBase> effect_base, EForceMoveAnchor anchor, float deg, Vector2 *out_dir);
+}

@@ -19,13 +19,13 @@ namespace GameLogic
 		float GetSpeed() const { return m_speed; }
 		bool IgnoreTerrian() const { return m_ignoreTerrian; }
 		float GetMoveDeg() const { return m_moveDeg; }
-		EEffectFilterAnchor GetAnchor() const { return m_anchor; }
+		EForceMoveAnchor GetAnchor() const { return m_anchor; }
 
 	public:
 		bool InitCfg(const Config::CsvEffectForceMoveConfig *csv_cfg);
 
 	protected:
-		EEffectFilterAnchor m_anchor;
+		EForceMoveAnchor m_anchor;
 		int m_timeSec = 0;
 		float m_speed = 0;
 		bool m_ignoreTerrian = false;

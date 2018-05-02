@@ -18,7 +18,7 @@ namespace GameLogic
 		m_reversible = false;
 		m_ignoreTerrian = csv_cfg->ignore_terrian;
 		m_moveDeg = csv_cfg->angle;
-		m_anchor = StrToEffectFilterAnchor(csv_cfg->anchor);
+		m_anchor = StrToForceMoveAnchor(csv_cfg->anchor);
 
 		{
 			int timeMs = 0;

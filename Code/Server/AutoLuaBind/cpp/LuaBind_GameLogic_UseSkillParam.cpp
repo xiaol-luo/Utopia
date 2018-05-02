@@ -33,7 +33,7 @@ namespace SolLuaBind
 						,"target_su", &GameLogic::UseSkillParam::target_su				
 						,"pos", &GameLogic::UseSkillParam::pos				
 						,"dir", &GameLogic::UseSkillParam::dir				
-						,"face_dir", &GameLogic::UseSkillParam::face_dir				
+						,"face_dir", &GameLogic::UseSkillParam::cast_face_dir				
 						,"Reset", &GameLogic::UseSkillParam::Reset
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);

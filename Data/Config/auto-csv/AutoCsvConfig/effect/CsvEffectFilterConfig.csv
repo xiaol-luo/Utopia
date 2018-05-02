@@ -1,6 +1,6 @@
 id,limit_num,limit_num_priority,unit_types,relations,anchor,shape_circle,shape_rect,shape_sector
 int;key,int,string,string,string,string,int,[int],[int]
-1000001,0,near_caster,hero;monster;soldier;building,self;friend,pos,10,,
-1000002,0,away_caster,hero;monster;soldier,self;enemy,target,0,10;10,
-1000003,0,near_target,hero;monster;soldier,self,owner,0,,10;90
-1000004,0,away_target,hero;monster;soldier;building,enemy,owner,10,,
+1000001,0,near_caster,hero;monster;soldier;building,self;friend,target_pos,10,,
+1000002,0,away_caster,hero;monster;soldier,self;enemy,target_unit,0,10;10,
+1000003,0,near_target,hero;monster;soldier,self,caster,0,,10;90
+1000004,0,away_target,hero;monster;soldier;building,enemy,effect_target_unit,100,,

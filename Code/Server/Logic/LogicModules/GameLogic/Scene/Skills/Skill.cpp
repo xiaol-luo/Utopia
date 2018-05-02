@@ -59,7 +59,8 @@ namespace GameLogic
 	void Skill::SetParams(int64_t target_suid, Vector3 pos, Vector2 dir)
 	{
 		m_use_skill_param.Reset();
-		m_use_skill_param.pos = m_su_skills->GetOwner()->GetTransform()->GetPos();
+		m_use_skill_param.pos = m_su_skills->GetOwner()->GetTransform()->GetPos().XZ();
+		m_use_skill_param.cast_pos = m_use_skill_param.pos;
 
 		switch (m_cfg->use_way)
 		{
@@ -70,29 +71,29 @@ namespace GameLogic
 				{
 					m_use_skill_param.target_suid = target_suid;
 					m_use_skill_param.target_su = target_su;
-					m_use_skill_param.pos = target_su->GetTransform()->GetPos();
-					m_use_skill_param.dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).XZ();
-					m_use_skill_param.face_dir = m_use_skill_param.dir;
+					m_use_skill_param.pos = target_su->GetTransform()->GetPos().XZ();
+					m_use_skill_param.dir = m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos().XZ();
+					m_use_skill_param.cast_face_dir = m_use_skill_param.dir;
 				}
 			}
 			break;
 			case NetProto::ESkillUseWay_Position:
 			{
-				m_use_skill_param.pos = pos;
-				m_use_skill_param.dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).XZ();
-				m_use_skill_param.face_dir = m_use_skill_param.dir;
+				m_use_skill_param.pos = pos.XZ();
+				m_use_skill_param.dir = m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos().XZ();
+				m_use_skill_param.cast_face_dir = m_use_skill_param.dir;
 			}
 			case NetProto::ESkillUseWay_PosAndDir:
 			{
-				m_use_skill_param.pos = pos;
+				m_use_skill_param.pos = pos.XZ();
 				m_use_skill_param.dir = dir;
-				m_use_skill_param.face_dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).XZ();
+				m_use_skill_param.cast_face_dir = m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos().XZ();
 			}
 			break;
 			case NetProto::ESkillUseWay_Direction:
 			{
 				m_use_skill_param.dir = dir;
-				m_use_skill_param.face_dir = dir;
+				m_use_skill_param.cast_face_dir = dir;
 			}
 			break;
 		}
@@ -355,7 +356,7 @@ namespace GameLogic
 
 	void Skill::SetFaceDir()
 	{
-		Vector2 face_dir = m_use_skill_param.face_dir;
+		Vector2 face_dir = m_use_skill_param.cast_face_dir;
 
 		switch (m_cfg->use_way)
 		{
@@ -371,7 +372,7 @@ namespace GameLogic
 			case NetProto::ESkillUseWay_Position:
 			case NetProto::ESkillUseWay_PosAndDir:
 			{
-				face_dir = (m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos()).XZ();
+				face_dir = m_use_skill_param.pos - m_su_skills->GetOwner()->GetTransform()->GetPos().XZ();
 			}
 			break;
 		}

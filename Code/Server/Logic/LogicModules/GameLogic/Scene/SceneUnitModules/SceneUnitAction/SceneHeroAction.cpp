@@ -112,12 +112,11 @@ namespace GameLogic
 		su_move->CancelMove();
 	}
 
-	bool SceneHeroAction::UseSkill(int skill_id, uint64_t su_id, Vector2 _pos, float _dir)
+	bool SceneHeroAction::UseSkill(int skill_id, uint64_t su_id, Vector2 pos, float _dir)
 	{
 		if (!CancelSkill())
 			return false;
 
-		Vector3 pos = Vector3(_pos.x, 0, _pos.y);
 		m_using_skill = nullptr;
 		std::shared_ptr<SceneUnitSkills> su_skills = m_owner->GetModule<SceneUnitSkills>();
 		if (nullptr == su_skills)
@@ -127,7 +126,7 @@ namespace GameLogic
 			return false;
 
 		Vector3 locate_pos = m_owner->GetTransform()->GetPos();
-		Vector2 dir = (pos - locate_pos).XZ();
+		Vector2 dir = pos - locate_pos.XZ();
 		dir.Normalize();
 		skill->SetParams(su_id, pos, dir);
 		bool ret = skill->Begin();

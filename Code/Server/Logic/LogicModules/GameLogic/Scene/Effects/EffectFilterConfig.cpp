@@ -63,13 +63,6 @@ namespace GameLogic
 		return ret;
 	}
 
-	// EEffectFilterRelation
-	std::unordered_map<std::string, EEffectFilterAnchor> Effect_Anchor_Map({
-		{ "pos", EEffectAnchor_Pos},
-		{ "target", EEffectAnchor_Target },
-		{ "owner", EEffectAnchor_SkillOwner },
-	});
-
 	bool EffectFilterConfig::InitCfg(Config::CsvEffectFilterConfig * csv_cfg)
 	{
 		id = csv_cfg->id;
@@ -99,7 +92,7 @@ namespace GameLogic
 			shape_param.sector.angle = csv_cfg->shape_sector[1];
 		}
 
-		assert(EffectFilterShape_None != shape);
+		assert(EEffectFilterShape_None != shape);
 		return true;
 	}
 

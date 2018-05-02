@@ -37,6 +37,20 @@ namespace GameLogic
 	{
 		return m_scene->GetUnit(m_user_effect_param.target_suid);
 	}
+	std::shared_ptr<SceneUnit> EffectBase::GetSkillTarget()
+	{
+		return m_user_effect_param.skill->GetUseSkillParam().target_su.lock();
+	}
+
+	NewScene * EffectBase::GetScene()
+	{
+		return m_scene;
+	}
+
+	std::shared_ptr<SceneUnit> EffectBase::GetSceneUnit(uint64_t suid)
+	{
+		return m_scene->GetUnit(suid);
+	}
 
 	void EffectBase::Begin(UseEffectParam use_effect_param)
 	{
@@ -240,29 +254,51 @@ namespace GameLogic
 		shape.shape = filter_cfg->shape;
 		shape.shape_param = filter_cfg->shape_param;
 
-		switch (filter_cfg->anchor) // todo
+		switch (filter_cfg->anchor)
 		{
-		case EEffectAnchor_Pos:
-		{
-			shape.pos = m_user_effect_param.pos.XZ();
-			break;
-		}
-		case EEffectAnchor_SkillOwner:
+		case EEffectFilterAnchor_Caster:
 		{
 			shape.pos = caster->GetTransform()->GetPos().XZ();
 		}
 		break;
-		case EEffectAnchor_Target:
+		case EEffectFilterAnchor_CastPos:
 		{
-			std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
+			shape.pos = m_user_effect_param.skill->GetUseSkillParam().cast_pos;
+		}
+		break;
+		case EEffectFilterAnchor_TargetPos:
+		{
+			shape.pos = m_user_effect_param.skill->GetUseSkillParam().pos;
+		}
+		break;
+		case EEffectFilterAnchor_TargetUnit:
+		{
+			std::shared_ptr<SceneUnit> target_su = this->GetSkillTarget();
 			if (nullptr == target_su)
 			{
-				shape.pos = m_user_effect_param.pos.XZ();
+				shape.pos = m_user_effect_param.skill->GetUseSkillParam().pos;
 			}
 			else
 			{
 				shape.pos = target_su->GetTransform()->GetPos().XZ();
 			}
+		}
+		case EEffectFilterAnchor_EffectTargetUnit:
+		{
+			std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
+			if (nullptr == target_su)
+			{
+				shape.pos = m_user_effect_param.pos;
+			}
+			else
+			{
+				shape.pos = target_su->GetTransform()->GetPos().XZ();
+			}
+		}
+		break;
+		case EEffectFilterAnchor_EffectTargetPos:
+		{
+			shape.pos = m_user_effect_param.pos;
 		}
 		break;
 		default:

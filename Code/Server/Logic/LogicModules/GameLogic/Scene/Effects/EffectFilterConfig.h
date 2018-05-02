@@ -20,8 +20,8 @@ namespace GameLogic
 		EEffectFilterLimitNumPriority limit_num_priority = EEffectFilterLimitNumPriority_None;
 		uint64_t unit_types = 0;
 		int relations = 0;
-		EEffectFilterAnchor anchor = EEffectAnchor_Pos;
-		EEffectFilterShape shape = EffectFilterShape_None;
+		EEffectFilterAnchor anchor = EEffectFilterAnchor_Caster;
+		EEffectFilterShape shape = EEffectFilterShape_None;
 		EffectFilterShapeParam shape_param;
 	};
 

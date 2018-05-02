@@ -99,7 +99,7 @@ namespace GameLogic
 			if (nullptr != effect)
 			{
 				UseEffectParam effect_param = m_param.use_effect_param;
-				effect_param.pos = m_transform->GetPos();
+				effect_param.pos = m_transform->GetPos().XZ();
 				if (nullptr != m_param.target_su)
 					effect_param.target_suid = m_param.target_su->GetId();
 				effect->Begin(effect_param);
