@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "Logic/ShareCode/Common/Geometry/Vector2.h"
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"
 
 namespace SolLuaBind
 {

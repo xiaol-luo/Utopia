@@ -1,1 +1,0 @@
-python main.py ../../Data/Config/excel/config_list.txt

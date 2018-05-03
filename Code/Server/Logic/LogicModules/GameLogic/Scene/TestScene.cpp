@@ -140,7 +140,7 @@ namespace GameLogic
 		{
 			const EffectConfigBase * cfg = item.second;
 			int filter_id = cfg->GetFilterId();
-			if (0 != filter_id && nullptr == m_cfg->effect_filter_cfg_mgr->GetCfg(filter_id))
+			if (filter_id > 0 && nullptr == m_cfg->effect_filter_cfg_mgr->GetCfg(filter_id))
 			{
 				assert(false);
 				return false;

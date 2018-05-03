@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveImmobilizedState.h"	
-#include "Logic/ShareCode/Common/Utils/Ticker.h"
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveImmobilizedState.h"
 
 namespace SolLuaBind
 {

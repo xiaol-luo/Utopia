@@ -1,13 +1,13 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Logic/ShareCode/Network/Protobuf/Battle.pb.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewSnapshot.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/SceneView.h"
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"	
+#include "ShareCode/Network/Protobuf/Battle.pb.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/SceneView.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewSnapshot.h"
 
 namespace SolLuaBind
 {

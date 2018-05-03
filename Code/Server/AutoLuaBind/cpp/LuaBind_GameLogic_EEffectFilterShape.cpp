@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
 
 namespace SolLuaBind
 {
@@ -21,7 +21,7 @@ namespace SolLuaBind
 					assert(!opt_object);
 				}
 				ns_table.new_enum(name,
-					"EffectFilterShape_None", 0,
+					"EEffectFilterShape_None", 0,
 					"EEffectFilterShape_Circle", 1,
 					"EEffectFilterShape_Rect", 2,
 					"EEffectFilterShape_Sector", 3

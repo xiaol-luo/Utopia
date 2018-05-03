@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/ShareCode/Common/Geometry/Vector3.h"	
-#include "Logic/ShareCode/Common/Geometry/Vector2.h"
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"
 
 namespace SolLuaBind
 {
@@ -74,7 +74,8 @@ namespace SolLuaBind
 						Vector3(const float *),				
 						Vector3(),				
 						Vector3(float, float, float),				
-						Vector3(const Vector3 &)
+						Vector3(const Vector3 &),				
+						Vector3(const Vector2 &)
 						>(),
 						"__StructName__", sol::property([]() {return "Vector3"; })				
 						,"x", &Vector3::x				

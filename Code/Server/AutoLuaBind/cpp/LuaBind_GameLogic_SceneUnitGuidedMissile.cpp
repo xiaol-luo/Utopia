@@ -1,14 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Skills/Skill.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
-#include "Logic/ShareCode/Common/Utils/Ticker.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "Logic/ShareCode/Common/Geometry/Vector3.h"	
-#include "Logic/ShareCode/Common/Geometry/Vector2.h"
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"
 
 namespace SolLuaBind
 {
@@ -37,7 +37,7 @@ namespace SolLuaBind
 						>(),
 						"__StructName__", sol::property([]() {return "SceneUnitGuidedMissile"; })				
 						,"SetParam", &GameLogic::SceneUnitGuidedMissile::SetParam				
-						,"OnAwake", &GameLogic::SceneUnitGuidedMissile::OnEnterScene				
+						,"OnEnterScene", &GameLogic::SceneUnitGuidedMissile::OnEnterScene				
 						,"OnUpdate", &GameLogic::SceneUnitGuidedMissile::OnUpdate				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitMissile 

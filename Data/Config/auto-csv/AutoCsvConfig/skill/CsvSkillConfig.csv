@@ -1,7 +1,7 @@
 id,name,is_normal_attack,use_way,target_relations,target_types
 int;key,string,bool,int,[int],[int]
 11,red_normal_attack,1,0,1;2,1;2;3;4
-12,red_magic_skill,0,1,1;2,1;2;3;4
+12,red_magic_skill,0,2,1;2,1;2;3;4
 21,blue_normal_attack,1,0,1;2,1;2;3;4
 22,blue_magic_skill,0,2,1;2,1;2;3;4
 ,,,,,

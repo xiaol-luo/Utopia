@@ -17,7 +17,8 @@ function effect_script_demo.on_late_begin(self)
     param.max_alive_sec  = 10000
     param.effect_ids:add(7000005)
     param.use_effect_param = self.effect:GetUseEffectParam()
-	param.target_pos = param.use_effect_param.pos
+	param.target_pos.x = param.use_effect_param.pos.x
+	param.target_pos.z = param.use_effect_param.pos.y
 	local start_pos = self.effect:GetSkill():GetCaster(): GetTransform():GetPos():XZ()
     local gm = GameLogic.AddGuidedMissileToScene(start_pos, param.use_effect_param.dir, param)
 end

@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
 
 namespace SolLuaBind
 {

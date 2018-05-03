@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
-#include "effect/CsvEffectForceMoveConfig.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectForceMove/EffectForceMoveConfig.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectForceMoveConfig.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectForceMove/EffectForceMoveConfig.h"
 
 namespace SolLuaBind
 {
@@ -30,7 +30,7 @@ namespace SolLuaBind
 					sol::usertype<GameLogic::EffectForceMoveConfig> meta_table(
 						"__StructName__", sol::property([]() {return "EffectForceMoveConfig"; })				
 						,"CreateEffect", &GameLogic::EffectForceMoveConfig::CreateEffect				
-						,"GetTimeMs", &GameLogic::EffectForceMoveConfig::GetTimeSec				
+						,"GetTimeSec", &GameLogic::EffectForceMoveConfig::GetTimeSec				
 						,"GetSpeed", &GameLogic::EffectForceMoveConfig::GetSpeed				
 						,"IgnoreTerrian", &GameLogic::EffectForceMoveConfig::IgnoreTerrian				
 						,"GetMoveDeg", &GameLogic::EffectForceMoveConfig::GetMoveDeg				

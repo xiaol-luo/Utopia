@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
 
 namespace SolLuaBind
 {
@@ -21,9 +21,12 @@ namespace SolLuaBind
 					assert(!opt_object);
 				}
 				ns_table.new_enum(name,
-					"EEffectAnchor_Pos", 0,
-					"EEffectAnchor_SkillOwner", 1,
-					"EEffectAnchor_Target", 2
+					"EEffectFilterAnchor_Caster", 0,
+					"EEffectFilterAnchor_CastPos", 1,
+					"EEffectFilterAnchor_TargetPos", 2,
+					"EEffectFilterAnchor_TargetUnit", 3,
+					"EEffectFilterAnchor_EffectTargetUnit", 4,
+					"EEffectFilterAnchor_EffectTargetPos", 5
 				);
 			}
 		};

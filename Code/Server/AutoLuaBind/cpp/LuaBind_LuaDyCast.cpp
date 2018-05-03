@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LuaHelps/LuaDynamicCasts.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"	
+#include "LuaHelps/LuaDynamicCasts.h"
 
 namespace SolLuaBind
 {

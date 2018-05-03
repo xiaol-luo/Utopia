@@ -1,5 +1,5 @@
 id,ignore_terrian,result,anchor,angle
 int;key,bool,string,string,float
-6000001,0,ts;3000;3,caster,0
-6000002,1,td;3000;6,target_unit,180
+6000001,0,ts;3;3,target_pos,0
+6000002,1,td;3;6,target_unit,180
 6000003,1,sd;3;9,effect_target_unit,90

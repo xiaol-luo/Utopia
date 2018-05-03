@@ -1,13 +1,13 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Logic/LogicModules/GameLogic/Scene/NewScene.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "LogicModules/GameLogic/Scene/NewScene.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"
 
 namespace SolLuaBind
 {
@@ -40,6 +40,9 @@ namespace SolLuaBind
 						,"GetSkill", &GameLogic::EffectBase::GetSkill				
 						,"GetCaster", &GameLogic::EffectBase::GetCaster				
 						,"GetEffectTarget", &GameLogic::EffectBase::GetEffectTarget				
+						,"GetSkillTarget", &GameLogic::EffectBase::GetSkillTarget				
+						,"GetScene", &GameLogic::EffectBase::GetScene				
+						,"GetSceneUnit", &GameLogic::EffectBase::GetSceneUnit				
 						,"GetUseEffectParam", &GameLogic::EffectBase::GetUseEffectParam				
 						,"Begin", &GameLogic::EffectBase::Begin				
 						,"End", &GameLogic::EffectBase::End				
