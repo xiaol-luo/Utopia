@@ -395,6 +395,8 @@ namespace GameLogic
 				use_param.dir = m_use_skill_param.dir;
 				use_param.pos = m_use_skill_param.pos;
 				use_param.target_suid = m_use_skill_param.target_suid;
+				use_param.use_skill_param = std::make_shared<UseSkillParam>();
+				*use_param.use_skill_param = m_use_skill_param;
 				effect->Begin(use_param);
 			}
 		}

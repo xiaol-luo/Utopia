@@ -39,7 +39,7 @@ namespace GameLogic
 	}
 	std::shared_ptr<SceneUnit> EffectBase::GetSkillTarget()
 	{
-		return m_user_effect_param.skill->GetUseSkillParam().target_su.lock();
+		return m_user_effect_param.use_skill_param->target_su.lock();
 	}
 
 	NewScene * EffectBase::GetScene()
@@ -263,12 +263,12 @@ namespace GameLogic
 		break;
 		case EEffectFilterAnchor_CastPos:
 		{
-			shape.pos = m_user_effect_param.skill->GetUseSkillParam().cast_pos;
+			shape.pos = m_user_effect_param.use_skill_param->cast_pos;
 		}
 		break;
 		case EEffectFilterAnchor_TargetPos:
 		{
-			shape.pos = m_user_effect_param.skill->GetUseSkillParam().pos;
+			shape.pos = m_user_effect_param.use_skill_param->pos;
 		}
 		break;
 		case EEffectFilterAnchor_TargetUnit:
@@ -276,7 +276,7 @@ namespace GameLogic
 			std::shared_ptr<SceneUnit> target_su = this->GetSkillTarget();
 			if (nullptr == target_su)
 			{
-				shape.pos = m_user_effect_param.skill->GetUseSkillParam().pos;
+				shape.pos = m_user_effect_param.use_skill_param->pos;
 			}
 			else
 			{

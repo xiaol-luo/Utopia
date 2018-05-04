@@ -80,7 +80,7 @@ namespace GameLogic
 		break;
 		case GameLogic::EForceMoveAnchor_CastPos:
 		{
-			Vector2 cast_pos = effect_base->GetSkill()->GetUseSkillParam().cast_pos;
+			Vector2 cast_pos = m_user_effect_param.use_skill_param->cast_pos;
 			link_vec2 = effect_target_su_pos - cast_pos;
 		}
 		break;
@@ -95,18 +95,18 @@ namespace GameLogic
 		break;
 		case GameLogic::EForceMoveAnchor_TargetUnit:
 		{
-			Vector2 skill_target_su_pos = m_user_effect_param.skill->GetUseSkillParam().pos;
+			Vector2 skill_target_su_pos = m_user_effect_param.use_skill_param->pos;
 			std::shared_ptr<SceneUnit> skill_target_su = effect_base->GetSkillTarget();
 			if (nullptr != skill_target_su)
 			{
-				skill_target_su_pos = m_user_effect_param.skill->GetUseSkillParam().pos;
+				skill_target_su_pos = m_user_effect_param.use_skill_param->pos;
 			}
 			link_vec2 = effect_target_su_pos - skill_target_su_pos;
 		}
 		break;
 		case GameLogic::EForceMoveAnchor_TargetPos:
 		{
-			Vector2 skill_target_su_pos = m_user_effect_param.skill->GetUseSkillParam().pos;
+			Vector2 skill_target_su_pos = m_user_effect_param.use_skill_param->pos;
 			link_vec2 = effect_target_su_pos - skill_target_su_pos;
 		}
 		break;
@@ -117,12 +117,12 @@ namespace GameLogic
 		break;
 		case GameLogic::EForceMoveAnchor_SkillDir:
 		{
-			link_vec2 = m_user_effect_param.skill->GetUseSkillParam().dir;
+			link_vec2 = m_user_effect_param.use_skill_param->dir;
 		}
 		break;
 		case GameLogic::EForceMoveAnchor_CastFaceDir:
 		{
-			link_vec2 = m_user_effect_param.skill->GetUseSkillParam().cast_face_dir;
+			link_vec2 = m_user_effect_param.use_skill_param->cast_face_dir;
 		}
 		break;
 		default:

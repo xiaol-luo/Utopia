@@ -24,7 +24,6 @@ namespace GameLogic
 		std::shared_ptr<SceneUnitSkills> GetSceneUnitSkills() { return m_su_skills; }
 		std::shared_ptr<SceneUnit> GetCaster();
 		int64_t GetLogicMs(int64_t delta_ms = 0);
-		const UseSkillParam & GetUseSkillParam() { return m_use_skill_param; }
 
 		virtual bool SetLevel(int lvl) { return false; }
 		virtual void ReloadCfg(SceneAllConfig *sceneAllCfg) {}

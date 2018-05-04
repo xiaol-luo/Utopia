@@ -41,7 +41,6 @@ namespace SolLuaBind
 						,"GetSceneUnitSkills", &GameLogic::SkillBase::GetSceneUnitSkills				
 						,"GetCaster", &GameLogic::SkillBase::GetCaster				
 						,"GetLogicMs", &GameLogic::SkillBase::GetLogicMs				
-						,"GetUseSkillParam", &GameLogic::SkillBase::GetUseSkillParam				
 						,"SetLevel", &GameLogic::SkillBase::SetLevel				
 						,"ReloadCfg", &GameLogic::SkillBase::ReloadCfg				
 						,"SyncClient", &GameLogic::SkillBase::SyncClient				

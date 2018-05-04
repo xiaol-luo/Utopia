@@ -40,12 +40,14 @@ namespace GameLogic
 		void Reset()
 		{
 			skill = nullptr;
+			use_skill_param = nullptr;
 			target_suid = 0;
 			pos = Vector2::zero;
 			dir = Vector2::zero;
 		}
 
 		std::shared_ptr<SkillBase> skill;
+		std::shared_ptr<UseSkillParam> use_skill_param;
 		uint64_t target_suid = 0;
 		Vector2 pos;
 		Vector2 dir;

@@ -205,7 +205,7 @@ namespace GameLogic
 				if (nullptr != su)
 					m_cached_scene_units.insert(std::make_pair(su->GetId(), su));
 			}
-			m_removed_scene_unit_ids.clear();
+			m_new_scene_unit_ids.clear();
 		}
 	}
 
