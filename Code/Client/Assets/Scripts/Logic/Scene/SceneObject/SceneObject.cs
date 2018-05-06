@@ -62,7 +62,16 @@ public class SceneObjcet
 
     protected void LoadModelResource()
     {
-        Object prefab = Resources.Load("Heros/xiaoqiao_blue");
+        Object prefab = null;
+        if (5 == unitType)
+        {
+            prefab = Resources.Load("Effect/Missile/GuidedMissile");
+        }
+        else
+        {
+            prefab = Resources.Load("Heros/xiaoqiao_blue");
+        }
+
         GameObject go = GameObject.Instantiate(prefab) as GameObject;
         go.transform.SetParent(App.my.scene.rootSceneObejcts);
         go.SetActive(true);
