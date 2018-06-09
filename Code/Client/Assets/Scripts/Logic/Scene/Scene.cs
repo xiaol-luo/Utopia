@@ -17,7 +17,7 @@ public class Scene
         get
         {
             SceneObjcet so;
-            m_sceneObjects.TryGetValue(App.my.heroId, out so);
+            m_sceneObjects.TryGetValue(App.instance.heroId, out so);
             return so;
         }
     }
@@ -39,23 +39,23 @@ public class Scene
     {
         m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
 
-        App.my.gameNetwork.Send(ProtoId.PidLoadSceneComplete);
+        App.instance.gameNetwork.Send(ProtoId.PidLoadSceneComplete);
 
-        App.my.gameNetwork.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
-        App.my.gameNetwork.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
-        App.my.gameNetwork.Add<SceneUnitMove>((int)ProtoId.PidSceneUnitMove, OnRecvceneUnitMove);
-        App.my.gameNetwork.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
-        App.my.gameNetwork.Add<SceneUnitSkillAction>((int)ProtoId.PidSceneUnitSkillAction, OnSceneUnitSkillAction);
+        App.instance.gameNetwork.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
+        App.instance.gameNetwork.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
+        App.instance.gameNetwork.Add<SceneUnitMove>((int)ProtoId.PidSceneUnitMove, OnRecvceneUnitMove);
+        App.instance.gameNetwork.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
+        App.instance.gameNetwork.Add<SceneUnitSkillAction>((int)ProtoId.PidSceneUnitSkillAction, OnSceneUnitSkillAction);
 
-        App.my.gameNetwork.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
+        App.instance.gameNetwork.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
         {
             m_vgg.SetAllGrids(msg);
         });
-        App.my.gameNetwork.Add<ViewSnapshot>((int)ProtoId.PidViewSnapshot, (int id, ViewSnapshot msg) =>
+        App.instance.gameNetwork.Add<ViewSnapshot>((int)ProtoId.PidViewSnapshot, (int id, ViewSnapshot msg) =>
         {
             m_vgg.SetSnapshot(msg);
         });
-        App.my.gameNetwork.Add<ViewSnapshotDiff>((int)ProtoId.PidViewSnapshotDiff, (int id, ViewSnapshotDiff msg) =>
+        App.instance.gameNetwork.Add<ViewSnapshotDiff>((int)ProtoId.PidViewSnapshotDiff, (int id, ViewSnapshotDiff msg) =>
         {
             m_vgg.SetSnapshotDiff(msg);
         });
@@ -77,17 +77,17 @@ public class Scene
     }
     public void LeaveScene()
     {
-        App.my.gameNetwork.Send(ProtoId.PidLeaveScene);
+        App.instance.gameNetwork.Send(ProtoId.PidLeaveScene);
         m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
 
-        App.my.gameNetwork.Remove((int)ProtoId.PidSceneUnitState);
-        App.my.gameNetwork.Remove((int)ProtoId.PidSceneUnitTransform);
-        App.my.gameNetwork.Remove((int)ProtoId.PidSceneUnitMove);
-        App.my.gameNetwork.Remove((int)ProtoId.PidSceneObjectDisappear);
-        App.my.gameNetwork.Remove((int)ProtoId.PidViewAllGrids);
-        App.my.gameNetwork.Remove((int)ProtoId.PidViewSnapshot);
-        App.my.gameNetwork.Remove((int)ProtoId.PidViewSnapshotDiff);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidSceneUnitState);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidSceneUnitTransform);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidSceneUnitMove);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidSceneObjectDisappear);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidViewAllGrids);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidViewSnapshot);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidViewSnapshotDiff);
     }
     
     SceneObjcet GetSceneObject(ulong objId)
@@ -185,7 +185,7 @@ public class Scene
 
     public void TryStopMove()
     {
-        App.my.gameNetwork.Send(ProtoId.PidStopMove);
+        App.instance.gameNetwork.Send(ProtoId.PidStopMove);
     }
     public void Update()
     {
@@ -237,7 +237,7 @@ public class Scene
         {
             ReloadLuaScripts msg = new ReloadLuaScripts();
             msg.Scripts.Add("_load_files_effect_script");
-            App.my.gameNetwork.Send(ProtoId.PidReloadLuaScripts, msg);
+            App.instance.gameNetwork.Send(ProtoId.PidReloadLuaScripts, msg);
         }
 
     }
@@ -248,27 +248,27 @@ public class Scene
         msg.TargetId = targetId;
         msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
 		msg.SkillSlot = skillSlot;
-        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
+        App.instance.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
     void TraceUnit(ulong targetId)
     {
         BattleOperation msg = new BattleOperation();
         msg.Opera = EPlayerOpera.EpoTrace;
         msg.TargetId = targetId;
-        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
+        App.instance.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
     void TryMoveToPos(Vector3 pos)
     {
         BattleOperation msg = new BattleOperation();
         msg.Opera = EPlayerOpera.EpoMove;
         msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
-        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
+        App.instance.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
     void StopAction()
     {
         BattleOperation msg = new BattleOperation();
         msg.Opera = EPlayerOpera.EpoStop;
-        App.my.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
+        App.instance.gameNetwork.Send(ProtoId.PidBattleOperaReq, msg);
     }
 
     // void RspFreeHero(int id, RspFreeHero msg)

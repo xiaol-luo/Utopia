@@ -14,20 +14,20 @@ public class AppStateLaunch : IAppState
 
     public override void Enter(params object[] objs)
     {
-        m_mono = App.my.uiRoot.GetComponentInChildren<UIConnectServer>();
+        m_mono = App.instance.uiRoot.GetComponentInChildren<UIConnectServer>();
         if (null == m_mono)
         {
             Object prefab = Resources.Load("Art/UI/Prefabs/UIConnectServer");
             GameObject go = GameObject.Instantiate(prefab) as GameObject;
             m_mono = go.GetComponent<UIConnectServer>();
-            m_mono.transform.SetParent(App.my.uiRoot);
+            m_mono.transform.SetParent(App.instance.uiRoot);
             m_mono.transform.localPosition = Vector3.zero;
             m_mono.transform.localScale = Vector3.one;
         }
         m_mono.ip = m_lastUsedIp;
         m_mono.port = m_lastUsedPort;
-        App.my.gameNetwork.openCb += this.OnConnected;
-        App.my.gameNetwork.closeCb += this.OnDisConnect;
+        App.instance.gameNetwork.openCb += this.OnConnected;
+        App.instance.gameNetwork.closeCb += this.OnDisConnect;
     }
 
     public override void Exit(params object[] objs)
@@ -40,8 +40,8 @@ public class AppStateLaunch : IAppState
         }
             
         m_mono = null;
-        App.my.gameNetwork.openCb -= this.OnConnected;
-        App.my.gameNetwork.closeCb -= this.OnDisConnect;
+        App.instance.gameNetwork.openCb -= this.OnConnected;
+        App.instance.gameNetwork.closeCb -= this.OnDisConnect;
     }
 
     public override void Update(params object[] objs)

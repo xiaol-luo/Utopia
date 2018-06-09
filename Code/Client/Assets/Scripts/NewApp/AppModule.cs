@@ -12,10 +12,10 @@ namespace Utopia
             Staring,
             Started,
             Updating,
-            Quiting,
-            Quited,
+            Releasing,
+            Released,
         }
-        protected int m_moduleId = NewApp.EModule.Count;
+        protected int m_moduleId = EModule.Count;
         public int moduleId { get { return m_moduleId; } }
         public EStage stage { get; set; }
         public enum ERet
@@ -26,14 +26,17 @@ namespace Utopia
         }
         public struct EModule
         {
-            public const int UIMgr = 0;
-            public const int CameraMgr = 1;
-            public const int Count = 3;
+            public const int DateTimeMgr = 1;
+            public const int LogMgr = 2;
+            public const int TimerMgr = 3;
+            public const int UIMgr = 4;
+            public const int CameraMgr = 5;
+            public const int Count = 6;
         }
 
         public AppModule(NewApp _app, int moduleId)
         {
-            _app = app;
+            app = _app;
             m_moduleId = moduleId;
         }
         public NewApp app { get; }
@@ -83,13 +86,13 @@ namespace Utopia
         }
         public void FixedUpdate()
         {
-            if (EStage.Updating == stage)
+            if (EStage.Updating != stage)
                 return;
             this.OnFixedUpdate();
         }
-        public ERet Quit()
+        public ERet Release()
         {
-            ERet ret = CallUtil(EStage.Quiting, EStage.Quited, this.OnQuit);
+            ERet ret = CallUtil(EStage.Releasing, EStage.Released, this.OnRelease);
             return ret;
         }
 
@@ -102,6 +105,6 @@ namespace Utopia
         protected virtual void OnLateUpdate() { }
 
         protected virtual void OnFixedUpdate() { }
-        protected virtual ERet OnQuit() { return ERet.Success; }
+        protected virtual ERet OnRelease() { return ERet.Success; }
     }
 }

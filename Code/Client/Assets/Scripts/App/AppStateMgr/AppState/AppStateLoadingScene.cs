@@ -41,14 +41,14 @@ public class AppStateLoadingScene : IAppState
         m_asyncOpera = SceneManager.LoadSceneAsync(m_sceneName);
 
 
-        m_mono = App.my.uiRoot.GetComponentInChildren<UILoadingScene>();
+        m_mono = App.instance.uiRoot.GetComponentInChildren<UILoadingScene>();
         if (null == m_mono)
         {
             Object prefab = Resources.Load("Art/UI/Prefabs/UILoadingScene");
             GameObject go = GameObject.Instantiate(prefab) as GameObject;
             go.SetActive(true);
             m_mono = go.GetComponent<UILoadingScene>();
-            m_mono.transform.SetParent(App.my.uiRoot);
+            m_mono.transform.SetParent(App.instance.uiRoot);
             m_mono.transform.localPosition = Vector3.zero;
             m_mono.transform.localScale = Vector3.one;
         }

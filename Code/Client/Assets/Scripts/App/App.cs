@@ -8,19 +8,21 @@ using UnityEngine;
 
 public class App 
 {
-    public static App my { get { return m_my; } }
-    protected static App m_my = null;
-    public static void GenInstance(MonoBehaviour _owner)
+    public static App instance { get { return m_instance; } }
+    protected static App m_instance = null;
+    public static void MakeInstance(MonoBehaviour _owner)
     {
-        if (null == m_my)
-            m_my = new App(_owner);
+        if (null == m_instance)
+            m_instance = new App(_owner);
+        else
+            Debug.LogError("App is single instance, can only make one instance");
     }
-    protected App(MonoBehaviour mono)
+    protected App(MonoBehaviour _mono)
     {
-        owner = mono;
-        uiRoot = mono.transform.Find("UIRoot").transform;
+        root = _mono;
+        uiRoot = root.transform.Find("UIRoot").transform;
     }
-    public MonoBehaviour owner { get; protected set; }
+    public MonoBehaviour root { get; protected set; }
     public Transform uiRoot { get; protected set; }
     public GameNetwork gameNetwork { get; protected set; }
     public GameConfig gameConfig { get; protected set; }

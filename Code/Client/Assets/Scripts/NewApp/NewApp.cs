@@ -23,6 +23,8 @@ namespace Utopia
 
         public MonoBehaviour root { get; protected set; }
 
+        public AppModule.EStage moduleStage { get; protected set; }
+
         const int EModuleCount = (int)AppModule.EModule.Count;
         AppModule[] m_modules = new AppModule[EModuleCount];
 
@@ -43,10 +45,13 @@ namespace Utopia
         }
         bool ExecuteStageFnUtil(AppModule.EStage preStage, AppModule.EStage fromStage, AppModule.EStage toStage)
         {
+            this.moduleStage = fromStage;
+
             bool allModuleStageMatch = true;
             ForeachModule((AppModule module) =>
             {
-                allModuleStageMatch &= (module.stage == preStage);
+                if (AppModule.EStage.Releasing !=  fromStage)
+                    allModuleStageMatch &= (module.stage == preStage);
             });
             if (!allModuleStageMatch)
                 return false;
@@ -57,9 +62,9 @@ namespace Utopia
             });
 
             int failModuleId = AppModule.EModule.Count;
-            bool allReady = true;
             while (true)
             {
+                bool allReady = true;
                 foreach (AppModule module in m_modules)
                 {
                     if (toStage == module.stage)
@@ -78,9 +83,9 @@ namespace Utopia
                                 ret = module.Start();
                             }
                             break;
-                        case AppModule.EStage.Quiting:
+                        case AppModule.EStage.Releasing:
                             {
-                                ret = module.Quit();
+                                ret = module.Release();
                             }
                             break;
                     }
@@ -100,7 +105,10 @@ namespace Utopia
                 if (allReady)
                     break;
             }
-            return allReady && AppModule.EModule.Count != failModuleId;
+            bool returnVal= AppModule.EModule.Count == failModuleId;
+            if (returnVal)
+                this.moduleStage = toStage;
+            return returnVal;
         }
         protected NewApp(MonoBehaviour _root)
         {
@@ -111,9 +119,11 @@ namespace Utopia
             m_modules[AppModule.EModule.UIMgr] = new UIMgr(this);
             m_modules[AppModule.EModule.CameraMgr] = new CameraMgr(this);
 
+            moduleStage = AppModule.EStage.Free;
             ForeachModule((AppModule module) => {
                 module.Init();
             });
+            moduleStage = AppModule.EStage.Inited;
         }
         public void Awake()
         {
@@ -124,8 +134,22 @@ namespace Utopia
         public void Start()
         {
             bool ret = ExecuteStageFnUtil(AppModule.EStage.Awaked, AppModule.EStage.Staring, AppModule.EStage.Started);
-            if (!ret)
+            if (ret)
+            {
+                ForeachModule((AppModule module) =>
+                {
+                    module.stage = AppModule.EStage.Updating;
+                });
+            }
+            else
+            {
                 this.Quit();
+            }
+        }
+        public void Quit()
+        {
+            if (AppModule.EStage.Releasing != moduleStage && AppModule.EStage.Released != moduleStage)
+                ExecuteStageFnUtil(moduleStage, AppModule.EStage.Releasing, AppModule.EStage.Released);
         }
 
         public void Update()
@@ -149,14 +173,6 @@ namespace Utopia
             foreach (AppModule module in m_modules)
             {
                 module.FixedUpdate();
-            }
-        }
-
-        public void Quit()
-        {
-            foreach (AppModule module in m_modules)
-            {
-                module.Quit();
             }
         }
     }

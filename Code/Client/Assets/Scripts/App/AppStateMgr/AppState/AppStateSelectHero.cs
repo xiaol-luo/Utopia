@@ -14,13 +14,13 @@ public class AppStateSelectHero : IAppState
     UISelectHero m_mono = null;
     public override void Enter(params object[] objs)
     {
-        m_mono = App.my.uiRoot.GetComponentInChildren<UISelectHero>();
+        m_mono = App.instance.uiRoot.GetComponentInChildren<UISelectHero>();
         if (null == m_mono)
         {
             Object prefab = Resources.Load("Art/UI/Prefabs/UISelectHero");
             GameObject go = GameObject.Instantiate(prefab) as GameObject;
             m_mono = go.GetComponent<UISelectHero>();
-            m_mono.transform.SetParent(App.my.uiRoot);
+            m_mono.transform.SetParent(App.instance.uiRoot);
             m_mono.transform.localPosition = Vector3.zero;
             m_mono.transform.localScale = Vector3.one;
         }
@@ -35,9 +35,9 @@ public class AppStateSelectHero : IAppState
         m_blue_hero_id = 0;
         this.UpdateUI();
 
-        App.my.gameNetwork.Add<RspFreeHero>((int)ProtoId.PidRspFreeHero, this.RspFreeHero);
-        App.my.gameNetwork.Add<SelectHeroRsp>((int)ProtoId.PidSelectHeroRsp, this.SelectHeroRsp);
-        App.my.gameNetwork.Send((int)ProtoId.PidQueryFreeHero);
+        App.instance.gameNetwork.Add<RspFreeHero>((int)ProtoId.PidRspFreeHero, this.RspFreeHero);
+        App.instance.gameNetwork.Add<SelectHeroRsp>((int)ProtoId.PidSelectHeroRsp, this.SelectHeroRsp);
+        App.instance.gameNetwork.Send((int)ProtoId.PidQueryFreeHero);
 
     }
 
@@ -48,8 +48,8 @@ public class AppStateSelectHero : IAppState
             GameObject.Destroy(m_mono.gameObject);
         }
         m_mono = null;
-        App.my.gameNetwork.Remove((int)ProtoId.PidRspFreeHero);
-        App.my.gameNetwork.Remove((int)ProtoId.PidSelectHeroRsp);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidRspFreeHero);
+        App.instance.gameNetwork.Remove((int)ProtoId.PidSelectHeroRsp);
     }
 
     public override void Update(params object[] objs)
@@ -73,7 +73,7 @@ public class AppStateSelectHero : IAppState
 
         if (msg.IsSucc)
         {
-            App.my.heroId = msg.HeroId;
+            App.instance.heroId = msg.HeroId;
             System.Action<AppStateLoadingScene.LoadResult, string> cb = this.EnterStateInBattle;
             m_stateMgr.ChangeState(IAppState.StateName.LoadingScene, "Level_Battle", cb);
         }
@@ -105,7 +105,7 @@ public class AppStateSelectHero : IAppState
         if (hero_id > 0)
         {
             SelectHeroReq req = new SelectHeroReq() { HeroId = hero_id };
-            App.my.gameNetwork.Send((int)ProtoId.PidSelectHeroReq, req);
+            App.instance.gameNetwork.Send((int)ProtoId.PidSelectHeroReq, req);
         }
     }
 }

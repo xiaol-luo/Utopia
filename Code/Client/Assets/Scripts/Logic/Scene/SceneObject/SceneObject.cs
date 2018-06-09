@@ -73,7 +73,7 @@ public class SceneObjcet
         }
 
         GameObject go = GameObject.Instantiate(prefab) as GameObject;
-        go.transform.SetParent(App.my.scene.rootSceneObejcts);
+        go.transform.SetParent(App.instance.scene.rootSceneObejcts);
         go.SetActive(true);
         modelGo = go;
     }

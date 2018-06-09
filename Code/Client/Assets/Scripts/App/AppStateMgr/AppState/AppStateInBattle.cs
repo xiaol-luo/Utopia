@@ -11,7 +11,7 @@ public class AppStateInBattle : IAppState
     public override void Enter(params object[] objs)
     {
         string sceneName = objs[0] as string;
-        App.my.scene.EnterScene(sceneName);
+        App.instance.scene.EnterScene(sceneName);
     }
 
     public override void Exit(params object[] objs)
@@ -21,6 +21,6 @@ public class AppStateInBattle : IAppState
 
     public override void Update(params object[] objs)
     {
-        App.my.scene.Update();
+        App.instance.scene.Update();
     }
 }
