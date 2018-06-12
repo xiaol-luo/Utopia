@@ -21,6 +21,22 @@ namespace Utopia
                 Debug.LogError("NewApp is single instance, can only make one instance");
         }
 
+        public LogModule logModule
+        {
+            get
+            {
+                return m_modules[AppModule.EModule.LogModule] as LogModule;
+            }
+        }
+
+        public DateTimeModule datetimeModule
+        {
+            get
+            {
+                return m_modules[AppModule.EModule.DateTimeModule] as DateTimeModule;
+            }
+        }
+
         public MonoBehaviour root { get; protected set; }
 
         public AppModule.EStage moduleStage { get; protected set; }
