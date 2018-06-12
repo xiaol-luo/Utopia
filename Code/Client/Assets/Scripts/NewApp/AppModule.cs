@@ -26,12 +26,15 @@ namespace Utopia
         }
         public struct EModule
         {
-            public const int DateTimeMgr = 1;
-            public const int LogMgr = 2;
-            public const int TimerMgr = 3;
-            public const int UIMgr = 4;
-            public const int CameraMgr = 5;
-            public const int Count = 6;
+            public const int DateTimeModule = 0;
+            public const int LogModule = 1;
+            public const int TimerModule = 2;
+            public const int EventModule = 3;
+            public const int UIModule = 4;
+            public const int CameraModule = 5;
+            public const int NetModule = 6;
+            public const int ResourceModule = 7;
+            public const int Count = 8;
         }
 
         public AppModule(NewApp _app, int moduleId)

@@ -116,8 +116,14 @@ namespace Utopia
 
             LayerUtil.Init();
 
-            m_modules[AppModule.EModule.UIMgr] = new UIMgr(this);
-            m_modules[AppModule.EModule.CameraMgr] = new CameraMgr(this);
+            m_modules[AppModule.EModule.UIModule] = new UIModule(this);
+            m_modules[AppModule.EModule.CameraModule] = new CameraModule(this);
+            m_modules[AppModule.EModule.DateTimeModule] = new DateTimeModule(this);
+            m_modules[AppModule.EModule.TimerModule] = new TimerModule(this);
+            m_modules[AppModule.EModule.LogModule] = new LogModule(this);
+            m_modules[AppModule.EModule.EventModule] = new EventModule(this);
+            m_modules[AppModule.EModule.NetModule] = new NetModule(this);
+            m_modules[AppModule.EModule.ResourceModule] = new ResourceModule(this);
 
             moduleStage = AppModule.EStage.Free;
             ForeachModule((AppModule module) => {
@@ -125,6 +131,9 @@ namespace Utopia
             });
             moduleStage = AppModule.EStage.Inited;
         }
+
+
+
         public void Awake()
         {
             bool ret = ExecuteStageFnUtil(AppModule.EStage.Inited, AppModule.EStage.Awaking, AppModule.EStage.Awaked);
