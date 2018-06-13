@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Utopia
 {
@@ -7,128 +8,51 @@ namespace Utopia
 
     public class TimerModule : AppModule
     {
+        TimerMgr m_timerMgr;
         public TimerModule(NewApp _app) : base(_app, EModule.TimerModule)
         {
             
         }
-
-        class Item : IComparable<Item>
+        protected override void OnInit()
         {
-            public TimerId id = 0;
-            public long nextTick = 0;
-            public long spanTicks = 0;
-            public int callTimes = 0;
-            public System.Action callFn;
-
-            public int CompareTo(Item y)
-            {
-                int ret = nextTick.CompareTo(y.nextTick);
-                if (0 != ret)
-                    return ret;
-                ret = id.CompareTo(y.id);
-                return ret;
-            }
+            base.OnInit();
+            m_timerMgr = new TimerMgr(() => { return app.datetimeModule.now; });
+        }
+        
+        protected override void OnFixedUpdate()
+        {
+            m_timerMgr.CheckTrigger();
         }
 
-        TimerId m_lastId = 0;
-        SortedSet<Item> m_items = new SortedSet<Item>();
-        Dictionary<TimerId, Item> m_id2Item = new Dictionary<TimerId, Item>();
-
-        public TimerId Add(System.Action cb, float delaySec, float spanSec, int callTimes)
+        public TimerProxy CreateTimerProxy()
         {
-            if (null == cb)
-                return 0;
-
-            ++m_lastId;
-            if (0 == m_lastId)
-                ++m_lastId;
-
-            Item item = new Item();
-            item.id = m_lastId;
-            item.callFn = cb;
-            item.callTimes = callTimes;
-            System.DateTime dt = app.datetimeModule.now.AddSeconds(delaySec);
-            item.nextTick = dt.Ticks;
-            item.spanTicks = 0;
-            if (spanSec > 0)
-            {
-                item.spanTicks = (long)Math.Ceiling(TimeSpan.TicksPerSecond * spanSec);
-                if (item.spanTicks <= 0)
-                    item.spanTicks = 1;
-            }
-            m_id2Item.Add(item.id, item);
-            m_items.Add(item);
-            return m_lastId;
+            TimerProxy ret = new TimerProxy(m_timerMgr);
+            return ret;
         }
 
-        public void Remove(TimerId id)
+        public ulong Add(System.Action cb, float delaySec, int callTimes, float callSpanSec)
         {
-            Item item;
-            if (m_id2Item.TryGetValue(id, out item))
-            {
-                m_items.RemoveWhere(x => x.id == id);
-                m_id2Item.Remove(id);
-            }
+            return m_timerMgr.Add(cb, delaySec, callTimes, callSpanSec);
+        }
+
+        public ulong Add(System.Action cb, float delaySec)
+        {
+            return m_timerMgr.Add(cb, delaySec);
+        }
+
+        public ulong Add(System.Action cb, int callTimes, float spanSec)
+        {
+            return m_timerMgr.Add(cb, callTimes, spanSec);
+        }
+
+        public void Remove(ulong id)
+        {
+            m_timerMgr.Remove(id);
         }
 
         public void ClearAll()
         {
-            m_id2Item.Clear();
-            m_items.Clear();
-        }
-
-        protected override ERet OnStart()
-        {
-            ERet ret = base.OnStart();
-
-
-            this.Add(() =>
-            {
-                app.logModule.LogDebug("Timer 1");
-            }, 2.0f, 1.0f, 10);
-
-            this.Add(() =>
-            {
-                app.logModule.LogDebug("Timer 2");
-            }, 2.0f, 1.0f, -1);
-
-            this.Add(() =>
-            {
-                app.logModule.LogDebug("Timer 3");
-            }, 2.0f, 1.0f, 0);
-
-            return ret;
-        }
-
-        protected override void OnFixedUpdate()
-        {
-            long nowTicks = app.datetimeModule.now.Ticks;
-            Item minItem = new Item();
-            Item endItem = new Item()
-            {
-                id = UInt64.MaxValue,
-                nextTick = nowTicks
-            };
-
-            SortedSet<Item> hitItems = m_items.GetViewBetween(minItem, endItem);
-            List<Item> toRemoveItems = new List<Item>();
-            foreach (Item item in hitItems)
-            {
-                item.callFn();
-                bool willRemove = item.callTimes >= 0 && item.callTimes <= 1;
-                if (willRemove)
-                {
-                    toRemoveItems.Add(item);
-                    continue;
-                }
-                if (item.callTimes > 0)
-                    --item.callTimes;
-                item.nextTick = nowTicks + item.spanTicks;
-            }
-            foreach (Item item in toRemoveItems)
-            {
-                this.Remove(item.id);
-            }
+            m_timerMgr.ClearAll();
         }
     }
 }
