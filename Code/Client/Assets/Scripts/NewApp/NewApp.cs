@@ -37,6 +37,14 @@ namespace Utopia
             }
         }
 
+        public TimerModule timerModule
+        {
+            get
+            {
+                return m_modules[AppModule.EModule.TimerModule] as TimerModule;
+            }
+        }
+
         public MonoBehaviour root { get; protected set; }
 
         public AppModule.EStage moduleStage { get; protected set; }

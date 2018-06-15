@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace Utopia
 {
@@ -50,19 +51,10 @@ namespace Utopia
             else
             {
                 ret = m_resLoader.Load(path);
-                /*
-                if (null != ret && null == resState)
-                {
-                    resState = new ResourceState(this);
-                    ulong reqId = this.GenReqId();
-                    resState.req = ResourceRequest.CreateRequest(m_resLoader, path, ret, reqId);
-                    m_resStates.Add(path, resState);
-                }
-                */
             }
             return ret;
         }
-        public ResourceObserver AsyncLoadAsset(string path, System.Action<bool, UnityEngine.Object> cb)
+        public ResourceObserver AsyncLoadAsset(string path, System.Action<string, UnityEngine.Object> cb)
         {
             ResourceState resState = this.GetResState(path);
             if (null == resState)
@@ -111,7 +103,7 @@ namespace Utopia
                 null != resState.req &&
                 resState.req.id == id && 
                 resState.req.isDone &&
-                resState.GetObserverCount() <= 0)
+                resState.observerCount <= 0)
             {
                 m_resStates.Remove(path);
                 resState.req.UnloadRes();
@@ -127,7 +119,7 @@ namespace Utopia
                 {
                     if (null != ob.cb)
                     {
-                        ob.cb(req.isLoaded, req.res);
+                        ob.cb(req.path, req.res);
                         ob.ResetCb();
                     }
                 }

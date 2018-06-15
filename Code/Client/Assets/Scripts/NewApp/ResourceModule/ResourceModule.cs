@@ -22,7 +22,7 @@ namespace Utopia
             UnityEngine.Object ret = null;
             ret = ResourceLoader.instance.LoadAsset(resPath);
             ResourceObserver xx = null;
-            xx = ResourceLoader.instance.AsyncLoadAsset(resPath, (bool xxx, UnityEngine.Object res) => {
+            xx = ResourceLoader.instance.AsyncLoadAsset(resPath, (string xxx, UnityEngine.Object res) => {
                 app.logModule.LogDebug(" ResouceModule AsyncLoad {0}", res.ToString());
 
                 xx.Release();

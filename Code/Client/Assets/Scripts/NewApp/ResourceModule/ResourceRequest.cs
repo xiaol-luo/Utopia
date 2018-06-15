@@ -102,8 +102,8 @@ namespace Utopia
 
         public void AsyncLoad()
         {
-            loaderImpl.AsyncLoad(path,(UnityEngine.Object res) => {
-                this.AsyncLoadEndCall(this, res);
+            loaderImpl.AsyncLoad(path, (string reqPath, UnityEngine.Object res) => {
+                AsyncLoadEndCall(this, res);
             });
         }
         public void UnloadRes()
@@ -112,31 +112,31 @@ namespace Utopia
             {
                 m_state = RequestState.Unloaded;
                 res = null;
-                // Ð¶ÔØ²Ù×÷
+                loaderImpl.Unload(path);
             }
         }
-        void AsyncLoadEndCall(ResourceRequest req, UnityEngine.Object res)
+        static void AsyncLoadEndCall(ResourceRequest req, UnityEngine.Object res)
         {
             req.res = res;
             if (null != req.res)
                 req.m_state = RequestState.Loaded;
             else
                 req.m_state = RequestState.Fail;
-            if (null != loadEndCb)
+            if (null != req.loadEndCb)
             {
-                loadEndCb(this);
+                req.loadEndCb(req);
             }
         }
     }
 
     public class ResourceObserver
     {
-        public ResourceObserver(System.Action<bool, UnityEngine.Object> _cb)
+        public ResourceObserver(System.Action<string, UnityEngine.Object> _cb)
         {
             m_cb = _cb;
         }
-        public System.Action<bool, UnityEngine.Object> cb { get { return m_cb; } }
-        System.Action<bool, UnityEngine.Object> m_cb;
+        public System.Action<string, UnityEngine.Object> cb { get { return m_cb; } }
+        System.Action<string, UnityEngine.Object> m_cb;
         public uint id = 0;
         public ResourceState resState;
 
@@ -169,7 +169,7 @@ namespace Utopia
 
         uint m_lastObserverId = 0;
         Dictionary<uint, ResourceObserver> m_observers = new Dictionary<uint, ResourceObserver>();
-        public ResourceObserver AddObserver(System.Action<bool, UnityEngine.Object> cb)
+        public ResourceObserver AddObserver(System.Action<string, UnityEngine.Object> cb)
         {
             ++m_lastObserverId;
             ResourceObserver ob = new ResourceObserver(cb);
@@ -198,9 +198,9 @@ namespace Utopia
         {
             return new List<ResourceObserver>(m_observers.Values);
         }
-        public int GetObserverCount()
+        public int observerCount
         {
-            return m_observers.Count;
+            get { return m_observers.Count; }
         }
     }
 }
