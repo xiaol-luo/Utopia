@@ -1,3 +1,4 @@
+using UnityEngine;
 using System.Collections;
 
 namespace Utopia
@@ -19,15 +20,23 @@ namespace Utopia
 
             isFirst = false;
 
-            UnityEngine.Object ret = null;
-            ret = ResourceLoader.instance.LoadAsset(resPath);
-            ResourceObserver xx = null;
-            xx = ResourceLoader.instance.AsyncLoadAsset(resPath, (string xxx, UnityEngine.Object res) => {
+            ResourceObserver ret = null;
+            ResourceObserver ret2 = ResourceLoader.instance.LoadAsset(resPath);
+            GameObject.Instantiate(ret2.res);
+            ret = ResourceLoader.instance.AsyncLoadAsset(resPath, (string xxx, UnityEngine.Object res) => {
                 app.logModule.LogDebug(" ResouceModule AsyncLoad {0}", res.ToString());
 
-                xx.Release();
+                GameObject go = GameObject.Instantiate(ret.resState.req.res) as GameObject;
+                GameObject go2 = GameObject.Instantiate(go);
+
+                int id1 = go.GetInstanceID();
+                int id2 = ret.resState.req.res.GetInstanceID();
+                int id3 = go2.GetInstanceID();
+                ret.Release();
             });
             app.root.StartCoroutine(CoLoadRes());
+            ret2.Release();
+            ret2.Release();
         }
 
         IEnumerator CoLoadRes()
@@ -35,6 +44,10 @@ namespace Utopia
             ResourceObserver resOb = ResourceLoader.instance.CoLoadAsset(resPath);
             yield return resOb.resState.req;
             app.logModule.LogDebug(" ResouceModule CoLoadRes {0}", resOb.resState.req.res.ToString());
+
+            if (null != resOb.res)
+                GameObject.Instantiate(resOb.res);
+
             resOb.Release();
         }
     }

@@ -23,7 +23,7 @@ namespace Utopia
 
         public void Unload(string path)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

@@ -40,19 +40,34 @@ namespace Utopia
             m_resStates.TryGetValue(path, out ret);
             return ret;
         }
-        public UnityEngine.Object LoadAsset(string path)
+        public ResourceObserver LoadAsset(string path)
         {
-            UnityEngine.Object ret = null;
+            ResourceObserver retOb = null;
             ResourceState resState = this.GetResState(path);
-            if (null != resState && null != resState.req && resState.req.isLoaded)
+            /*
+             * resState.req.isLoaded will be loading or isLoaded.
+             * if it fail, it will be remove by funciton ResLoadEndCall
+             */
+            if (null != resState && null != resState.req && resState.req.isLoaded) 
             {
-                ret = resState.req.res;
+                retOb = resState.AddObserver(null);
             }
             else
             {
-                ret = m_resLoader.Load(path);
+                UnityEngine.Object ret = m_resLoader.Load(path);
+                if (null != ret)
+                {
+                    if (null == resState)
+                    {
+                        resState = new ResourceState(this);
+                        ulong reqId = this.GenReqId();
+                        resState.req = ResourceRequest.CreateRequest(m_resLoader, path, ret, reqId);
+                        m_resStates.Add(path, resState);
+                    }
+                    retOb = resState.AddObserver(null);
+                }
             }
-            return ret;
+            return retOb;
         }
         public ResourceObserver AsyncLoadAsset(string path, System.Action<string, UnityEngine.Object> cb)
         {
@@ -107,6 +122,7 @@ namespace Utopia
             {
                 m_resStates.Remove(path);
                 resState.req.UnloadRes();
+                resState.req = null;
             }
         }
 
