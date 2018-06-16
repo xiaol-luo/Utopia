@@ -40,6 +40,13 @@ namespace Utopia
             m_resStates.TryGetValue(path, out ret);
             return ret;
         }
+        public ResourceState GetLoadedResState(string path)
+        {
+            ResourceState resState = this.GetResState(path);
+            if (null == resState || !resState.isLoaded)
+                return null;
+            return resState;
+        }
         public ResourceObserver LoadAsset(string path)
         {
             ResourceObserver retOb = null;
@@ -63,13 +70,18 @@ namespace Utopia
                         ulong reqId = this.GenReqId();
                         resState.req = ResourceRequest.CreateRequest(m_resLoader, path, ret, reqId);
                         m_resStates.Add(path, resState);
+                        retOb = resState.AddObserver(null);
                     }
-                    retOb = resState.AddObserver(null);
+                    else
+                    {
+                        retOb = resState.AddObserver(null);
+                        resState.req.SetRes(ret);
+                    }
                 }
             }
             return retOb;
         }
-        public ResourceObserver AsyncLoadAsset(string path, System.Action<string, UnityEngine.Object> cb)
+        public ResourceObserver AsyncLoadAsset(string path, System.Action<string, ResourceObserver> cb)
         {
             ResourceState resState = this.GetResState(path);
             if (null == resState)
@@ -136,7 +148,7 @@ namespace Utopia
                 {
                     if (null != ob.cb)
                     {
-                        ob.cb(req.path, req.res);
+                        ob.cb(req.path, ob);
                         ob.ResetCb();
                     }
                 }

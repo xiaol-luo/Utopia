@@ -15,15 +15,17 @@ namespace Utopia.Resource
 
         public void SetResourceState(ResourceState newResState)
         {
+            if (null != newResState)
+            {
+                newResState.AddRef();
+            }
             if (null != resState)
             {
                 resState.SubRef();
-                resState = null;
             }
             resState = newResState;
         }
     }
-
     class ResourceRefMonitorMono<T, R> : ResourceRefMonitorMono where T : Component where R : Object
     {
         protected static void Set<RT>(T component, string assetPath, System.Action<T, R> onEnd) where RT : ResourceRefMonitorMono<T, R>
@@ -41,21 +43,18 @@ namespace Utopia.Resource
             {
                 RT ai = component.GetComponent<RT>();
                 if (ai == null)
-                {
                     ai = component.gameObject.AddComponent<RT>();
-                }
                 {
-                    ResourceObserver ob = null;
-                    ob = ResourceLoader.instance.AsyncLoadAsset(assetPath, (string ap, UnityEngine.Object o) =>
+                    ResourceLoader.instance.AsyncLoadAsset(assetPath, (string ap, ResourceObserver ob) =>
                     {
-                        if (ob.isLoaded && null != o)
+                        if (null != ob && ob.isLoaded && null != ob.res && ob.res is R)
                         {
-                            if (o is R)
-                            {
-                                ob.AddRef();
-                                ai.SetResourceState(ob.resState);
-                                onEnd(component, o as R);
-                            }
+                            ai.SetResourceState(ob.resState);
+                            onEnd(component, ob.res as R);
+                        }
+                        else
+                        {
+                            ai.SetResourceState(null);
                         }
                         ob.Release();
                     });

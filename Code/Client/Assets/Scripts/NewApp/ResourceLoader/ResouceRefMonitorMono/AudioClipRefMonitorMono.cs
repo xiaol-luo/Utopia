@@ -13,7 +13,7 @@ namespace Utopia.Resource
 
         public static void Set(AudioSource image, string assetPath)
         {
-            Set<AudioClipRefMonitorMono>(image, assetPath, (i, s) => 
+            Set(image, assetPath, (i, s) => 
             {
                 i.clip = s;
             });

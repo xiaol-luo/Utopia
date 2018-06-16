@@ -8,7 +8,9 @@ namespace Utopia.Resource
     {
         public static void Set(Animator animator, string assetPath)
         {
-            Set<AnimatorRATRefMonitorMono>(animator, assetPath, (i, s) => { animator.runtimeAnimatorController = s; });
+            Set(animator, assetPath, (a, s) => {
+                a.runtimeAnimatorController = s;
+            });
         }
 
         public static void Set(Animator animator, string assetPath, System.Action<Animator, RuntimeAnimatorController> onEnd)
@@ -16,13 +18,13 @@ namespace Utopia.Resource
             Set<AnimatorRATRefMonitorMono>(animator, assetPath, onEnd);
         }
 
-        public static IEnumerator CoSet(Animator animator, string assetPath, System.Action<Animator, RuntimeAnimatorController> onEnd)
+        public static IEnumerator CoSet(Animator animator, string assetPath)
         {
             bool isDone = false;
             Set<AnimatorRATRefMonitorMono>(animator, assetPath, (a, r)=> 
             {
                 isDone = true;
-                onEnd(a, r);
+                a.runtimeAnimatorController = r;
             });
             yield return new WaitUntil(() => { return isDone; });
         }

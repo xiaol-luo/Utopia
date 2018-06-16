@@ -93,7 +93,7 @@ namespace Utopia
 
         uint m_lastObserverId = 0;
         Dictionary<uint, ResourceObserver> m_observers = new Dictionary<uint, ResourceObserver>();
-        public ResourceObserver AddObserver(System.Action<string, UnityEngine.Object> cb)
+        public ResourceObserver AddObserver(System.Action<string, ResourceObserver> cb)
         {
             ++m_lastObserverId;
             ResourceObserver ob = new ResourceObserver(cb);
@@ -145,9 +145,9 @@ namespace Utopia
             if (null != res)
             {
                 ret = UnityEngine.GameObject.Instantiate<T>(res as T, position, rotation);
-                this.AddRef();
             }
-            return ret;
+            bool isOk = AttachMonitorRefMono(ret);
+            return isOk ? ret : null;
         }
 
         public T Instantiate<T>(UnityEngine.Transform parent, bool worldPositionStays) where T : UnityEngine.Object
@@ -156,9 +156,9 @@ namespace Utopia
             if (null != res)
             {
                 ret = UnityEngine.GameObject.Instantiate<T>(res as T, parent, worldPositionStays);
-                this.AddRef();
             }
-            return ret;
+            bool isOk = AttachMonitorRefMono(ret);
+            return isOk ? ret : null;
         }
         public T Instantiate<T>(UnityEngine.Transform parent) where T : UnityEngine.Object
         {
@@ -166,9 +166,9 @@ namespace Utopia
             if (null != res)
             {
                 ret = UnityEngine.GameObject.Instantiate<T>(res as T, parent);
-                this.AddRef();
             }
-            return ret;
+            bool isOk = AttachMonitorRefMono(ret);
+            return isOk ? ret : null;
         }
         public T Instantiate<T>(UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent) where T : UnityEngine.Object
         {
@@ -176,9 +176,9 @@ namespace Utopia
             if (null != res)
             {
                 ret = UnityEngine.GameObject.Instantiate<T>(res as T, position, rotation, parent);
-                this.AddRef();
             }
-            return ret;
+            bool isOk = AttachMonitorRefMono(ret);
+            return isOk ? ret : null;
         }
         public T Instantiate<T>() where T : UnityEngine.Object
         {
@@ -186,9 +186,34 @@ namespace Utopia
             if (null != res)
             {
                 ret = UnityEngine.GameObject.Instantiate<T>(res as T);
-                this.AddRef();
             }
-            return ret;
+            bool isOk = AttachMonitorRefMono(ret);
+            return isOk ? ret : null;
+        }
+
+        protected bool AttachMonitorRefMono<T>(T obj)
+        {
+            if (null == obj)
+                return false;
+
+            UnityEngine.GameObject go = null;
+            if (obj is UnityEngine.Component)
+            {
+                go = (obj as UnityEngine.Component).gameObject;
+            }
+            if (obj is UnityEngine.GameObject)
+            {
+                go = (obj as UnityEngine.GameObject);
+            }
+            if (null != go)
+            {
+                Resource.GameObjectRefMonitorMono.Add(go, this);
+            }
+            else
+            {
+                NewApp.instance.logModule.LogDebug("AttachMonitorRefMono {0} is not the fit type", typeof(T));
+            }
+            return null != go;
         }
     }
 }

@@ -8,11 +8,11 @@ namespace Utopia.Resource
     {
         ResourceState resState;
 
-        public static void Add(GameObject go, ResourceState request)
+        public static void Add(GameObject go, ResourceState resState)
         {
-            request.AddRef();
             var cmp = go.AddComponent<GameObjectRefMonitorMono>();
-            cmp.resState = request;
+            cmp.resState = resState;
+            cmp.resState.AddRef();
         }
         private void OnDestroy()
         {

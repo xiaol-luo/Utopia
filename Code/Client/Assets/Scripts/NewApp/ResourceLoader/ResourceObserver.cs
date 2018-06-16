@@ -6,12 +6,12 @@ namespace Utopia
 {
     public class ResourceObserver
     {
-        public ResourceObserver(System.Action<string, UnityEngine.Object> _cb)
+        public ResourceObserver(System.Action<string, ResourceObserver> _cb)
         {
             m_cb = _cb;
         }
-        public System.Action<string, UnityEngine.Object> cb { get { return m_cb; } }
-        System.Action<string, UnityEngine.Object> m_cb;
+        public System.Action<string, ResourceObserver> cb { get { return m_cb; } }
+        System.Action<string, ResourceObserver> m_cb;
         public uint id = 0;
         public ResourceState resState;
 
@@ -121,6 +121,50 @@ namespace Utopia
                 int ret = (null != resState) ? resState.refCount : 0;
                 return ret;
             }
+        }
+        public T Instantiate<T>(UnityEngine.Vector3 position, UnityEngine.Quaternion rotation) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != resState)
+                ret = resState.Instantiate<T>(position, rotation);
+            return ret;
+        }
+
+        public T Instantiate<T>(UnityEngine.Transform parent, bool worldPositionStays) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != resState)
+            {
+                ret =  resState.Instantiate<T>(parent, worldPositionStays);
+            }
+            return ret;
+        }
+        public T Instantiate<T>(UnityEngine.Transform parent) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != resState)
+            {
+                ret = resState.Instantiate<T>(parent);
+            }
+            return ret;
+        }
+        public T Instantiate<T>(UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != resState)
+            {
+                ret = resState.Instantiate<T>(position, rotation, parent);
+            }
+            return ret;
+        }
+        public T Instantiate<T>() where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != resState)
+            {
+                ret = resState.Instantiate<T>();
+            }
+            return ret;
         }
     }
 }
