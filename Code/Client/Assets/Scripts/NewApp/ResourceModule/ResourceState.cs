@@ -12,6 +12,15 @@ namespace Utopia
             loader = _loader;
         }
 
+        public ulong id
+        {
+            get
+            {
+                var ret = (null != req) ? req.id : 0;
+                return ret;
+            }
+        }
+
         public string path
         {
             get
@@ -116,6 +125,70 @@ namespace Utopia
         public int observerCount
         {
             get { return m_observers.Count; }
+        }
+
+        int m_refCount = 0;
+        public int refCount { get { return m_refCount; } }
+        public void AddRef() { ++m_refCount; }
+        public void SubRef()
+        {
+            --m_refCount;
+            if (null != loader)
+            {
+                loader.CheckUnloadRes(path, id);
+            }
+        }
+
+        public T Instantiate<T>(UnityEngine.Vector3 position,  UnityEngine.Quaternion rotation) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != res)
+            {
+                ret = UnityEngine.GameObject.Instantiate<T>(res as T, position, rotation);
+                this.AddRef();
+            }
+            return ret;
+        }
+
+        public T Instantiate<T>(UnityEngine.Transform parent, bool worldPositionStays) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != res)
+            {
+                ret = UnityEngine.GameObject.Instantiate<T>(res as T, parent, worldPositionStays);
+                this.AddRef();
+            }
+            return ret;
+        }
+        public T Instantiate<T>(UnityEngine.Transform parent) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != res)
+            {
+                ret = UnityEngine.GameObject.Instantiate<T>(res as T, parent);
+                this.AddRef();
+            }
+            return ret;
+        }
+        public T Instantiate<T>(UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent) where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != res)
+            {
+                ret = UnityEngine.GameObject.Instantiate<T>(res as T, position, rotation, parent);
+                this.AddRef();
+            }
+            return ret;
+        }
+        public T Instantiate<T>() where T : UnityEngine.Object
+        {
+            T ret = default(T);
+            if (null != res)
+            {
+                ret = UnityEngine.GameObject.Instantiate<T>(res as T);
+                this.AddRef();
+            }
+            return ret;
         }
     }
 }

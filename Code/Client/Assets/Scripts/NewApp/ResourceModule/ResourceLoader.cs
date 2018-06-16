@@ -118,7 +118,8 @@ namespace Utopia
                 null != resState.req &&
                 resState.req.id == id && 
                 resState.req.isDone &&
-                resState.observerCount <= 0)
+                resState.observerCount <= 0
+                && resState.refCount <= 0)
             {
                 m_resStates.Remove(path);
                 resState.req.UnloadRes();

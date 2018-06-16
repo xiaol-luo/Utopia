@@ -97,6 +97,31 @@ namespace Utopia
                 return ret;
             }
         }
+
+        public void AddRef()
+        {
+            if (null != resState)
+            {
+                resState.AddRef();
+            }
+        }
+
+        public void SubRef()
+        {
+            if (null != resState)
+            {
+                resState.SubRef();
+            }
+        }
+
+        public int refCount
+        {
+            get
+            {
+                int ret = (null != resState) ? resState.refCount : 0;
+                return ret;
+            }
+        }
     }
 }
 
