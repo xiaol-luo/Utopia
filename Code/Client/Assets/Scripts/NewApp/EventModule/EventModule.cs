@@ -9,7 +9,7 @@ namespace Utopia
 
         }
 
-        EventProxy<string> CreateEventProxy()
+        public EventProxy<string> CreateEventProxy()
         {
             EventProxy <string> ret = new EventProxy<string>(m_eventMgr);
             return ret;

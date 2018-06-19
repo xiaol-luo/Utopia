@@ -44,6 +44,21 @@ namespace Utopia
                 return m_modules[AppModule.EModule.TimerModule] as TimerModule;
             }
         }
+        public EventModule eventModule
+        {
+            get
+            {
+                return m_modules[AppModule.EModule.EventModule] as EventModule;
+            }
+        }
+        public NetModule netModule
+        {
+            get
+            {
+                return m_modules[AppModule.EModule.NetModule] as NetModule;
+            }
+        }
+
 
         public MonoBehaviour root { get; protected set; }
 
