@@ -28,7 +28,7 @@ public class ClientSocket
     ThreadParam m_threadParam = new ThreadParam();
     List<byte[]>[] m_recvBytesArray = new List<byte[]>[2] { new List<byte[]>(), new List<byte[]>() };
     List<byte[]>[] m_sendBytesArray = new List<byte[]>[2] { new List<byte[]>(), new List<byte[]>() };
-    public long id { get; set; }
+
     public string host { get; protected set; }
     public int port { get; protected set; }
     public State state { get { return m_threadParam.state; } }
@@ -48,7 +48,6 @@ public class ClientSocket
     public void Reset(string _host, int _port)
     {
         this.Close(State.Free);
-        id = 0;
         host = _host;
         port = _port;
     }
@@ -122,22 +121,6 @@ public class ClientSocket
             socket.EndConnect(ar);
         }
     }
-    
-    public bool Send(byte[] data, int offset, int data_len)
-    {
-        if (State.Connected == state && offset >= 0 && data_len > 0 && data.Length >= offset + data_len)
-        {
-            byte[] newBytes = new byte[data_len];
-            Array.Copy(data, offset, newBytes, 0, data_len);
-            List<byte[]> sendBytes = m_sendBytesArray[0];
-            if (sendBytes == m_threadParam.sendBytes)
-                sendBytes = m_sendBytesArray[1];
-            sendBytes.Add(newBytes);
-            return true;
-        }
-        return false;
-    }
-
     Socket m_tmpSocket = null;
     System.Action<bool> m_tmpCnnCb = null;
 
@@ -176,6 +159,20 @@ public class ClientSocket
             m_recvDataCb = recvDataCb;
         }
         return null != socket;
+    }
+    public bool Send(byte[] data, int offset, int data_len)
+    {
+        if (State.Connected == state && offset >= 0 && data_len > 0 && data.Length >= offset + data_len)
+        {
+            byte[] newBytes = new byte[data_len];
+            Array.Copy(data, offset, newBytes, 0, data_len);
+            List<byte[]> sendBytes = m_sendBytesArray[0];
+            if (sendBytes == m_threadParam.sendBytes)
+                sendBytes = m_sendBytesArray[1];
+            sendBytes.Add(newBytes);
+            return true;
+        }
+        return false;
     }
     public void UpdateIO()
     {

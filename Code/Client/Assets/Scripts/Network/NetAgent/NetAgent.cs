@@ -14,7 +14,8 @@ public class NetAgent
 
     public string host { get; protected set; }
     public int port { get; protected set; }
-    ClientSocket socket;
+    public ClientSocket socket { get; protected set; }
+    public ulong id { get; set; }
 
     public bool Connect(string _host , int _port)
     {
@@ -35,9 +36,15 @@ public class NetAgent
         socket = null;
         m_parseBufferOffset = 0;
     }
+    public void UpdateIO()
+    {
+        if (null != socket)
+            socket.UpdateIO();
+    }
     public bool Send(byte[] data, int offset, int len)
     {
-        if (null != socket && null != data && offset >= 0 && len > 0 && offset + len <= data.Length)
+        if (null != socket && 0 == socket.errno && 
+            null != data && offset >= 0 && len > 0 && offset + len <= data.Length)
         {
             return socket.Send(data, offset, len);
 
@@ -90,12 +97,6 @@ public class NetAgent
             isOk = this.Send(tmpBuffer, 0, tmpBuffer.Length);
         }
         return isOk;
-    }
-
-    public void UpdateIO()
-    {
-        if (null != socket)
-            socket.UpdateIO();
     }
 
     void OnSocketOpen(bool isSucc)
