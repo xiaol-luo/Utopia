@@ -88,7 +88,7 @@ namespace Utopia
             }
         }
 
-        object IEnumerator.Current { get { return res; } }
+        object IEnumerator.Current { get { return this; } }
 
         bool IEnumerator.MoveNext()
         {

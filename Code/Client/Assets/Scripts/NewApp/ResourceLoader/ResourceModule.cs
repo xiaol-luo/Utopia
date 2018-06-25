@@ -32,6 +32,15 @@ namespace Utopia
             isFirst = false;
             m_firstTick = app.datetimeModule.now.Ticks;
 
+            for (int i = 0; i < 10; ++ i)
+            {
+                int xxx = i;
+                ResourceLoader.instance.AsyncLoadScene("Assets/Resources/Levels/Level_Battle.unity", true, (ResourceScene.LoadResult lr, string sceneName) =>
+                {
+                    app.logModule.LogDebug(" ResouceModule AsyncLoadScene {0} {1} {2}", sceneName, lr, xxx);
+                });
+            }
+            
             ResourceObserver ret2 = loader.LoadAsset(resPath);
             var tmpGo = ret2.Instantiate<GameObject>();
 

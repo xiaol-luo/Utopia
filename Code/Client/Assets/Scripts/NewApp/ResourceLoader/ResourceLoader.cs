@@ -24,6 +24,9 @@ namespace Utopia
 #else
         IResourceLoaderImpl m_resLoader = new ResourceLoaderImplEditor();
 #endif
+
+        #region Resource
+
         Dictionary<string, ResourceState> m_resStates = new Dictionary<string, ResourceState>();
         ulong m_lastReqId = 0;
         ulong GenReqId()
@@ -161,6 +164,120 @@ namespace Utopia
                     this.CheckUnloadRes(req.path, req.id);
                 }
             }
+            else
+            {
+                req.UnloadRes();
+            }
         }
+
+        #endregion
+
+        #region Scene
+
+        Dictionary<string, ResourceScene> m_resScenes = new Dictionary<string, ResourceScene>();
+
+        ResourceScene GetResScene(string path)
+        {
+            ResourceScene ret;
+            m_resScenes.TryGetValue(path, out ret);
+            return ret;
+        }
+        public void AsyncLoadScene(string path, bool isAddition, System.Action<ResourceScene.LoadResult, string> cb)
+        {
+            if (!isAddition)
+            {
+                Dictionary<string, ResourceScene> tmpScens = new Dictionary<string, ResourceScene>(m_resScenes);
+                foreach (string item in tmpScens.Keys)
+                {
+                    if (item == path)
+                        continue;
+                    this.UnloadScene(item);
+                }
+            }
+
+            ResourceScene resScene = this.GetResScene(path);
+            if (null != resScene) 
+            {
+                // 不存在Fail和Released的情况，因为函数逻辑会马上把这些情况的resScene移出m_resScenes
+                // 不存在Inited的情况，因为所有的resScene一创建马上就TryLoadAssset了
+                if (resScene.isLoading)
+                {
+                    if (null != resScene.cb)
+                    {
+                        resScene.cb(ResourceScene.LoadResult.Cancel, resScene.sceneName);
+                        resScene.SetCb(cb);
+                    }
+                }
+                else if (resScene.isLoaded)
+                {
+                    resScene.ReloadScene(cb);
+                }
+            }
+            else
+            {
+                ResourceState resState = new ResourceState(this);
+                ulong reqId = this.GenReqId();
+                resState.req = ResourceRequest.CreateAsyncRequest(m_resLoader, path, this.ResLoadSceneEndCall, reqId);
+                resScene = new ResourceScene(resState);
+                resScene.SetCb(cb);
+                m_resScenes.Add(resScene.sceneName, resScene);
+                resScene.TryLoadAsset();
+            }
+        }
+        public ResourceScene CoLoadScene(string path, bool isAddition)
+        {
+            if (!isAddition)
+            {
+                Dictionary<string, ResourceScene> tmpScens = new Dictionary<string, ResourceScene>(m_resScenes);
+                foreach (string item in tmpScens.Keys)
+                {
+                    if (item == path)
+                        continue;
+                    this.UnloadScene(item);
+                }
+            }
+
+            ResourceState resState = new ResourceState(this);
+            ulong reqId = this.GenReqId();
+            resState.req = ResourceRequest.CreateAsyncRequest(m_resLoader, path, this.ResLoadSceneEndCall, reqId);
+            ResourceScene resScene = new ResourceScene(resState);
+            m_resScenes.Add(resScene.sceneName, resScene);
+            resScene.TryLoadAsset();
+
+            this.UnloadScene(path);
+            return resScene;
+        }
+        public void UnloadScene(string path)
+        {
+            ResourceScene resScene = this.GetResScene(path);
+            if (null != resScene)
+            {
+                m_resScenes.Remove(path);
+                resScene.Release();
+            }
+        }
+        public void ResLoadSceneEndCall(ResourceRequest req)
+        {
+            ResourceScene resScene = this.GetResScene(req.path);
+            if (null != resScene && null != resScene.resState && 
+                null != resScene.resState.req && 
+                req.id == resScene.resState.req.id)
+            {
+                if (!req.isLoaded)
+                {
+                    resScene.SetLoadAssetFail();
+                    m_resScenes.Remove(req.path);
+                }
+                else
+                {
+                    resScene.TryLoadScene();
+                }
+            }
+            else
+            {
+                req.UnloadRes();
+            }
+        }
+        #endregion
     }
 }

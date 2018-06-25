@@ -15,15 +15,34 @@ namespace Utopia
             }, 0);
         }
 
+        public void AsyncLoadScene(string path, Action<string, bool> cb)
+        {
+            NewApp.instance.timerModule.Add(() =>
+            {
+                bool ret = this.Load(path);
+                cb(path, ret);
+            }, 0);
+        }
+
         public UnityEngine.Object Load(string path)
         {
             UnityEngine.Object ret = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
             return ret;
         }
 
+        public bool LoadScene(string path)
+        {
+            return true;
+        }
+
         public void Unload(string path)
         {
 
+        }
+
+        public void UnloadScene(string path)
+        {
+            
         }
     }
 }

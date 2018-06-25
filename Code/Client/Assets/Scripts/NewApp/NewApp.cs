@@ -223,6 +223,19 @@ namespace Utopia
                 module.FixedUpdate();
             }
         }
+
+        public Coroutine StartCoroutine(IEnumerator ie)
+        {
+            return root.StartCoroutine(ie);
+        }
+        public void StopCoroutine(Coroutine co)
+        {
+            root.StopCoroutine(co);
+        }
+        public void StopAllCoroutines()
+        {
+            root.StopAllCoroutines();
+        }
     }
 
 }
