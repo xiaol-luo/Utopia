@@ -68,7 +68,7 @@ namespace Utopia.Net
             return m_netAgent.Send((int)protocolId);
         }
 
-        Dictionary<int, INetMsgHandler> msgHandlers = new Dictionary<int, INetMsgHandler>();
+        protected Dictionary<int, INetMsgHandler> msgHandlers = new Dictionary<int, INetMsgHandler>();
         public void Add<T>(int protocolId, System.Action<int, T> action) where T : IMessage, new()
         {
             NetMsgHandler<T> handler = new NetMsgHandler<T>(action);
@@ -89,12 +89,12 @@ namespace Utopia.Net
             NetMsgHandler handler = new NetMsgHandler(DefaultMsgHandlerAction);
             msgHandlers.Add(protocolId, handler);
         }
-        public void DefaultMsgHandlerAction(int protocolId)
+        public virtual void DefaultMsgHandlerAction(int protocolId)
         {
             string evKey = string.Format(NetModuleEventDef.ProtocolEventKeyFormat, protocolId);
             m_evProxy.Fire(evKey);
         }
-        public void DefaultMsgHandlerAction<T>(int protocolId, T msg) where T : IMessage, new()
+        public virtual void DefaultMsgHandlerAction<T>(int protocolId, T msg) where T : IMessage, new()
         {
             string evKey = string.Format(NetModuleEventDef.ProtocolEventKeyFormat, protocolId);
             m_evProxy.Fire(evKey, msg);
@@ -107,8 +107,16 @@ namespace Utopia.Net
 
         public INetMsgHandler GetMsgHandler(int protocolId)
         {
-            INetMsgHandler ret;
-            msgHandlers.TryGetValue(protocolId, out ret);
+            INetMsgHandler ret = null;
+            foreach (var kvPair in msgHandlers)
+            {
+                if (protocolId == kvPair.Key)
+                {
+                    ret = kvPair.Value;
+                    break;
+                }
+            }
+            // msgHandlers.TryGetValue(protocolId, out ret);
             return ret;
         }
     }

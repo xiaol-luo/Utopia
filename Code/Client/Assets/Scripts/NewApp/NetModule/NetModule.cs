@@ -5,25 +5,6 @@ namespace Utopia
 {
     public class NetModule : AppModule
     {
-
-        public static string ProtocolEventKey(int protoId)
-        {
-            string ret = string.Format(NetModuleEventDef.ProtocolEventKeyFormat, protoId);
-            return ret;
-        }
-        public static EventId<string> SubscribeNetEvent(EventProxy<string> evProxy, int protoId, System.Action<string> cb)
-        {
-            string evKey = string.Format(NetModuleEventDef.ProtocolEventKeyFormat, protoId);
-            var ret = evProxy.Subscribe(evKey, cb);
-            return ret;
-        }
-        public static EventId<string> Subscribe<T>(EventProxy<string> evProxy, int protoId, System.Action<string, T> cb)
-        {
-            string evKey = string.Format(NetModuleEventDef.ProtocolEventKeyFormat, protoId);
-            EventId<string> ret = evProxy.Subscribe(evKey, cb);
-            return ret;
-        }
-
         ulong m_lastId = 0;
         Dictionary<ulong, NetAgent> m_netAgents = new Dictionary<ulong, NetAgent>();
 
@@ -59,16 +40,16 @@ namespace Utopia
             return ret;
         }
 
-        protected override ERet OnStart()
+        protected override ERet OnAwake()
         {
             {
-                gameSrv = new CommonNetProxy();
+                gameSrv = new GameSrvNetProxy();
                 GameSrvNetAgentHandler nah = new GameSrvNetAgentHandler();
                 nah.SetNetProxy(gameSrv);
                 nah.Init();
                 gameSrv.SetNetAgentHandler(nah);
 
-                gameSrv.Connect("127.0.0.1", 10240);
+//                 gameSrv.Connect("127.0.0.1", 10240);
             }
 
             return ERet.Success;
@@ -85,8 +66,9 @@ namespace Utopia
                 ulong id = kvPair.Key;
                 NetAgent na = kvPair.Value;
 
-                if (ClientSocket.State.Connecting !=  na.socket.state ||
-                    ClientSocket.State.Connected != na.socket.state)
+                if (null == na.socket ||
+                    ClientSocket.State.Error ==  na.socket.state ||
+                    ClientSocket.State.Free == na.socket.state)
                 {
                     toRemoveAgentIds.Add(id);
                 }

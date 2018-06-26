@@ -2,7 +2,7 @@ namespace Utopia.Net
 {
     public class CommonNetAgentHandler : INetAgentHandler
     {
-        CommonNetProxy m_netProxy;
+        protected CommonNetProxy m_netProxy;
         public void SetNetProxy(CommonNetProxy netProxy)
         {
             m_netProxy = netProxy;
@@ -24,13 +24,13 @@ namespace Utopia.Net
         void INetAgentHandler.OnClose(int errno, string errMsg)
         {
             this.OnSockeClose(errno, errMsg);
-            m_netProxy.evProxy.Fire(NetModuleEventDef.CommonNetClose, this);
+            m_netProxy.evProxy.Fire(NetModuleEventDef.CommonNetClosed, m_netProxy);
         }
 
         void INetAgentHandler.OnOpen(bool isSucc)
         {
             this.OnSocketOpen(isSucc);
-            m_netProxy.evProxy.Fire(NetModuleEventDef.CommonNetConnect, this);
+            m_netProxy.evProxy.Fire(NetModuleEventDef.CommonNetConnected, m_netProxy);
         }
 
         protected virtual void OnInit()

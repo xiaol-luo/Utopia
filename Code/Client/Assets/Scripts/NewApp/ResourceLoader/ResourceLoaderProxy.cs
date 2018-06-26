@@ -116,5 +116,19 @@ namespace Utopia
             }
             m_resObservers.Clear();
         }
+
+        public void AsyncLoadScene(string path, bool isAddition, System.Action<ResourceScene.LoadResult, string> cb)
+        {
+            m_loader.AsyncLoadScene(path, isAddition, cb);
+        }
+        public ResourceScene CoLoadScene(string path, bool isAddition)
+        {
+            ResourceScene ret = m_loader.CoLoadScene(path, isAddition);
+            return ret;
+        }
+        public void UnloadScene(string path)
+        {
+            m_loader.UnloadScene(path);
+        }
     }
 }
