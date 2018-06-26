@@ -5,19 +5,8 @@ using UnityEngine.SceneManagement;
 
 namespace Utopia
 {
-    public class ResourceScene : IEnumerator
+    public class ResourceScene : CustomYieldInstruction
     {
-        public object Current { get { return this; } }
-
-        public bool MoveNext()
-        {
-            return isDone;
-        }
-
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
         ResourceLoader m_resLoader;
         public ResourceLoader resLoader { get { return m_resLoader; } }
 
@@ -115,6 +104,13 @@ namespace Utopia
             }
         }
 
+        public override bool keepWaiting
+        {
+            get
+            {
+                return !isDone;
+            }
+        }
 
         public ResourceScene(ResourceState resState)
         {
@@ -163,6 +159,7 @@ namespace Utopia
             if (this.isLoaded)
             {
                 ret = true;
+                m_state = State.LoadingScene;
                 this.SetCb(newCb);
                 SceneManager.UnloadSceneAsync(this.sceneName);
                 m_resOpera = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(this.sceneName, LoadSceneMode.Additive);

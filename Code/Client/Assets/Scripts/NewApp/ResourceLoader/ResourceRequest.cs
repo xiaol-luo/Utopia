@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Utopia
 {
-    public class ResourceRequest : IEnumerator
+    public class ResourceRequest : UnityEngine.CustomYieldInstruction
     {
         public static ResourceRequest CreateAsyncRequest(IResourceLoaderImpl _loaderImpl, string path, System.Action<ResourceRequest> cb, ulong id)
         {
@@ -88,16 +88,12 @@ namespace Utopia
             }
         }
 
-        object IEnumerator.Current { get { return this; } }
-
-        bool IEnumerator.MoveNext()
+        public override bool keepWaiting
         {
-            return !isDone;
-        }
-
-        void IEnumerator.Reset()
-        {
-            throw new System.NotImplementedException();
+            get
+            {
+                return !isDone;
+            }
         }
 
         public void AsyncLoad()

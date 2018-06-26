@@ -241,10 +241,11 @@ namespace Utopia
             ulong reqId = this.GenReqId();
             resState.req = ResourceRequest.CreateAsyncRequest(m_resLoader, path, this.ResLoadSceneEndCall, reqId);
             ResourceScene resScene = new ResourceScene(resState);
-            m_resScenes.Add(resScene.sceneName, resScene);
             resScene.TryLoadAsset();
 
             this.UnloadScene(path);
+
+            m_resScenes.Add(resScene.sceneName, resScene);
             return resScene;
         }
         public void UnloadScene(string path)

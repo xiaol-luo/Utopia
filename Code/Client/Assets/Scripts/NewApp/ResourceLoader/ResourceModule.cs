@@ -32,15 +32,25 @@ namespace Utopia
             isFirst = false;
             m_firstTick = app.datetimeModule.now.Ticks;
 
-            for (int i = 0; i < 10; ++ i)
+            string scenePath = "Assets/Resources/Levels/Level_Battle.unity";
+            /*
+            for (int i = 0; i < 1; ++ i)
             {
                 int xxx = i;
-                ResourceLoader.instance.AsyncLoadScene("Assets/Resources/Levels/Level_Battle.unity", true, (ResourceScene.LoadResult lr, string sceneName) =>
+                ResourceLoader.instance.AsyncLoadScene(scenePath, true, (ResourceScene.LoadResult lr, string sceneName) =>
                 {
                     app.logModule.LogDebug(" ResouceModule AsyncLoadScene {0} {1} {2}", sceneName, lr, xxx);
                 });
             }
-            
+            */
+
+            //             ResourceLoader.instance.UnloadScene(scenePath);
+
+            {
+                NewApp.instance.StartCoroutine(CoLoadScene(scenePath));
+            }
+
+
             ResourceObserver ret2 = loader.LoadAsset(resPath);
             var tmpGo = ret2.Instantiate<GameObject>();
 
@@ -67,6 +77,14 @@ namespace Utopia
                 app.logModule.LogDebug(" ResouceModule CoLoadRes {0}", resOb.resState.req.res.ToString());
                 GameObject.Destroy(resOb.Instantiate<GameObject>());
             }
+        }
+
+        IEnumerator CoLoadScene(string scenePath)
+        {
+            ResourceScene ie = ResourceLoader.instance.CoLoadScene(scenePath, false);
+            yield return ie;
+            app.logModule.LogDebug(" ResouceModule CoLoadScene");
+            yield return null;
         }
     }
 }

@@ -7,7 +7,6 @@ namespace Utopia
 {
     public class ResourceLoaderProxy
     {
-
         public static ResourceLoaderProxy Create()
         {
             return new ResourceLoaderProxy(ResourceLoader.instance);
