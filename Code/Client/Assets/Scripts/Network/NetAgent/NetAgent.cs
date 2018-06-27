@@ -167,11 +167,9 @@ public class NetAgent
 
     void OnSocketClose()
     {
+        int errno = socket.errno;
+        string errmsg = socket.errmsg;
         if (null != m_handler)
-            m_handler.OnClose(socket.errno, socket.errmsg);
-        socket = null;
-        this.Close();
-
-        Debug.Log("OnSocketClose ");
+            m_handler.OnClose(errno, errmsg);
     }
 }

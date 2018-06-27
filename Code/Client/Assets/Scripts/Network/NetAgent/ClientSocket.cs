@@ -59,15 +59,19 @@ public class ClientSocket
             m_thread.Join();
             m_thread = null;
         }
+        m_threadParam.state = state;
 
         if (null != m_closeCb)
+        {
             m_closeCb();
+        }
+
         m_closeCb = null;
         m_recvDataCb = null;
         m_tmpCnnCb = null;
         m_tmpSocket = null;
         m_asyncDoCnnCb = null;
-        m_threadParam.state = state;
+        
         if (null != m_threadParam.socket)
             m_threadParam.socket.Close();
         m_threadParam.socket = null;
@@ -226,6 +230,7 @@ public class ClientSocket
     {
         byte[] recvBuffer = new byte[40960];
         List<byte[]> tmpSendBytes = new List<byte[]>();
+        const int POLL_WAIT_MS = 25;
 
         ThreadParam threadParam = param as ThreadParam;
         while (!threadParam.isExit && 0 == threadParam.errno && State.Connected == threadParam.state)
@@ -233,20 +238,23 @@ public class ClientSocket
             const int TIMEOUT_ERRNO = 10060;
             try
             {
-                // receive
-                int recvLen = threadParam.socket.Receive(recvBuffer, 0, recvBuffer.Length, SocketFlags.None);
-                if (recvLen <= 0)
+                if (threadParam.socket.Poll(POLL_WAIT_MS, System.Net.Sockets.SelectMode.SelectRead))
                 {
-                    threadParam.errno = 2;
-                    threadParam.errmsg = "remote close socket";
-                }
-                else
-                {
-                    byte[] bytes = new byte[recvLen];
-                    Array.Copy(recvBuffer, bytes, recvLen);
-                    threadParam.mtx.WaitOne();
-                    threadParam.recvBytes.Add(bytes);
-                    threadParam.mtx.ReleaseMutex();
+                    // receive
+                    int recvLen = threadParam.socket.Receive(recvBuffer, 0, recvBuffer.Length, SocketFlags.None);
+                    if (recvLen <= 0)
+                    {
+                        threadParam.errno = 2;
+                        threadParam.errmsg = "remote close socket";
+                    }
+                    else
+                    {
+                        byte[] bytes = new byte[recvLen];
+                        Array.Copy(recvBuffer, bytes, recvLen);
+                        threadParam.mtx.WaitOne();
+                        threadParam.recvBytes.Add(bytes);
+                        threadParam.mtx.ReleaseMutex();
+                    }
                 }
             }
             catch (Exception e)
@@ -267,29 +275,32 @@ public class ClientSocket
                 threadParam.sendBytes.Clear();
                 threadParam.mtx.ReleaseMutex();
 
-                int i = 0;
-                int lastSendLen = 0;
-                for (; i < tmpSendBytes.Count; ++i)
+                if (threadParam.socket.Poll(POLL_WAIT_MS, System.Net.Sockets.SelectMode.SelectWrite))
                 {
-                    byte[] currBytes = tmpSendBytes[i];
-                    lastSendLen = threadParam.socket.Send(currBytes);
-                    if (lastSendLen < currBytes.Length)
-                        break;
-                }
-                if (i >= tmpSendBytes.Count)
-                {
-                    tmpSendBytes.Clear();
-                }
-                else
-                {
-                    byte[] lastBytes = tmpSendBytes[i];
-                    byte[] lastLeftBytes = new byte[lastBytes.Length - lastSendLen];
-                    Array.Copy(lastBytes, lastSendLen, lastLeftBytes, 0, lastLeftBytes.Length);
-                    if (i == tmpSendBytes.Count - 1)
+                    int i = 0;
+                    int lastSendLen = 0;
+                    for (; i < tmpSendBytes.Count; ++i)
+                    {
+                        byte[] currBytes = tmpSendBytes[i];
+                        lastSendLen = threadParam.socket.Send(currBytes);
+                        if (lastSendLen < currBytes.Length)
+                            break;
+                    }
+                    if (i >= tmpSendBytes.Count)
+                    {
                         tmpSendBytes.Clear();
+                    }
                     else
-                        tmpSendBytes = tmpSendBytes.GetRange(i + 1, tmpSendBytes.Count);
-                    tmpSendBytes.Insert(0, lastLeftBytes);
+                    {
+                        byte[] lastBytes = tmpSendBytes[i];
+                        byte[] lastLeftBytes = new byte[lastBytes.Length - lastSendLen];
+                        Array.Copy(lastBytes, lastSendLen, lastLeftBytes, 0, lastLeftBytes.Length);
+                        if (i == tmpSendBytes.Count - 1)
+                            tmpSendBytes.Clear();
+                        else
+                            tmpSendBytes = tmpSendBytes.GetRange(i + 1, tmpSendBytes.Count);
+                        tmpSendBytes.Insert(0, lastLeftBytes);
+                    }
                 }
             }
             catch (Exception e)
