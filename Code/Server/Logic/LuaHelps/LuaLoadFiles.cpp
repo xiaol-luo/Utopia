@@ -67,10 +67,4 @@ namespace LuaUtils
 		}
 		return loadRet;
 	}
-
-	bool LoadScripts_ReloadEffectScripts()
-	{
-		std::set<std::string> filter = { Load_Files_Effect_Script_Table_Name };
-		return LoadScripts_DoLoadScript(true, filter);
-	}
 }

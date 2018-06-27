@@ -1,5 +1,5 @@
 
-local cfg_root = "F:/git-dir/Utopia/Data/Config/"
+local cfg_root = "G:/git-dir/Utopia/Data/Config/"
 
 ConfigTable =
 {

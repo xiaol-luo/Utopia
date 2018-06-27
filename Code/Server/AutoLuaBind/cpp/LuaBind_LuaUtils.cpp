@@ -24,13 +24,7 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set(name, LuaUtils::Load_Files_Table_Name);
-				}				
-				{
-					std::string name = "Load_Files_Effect_Script_Table_Name";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, LuaUtils::Load_Files_Effect_Script_Table_Name);
-				}				
+				}							
 				{
 					std::string name = "Load_Files_Setting_File";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
@@ -48,13 +42,7 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set_function(name, LuaUtils::LoadScripts_DoLoadScript);
-				}				
-				{
-					std::string name = "LoadScripts_ReloadEffectScripts";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set_function(name, LuaUtils::LoadScripts_ReloadEffectScripts);
-				}			
+				}					
 			}
 		};
 

@@ -14,6 +14,8 @@
 #include "Utils/PlatformCompat.h"
 #include <LuaHelps/LuaLoadFiles.h>
 
+#include "network/Protobuf/try.pb.h"
+
 extern ServerLogic *server_logic;
 namespace SolLuaBind
 {
@@ -169,6 +171,19 @@ int main(int argc, char **argv)
 			if (!LuaUtils::LoadScripts_DoLoadScript(false, std::set<std::string>()))
 			{
 				exit(40);
+			}
+
+			{
+				// for test pb
+				sol::protected_function f = lsv["pb_test"];
+				sol::object fr = f();
+				std::string s = fr.as<std::string>();
+				std::string ss = s;
+
+				NetProto::TryItem xx;
+				xx.ParseFromString(s);
+				int a = xx.id();
+				std::string b = xx.name();
 			}
 		}
 	}

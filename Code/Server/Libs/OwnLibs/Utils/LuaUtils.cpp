@@ -42,6 +42,7 @@ namespace LuaUtils
 			, sol::lib::bit32
 			, sol::lib::io
 			, sol::lib::utf8
+			, sol::lib::package
 		);
 	}
 	void Uninit()
