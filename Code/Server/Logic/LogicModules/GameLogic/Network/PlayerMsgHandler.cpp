@@ -30,6 +30,9 @@
 	msg_handle_descripts.push_back(new GameLogic::ClientEmptyMsgHandlerDescript(this, (int)id, &PlayerMsgHandler::func))
 
 
+static const char *NET_HANDLER_NAMESPACE = "net_handler";
+static const char *NET_PLAYER_HANDLER_FN = "OnPlayerMsg";
+
 namespace GameLogic
 {
 	PlayerMsgHandler::PlayerMsgHandler(GameLogicModule *logic_module)
@@ -67,6 +70,11 @@ namespace GameLogic
 			assert(nullptr == m_client_msg_handler_descripts[desc->Id()]);
 			m_client_msg_handler_descripts[desc->Id()] = desc;
 		}
+
+		sol::state_view lsv(LuaUtils::GetState());
+		m_lua_msg_handler_fn = lsv[NET_HANDLER_NAMESPACE][NET_PLAYER_HANDLER_FN];
+		assert(m_lua_msg_handler_fn.valid());
+		m_lua_msg_handler_fn.error_handler = LuaUtils::ProtectFnErrorHandler();
 	}
 
 	void PlayerMsgHandler::Uninit()
@@ -107,14 +115,23 @@ namespace GameLogic
 				break;
 			}
 			char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;
+			uint32_t protobuf_len = data_len - PROTOCOL_LEN_DESCRIPT_SIZE;
 			if (nullptr != handler_descript->Msg())
 			{
 				handler_descript->Msg()->Clear();
-				handler_descript->Msg()->ParsePartialFromArray(protobuf_data, data_len);
+				if (!handler_descript->Msg()->ParsePartialFromArray(protobuf_data, protobuf_len))
+					break;
 			}
 			handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
 			if (m_protobuf_arena->SpaceAllocated() > 1024 * 10)
 				m_protobuf_arena->Reset();
+
+			// for test
+			m_tmp_lua_msg_buf.assign(protobuf_data, protobuf_len);
+			std::string protobuf_type_name;
+			if (handler_descript->Msg())
+				protobuf_type_name = handler_descript->Msg()->GetTypeName();
+			m_lua_msg_handler_fn(protocol_id, m_tmp_lua_msg_buf, player, protobuf_type_name);
 
 		} while (false);
 		if (!is_ok)

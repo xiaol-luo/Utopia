@@ -60,6 +60,11 @@ namespace LuaUtils
 		}
 	}
 
+	lua_State * GetState()
+	{
+		return luaState; 
+	}
+
 	sol::protected_function ProtectFnErrorHandler()
 	{
 		sol::state_view lsv(luaState);

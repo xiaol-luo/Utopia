@@ -1,6 +1,5 @@
-
-local pb = require "pb"
-local protoc = LuaProtoc
+local pb = pb
+local protoc = pb.protoc
 
 assert(protoc:load [[
    message Phone {
@@ -24,14 +23,14 @@ local data = {
 }
 
 for name, basename, type in pb.types() do
-    print(name, basename, type)
+    --print(name, basename, type)
   end
 
 local bytes = assert(pb.encode("Person", data))
 print(pb.tohex(bytes))
 
 local data2 = assert(pb.decode("Person", bytes))
--- serpent.block(data2)
+serpent.block(data2)
 
 local p = protoc:new()
 p:addpath("Proto")
@@ -56,7 +55,7 @@ for i, v in ipairs(proto_files) do
 end
 
 for name, basename, type in pb.types() do
-    print(name, basename, type)
+    --print(name, basename, type)
 end
 
 function pb_test()
@@ -64,7 +63,16 @@ function pb_test()
         id = 1,
         name = "hello"
     }
-    
+    serpent.dump(try_item)
+    print("xxxxxxxxxxxxx")
+    serpent.line(try_item)
     local item_bytes = assert(pb.encode("NetProto.TryItem", try_item))
+
+    net.send_pb(0, 0, "NetProto.TryItem", try_item)
+    net.send_buf(0, 0, item_bytes)
+
     return item_bytes
 end
+
+
+pb_test()

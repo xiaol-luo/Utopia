@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/EventDispatcher/EventDispacher.h"
+#include "Common/EventDispatcher/EventDispacher.h"
 
 namespace SolLuaBind
 {

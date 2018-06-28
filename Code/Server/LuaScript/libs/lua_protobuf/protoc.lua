@@ -1,3 +1,4 @@
+pb = require "pb"
 
 local function meta(name, t)
    t = t or {}
@@ -1050,7 +1051,6 @@ Parser.reload()
 end
 end
 
-LuaProtoc = Parser
+pb.protoc = Parser
 
-return Parser
 

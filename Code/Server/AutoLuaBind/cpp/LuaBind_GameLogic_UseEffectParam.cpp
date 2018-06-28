@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "ShareCode/Common/Geometry/Vector2.h"	
-#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"
+#include "Common/Geometry/Vector2.h"	
+#include "GameLogic/Scene/Defines/EffectDefine.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "GameLogic/Scene/Effects/EffectBase.h"	
+#include "GameLogic/Scene/Skills/SkillBase.h"
 
 namespace SolLuaBind
 {
@@ -30,6 +30,7 @@ namespace SolLuaBind
 					sol::usertype<GameLogic::UseEffectParam> meta_table(
 						"__StructName__", sol::property([]() {return "UseEffectParam"; })				
 						,"skill", &GameLogic::UseEffectParam::skill				
+						,"use_skill_param", &GameLogic::UseEffectParam::use_skill_param				
 						,"target_suid", &GameLogic::UseEffectParam::target_suid				
 						,"pos", &GameLogic::UseEffectParam::pos				
 						,"dir", &GameLogic::UseEffectParam::dir				

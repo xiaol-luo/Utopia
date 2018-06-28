@@ -1,5 +1,6 @@
 #pragma once
 
+#include <sol.hpp>
 #include <stdint.h>
 #include <google/protobuf/message.h>
 #include "Network/Protobuf/Empty.pb.h"
@@ -98,6 +99,8 @@ namespace GameLogic
 		IClientMsgHandlerDescript **m_client_msg_handler_descripts = nullptr;
 		GameLogicModule *m_logic_module = nullptr;
 		google::protobuf::Arena *m_protobuf_arena = nullptr;
+		std::string m_tmp_lua_msg_buf;
+		sol::protected_function m_lua_msg_handler_fn;
 
 	protected:
 		void OnHandlePlayerPingMsg(int protocol_id, NetProto::Ping *msg, GameLogic::Player *player);

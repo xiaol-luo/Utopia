@@ -108,15 +108,7 @@ namespace Utopia.Net
         public INetMsgHandler GetMsgHandler(int protocolId)
         {
             INetMsgHandler ret = null;
-            foreach (var kvPair in msgHandlers)
-            {
-                if (protocolId == kvPair.Key)
-                {
-                    ret = kvPair.Value;
-                    break;
-                }
-            }
-            // msgHandlers.TryGetValue(protocolId, out ret);
+            msgHandlers.TryGetValue(protocolId, out ret);
             return ret;
         }
     }

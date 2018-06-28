@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "LogicModules/GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
 
 namespace SolLuaBind
 {
