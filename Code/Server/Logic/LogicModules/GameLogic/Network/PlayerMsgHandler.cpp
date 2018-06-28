@@ -107,31 +107,52 @@ namespace GameLogic
 				is_ok = false;
 				break;
 			}
+			char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;
+			uint32_t protobuf_len = data_len - PROTOCOL_LEN_DESCRIPT_SIZE;
+
+			bool is_msg_handled = false;
+			// c++ msg handler
 			GameLogic::IClientMsgHandlerDescript *handler_descript = m_client_msg_handler_descripts[protocol_id];
-			if (nullptr == handler_descript)
+			if (nullptr != handler_descript)
+			{
+				if (nullptr != handler_descript->Msg())
+				{
+					handler_descript->Msg()->Clear();
+					if (!handler_descript->Msg()->ParsePartialFromArray(protobuf_data, protobuf_len))
+					{
+						is_ok = false;
+						GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR + 1, "c++ msg parse from net buffer fail for protocol id {}", protocol_id);
+						break;
+					}
+				}
+
+				is_msg_handled = true;
+				handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
+			}
+
+			// lua msg handler
+			{ 
+				m_tmp_lua_msg_buf.assign(protobuf_data, protobuf_len);
+				sol::protected_function_result ret = m_lua_msg_handler_fn(protocol_id, m_tmp_lua_msg_buf, player);
+				if (ret.valid())
+				{
+					bool lua_ret = ret.get<bool>();
+					if (lua_ret)
+					{
+						is_msg_handled = true;
+					}
+				}
+			}
+
+			if (m_protobuf_arena->SpaceAllocated() > 1024 * 10)
+				m_protobuf_arena->Reset();
+
+			if (!is_msg_handled)
 			{
 				is_ok = false;
 				GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR + 1, "not handler function for protocol id {}", protocol_id);
 				break;
 			}
-			char *protobuf_data = data + PROTOCOL_LEN_DESCRIPT_SIZE;
-			uint32_t protobuf_len = data_len - PROTOCOL_LEN_DESCRIPT_SIZE;
-			if (nullptr != handler_descript->Msg())
-			{
-				handler_descript->Msg()->Clear();
-				if (!handler_descript->Msg()->ParsePartialFromArray(protobuf_data, protobuf_len))
-					break;
-			}
-			handler_descript->Handle(protocol_id, handler_descript->Msg(), player);
-			if (m_protobuf_arena->SpaceAllocated() > 1024 * 10)
-				m_protobuf_arena->Reset();
-
-			// for test
-			m_tmp_lua_msg_buf.assign(protobuf_data, protobuf_len);
-			std::string protobuf_type_name;
-			if (handler_descript->Msg())
-				protobuf_type_name = handler_descript->Msg()->GetTypeName();
-			m_lua_msg_handler_fn(protocol_id, m_tmp_lua_msg_buf, player, protobuf_type_name);
 
 		} while (false);
 		if (!is_ok)
