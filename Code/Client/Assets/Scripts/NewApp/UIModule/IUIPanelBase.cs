@@ -1,10 +1,16 @@
 
 namespace Utopia.UI
 {
-    interface IUIPanelBase
+    public interface IUIPanelBase
     {
-        bool ShowPanel(System.Action<IUIPanelBase> cb);
-        bool HidePanel();
-
+        void Init();
+        void Show(UIShowPanelDataBase panelData);
+        void Reshow();
+        void Hide();
+        void Freeze();
+        void Unfreeze();
+        UIPanelSetting GetPanelSetting();
+        UIPanelId GetPanelId();
+        UIPanelState GetPanelState();
     }
 }
