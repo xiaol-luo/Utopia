@@ -18,7 +18,7 @@ namespace Utopia
         {
             ERet ret = base.OnStart();
 
-            GameObject panelRoot = NewApp.instance.root.transform.Find("RootUI/UILayerRoot").gameObject;
+            GameObject panelRoot = NewApp.instance.root.transform.Find("RootUI").gameObject;
             m_panelMgr = new UIPanelMgr(panelRoot);
             UIPanelDef.InitPanelSettings();
             m_panelMgr.Init();

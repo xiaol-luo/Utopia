@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utopia.UI
 {
-    public class UIPanelMgr
+    public partial class UIPanelMgr
     {
         public const string Default_UIPanelProxy_Res_Path = "Assets/Resources/UI/UIPanelProxy.prefab";
 
@@ -15,15 +15,17 @@ namespace Utopia.UI
         Transform[] m_layers = new Transform[(int)UIPanelLayer.Count];
         string[] m_layerPaths = new string[(int)UIPanelLayer.Count]
         {
-            "UILayerBg",
-            "UILayerPanel",
-            "UILayerTool",
-            "UILayerAlter",
+            "UILayer/CoexistLayer0",
+            "UILayer/CoexistLayer1",
+            "UILayer/CoexistLayer2",
+            "UILayer/MaskLayer",
+            "UILayerFullScreen/CoexistLayer",
+            "UILayerFullScreen/MaskLayer",
         };
 
         public UIPanelMgr(GameObject panelRoot)
         {
-            for (UIPanelLayer pl = UIPanelLayer.Bg; pl < UIPanelLayer.Count; ++ pl)
+            for (UIPanelLayer pl = UIPanelLayer.Coexist_0; pl < UIPanelLayer.Count; ++ pl)
             {
                 string layerPath = m_layerPaths[(int)pl];
                 m_layers[(int)pl] = panelRoot.transform.Find(layerPath);
@@ -31,8 +33,9 @@ namespace Utopia.UI
             }
         }
 
-        ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
+        IUIPanelMgrStragy m_showStragy;
 
+        ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
         Dictionary<string, ResourceObserver> m_panelProxyResMap = new Dictionary<string, ResourceObserver>();
 
         public ResourceObserver GetProxyGoRes(string resName)
@@ -44,6 +47,8 @@ namespace Utopia.UI
 
         public bool Init()
         {
+            m_showStragy = new UIPanelMgrStragy(this);
+
             foreach (string resPath in s_UIPanelProxy_Res_Paths)
             {
                ResourceObserver resOb = m_resLoader.AsyncLoadAsset(resPath, null);
@@ -78,14 +83,33 @@ namespace Utopia.UI
                 panelProxy.GetRoot().transform.SetParent(m_layers[(int)panelSetting.panelLayer]);
             }
             panelProxy.Show(param);
+            m_showStragy.OnShowPanel(panelProxy);
         }
-
+        public void ReshowPanel(UIPanelId panelId)
+        {
+            UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
+            if (null != panelProxy)
+            {
+                panelProxy.Reshow();
+                m_showStragy.OnReshowPanel(panelProxy);
+            }
+        }
         public void HidePanel(UIPanelId panelId)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null != panelProxy)
             {
                 panelProxy.Hide();
+                m_showStragy.OnHidePanel(panelProxy);
+            }
+        }
+        public void ReleasePanel(UIPanelId panelId)
+        {
+            UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
+            if (null != panelProxy)
+            {
+                panelProxy.Release();
+                m_showStragy.OnReleasePanel(panelProxy);
             }
         }
     }

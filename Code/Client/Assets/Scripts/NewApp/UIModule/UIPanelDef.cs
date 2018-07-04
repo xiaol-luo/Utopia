@@ -18,12 +18,24 @@ namespace Utopia.UI
 
     public enum UIPanelLayer
     {
-        Bg,
-        Normal,
-        Tool,
-        Alter,
+        Coexist_0,
+        Coexist_1,
+        Coexist_2,
+        Mask,
+        FullScreen,
+        UponFullScreen,
         Count,
     }
+
+    public enum UIPanelShowMode
+    {
+        Coexist,        // 共存
+        Mask,           // 遮挡下层Panel
+        HideOther,      // 隐藏其他， 这里同时只存在一个全屏panel，若是新show一个全屏panel，新的顶替旧的
+        UponHideOther,  // 在隐藏其他模式的面板之上
+        Count,
+    }
+
     public enum UIPanelState
     {
         Free = 0,
@@ -36,7 +48,44 @@ namespace Utopia.UI
 
     public class UIPanelSetting
     {
-        public UIPanelLayer panelLayer = UIPanelLayer.Normal;
+        protected UIPanelLayer m_panelLayer;
+        public UIPanelLayer panelLayer
+        {
+            get
+            {
+                UIPanelLayer ret = UIPanelLayer.Coexist_0;
+                switch (showMode)
+                {
+                    case UIPanelShowMode.Mask:
+                        ret = UIPanelLayer.Mask;
+                        break;
+                    case UIPanelShowMode.HideOther:
+                        ret = UIPanelLayer.FullScreen;
+                        break;
+                    case UIPanelShowMode.UponHideOther:
+                        ret = UIPanelLayer.UponFullScreen;
+                        break;
+                    default:
+                        {
+                            switch (m_panelLayer)
+                            {
+                                case UIPanelLayer.Coexist_0:
+                                case UIPanelLayer.Coexist_1:
+                                case UIPanelLayer.Coexist_2:
+                                    ret = m_panelLayer;
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                return ret;
+            }
+            set
+            {
+                m_panelLayer = value;
+            }
+        }
+        public UIPanelShowMode showMode;
         public string resPath = string.Empty;
 
         public virtual UIPanelProxy CreateProxy(UIPanelMgr panelMgr, UIPanelId panelId)
@@ -72,7 +121,8 @@ namespace Utopia.UI
         {
             s_panelSettings[(int)UIPanelId.MainPanel] = new UIPanelSetting()
             {
-                panelLayer = UIPanelLayer.Normal,
+                panelLayer = UIPanelLayer.Coexist_0,
+                showMode = UIPanelShowMode.Coexist,
                 resPath = "Assets/Resources/UI/MainPanel.prefab"
             };
 
