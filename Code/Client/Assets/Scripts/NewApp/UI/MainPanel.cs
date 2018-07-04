@@ -5,7 +5,7 @@ using Utopia.Net;
 
 namespace Utopia.UI
 {
-    public class MainPanel : MonoBehaviour
+    public class MainPanel : UIPanelBase
     {
         [SerializeField]
         Button netBtn;
@@ -28,7 +28,7 @@ namespace Utopia.UI
         void Start()
         {
             ipTxt.text = "127.0.0.1";
-            portTxt.text = "10240";
+            portTxt.text = "10250";
 
             m_evProxy = NewApp.instance.eventModule.CreateEventProxy();
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
@@ -53,6 +53,10 @@ namespace Utopia.UI
             logicBtn.onClick.AddListener(() =>
             {
                 NewApp.instance.netModule.gameSrv.Send(ProtoId.PidQueryFreeHero);
+
+                SelectHeroReq req = new SelectHeroReq() { HeroId = 1 };
+                // for test
+                NewApp.instance.netModule.gameSrv.Send((int)ProtoId.PidSelectHeroReq, req);
             });
         }
         void OnGameSrvConnected(string evName, CommonNetProxy evParam)

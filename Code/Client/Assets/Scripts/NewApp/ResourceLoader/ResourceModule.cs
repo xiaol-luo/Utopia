@@ -19,6 +19,8 @@ namespace Utopia
 
         protected override void OnUpdate()
         {
+            return;
+
             if (!isFirst)
             {
                 if (m_firstTick > 0 && app.datetimeModule.now.Ticks - m_firstTick > TimeSpan.TicksPerSecond * 20)

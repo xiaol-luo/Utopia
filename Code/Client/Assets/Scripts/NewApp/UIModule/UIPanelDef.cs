@@ -16,21 +16,33 @@ namespace Utopia.UI
         Count,
     }
 
+    public enum UIPanelLayer
+    {
+        Bg,
+        Normal,
+        Tool,
+        Alter,
+        Count,
+    }
     public enum UIPanelState
     {
         Free = 0,
         Loading,
         Loaded,
         Hided,
-        Freezed,
         Showed,
-        Releasing,
         Released,
     }
 
     public class UIPanelSetting
     {
+        public UIPanelLayer panelLayer = UIPanelLayer.Normal;
+        public string resPath = string.Empty;
 
+        public virtual UIPanelProxy CreateProxy(UIPanelMgr panelMgr, UIPanelId panelId)
+        {
+            return new UIPanelProxy(panelMgr, panelId);
+        }
     }
 
     public static class UIPanelDef
@@ -58,6 +70,12 @@ namespace Utopia.UI
         // 请在这里调用函数初始化所有panel的settting
         public static void InitPanelSettings()
         {
+            s_panelSettings[(int)UIPanelId.MainPanel] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.Normal,
+                resPath = "Assets/Resources/UI/MainPanel.prefab"
+            };
+
             {
                 // reservt ids use default setting
                 for (UIPanelId id = UIPanelId.ReserveName_Begin; id < UIPanelId.Count; ++ id)
