@@ -112,6 +112,7 @@ namespace Utopia.UI
                 m_cachedPanels.Remove(panelId);
                 panelProxy.Release();
                 m_showStragy.OnReleasePanel(panelProxy);
+                GameObject.Destroy(panelProxy.GetRoot());
             }
         }
     }

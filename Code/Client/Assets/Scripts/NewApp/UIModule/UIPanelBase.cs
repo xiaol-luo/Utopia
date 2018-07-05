@@ -5,7 +5,7 @@ namespace Utopia.UI
 {
     public class UIPanelBase : MonoBehaviour, IUIPanelBase
     {
-        UIPanelProxy m_proxy;
+        protected UIPanelProxy m_proxy;
         public void SetProxy(UIPanelProxy proxy)
         {
             m_proxy = proxy;
@@ -16,7 +16,7 @@ namespace Utopia.UI
             this.OnFreeze();
         }
 
-        public UIPanelId GetPanelId()
+        public virtual UIPanelId GetPanelId()
         {
             throw new System.NotImplementedException();
         }
@@ -48,23 +48,23 @@ namespace Utopia.UI
         }
         protected virtual void OnShow()
         {
-
+            NewApp.instance.logModule.LogDebug("UIPanelBase OnShow {0}", this.GetPanelId());
         }
         protected virtual void OnHide()
         {
-
+            NewApp.instance.logModule.LogDebug("UIPanelBase OnHide {0}", this.GetPanelId());
         }
         protected virtual void OnFreeze()
         {
-
+            NewApp.instance.logModule.LogDebug("UIPanelBase OnFreeze {0}", this.GetPanelId());
         }
         protected virtual void OnUnfreeze()
         {
-
+            NewApp.instance.logModule.LogDebug("UIPanelBase OnUnfreeze {0}", this.GetPanelId());
         }
         protected virtual void OnReshow()
         {
-
+            NewApp.instance.logModule.LogDebug("UIPanelBase OnReshow {0}", this.GetPanelId());
         }
 
         public UIPanelState GetPanelState()

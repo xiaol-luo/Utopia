@@ -32,6 +32,14 @@ namespace Utopia.UI
             public Dictionary<UIPanelId, PanelInfo> panelInfos = new Dictionary<UIPanelId, PanelInfo>();
             public List<PanelInfo>[] layerPanelInfos = new List<PanelInfo>[(int)UIPanelLayer.Count];
 
+            public UIPanelInfoSet()
+            {
+                for (int i = 0; i < layerPanelInfos.Length; ++ i)
+                {
+                    layerPanelInfos[i] = new List<PanelInfo>();
+                }
+            }
+
             public PanelInfo GetPanelInfo(UIPanelId panelId)
             {
                 PanelInfo ret;
@@ -86,9 +94,9 @@ namespace Utopia.UI
                 PanelInfo pi = this.GetPanelInfo(panelId);
                 if (null != pi)
                 {
+                    ret = pi.setting.panelLayer;
                     layerPanelInfos[(int)ret].Remove(pi);
                     pi.isRelease = true;
-                    ret = pi.setting.panelLayer;
                 }
                 return ret;
             }
@@ -147,7 +155,7 @@ namespace Utopia.UI
                 m_panelInfoSet.HidePanel(hidedPanelId);
                 UIPanelInfoSet.PanelInfo newTopestPanel = m_panelInfoSet.GetTopestShowedPanelInfo();
 
-                if (null != oldTopestPanel)
+                if (null != oldTopestPanel && null != newTopestPanel)
                 {
                     if (hidedPanelId == oldTopestPanel.panelId)
                     {
@@ -179,6 +187,20 @@ namespace Utopia.UI
                                 }
                             }
                         }
+                    }
+                }
+
+                {
+                    UIPanelLayer oldTopestLayer = UIPanelLayer.Coexist_0;
+                    if (null != oldTopestPanel)
+                        oldTopestLayer = oldTopestPanel.setting.panelLayer;
+                    UIPanelLayer newTopestLayer = UIPanelLayer.Coexist_0;
+                    if (null != newTopestPanel)
+                        newTopestLayer = newTopestPanel.setting.panelLayer;
+                    if (oldTopestLayer >= UIPanelLayer.FullScreen && 
+                        newTopestLayer < UIPanelLayer.FullScreen)
+                    {
+                        NewApp.instance.eventModule.Fire(UIPanelEventDef.AllFullPanelHide);
                     }
                 }
             }
@@ -251,6 +273,19 @@ namespace Utopia.UI
                                 }
                             }
                         }
+                    }
+                }
+                {
+                    UIPanelLayer oldTopestLayer = UIPanelLayer.Coexist_0;
+                    if (null != oldTopestPanel)
+                        oldTopestLayer = oldTopestPanel.setting.panelLayer;
+                    UIPanelLayer newTopestLayer = UIPanelLayer.Coexist_0;
+                    if (null != newTopestPanel)
+                        newTopestLayer = newTopestPanel.setting.panelLayer;
+                    if (oldTopestLayer < UIPanelLayer.FullScreen &&
+                        newTopestLayer >= UIPanelLayer.FullScreen)
+                    {
+                        NewApp.instance.eventModule.Fire(UIPanelEventDef.OneFullPanelShow);
                     }
                 }
             }

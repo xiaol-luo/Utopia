@@ -108,6 +108,8 @@ namespace Utopia.UI
 
         public void Hide()
         {
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Hide {0}", m_panelId);
+
             if (this.IsReleased())
                 return;
             if (UIPanelState.Hided == m_panelState)
@@ -131,13 +133,14 @@ namespace Utopia.UI
             {
                 m_wantPanelState = UIPanelState.Hided;
             }
-
             m_root.SetActive(false);
             this.UnlockOpera(op);
         }
 
         public void Show(UIShowPanelDataBase panelData)
         {
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Show {0}", m_panelId);
+
             if (this.IsReleased())
                 return;
 
@@ -150,7 +153,6 @@ namespace Utopia.UI
 
             this.CheckLoadPanel();
             m_root.SetActive(true);
-            this.Unfreeze();
             {
                 // TOOD: process proxy self logic
             }
@@ -165,11 +167,13 @@ namespace Utopia.UI
                 m_wantPanelState = UIPanelState.Showed;
                 m_wantShowPanelData = panelData;
             }
-
+            this.Unfreeze();
             this.UnlockOpera(op);
         }
         public void Reshow()
         {
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Reshow {0}", m_panelId);
+
             if (this.IsReleased())
                 return;
             if (UIPanelState.Showed == m_panelState)
@@ -187,7 +191,6 @@ namespace Utopia.UI
             else
             {
                 m_root.SetActive(true);
-                this.Unfreeze();
                 {
                     // TOOD: process proxy self logic
                 }
@@ -200,12 +203,15 @@ namespace Utopia.UI
                 {
                     m_wantPanelState = UIPanelState.Showed;
                 }
+                this.Unfreeze();
             }
             this.UnlockOpera(op);
         }
 
         public void Freeze()
         {
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Freeze {0}", m_panelId);
+
             if (this.IsReleased())
                 return;
             if (m_isFreezed)
@@ -225,6 +231,8 @@ namespace Utopia.UI
         }
         public void Unfreeze()
         {
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Unfreeze {0}", m_panelId);
+
             if (this.IsReleased())
                 return;
             if (!m_isFreezed)
@@ -245,6 +253,8 @@ namespace Utopia.UI
 
         public virtual void Release()
         {
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Release {0}", m_panelId);
+
             if (this.IsReleased())
                 return;
 
@@ -274,8 +284,9 @@ namespace Utopia.UI
 
             m_panelState = UIPanelState.Loaded;
             GameObject panelGo = resOb.Instantiate<GameObject>();
-            m_panel = panelGo.GetComponent<UIPanelBase>();
             panelGo.transform.SetParent(m_panelRoot.transform);
+            m_panel = panelGo.GetComponent<UIPanelBase>();
+            m_panel.SetProxy(this);
             m_panel.Init();
 
             switch (m_wantPanelState)

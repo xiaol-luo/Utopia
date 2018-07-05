@@ -10,6 +10,25 @@ namespace Utopia.UI
     {
         None = 0,
         MainPanel,
+        MainPanel_1,
+        MainPanel_2,
+        MainPanel_3,
+        MainPanel_4,
+        MainPanel_5,
+
+        MainPanel_00,
+        MainPanel_11,
+        MainPanel_22,
+        MainPanel_33,
+        MainPanel_44,
+        MainPanel_55,
+
+        MainPanel_000,
+        MainPanel_111,
+        MainPanel_222,
+        MainPanel_333,
+        MainPanel_444,
+        MainPanel_555,
 
         ReserveName_Begin,
         ReserveName_End = ReserveName_Begin + 20,
@@ -125,6 +144,126 @@ namespace Utopia.UI
                 showMode = UIPanelShowMode.Coexist,
                 resPath = "Assets/Resources/UI/MainPanel.prefab"
             };
+
+            s_panelSettings[(int)UIPanelId.MainPanel_1] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.Coexist_1,
+                showMode = UIPanelShowMode.Coexist,
+                resPath = "Assets/Resources/UI/MainPanel.prefab"
+            };
+
+            s_panelSettings[(int)UIPanelId.MainPanel_2] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.Coexist_2,
+                showMode = UIPanelShowMode.Coexist,
+                resPath = "Assets/Resources/UI/MainPanel.prefab"
+            };
+
+            s_panelSettings[(int)UIPanelId.MainPanel_3] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.Mask,
+                showMode = UIPanelShowMode.Mask,
+                resPath = "Assets/Resources/UI/MainPanel.prefab"
+            };
+
+            s_panelSettings[(int)UIPanelId.MainPanel_4] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.FullScreen,
+                showMode = UIPanelShowMode.HideOther,
+                resPath = "Assets/Resources/UI/MainPanel.prefab"
+            };
+            s_panelSettings[(int)UIPanelId.MainPanel_5] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.UponFullScreen,
+                showMode = UIPanelShowMode.UponHideOther,
+                resPath = "Assets/Resources/UI/MainPanel.prefab"
+            };
+
+            {
+                s_panelSettings[(int)UIPanelId.MainPanel_00] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Coexist_0,
+                    showMode = UIPanelShowMode.Coexist,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_11] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Coexist_1,
+                    showMode = UIPanelShowMode.Coexist,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_22] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Coexist_2,
+                    showMode = UIPanelShowMode.Coexist,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_33] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Mask,
+                    showMode = UIPanelShowMode.Mask,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_44] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.FullScreen,
+                    showMode = UIPanelShowMode.HideOther,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+                s_panelSettings[(int)UIPanelId.MainPanel_55] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.UponFullScreen,
+                    showMode = UIPanelShowMode.UponHideOther,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+            }
+
+            {
+                s_panelSettings[(int)UIPanelId.MainPanel_000] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Coexist_0,
+                    showMode = UIPanelShowMode.Coexist,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_111] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Coexist_1,
+                    showMode = UIPanelShowMode.Coexist,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_222] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Coexist_2,
+                    showMode = UIPanelShowMode.Coexist,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_333] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.Mask,
+                    showMode = UIPanelShowMode.Mask,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+
+                s_panelSettings[(int)UIPanelId.MainPanel_444] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.FullScreen,
+                    showMode = UIPanelShowMode.HideOther,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+                s_panelSettings[(int)UIPanelId.MainPanel_555] = new UIPanelSetting()
+                {
+                    panelLayer = UIPanelLayer.UponFullScreen,
+                    showMode = UIPanelShowMode.UponHideOther,
+                    resPath = "Assets/Resources/UI/MainPanel.prefab"
+                };
+            }
 
             {
                 // reservt ids use default setting

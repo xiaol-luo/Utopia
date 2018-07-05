@@ -21,12 +21,23 @@ namespace Utopia.UI
 
         EventProxy<string> m_evProxy;
 
+        public override UIPanelId GetPanelId()
+        {
+            return m_proxy.GetPanelId();
+        }
+
         void OnDestroy()
         {
-            m_evProxy.ClearAll();
+            if (null != m_evProxy)
+            {
+                m_evProxy.ClearAll();
+            }
         }
-        void Start()
+
+        protected override void OnInit()
         {
+            base.OnInit();
+
             ipTxt.text = "127.0.0.1";
             portTxt.text = "10250";
 
@@ -59,6 +70,7 @@ namespace Utopia.UI
                 NewApp.instance.netModule.gameSrv.Send((int)ProtoId.PidSelectHeroReq, req);
             });
         }
+
         void OnGameSrvConnected(string evName, CommonNetProxy evParam)
         {
             this.UpdateUI();

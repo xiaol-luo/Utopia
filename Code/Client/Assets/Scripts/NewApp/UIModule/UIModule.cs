@@ -26,15 +26,37 @@ namespace Utopia
             return ret;
         }
 
+        float deltaSec = 0.0f;
         bool isFirst = true;
-        protected override void OnLateUpdate()
+        protected override void OnFixedUpdate ()
         {
-            base.OnLateUpdate();
+            base.OnFixedUpdate();
 
-            if (isFirst)
+            deltaSec += Time.deltaTime;
+            // for (int i = 0; i < 3; ++ i)
             {
-                isFirst = false;
-                m_panelMgr.ShowPanel(UIPanelId.MainPanel, null);
+                deltaSec = 0;
+
+                UIPanelId panelId = (UIPanelId)Random.Range(1, (int)UIPanelId.ReserveName_Begin);
+                int actionType = Random.Range(0, 7);   
+                switch (actionType)
+                {
+                    case 0:
+                    case 4:
+                    case 5:
+                    case 6:
+                        m_panelMgr.ShowPanel(panelId, null);
+                        break;
+                    case 1:
+                        m_panelMgr.HidePanel(panelId);
+                        break;
+                    case 2:
+                        m_panelMgr.ReshowPanel(panelId);
+                        break;
+                    case 3:
+                        m_panelMgr.ReleasePanel(panelId);
+                        break;
+                }
             }
         }
     }
