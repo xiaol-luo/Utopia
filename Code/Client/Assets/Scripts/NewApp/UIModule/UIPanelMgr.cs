@@ -108,6 +108,8 @@ namespace Utopia.UI
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null != panelProxy)
             {
+                this.HidePanel(panelId);
+                m_cachedPanels.Remove(panelId);
                 panelProxy.Release();
                 m_showStragy.OnReleasePanel(panelProxy);
             }

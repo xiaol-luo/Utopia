@@ -132,6 +132,7 @@ namespace Utopia.UI
                 m_wantPanelState = UIPanelState.Hided;
             }
 
+            m_root.SetActive(false);
             this.UnlockOpera(op);
         }
 
@@ -146,7 +147,9 @@ namespace Utopia.UI
 
             m_isNewShow = true;
             m_wantShowPanelData = null;
+
             this.CheckLoadPanel();
+            m_root.SetActive(true);
             this.Unfreeze();
             {
                 // TOOD: process proxy self logic
@@ -176,12 +179,14 @@ namespace Utopia.UI
                 return;
 
             this.CheckLoadPanel();
+            m_root.SetActive(true);
             if (this.IsReady() && m_isNewShow)
             {
                 this.Show(m_wantShowPanelData);
             }
             else
             {
+                m_root.SetActive(true);
                 this.Unfreeze();
                 {
                     // TOOD: process proxy self logic
@@ -245,6 +250,7 @@ namespace Utopia.UI
 
             this.Hide();
             m_panelState = UIPanelState.Released;
+            m_root.transform.SetParent(null);
             m_resLoader.Release();
             m_timer.ClearAll();
             m_eventMgr.ClearAll();
