@@ -103,6 +103,7 @@ namespace Utopia.UI
                 m_showStragy.OnHidePanel(panelProxy);
             }
         }
+
         public void ReleasePanel(UIPanelId panelId)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);

@@ -33,7 +33,7 @@ namespace Utopia
             base.OnFixedUpdate();
 
             deltaSec += Time.deltaTime;
-            // for (int i = 0; i < 3; ++ i)
+            if (deltaSec >= 0.3f)
             {
                 deltaSec = 0;
 
