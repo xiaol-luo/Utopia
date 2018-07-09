@@ -19,8 +19,8 @@ namespace Utopia.UI
             "UILayer/CoexistLayer1",
             "UILayer/CoexistLayer2",
             "UILayer/MaskLayer",
-            "UILayerFullScreen/CoexistLayer",
-            "UILayerFullScreen/MaskLayer",
+            "UILayer/FullScreenLayer",
+            "UILayer/UponFullScreenLayer",
         };
 
         public UIPanelMgr(GameObject panelRoot)
@@ -71,7 +71,7 @@ namespace Utopia.UI
             return ret;
         }
 
-        public void ShowPanel(UIPanelId panelId, UIShowPanelDataBase param)
+        public UIPanelProxy ShowPanel(UIPanelId panelId, UIShowPanelDataBase param)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null == panelProxy)
@@ -79,29 +79,34 @@ namespace Utopia.UI
                 UIPanelSetting panelSetting = UIPanelDef.GetPanelSetting(panelId);
                 panelProxy = panelSetting.CreateProxy(this, panelId);
                 panelProxy.Init();
+                {
+                    panelProxy.SetPanelOperaAction(UIPanelOpera.Showed, this.OperaShow);
+                    panelProxy.SetPanelOperaAction(UIPanelOpera.Reshowed, this.OperaReshow);
+                    panelProxy.SetPanelOperaAction(UIPanelOpera.Hided, this.OperaHide);
+                }
                 m_cachedPanels.Add(panelId, panelProxy);
                 panelProxy.GetRoot().transform.SetParent(m_layers[(int)panelSetting.panelLayer]);
             }
             panelProxy.Show(param);
-            m_showStragy.OnShowPanel(panelProxy);
+            return panelProxy;
         }
-        public void ReshowPanel(UIPanelId panelId)
+        public UIPanelProxy ReshowPanel(UIPanelId panelId)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null != panelProxy)
             {
                 panelProxy.Reshow();
-                m_showStragy.OnReshowPanel(panelProxy);
             }
+            return panelProxy;
         }
-        public void HidePanel(UIPanelId panelId)
+        public UIPanelProxy HidePanel(UIPanelId panelId)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null != panelProxy)
             {
                 panelProxy.Hide();
-                m_showStragy.OnHidePanel(panelProxy);
             }
+            return panelProxy;
         }
 
         public void ReleasePanel(UIPanelId panelId)

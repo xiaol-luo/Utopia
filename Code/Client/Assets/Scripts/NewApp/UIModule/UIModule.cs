@@ -38,7 +38,7 @@ namespace Utopia
                 deltaSec = 0;
 
                 UIPanelId panelId = (UIPanelId)Random.Range(1, (int)UIPanelId.ReserveName_Begin);
-                int actionType = Random.Range(0, 7);   
+                int actionType = Random.Range(0, 10);   
                 switch (actionType)
                 {
                     case 0:
@@ -55,6 +55,22 @@ namespace Utopia
                         break;
                     case 3:
                         m_panelMgr.ReleasePanel(panelId);
+                        break;
+                    default:
+                        {
+                            var pp = m_panelMgr.GetCachedPanel(panelId);
+                            if (null != pp)
+                            {
+                                UIPanelBase pb = pp.GetPanel();
+                                if (null != pb)
+                                {
+                                    pb.Hide();
+                                    pb.Reshow();
+                                    pb.Show(null);
+                                    pb.Reshow();
+                                }
+                            }
+                        }
                         break;
                 }
             }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Utopia.UI
 {
-    public class UIPanelBase : MonoBehaviour, IUIPanelBase
+    public partial class UIPanelBase : MonoBehaviour, IUIPanelBase
     {
         protected UIPanelProxy m_proxy;
         public void SetProxy(UIPanelProxy proxy)
@@ -29,12 +29,24 @@ namespace Utopia.UI
 
         public void Hide()
         {
+            if (!this.IsReady())
+                return;
+            if (UIPanelState.Hided == m_proxy.GetPanelState())
+                return;
+
+            m_panelOperas[(int)UIPanelOpera.PreHide](this, null);
             this.OnHide();
+            m_panelOperas[(int)UIPanelOpera.Hided](this, null);
         }
 
         public void Show(UIShowPanelDataBase panelData)
         {
-            this.OnShow();
+            if (!this.IsReady())
+                return;
+
+            m_panelOperas[(int)UIPanelOpera.PreShow](this, panelData);
+            this.OnShow(panelData);
+            m_panelOperas[(int)UIPanelOpera.Showed](this, panelData);
         }
 
         public void Unfreeze()
@@ -46,7 +58,7 @@ namespace Utopia.UI
         {
 
         }
-        protected virtual void OnShow()
+        protected virtual void OnShow(UIShowPanelDataBase panelData)
         {
             NewApp.instance.logModule.LogDebug("UIPanelBase OnShow {0}", this.GetPanelId());
         }
@@ -75,12 +87,46 @@ namespace Utopia.UI
 
         public void Reshow()
         {
-            this.OnReshow();
+            if (!this.IsReady())
+                return;
+            if (UIPanelState.Showed == m_proxy.GetPanelState())
+                return;
+
+            if (m_proxy.isNewShow)
+            {
+                m_proxy.Reshow();
+            }
+            else
+            {
+                m_panelOperas[(int)UIPanelOpera.PreReshowed](this, null);
+                this.OnReshow();
+                m_panelOperas[(int)UIPanelOpera.Reshowed](this, null);
+            }
         }
 
         public void Init()
         {
             this.OnInit();
+        }
+
+        public void SetPanelProxyFn()
+        {
+
+        }
+
+        public bool IsLoading()
+        {
+            return false;
+        }
+
+        public bool IsReleased()
+        {
+            return m_proxy.IsReleased();
+        }
+
+        public bool IsReady()
+        {
+            return m_proxy.IsReady();
         }
     }
 }

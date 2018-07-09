@@ -1,6 +1,17 @@
 
 namespace Utopia.UI
 {
+    public enum UIPanelOpera
+    {
+        PreShow,
+        Showed,
+        PreReshowed,
+        Reshowed,
+        PreHide,
+        Hided,
+        Count,
+    }
+
     public interface IUIPanelBase
     {
         void Init();
@@ -12,5 +23,8 @@ namespace Utopia.UI
         UIPanelSetting GetPanelSetting();
         UIPanelId GetPanelId();
         UIPanelState GetPanelState();
+        bool IsLoading();
+        bool IsReleased();
+        bool IsReady();
     }
 }

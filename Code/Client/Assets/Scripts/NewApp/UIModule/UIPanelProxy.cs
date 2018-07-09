@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Utopia.UI
 {
-    public class UIPanelProxy : IUIPanelBase
+    public partial class UIPanelProxy : IUIPanelBase
     {
         ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
         TimerProxy m_timer = NewApp.instance.timerModule.CreateTimerProxy();
@@ -16,12 +16,13 @@ namespace Utopia.UI
         UIPanelState m_wantPanelState;
         UIShowPanelDataBase m_wantShowPanelData;
         bool m_isNewShow = false;
+        public bool isNewShow { get { return m_isNewShow; } }
         bool m_isFreezed = true;
 
         UIPanelMgr m_panelMgr;
+        GameObject m_uiRoot;
         GameObject m_root;
         UIPanelBase m_panel;
-        GameObject m_mask;
         GameObject m_panelRoot;
 
         public GameObject GetRoot()
@@ -76,6 +77,11 @@ namespace Utopia.UI
             return ret;
         }
 
+        public UIPanelBase GetPanel()
+        {
+            return m_panel;
+        }
+
         public UIPanelState GetPanelState()
         {
             return m_panelState;
@@ -115,26 +121,17 @@ namespace Utopia.UI
             if (UIPanelState.Hided == m_panelState)
                 return;
 
-            OperaType op = OperaType.Hide;
-            if (!this.LockOpera(op))
-                return;
-
             this.CheckLoadPanel();
-            this.Freeze();
-            {
-                // TOOD: process proxy self logic
-            }
+
             if (this.IsReady())
             {
-                m_panelState = UIPanelState.Hided;
                 m_panel.Hide();
             }
             else // loading
             {
-                m_wantPanelState = UIPanelState.Hided;
+                this.OperaPreHide(null, null);
+                this.OperaHided(null, null);
             }
-            m_root.SetActive(false);
-            this.UnlockOpera(op);
         }
 
         public void Show(UIShowPanelDataBase panelData)
@@ -144,31 +141,17 @@ namespace Utopia.UI
             if (this.IsReleased())
                 return;
 
-            OperaType op = OperaType.Show;
-            if (!this.LockOpera(op))
-                return;
-
-            m_isNewShow = true;
-            m_wantShowPanelData = null;
-
             this.CheckLoadPanel();
-            m_root.SetActive(true);
-            {
-                // TOOD: process proxy self logic
-            }
+
             if (this.IsReady())
             {
-                m_panelState = UIPanelState.Showed;
                 m_panel.Show(panelData);
-                m_isNewShow = false;
             }
             else // loading
             {
-                m_wantPanelState = UIPanelState.Showed;
-                m_wantShowPanelData = panelData;
+                this.OperaPreShow(null, panelData);
+                this.OperaHided(null, panelData);
             }
-            this.Unfreeze();
-            this.UnlockOpera(op);
         }
         public void Reshow()
         {
@@ -178,34 +161,25 @@ namespace Utopia.UI
                 return;
             if (UIPanelState.Showed == m_panelState)
                 return;
-            OperaType op = OperaType.Show;
-            if (!this.LockOpera(op))
-                return;
 
             this.CheckLoadPanel();
-            m_root.SetActive(true);
+
             if (this.IsReady() && m_isNewShow)
             {
                 this.Show(m_wantShowPanelData);
             }
             else
             {
-                m_root.SetActive(true);
-                {
-                    // TOOD: process proxy self logic
-                }
                 if (this.IsReady())
                 {
-                    m_panelState = UIPanelState.Showed;
                     m_panel.Reshow();
                 }
                 else // loading
                 {
-                    m_wantPanelState = UIPanelState.Showed;
+                    this.OperaPreReshowed(null, null);
+                    this.OperaReshowed(null, null);
                 }
-                this.Unfreeze();
             }
-            this.UnlockOpera(op);
         }
 
         public void Freeze()
@@ -237,8 +211,6 @@ namespace Utopia.UI
                 return;
             if (!m_isFreezed)
                 return;
-            if (!this.LockOpera(OperaType.Unfreeze))
-                return;
 
             m_isFreezed = false;
             {
@@ -248,10 +220,9 @@ namespace Utopia.UI
             {
                 m_panel.Unfreeze();
             }
-            this.UnlockOpera(OperaType.Unfreeze);
         }
 
-        public virtual void Release()
+        public void Release()
         {
             NewApp.instance.logModule.LogDebug("UIPanelProxy Release {0}", m_panelId);
 
@@ -260,13 +231,14 @@ namespace Utopia.UI
 
             this.Hide();
             m_panelState = UIPanelState.Released;
+            m_root.SetActive(false);
             m_root.transform.SetParent(null);
             m_resLoader.Release();
             m_timer.ClearAll();
             m_eventMgr.ClearAll();
         }
 
-        protected void CheckLoadPanel()
+        public void CheckLoadPanel()
         {
             if (UIPanelState.Free != m_panelState)
                 return;
@@ -288,6 +260,14 @@ namespace Utopia.UI
             m_panel = panelGo.GetComponent<UIPanelBase>();
             m_panel.SetProxy(this);
             m_panel.Init();
+            {
+                m_panel.SetPanelOperaAction(UIPanelOpera.PreShow, this.OperaPreShow);
+                m_panel.SetPanelOperaAction(UIPanelOpera.Showed, this.OperaShowed);
+                m_panel.SetPanelOperaAction(UIPanelOpera.PreReshowed, this.OperaPreReshowed);
+                m_panel.SetPanelOperaAction(UIPanelOpera.Reshowed, this.OperaReshowed);
+                m_panel.SetPanelOperaAction(UIPanelOpera.PreHide, this.OperaPreHide);
+                m_panel.SetPanelOperaAction(UIPanelOpera.Hided, this.OperaHided);
+            }
 
             switch (m_wantPanelState)
             {
@@ -312,8 +292,8 @@ namespace Utopia.UI
             m_root.SetActive(true);
             m_root.transform.localPosition = Vector3.zero;
             m_root.transform.localScale = Vector3.one;
-            m_panelRoot = m_root.transform.Find("PanelRoot").gameObject;
-            m_mask = m_root.transform.Find("Mask").gameObject;
+            m_uiRoot = m_root.transform.Find("Root").gameObject;
+            m_panelRoot = m_root.transform.Find("Root/PanelRoot").gameObject;
         }
     }
 }
