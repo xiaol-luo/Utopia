@@ -8,7 +8,7 @@ namespace Utopia.UI
         ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
         TimerProxy m_timer = NewApp.instance.timerModule.CreateTimerProxy();
         EventProxy<string> m_eventMgr = NewApp.instance.eventModule.CreateEventProxy();
-
+        public EventProxy<string> eventProxy { get { return m_eventMgr; } }
 
         UIPanelId m_panelId;
         UIPanelSetting m_panelSetting;
@@ -20,6 +20,7 @@ namespace Utopia.UI
         bool m_isFreezed = true;
 
         UIPanelMgr m_panelMgr;
+        public UIPanelMgr panelMgr { get { return m_panelMgr; } }
         GameObject m_uiRoot;
         GameObject m_root;
         UIPanelBase m_panel;
@@ -89,12 +90,12 @@ namespace Utopia.UI
 
         public void Hide()
         {
-            NewApp.instance.logModule.LogDebug("UIPanelProxy Hide {0}", m_panelId);
-
             if (this.IsReleased())
                 return;
             if (UIPanelState.Hided == m_panelState)
                 return;
+
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Hide {0}", m_panelId);
 
             this.CheckLoadPanel();
 
@@ -111,10 +112,10 @@ namespace Utopia.UI
 
         public void Show(UIShowPanelDataBase panelData)
         {
-            NewApp.instance.logModule.LogDebug("UIPanelProxy Show {0}", m_panelId);
-
             if (this.IsReleased())
                 return;
+
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Show {0}", m_panelId);
 
             this.CheckLoadPanel();
 
@@ -130,12 +131,12 @@ namespace Utopia.UI
         }
         public void Reshow()
         {
-            NewApp.instance.logModule.LogDebug("UIPanelProxy Reshow {0}", m_panelId);
-
             if (this.IsReleased())
                 return;
             if (UIPanelState.Showed == m_panelState)
                 return;
+
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Reshow {0}", m_panelId);
 
             this.CheckLoadPanel();
 
@@ -159,12 +160,12 @@ namespace Utopia.UI
 
         public void Freeze()
         {
-            NewApp.instance.logModule.LogDebug("UIPanelProxy Freeze {0}", m_panelId);
-
             if (this.IsReleased())
                 return;
             if (m_isFreezed)
                 return;
+
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Freeze {0}", m_panelId);
 
             if (this.IsReady())
             {
@@ -177,12 +178,12 @@ namespace Utopia.UI
         }
         public void Unfreeze()
         {
-            NewApp.instance.logModule.LogDebug("UIPanelProxy Unfreeze {0}", m_panelId);
-
             if (this.IsReleased())
                 return;
             if (!m_isFreezed)
                 return;
+
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Unfreeze {0}", m_panelId);
 
             if (this.IsReady())
             {
@@ -196,10 +197,10 @@ namespace Utopia.UI
 
         public void Release()
         {
-            NewApp.instance.logModule.LogDebug("UIPanelProxy Release {0}", m_panelId);
-
             if (this.IsReleased())
                 return;
+
+            NewApp.instance.logModule.LogDebug("UIPanelProxy Release {0}", m_panelId);
 
             this.Hide();
 
@@ -269,11 +270,20 @@ namespace Utopia.UI
             ResourceObserver resOb = m_panelMgr.GetProxyGoRes(UIPanelMgr.Default_UIPanelProxy_Res_Path);
             m_root = resOb.Instantiate<GameObject>();
             m_root.name = m_panelId.ToString();
-            m_root.SetActive(true);
-            m_root.transform.localPosition = Vector3.zero;
-            m_root.transform.localScale = Vector3.one;
             m_uiRoot = m_root.transform.Find("Root").gameObject;
             m_panelRoot = m_root.transform.Find("Root/PanelRoot").gameObject;
+
+            {
+                UIPanelProxyBehaviourBase[] behaviours = m_root.GetComponents<UIPanelProxyBehaviourBase>();
+                if (null != behaviours &&behaviours.Length > 0)
+                {
+                    foreach (UIPanelProxyBehaviourBase behaviour in behaviours)
+                    {
+                        m_behaviours.Add(behaviour);
+                        behaviour.Init(this);
+                    }
+                }
+            }
         }
 
         public bool IsFreezed()

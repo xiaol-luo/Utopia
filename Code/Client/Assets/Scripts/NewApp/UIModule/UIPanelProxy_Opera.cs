@@ -40,6 +40,13 @@ namespace Utopia.UI
                 m_wantPanelState = UIPanelState.Showed;
             }
             m_panelOperas[(int)UIPanelOpera.Showed](this, param);
+
+            {
+                foreach (var item in m_behaviours)
+                {
+                    item.OnShow();
+                }
+            }
         }
 
         protected void OperaPreReshowed(UIPanelBase panel, object param/*always null*/)
@@ -65,6 +72,13 @@ namespace Utopia.UI
                 m_wantPanelState = UIPanelState.Showed;
             }
             m_panelOperas[(int)UIPanelOpera.Reshowed](this, param);
+
+            {
+                foreach (var item in m_behaviours)
+                {
+                    item.OnReshow();
+                }
+            }
         }
         protected void OperaPreHide(UIPanelBase panel, object param/*always null*/)
         {
@@ -83,22 +97,54 @@ namespace Utopia.UI
             
             m_uiRoot.SetActive(false);
             m_panelOperas[(int)UIPanelOpera.Hided](this, param);
+
+            {
+                foreach (var item in m_behaviours)
+                {
+                    item.OnHide();
+                }
+            }
         }
 
         protected void OperaFreezed(UIPanelBase panel, object param/*always null*/)
         {
             m_isFreezed = true;
+            m_panelOperas[(int)UIPanelOpera.Freezed](this, param);
+
+            {
+                foreach (var item in m_behaviours)
+                {
+                    item.OnUnfreeze();
+                }
+            }
         }
         protected void OperaUnfreezed(UIPanelBase panel, object param/*always null*/)
         {
             m_isFreezed = false;
+            m_panelOperas[(int)UIPanelOpera.Unfreezed](this, param);
+
+            {
+                foreach (var item in m_behaviours)
+                {
+                    item.OnUnfreeze();
+                }
+            }
         }
         protected void OperaPreRelease(UIPanelBase panel, object param/*always null*/)
         {
+
         }
         protected void OperaReleased(UIPanelBase panel, object param/*always null*/)
         {
             m_panelState = UIPanelState.Released;
+
+            {
+                foreach (var item in m_behaviours)
+                {
+                    item.OnRelease();
+                }
+            }
+
             m_root.transform.SetParent(null);
             m_resLoader.Release();
             m_timer.ClearAll();

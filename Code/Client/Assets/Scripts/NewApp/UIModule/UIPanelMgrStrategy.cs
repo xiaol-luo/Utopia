@@ -10,6 +10,7 @@ namespace Utopia.UI
             void OnHidePanel(UIPanelProxy panel);
             void OnReshowPanel(UIPanelProxy panel);
             void OnReleasePanel(UIPanelProxy panel);
+            UIPanelId GetTopestActivePanelId();
         }
 
         public class UIPanelInfoSet
@@ -28,6 +29,7 @@ namespace Utopia.UI
                 public UIPanelSetting setting;
                 public bool isActive = false;
                 public bool isRelease = false;
+                public bool isFreeze = false;
             }
             public Dictionary<UIPanelId, PanelInfo> panelInfos = new Dictionary<UIPanelId, PanelInfo>();
             public List<PanelInfo>[] layerPanelInfos = new List<PanelInfo>[(int)UIPanelLayer.Count];
@@ -88,6 +90,32 @@ namespace Utopia.UI
                 }
                 return ret;
             }
+
+            public UIPanelLayer FreezePanel(UIPanelId panelId)
+            {
+                UIPanelLayer ret = UIPanelLayer.Count;
+                PanelInfo pi = this.GetPanelInfo(panelId);
+                if (null != pi)
+                {
+                    ret = pi.setting.panelLayer;
+                    pi.isFreeze = true;
+                }
+                return ret;
+            }
+
+            public UIPanelLayer UnfreezePanel(UIPanelId panelId)
+            {
+
+                UIPanelLayer ret = UIPanelLayer.Count;
+                PanelInfo pi = this.GetPanelInfo(panelId);
+                if (null != pi)
+                {
+                    ret = pi.setting.panelLayer;
+                    pi.isFreeze = false;
+                }
+                return ret;
+            }
+
             public UIPanelLayer ReleasePanel(UIPanelId panelId)
             {
                 UIPanelLayer ret = UIPanelLayer.Count;
@@ -165,17 +193,20 @@ namespace Utopia.UI
                             {
                                 if (newTopestPanel.setting.showMode > UIPanelShowMode.Coexist)
                                 {
-                                    var newTopestPanelProxy = m_panelMgr.GetCachedPanel(newTopestPanel.panelId);
-                                    if (null != newTopestPanelProxy)
+                                    if (newTopestPanel.isFreeze)
                                     {
-                                        newTopestPanelProxy.Unfreeze();
+                                        var newTopestPanelProxy = m_panelMgr.GetCachedPanel(newTopestPanel.panelId);
+                                        if (null != newTopestPanelProxy)
+                                        {
+                                            newTopestPanelProxy.Unfreeze();
+                                        }
                                     }
                                 }
                                 else
                                 {
                                     foreach (UIPanelInfoSet.PanelInfo pi in m_panelInfoSet.panelInfos.Values)
                                     {
-                                        if (pi.isActive && !pi.isRelease && UIPanelShowMode.Coexist == pi.setting.showMode)
+                                        if (pi.isActive && !pi.isRelease && pi.isFreeze && UIPanelShowMode.Coexist == pi.setting.showMode)
                                         {
                                             var pp = m_panelMgr.GetCachedPanel(pi.panelId);
                                             if (null != pp)
@@ -237,7 +268,7 @@ namespace Utopia.UI
                     {
                         // 新showed的面板并不在最上层，那么新show的面板也不会导致其他面板freeze
                         // 判断下是否冻结自己就好了
-                        if (newTopestPanel.setting.showMode > UIPanelShowMode.Coexist)
+                        if (!newTopestPanel.isFreeze && newTopestPanel.setting.showMode > UIPanelShowMode.Coexist)
                         {
                             showedPanelProxy.Freeze();
                         }
@@ -251,17 +282,20 @@ namespace Utopia.UI
                             {
                                 if (oldTopestPanel.setting.showMode != UIPanelShowMode.Coexist)
                                 {
-                                    var oldTopestPanelProxy = m_panelMgr.GetCachedPanel(oldTopestPanel.panelId);
-                                    if (null != oldTopestPanelProxy)
+                                    if (!oldTopestPanel.isFreeze)
                                     {
-                                        oldTopestPanelProxy.Freeze();
+                                        var oldTopestPanelProxy = m_panelMgr.GetCachedPanel(oldTopestPanel.panelId);
+                                        if (null != oldTopestPanelProxy)
+                                        {
+                                            oldTopestPanelProxy.Freeze();
+                                        }
                                     }
                                 }
                                 else // 如果旧的最高层面板是共存类型的，那么可能所有共存类型的面板都需要Freeze下
                                 {
                                     foreach (UIPanelInfoSet.PanelInfo pi in m_panelInfoSet.panelInfos.Values)
                                     {
-                                        if (pi.isActive && !pi.isRelease && UIPanelShowMode.Coexist == pi.setting.showMode)
+                                        if (pi.isActive && !pi.isRelease && !pi.isFreeze && UIPanelShowMode.Coexist == pi.setting.showMode)
                                         {
                                             var pp = m_panelMgr.GetCachedPanel(pi.panelId);
                                             if (null != pp)
@@ -288,6 +322,17 @@ namespace Utopia.UI
                         NewApp.instance.eventModule.Fire(UIPanelEventDef.OneFullPanelShow);
                     }
                 }
+            }
+
+            public UIPanelId GetTopestActivePanelId()
+            {
+                UIPanelId ret = UIPanelId.None;
+                UIPanelInfoSet.PanelInfo pi = m_panelInfoSet.GetTopestShowedPanelInfo();
+                if (null != pi)
+                {
+                    ret = pi.panelId;
+                }
+                return ret;
             }
         }
     }

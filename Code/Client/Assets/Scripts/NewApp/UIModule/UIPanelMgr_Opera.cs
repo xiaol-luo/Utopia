@@ -28,5 +28,15 @@ namespace Utopia.UI
             m_showStragy.OnReleasePanel(proxy);
             GameObject.Destroy(proxy.GetRoot());
         }
+
+        protected void OperaFreeze(UIPanelProxy proxy, object param/*always null*/)
+        {
+
+        }
+
+        protected void OperaUnfreeze(UIPanelProxy proxy, object param/*always null*/)
+        {
+
+        }
     }
 }

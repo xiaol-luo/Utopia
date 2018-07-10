@@ -84,9 +84,15 @@ namespace Utopia.UI
                     panelProxy.SetPanelOperaAction(UIPanelOpera.Reshowed, this.OperaReshow);
                     panelProxy.SetPanelOperaAction(UIPanelOpera.Hided, this.OperaHide);
                     panelProxy.SetPanelOperaAction(UIPanelOpera.Released, this.OperaRelease);
+                    panelProxy.SetPanelOperaAction(UIPanelOpera.Freezed, this.OperaFreeze);
+                    panelProxy.SetPanelOperaAction(UIPanelOpera.Unfreezed, this.OperaUnfreeze);
                 }
+                GameObject panelRoot = panelProxy.GetRoot();
+                panelRoot.transform.SetParent(m_layers[(int)panelSetting.panelLayer]);
+                panelRoot.SetActive(true);
+                panelRoot.transform.localPosition = Vector3.zero;
+                panelRoot.transform.localScale = Vector3.one;
                 m_cachedPanels.Add(panelId, panelProxy);
-                panelProxy.GetRoot().transform.SetParent(m_layers[(int)panelSetting.panelLayer]);
             }
             panelProxy.Show(param);
             return panelProxy;
@@ -117,6 +123,12 @@ namespace Utopia.UI
             {
                 panelProxy.Release();
             }
+        }
+
+        public UIPanelId GetTopestActivePanelId()
+        {
+            UIPanelId ret = m_showStragy.GetTopestActivePanelId();
+            return ret;
         }
     }
 }
