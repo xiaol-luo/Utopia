@@ -20,5 +20,13 @@ namespace Utopia.UI
         {
             m_showStragy.OnHidePanel(proxy);
         }
+        protected void OperaRelease(UIPanelProxy proxy, object param/*always null*/)
+        {
+            UIPanelId panelId = proxy.GetPanelId();
+            this.HidePanel(panelId);
+            m_cachedPanels.Remove(panelId);
+            m_showStragy.OnReleasePanel(proxy);
+            GameObject.Destroy(proxy.GetRoot());
+        }
     }
 }

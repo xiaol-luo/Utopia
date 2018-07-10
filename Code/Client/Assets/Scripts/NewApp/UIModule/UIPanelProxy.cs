@@ -87,31 +87,6 @@ namespace Utopia.UI
             return m_panelState;
         }
 
-        // maybe just for debug
-        enum OperaType
-        {
-            Show,
-            Hide,
-            Freeze,
-            Unfreeze,
-            Count
-        }
-        bool []m_isOpering = new bool [(int)OperaType.Count]; // ∑¿÷π≤Ÿ◊˜÷ÿ»Î
-        bool LockOpera(OperaType op)
-        {
-            bool ret = false;
-            if (!m_isOpering[(int)op])
-            {
-                ret = true;
-                m_isOpering[(int)op] = true;
-            }
-            return ret;
-        }
-        void UnlockOpera(OperaType op)
-        {
-            m_isOpering[(int)op] = false;
-        }
-
         public void Hide()
         {
             NewApp.instance.logModule.LogDebug("UIPanelProxy Hide {0}", m_panelId);
@@ -190,18 +165,15 @@ namespace Utopia.UI
                 return;
             if (m_isFreezed)
                 return;
-            if (!this.LockOpera(OperaType.Freeze))
-                return;
 
-            m_isFreezed = true;
-            {
-                // TOOD: process proxy self logic
-            }
             if (this.IsReady())
             {
                 m_panel.Freeze();
             }
-            this.UnlockOpera(OperaType.Freeze);
+            else
+            {
+                this.OperaFreezed(null, null);
+            }
         }
         public void Unfreeze()
         {
@@ -212,13 +184,13 @@ namespace Utopia.UI
             if (!m_isFreezed)
                 return;
 
-            m_isFreezed = false;
-            {
-                // TOOD: process proxy self logic
-            }
             if (this.IsReady())
             {
                 m_panel.Unfreeze();
+            }
+            else
+            {
+                this.OperaUnfreezed(null, null);
             }
         }
 
@@ -230,12 +202,16 @@ namespace Utopia.UI
                 return;
 
             this.Hide();
-            m_panelState = UIPanelState.Released;
-            m_root.SetActive(false);
-            m_root.transform.SetParent(null);
-            m_resLoader.Release();
-            m_timer.ClearAll();
-            m_eventMgr.ClearAll();
+
+            if (this.IsReady())
+            {
+                m_panel.Release();
+            }
+            else // loading
+            {
+                this.OperaPreRelease(null, null);
+                this.OperaReleased(null, null);
+            }
         }
 
         public void CheckLoadPanel()
@@ -267,6 +243,10 @@ namespace Utopia.UI
                 m_panel.SetPanelOperaAction(UIPanelOpera.Reshowed, this.OperaReshowed);
                 m_panel.SetPanelOperaAction(UIPanelOpera.PreHide, this.OperaPreHide);
                 m_panel.SetPanelOperaAction(UIPanelOpera.Hided, this.OperaHided);
+                m_panel.SetPanelOperaAction(UIPanelOpera.Freezed, this.OperaFreezed);
+                m_panel.SetPanelOperaAction(UIPanelOpera.Unfreezed, this.OperaUnfreezed);
+                m_panel.SetPanelOperaAction(UIPanelOpera.PreRelease, this.OperaPreRelease);
+                m_panel.SetPanelOperaAction(UIPanelOpera.Released, this.OperaReleased);
             }
 
             switch (m_wantPanelState)
@@ -294,6 +274,11 @@ namespace Utopia.UI
             m_root.transform.localScale = Vector3.one;
             m_uiRoot = m_root.transform.Find("Root").gameObject;
             m_panelRoot = m_root.transform.Find("Root/PanelRoot").gameObject;
+        }
+
+        public bool IsFreezed()
+        {
+            return m_isFreezed;
         }
     }
 }

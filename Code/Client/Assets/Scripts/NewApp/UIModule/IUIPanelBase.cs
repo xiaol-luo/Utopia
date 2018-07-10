@@ -9,6 +9,10 @@ namespace Utopia.UI
         Reshowed,
         PreHide,
         Hided,
+        Freezed,
+        Unfreezed,
+        PreRelease,
+        Released,
         Count,
     }
 
@@ -20,9 +24,11 @@ namespace Utopia.UI
         void Hide();
         void Freeze();
         void Unfreeze();
+        void Release();
         UIPanelSetting GetPanelSetting();
         UIPanelId GetPanelId();
         UIPanelState GetPanelState();
+        bool IsFreezed();
         bool IsLoading();
         bool IsReleased();
         bool IsReady();

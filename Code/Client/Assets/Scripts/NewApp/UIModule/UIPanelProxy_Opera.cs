@@ -84,5 +84,26 @@ namespace Utopia.UI
             m_uiRoot.SetActive(false);
             m_panelOperas[(int)UIPanelOpera.Hided](this, param);
         }
+
+        protected void OperaFreezed(UIPanelBase panel, object param/*always null*/)
+        {
+            m_isFreezed = true;
+        }
+        protected void OperaUnfreezed(UIPanelBase panel, object param/*always null*/)
+        {
+            m_isFreezed = false;
+        }
+        protected void OperaPreRelease(UIPanelBase panel, object param/*always null*/)
+        {
+        }
+        protected void OperaReleased(UIPanelBase panel, object param/*always null*/)
+        {
+            m_panelState = UIPanelState.Released;
+            m_root.transform.SetParent(null);
+            m_resLoader.Release();
+            m_timer.ClearAll();
+            m_eventMgr.ClearAll();
+            m_panelOperas[(int)UIPanelOpera.Released](this, param);
+        }
     }
 }

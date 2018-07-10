@@ -13,7 +13,11 @@ namespace Utopia.UI
 
         public void Freeze()
         {
+            if (this.IsFreezed())
+                return;
+
             this.OnFreeze();
+            m_panelOperas[(int)UIPanelOpera.Freezed](this, null);
         }
 
         public virtual UIPanelId GetPanelId()
@@ -51,7 +55,11 @@ namespace Utopia.UI
 
         public void Unfreeze()
         {
+            if (!this.IsFreezed())
+                return;
+
             this.OnUnfreeze();
+            m_panelOperas[(int)UIPanelOpera.Unfreezed](this, null);
         }
 
         protected virtual void OnInit()
@@ -127,6 +135,27 @@ namespace Utopia.UI
         public bool IsReady()
         {
             return m_proxy.IsReady();
+        }
+
+        public bool IsFreezed()
+        {
+            return m_proxy.IsFreezed();
+        }
+
+        public void Release()
+        {
+            if (this.IsReleased())
+                return;
+        }
+
+        protected virtual void OnRelease()
+        {
+            if (!this.IsReady())
+                return;
+
+            m_panelOperas[(int)UIPanelOpera.PreRelease](this, null);
+            this.OnRelease();
+            m_panelOperas[(int)UIPanelOpera.Released](this, null);
         }
     }
 }
