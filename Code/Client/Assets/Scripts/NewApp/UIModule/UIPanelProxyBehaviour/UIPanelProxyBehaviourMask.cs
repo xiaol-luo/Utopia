@@ -15,16 +15,25 @@ namespace Utopia.UI
 
         public override void OnShow()
         {
+            if (UIPanelShowMode.Coexist == m_proxy.GetPanelSetting().showMode)
+                return;
+
             base.OnShow();
             m_mask.gameObject.SetActive(true);
         }
         public override void OnReshow()
         {
+            if (UIPanelShowMode.Coexist == m_proxy.GetPanelSetting().showMode)
+                return;
+
             base.OnReshow();
             m_mask.gameObject.SetActive(true);
         }
         public override void OnHide()
         {
+            if (UIPanelShowMode.Coexist == m_proxy.GetPanelSetting().showMode)
+                return;
+
             base.OnHide();
             m_mask.gameObject.SetActive(false);
         }

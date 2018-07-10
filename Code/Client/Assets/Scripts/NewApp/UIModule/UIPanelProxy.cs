@@ -234,6 +234,9 @@ namespace Utopia.UI
             m_panelState = UIPanelState.Loaded;
             GameObject panelGo = resOb.Instantiate<GameObject>();
             panelGo.transform.SetParent(m_panelRoot.transform);
+            panelGo.SetActive(true);
+            panelGo.transform.localScale = Vector3.one;
+            panelGo.transform.localPosition = Vector3.zero;
             m_panel = panelGo.GetComponent<UIPanelBase>();
             m_panel.SetProxy(this);
             m_panel.Init();

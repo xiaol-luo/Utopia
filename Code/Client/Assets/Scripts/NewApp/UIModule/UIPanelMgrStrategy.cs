@@ -21,6 +21,7 @@ namespace Utopia.UI
                 {UIPanelShowMode.Mask, new List<UIPanelLayer>() { UIPanelLayer.Mask } },
                 {UIPanelShowMode.HideOther, new List<UIPanelLayer>() { UIPanelLayer.FullScreen } },
                 {UIPanelShowMode.UponHideOther, new List<UIPanelLayer>() { UIPanelLayer.UponFullScreen } },
+                {UIPanelShowMode.Loading, new List<UIPanelLayer>() { UIPanelLayer.Loading } },
             };
 
             public class PanelInfo
@@ -188,7 +189,7 @@ namespace Utopia.UI
                     if (hidedPanelId == oldTopestPanel.panelId)
                     {
                         if (oldTopestPanel.setting.showMode > UIPanelShowMode.Coexist)
-                        { 
+                        {
                             if (null != newTopestPanel)
                             {
                                 if (newTopestPanel.setting.showMode > UIPanelShowMode.Coexist)
@@ -221,17 +222,31 @@ namespace Utopia.UI
                     }
                 }
 
+                this.CheckFullScreenOnTop(oldTopestPanel, newTopestPanel);
+            }
+
+            void CheckFullScreenOnTop(UIPanelInfoSet.PanelInfo oldTopestPanel, UIPanelInfoSet.PanelInfo newTopestPanel)
+            {
+                UIPanelLayer newTopestLayer = UIPanelLayer.Coexist_0;
+                UIPanelEventDef.PanelIdChange pic = new UIPanelEventDef.PanelIdChange();
+                if (null != oldTopestPanel)
                 {
-                    UIPanelLayer oldTopestLayer = UIPanelLayer.Coexist_0;
-                    if (null != oldTopestPanel)
-                        oldTopestLayer = oldTopestPanel.setting.panelLayer;
-                    UIPanelLayer newTopestLayer = UIPanelLayer.Coexist_0;
-                    if (null != newTopestPanel)
-                        newTopestLayer = newTopestPanel.setting.panelLayer;
-                    if (oldTopestLayer >= UIPanelLayer.FullScreen && 
-                        newTopestLayer < UIPanelLayer.FullScreen)
+                    pic.from = oldTopestPanel.panelId;
+                }
+                if (null != newTopestPanel)
+                {
+                    pic.to = newTopestPanel.panelId;
+                    newTopestLayer = newTopestPanel.setting.panelLayer;
+                }
+                if (pic.from != pic.to)
+                {
+                    if (UIPanelDef.InFullScreenLayers(newTopestLayer))
                     {
-                        NewApp.instance.eventModule.Fire(UIPanelEventDef.AllFullPanelHide);
+                        NewApp.instance.eventModule.Fire(UIPanelEventDef.FullScreenPanelOnTop, pic);
+                    }
+                    else
+                    {
+                        NewApp.instance.eventModule.Fire(UIPanelEventDef.FullScreenPanelNotOnTop, pic);
                     }
                 }
             }
@@ -309,19 +324,8 @@ namespace Utopia.UI
                         }
                     }
                 }
-                {
-                    UIPanelLayer oldTopestLayer = UIPanelLayer.Coexist_0;
-                    if (null != oldTopestPanel)
-                        oldTopestLayer = oldTopestPanel.setting.panelLayer;
-                    UIPanelLayer newTopestLayer = UIPanelLayer.Coexist_0;
-                    if (null != newTopestPanel)
-                        newTopestLayer = newTopestPanel.setting.panelLayer;
-                    if (oldTopestLayer < UIPanelLayer.FullScreen &&
-                        newTopestLayer >= UIPanelLayer.FullScreen)
-                    {
-                        NewApp.instance.eventModule.Fire(UIPanelEventDef.OneFullPanelShow);
-                    }
-                }
+
+                this.CheckFullScreenOnTop(oldTopestPanel, newTopestPanel);
             }
 
             public UIPanelId GetTopestActivePanelId()

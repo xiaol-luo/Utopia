@@ -22,7 +22,7 @@ namespace Utopia.UI
 
         public virtual UIPanelId GetPanelId()
         {
-            throw new System.NotImplementedException();
+            return m_proxy.GetPanelId();
         }
 
         public UIPanelSetting GetPanelSetting()

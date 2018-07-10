@@ -21,6 +21,7 @@ namespace Utopia.UI
             "UILayer/MaskLayer",
             "UILayer/FullScreenLayer",
             "UILayer/UponFullScreenLayer",
+            "UILayer/LoadingLayer",
         };
 
         public UIPanelMgr(GameObject panelRoot)

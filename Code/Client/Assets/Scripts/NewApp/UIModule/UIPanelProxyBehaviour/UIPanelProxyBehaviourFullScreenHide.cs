@@ -12,17 +12,17 @@ namespace Utopia.UI
             Transform root = m_proxy.GetRoot().transform;
             m_uiRoot = root.Find("Root");
 
-            m_proxy.eventProxy.Subscribe(UIPanelEventDef.OneFullPanelShow, this.OnOneFullPanelShow);
-            m_proxy.eventProxy.Subscribe(UIPanelEventDef.AllFullPanelHide, this.OnAllFullPanelHide);
+            m_proxy.eventProxy.Subscribe<UIPanelEventDef.PanelIdChange>(UIPanelEventDef.FullScreenPanelOnTop, this.OnOneFullPanelShow);
+            m_proxy.eventProxy.Subscribe<UIPanelEventDef.PanelIdChange>(UIPanelEventDef.FullScreenPanelNotOnTop, this.OnAllFullPanelHide);
 
             this.CheckHide();
         }
 
-        void OnOneFullPanelShow(string evName)
+        void OnOneFullPanelShow(string evName, UIPanelEventDef.PanelIdChange pic)
         {
             this.CheckHide();
         }
-        void OnAllFullPanelHide(string evName)
+        void OnAllFullPanelHide(string evName, UIPanelEventDef.PanelIdChange pic)
         {
             this.CheckHide();
         }
@@ -31,18 +31,22 @@ namespace Utopia.UI
         void CheckHide()
         {
             UIPanelSetting selfPs = m_proxy.GetPanelSetting();
-            if (null == selfPs || selfPs.showMode >= UIPanelShowMode.HideOther)
+            if (null == selfPs || 
+                UIPanelDef.InFullScreenLayers(selfPs.panelLayer) || 
+                UIPanelLayer.Loading == selfPs.panelLayer)
                 return;
 
             UIPanelId topestActivePanelId = m_proxy.panelMgr.GetTopestActivePanelId();
             UIPanelSetting topestActivePs = UIPanelDef.GetPanelSetting(topestActivePanelId);
-            UIPanelShowMode topestActiveShowMode = UIPanelShowMode.Coexist;
+            UIPanelLayer topestActivePanelLayer = UIPanelLayer.Coexist_0;
             if (null != topestActivePs)
-                topestActiveShowMode = topestActivePs.showMode;
+                topestActivePanelLayer = topestActivePs.panelLayer;
+            if (UIPanelLayer.Loading == topestActivePanelLayer)
+                return;
 
             if (isHide)
             {
-                if (topestActiveShowMode < UIPanelShowMode.HideOther)
+                if (!UIPanelDef.InFullScreenLayers(topestActivePanelLayer))
                 {
                     isHide = false;
                     m_uiRoot.localScale = Vector3.one;
@@ -50,7 +54,7 @@ namespace Utopia.UI
             }
             else
             {
-                if (topestActiveShowMode >= UIPanelShowMode.HideOther)
+                if (UIPanelDef.InFullScreenLayers(topestActivePanelLayer))
                 {
                     isHide = true;
                     m_uiRoot.localScale = Vector3.zero;
