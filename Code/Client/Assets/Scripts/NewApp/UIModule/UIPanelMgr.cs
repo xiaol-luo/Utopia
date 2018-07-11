@@ -46,6 +46,20 @@ namespace Utopia.UI
             return ret;
         }
 
+        public bool IsAllProxyResLoaded()
+        {
+            bool ret = true;
+            foreach (var res in m_panelProxyResMap.Values)
+            {
+                if (!res.isLoaded)
+                {
+                    ret = false;
+                    break;
+                }
+            }
+            return ret;
+        }
+
         public bool Init()
         {
             m_showStragy = new UIPanelMgrStragy(this);

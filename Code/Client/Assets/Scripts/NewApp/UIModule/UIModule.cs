@@ -17,12 +17,10 @@ namespace Utopia
         protected override ERet OnStart()
         {
             ERet ret = base.OnStart();
-
+            UIPanelDef.InitPanelSettings();
             GameObject panelRoot = NewApp.instance.root.transform.Find("RootUI").gameObject;
             m_panelMgr = new UIPanelMgr(panelRoot);
-            UIPanelDef.InitPanelSettings();
             m_panelMgr.Init();
-
             return ret;
         }
 
@@ -31,6 +29,14 @@ namespace Utopia
         protected override void OnFixedUpdate ()
         {
             base.OnFixedUpdate();
+
+            if (isFirst)
+            {
+                isFirst = false;
+                m_panelMgr.ShowPanel(UIPanelId.MainPanel, null);
+            }
+
+            return;
 
             deltaSec += Time.deltaTime;
             if (deltaSec >= 0.3f)

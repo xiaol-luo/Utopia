@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using UnityEngine;
-
+using Utopia.UI;
 
 namespace Utopia
 {
@@ -56,6 +56,15 @@ namespace Utopia
             get
             {
                 return m_modules[AppModule.EModule.NetModule] as NetModule;
+            }
+        }
+
+        public UIPanelMgr panelMgr
+        {
+            get
+            {
+                UIModule uiModule = m_modules[AppModule.EModule.UIModule] as UIModule;
+                return uiModule.panelMgr;
             }
         }
 

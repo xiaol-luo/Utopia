@@ -216,6 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da42884ab6d3ea45a20779da89be3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confirmBtn: {fileID: 114179883160195388}
+  cancelBtn: {fileID: 114115752654277958}
+  contentTxt: {fileID: 114598781325742554}
 --- !u!114 &114179883160195388
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -79,6 +79,29 @@ namespace Utopia.UI
         void OnGameSrvClosed(string evName, CommonNetProxy evParam)
         {
             this.UpdateUI();
+            UIConfirmPanelData cpd = new UIConfirmPanelData();
+            cpd.content = "cancel is to hide panel, ok to show loading panel";
+            cpd.confirmCb = () =>
+            {
+                UILoadingPanelData lpd = new UILoadingPanelData();
+                int tickTimes = 10;
+                lpd.fnIsDone = () =>
+                {
+                    return tickTimes <= 0;
+                };
+                string txt = "10";
+                lpd.fnGetContent = () =>
+                {
+                    return txt;
+                };
+                NewApp.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, lpd);
+                m_proxy.timer.Add(() =>
+                {
+                    --tickTimes;
+                    txt = tickTimes.ToString();
+                }, 0, tickTimes, 1.0f);
+            };
+            NewApp.instance.panelMgr.ShowPanel(UIPanelId.ConfirmPanel, cpd);
         }
 
         void OnRspFreeHero(string evKey, RspFreeHero msg)

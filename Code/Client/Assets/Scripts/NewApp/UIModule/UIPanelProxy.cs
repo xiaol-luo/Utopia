@@ -7,6 +7,7 @@ namespace Utopia.UI
     {
         ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
         TimerProxy m_timer = NewApp.instance.timerModule.CreateTimerProxy();
+        public TimerProxy timer { get { return m_timer; } }
         EventProxy<string> m_eventMgr = NewApp.instance.eventModule.CreateEventProxy();
         public EventProxy<string> eventProxy { get { return m_eventMgr; } }
 
@@ -126,7 +127,7 @@ namespace Utopia.UI
             else // loading
             {
                 this.OperaPreShow(null, panelData);
-                this.OperaHided(null, panelData);
+                this.OperaShowed(null, panelData);
             }
         }
         public void Reshow()

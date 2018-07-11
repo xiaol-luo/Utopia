@@ -2,8 +2,7 @@ namespace Utopia.UI
 {
     public class UIShowPanelDataBase
     {
-        public object openCbParam;
-        public System.Action<IUIPanelBase, object> openCb;
+
     }
 
     public enum UIPanelId
