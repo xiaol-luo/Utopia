@@ -80,7 +80,7 @@ namespace Utopia
             {
                 if (null != cb)
                 {
-                    Core.instance.timerModule.Add(() => {
+                    Core.instance.timer.Add(() => {
                         cb(path, ret);
                     }, 0);
                 }

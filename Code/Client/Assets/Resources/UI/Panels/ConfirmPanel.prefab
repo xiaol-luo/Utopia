@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 224553159932569276}
   - component: {fileID: 222994380134979792}
   - component: {fileID: 114720462672555778}
-  - component: {fileID: 114177349226518466}
+  - component: {fileID: 114874636940431336}
   m_Layer: 5
   m_Name: ConfirmPanel
   m_TagString: Untagged
@@ -205,20 +205,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114177349226518466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1174722292467140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4da42884ab6d3ea45a20779da89be3f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  confirmBtn: {fileID: 114179883160195388}
-  cancelBtn: {fileID: 114115752654277958}
-  contentTxt: {fileID: 114598781325742554}
 --- !u!114 &114179883160195388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,6 +398,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114874636940431336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174722292467140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff38fbed35e573488b7154a7be6befb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmBtn: {fileID: 114179883160195388}
+  cancelBtn: {fileID: 114115752654277958}
+  contentTxt: {fileID: 114598781325742554}
 --- !u!222 &222055194200066964
 CanvasRenderer:
   m_ObjectHideFlags: 1

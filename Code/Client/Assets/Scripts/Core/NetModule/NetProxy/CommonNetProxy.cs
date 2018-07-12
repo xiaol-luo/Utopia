@@ -13,7 +13,7 @@ namespace Utopia.Net
         public CommonNetProxy()
         {
             m_netAgent = new NetAgent();
-            m_evProxy = Core.instance.eventModule.CreateEventProxy();
+            m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             m_evProxy.Subscribe<NetAgent>(NetModuleEventDef.RemoveNetAgent, this.OnNetAgentError);
         }
 
@@ -28,19 +28,19 @@ namespace Utopia.Net
         }
         public void Connect(string ip, int port)
         {
-            Core.instance.netModule.RemoveNetAgent(m_netAgent.id);
+            Core.instance.net.RemoveNetAgent(m_netAgent.id);
             m_netAgent.id = 0;
             if (m_netAgent.Connect(ip, port))
             {
-                Core.instance.netModule.AddNetAgent(m_netAgent);
+                Core.instance.net.AddNetAgent(m_netAgent);
             }
         }
         public void Reconnect()
         {
-            Core.instance.netModule.RemoveNetAgent(m_netAgent.id);
+            Core.instance.net.RemoveNetAgent(m_netAgent.id);
             if (m_netAgent.ReConnect())
             {
-                Core.instance.netModule.AddNetAgent(m_netAgent);
+                Core.instance.net.AddNetAgent(m_netAgent);
             }
         }
         public void Close()

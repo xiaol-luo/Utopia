@@ -41,7 +41,7 @@ namespace Utopia.UI
             ipTxt.text = "127.0.0.1";
             portTxt.text = "10250";
 
-            m_evProxy = Core.instance.eventModule.CreateEventProxy();
+            m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetClosed, OnGameSrvClosed);
             m_evProxy.Subscribe<RspFreeHero>(GameSrvNetProxy.ProtoEventName(ProtoId.PidRspFreeHero), OnRspFreeHero);
@@ -50,24 +50,20 @@ namespace Utopia.UI
             netBtn.onClick.AddListener(() =>
             {
                 bool isGameSrvConnected = false;
-                if (null != Core.instance.netModule.gameSrv.netAgent.socket &&
-                    ClientSocket.State.Connected == Core.instance.netModule.gameSrv.netAgent.socket.state)
+                if (null != App.instance.net.gameSrv.netAgent.socket &&
+                    ClientSocket.State.Connected == App.instance.net.gameSrv.netAgent.socket.state)
                 {
                     isGameSrvConnected = true;
                 }
                 if (!isGameSrvConnected)
-                    Core.instance.netModule.gameSrv.Connect(ipTxt.text, int.Parse(portTxt.text));
+                    App.instance.net.gameSrv.Connect(ipTxt.text, int.Parse(portTxt.text));
                 else
-                    Core.instance.netModule.gameSrv.Close();
+                    App.instance.net.gameSrv.Close();
             });
 
             logicBtn.onClick.AddListener(() =>
             {
-                Core.instance.netModule.gameSrv.Send(ProtoId.PidQueryFreeHero);
-
-                SelectHeroReq req = new SelectHeroReq() { HeroId = 1 };
-                // for test
-                Core.instance.netModule.gameSrv.Send((int)ProtoId.PidSelectHeroReq, req);
+                App.instance.net.gameSrv.Send(ProtoId.PidQueryFreeHero);
             });
         }
 
@@ -94,25 +90,25 @@ namespace Utopia.UI
                 {
                     return txt;
                 };
-                // Core.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, lpd);
+                App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, lpd);
                 m_proxy.timer.Add(() =>
                 {
                     --tickTimes;
                     txt = tickTimes.ToString();
                 }, 0, tickTimes, 1.0f);
             };
-//             Core.instance.panelMgr.ShowPanel(UIPanelId.ConfirmPanel, cpd);
+            App.instance.panelMgr.ShowPanel(UIPanelId.ConfirmPanel, cpd);
         }
 
         void OnRspFreeHero(string evKey, RspFreeHero msg)
         {
-            Core.instance.logModule.LogDebug("OnRspFreeHero {0}", msg.ToString());
+            Core.instance.log.LogDebug("OnRspFreeHero {0}", msg.ToString());
         }
         void UpdateUI()
         {
             bool isGameSrvConnected = false;
-            if (null != Core.instance.netModule.gameSrv.netAgent.socket &&
-                ClientSocket.State.Connected == Core.instance.netModule.gameSrv.netAgent.socket.state)
+            if (null != App.instance.net.gameSrv.netAgent.socket &&
+                ClientSocket.State.Connected == App.instance.net.gameSrv.netAgent.socket.state)
             {
                 isGameSrvConnected = true;
             }

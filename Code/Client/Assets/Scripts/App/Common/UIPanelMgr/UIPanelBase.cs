@@ -68,23 +68,23 @@ namespace Utopia.UI
         }
         protected virtual void OnShow(UIShowPanelDataBase panelData)
         {
-            Core.instance.logModule.LogDebug("UIPanelBase OnShow {0}", this.GetPanelId());
+            Core.instance.log.LogDebug("UIPanelBase OnShow {0}", this.GetPanelId());
         }
         protected virtual void OnHide()
         {
-            Core.instance.logModule.LogDebug("UIPanelBase OnHide {0}", this.GetPanelId());
+            Core.instance.log.LogDebug("UIPanelBase OnHide {0}", this.GetPanelId());
         }
         protected virtual void OnFreeze()
         {
-            Core.instance.logModule.LogDebug("UIPanelBase OnFreeze {0}", this.GetPanelId());
+            Core.instance.log.LogDebug("UIPanelBase OnFreeze {0}", this.GetPanelId());
         }
         protected virtual void OnUnfreeze()
         {
-            Core.instance.logModule.LogDebug("UIPanelBase OnUnfreeze {0}", this.GetPanelId());
+            Core.instance.log.LogDebug("UIPanelBase OnUnfreeze {0}", this.GetPanelId());
         }
         protected virtual void OnReshow()
         {
-            Core.instance.logModule.LogDebug("UIPanelBase OnReshow {0}", this.GetPanelId());
+            Core.instance.log.LogDebug("UIPanelBase OnReshow {0}", this.GetPanelId());
         }
 
         public UIPanelState GetPanelState()

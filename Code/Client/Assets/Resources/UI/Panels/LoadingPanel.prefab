@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224023914833996428}
-  - component: {fileID: 114915001118919886}
+  - component: {fileID: 114723437976755766}
   m_Layer: 5
   m_Name: LoadingPanel
   m_TagString: Untagged
@@ -94,6 +94,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Loading ... 100%
+--- !u!114 &114723437976755766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1075088400711616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b405a044f32f4b4caf5ea0e67e0a7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentTxt: {fileID: 114244438334992818}
 --- !u!114 &114894005483820122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,18 +133,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114915001118919886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1075088400711616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da4488ba626ea7d41b8104de79e0d4d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contentTxt: {fileID: 114244438334992818}
 --- !u!222 &222506109006213224
 CanvasRenderer:
   m_ObjectHideFlags: 1

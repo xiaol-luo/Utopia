@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 224796638242743626}
   - component: {fileID: 222075506219011234}
   - component: {fileID: 114929305738307550}
-  - component: {fileID: 114944868178849280}
+  - component: {fileID: 114978164546403618}
   m_Layer: 5
   m_Name: MainPanel
   m_TagString: Untagged
@@ -637,21 +637,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114944868178849280
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1393346585456808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcf2b33aab2c5214fb1263dfe33b4c47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  netBtn: {fileID: 114977182190107602}
-  logicBtn: {fileID: 114543790955005384}
-  ipTxt: {fileID: 114926951496392936}
-  portTxt: {fileID: 114483279973924570}
 --- !u!114 &114958684962047154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -726,6 +711,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114978164546403618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393346585456808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c0ec8371071a7340bde3a6dfaf9f4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  netBtn: {fileID: 114977182190107602}
+  logicBtn: {fileID: 114543790955005384}
+  ipTxt: {fileID: 114926951496392936}
+  portTxt: {fileID: 114483279973924570}
 --- !u!114 &114993043065037292
 MonoBehaviour:
   m_ObjectHideFlags: 1

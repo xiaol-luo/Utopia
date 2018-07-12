@@ -6,9 +6,9 @@ namespace Utopia.UI
     public partial class UIPanelProxy : IUIPanelBase
     {
         ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
-        TimerProxy m_timer = Core.instance.timerModule.CreateTimerProxy();
+        TimerProxy m_timer = Core.instance.timer.CreateTimerProxy();
         public TimerProxy timer { get { return m_timer; } }
-        EventProxy<string> m_eventMgr = Core.instance.eventModule.CreateEventProxy();
+        EventProxy<string> m_eventMgr = Core.instance.eventMgr.CreateEventProxy();
         public EventProxy<string> eventProxy { get { return m_eventMgr; } }
 
         UIPanelId m_panelId;
@@ -37,7 +37,7 @@ namespace Utopia.UI
             m_panelMgr = panelMgr;
             m_panelId = panelId;
             m_panelSetting = UIPanelDef.GetPanelSetting(m_panelId);
-            Core.instance.logModule.LogAssert(
+            Core.instance.log.LogAssert(
                 null != m_panelSetting, "panel setting of {0} is null!", m_panelId);
         }
 
@@ -96,7 +96,7 @@ namespace Utopia.UI
             if (UIPanelState.Hided == m_panelState)
                 return;
 
-            Core.instance.logModule.LogDebug("UIPanelProxy Hide {0}", m_panelId);
+            Core.instance.log.LogDebug("UIPanelProxy Hide {0}", m_panelId);
 
             this.CheckLoadPanel();
 
@@ -116,7 +116,7 @@ namespace Utopia.UI
             if (this.IsReleased())
                 return;
 
-            Core.instance.logModule.LogDebug("UIPanelProxy Show {0}", m_panelId);
+            Core.instance.log.LogDebug("UIPanelProxy Show {0}", m_panelId);
 
             this.CheckLoadPanel();
 
@@ -137,7 +137,7 @@ namespace Utopia.UI
             if (UIPanelState.Showed == m_panelState)
                 return;
 
-            Core.instance.logModule.LogDebug("UIPanelProxy Reshow {0}", m_panelId);
+            Core.instance.log.LogDebug("UIPanelProxy Reshow {0}", m_panelId);
 
             this.CheckLoadPanel();
 
@@ -166,7 +166,7 @@ namespace Utopia.UI
             if (m_isFreezed)
                 return;
 
-            Core.instance.logModule.LogDebug("UIPanelProxy Freeze {0}", m_panelId);
+            Core.instance.log.LogDebug("UIPanelProxy Freeze {0}", m_panelId);
 
             if (this.IsReady())
             {
@@ -184,7 +184,7 @@ namespace Utopia.UI
             if (!m_isFreezed)
                 return;
 
-            Core.instance.logModule.LogDebug("UIPanelProxy Unfreeze {0}", m_panelId);
+            Core.instance.log.LogDebug("UIPanelProxy Unfreeze {0}", m_panelId);
 
             if (this.IsReady())
             {
@@ -201,7 +201,7 @@ namespace Utopia.UI
             if (this.IsReleased())
                 return;
 
-            Core.instance.logModule.LogDebug("UIPanelProxy Release {0}", m_panelId);
+            Core.instance.log.LogDebug("UIPanelProxy Release {0}", m_panelId);
 
             this.Hide();
 
@@ -222,6 +222,7 @@ namespace Utopia.UI
                 return;
 
             m_panelState = UIPanelState.Loading;
+
             m_resLoader.AsyncLoadAsset(m_panelSetting.resPath, this.OnLoadPanelDone);
         }
         protected void OnLoadPanelDone(string resPath, ResourceObserver resOb)
@@ -229,7 +230,7 @@ namespace Utopia.UI
             if (this.IsReleased())
                 return;
 
-            Core.instance.logModule.LogAssert(resOb.isValid,
+            Core.instance.log.LogAssert(resOb.isValid,
                 "Load {0} fail, can not load resource {1}", m_panelId, resPath);
 
             m_panelState = UIPanelState.Loaded;

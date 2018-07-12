@@ -15,13 +15,13 @@ namespace Utopia.Net
         protected override void OnSockeClose(int errno, string errMsg)
         {
             base.OnSockeClose(errno, errMsg);
-            Core.instance.eventModule.Fire(NetModuleEventDef.GameSrvNetClosed, m_gsNetProxy);
+            Core.instance.eventMgr.Fire(NetModuleEventDef.GameSrvNetClosed, m_gsNetProxy);
         }
 
         protected override void OnSocketOpen(bool isSucc)
         {
             base.OnSocketOpen(isSucc);
-            Core.instance.eventModule.Fire(NetModuleEventDef.GameSrvNetConnected, m_gsNetProxy);
+            Core.instance.eventMgr.Fire(NetModuleEventDef.GameSrvNetConnected, m_gsNetProxy);
         }
     }
 }

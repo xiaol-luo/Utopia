@@ -15,9 +15,9 @@ namespace Utopia
         void Start()
         {
             App.instance.Start();
+            InvokeRepeating("Tick", 0.0f, 0.01f);
         }
-
-        void FixedUpdate()
+        void Tick()
         {
             App.instance.FixedUpdate();
         }

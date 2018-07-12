@@ -21,7 +21,7 @@ namespace Utopia
                 Debug.LogError("NewApp is single instance, can only make one instance");
         }
 
-        public LogModule logModule
+        public LogModule log
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Utopia
             }
         }
 
-        public DateTimeModule datetimeModule
+        public DateTimeModule datetime
         {
             get
             {
@@ -37,21 +37,21 @@ namespace Utopia
             }
         }
 
-        public TimerModule timerModule
+        public TimerModule timer
         {
             get
             {
                 return m_modules[CoreModule.EModule.TimerModule] as TimerModule;
             }
         }
-        public EventModule eventModule
+        public EventModule eventMgr
         {
             get
             {
                 return m_modules[CoreModule.EModule.EventModule] as EventModule;
             }
         }
-        public NetModule netModule
+        public NetModule net
         {
             get
             {

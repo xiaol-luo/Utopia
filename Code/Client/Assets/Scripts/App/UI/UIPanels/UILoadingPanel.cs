@@ -23,7 +23,7 @@ namespace Utopia.UI
         protected override void OnInit()
         {
             base.OnInit();
-            m_timerProxy = Core.instance.timerModule.CreateTimerProxy();
+            m_timerProxy = Core.instance.timer.CreateTimerProxy();
         }
 
         protected override void OnShow(UIShowPanelDataBase panelData)

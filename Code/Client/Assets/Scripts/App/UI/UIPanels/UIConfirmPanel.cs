@@ -27,8 +27,8 @@ namespace Utopia.UI
                 if (null != m_panelData && null != m_panelData.confirmCb)
                 {
                     m_panelData.confirmCb();
-                    this.Hide();
                 }
+                this.Hide();
             });
 
             cancelBtn.onClick.AddListener( () =>
@@ -36,8 +36,8 @@ namespace Utopia.UI
                 if (null != m_panelData && null != m_panelData.cancelCb)
                 {
                     m_panelData.cancelCb();
-                    this.Hide();
                 }
+                this.Hide();
             });
         }
 
@@ -48,7 +48,7 @@ namespace Utopia.UI
             m_panelData = panelData as UIConfirmPanelData;
             if (null == m_panelData)
             {
-                Core.instance.timerModule.Add(() => { this.Hide(); }, 0);
+                Core.instance.timer.Add(() => { this.Hide(); }, 0);
                 return;
             }
             contentTxt.text = m_panelData.content;

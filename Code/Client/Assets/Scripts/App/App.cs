@@ -40,14 +40,17 @@ namespace Utopia
 
 
         bool m_isQuited = false;
+        bool m_isStarted = false;
         public UIPanelMgr panelMgr { get; protected set; }
+        public NetMgr net { get; protected set; }
         EventProxy<string> m_evProxy;
 
         public void Awake()
         {
             Core.MakeInstance(this.root);
-            m_evProxy = Core.instance.eventModule.CreateEventProxy();
+            m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             panelMgr = new UIPanelMgr(root.transform.Find("RootUI").gameObject);
+            net = new NetMgr();
 
             this.SetupEvents();
             stateMgr = new AppStateMgr();
@@ -60,6 +63,7 @@ namespace Utopia
         {
             LayerUtil.Init();
             UIPanelDef.InitPanelSettings();
+            net.Init();
 
             bool isAllOk = true;
             do
@@ -93,7 +97,8 @@ namespace Utopia
 
             if (isAllOk)
             {
-                Core.instance.eventModule.Fire(AppEvent.GameStarted);
+                m_isStarted = true;
+                Core.instance.eventMgr.Fire(AppEvent.GameStarted);
             }
             else
             {
@@ -102,7 +107,7 @@ namespace Utopia
         }
         public void FixedUpdate()
         {
-            if (m_isQuited)
+            if (m_isQuited || !m_isStarted)
                 return;
 
             if (CoreModule.EStage.Updating == Core.instance.currStage)
@@ -117,7 +122,7 @@ namespace Utopia
                 return;
 
             m_isQuited = true;
-            Core.instance.eventModule.Fire(AppEvent.GameToQuit);
+            Core.instance.eventMgr.Fire(AppEvent.GameToQuit);
             Core.instance.Release();
         }
 

@@ -242,11 +242,11 @@ namespace Utopia.UI
                 {
                     if (UIPanelDef.InFullScreenLayers(newTopestLayer))
                     {
-                        Core.instance.eventModule.Fire(UIPanelEventDef.FullScreenPanelOnTop, pic);
+                        Core.instance.eventMgr.Fire(UIPanelEventDef.FullScreenPanelOnTop, pic);
                     }
                     else
                     {
-                        Core.instance.eventModule.Fire(UIPanelEventDef.FullScreenPanelNotOnTop, pic);
+                        Core.instance.eventMgr.Fire(UIPanelEventDef.FullScreenPanelNotOnTop, pic);
                     }
                 }
             }

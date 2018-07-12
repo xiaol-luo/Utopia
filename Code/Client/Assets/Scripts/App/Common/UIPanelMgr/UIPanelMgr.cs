@@ -30,7 +30,7 @@ namespace Utopia.UI
             {
                 string layerPath = m_layerPaths[(int)pl];
                 m_layers[(int)pl] = panelRoot.transform.Find(layerPath);
-                Core.instance.logModule.LogAssert(null != m_layers[(int)pl], "New UIPanelMgr {0} is null, can not find child {1}", pl, layerPath);
+                Core.instance.log.LogAssert(null != m_layers[(int)pl], "New UIPanelMgr {0} is null, can not find child {1}", pl, layerPath);
             }
         }
 
@@ -80,8 +80,8 @@ namespace Utopia.UI
                 if (!resOb.isLoaded)
                 {
                     m_panelProxyResMap.Clear();
-                    Core.instance.timerModule.Add(() => {
-                        Core.instance.eventModule.Fire(Event.AppEvent.UIPanelMgr_LoadPanelProxyResourceFail);
+                    Core.instance.timer.Add(() => {
+                        Core.instance.eventMgr.Fire(Event.AppEvent.UIPanelMgr_LoadPanelProxyResourceFail);
                     }, 0); 
                 }
                 else
@@ -97,7 +97,7 @@ namespace Utopia.UI
                     }
                     if (isAllLoaded)
                     {
-                        Core.instance.eventModule.Fire(Event.AppEvent.UIPanelMgr_BecomeReady);
+                        Core.instance.eventMgr.Fire(Event.AppEvent.UIPanelMgr_BecomeReady);
                     }
                 }
             }
@@ -116,7 +116,7 @@ namespace Utopia.UI
             return ret;
         }
 
-        public UIPanelProxy ShowPanel(UIPanelId panelId, UIShowPanelDataBase param)
+        public UIPanelProxy ShowPanel(UIPanelId panelId, UIShowPanelDataBase param=null)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null == panelProxy)

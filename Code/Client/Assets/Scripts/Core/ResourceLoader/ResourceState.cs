@@ -211,7 +211,7 @@ namespace Utopia
             }
             else
             {
-                Core.instance.logModule.LogDebug("AttachMonitorRefMono {0} is not the fit type", typeof(T));
+                Core.instance.log.LogDebug("AttachMonitorRefMono {0} is not the fit type", typeof(T));
             }
             return null != go;
         }

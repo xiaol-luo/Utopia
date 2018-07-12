@@ -23,7 +23,7 @@ namespace Utopia
 
             if (!isFirst)
             {
-                if (m_firstTick > 0 && app.datetimeModule.now.Ticks - m_firstTick > TimeSpan.TicksPerSecond * 20)
+                if (m_firstTick > 0 && app.datetime.now.Ticks - m_firstTick > TimeSpan.TicksPerSecond * 20)
                 {
                     m_firstTick = 0;
                     loader.Release();
@@ -32,7 +32,7 @@ namespace Utopia
             }
 
             isFirst = false;
-            m_firstTick = app.datetimeModule.now.Ticks;
+            m_firstTick = app.datetime.now.Ticks;
 
             string scenePath = "Assets/Resources/Levels/Level_Battle.unity";
             /*
@@ -41,7 +41,7 @@ namespace Utopia
                 int xxx = i;
                 ResourceLoader.instance.AsyncLoadScene(scenePath, true, (ResourceScene.LoadResult lr, string sceneName) =>
                 {
-                    app.logModule.LogDebug(" ResouceModule AsyncLoadScene {0} {1} {2}", sceneName, lr, xxx);
+                    app.log.LogDebug(" ResouceModule AsyncLoadScene {0} {1} {2}", sceneName, lr, xxx);
                 });
             }
             */
@@ -58,7 +58,7 @@ namespace Utopia
 
             ResourceObserver ret = null;
             ret = loader.AsyncLoadAsset(resPath, (string xxx, ResourceObserver res) => {
-                app.logModule.LogDebug(" ResouceModule AsyncLoad {0}", res.ToString());
+                app.log.LogDebug(" ResouceModule AsyncLoad {0}", res.ToString());
 
                 GameObject go = ret.Instantiate<GameObject>();
                 int id1 = go.GetInstanceID();
@@ -76,7 +76,7 @@ namespace Utopia
             yield return resOb.resState.req;
             if (resOb.isValid)
             {
-                app.logModule.LogDebug(" ResouceModule CoLoadRes {0}", resOb.resState.req.res.ToString());
+                app.log.LogDebug(" ResouceModule CoLoadRes {0}", resOb.resState.req.res.ToString());
                 GameObject.Destroy(resOb.Instantiate<GameObject>());
             }
         }
@@ -85,7 +85,7 @@ namespace Utopia
         {
             ResourceScene ie = ResourceLoader.instance.CoLoadScene(scenePath, false);
             yield return ie;
-            app.logModule.LogDebug(" ResouceModule CoLoadScene");
+            app.log.LogDebug(" ResouceModule CoLoadScene");
             yield return null;
         }
     }

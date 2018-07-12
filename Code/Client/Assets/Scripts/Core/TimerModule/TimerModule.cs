@@ -16,7 +16,7 @@ namespace Utopia
         protected override void OnInit()
         {
             base.OnInit();
-            m_timerMgr = new TimerMgr(() => { return app.datetimeModule.now; });
+            m_timerMgr = new TimerMgr(() => { return app.datetime.now; });
         }
         
         protected override void OnUpdate()

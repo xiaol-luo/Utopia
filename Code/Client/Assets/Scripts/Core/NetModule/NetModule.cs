@@ -8,8 +8,6 @@ namespace Utopia
         ulong m_lastId = 0;
         Dictionary<ulong, NetAgent> m_netAgents = new Dictionary<ulong, NetAgent>();
 
-        public CommonNetProxy gameSrv { get; protected set; }
-
         public NetModule(Core _app) : base(_app, EModule.NetModule)
         {
            
@@ -29,7 +27,7 @@ namespace Utopia
             m_netAgents.Remove(id);
             if (null != na)
             {
-                app.eventModule.Fire(NetModuleEventDef.RemoveNetAgent, na);
+                app.eventMgr.Fire(NetModuleEventDef.RemoveNetAgent, na);
             }
         }
 
@@ -38,21 +36,6 @@ namespace Utopia
             NetAgent ret = null;
             m_netAgents.TryGetValue(id, out ret);
             return ret;
-        }
-
-        protected override ERet OnAwake()
-        {
-            {
-                gameSrv = new GameSrvNetProxy();
-                GameSrvNetAgentHandler nah = new GameSrvNetAgentHandler();
-                nah.SetNetProxy(gameSrv);
-                nah.Init();
-                gameSrv.SetNetAgentHandler(nah);
-
-//                 gameSrv.Connect("127.0.0.1", 10240);
-            }
-
-            return ERet.Success;
         }
 
         protected override void OnUpdate()
