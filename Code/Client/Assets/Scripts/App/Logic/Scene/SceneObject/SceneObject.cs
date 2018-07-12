@@ -1,6 +1,7 @@
 
 using NetProto;
 using UnityEngine;
+using Utopia;
 
 public class SceneObjcet
 {

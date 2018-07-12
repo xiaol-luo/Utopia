@@ -108,7 +108,6 @@ namespace Utopia.UI
             switch (panelLayer)
             {
                 case UIPanelLayer.FullScreen:
-                case UIPanelLayer.UponFullScreen:
                     ret = true;
                     break;
             }

@@ -19,7 +19,7 @@ namespace Utopia
             m_timerMgr = new TimerMgr(() => { return app.datetimeModule.now; });
         }
         
-        protected override void OnFixedUpdate()
+        protected override void OnUpdate()
         {
             m_timerMgr.CheckTrigger();
         }

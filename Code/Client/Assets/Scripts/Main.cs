@@ -1,37 +1,30 @@
 
 using UnityEngine;
 
-class Main : MonoBehaviour
+namespace Utopia
 {
-    void Awake()
+    class Main : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
-        App.MakeInstance(this);
-        App.instance.Awake();
-    }
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+            App.MakeInstance(this);
+            App.instance.Awake();
+        }
 
-    void Start()
-    {
-        App.instance.Start();
-    }
+        void Start()
+        {
+            App.instance.Start();
+        }
 
-    void Update()
-    {
-        App.instance.Update();
-    }
+        void FixedUpdate()
+        {
+            App.instance.FixedUpdate();
+        }
 
-    void LateUpdate()
-    {
-        App.instance.LateUpdate();
-    }
-
-    void FixedUpdate()
-    {
-        App.instance.FixedUpdate();
-    }
-
-    void OnApplicationQuit()
-    {
-        App.instance.Quit();
+        void OnApplicationQuit()
+        {
+            App.instance.Quit();
+        }
     }
 }

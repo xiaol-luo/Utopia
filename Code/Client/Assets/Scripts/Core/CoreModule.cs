@@ -9,8 +9,6 @@ namespace Utopia
             Inited,
             Awaking,
             Awaked,
-            Staring,
-            Started,
             Updating,
             Releasing,
             Released,
@@ -30,11 +28,9 @@ namespace Utopia
             public const int LogModule = 1;
             public const int TimerModule = 2;
             public const int EventModule = 3;
-            public const int UIModule = 4;
-            public const int CameraModule = 5;
-            public const int NetModule = 6;
-            public const int ResourceModule = 7;
-            public const int Count = 8;
+            public const int NetModule = 4;
+            public const int ResourceModule = 5;
+            public const int Count = 6;
         }
 
         public CoreModule(Core _app, int moduleId)
@@ -70,28 +66,11 @@ namespace Utopia
             ERet ret = CallUtil(EStage.Awaking, EStage.Awaked, this.OnAwake);
             return ret;
         }
-        public ERet Start()
-        {
-            ERet ret = CallUtil(EStage.Staring, EStage.Started, this.OnStart);
-            return ret;
-        }
         public void Update()
         {
             if (EStage.Updating != stage)
                 return;
             this.OnUpdate();
-        }
-        public void LateUpdate()
-        {
-            if (EStage.Updating != stage)
-                return;
-            this.OnLateUpdate();
-        }
-        public void FixedUpdate()
-        {
-            if (EStage.Updating != stage)
-                return;
-            this.OnFixedUpdate();
         }
         public ERet Release()
         {
@@ -101,13 +80,7 @@ namespace Utopia
 
         protected virtual void OnInit() { }
         protected virtual ERet OnAwake() { return ERet.Success; }
-        protected virtual ERet OnStart() { return ERet.Success; }
-
         protected virtual void OnUpdate() { }
-
-        protected virtual void OnLateUpdate() { }
-
-        protected virtual void OnFixedUpdate() { }
         protected virtual ERet OnRelease() { return ERet.Success; }
     }
 }

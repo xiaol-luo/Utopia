@@ -66,11 +66,41 @@ namespace Utopia.UI
 
             foreach (string resPath in s_UIPanelProxy_Res_Paths)
             {
-               ResourceObserver resOb = m_resLoader.AsyncLoadAsset(resPath, null);
+               ResourceObserver resOb = m_resLoader.AsyncLoadAsset(resPath, this.OnLoadProxyResCallback);
                 m_panelProxyResMap.Add(resPath, resOb);
             }
             
             return true;
+        }
+        void OnLoadProxyResCallback(string resPath, ResourceObserver rob)
+        {
+            ResourceObserver resOb = this.GetProxyGoRes(resPath);
+            if (null != resOb)
+            {
+                if (!resOb.isLoaded)
+                {
+                    m_panelProxyResMap.Clear();
+                    Core.instance.timerModule.Add(() => {
+                        Core.instance.eventModule.Fire(Event.AppEvent.UIPanelMgr_LoadPanelProxyResourceFail);
+                    }, 0); 
+                }
+                else
+                {
+                    bool isAllLoaded = true;
+                    foreach (var item in m_panelProxyResMap.Values)
+                    {
+                        if (!item.isLoaded)
+                        {
+                            isAllLoaded = false;
+                            break;
+                        }
+                    }
+                    if (isAllLoaded)
+                    {
+                        Core.instance.eventModule.Fire(Event.AppEvent.UIPanelMgr_BecomeReady);
+                    }
+                }
+            }
         }
 
         public void Destory()

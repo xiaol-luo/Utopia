@@ -58,20 +58,9 @@ namespace Utopia
                 return m_modules[CoreModule.EModule.NetModule] as NetModule;
             }
         }
-
-        public UIPanelMgr panelMgr
-        {
-            get
-            {
-                UIModule uiModule = m_modules[CoreModule.EModule.UIModule] as UIModule;
-                return uiModule.panelMgr;
-            }
-        }
-
-
         public MonoBehaviour root { get; protected set; }
 
-        public CoreModule.EStage moduleStage { get; protected set; }
+        public CoreModule.EStage currStage { get; protected set; }
 
         const int EModuleCount = (int)CoreModule.EModule.Count;
         CoreModule[] m_modules = new CoreModule[EModuleCount];
@@ -93,7 +82,7 @@ namespace Utopia
         }
         bool ExecuteStageFnUtil(CoreModule.EStage preStage, CoreModule.EStage fromStage, CoreModule.EStage toStage)
         {
-            this.moduleStage = fromStage;
+            this.currStage = fromStage;
 
             bool allModuleStageMatch = true;
             ForeachModule((CoreModule module) =>
@@ -126,11 +115,6 @@ namespace Utopia
                                 ret = module.Awake();
                             }
                             break;
-                        case CoreModule.EStage.Staring:
-                            {
-                                ret = module.Start();
-                            }
-                            break;
                         case CoreModule.EStage.Releasing:
                             {
                                 ret = module.Release();
@@ -155,7 +139,7 @@ namespace Utopia
             }
             bool returnVal= CoreModule.EModule.Count == failModuleId;
             if (returnVal)
-                this.moduleStage = toStage;
+                this.currStage = toStage;
             return returnVal;
         }
         protected Core(MonoBehaviour _root)
@@ -163,9 +147,6 @@ namespace Utopia
             root = _root;
 
             LayerUtil.Init();
-
-            m_modules[CoreModule.EModule.UIModule] = new UIModule(this);
-            m_modules[CoreModule.EModule.CameraModule] = new CameraModule(this);
             m_modules[CoreModule.EModule.DateTimeModule] = new DateTimeModule(this);
             m_modules[CoreModule.EModule.TimerModule] = new TimerModule(this);
             m_modules[CoreModule.EModule.LogModule] = new LogModule(this);
@@ -173,40 +154,34 @@ namespace Utopia
             m_modules[CoreModule.EModule.NetModule] = new NetModule(this);
             m_modules[CoreModule.EModule.ResourceModule] = new ResourceModule(this);
 
-            moduleStage = CoreModule.EStage.Free;
+            currStage = CoreModule.EStage.Free;
             ForeachModule((CoreModule module) => {
                 module.Init();
             });
-            moduleStage = CoreModule.EStage.Inited;
+            currStage = CoreModule.EStage.Inited;
         }
-
-
 
         public void Awake()
         {
             bool ret = ExecuteStageFnUtil(CoreModule.EStage.Inited, CoreModule.EStage.Awaking, CoreModule.EStage.Awaked);
-            if (!ret)
-                this.Quit();
-        }
-        public void Start()
-        {
-            bool ret = ExecuteStageFnUtil(CoreModule.EStage.Awaked, CoreModule.EStage.Staring, CoreModule.EStage.Started);
             if (ret)
             {
                 ForeachModule((CoreModule module) =>
                 {
                     module.stage = CoreModule.EStage.Updating;
                 });
+                currStage = CoreModule.EStage.Updating;
             }
             else
             {
-                this.Quit();
+                this.Release();
             }
+                
         }
-        public void Quit()
+        public void Release()
         {
-            if (CoreModule.EStage.Releasing != moduleStage && CoreModule.EStage.Released != moduleStage)
-                ExecuteStageFnUtil(moduleStage, CoreModule.EStage.Releasing, CoreModule.EStage.Released);
+            if (CoreModule.EStage.Releasing != currStage && CoreModule.EStage.Released != currStage)
+                ExecuteStageFnUtil(currStage, CoreModule.EStage.Releasing, CoreModule.EStage.Released);
         }
 
         public void Update()
@@ -214,22 +189,6 @@ namespace Utopia
             foreach (CoreModule module in m_modules)
             {
                 module.Update();
-            }
-        }
-
-        public void LateUpdate()
-        {
-            foreach (CoreModule module in m_modules)
-            {
-                module.LateUpdate();
-            }
-        }
-
-        public void FixedUpdate()
-        {
-            foreach (CoreModule module in m_modules)
-            {
-                module.FixedUpdate();
             }
         }
 

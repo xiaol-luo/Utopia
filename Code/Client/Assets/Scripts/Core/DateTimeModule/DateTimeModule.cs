@@ -38,7 +38,7 @@ namespace Utopia
 
         }
 
-        protected override void OnFixedUpdate()
+        protected override void OnUpdate()
         {
             long nowTick = this.now.Ticks;
             if (nowTick >= m_nextSyncTimeTick)

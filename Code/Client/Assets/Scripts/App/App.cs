@@ -5,77 +5,130 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using UnityEngine;
+using Utopia.Event;
+using Utopia.UI;
 
-public class App 
+namespace Utopia
 {
-    public static App instance { get { return m_instance; } }
-    protected static App m_instance = null;
-    public static void MakeInstance(MonoBehaviour _owner)
+    public class App
     {
-        if (null == m_instance)
-            m_instance = new App(_owner);
-        else
-            Debug.LogError("App is single instance, can only make one instance");
-    }
-    protected App(MonoBehaviour _mono)
-    {
-        root = _mono;
-        uiRoot = root.transform.Find("UIRoot").transform;
-    }
-    public MonoBehaviour root { get; protected set; }
-    public Transform uiRoot { get; protected set; }
-    public GameNetwork gameNetwork { get; protected set; }
-    public GameConfig gameConfig { get; protected set; }
-    public AppStateMgr stateMgr { get; protected set; }
-    public Scene scene { get; protected set; }
-    public ulong heroId { get; set; }
-
-    public void Awake()
-    {
-        stateMgr = new AppStateMgr();
-        gameNetwork = new GameNetwork();
-        gameConfig = new GameConfig();
-        scene = new Scene();
-        gameConfig.Awake();
-    }
-    public void Start ()
-    {
-        LayerUtil.Init();
-
-        do
+        public static App instance { get { return m_instance; } }
+        protected static App m_instance = null;
+        public static void MakeInstance(MonoBehaviour _owner)
         {
-            if (!gameConfig.Start())
+            if (null == m_instance)
             {
-                Debug.LogError(string.Format("errno :{0}, error msg :{1}", gameConfig.errno, gameConfig.errMsg));
-                break;
+                m_instance = new App(_owner);
             }
-        } while (false);
-
-        stateMgr.ChangeState(IAppState.StateName.Launch);
-    }
-
-	public void Update ()
-    {
-        stateMgr.UpdateState();
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+            else
+            {
+                Debug.LogError("App is single instance, can only make one instance");
+            }
+        }
+        protected App(MonoBehaviour _mono)
         {
+            root = _mono;
+            uiRoot = root.transform.Find("RootUI").transform;
+        }
+        public MonoBehaviour root { get; protected set; }
+        public Transform uiRoot { get; protected set; }
+        public GameNetwork gameNetwork { get; protected set; }
+        public GameConfig gameConfig { get; protected set; }
+        public AppStateMgr stateMgr { get; protected set; }
+        public Scene scene { get; protected set; }
+        public ulong heroId { get; set; }
 
+
+        bool m_isQuited = false;
+        public UIPanelMgr panelMgr { get; protected set; }
+        EventProxy<string> m_evProxy;
+
+        public void Awake()
+        {
+            Core.MakeInstance(this.root);
+            m_evProxy = Core.instance.eventModule.CreateEventProxy();
+            panelMgr = new UIPanelMgr(root.transform.Find("RootUI").gameObject);
+
+            this.SetupEvents();
+            stateMgr = new AppStateMgr();
+            gameNetwork = new GameNetwork();
+            gameConfig = new GameConfig();
+            scene = new Scene();
+            gameConfig.Awake();
+        }
+        public void Start()
+        {
+            LayerUtil.Init();
+            UIPanelDef.InitPanelSettings();
+
+            bool isAllOk = true;
+            do
+            {
+                if (!gameConfig.Start())
+                {
+                    Debug.LogError(string.Format("GameConfig Start errno :{0}, error msg :{1}", gameConfig.errno, gameConfig.errMsg));
+                    break;
+                }
+                {
+                    Core.instance.Awake();
+                    if (CoreModule.EStage.Updating != Core.instance.currStage)
+                    {
+                        Debug.LogError(string.Format("Core awake fail!"));
+                        break;
+                    }
+                }
+                {
+                    if (!panelMgr.Init())
+                    {
+                        {
+                            Debug.LogError(string.Format("panelMgr.Init"));
+                            break;
+                        }
+                    }
+                }
+
+                isAllOk = true;
+
+            } while (false);
+
+            if (isAllOk)
+            {
+                Core.instance.eventModule.Fire(AppEvent.GameStarted);
+            }
+            else
+            {
+                this.Quit();
+            }
+        }
+        public void FixedUpdate()
+        {
+            if (m_isQuited)
+                return;
+
+            if (CoreModule.EStage.Updating == Core.instance.currStage)
+            {
+                Core.instance.Update();
+            }
+        }
+
+        public void Quit()
+        {
+            if (m_isQuited)
+                return;
+
+            m_isQuited = true;
+            Core.instance.eventModule.Fire(AppEvent.GameToQuit);
+            Core.instance.Release();
+        }
+
+        void SetupEvents()
+        {
+            m_evProxy.Subscribe(AppEvent.UIPanelMgr_LoadPanelProxyResourceFail, OnUIPanelMgrInitFail);
+        }
+        void OnUIPanelMgrInitFail(string eventName)
+        {
+            this.Quit();
         }
     }
 
-    public void LateUpdate()
-    {
-
-    }
-
-    public void FixedUpdate()
-    {
-        gameNetwork.UpdateIO();
-    }
-
-    public void Quit()
-    {
-        gameNetwork.Close();
-    }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utopia;
 
 public class AppStateLoadingScene : IAppState
 {

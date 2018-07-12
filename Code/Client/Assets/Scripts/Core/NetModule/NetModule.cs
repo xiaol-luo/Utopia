@@ -55,9 +55,9 @@ namespace Utopia
             return ERet.Success;
         }
 
-        protected override void OnFixedUpdate()
+        protected override void OnUpdate()
         {
-            base.OnFixedUpdate();
+            base.OnUpdate();
 
             List<ulong> toRemoveAgentIds = new List<ulong>();
             var tmpAgents = new Dictionary<ulong, NetAgent>(m_netAgents);

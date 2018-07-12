@@ -94,14 +94,14 @@ namespace Utopia.UI
                 {
                     return txt;
                 };
-                Core.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, lpd);
+                // Core.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, lpd);
                 m_proxy.timer.Add(() =>
                 {
                     --tickTimes;
                     txt = tickTimes.ToString();
                 }, 0, tickTimes, 1.0f);
             };
-            Core.instance.panelMgr.ShowPanel(UIPanelId.ConfirmPanel, cpd);
+//             Core.instance.panelMgr.ShowPanel(UIPanelId.ConfirmPanel, cpd);
         }
 
         void OnRspFreeHero(string evKey, RspFreeHero msg)
