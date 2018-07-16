@@ -44,6 +44,7 @@ namespace Utopia
         public UIPanelMgr panelMgr { get; protected set; }
         public NetMgr net { get; protected set; }
         EventProxy<string> m_evProxy;
+        public LogicModuleMgr logicModuleMgr { get; protected set; }
 
         public void Awake()
         {
@@ -51,6 +52,7 @@ namespace Utopia
             m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             panelMgr = new UIPanelMgr(root.transform.Find("RootUI").gameObject);
             net = new NetMgr();
+            logicModuleMgr = new LogicModuleMgr();
 
             this.SetupEvents();
             stateMgr = new AppStateMgr();
@@ -64,6 +66,7 @@ namespace Utopia
             LayerUtil.Init();
             UIPanelDef.InitPanelSettings();
             net.Init();
+            logicModuleMgr.Init();
 
             bool isAllOk = true;
             do
@@ -82,10 +85,13 @@ namespace Utopia
                     }
                 }
                 {
-                    if (!panelMgr.Init())
+                    logicModuleMgr.Awake();
+                }
+                {
+                    if (!panelMgr.Awake())
                     {
                         {
-                            Debug.LogError(string.Format("panelMgr.Init"));
+                            Debug.LogError(string.Format("panelMgr.Awake"));
                             break;
                         }
                     }
@@ -123,6 +129,8 @@ namespace Utopia
 
             m_isQuited = true;
             Core.instance.eventMgr.Fire(AppEvent.GameToQuit);
+            panelMgr.Destory();
+            logicModuleMgr.Release();
             Core.instance.Release();
         }
 

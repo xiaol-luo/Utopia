@@ -7,17 +7,44 @@ namespace Utopia.UI
 {
     public class SelectHeroPanel : UIPanelBase
     {
+        [SerializeField]
+        Button hero1Btn;
+
+        [SerializeField]
+        Button hero2Btn;
+
         void OnDestroy()
         {
+            m_proxy.eventProxy.ClearAll();
         }
 
         protected override void OnInit()
         {
             base.OnInit();
+
+            m_proxy.eventProxy.Subscribe(SelectHeroModuleDef.Event_OnRspFreeHeros, OnEvent);
+            m_proxy.eventProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero, OnEvent);
+
+            hero1Btn.onClick.AddListener(()=> {
+                SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
+                module.SelectHero(module.redHeroId);
+            });
+            hero2Btn.onClick.AddListener(() => {
+                SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
+                module.SelectHero(module.blueHeroId);
+            });
+        }
+
+        void OnEvent(string evName)
+        {
+            this.UpdateUI();
         }
 
         void UpdateUI()
         {
+            SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
+            hero1Btn.gameObject.SetActive(module.redHeroId > 0);
+            hero2Btn.gameObject.SetActive(module.blueHeroId > 0);
         }
     }
 }

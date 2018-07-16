@@ -281,6 +281,13 @@ namespace GameLogic
 		if (nullptr == player)
 			return false;
 
+		auto old_hero = player->GetSu();
+		if (nullptr != old_hero)
+		{
+			old_hero->SetPlayerId(0);
+			player->SetSu(nullptr);
+			player->SetScene(nullptr);
+		}
 		auto hero = this->GetUnit(su_id);
 		if (nullptr != hero && hero->GetPlayerId() <= 0)
 		{
@@ -307,6 +314,12 @@ namespace GameLogic
 	{
 		if (nullptr == player)
 			return;
+
+		auto hero = player->GetSu();
+		if (nullptr != hero)
+		{
+			hero->SetPlayerId(0);
+		}
 
 		player->SetScene(nullptr);
 		player->SetSu(nullptr);

@@ -15,7 +15,7 @@ namespace Utopia
             UIPanelDef.InitPanelSettings();
             GameObject panelRoot = Core.instance.root.transform.Find("RootUI").gameObject;
             m_panelMgr = new UIPanelMgr(panelRoot);
-            m_panelMgr.Init();
+            m_panelMgr.Awake();
         }
     }
 }

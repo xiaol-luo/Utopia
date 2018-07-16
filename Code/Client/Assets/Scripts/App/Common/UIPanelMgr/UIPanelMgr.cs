@@ -60,7 +60,7 @@ namespace Utopia.UI
             return ret;
         }
 
-        public bool Init()
+        public bool Awake()
         {
             m_showStragy = new UIPanelMgrStragy(this);
 
@@ -105,6 +105,11 @@ namespace Utopia.UI
 
         public void Destory()
         {
+            List<UIPanelId> panelIdss = new List<UIPanelId>(m_cachedPanels.Keys);
+            foreach (UIPanelId panelId in panelIdss)
+            {
+                this.ReleasePanel(panelId);
+            }
             m_resLoader.Release();
         }
 

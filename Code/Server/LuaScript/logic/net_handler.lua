@@ -13,7 +13,7 @@ function net_handler.OnPlayerMsg(proto_id, msg_buf, player)
             red_hero_id = 20000,
             blue_hero_id = 11000,
         }
-        net.send_pb(player:GetNetId(), 101, "NetProto.RspFreeHero", try_item)
+        --net.send_pb(player:GetNetId(), 101, "NetProto.RspFreeHero", try_item)
 
         return true
     end

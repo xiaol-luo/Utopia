@@ -213,17 +213,11 @@ namespace GameLogic
 	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player)
 	{
 		NetProto::SelectHeroRsp *rsp_msg = google::protobuf::Arena::CreateMessage<NetProto::SelectHeroRsp>(m_protobuf_arena);
+		m_logic_module->m_new_scene->PlayerSelectHero(player, msg->hero_id());
 		auto hero = player->GetSu();
-		if (nullptr == hero)
-		{
-			rsp_msg->set_hero_id(msg->hero_id());
-			auto su = m_logic_module->m_new_scene->GetUnit(msg->hero_id());
-			if (nullptr != su && 0 == su->GetPlayerId())
-			{
-				m_logic_module->m_new_scene->PlayerSelectHero(player, su->GetId());
-				rsp_msg->set_is_succ(true);
-			}
-		}
+		rsp_msg->set_is_succ(nullptr != hero);
+		if (nullptr != hero)
+			rsp_msg->set_hero_id(hero->GetId());
 		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_SelectHeroRsp, rsp_msg);
 	}
 

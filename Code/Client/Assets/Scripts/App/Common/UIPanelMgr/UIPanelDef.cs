@@ -11,6 +11,7 @@ namespace Utopia.UI
         MainPanel,
         LoadingPanel,
         ConfirmPanel,
+        SelectHeroPanel,
 
         ReserveName_Begin,
         ReserveName_End = ReserveName_Begin + 20,
@@ -152,6 +153,12 @@ namespace Utopia.UI
             {
                 showMode = UIPanelShowMode.Mask,
                 resPath = "Assets/Resources/UI/Panels/ConfirmPanel.prefab"
+            };
+            s_panelSettings[(int)UIPanelId.SelectHeroPanel] = new UIPanelSetting()
+            {
+                panelLayer = UIPanelLayer.Coexist_1,
+                showMode = UIPanelShowMode.Coexist,
+                resPath = "Assets/Resources/UI/Panels/SelectHeroPanel.prefab"
             };
 
             {

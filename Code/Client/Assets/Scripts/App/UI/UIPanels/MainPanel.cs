@@ -39,7 +39,7 @@ namespace Utopia.UI
             base.OnInit();
 
             ipTxt.text = "127.0.0.1";
-            portTxt.text = "10250";
+            portTxt.text = "10240";
 
             m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
@@ -63,7 +63,10 @@ namespace Utopia.UI
 
             logicBtn.onClick.AddListener(() =>
             {
-                App.instance.net.gameSrv.Send(ProtoId.PidQueryFreeHero);
+                SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
+                module.QueryFreeHero();
+                App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
+                this.Hide();
             });
         }
 
@@ -75,29 +78,6 @@ namespace Utopia.UI
         void OnGameSrvClosed(string evName, CommonNetProxy evParam)
         {
             this.UpdateUI();
-            UIConfirmPanelData cpd = new UIConfirmPanelData();
-            cpd.content = "cancel is to hide panel, ok to show loading panel";
-            cpd.confirmCb = () =>
-            {
-                UILoadingPanelData lpd = new UILoadingPanelData();
-                int tickTimes = 10;
-                lpd.fnIsDone = () =>
-                {
-                    return tickTimes <= 0;
-                };
-                string txt = "10";
-                lpd.fnGetContent = () =>
-                {
-                    return txt;
-                };
-                App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, lpd);
-                m_proxy.timer.Add(() =>
-                {
-                    --tickTimes;
-                    txt = tickTimes.ToString();
-                }, 0, tickTimes, 1.0f);
-            };
-            App.instance.panelMgr.ShowPanel(UIPanelId.ConfirmPanel, cpd);
         }
 
         void OnRspFreeHero(string evKey, RspFreeHero msg)
