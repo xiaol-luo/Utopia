@@ -2,15 +2,16 @@
 using UnityEditor;
 using Utopia.Net;
 using Utopia.UI;
+using Utopia;
 using System.Collections.Generic;
 
-namespace Utopia
+namespace Utopia.Logic
 {
-    public class SelectHeroModule : LogicModuleBase
+    public class SelectHero : LogicBase
     {
-        public override ELogicModule GetModuleName()
+        public override ELogicName GetModuleName()
         {
-            return ELogicModule.SelectHeroModule;
+            return ELogicName.SelectHero;
         }
 
         public ulong usingHeroObjId { get; protected set; }
@@ -44,7 +45,7 @@ namespace Utopia
             {
                 if (usingHeroObjId > 0)
                 {
-                    this.SelectHero(usingHeroObjId);
+                    this.SelectHeroReq(usingHeroObjId);
                 }
                 else
                 {
@@ -67,7 +68,7 @@ namespace Utopia
             App.instance.net.gameSrv.Send(NetProto.ProtoId.PidQueryFreeHero);
         }
 
-        public void SelectHero(ulong uid)
+        public void SelectHeroReq(ulong uid)
         {
             NetProto.SelectHeroReq req = new NetProto.SelectHeroReq() { HeroId = uid };
             App.instance.net.gameSrv.Send(NetProto.ProtoId.PidSelectHeroReq, req);

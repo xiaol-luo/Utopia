@@ -3,22 +3,22 @@ using UnityEditor;
 using System.Collections.Generic;
 using System;
 
-namespace Utopia
+namespace Utopia.Logic
 {
-    public class LogicModuleMgr
+    public class LogicMgr
     {
-        LogicModuleBase[] m_modules = new LogicModuleBase[(int)ELogicModule.Count];
-        Dictionary<Type, LogicModuleBase> m_moduleMap = new Dictionary<Type, LogicModuleBase>();
+        LogicBase[] m_modules = new LogicBase[(int)ELogicName.Count];
+        Dictionary<Type, LogicBase> m_moduleMap = new Dictionary<Type, LogicBase>();
 
-        public LogicModuleMgr()
+        public LogicMgr()
         {
-            this.AddModuleHelper<SelectHeroModule>();
+            this.AddModuleHelper<SelectHero>();
         }
 
-        protected void AddModuleHelper<T>() where T : LogicModuleBase, new()
+        protected void AddModuleHelper<T>() where T : LogicBase, new()
         {
             T module = new T();
-            ELogicModule moduleName = module.GetModuleName();
+            ELogicName moduleName = module.GetModuleName();
             Core.instance.log.LogAssert(null == m_modules[(int)moduleName], "Repeated Module {0}", moduleName);
             m_modules[(int)moduleName] = module;
             m_moduleMap.Add(typeof(T), module);
@@ -26,7 +26,7 @@ namespace Utopia
 
         public void Init()
         {
-            foreach (LogicModuleBase module in m_modules)
+            foreach (LogicBase module in m_modules)
             {
                 module.Init();
             }
@@ -34,7 +34,7 @@ namespace Utopia
 
         public void Awake()
         {
-            foreach (LogicModuleBase module in m_modules)
+            foreach (LogicBase module in m_modules)
             {
                 module.Awake();
             }
@@ -42,21 +42,21 @@ namespace Utopia
 
         public void Release()
         {
-            foreach (LogicModuleBase module in m_modules)
+            foreach (LogicBase module in m_modules)
             {
                 module.Release();
             }
         }
 
-        public LogicModuleBase GetModule(ELogicModule moduleName)
+        public LogicBase GetModule(ELogicName moduleName)
         {
-            LogicModuleBase ret = m_modules[(int)moduleName];
+            LogicBase ret = m_modules[(int)moduleName];
             return ret;
         }
 
-        public T GetModule<T>() where T : LogicModuleBase
+        public T GetModule<T>() where T : LogicBase
         {
-            LogicModuleBase ret = null;
+            LogicBase ret = null;
             m_moduleMap.TryGetValue(typeof(T), out ret);
             return ret as T;
         }

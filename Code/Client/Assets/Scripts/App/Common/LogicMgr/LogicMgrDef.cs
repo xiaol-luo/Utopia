@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace Utopia
+namespace Utopia.Logic
 {
-    public enum ELogicModule
+    public enum ELogicName
     {
-        SelectHeroModule,
+        SelectHero,
         Count,
     }
 }

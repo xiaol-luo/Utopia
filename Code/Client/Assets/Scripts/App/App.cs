@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using UnityEngine;
 using Utopia.Event;
+using Utopia.Logic;
 using Utopia.UI;
 
 namespace Utopia
@@ -44,7 +45,7 @@ namespace Utopia
         public UIPanelMgr panelMgr { get; protected set; }
         public NetMgr net { get; protected set; }
         EventProxy<string> m_evProxy;
-        public LogicModuleMgr logicModuleMgr { get; protected set; }
+        public LogicMgr logicMgr { get; protected set; }
         public AppStateMgr stateMgr { get; protected set; }
 
         public void Awake()
@@ -53,7 +54,7 @@ namespace Utopia
             m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             panelMgr = new UIPanelMgr(root.transform.Find("RootUI").gameObject);
             net = new NetMgr();
-            logicModuleMgr = new LogicModuleMgr();
+            logicMgr = new LogicMgr();
 
             this.SetupEvents();
             stateMgr = new AppStateMgr();
@@ -67,7 +68,7 @@ namespace Utopia
             LayerUtil.Init();
             UIPanelDef.InitPanelSettings();
             net.Init();
-            logicModuleMgr.Init();
+            logicMgr.Init();
 
             bool isAllOk = true;
             do
@@ -86,7 +87,7 @@ namespace Utopia
                     }
                 }
                 {
-                    logicModuleMgr.Awake();
+                    logicMgr.Awake();
                 }
                 {
                     if (!panelMgr.Awake())
@@ -131,7 +132,7 @@ namespace Utopia
             m_isQuited = true;
             Core.instance.eventMgr.Fire(AppEvent.GameToQuit);
             panelMgr.Destory();
-            logicModuleMgr.Release();
+            logicMgr.Release();
             Core.instance.Release();
         }
 

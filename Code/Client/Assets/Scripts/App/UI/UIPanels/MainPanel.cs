@@ -63,7 +63,7 @@ namespace Utopia.UI
 
             logicBtn.onClick.AddListener(() =>
             {
-                SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
+                Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
                 module.QueryFreeHero();
                 App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
                 this.Hide();

@@ -26,12 +26,12 @@ namespace Utopia.UI
             m_proxy.eventProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero, OnEvent);
 
             hero1Btn.onClick.AddListener(()=> {
-                SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
-                module.SelectHero(module.redHeroId);
+                Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
+                module.SelectHeroReq(module.redHeroId);
             });
             hero2Btn.onClick.AddListener(() => {
-                SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
-                module.SelectHero(module.blueHeroId);
+                Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
+                module.SelectHeroReq(module.blueHeroId);
             });
         }
 
@@ -42,7 +42,7 @@ namespace Utopia.UI
 
         void UpdateUI()
         {
-            SelectHeroModule module = App.instance.logicModuleMgr.GetModule<SelectHeroModule>();
+            Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
             hero1Btn.gameObject.SetActive(module.redHeroId > 0);
             hero2Btn.gameObject.SetActive(module.blueHeroId > 0);
         }
