@@ -2,9 +2,9 @@
 using System;
 using Utopia;
 
-public class AppStateInBattle : IAppState
+public class AppStateInBattle : AppStateBase
 {
-    public AppStateInBattle(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.InBattle)
+    public AppStateInBattle(IStateMgr stateMgr) : base(stateMgr, (int)AppStateBase.StateName.InBattle)
     {
 
     }

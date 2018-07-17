@@ -34,7 +34,7 @@ namespace Utopia
         public Transform uiRoot { get; protected set; }
         public GameNetwork gameNetwork { get; protected set; }
         public GameConfig gameConfig { get; protected set; }
-        public AppStateMgr stateMgr { get; protected set; }
+        
         public Scene scene { get; protected set; }
         public ulong heroId { get; set; }
 
@@ -45,6 +45,7 @@ namespace Utopia
         public NetMgr net { get; protected set; }
         EventProxy<string> m_evProxy;
         public LogicModuleMgr logicModuleMgr { get; protected set; }
+        public AppStateMgr stateMgr { get; protected set; }
 
         public void Awake()
         {

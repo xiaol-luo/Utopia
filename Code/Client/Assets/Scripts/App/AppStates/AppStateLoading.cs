@@ -1,7 +1,7 @@
 
-public class AppStateLoading : IAppState
+public class AppStateLoading : AppStateBase
 {
-    public AppStateLoading(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.Loading)
+    public AppStateLoading(IStateMgr stateMgr) : base(stateMgr, (int)AppStateBase.StateName.Loading)
     {
 
     }

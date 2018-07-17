@@ -2,9 +2,9 @@ using NetProto;
 using UnityEngine;
 using Utopia;
 
-public class AppStateSelectHero : IAppState
+public class AppStateSelectHero : AppStateBase
 {
-    public AppStateSelectHero(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.SelectHero)
+    public AppStateSelectHero(IStateMgr stateMgr) : base(stateMgr, (int)AppStateBase.StateName.SelectHero)
     {
 
     }
@@ -76,14 +76,14 @@ public class AppStateSelectHero : IAppState
         {
             App.instance.heroId = msg.HeroId;
             System.Action<AppStateLoadingScene.LoadResult, string> cb = this.EnterStateInBattle;
-            m_stateMgr.ChangeState(IAppState.StateName.LoadingScene, "Level_Battle", cb);
+            m_stateMgr.ChangeState(AppStateBase.StateName.LoadingScene, "Level_Battle", cb);
         }
     }
 
     void EnterStateInBattle(AppStateLoadingScene.LoadResult ret, string sceneName)
     {
         if (AppStateLoadingScene.LoadResult.Success == ret)
-            m_stateMgr.ChangeState(IAppState.StateName.InBattle, sceneName);
+            m_stateMgr.ChangeState(AppStateBase.StateName.InBattle, sceneName);
     }
 
     void UpdateUI()

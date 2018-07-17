@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utopia;
 
-public class AppStateLoadingScene : IAppState
+public class AppStateLoadingScene : AppStateBase
 {
     public enum LoadResult
     {
@@ -11,7 +11,7 @@ public class AppStateLoadingScene : IAppState
         Break,
     }
 
-    public AppStateLoadingScene(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.LoadingScene)
+    public AppStateLoadingScene(IStateMgr stateMgr) : base(stateMgr, (int)AppStateBase.StateName.LoadingScene)
     {
 
     }

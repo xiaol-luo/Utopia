@@ -2,9 +2,9 @@
 using UnityEngine;
 using Utopia;
 
-public class AppStateLaunch : IAppState
+public class AppStateLaunch : AppStateBase
 {
-    public AppStateLaunch(IStateMgr stateMgr) : base(stateMgr, (int)IAppState.StateName.Launch)
+    public AppStateLaunch(IStateMgr stateMgr) : base(stateMgr, (int)AppStateBase.StateName.Launch)
     {
 
     }
@@ -65,7 +65,7 @@ public class AppStateLaunch : IAppState
             // App.my.gameNetwork.Send((int)ProtoId.PidPing, ping);
         }
 
-        m_stateMgr.ChangeState(IAppState.StateName.SelectHero);
+        m_stateMgr.ChangeState(AppStateBase.StateName.SelectHero);
     }
     void OnDisConnect(int errno, string errMsg)
     {

@@ -1,5 +1,5 @@
 
-public class IAppState : IState
+public class AppStateBase : IState
 {
     public enum StateName
     {
@@ -12,8 +12,8 @@ public class IAppState : IState
         Max,
     }
 
-    public IAppState() : base(null, 0) { }
-    public IAppState(IStateMgr stateMgr, int id) : base(stateMgr, id)
+    public AppStateBase() : base(null, 0) { }
+    public AppStateBase(IStateMgr stateMgr, int id) : base(stateMgr, id)
     {
 
     }

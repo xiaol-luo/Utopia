@@ -1,5 +1,5 @@
 
-public class AppStateMgr : StateMgr<IAppState>
+public class AppStateMgr : StateMgr<AppStateBase>
 {
     public AppStateMgr()
     {
