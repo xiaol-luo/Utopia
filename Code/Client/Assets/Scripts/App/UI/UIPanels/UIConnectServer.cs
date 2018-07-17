@@ -45,6 +45,6 @@ public class UIConnectServer : MonoBehaviour
     void OnClickBtn()
     {
         int port = int.Parse(portTxt.text);
-        App.instance.gameNetwork.Connect(ipTxt.text, port);
+        App.instance.net.gameSrv.Connect(ipTxt.text, port);
     }
 }

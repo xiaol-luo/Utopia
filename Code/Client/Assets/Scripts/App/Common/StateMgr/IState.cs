@@ -7,9 +7,9 @@ public abstract class IState
         Id = id;
     }
 
-    public abstract void Enter(params object[] objs);
-    public abstract void Exit(params object[] objs);
-    public abstract void Update(params object[] objs);
+    public abstract void Enter(object param);
+    public abstract void Exit();
+    public abstract void Update();
 
     protected IStateMgr m_stateMgr;
     public int Id { get; protected set; }

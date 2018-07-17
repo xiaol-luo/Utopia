@@ -1,12 +1,17 @@
 
-public class AppStateMgr : StateMgr<AppStateBase>
+namespace Utopia
 {
-    public AppStateMgr()
+    public class AppStateMgr : StateMgr<AppStateBase>
     {
-        this.AddState(new AppStateLaunch(this));
-        this.AddState(new AppStateLoading(this));
-        this.AddState(new AppStateSelectHero(this));
-        this.AddState(new AppStateInBattle(this));
-        this.AddState(new AppStateLoadingScene(this));
+        public AppStateMgr()
+        {
+            this.AddState(new AppStateLiveUpdate(this));
+            this.AddState(new AppStateAwakeCore(this));
+            this.AddState(new AppStateWaitTask(this));
+            this.AddState(new AppStateInLogic(this));
+            this.AddState(new AppStateInBattle(this));
+            this.AddState(new AppStateQuit(this));
+        }
     }
 }
+

@@ -33,7 +33,6 @@ namespace Utopia
         }
         public MonoBehaviour root { get; protected set; }
         public Transform uiRoot { get; protected set; }
-        public GameNetwork gameNetwork { get; protected set; }
         public GameConfig gameConfig { get; protected set; }
         
         public Scene scene { get; protected set; }
@@ -41,7 +40,6 @@ namespace Utopia
 
 
         bool m_isQuited = false;
-        bool m_isStarted = false;
         public UIPanelMgr panelMgr { get; protected set; }
         public NetMgr net { get; protected set; }
         EventProxy<string> m_evProxy;
@@ -53,20 +51,23 @@ namespace Utopia
             Core.MakeInstance(this.root);
             m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             panelMgr = new UIPanelMgr(root.transform.Find("RootUI").gameObject);
-            net = new NetMgr();
             logicMgr = new LogicMgr();
-
-            this.SetupEvents();
             stateMgr = new AppStateMgr();
-            gameNetwork = new GameNetwork();
             gameConfig = new GameConfig();
-            scene = new Scene();
             gameConfig.Awake();
+            scene = new Scene();
+            App.instance.logicMgr.Init();
+            net = new NetMgr();
+            this.SetupEvents();
         }
+
         public void Start()
         {
             LayerUtil.Init();
             UIPanelDef.InitPanelSettings();
+            stateMgr.ChangeState(EAppState.LiveUpdate, null);
+
+            /*
             net.Init();
             logicMgr.Init();
 
@@ -105,18 +106,20 @@ namespace Utopia
 
             if (isAllOk)
             {
-                m_isStarted = true;
                 Core.instance.eventMgr.Fire(AppEvent.GameStarted);
             }
             else
             {
                 this.Quit();
             }
+            */
         }
         public void FixedUpdate()
         {
-            if (m_isQuited || !m_isStarted)
+            if (m_isQuited)
                 return;
+
+            stateMgr.UpdateState();
 
             if (CoreModule.EStage.Updating == Core.instance.currStage)
             {
@@ -130,10 +133,7 @@ namespace Utopia
                 return;
 
             m_isQuited = true;
-            Core.instance.eventMgr.Fire(AppEvent.GameToQuit);
-            panelMgr.Destory();
-            logicMgr.Release();
-            Core.instance.Release();
+            stateMgr.ChangeState(EAppState.Quit, null);
         }
 
         void SetupEvents()

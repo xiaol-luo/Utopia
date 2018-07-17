@@ -11,7 +11,7 @@ namespace Utopia
         public NetModule(Core _app) : base(_app, EModule.NetModule)
         {
            
-        }
+        }  
 
         public ulong AddNetAgent(NetAgent netAgent)
         {

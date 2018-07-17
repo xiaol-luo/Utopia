@@ -14,6 +14,11 @@ namespace Utopia
             m_evProxy.Subscribe(Event.AppEvent.UIPanelMgr_BecomeReady, (string eventName)=> {
                 App.instance.panelMgr.ShowPanel(UI.UIPanelId.MainPanel);
             });
+
+            AppStateWaitTask appState = App.instance.stateMgr.GetState(EAppState.WaitTask) as AppStateWaitTask;
+            appState.SetTask(()=> {
+                App.instance.stateMgr.ChangeState(EAppState.InLogic, null);
+            });
         }
 
         // Update is called once per frame

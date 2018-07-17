@@ -87,6 +87,7 @@ namespace Utopia.UI
         void UpdateUI()
         {
             bool isGameSrvConnected = false;
+            CommonNetProxy xx = App.instance.net.gameSrv;
             if (null != App.instance.net.gameSrv.netAgent.socket &&
                 ClientSocket.State.Connected == App.instance.net.gameSrv.netAgent.socket.state)
             {
