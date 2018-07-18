@@ -30,7 +30,8 @@ _load_files_effect_script = {
 }
 
 local _logic_net_handler = {
-    "LuaScript/logic/net_handler.lua",
+    "LuaScript/logic/net/net_handler.lua",
+    "LuaScript/logic/net/msg_handlers.lua",
 }
 
 _load_files_map =
