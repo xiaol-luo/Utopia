@@ -19,7 +19,6 @@ namespace Utopia.UI
         [SerializeField]
         InputField portTxt;
 
-        EventProxy<string> m_evProxy;
 
         public override UIPanelId GetPanelId()
         {
@@ -41,7 +40,6 @@ namespace Utopia.UI
             ipTxt.text = "127.0.0.1";
             portTxt.text = "10240";
 
-            m_evProxy = Core.instance.eventMgr.CreateEventProxy();
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetClosed, OnGameSrvClosed);
             m_evProxy.Subscribe<RspFreeHero>(GameSrvNetProxy.ProtoEventName(ProtoId.PidRspFreeHero), OnRspFreeHero);

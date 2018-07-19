@@ -148,7 +148,7 @@ namespace Utopia.UI
             m_root.transform.SetParent(null);
             m_resLoader.Release();
             m_timer.ClearAll();
-            m_eventMgr.ClearAll();
+            m_evProxy.ClearAll();
             m_panelOperas[(int)UIPanelOpera.Released](this, param);
         }
     }

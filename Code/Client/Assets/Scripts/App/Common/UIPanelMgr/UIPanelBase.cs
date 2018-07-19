@@ -5,6 +5,10 @@ namespace Utopia.UI
 {
     public partial class UIPanelBase : MonoBehaviour, IUIPanelBase
     {
+        protected ResourceLoaderProxy m_resLoader;
+        protected TimerProxy m_timer;
+        protected EventProxy<string> m_evProxy;
+
         protected UIPanelProxy m_proxy;
         public void SetProxy(UIPanelProxy proxy)
         {
@@ -114,6 +118,10 @@ namespace Utopia.UI
 
         public void Init()
         {
+            m_resLoader = ResourceLoaderProxy.Create();
+            m_timer = Core.instance.timer.CreateTimerProxy();
+            m_evProxy = Core.instance.eventMgr.CreateEventProxy();
+
             this.OnInit();
         }
 
@@ -146,6 +154,11 @@ namespace Utopia.UI
         {
             if (this.IsReleased())
                 return;
+
+            this.OnRelease();
+            m_resLoader.Release();
+            m_timer.ClearAll();
+            m_evProxy.ClearAll();
         }
 
         protected virtual void OnRelease()

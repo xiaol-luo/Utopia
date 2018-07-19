@@ -12,8 +12,8 @@ namespace Utopia.UI
             Transform root = m_proxy.GetRoot().transform;
             m_uiRoot = root.Find("Root");
 
-            m_proxy.eventProxy.Subscribe<UIPanelEventDef.PanelIdChange>(UIPanelEventDef.FullScreenPanelOnTop, this.OnOneFullPanelShow);
-            m_proxy.eventProxy.Subscribe<UIPanelEventDef.PanelIdChange>(UIPanelEventDef.FullScreenPanelNotOnTop, this.OnAllFullPanelHide);
+            m_proxy.evProxy.Subscribe<UIPanelEventDef.PanelIdChange>(UIPanelEventDef.FullScreenPanelOnTop, this.OnOneFullPanelShow);
+            m_proxy.evProxy.Subscribe<UIPanelEventDef.PanelIdChange>(UIPanelEventDef.FullScreenPanelNotOnTop, this.OnAllFullPanelHide);
 
             this.CheckHide();
         }

@@ -8,8 +8,8 @@ namespace Utopia.UI
         ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
         TimerProxy m_timer = Core.instance.timer.CreateTimerProxy();
         public TimerProxy timer { get { return m_timer; } }
-        EventProxy<string> m_eventMgr = Core.instance.eventMgr.CreateEventProxy();
-        public EventProxy<string> eventProxy { get { return m_eventMgr; } }
+        EventProxy<string> m_evProxy = Core.instance.eventMgr.CreateEventProxy();
+        public EventProxy<string> evProxy { get { return m_evProxy; } }
 
         UIPanelId m_panelId;
         UIPanelSetting m_panelSetting;

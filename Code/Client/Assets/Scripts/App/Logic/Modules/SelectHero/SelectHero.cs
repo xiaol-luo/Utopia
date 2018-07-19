@@ -41,16 +41,10 @@ namespace Utopia.Logic
         void OnGameSrvConnected(string evName, CommonNetProxy netGameSrv)
         {
             bool isConnected = (0 == netGameSrv.netAgent.socket.errno);
-            if (isConnected)
+            if (isConnected && usingHeroObjId > 0)
             {
-                if (usingHeroObjId > 0)
-                {
-                    this.SelectHeroReq(usingHeroObjId);
-                }
-                else
-                {
-                    App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
-                }
+                this.SelectHeroReq(usingHeroObjId);
+                App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
             }
             else
             {

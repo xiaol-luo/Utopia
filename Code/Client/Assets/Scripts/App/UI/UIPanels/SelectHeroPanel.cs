@@ -15,15 +15,15 @@ namespace Utopia.UI
 
         void OnDestroy()
         {
-            m_proxy.eventProxy.ClearAll();
+            m_proxy.evProxy.ClearAll();
         }
 
         protected override void OnInit()
         {
             base.OnInit();
 
-            m_proxy.eventProxy.Subscribe(SelectHeroModuleDef.Event_OnRspFreeHeros, OnEvent);
-            m_proxy.eventProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero, OnEvent);
+            m_proxy.evProxy.Subscribe(SelectHeroModuleDef.Event_OnRspFreeHeros, OnEvent);
+            m_proxy.evProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero, OnEvent);
 
             hero1Btn.onClick.AddListener(()=> {
                 Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
