@@ -7,7 +7,7 @@ namespace Utopia
 {
     public class AppStateQuit : AppStateBase
     {
-        public AppStateQuit(IStateMgr stateMgr) : base(stateMgr, (int)EAppState.Quit)
+        public AppStateQuit(AppStateMgr stateMgr) : base(stateMgr, EAppState.Quit)
         {
 
         }

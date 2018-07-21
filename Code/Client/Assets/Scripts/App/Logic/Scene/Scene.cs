@@ -41,13 +41,11 @@ public class Scene
         m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
 
         App.instance.net.gameSrv.Send(ProtoId.PidLoadSceneComplete);
-
         App.instance.net.gameSrv.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
         App.instance.net.gameSrv.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
         App.instance.net.gameSrv.Add<SceneUnitMove>((int)ProtoId.PidSceneUnitMove, OnRecvceneUnitMove);
         App.instance.net.gameSrv.Add<SceneObjectDisappear>((int)ProtoId.PidSceneObjectDisappear, OnSceneObjectDisappear);
         App.instance.net.gameSrv.Add<SceneUnitSkillAction>((int)ProtoId.PidSceneUnitSkillAction, OnSceneUnitSkillAction);
-
         App.instance.net.gameSrv.Add<ViewAllGrids>((int)ProtoId.PidViewAllGrids, (int id, ViewAllGrids msg) =>
         {
             m_vgg.SetAllGrids(msg);
@@ -60,7 +58,6 @@ public class Scene
         {
             m_vgg.SetSnapshotDiff(msg);
         });
-
 
         {
             foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())

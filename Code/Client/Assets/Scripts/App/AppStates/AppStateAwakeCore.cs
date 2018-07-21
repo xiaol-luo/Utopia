@@ -7,7 +7,7 @@ namespace Utopia
 {
     public class AppStateAwakeCore : AppStateBase
     {
-        public AppStateAwakeCore(IStateMgr stateMgr) : base(stateMgr, (int)EAppState.AwakeCore)
+        public AppStateAwakeCore(AppStateMgr stateMgr) : base(stateMgr, EAppState.AwakeCore)
         {
 
         }

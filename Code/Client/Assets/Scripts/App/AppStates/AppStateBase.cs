@@ -3,6 +3,7 @@ namespace Utopia
 {
     public enum EAppState
     {
+        Invalid = 0,
         LiveUpdate, // 在线更新
         AwakeCore, // 唤醒Core
         WaitTask, // 等待任务
@@ -13,10 +14,10 @@ namespace Utopia
         Count,
     }
 
-    public class AppStateBase : IState
+    public class AppStateBase : IState<EAppState>
     {
         public AppStateBase() : base(null, 0) { }
-        public AppStateBase(IStateMgr stateMgr, int id) : base(stateMgr, id)
+        public AppStateBase(AppStateMgr stateMgr, EAppState id) : base(stateMgr, id)
         {
 
         }

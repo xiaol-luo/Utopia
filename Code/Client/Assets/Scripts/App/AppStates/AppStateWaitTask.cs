@@ -6,7 +6,7 @@ namespace Utopia
 {
     public class AppStateWaitTask : AppStateBase
     {
-        public AppStateWaitTask(IStateMgr stateMgr) : base(stateMgr, (int)EAppState.WaitTask)
+        public AppStateWaitTask(AppStateMgr stateMgr) : base(stateMgr, EAppState.WaitTask)
         {
 
         }

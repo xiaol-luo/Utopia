@@ -6,7 +6,7 @@ namespace Utopia
 {
     public class AppStateLiveUpdate : AppStateBase
     {
-        public AppStateLiveUpdate(IStateMgr stateMgr) : base(stateMgr, (int)EAppState.LiveUpdate)
+        public AppStateLiveUpdate(AppStateMgr stateMgr) : base(stateMgr, EAppState.LiveUpdate)
         {
 
         }

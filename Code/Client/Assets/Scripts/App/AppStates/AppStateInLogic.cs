@@ -6,7 +6,7 @@ namespace Utopia
 {
     public class AppStateInLogic : AppStateBase
     {
-        public AppStateInLogic(IStateMgr stateMgr) : base(stateMgr, (int)EAppState.InLogic)
+        public AppStateInLogic(AppStateMgr stateMgr) : base(stateMgr, EAppState.InLogic)
         {
 
         }

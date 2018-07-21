@@ -1,7 +1,7 @@
 
 namespace Utopia
 {
-    public class AppStateMgr : StateMgr<AppStateBase>
+    public class AppStateMgr : StateMgr<EAppState, AppStateBase>
     {
         public AppStateMgr()
         {

@@ -166,12 +166,30 @@ namespace Utopia.UI
             return panelProxy;
         }
 
+        public void HideAllPanels()
+        {
+            var panels = new List<UIPanelProxy>(m_cachedPanels.Values);
+            foreach (var panel in panels)
+            {
+                panel.Hide();
+            }
+        }
+
         public void ReleasePanel(UIPanelId panelId)
         {
             UIPanelProxy panelProxy = this.GetCachedPanel(panelId);
             if (null != panelProxy)
             {
                 panelProxy.Release();
+            }
+        }
+
+        public void ReleaseAllPanels()
+        {
+            var panels = new List<UIPanelProxy>(m_cachedPanels.Values);
+            foreach (var panel in panels)
+            {
+                panel.Release();
             }
         }
 

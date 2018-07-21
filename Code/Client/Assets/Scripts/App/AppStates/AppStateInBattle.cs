@@ -6,13 +6,14 @@ namespace Utopia
 {
     public class AppStateInBattle : AppStateBase
     {
-        public AppStateInBattle(IStateMgr stateMgr) : base(stateMgr, (int)EAppState.InBattle)
+        public AppStateInBattle(AppStateMgr stateMgr) : base(stateMgr, EAppState.InBattle)
         {
 
         }
 
         public override void Enter(object param)
         {
+            App.instance.panelMgr.HideAllPanels();
             string sceneName = param as string;
             App.instance.scene.EnterScene(sceneName);
         }
