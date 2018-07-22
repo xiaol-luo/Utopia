@@ -8,7 +8,7 @@ namespace Utopia
     {
         public AppStateInBattle(AppStateMgr stateMgr) : base(stateMgr, EAppState.InBattle)
         {
-
+             
         }
 
         public override void Enter(object param)
@@ -20,7 +20,7 @@ namespace Utopia
 
         public override void Exit()
         {
-
+            App.instance.scene.LeaveScene();
         }
 
         public override void Update()

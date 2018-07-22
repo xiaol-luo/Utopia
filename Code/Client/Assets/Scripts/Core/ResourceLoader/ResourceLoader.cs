@@ -243,8 +243,6 @@ namespace Utopia
             ResourceScene resScene = new ResourceScene(resState);
             resScene.TryLoadAsset();
 
-            this.UnloadScene(path);
-
             m_resScenes.Add(resScene.sceneName, resScene);
             return resScene;
         }

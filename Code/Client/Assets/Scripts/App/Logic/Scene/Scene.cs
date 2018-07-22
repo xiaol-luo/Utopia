@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utopia;
+using Utopia.UI;
 
 public class Scene
 {
@@ -13,6 +14,11 @@ public class Scene
     Transform m_rootSceneObjects = null;
 
     Dictionary<ulong, SceneObjcet> m_sceneObjects = new Dictionary<ulong, SceneObjcet>();
+
+    bool m_isLoadSceneSucc = false;
+    bool m_isLoadingScene = false;
+    ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
+
     public SceneObjcet mainHero
     {
         get
@@ -38,8 +44,29 @@ public class Scene
 
     public void EnterScene(string sceneName)
     {
-        m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
+        m_isLoadSceneSucc = false;
+        m_isLoadingScene = true;
+        m_resLoader.AsyncLoadScene("Assets/Resources/Levels/Level_Battle.unity", false, OnSceneLoaded);
 
+        {
+            UILoadingPanelData panelData = new UILoadingPanelData();
+            panelData.fnGetContent = () => { return "Loading Scene"; };
+            panelData.fnIsDone = () => { return m_isLoadingScene; };
+            App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, panelData);
+        }
+    }
+
+    void OnSceneLoaded(ResourceScene.LoadResult result, string scenePath)
+    {
+        m_isLoadingScene = false;
+        m_isLoadSceneSucc = ResourceScene.LoadResult.Succ != result;
+        if (m_isLoadSceneSucc)
+        {
+            Core.instance.log.LogError("Scene Load Scene fail {0}", scenePath);
+            return;
+        }
+
+        m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
         App.instance.net.gameSrv.Send(ProtoId.PidLoadSceneComplete);
         App.instance.net.gameSrv.Add<SceneUnitState>((int)ProtoId.PidSceneUnitState, OnRecvSceneUnitState);
         App.instance.net.gameSrv.Add<SceneUnitTransform>((int)ProtoId.PidSceneUnitTransform, OnRecvSceneUnitTransform);
@@ -58,23 +85,23 @@ public class Scene
         {
             m_vgg.SetSnapshotDiff(msg);
         });
-
+        foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
         {
-            foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
+            if (rootGo.name == "SceneObjects")
             {
-                if (rootGo.name == "SceneObjects")
-                {
-                    m_rootSceneObjects = rootGo.transform;
-                }
-                if (rootGo.name == "Obstacles")
-                {
-                    m_rootObstacles = rootGo.transform;
-                }
+                m_rootSceneObjects = rootGo.transform;
+            }
+            if (rootGo.name == "Obstacles")
+            {
+                m_rootObstacles = rootGo.transform;
             }
         }
     }
+
     public void LeaveScene()
     {
+        m_isLoadSceneSucc = false;
+        
         App.instance.net.gameSrv.Send(ProtoId.PidLeaveScene);
         m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
@@ -187,6 +214,9 @@ public class Scene
     }
     public void Update()
     {
+        if (!m_isLoadSceneSucc)
+            return;
+
         this.CheckPlayerInput();
     }
 
