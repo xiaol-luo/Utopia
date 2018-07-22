@@ -14,6 +14,15 @@ namespace Utopia
         public ResourceState resState { get { return m_resState; } }
         UnityEngine.AsyncOperation m_resOpera;
         UnityEngine.Coroutine m_resOperaCo;
+        public bool isAddition;
+
+        protected LoadSceneMode loadSceneMode 
+        {
+            get
+            {
+                return isAddition ? LoadSceneMode.Additive : LoadSceneMode.Single;
+            }
+        }
 
         public enum LoadResult
         {
@@ -162,7 +171,7 @@ namespace Utopia
                 m_state = State.LoadingScene;
                 this.SetCb(newCb);
                 SceneManager.UnloadSceneAsync(this.sceneName);
-                m_resOpera = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(this.sceneName, LoadSceneMode.Additive);
+                m_resOpera = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(this.sceneName, this.loadSceneMode);
                 m_resOperaCo = Core.instance.StartCoroutine(CoTryLoadScene());
             }
             return ret;
@@ -174,7 +183,7 @@ namespace Utopia
             {
                 ret = true;
                 m_state = State.LoadingScene;
-                m_resOpera = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(this.sceneName, LoadSceneMode.Additive);
+                m_resOpera = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(this.sceneName, this.loadSceneMode);
                 m_resOperaCo = Core.instance.StartCoroutine(CoTryLoadScene());
             }
             return ret;

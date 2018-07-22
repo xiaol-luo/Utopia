@@ -152,23 +152,22 @@ namespace Utopia.UI
 
         public void Release()
         {
-            if (this.IsReleased())
-                return;
-
-            this.OnRelease();
-            m_resLoader.Release();
-            m_timer.ClearAll();
-            m_evProxy.ClearAll();
-        }
-
-        protected virtual void OnRelease()
-        {
             if (!this.IsReady())
+                return;
+            if (this.IsReleased())
                 return;
 
             m_panelOperas[(int)UIPanelOpera.PreRelease](this, null);
             this.OnRelease();
+            m_resLoader.Release();
+            m_timer.ClearAll();
+            m_evProxy.ClearAll();
             m_panelOperas[(int)UIPanelOpera.Released](this, null);
+        }
+
+        protected virtual void OnRelease()
+        {
+            
         }
     }
 }

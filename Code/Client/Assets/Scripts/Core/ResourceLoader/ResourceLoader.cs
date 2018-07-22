@@ -198,6 +198,8 @@ namespace Utopia
             ResourceScene resScene = this.GetResScene(path);
             if (null != resScene) 
             {
+                resScene.isAddition = isAddition;
+
                 // 不存在Fail和Released的情况，因为函数逻辑会马上把这些情况的resScene移出m_resScenes
                 // 不存在Inited的情况，因为所有的resScene一创建马上就TryLoadAssset了
                 if (resScene.isLoading)
