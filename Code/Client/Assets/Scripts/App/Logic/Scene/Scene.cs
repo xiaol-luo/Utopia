@@ -19,6 +19,8 @@ public class Scene
     bool m_isLoadingScene = false;
     ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
 
+    SceneCamera sceneCamera = new SceneCamera();
+
     public SceneObjcet mainHero
     {
         get
@@ -51,7 +53,7 @@ public class Scene
         {
             UILoadingPanelData panelData = new UILoadingPanelData();
             panelData.fnGetContent = () => { return "Loading Scene"; };
-            panelData.fnIsDone = () => { return m_isLoadingScene; };
+            panelData.fnIsDone = () => { return m_isLoadSceneSucc; };
             App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, panelData);
         }
     }
@@ -59,12 +61,14 @@ public class Scene
     void OnSceneLoaded(ResourceScene.LoadResult result, string scenePath)
     {
         m_isLoadingScene = false;
-        m_isLoadSceneSucc = ResourceScene.LoadResult.Succ != result;
-        if (m_isLoadSceneSucc)
+        m_isLoadSceneSucc = ResourceScene.LoadResult.Succ == result;
+        if (!m_isLoadSceneSucc)
         {
             Core.instance.log.LogError("Scene Load Scene fail {0}", scenePath);
             return;
         }
+
+        sceneCamera.InitCamera();
 
         m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
         App.instance.net.gameSrv.Send(ProtoId.PidLoadSceneComplete);
@@ -113,6 +117,8 @@ public class Scene
         App.instance.net.gameSrv.Remove((int)ProtoId.PidViewAllGrids);
         App.instance.net.gameSrv.Remove((int)ProtoId.PidViewSnapshot);
         App.instance.net.gameSrv.Remove((int)ProtoId.PidViewSnapshotDiff);
+
+        sceneCamera.ReleaseCamera();
     }
     
     SceneObjcet GetSceneObject(ulong objId)
@@ -220,6 +226,7 @@ public class Scene
         this.CheckPlayerInput();
     }
 
+    long m_clickMouseTimes = 0;
     void CheckPlayerInput()
     {
         const int Mouse_Left_Click = 0;
@@ -227,8 +234,10 @@ public class Scene
 
         if (Input.GetMouseButtonDown(Mouse_Right_Click))
         {
+            ++m_clickMouseTimes;
+            Core.instance.log.LogDebug("Click Mouse {0}", m_clickMouseTimes);
             Vector3 hitGound = Vector3.zero;
-            bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
+            bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
             if (isOk)
             {
                 this.TryMoveToPos(hitGound);
@@ -242,7 +251,7 @@ public class Scene
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Vector3 hitGound = Vector3.zero;
-            bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
+            bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
             if (isOk)
             {
                 this.CastSkill(ESkillSlot.EssQslot, targetSuid, hitGound);
@@ -251,7 +260,7 @@ public class Scene
         if (Input.GetKeyDown(KeyCode.W))
         {
             Vector3 hitGound = Vector3.zero;
-            bool isOk = SceneUtils.ScreenToGround(Camera.main, Input.mousePosition, ref hitGound);
+            bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
             if (isOk)
             {
                 this.CastSkill(ESkillSlot.EssWslot, targetSuid, hitGound);

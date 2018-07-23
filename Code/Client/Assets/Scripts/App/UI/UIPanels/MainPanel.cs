@@ -71,6 +71,13 @@ namespace Utopia.UI
         void OnGameSrvConnected(string evName, CommonNetProxy evParam)
         {
             this.UpdateUI();
+            // for test
+            {
+                Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
+                module.QueryFreeHero();
+                App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
+                this.Hide();
+            }
         }
 
         void OnGameSrvClosed(string evName, CommonNetProxy evParam)

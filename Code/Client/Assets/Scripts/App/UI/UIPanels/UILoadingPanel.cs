@@ -36,7 +36,7 @@ namespace Utopia.UI
                 return;
             }
 
-            m_timerProxy.Add(this.UpdateLogic, 0, -1, 1.0f);
+            m_timerProxy.Add(this.UpdateLogic, 0, -1, 0.5f);
         }
 
         protected override void OnHide()
