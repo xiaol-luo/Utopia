@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -353,7 +353,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 458606843}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 868118071}
   - component: {fileID: 868118070}
   - component: {fileID: 868118069}
+  - component: {fileID: 868118072}
   m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
@@ -540,6 +541,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 868118067}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &868118072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868118067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3675334ff9bccf4796a2cea42d9b9e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1111803712
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +965,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55514813cbd04fa46b7f91cb47cd6f7d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1982713717 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1708225169268494, guid: 55514813cbd04fa46b7f91cb47cd6f7d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1982713716}
+--- !u!114 &1982713718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1982713717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!1 &2040544916
 GameObject:
   m_ObjectHideFlags: 0

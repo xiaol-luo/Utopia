@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utopia;
+using Utopia.Logic;
 using Utopia.UI;
 
 public class Scene
@@ -20,13 +21,15 @@ public class Scene
     ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
 
     SceneCamera sceneCamera = new SceneCamera();
+    EventProxy<string> m_evProxy = Core.instance.eventMgr.CreateEventProxy();
 
+    ulong m_mainHeroId = 0;
     public SceneObjcet mainHero
     {
         get
         {
             SceneObjcet so;
-            m_sceneObjects.TryGetValue(App.instance.heroId, out so);
+            m_sceneObjects.TryGetValue(m_mainHeroId, out so);
             return so;
         }
     }
@@ -46,6 +49,8 @@ public class Scene
 
     public void EnterScene(string sceneName)
     {
+        m_mainHeroId = App.instance.logicMgr.GetModule<SelectHero>().usingHeroObjId;
+
         m_isLoadSceneSucc = false;
         m_isLoadingScene = true;
         m_resLoader.AsyncLoadScene("Assets/Resources/Levels/Level_Battle.unity", false, OnSceneLoaded);
@@ -56,6 +61,15 @@ public class Scene
             panelData.fnIsDone = () => { return m_isLoadSceneSucc; };
             App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, panelData);
         }
+
+        m_evProxy.Subscribe<Vector3>(SceneEventDef.MouseHitGround, OnMouseHitGround);
+    }
+
+    void OnMouseHitGround(string evName, Vector3 worldPos)
+    {
+        Core.instance.log.LogDebug("Scene UPdate {0} {1} {2}",
+            worldPos.x, worldPos.y, worldPos.z);
+        this.TryMoveToPos(worldPos);
     }
 
     void OnSceneLoaded(ResourceScene.LoadResult result, string scenePath)
@@ -226,23 +240,11 @@ public class Scene
         this.CheckPlayerInput();
     }
 
-    long m_clickMouseTimes = 0;
     void CheckPlayerInput()
     {
         const int Mouse_Left_Click = 0;
         const int Mouse_Right_Click = 1;
 
-        if (Input.GetMouseButtonDown(Mouse_Right_Click))
-        {
-            ++m_clickMouseTimes;
-            Core.instance.log.LogDebug("Click Mouse {0}", m_clickMouseTimes);
-            Vector3 hitGound = Vector3.zero;
-            bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
-            if (isOk)
-            {
-                this.TryMoveToPos(hitGound);
-            }
-        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             this.StopAction();

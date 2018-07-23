@@ -36,8 +36,6 @@ namespace Utopia
         public GameConfig gameConfig { get; protected set; }
         
         public Scene scene { get; protected set; }
-        public ulong heroId { get; set; }
-
 
         bool m_isQuited = false;
         public UIPanelMgr panelMgr { get; protected set; }
