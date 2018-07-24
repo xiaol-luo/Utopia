@@ -43,7 +43,6 @@ namespace GameLogic
 			delete m_event_dispacher; m_event_dispacher = nullptr;
 			m_transform = nullptr;
 			m_scene = nullptr;
-			
 		}
 	}
 

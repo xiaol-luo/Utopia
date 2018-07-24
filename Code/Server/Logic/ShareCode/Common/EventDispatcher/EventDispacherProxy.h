@@ -56,11 +56,11 @@ public:
 
 	void CancelAll()
 	{
-		for (uint64_t id : m_subscribe_ids)
+		std::vector<uint64_t> subscribe_ids(m_subscribe_ids.begin(), m_subscribe_ids.end());
+		for (uint64_t id : subscribe_ids)
 		{
-			m_ev_dispacher->Cancel(id);
+			this->Cancel(id);
 		}
-		m_subscribe_ids.clear();
 	}
 
 private:

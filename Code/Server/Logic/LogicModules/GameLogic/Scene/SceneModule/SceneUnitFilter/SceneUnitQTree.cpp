@@ -46,7 +46,10 @@ namespace GameLogic
 				if (nullptr != node->children[i])
 					nodes.push_back(node->children[i]);
 			}
-			for (SceneUnitQTreeNodeUnit *unit : node->node_units)
+
+			std::vector<SceneUnitQTreeNodeUnit *> node_units(node->node_units.begin(), node->node_units.end());
+
+			for (SceneUnitQTreeNodeUnit *unit : node_units)
 			{
 				unit->Deattach();
 			}

@@ -36,14 +36,14 @@ namespace GameLogic
 
 	NewScene::~NewScene()
 	{
-		delete m_protobuf_arena; m_protobuf_arena = nullptr;
-		delete m_ev_dispacher; m_ev_dispacher = nullptr;
+		m_scene_units.clear();
 		for (auto &&module : m_modules)
 		{
 			delete module;
 		}
 		memset(m_modules, 0, sizeof(m_modules));
-
+		delete m_ev_dispacher; m_ev_dispacher = nullptr;
+		delete m_protobuf_arena; m_protobuf_arena = nullptr;
 		delete m_cfg; m_cfg = nullptr;
 	}
 

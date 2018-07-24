@@ -114,6 +114,12 @@ public class Scene
                 m_rootObstacles = rootGo.transform;
             }
         }
+
+        {
+            GameObject sceneLogicMono = new GameObject();
+            sceneLogicMono.name = "SceneLogicMono";
+            sceneLogicMono.AddComponent<SceneLogicMono>();
+        }
     }
 
     public void LeaveScene()
@@ -232,6 +238,12 @@ public class Scene
     {
         App.instance.net.gameSrv.Send(ProtoId.PidStopMove);
     }
+    public void FixUpdate()
+    {
+        if (!m_isLoadSceneSucc)
+            return;
+    }
+
     public void Update()
     {
         if (!m_isLoadSceneSucc)
@@ -240,10 +252,16 @@ public class Scene
         this.CheckPlayerInput();
     }
 
+    int m_clickBtnTiems = 0;
     void CheckPlayerInput()
     {
         const int Mouse_Left_Click = 0;
         const int Mouse_Right_Click = 1;
+
+        if (Input.anyKey)
+        {
+
+        }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -261,6 +279,9 @@ public class Scene
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
+            ++m_clickBtnTiems;
+            Core.instance.log.LogDebug("CheckPlayerInput {0}", m_clickBtnTiems);
+
             Vector3 hitGound = Vector3.zero;
             bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
             if (isOk)

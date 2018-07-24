@@ -80,8 +80,6 @@ class ViewGridGizmos : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (true)
-            return;
         Color oldColor = Gizmos.color;
 
         foreach (DrawViewGrid grid in m_allGrids)

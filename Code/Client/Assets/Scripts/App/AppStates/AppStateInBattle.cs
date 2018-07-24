@@ -16,16 +16,20 @@ namespace Utopia
             App.instance.panelMgr.HideAllPanels();
             string sceneName = param as string;
             App.instance.scene.EnterScene(sceneName);
+
+            UnityEngine.Application.targetFrameRate = SceneDef.InBattle_GameFrame;
+            
         }
 
         public override void Exit()
         {
             App.instance.scene.LeaveScene();
+            UnityEngine.Application.targetFrameRate = SceneDef.InLogic_GameFrame;
         }
 
         public override void Update()
         {
-            App.instance.scene.Update();
+            App.instance.scene.FixUpdate();
         }
     }
 }

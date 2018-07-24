@@ -41,8 +41,11 @@ namespace GameLogic
 
 	SceneUnitMove::~SceneUnitMove()
 	{
-		m_nav_agent->Disable();
-		delete m_nav_agent; m_nav_agent = nullptr;
+		if (nullptr != m_nav_agent)
+		{
+			m_nav_agent->Disable();
+			delete m_nav_agent; m_nav_agent = nullptr;
+		}
 	}
 
 	void SceneUnitMove::UpdateState(int64_t deltaMs)
