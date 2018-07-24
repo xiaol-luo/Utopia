@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Define/NetworkDefine.h"
+#include "ShareCode/Common/Define/NetworkDefine.h"
 
 namespace SolLuaBind
 {

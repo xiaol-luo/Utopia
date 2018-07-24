@@ -1,14 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "Common/Utils/Ticker.h"	
-#include "GameLogic/Scene/Navigation/NavMesh.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "GameLogic/Scene/Navigation/NavAgent.h"
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "LogicModules/GameLogic/Scene/Navigation/NavAgent.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "LogicModules/GameLogic/Scene/Navigation/NavMesh.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
 namespace SolLuaBind
 {

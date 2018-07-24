@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Player/PlayerMgr.h"	
 #include "CommonModules/Network/INetworkHandler.h"	
-#include "GameLogic/GameLogicModule.h"	
-#include "GameLogic/Player/Player.h"	
-#include "protobuf/include/google/protobuf/message.h"
+#include "LogicModules/GameLogic/Player/PlayerMgr.h"	
+#include "LogicModules/GameLogic/Player/Player.h"	
+#include "LogicModules/GameLogic/GameLogicModule.h"	
+#include "google/protobuf/message.h"
 
 namespace SolLuaBind
 {

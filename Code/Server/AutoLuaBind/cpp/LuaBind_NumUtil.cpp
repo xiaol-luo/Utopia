@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Utils/NumUtils.h"
+#include "ShareCode/Common/Utils/NumUtils.h"
 
 namespace SolLuaBind
 {
