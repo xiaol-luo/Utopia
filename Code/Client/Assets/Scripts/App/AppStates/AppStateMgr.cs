@@ -11,6 +11,7 @@ namespace Utopia
             this.AddState(new AppStateInLogic(this));
             this.AddState(new AppStateInBattle(this));
             this.AddState(new AppStateQuit(this));
+            this.AddState(new AppStateAwakeLua(this));
         }
     }
 }

@@ -44,6 +44,8 @@ namespace Utopia
         public LogicMgr logicMgr { get; protected set; }
         public AppStateMgr stateMgr { get; protected set; }
 
+        public XLua.LuaEnv lua { get; protected set; }
+
         public void Awake()
         {
             Core.MakeInstance(this.root);
@@ -56,6 +58,7 @@ namespace Utopia
             scene = new Scene();
             App.instance.logicMgr.Init();
             net = new NetMgr();
+            lua = new XLua.LuaEnv();
             this.SetupEvents();
         }
 
@@ -64,53 +67,6 @@ namespace Utopia
             LayerUtil.Init();
             UIPanelDef.InitPanelSettings();
             stateMgr.ChangeState(EAppState.LiveUpdate, null);
-
-            /*
-            net.Init();
-            logicMgr.Init();
-
-            bool isAllOk = true;
-            do
-            {
-                if (!gameConfig.Start())
-                {
-                    Debug.LogError(string.Format("GameConfig Start errno :{0}, error msg :{1}", gameConfig.errno, gameConfig.errMsg));
-                    break;
-                }
-                {
-                    Core.instance.Awake();
-                    if (CoreModule.EStage.Updating != Core.instance.currStage)
-                    {
-                        Debug.LogError(string.Format("Core awake fail!"));
-                        break;
-                    }
-                }
-                {
-                    logicMgr.Awake();
-                }
-                {
-                    if (!panelMgr.Awake())
-                    {
-                        {
-                            Debug.LogError(string.Format("panelMgr.Awake"));
-                            break;
-                        }
-                    }
-                }
-
-                isAllOk = true;
-
-            } while (false);
-
-            if (isAllOk)
-            {
-                Core.instance.eventMgr.Fire(AppEvent.GameStarted);
-            }
-            else
-            {
-                this.Quit();
-            }
-            */
         }
         public void FixedUpdate()
         {

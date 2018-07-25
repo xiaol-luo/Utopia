@@ -6,6 +6,7 @@ namespace Utopia
         Invalid = 0,
         LiveUpdate, // 在线更新
         AwakeCore, // 唤醒Core
+        AwakeLua, // 唤醒Lua
         WaitTask, // 等待任务
         InLogic, // 处理逻辑
         InBattle, // 战斗中

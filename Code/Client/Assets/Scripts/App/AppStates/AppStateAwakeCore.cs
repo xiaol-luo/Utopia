@@ -46,7 +46,7 @@ namespace Utopia
         {
             if (isInited)
             {
-                m_stateMgr.ChangeState(EAppState.WaitTask, null);
+                m_stateMgr.ChangeState(EAppState.AwakeLua, null);
             }
         }
     }
