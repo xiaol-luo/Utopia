@@ -26,6 +26,7 @@ namespace GameLogic
 
 	EffectScript::~EffectScript()
 	{
+		LuaClearAllSubscribe();
 	}
 
 	void EffectScript::OnLateBegin()

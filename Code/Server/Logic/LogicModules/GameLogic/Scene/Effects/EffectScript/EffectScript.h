@@ -12,6 +12,10 @@ namespace GameLogic
 		EffectScript(const EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key);
 		virtual ~EffectScript();
 
+		uint64_t LuaSubscribeSceneEvent(int evId, sol::protected_function lua_fn);
+		void LuaRemoveSubscribe(uint64_t subcribe_id);
+		void LuaClearAllSubscribe();
+
 	protected:
 		virtual void OnLateBegin() override;
 		virtual bool IsDone() override;
@@ -20,5 +24,17 @@ namespace GameLogic
 	protected:
 		const EffectScriptConfig *m_cfg = nullptr;
 		sol::table m_lua_effect_script;
+
+	public:
+		struct LuaSubcribeItem
+		{
+			uint64_t id = 0;
+			sol::protected_function fn;
+			LuaSubcribeItem *next = nullptr;
+		};
+
+	protected:
+		std::unordered_map<int, LuaSubcribeItem *> m_lua_subcribe_items;
+		uint64_t m_last_subcribe_id = 0;
 	};
 }
