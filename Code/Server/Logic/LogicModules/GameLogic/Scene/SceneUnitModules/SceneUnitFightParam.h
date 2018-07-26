@@ -65,7 +65,7 @@ namespace GameLogic
 		bool HasParam(NetProto::EFightParam efp);
 		bool HasFixParam(NetProto::EFightParam efp);
 		bool IsState(NetProto::EFightParam efp);
-		void OnStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value);
+		void CheckStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value);
 
 	public:
 		int GetHp();

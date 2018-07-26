@@ -183,25 +183,20 @@ namespace GameLogic
 
 	void SceneUnitFightParam::OnValueChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
 	{
-		m_ev_queue.push(std::make_tuple(is_fix, efp, old_value, new_value));
+		m_ev_queue.push(std::make_tuple(is_fix, efp, new_value, old_value));
 		while (!m_ev_queue.empty() && !m_ev_firing)
 		{
 			auto t = m_ev_queue.front();
 			m_ev_queue.pop();
 
 			FireEventHelp(std::get<0>(t), std::get<1>(t), std::get<2>(t), std::get<3>(t));
-
-			/*
-			Tuple::Apply(std::bind(&SceneUnitFightParam::FireEventHelp, this, 
-				std::placeholders::_1, std::placeholders::_2, 
-				std::placeholders::_3, std::placeholders::_4), t);
-				*/
 		}
 	}
 
 	void SceneUnitFightParam::FireEventHelp(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
 	{
 		m_ev_firing = true;
+		this->CheckStateChange(is_fix, efp, new_value, old_value);
 		this->GetEvProxy()->Fire(ESU_FightParamChange, is_fix, efp, new_value, old_value);
 		m_ev_firing = false;
 	}
@@ -210,9 +205,6 @@ namespace GameLogic
 	{
 		this->ForTestInitParam();
 		this->ForTestInitFixParam();
-		this->GetEvProxy()->Subscribe<bool, NetProto::EFightParam, int, int> (
-			ESU_FightParamChange, std::bind(&SceneUnitFightParam::OnStateChange, this, 
-			std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	}
 
 	void SceneUnitFightParam::OnDestroy()
@@ -250,7 +242,7 @@ namespace GameLogic
 	void SceneUnitFightParam::ForTestInitParam()
 	{
 		memset(m_params, 0, sizeof(m_params));
-		// 下面是属性值，一般来讲base_value>=0 value >= 0，其他的不作限制
+		// 下面是属性值，一般来讲base_value> =0 value >= 0，其他的不作限制
 		{
 			FightParam *fp = DefaultFightParameter(NetProto::EFP_MaxHP, 1, 1, 0, 0, INT_MAX);
 			assert(nullptr == m_params[fp->GetFightParam()]);
@@ -425,12 +417,12 @@ namespace GameLogic
 		return ret;
 	}
 
-	void SceneUnitFightParam::OnStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
+	void SceneUnitFightParam::CheckStateChange(bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
 	{
 		if (is_fix || !this->IsState(efp))
 			return;
 
-		bool attach_state = old_value <= 0 && new_value;
+		bool attach_state = old_value <= 0 && new_value > 0;
 		bool deattach_state = old_value > 0 && new_value <= 0;
 		if (!attach_state && !deattach_state)
 			return;
@@ -462,7 +454,7 @@ namespace GameLogic
 	{
 		m_hp += delta;
 		m_hp = NumUtil::GetInRange(m_hp, 0, this->GetValue(NetProto::EFP_MaxHP));
-		return m_mp;
+		return m_hp;
 	}
 	int SceneUnitFightParam::GetMp()
 	{

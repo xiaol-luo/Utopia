@@ -21,8 +21,6 @@
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
 #include "LuaHelps/LuaLoadFiles.h"
 
-static int64_t xxxx = 0;
-
 namespace GameLogic
 {
 	NewScene::NewScene(GameLogicModule *logic_module)

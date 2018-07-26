@@ -5,6 +5,8 @@
 #include <memory>
 #include "GameLogic/Scene/Defines/EffectDefine.h"
 
+class EventDispacherProxy;
+
 namespace GameLogic
 {
 	class SkillBase;
@@ -61,6 +63,7 @@ namespace GameLogic
 		const EffectConfigBase *m_base_cfg = nullptr;
 		NewScene *m_scene = nullptr;
 		UseEffectParam m_user_effect_param;
+		EventDispacherProxy *m_scene_event_proxy = nullptr;
 
 	protected:
 		virtual std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();

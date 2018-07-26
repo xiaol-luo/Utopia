@@ -10,6 +10,8 @@
 #include "GameLogic/Scene/Effects/EffectFilterConfig.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
+#include "Common/EventDispatcher/EventDispacher.h"
+#include "Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace GameLogic
 {
@@ -21,11 +23,14 @@ namespace GameLogic
 		m_effect_key = effect_key;
 		m_scene_effects = scene_effects;
 		m_scene = scene_effects->GetScene();
+		m_scene_event_proxy = new EventDispacherProxy(scene_effects->GetScene()->GetEvDispacher());
 	}
 
 	EffectBase::~EffectBase()
 	{
 		m_user_effect_param.Reset();
+		m_scene_event_proxy->CancelAll();
+		delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
 	}
 
 	std::shared_ptr<SceneUnit> EffectBase::GetCaster()
