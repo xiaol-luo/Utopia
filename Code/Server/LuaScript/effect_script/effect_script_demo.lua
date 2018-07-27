@@ -7,11 +7,16 @@ effect_script_demo.__index = effect_script_demo
 local OnSceneUnitFightParamChange = function(self, p1, p2, p3, p4, p5)
     print(self, p1, p2, p3, p4, p5)
 end
+local OnSceneUnitFightParamChange2 = function(self, p1, p2, p3, p4, p5)
+    print("OnSceneUnitFightParamChange2")
+    print(self, p1, p2, p3, p4, p5)
+end
 
 function effect_script_demo.init(self, effect, param)
     effect_script.effect_script_base.init(self, effect, param)
     self.loop_times = 0
     self.effect:LuaSubscribeSceneEvent(ESUEventId.ESU_FightParamChange, OnSceneUnitFightParamChange)
+    self.scene_events.OnSceneUnitFightParamChange = OnSceneUnitFightParamChange2
 end
 
 function effect_script_demo.on_late_begin(self)

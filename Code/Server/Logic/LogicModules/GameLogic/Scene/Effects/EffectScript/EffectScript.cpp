@@ -6,6 +6,7 @@
 #include "GameLogic/Scene/Defines/EffectUtils.h"
 #include "Utils/LuaUtils.h"
 #include "SolLuaBindUtils.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace GameLogic
@@ -23,11 +24,30 @@ namespace GameLogic
 		newFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		m_lua_effect_script = newFn(typeDefine, this, nullptr);
 		assert(m_lua_effect_script.valid());
+
+		m_lua_subscribe_scene_event_dtail = new LuaSubscribeSceneEventDetail(this, m_scene_event_proxy->GetEventDispacher());
 	}
 
 	EffectScript::~EffectScript()
 	{
 		LuaClearAllSubscribe();
+		delete m_lua_subscribe_scene_event_dtail; m_lua_subscribe_scene_event_dtail = nullptr;
+	}
+
+	void EffectScript::OnBegin()
+	{
+		sol::table scene_events = m_lua_effect_script["scene_events"];
+		if (scene_events.valid())
+		{
+			{
+				// sol::protected_function fn = scene_events.get_or("OnSceneUnitFightParamChange", sol::nil);
+				sol::protected_function fn = scene_events.get<sol::protected_function>("OnSceneUnitFightParamChange");
+				if (fn.valid())
+				{
+					m_lua_subscribe_scene_event_dtail->Subscribe(ESU_FightParamChange, fn);
+				}
+			}
+		}
 	}
 
 	void EffectScript::OnLateBegin()
@@ -55,6 +75,9 @@ namespace GameLogic
 		sol::protected_function luaFn = m_lua_effect_script["on_late_end"];
 		luaFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		luaFn(m_lua_effect_script);
+
+		m_lua_subscribe_scene_event_dtail->ClearAll();
+		this->LuaClearAllSubscribe();
 	}
 
 	void EffectScript::LuaRemoveSubscribe(uint64_t subcribe_id)
