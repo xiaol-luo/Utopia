@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 #include "Utils/ConfigUtil.h"
 
 namespace Config
@@ -12,7 +13,8 @@ namespace Config
         int filter_id = 0 ;
         std::vector<int> effect_ids;
 
-        using ConfigCheckFunc = bool(*)(CsvEffectSearcherConfig *item);
+        using ConfigCheckFunc = std::function<bool(CsvEffectSearcherConfig*)>;
+        // using ConfigCheckFunc = bool(*)(CsvEffectSearcherConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
@@ -20,7 +22,9 @@ namespace Config
     {
         ~CsvEffectSearcherConfigSet();
         CsvEffectSearcherConfig::ConfigCheckFunc cfg_check_fun = nullptr;
-        using ConfigSetCheckFunc = bool(*)(CsvEffectSearcherConfigSet *items);
+        
+        using ConfigSetCheckFunc = std::function<bool(CsvEffectSearcherConfigSet*)>;
+        //using ConfigSetCheckFunc = bool(*)(CsvEffectSearcherConfigSet *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 #include "Utils/ConfigUtil.h"
 
 namespace Config
@@ -15,7 +16,8 @@ namespace Config
         int need_guide = 0 ;
         int can_cancel_guide = 0 ;
 
-        using ConfigCheckFunc = bool(*)(CsvEffectGroupConfig *item);
+        using ConfigCheckFunc = std::function<bool(CsvEffectGroupConfig*)>;
+        // using ConfigCheckFunc = bool(*)(CsvEffectGroupConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
@@ -23,7 +25,9 @@ namespace Config
     {
         ~CsvEffectGroupConfigSet();
         CsvEffectGroupConfig::ConfigCheckFunc cfg_check_fun = nullptr;
-        using ConfigSetCheckFunc = bool(*)(CsvEffectGroupConfigSet *items);
+        
+        using ConfigSetCheckFunc = std::function<bool(CsvEffectGroupConfigSet*)>;
+        //using ConfigSetCheckFunc = bool(*)(CsvEffectGroupConfigSet *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         

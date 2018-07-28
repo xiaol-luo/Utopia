@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 #include "Utils/ConfigUtil.h"
 
 namespace Config
@@ -12,7 +13,8 @@ namespace Config
         std::string class_name;
         std::string script_param;
 
-        using ConfigCheckFunc = bool(*)(CsvEffectScriptConfig *item);
+        using ConfigCheckFunc = std::function<bool(CsvEffectScriptConfig*)>;
+        // using ConfigCheckFunc = bool(*)(CsvEffectScriptConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
@@ -20,7 +22,9 @@ namespace Config
     {
         ~CsvEffectScriptConfigSet();
         CsvEffectScriptConfig::ConfigCheckFunc cfg_check_fun = nullptr;
-        using ConfigSetCheckFunc = bool(*)(CsvEffectScriptConfigSet *items);
+        
+        using ConfigSetCheckFunc = std::function<bool(CsvEffectScriptConfigSet*)>;
+        //using ConfigSetCheckFunc = bool(*)(CsvEffectScriptConfigSet *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         

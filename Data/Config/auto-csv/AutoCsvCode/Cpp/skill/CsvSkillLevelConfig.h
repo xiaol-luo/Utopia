@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 #include "Utils/ConfigUtil.h"
 
 namespace Config
@@ -19,7 +20,8 @@ namespace Config
         bool can_move = 0 ;
         std::vector<int> effect_ids;
 
-        using ConfigCheckFunc = bool(*)(CsvSkillLevelConfig *item);
+        using ConfigCheckFunc = std::function<bool(CsvSkillLevelConfig*)>;
+        // using ConfigCheckFunc = bool(*)(CsvSkillLevelConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
@@ -27,7 +29,9 @@ namespace Config
     {
         ~CsvSkillLevelConfigSet();
         CsvSkillLevelConfig::ConfigCheckFunc cfg_check_fun = nullptr;
-        using ConfigSetCheckFunc = bool(*)(CsvSkillLevelConfigSet *items);
+        
+        using ConfigSetCheckFunc = std::function<bool(CsvSkillLevelConfigSet*)>;
+        //using ConfigSetCheckFunc = bool(*)(CsvSkillLevelConfigSet *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         

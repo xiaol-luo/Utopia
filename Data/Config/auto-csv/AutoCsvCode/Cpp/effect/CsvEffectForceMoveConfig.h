@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 #include "Utils/ConfigUtil.h"
 
 namespace Config
@@ -14,7 +15,8 @@ namespace Config
         std::string anchor;
         float angle = 0 ;
 
-        using ConfigCheckFunc = bool(*)(CsvEffectForceMoveConfig *item);
+        using ConfigCheckFunc = std::function<bool(CsvEffectForceMoveConfig*)>;
+        // using ConfigCheckFunc = bool(*)(CsvEffectForceMoveConfig *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
@@ -22,7 +24,9 @@ namespace Config
     {
         ~CsvEffectForceMoveConfigSet();
         CsvEffectForceMoveConfig::ConfigCheckFunc cfg_check_fun = nullptr;
-        using ConfigSetCheckFunc = bool(*)(CsvEffectForceMoveConfigSet *items);
+        
+        using ConfigSetCheckFunc = std::function<bool(CsvEffectForceMoveConfigSet*)>;
+        //using ConfigSetCheckFunc = bool(*)(CsvEffectForceMoveConfigSet *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <functional>
 #include "Utils/ConfigUtil.h"
 
 {#- extra field inlcude head file #}
@@ -23,7 +24,8 @@ namespace Config
         {{ field.field_type }} {{ field.field_name }};
     {%- endfor %}
 
-        using ConfigCheckFunc = bool(*)({{ class_name }} *item);
+        using ConfigCheckFunc = std::function<bool({{ class_name }}*)>;
+        // using ConfigCheckFunc = bool(*)({{ class_name }} *item);
         bool Init(std::map<std::string, std::string> kvPairs, ConfigCheckFunc func);
     };
 
@@ -31,7 +33,9 @@ namespace Config
     {
         ~{{ class_name }}Set();
         {{ class_name }}::ConfigCheckFunc cfg_check_fun = nullptr;
-        using ConfigSetCheckFunc = bool(*)({{ class_name }}Set *items);
+        
+        using ConfigSetCheckFunc = std::function<bool({{ class_name }}Set*)>;
+        //using ConfigSetCheckFunc = bool(*)({{ class_name }}Set *items);
         ConfigSetCheckFunc cfg_set_check_fun = nullptr;
         bool Load(std::string file_path);
         
