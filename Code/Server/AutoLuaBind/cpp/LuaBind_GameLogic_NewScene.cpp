@@ -1,15 +1,15 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
-#include "Scene/CsvSceneConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
 #include "LogicModules/GameLogic/Player/Player.h"	
-#include "ShareCode/Common/EventDispatcher/EventDispacher.h"	
-#include "google/protobuf/arena.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "LogicModules/GameLogic/Scene/NewScene.h"	
+#include "LogicModules/GameLogic/Scene/Config/SceneAllConfig.h"	
 #include "LogicModules/GameLogic/GameLogicModule.h"	
-#include "google/protobuf/message.h"
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
+#include "ShareCode/Common/EventDispatcher/EventDispacher.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/arena.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"
 
 namespace SolLuaBind
 {
@@ -19,7 +19,7 @@ namespace SolLuaBind
 		{
 			struct ForOverloadFns
 			{
-				using TypeAlias_1 = unsigned long long;
+				using TypeAlias_1 = uint64_t;
 				using TypeAlias_2 = int;
 				using TypeAlias_3 = google::protobuf::Message *;
 				using TypeAlias_4 = void;
@@ -27,14 +27,14 @@ namespace SolLuaBind
 				{
 					return cls.SendPlayer(p1, p2, p3);
 				}
-				using TypeAlias_5 = unsigned long long;
+				using TypeAlias_5 = uint64_t;
 				using TypeAlias_6 = const std::vector<GameLogic::SyncClientMsg, std::allocator<GameLogic::SyncClientMsg> > &;
 				using TypeAlias_7 = void;
 				static TypeAlias_7 SendPlayer2(GameLogic::NewScene &cls, TypeAlias_5 p1, TypeAlias_6 p2)
 				{
 					return cls.SendPlayer(p1, p2);
 				}
-				using TypeAlias_8 = long long;
+				using TypeAlias_8 = int64_t;
 				using TypeAlias_9 = int;
 				using TypeAlias_10 = google::protobuf::Message *;
 				using TypeAlias_11 = void;
@@ -42,7 +42,7 @@ namespace SolLuaBind
 				{
 					return cls.SendObservers(p1, p2, p3);
 				}
-				using TypeAlias_12 = long long;
+				using TypeAlias_12 = int64_t;
 				using TypeAlias_13 = const std::vector<GameLogic::SyncClientMsg, std::allocator<GameLogic::SyncClientMsg> > &;
 				using TypeAlias_14 = void;
 				static TypeAlias_14 SendObservers2(GameLogic::NewScene &cls, TypeAlias_12 p1, TypeAlias_13 p2)

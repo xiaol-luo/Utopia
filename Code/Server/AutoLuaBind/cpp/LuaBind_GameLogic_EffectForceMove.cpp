@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
 #include "LogicModules/GameLogic/Scene/Effects/EffectForceMove/EffectForceMoveConfig.h"	
 #include "LogicModules/GameLogic/Scene/Effects/EffectForceMove/EffectForceMove.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {
@@ -29,7 +29,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::EffectForceMove> meta_table(
 						sol::constructors<				
-						GameLogic::EffectForceMove(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, unsigned long long)
+						GameLogic::EffectForceMove(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "EffectForceMove"; })				
 						, sol::base_classes, sol::bases<

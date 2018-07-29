@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "ShareCode/Common/EventDispatcher/EventDispacher.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
+#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"	
+#include "ShareCode/Common/EventDispatcher/EventDispacher.h"
 
 namespace SolLuaBind
 {
@@ -15,7 +15,7 @@ namespace SolLuaBind
 			{
 				using TypeAlias_1 = int;
 				using TypeAlias_2 = std::function<void ()>;
-				using TypeAlias_3 = long long;
+				using TypeAlias_3 = int64_t;
 				static TypeAlias_3 Subscribe1(GameLogic::SceneUnitEventProxy &cls, TypeAlias_1 p1, TypeAlias_2 p2)
 				{
 					return cls.Subscribe(p1, p2);

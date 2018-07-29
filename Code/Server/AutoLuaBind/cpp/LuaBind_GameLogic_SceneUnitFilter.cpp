@@ -1,11 +1,12 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
+#include "ShareCode/Common/Geometry/GeometryDefine.h"	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
 #include "ShareCode/Common/Geometry/Vector3.h"	
-#include "ShareCode/Common/Geometry/GeometryDefine.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"
 
 namespace SolLuaBind
 {
@@ -16,14 +17,14 @@ namespace SolLuaBind
 			struct ForOverloadFns
 			{
 				using TypeAlias_1 = GameLogic::EffectFilterShape;
-				using TypeAlias_2 = std::unordered_map<unsigned long long, std::shared_ptr<GameLogic::SceneUnit>, std::hash<unsigned long long>, std::equal_to<unsigned long long>, std::allocator<std::pair<const unsigned long long, std::shared_ptr<GameLogic::SceneUnit> > > >;
+				using TypeAlias_2 = std::unordered_map<uint64_t, std::shared_ptr<GameLogic::SceneUnit>, std::hash<uint64_t>, std::equal_to<uint64_t>, std::allocator<std::pair<const uint64_t, std::shared_ptr<GameLogic::SceneUnit> > > >;
 				static TypeAlias_2 FilterSceneUnit1(GameLogic::SceneUnitFilter &cls, TypeAlias_1 p1)
 				{
 					return cls.FilterSceneUnit(p1);
 				}
 				using TypeAlias_3 = GameLogic::EffectFilterShape;
 				using TypeAlias_4 = GameLogic::ESceneUnitFilterWayParams &;
-				using TypeAlias_5 = std::unordered_map<unsigned long long, std::shared_ptr<GameLogic::SceneUnit>, std::hash<unsigned long long>, std::equal_to<unsigned long long>, std::allocator<std::pair<const unsigned long long, std::shared_ptr<GameLogic::SceneUnit> > > >;
+				using TypeAlias_5 = std::unordered_map<uint64_t, std::shared_ptr<GameLogic::SceneUnit>, std::hash<uint64_t>, std::equal_to<uint64_t>, std::allocator<std::pair<const uint64_t, std::shared_ptr<GameLogic::SceneUnit> > > >;
 				static TypeAlias_5 FilterSceneUnit2(GameLogic::SceneUnitFilter &cls, TypeAlias_3 p1, TypeAlias_4 p2)
 				{
 					return cls.FilterSceneUnit(p1, p2);
@@ -31,7 +32,7 @@ namespace SolLuaBind
 				using TypeAlias_6 = GameLogic::EffectFilterShape;
 				using TypeAlias_7 = std::shared_ptr<GameLogic::SceneUnit>;
 				using TypeAlias_8 = int;
-				using TypeAlias_9 = std::unordered_map<unsigned long long, std::shared_ptr<GameLogic::SceneUnit>, std::hash<unsigned long long>, std::equal_to<unsigned long long>, std::allocator<std::pair<const unsigned long long, std::shared_ptr<GameLogic::SceneUnit> > > >;
+				using TypeAlias_9 = std::unordered_map<uint64_t, std::shared_ptr<GameLogic::SceneUnit>, std::hash<uint64_t>, std::equal_to<uint64_t>, std::allocator<std::pair<const uint64_t, std::shared_ptr<GameLogic::SceneUnit> > > >;
 				static TypeAlias_9 FilterSceneUnit3(GameLogic::SceneUnitFilter &cls, TypeAlias_6 p1, TypeAlias_7 p2, TypeAlias_8 p3)
 				{
 					return cls.FilterSceneUnit(p1, p2, p3);

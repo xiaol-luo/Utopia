@@ -1,12 +1,12 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "CommonModules/Network/INetworkHandler.h"	
-#include "LogicModules/GameLogic/Player/PlayerMgr.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "LogicModules/GameLogic/Player/Player.h"	
 #include "LogicModules/GameLogic/Scene/NewScene.h"	
 #include "LogicModules/GameLogic/GameLogicModule.h"	
-#include "google/protobuf/message.h"
+#include "LogicModules/GameLogic/Player/PlayerMgr.h"	
+#include "CommonModules/Network/INetworkHandler.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"
 
 namespace SolLuaBind
 {
@@ -46,7 +46,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::Player> meta_table(
 						sol::constructors<				
-						GameLogic::Player(GameLogic::PlayerMgr *, unsigned long long)
+						GameLogic::Player(GameLogic::PlayerMgr *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "Player"; })				
 						,"operator new", &GameLogic::Player::operator new				

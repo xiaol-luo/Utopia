@@ -3,8 +3,8 @@
 #include "LogicModules/GameLogic/Scene/Effects/EffectGroup/EffectGroupConfig.h"	
 #include "LogicModules/GameLogic/Scene/Effects/EffectGroup/EffectGroup.h"	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {
@@ -29,7 +29,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::EffectGroup> meta_table(
 						sol::constructors<				
-						GameLogic::EffectGroup(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, unsigned long long)
+						GameLogic::EffectGroup(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "EffectGroup"; })				
 						, sol::base_classes, sol::bases<

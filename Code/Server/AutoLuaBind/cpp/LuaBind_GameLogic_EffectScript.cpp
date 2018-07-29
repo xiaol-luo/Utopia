@@ -1,10 +1,11 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Effects/EffectConfigBase.h"	
-#include "GameLogic/Scene/Effects/EffectScript/EffectScript.h"	
-#include "GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"	
-#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScript.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {
@@ -29,12 +30,13 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::EffectScript> meta_table(
 						sol::constructors<				
-						GameLogic::EffectScript(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, unsigned long long)
+						GameLogic::EffectScript(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "EffectScript"; })				
 						,"LuaSubscribeSceneEvent", &GameLogic::EffectScript::LuaSubscribeSceneEvent				
 						,"LuaRemoveSubscribe", &GameLogic::EffectScript::LuaRemoveSubscribe				
 						,"LuaClearAllSubscribe", &GameLogic::EffectScript::LuaClearAllSubscribe				
+						,"GetLuaObject", &GameLogic::EffectScript::GetLuaObject				
 						, sol::base_classes, sol::bases<
 							GameLogic::EffectBase 
 						>()

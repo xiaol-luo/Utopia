@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
+#include "LogicModules/GameLogic/Scene/Effects/EffectHurt/EffectHurtConfig.h"	
 #include "LogicModules/GameLogic/Scene/Effects/EffectHurt/EffectHurt.h"	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectHurt/EffectHurtConfig.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {
@@ -29,7 +29,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::EffectHurt> meta_table(
 						sol::constructors<				
-						GameLogic::EffectHurt(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, unsigned long long)
+						GameLogic::EffectHurt(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "EffectHurt"; })				
 						, sol::base_classes, sol::bases<

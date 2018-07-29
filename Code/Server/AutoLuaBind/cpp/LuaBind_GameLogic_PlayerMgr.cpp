@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "CommonModules/Network/INetworkHandler.h"	
-#include "LogicModules/GameLogic/Player/PlayerMgr.h"	
 #include "LogicModules/GameLogic/Player/Player.h"	
 #include "LogicModules/GameLogic/GameLogicModule.h"	
-#include "google/protobuf/message.h"
+#include "LogicModules/GameLogic/Player/PlayerMgr.h"	
+#include "CommonModules/Network/INetworkHandler.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"
 
 namespace SolLuaBind
 {
@@ -14,7 +14,7 @@ namespace SolLuaBind
 		{
 			struct ForOverloadFns
 			{
-				using TypeAlias_1 = unsigned long long;
+				using TypeAlias_1 = uint64_t;
 				using TypeAlias_2 = int;
 				using TypeAlias_3 = char *;
 				using TypeAlias_4 = unsigned int;
@@ -23,7 +23,7 @@ namespace SolLuaBind
 				{
 					return cls.Send(p1, p2, p3, p4);
 				}
-				using TypeAlias_6 = unsigned long long;
+				using TypeAlias_6 = uint64_t;
 				using TypeAlias_7 = int;
 				using TypeAlias_8 = google::protobuf::Message *;
 				using TypeAlias_9 = void;

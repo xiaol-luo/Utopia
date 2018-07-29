@@ -1,13 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
+#include "LogicModules/GameLogic/Scene/NewScene.h"	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
 #include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "LogicModules/GameLogic/Scene/NewScene.h"
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {
@@ -32,7 +33,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::EffectBase> meta_table(
 						sol::constructors<				
-						GameLogic::EffectBase(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, unsigned long long)
+						GameLogic::EffectBase(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "EffectBase"; })				
 						,"GetKey", &GameLogic::EffectBase::GetKey				
