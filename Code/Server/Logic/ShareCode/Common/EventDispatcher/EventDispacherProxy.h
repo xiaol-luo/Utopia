@@ -63,6 +63,8 @@ public:
 		}
 	}
 
+	EventDispacher * GetEventDispacher() { return m_ev_dispacher; }
+
 private:
 	EventDispacher *m_ev_dispacher = nullptr;
 	std::unordered_set<uint64_t> m_subscribe_ids;
