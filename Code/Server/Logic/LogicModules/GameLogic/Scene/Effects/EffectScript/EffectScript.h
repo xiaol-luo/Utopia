@@ -13,7 +13,7 @@ namespace GameLogic
 		EffectScript(const EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key);
 		virtual ~EffectScript();
 
-		uint64_t LuaSubscribeSceneEvent(int evId, sol::protected_function &lua_fn);
+		uint64_t LuaSubscribeSceneEvent(int evId, sol::protected_function lua_fn);
 		void LuaRemoveSubscribe(uint64_t subcribe_id);
 		void LuaClearAllSubscribe();
 		sol::table * GetLuaObject() { return &m_lua_effect_script; }

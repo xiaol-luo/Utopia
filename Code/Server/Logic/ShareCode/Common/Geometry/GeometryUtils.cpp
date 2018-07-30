@@ -7,6 +7,7 @@
 #include <cassert>
 #include <algorithm>
 #include "Common/Utils/NumUtils.h"
+#include <math.h>
 
 float GeometryUtils::DegToRad(float deg)
 {

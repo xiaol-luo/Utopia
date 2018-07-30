@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "GeometryUtils.h"
 #include <cfloat>
+#include <math.h>
 #include <memory>
 #include <algorithm>
 

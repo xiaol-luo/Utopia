@@ -31,7 +31,6 @@ namespace SolLuaBind
 						"__StructName__", sol::property([]() {return "EventDispacherProxy"; })				
 						,"Cancel", &EventDispacherProxy::Cancel				
 						,"CancelAll", &EventDispacherProxy::CancelAll				
-						,"GetEventDispacher", &EventDispacherProxy::GetEventDispacher
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

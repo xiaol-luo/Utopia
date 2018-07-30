@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 
-bool SolLuaBindUtils::GetLuaTable(sol::state_view &lua, 
+bool SolLuaBindUtils::GetLuaTable(sol::state_view lua, 
 	const std::vector<std::string> &table_names,
-	sol::table &out_obj, bool new_when_miss)
+	sol::table out_obj, bool new_when_miss)
 {
 	bool ret = true;
 	sol::table curr_table = lua.globals();
@@ -66,7 +66,7 @@ std::vector<std::string> SolLuaBindUtils::ParseNameSpace(std::string ns)
 	return std::move(ret);
 }
 
-sol::table SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view &lua, const std::string & ns)
+sol::table SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view lua, const std::string & ns)
 {
 	std::vector<std::string> ns_vec = ParseNameSpace(ns);
 	sol::table out_table;
@@ -74,7 +74,7 @@ sol::table SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view &lua, cons
 	return out_table;
 }
 
-sol::table SolLuaBindUtils::GetLuaNameSpaceTable(sol::state_view & lua, const std::string & ns)
+sol::table SolLuaBindUtils::GetLuaNameSpaceTable(sol::state_view lua, const std::string & ns)
 {
 	std::vector<std::string> ns_vec = ParseNameSpace(ns);
 	sol::table out_table;

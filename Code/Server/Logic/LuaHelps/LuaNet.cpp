@@ -3,7 +3,6 @@
 #include "Common/Macro/ServerLogicMacro.h"
 #include "Network/Utils/NetworkAgent.h"
 
-#include "network/Protobuf/try.pb.h"
 
 namespace LuaNet
 {

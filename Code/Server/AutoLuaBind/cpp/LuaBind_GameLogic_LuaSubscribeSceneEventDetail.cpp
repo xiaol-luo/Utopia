@@ -31,9 +31,6 @@ namespace SolLuaBind
 						GameLogic::LuaSubscribeSceneEventDetail(GameLogic::EffectScript *, EventDispacher *)
 						>(),
 						"__StructName__", sol::property([]() {return "LuaSubscribeSceneEventDetail"; })				
-						,"Subscribe", &GameLogic::LuaSubscribeSceneEventDetail::Subscribe				
-						,"Remove", &GameLogic::LuaSubscribeSceneEventDetail::Remove				
-						,"ClearAll", &GameLogic::LuaSubscribeSceneEventDetail::ClearAll
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

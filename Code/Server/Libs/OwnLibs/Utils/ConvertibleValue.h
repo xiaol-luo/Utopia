@@ -66,7 +66,7 @@ protected:
 			parseRet.isParsed = true;
 			for (auto strItem : m_strs.result)
 			{
-				ParseResult<T>::ResultItemType item;
+				typename ParseResult<T>::ResultItemType item;
 				std::string str = strItem.val;
 				item.isOk = ConfigUtil::Str2BaseValue(str, (T &)item.val);
 				parseRet.result.push_back(item);

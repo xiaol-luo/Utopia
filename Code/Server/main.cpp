@@ -14,7 +14,6 @@
 #include "Utils/PlatformCompat.h"
 #include <LuaHelps/LuaLoadFiles.h>
 
-#include "network/Protobuf/try.pb.h"
 
 extern ServerLogic *server_logic;
 namespace SolLuaBind
@@ -179,11 +178,6 @@ int main(int argc, char **argv)
 				sol::object fr = f();
 				std::string s = fr.as<std::string>();
 				std::string ss = s;
-
-				NetProto::TryItem xx;
-				xx.ParseFromString(s);
-				int a = xx.id();
-				std::string b = xx.name();
 			}
 		}
 	}

@@ -23,7 +23,7 @@ namespace GameLogic
 		}
 	}
 
-	uint64_t EffectScript::LuaSubscribeSceneEvent(int evId, sol::protected_function &lua_fn)
+	uint64_t EffectScript::LuaSubscribeSceneEvent(int evId, sol::protected_function lua_fn)
 	{
 		if (!lua_fn.valid())
 			return 0;
