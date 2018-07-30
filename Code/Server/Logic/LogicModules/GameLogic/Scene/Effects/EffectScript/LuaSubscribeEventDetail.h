@@ -9,6 +9,7 @@ class EventDispacher;
 namespace GameLogic
 {
 	class EffectScript;
+
 	struct LuaSubcribeEventRecord
 	{
 		LuaSubcribeEventRecord()
@@ -24,7 +25,6 @@ namespace GameLogic
 
 		int event_id = 0;
 		uint64_t subscribe_id = 0;
-		std::unordered_set<uint64_t> subcribe_ids;
 		struct Item
 		{
 			uint64_t id = 0;
@@ -34,14 +34,13 @@ namespace GameLogic
 		};
 		Item *head = nullptr;
 	};
-
 	class LuaSubscribeSceneEventDetail
 	{
 	public:
 		LuaSubscribeSceneEventDetail(EffectScript *effect, EventDispacher *ev_dispacter);
 		~LuaSubscribeSceneEventDetail();
 
-		uint64_t Subscribe(int evId, sol::protected_function &lua_fn);
+		uint64_t Subscribe(int evId, sol::protected_function lua_fn);
 		void Remove(uint64_t record_item_id);
 		void ClearAll();
 

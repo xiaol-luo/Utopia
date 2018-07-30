@@ -8,6 +8,8 @@
 
 namespace GameLogic
 {
+	class EffectBase;
+
 	class SceneUnitFightParam : public SceneUnitModule
 	{
 	public:
@@ -69,9 +71,9 @@ namespace GameLogic
 
 	public:
 		int GetHp();
-		int AddHp(int delta);
+		int AddHp(int delta, EffectBase *effect);
 		int GetMp();
-		int AddMp(int delta);
+		int AddMp(int delta, EffectBase *effect);
 		
 	protected:
 		int m_hp = INT_MAX / 2;

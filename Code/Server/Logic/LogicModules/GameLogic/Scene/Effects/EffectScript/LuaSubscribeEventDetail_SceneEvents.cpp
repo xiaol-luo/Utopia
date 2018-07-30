@@ -5,36 +5,21 @@
 #include "Utils/LuaUtils.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "EffectScript.h"
+#include "SceneEvents/LuaSubscribeSceneEventFnDetail.h"
 
 namespace GameLogic
 {
-	static void OnSceneUnitFightParamChange(LuaSubcribeEventRecord *record, sol::table *self, 
-		std::shared_ptr<SceneUnit> su, bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
+	uint64_t LuaSubscribeSceneEventDetail::Subscribe(int evId, sol::protected_function lua_fn)
 	{
-		LuaSubcribeEventRecord::Item *item = record->head->next;
-		while (item != record->head)
+		LuaScribeSceneEventFnDetail *hit_fn = nullptr;
+		for (LuaScribeSceneEventFnDetail *item_fn : LuaScribeSceneEventFnDetail::s_allFnDetails)
 		{
-			item->fn(*self, su, is_fix, efp, new_value, old_value);
-			item = item->next;
+			if (item_fn->GetEventId() == evId)
+			{
+				hit_fn = item_fn;
+			}
 		}
-	}
-	bool SubscribeEvent_OnSceneUnitFightParamChange(LuaSubcribeEventRecord *record, sol::table *self, EventDispacherProxy *ev_proxy, int ev_id)
-	{
-		record->subscribe_id = ev_proxy->Subscribe<std::shared_ptr<SceneUnit>, bool, NetProto::EFightParam, int, int>(ev_id, 
-			std::bind(OnSceneUnitFightParamChange, record, self, std::placeholders::_1, std::placeholders::_2,
-				std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
-		return record->subscribe_id > 0;
-	}
-	
-	typedef bool (*FnSubscribeSceneEventHelp)(LuaSubcribeEventRecord*, sol::table *self, EventDispacherProxy*, int);
-	static std::unordered_map<int, FnSubscribeSceneEventHelp> s_subscribe_scene_event_help_fns({
-		{ ESU_FightParamChange,  SubscribeEvent_OnSceneUnitFightParamChange }
-	});
-
-	uint64_t LuaSubscribeSceneEventDetail::Subscribe(int evId, sol::protected_function &lua_fn)
-	{
-		auto subscribe_fn_it = s_subscribe_scene_event_help_fns.find(evId);
-		if (s_subscribe_scene_event_help_fns.end() == subscribe_fn_it)
+		if (nullptr == hit_fn)
 			return 0;
 
 		auto record_it = m_records.find(evId);
@@ -61,7 +46,8 @@ namespace GameLogic
 
 		if (record->subscribe_id <= 0)
 		{
-			bool ret = subscribe_fn_it->second(record, m_effect->GetLuaObject(), m_ev_proxy, evId);
+			auto subscribe_event_fn = hit_fn->GetSubscribeEventFn();
+			bool ret = subscribe_event_fn(record, m_effect->GetLuaObject(), m_ev_proxy, evId);
 			assert(ret);
 		}
 		return record_item_id;

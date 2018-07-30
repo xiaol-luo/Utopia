@@ -8,6 +8,7 @@
 #include "SolLuaBindUtils.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
+#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaSubscribeSceneEventFnDetail.h"
 
 namespace GameLogic
 {
@@ -30,7 +31,6 @@ namespace GameLogic
 
 	EffectScript::~EffectScript()
 	{
-		LuaClearAllSubscribe();
 		delete m_lua_subscribe_scene_event_dtail; m_lua_subscribe_scene_event_dtail = nullptr;
 	}
 
@@ -39,12 +39,14 @@ namespace GameLogic
 		sol::table scene_events = m_lua_effect_script["scene_events"];
 		if (scene_events.valid())
 		{
+			for (LuaScribeSceneEventFnDetail *fn_detail : LuaScribeSceneEventFnDetail::s_allFnDetails)
 			{
-				// sol::protected_function fn = scene_events.get_or("OnSceneUnitFightParamChange", sol::nil);
-				sol::protected_function fn = scene_events.get<sol::protected_function>("OnSceneUnitFightParamChange");
+				std::string lua_fn_name = fn_detail->GetLuaFunName();
+				int event_id = fn_detail->GetEventId();
+				sol::protected_function fn = scene_events.get<sol::protected_function>(lua_fn_name);
 				if (fn.valid())
 				{
-					m_lua_subscribe_scene_event_dtail->Subscribe(ESU_FightParamChange, fn);
+					m_lua_subscribe_scene_event_dtail->Subscribe(event_id, fn);
 				}
 			}
 		}
@@ -77,65 +79,5 @@ namespace GameLogic
 		luaFn(m_lua_effect_script);
 
 		m_lua_subscribe_scene_event_dtail->ClearAll();
-		this->LuaClearAllSubscribe();
-	}
-
-	void EffectScript::LuaRemoveSubscribe(uint64_t subcribe_id)
-	{
-		LuaSubcribeItem *head_item = nullptr;
-		LuaSubcribeItem *remove_item = nullptr;
-		int evId = -1;
-		for (auto kv_pair : m_lua_subcribe_items)
-		{
-			evId = kv_pair.first;
-			head_item = kv_pair.second;
-			LuaSubcribeItem *pre_item = head_item;
-			LuaSubcribeItem *item = head_item->next;
-			while (nullptr != item)
-			{
-				if (subcribe_id == item->id)
-				{
-					remove_item = item;
-					pre_item->next = item->next;
-					item->next = nullptr;
-					delete item;
-					break;
-				}
-				item = item->next;
-			}
-			if (nullptr != remove_item)
-				break;
-		}
-		if (nullptr != remove_item)
-		{
-			delete remove_item; remove_item = nullptr;
-		}
-		if (nullptr != head_item && nullptr == head_item->next)
-		{
-			m_lua_subcribe_items.erase(evId);
-			m_scene_event_proxy->Cancel(head_item->event_handler_id);
-			delete head_item; head_item = nullptr;
-		}
-	}
-
-	void EffectScript::LuaClearAllSubscribe()
-	{
-		std::vector<LuaSubcribeItem *> delete_items;
-		for (auto kv_pair : m_lua_subcribe_items)
-		{
-			LuaSubcribeItem *item = kv_pair.second;
-			while (nullptr != item)
-			{
-				delete_items.push_back(item);
-				item = item->next;
-			}
-		}
-		m_lua_subcribe_items.clear();
-		m_scene_event_proxy->CancelAll();
-		for (auto item : delete_items)
-		{
-			delete item;
-		}
-		delete_items.clear();
 	}
 }

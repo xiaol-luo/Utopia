@@ -28,7 +28,7 @@ namespace GameLogic
 				std::shared_ptr<SceneUnitFightParam> su_fp = target_su->GetModule<SceneUnitFightParam>();
 				if (nullptr != su_fp)
 				{
-					su_fp->AddHp(-m_cfg->GetHurt());
+					su_fp->AddHp(-m_cfg->GetHurt(), this);
 				}
 			}
 		}

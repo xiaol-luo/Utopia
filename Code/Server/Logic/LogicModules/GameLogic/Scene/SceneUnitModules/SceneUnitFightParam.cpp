@@ -450,20 +450,24 @@ namespace GameLogic
 	{
 		return m_hp;
 	}
-	int SceneUnitFightParam::AddHp(int delta)
+	int SceneUnitFightParam::AddHp(int delta, EffectBase *effect)
 	{
+		int old_hp = m_hp;
 		m_hp += delta;
 		m_hp = NumUtil::GetInRange(m_hp, 0, this->GetValue(NetProto::EFP_MaxHP));
+		m_event_proxy->Fire(ES_HpChange, m_hp, old_hp, delta, effect);
 		return m_hp;
 	}
 	int SceneUnitFightParam::GetMp()
 	{
 		return m_mp;
 	}
-	int SceneUnitFightParam::AddMp(int delta)
+	int SceneUnitFightParam::AddMp(int delta, EffectBase *effect)
 	{
+		int old_mp = m_mp;
 		m_mp += delta;
 		m_mp = NumUtil::GetInRange(m_mp, 0, this->GetValue(NetProto::EFP_MaxMP));
+		m_event_proxy->Fire(ES_MpChange, m_mp, old_mp, delta, effect);
 		return m_mp;
 	}
 }
