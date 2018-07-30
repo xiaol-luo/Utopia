@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>
 
-#include "LogicModules/GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/SceneEventID.h"
 
 namespace SolLuaBind
 {
@@ -32,8 +32,10 @@ namespace SolLuaBind
 					"ESU_BlindChange", 8,
 					"ESU_SilenceChange", 9,
 					"ESU_DeadChange", 10,
-					"ES_ReloadConfig", 11,
-					"ES_TestHeartBeat", 12
+					"ES_HpChange", 11,
+					"ES_MpChange", 12,
+					"ES_ReloadConfig", 13,
+					"ES_TestHeartBeat", 14
 				);
 			}
 		};

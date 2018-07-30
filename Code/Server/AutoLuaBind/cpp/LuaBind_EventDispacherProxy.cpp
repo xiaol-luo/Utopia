@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
-#include "ShareCode/Common/EventDispatcher/EventDispacher.h"
+#include "Common/EventDispatcher/EventDispacherProxy.h"	
+#include "Common/EventDispatcher/EventDispacher.h"
 
 namespace SolLuaBind
 {
@@ -31,6 +31,7 @@ namespace SolLuaBind
 						"__StructName__", sol::property([]() {return "EventDispacherProxy"; })				
 						,"Cancel", &EventDispacherProxy::Cancel				
 						,"CancelAll", &EventDispacherProxy::CancelAll				
+						,"GetEventDispacher", &EventDispacherProxy::GetEventDispacher
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

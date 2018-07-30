@@ -1,12 +1,11 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Geometry/GeometryDefine.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"	
-#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"
+#include "Common/Geometry/Vector3.h"	
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Common/Geometry/GeometryDefine.h"	
+#include "GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"
 
 namespace SolLuaBind
 {
