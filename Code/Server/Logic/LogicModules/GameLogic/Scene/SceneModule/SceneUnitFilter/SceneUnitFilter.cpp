@@ -13,6 +13,8 @@
 
 namespace GameLogic
 {
+	const ESceneModule SceneUnitFilter::MODULE_TYPE = ESceneModule_UnitFilter;
+
 	SceneUnitFilter::SceneUnitFilter() : SceneModule(MODULE_TYPE)
 	{
 		m_filter_way[ESceneUnitFilterWay_ExculdeSuids] = &SceneUnitFilter::FilterExcludeSuids;

@@ -21,6 +21,8 @@
 
 namespace GameLogic
 {
+	const ESceneModule SceneView::MODULE_TYPE = ESceneModule_View;
+
 	SceneView::SceneView() : SceneModule(MODULE_TYPE)
 	{
 		for (int i = 0; i < EViewCamp_Observer; ++i)

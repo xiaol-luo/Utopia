@@ -22,7 +22,7 @@ namespace GameLogic
 	class SceneView : public SceneModule
 	{
 	public:
-		static const ESceneModule MODULE_TYPE = ESceneModule_View;
+		static const ESceneModule MODULE_TYPE/*= ESceneModule_View*/;
 	public:
 		SceneView();
 		virtual ~SceneView() override;

@@ -34,7 +34,7 @@ namespace GameLogic
 	class SkillConfig : public SkillConfigBase
 	{
 	public:
-		const static int MAX_SKILL_LEVEL = 5;
+		static const int MAX_SKILL_LEVEL = 5;
 		~SkillConfig();
 		bool is_normal_attack = false;
 		NetProto::ESkillUseWay use_way;

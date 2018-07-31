@@ -71,7 +71,7 @@ namespace GameLogic
 	class SceneUnitFilter : public SceneModule
 	{
 	public:
-		static const ESceneModule MODULE_TYPE = ESceneModule_UnitFilter;
+		static const ESceneModule MODULE_TYPE/* = ESceneModule_UnitFilter*/;
 	public:
 		SceneUnitFilter();
 		virtual ~SceneUnitFilter() override;
