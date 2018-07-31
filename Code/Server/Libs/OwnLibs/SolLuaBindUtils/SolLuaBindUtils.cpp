@@ -2,7 +2,7 @@
 
 bool SolLuaBindUtils::GetLuaTable(sol::state_view lua, 
 	const std::vector<std::string> &table_names,
-	sol::table out_obj, bool new_when_miss)
+	sol::table *out_obj, bool new_when_miss)
 {
 	bool ret = true;
 	sol::table curr_table = lua.globals();
@@ -32,7 +32,7 @@ bool SolLuaBindUtils::GetLuaTable(sol::state_view lua,
 		}
 	}
 
-	out_obj = curr_table;
+	*out_obj = curr_table;
 	return ret;
 }
 
@@ -70,7 +70,7 @@ sol::table SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view lua, const
 {
 	std::vector<std::string> ns_vec = ParseNameSpace(ns);
 	sol::table out_table;
-	assert(SolLuaBindUtils::GetLuaTable(lua, ns_vec, out_table, true));
+	assert(SolLuaBindUtils::GetLuaTable(lua, ns_vec, &out_table, true));
 	return out_table;
 }
 
@@ -78,6 +78,6 @@ sol::table SolLuaBindUtils::GetLuaNameSpaceTable(sol::state_view lua, const std:
 {
 	std::vector<std::string> ns_vec = ParseNameSpace(ns);
 	sol::table out_table;
-	SolLuaBindUtils::GetLuaTable(lua, ns_vec, out_table, false);
+	SolLuaBindUtils::GetLuaTable(lua, ns_vec, &out_table, false);
 	return out_table;
 }

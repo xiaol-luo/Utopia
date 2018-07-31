@@ -6,7 +6,7 @@
 
 namespace SolLuaBindUtils
 {
-	bool GetLuaTable(sol::state_view lua, const std::vector<std::string> &table_names, sol::table out_obj, bool new_when_miss);
+	bool GetLuaTable(sol::state_view lua, const std::vector<std::string> &table_names, sol::table *out_obj, bool new_when_miss);
 	std::vector<std::string> ParseNameSpace(std::string ns);
 	sol::table GetOrNewLuaNameSpaceTable(sol::state_view lua, const std::string &ns);
 	sol::table GetLuaNameSpaceTable(sol::state_view lua, const std::string &ns);
