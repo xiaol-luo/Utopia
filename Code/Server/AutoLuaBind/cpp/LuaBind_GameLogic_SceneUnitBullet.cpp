@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Missile/SceneUnitBullet/SceneUnitBullet.h"	
-#include "GameLogic/Scene/Missile/SceneUnitMissile.h"
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitBullet/SceneUnitBullet.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"
 
 namespace SolLuaBind
 {

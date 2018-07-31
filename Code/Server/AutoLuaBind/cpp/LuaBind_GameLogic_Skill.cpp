@@ -1,15 +1,15 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Skills/Skill.h"	
 #include "Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"	
-#include "GameLogic/Scene/Skills/SkillBase.h"	
-#include "GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"	
+#include "LogicModules/GameLogic/Scene/Config/SceneAllConfig.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"
 
 namespace SolLuaBind
 {

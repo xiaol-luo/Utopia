@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Scene/CsvSceneConfig.h"
+#include "Config/AutoCsvCode/Scene/CsvSceneConfig.h"
 
 namespace SolLuaBind
 {

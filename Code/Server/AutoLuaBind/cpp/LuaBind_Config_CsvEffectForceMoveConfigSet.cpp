@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "effect/CsvEffectForceMoveConfig.h"
+#include "Config/AutoCsvCode/effect/CsvEffectForceMoveConfig.h"
 
 namespace SolLuaBind
 {
