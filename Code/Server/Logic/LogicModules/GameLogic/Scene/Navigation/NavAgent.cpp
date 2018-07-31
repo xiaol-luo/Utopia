@@ -4,6 +4,8 @@
 #include "Common/Geometry/GeometryUtils.h"
 #include "Common/Geometry/Vector2.h"
 
+const uint64_t GameLogic::NavAgent::INVALID_ID = 0;
+
 namespace GameLogic
 {
 	NavAgent::NavAgent(NavMesh *nav_mesh) : m_nav_mesh(nav_mesh)

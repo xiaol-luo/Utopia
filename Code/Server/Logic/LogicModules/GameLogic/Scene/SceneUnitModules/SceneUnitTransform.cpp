@@ -14,6 +14,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneUnitTransform::MODULE_TYPE = ESceneUnitModule_Transform;
+
 	SceneUnitTransform::SceneUnitTransform() : SceneUnitModule(MODULE_TYPE)
 	{
 	}

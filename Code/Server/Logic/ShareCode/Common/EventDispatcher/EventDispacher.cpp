@@ -1,5 +1,8 @@
 #include "EventDispacher.h"
 
+const uint64_t EventDispacher::INVALID_ID = 0;
+const uint32_t EventDispacher::SubcribeDataBase::INVALID_ID = 0;
+
 EventDispacher::EventDispacher()
 {
 }

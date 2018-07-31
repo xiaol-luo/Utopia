@@ -10,7 +10,7 @@ namespace GameLogic
 	class SceneUnitTransform : public SceneUnitModule
 	{
 	public:
-		static const ESceneUnitModule MODULE_TYPE = ESceneUnitModule_Transform;
+		static const ESceneUnitModule MODULE_TYPE/* = ESceneUnitModule_Transform*/;
 	public: 
 		SceneUnitTransform();
 		virtual ~SceneUnitTransform() override;

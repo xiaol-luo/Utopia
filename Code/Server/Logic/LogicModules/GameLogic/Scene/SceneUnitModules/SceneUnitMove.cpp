@@ -23,6 +23,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneUnitMove::MODULE_TYPE = ESceneUnitModule_Move;
+
 	bool NeedImmobilized(SceneUnitMove *sum)
 	{
 		// 如果被定身或者眩晕了，就进入不动的状态

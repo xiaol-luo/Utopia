@@ -7,6 +7,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneUnitSight::MODULE_TYPE = ESceneUnitModule_Sight;
+
 	SceneUnitSight::SceneUnitSight() : SceneUnitModule(MODULE_TYPE)
 	{
 	}

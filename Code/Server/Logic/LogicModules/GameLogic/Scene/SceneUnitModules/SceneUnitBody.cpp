@@ -9,6 +9,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneUnitBody::MODULE_TYPE = ESceneUnitModule_Body;
+
 	SceneUnitBody::SceneUnitBody() : SceneUnitModule(MODULE_TYPE)
 	{
 

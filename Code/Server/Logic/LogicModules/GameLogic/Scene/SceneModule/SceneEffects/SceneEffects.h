@@ -9,7 +9,7 @@ namespace GameLogic
 	class SceneEffects : public SceneModule
 	{
 	public:
-		static const ESceneModule MODULE_TYPE = ESceneModule_Effects;
+		static const ESceneModule MODULE_TYPE /*= ESceneModule_Effects*/;
 	public:
 		SceneEffects();
 		virtual ~SceneEffects() override;

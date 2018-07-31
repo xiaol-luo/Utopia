@@ -7,7 +7,8 @@
 class EventDispacher
 {
 public:
-	static const uint64_t INVALID_ID = 0;
+	static const uint64_t INVALID_ID;
+
 	union SubscribeId
 	{
 		struct
@@ -84,7 +85,7 @@ private:
 	class SubcribeDataBase
 	{
 	public:
-		const static uint32_t INVALID_ID = 0;
+		const static uint32_t INVALID_ID;
 	public:
 		SubcribeDataBase() {}
 		virtual ~SubcribeDataBase() { this->Release(); }

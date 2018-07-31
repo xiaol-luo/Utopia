@@ -14,7 +14,7 @@ namespace GameLogic
 	class NavAgent
 	{
 	public:
-		const static uint64_t INVALID_ID = 0;
+		const static uint64_t INVALID_ID /*= 0*/;
 		
 		enum EMoveType
 		{

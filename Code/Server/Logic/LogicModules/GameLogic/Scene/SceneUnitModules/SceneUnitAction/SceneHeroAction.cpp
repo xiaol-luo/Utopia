@@ -15,6 +15,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneHeroAction::MODULE_TYPE = ESceneUnitModule_Action;
+
 	SceneHeroAction::SceneHeroAction() : SceneUnitModule(MODULE_TYPE)
 	{
 

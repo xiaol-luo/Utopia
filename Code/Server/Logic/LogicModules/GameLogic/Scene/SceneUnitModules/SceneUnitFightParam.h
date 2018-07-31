@@ -13,7 +13,7 @@ namespace GameLogic
 	class SceneUnitFightParam : public SceneUnitModule
 	{
 	public:
-		static const ESceneUnitModule MODULE_TYPE = ESceneUnitModule_FightParam;
+		static const ESceneUnitModule MODULE_TYPE/* = ESceneUnitModule_FightParam*/;
 	public:
 		SceneUnitFightParam();
 		virtual ~SceneUnitFightParam() override;

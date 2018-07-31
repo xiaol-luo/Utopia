@@ -17,7 +17,7 @@ namespace GameLogic
 	class SceneUnitMove : public SceneUnitModule
 	{
 	public:
-		static const ESceneUnitModule MODULE_TYPE = ESceneUnitModule_Move;
+		static const ESceneUnitModule MODULE_TYPE/* = ESceneUnitModule_Move*/;
 	public: 
 		SceneUnitMove();
 		virtual ~SceneUnitMove() override;

@@ -4,7 +4,10 @@
 #include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
-{	
+{
+	const int SceneUnitQTree::DEFAULT_MAX_LAYER = 4;			// 0 - 4,包含4
+	const size_t SceneUnitQTree::DEFAULT_SPLIT_CAPACITY = 4;	// 容量达到才允许分裂
+
 	void SceneUnitQTreeNodeUnit::Deattach()
 	{
 		for (SceneUnitQTreeNode *qtree_node : attached_qtree_nodes)

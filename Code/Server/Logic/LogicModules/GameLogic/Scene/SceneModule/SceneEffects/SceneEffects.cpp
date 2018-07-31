@@ -6,6 +6,8 @@
 
 namespace GameLogic
 {
+	const ESceneModule SceneEffects::MODULE_TYPE = ESceneModule_Effects;
+
 	SceneEffects::SceneEffects() : SceneModule(MODULE_TYPE)
 	{
 

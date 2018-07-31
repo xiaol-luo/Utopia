@@ -3,6 +3,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneUnitSkills::MODULE_TYPE = ESceneUnitModule_Skills;
+
 	SceneUnitSkills::SceneUnitSkills() : SceneUnitModule(MODULE_TYPE)
 	{
 	}

@@ -9,7 +9,7 @@ namespace GameLogic
 	class SceneNavMesh : public SceneModule
 	{
 	public:
-		static const ESceneModule MODULE_TYPE = ESceneModule_NavMesh;
+		static const ESceneModule MODULE_TYPE/* = ESceneModule_NavMesh*/;
 	public:
 		SceneNavMesh();
 		virtual ~SceneNavMesh() override;

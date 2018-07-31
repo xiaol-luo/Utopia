@@ -7,6 +7,8 @@
 
 namespace GameLogic
 {
+	const ESceneModule SceneNavMesh::MODULE_TYPE = ESceneModule_NavMesh;
+
 	SceneNavMesh::SceneNavMesh() : SceneModule(MODULE_TYPE)
 	{
 		m_nav_mesh = new GameLogic::NavMesh();

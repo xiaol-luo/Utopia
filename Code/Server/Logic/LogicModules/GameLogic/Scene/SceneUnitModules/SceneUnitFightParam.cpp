@@ -6,6 +6,8 @@
 
 namespace GameLogic
 {
+	const ESceneUnitModule SceneUnitFightParam::MODULE_TYPE = ESceneUnitModule_FightParam;
+
 	SceneUnitFightParam::SceneUnitFightParam() : SceneUnitModule(MODULE_TYPE)
 	{
 		memset(m_params, 0, sizeof(m_params));

@@ -12,7 +12,7 @@ namespace GameLogic
 	class SceneUnitBody : public SceneUnitModule
 	{
 	public:
-		static const ESceneUnitModule MODULE_TYPE = ESceneUnitModule_Body;
+		static const ESceneUnitModule MODULE_TYPE/* = ESceneUnitModule_Body*/;
 	public:
 		SceneUnitBody();
 		virtual ~SceneUnitBody() override;

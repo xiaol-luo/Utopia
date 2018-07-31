@@ -12,6 +12,8 @@
 
 namespace GameLogic
 {
+	const ESceneModule SceneMove::MODULE_TYPE = ESceneModule_Move;
+
 	SceneMove::SceneMove() : SceneModule(MODULE_TYPE)
 	{
 	}
