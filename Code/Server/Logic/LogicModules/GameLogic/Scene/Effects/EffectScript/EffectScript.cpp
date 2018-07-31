@@ -8,7 +8,9 @@
 #include "SolLuaBindUtils.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
-#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaSubscribeSceneEventFnDetail.h"
+#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"
+#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeSceneEventFnDetail.h"
+#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeSceneUnitEventFnDetail.h"
 
 namespace GameLogic
 {
@@ -27,12 +29,33 @@ namespace GameLogic
 		m_lua_effect_script = newFn(typeDefine, this, nullptr);
 		assert(m_lua_effect_script.valid());
 
-		m_lua_subscribe_scene_event_dtail = new LuaSubscribeSceneEventDetail(this, m_scene_event_proxy->GetEventDispacher());
+		m_lua_subscribe_scene_event_dtail = new LuaSubscribeEventDetail(&m_lua_effect_script, m_scene_event_proxy->GetEventDispacher());
 	}
 
 	EffectScript::~EffectScript()
 	{
 		delete m_lua_subscribe_scene_event_dtail; m_lua_subscribe_scene_event_dtail = nullptr;
+
+		for (auto kv_pair : m_lua_subscribe_su_event_details)
+		{
+			delete kv_pair.second;
+		}
+		m_lua_subscribe_su_event_details.clear();
+	}
+
+	bool EffectScript::SubscribeSuEvent(std::shared_ptr<SceneUnit> su, int ev_id, sol::object param)
+	{
+		return false;
+	}
+
+	bool EffectScript::CancelSuEvent(uint64_t su_id, int ev_id)
+	{
+		return false;
+	}
+
+	bool EffectScript::CancelAllSuEvent(uint64_t su_id)
+	{
+		return false;
 	}
 
 	void EffectScript::OnBegin()
@@ -40,14 +63,14 @@ namespace GameLogic
 		sol::table scene_events = m_lua_effect_script["scene_events"];
 		if (scene_events.valid())
 		{
-			for (LuaScribeSceneEventFnDetail *fn_detail : LuaScribeSceneEventFnDetail::s_allFnDetails)
+			for (LuaScribeEventFnDetail *fn_detail : LuaScribeSceneEventFnDetail::s_allFnDetails)
 			{
 				std::string lua_fn_name = fn_detail->GetLuaFunName();
 				int event_id = fn_detail->GetEventId();
 				sol::protected_function fn = scene_events.get<sol::protected_function>(lua_fn_name);
 				if (fn.valid())
 				{
-					m_lua_subscribe_scene_event_dtail->Subscribe(event_id, fn);
+					m_lua_subscribe_scene_event_dtail->Subscribe(event_id, fn, nullptr, LuaScribeSceneEventFnDetail::s_allFnDetails);
 				}
 			}
 		}

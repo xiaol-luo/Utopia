@@ -26,14 +26,14 @@ namespace SolLuaBind
 				std::string name_space = "GameLogic";
 
 				{
-					sol::usertype<GameLogic::LuaSubscribeSceneEventDetail> meta_table(
+					sol::usertype<GameLogic::LuaSubscribeEventDetail> meta_table(
 						sol::constructors<				
-						GameLogic::LuaSubscribeSceneEventDetail(GameLogic::EffectScript *, EventDispacher *)
+						GameLogic::LuaSubscribeEventDetail(sol::table *, EventDispacher *)
 						>(),
 						"__StructName__", sol::property([]() {return "LuaSubscribeSceneEventDetail"; })				
-						,"Subscribe", &GameLogic::LuaSubscribeSceneEventDetail::Subscribe				
-						,"Remove", &GameLogic::LuaSubscribeSceneEventDetail::Remove				
-						,"ClearAll", &GameLogic::LuaSubscribeSceneEventDetail::ClearAll
+						,"Subscribe", &GameLogic::LuaSubscribeEventDetail::Subscribe				
+						,"Remove", &GameLogic::LuaSubscribeEventDetail::Remove				
+						,"ClearAll", &GameLogic::LuaSubscribeEventDetail::ClearAll
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

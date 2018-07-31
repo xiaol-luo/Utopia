@@ -13,7 +13,10 @@ namespace GameLogic
 		EffectScript(const EffectConfigBase *cfg, SceneEffects *scene_effects, uint64_t effect_key);
 		virtual ~EffectScript();
 
-		sol::table * GetLuaObject() { return &m_lua_effect_script; }
+	public:
+		bool SubscribeSuEvent(std::shared_ptr<SceneUnit> su, int ev_id, sol::object param);
+		bool CancelSuEvent(uint64_t su_id, int ev_id);
+		bool CancelAllSuEvent(uint64_t su_id);
 
 	protected:
 		virtual void OnBegin() override;
@@ -26,6 +29,7 @@ namespace GameLogic
 		const EffectScriptConfig *m_cfg = nullptr;
 		sol::table m_lua_effect_script;
 
-		LuaSubscribeSceneEventDetail *m_lua_subscribe_scene_event_dtail = nullptr;
+		LuaSubscribeEventDetail *m_lua_subscribe_scene_event_dtail = nullptr;
+		std::unordered_map<uint64_t, LuaSubscribeEventDetail *> m_lua_subscribe_su_event_details;
 	};
 }

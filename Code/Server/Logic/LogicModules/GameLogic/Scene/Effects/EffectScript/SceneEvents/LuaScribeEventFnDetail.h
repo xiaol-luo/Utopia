@@ -10,25 +10,20 @@
 
 namespace GameLogic
 {
-	typedef bool(*FnSubscribeSceneEventHelp)(LuaSubcribeEventRecord*, sol::table *self, EventDispacherProxy*, int);
+	typedef bool(*FnDoSubscribeEvent)(LuaSubcribeEventRecord*, sol::table *self, EventDispacherProxy*, int, void **);
 
 	/// sol_ignore
-	class LuaScribeSceneEventFnDetail
+	class LuaScribeEventFnDetail
 	{
 	public:
 		virtual int GetEventId() = 0;
 		virtual std::string GetLuaFunName() = 0;
-		virtual FnSubscribeSceneEventHelp GetSubscribeEventFn() = 0;
-
-		static std::vector<LuaScribeSceneEventFnDetail *> s_allFnDetails;
+		virtual FnDoSubscribeEvent GetSubscribeEventFn() = 0;
 	};
 
 #define LuaScribeSceneEventFnDetail_ClassBody \
 public: \
 	virtual int GetEventId() override; \
 	virtual std::string GetLuaFunName() override; \
-	virtual FnSubscribeSceneEventHelp GetSubscribeEventFn() override;
-
-	/// sol_ignore
-	class LuaScribeSceneEventFnDetail_OnSceneUnitFightParamChange : public LuaScribeSceneEventFnDetail  { LuaScribeSceneEventFnDetail_ClassBody; };
+	virtual FnDoSubscribeEvent GetSubscribeEventFn() override;
 }

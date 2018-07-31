@@ -9,6 +9,7 @@ class EventDispacher;
 namespace GameLogic
 {
 	class EffectScript;
+	class LuaScribeEventFnDetail;
 
 	struct LuaSubcribeEventRecord
 	{
@@ -34,20 +35,22 @@ namespace GameLogic
 		};
 		Item *head = nullptr;
 	};
-	class LuaSubscribeSceneEventDetail
+
+	class LuaSubscribeEventDetail
 	{
 	public:
-		LuaSubscribeSceneEventDetail(EffectScript *effect, EventDispacher *ev_dispacter);
-		~LuaSubscribeSceneEventDetail();
+		LuaSubscribeEventDetail(sol::table *lua_table, EventDispacher *ev_dispacter);
+		~LuaSubscribeEventDetail();
 
-		uint64_t Subscribe(int evId, sol::protected_function lua_fn);
+		uint64_t Subscribe(int evId, sol::protected_function lua_fn, void **param,
+			std::vector<LuaScribeEventFnDetail *> &fn_details);
 		void Remove(uint64_t record_item_id);
 		void ClearAll();
 
 	private:
 		uint64_t m_last_record_item_id = 0;
 		EventDispacherProxy *m_ev_proxy = nullptr;
-		EffectScript *m_effect = nullptr;
+		sol::table *m_lua_table = nullptr;
 		std::unordered_map<int, LuaSubcribeEventRecord*> m_records;
 	};
 }

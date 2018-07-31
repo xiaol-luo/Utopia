@@ -33,7 +33,6 @@ namespace SolLuaBind
 						GameLogic::EffectScript(const GameLogic::EffectConfigBase *, GameLogic::SceneEffects *, uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "EffectScript"; })				
-						,"GetLuaObject", &GameLogic::EffectScript::GetLuaObject				
 						, sol::base_classes, sol::bases<
 							GameLogic::EffectBase 
 						>()
