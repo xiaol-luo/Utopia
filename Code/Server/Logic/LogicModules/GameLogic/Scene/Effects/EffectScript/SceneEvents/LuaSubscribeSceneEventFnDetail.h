@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"
@@ -10,7 +12,7 @@ namespace GameLogic
 {
 	typedef bool(*FnSubscribeSceneEventHelp)(LuaSubcribeEventRecord*, sol::table *self, EventDispacherProxy*, int);
 
-	// sol_ignore
+	/// sol_ignore
 	class LuaScribeSceneEventFnDetail
 	{
 	public:
@@ -27,6 +29,6 @@ public: \
 	virtual std::string GetLuaFunName() override; \
 	virtual FnSubscribeSceneEventHelp GetSubscribeEventFn() override;
 
-	// sol_ignore
+	/// sol_ignore
 	class LuaScribeSceneEventFnDetail_OnSceneUnitFightParamChange : public LuaScribeSceneEventFnDetail  { LuaScribeSceneEventFnDetail_ClassBody; };
 }

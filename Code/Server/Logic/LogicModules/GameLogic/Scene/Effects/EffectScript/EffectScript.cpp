@@ -22,6 +22,7 @@ namespace GameLogic
 		sol::table typeDefine = SolLuaBindUtils::GetLuaNameSpaceTable(lsv, m_cfg->GetClassName());
 		assert(typeDefine.valid());
 		sol::protected_function newFn = typeDefine["new"];
+		assert(newFn.valid());
 		newFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		m_lua_effect_script = newFn(typeDefine, this, nullptr);
 		assert(m_lua_effect_script.valid());

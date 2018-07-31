@@ -23,14 +23,6 @@ local handle_pb_SelectHeroReq = function(player, pid, msg)
     print("fn handle_pb_SelectHeroReq")
     print(msg.hero_id)
     print(serpent.block(msg)) 
---[[
-    local try_item = {
-        xxx = "hello world",
-        red_hero_id = 20000,
-        blue_hero_id = 11000,
-    }
-    net.send_pb(player:GetNetId(), 101, "NetProto.RspFreeHero", try_item)
-]]
 end
 
 msg_handlers.add_handler(
@@ -48,3 +40,14 @@ msg_handlers.add_handler(
     handle_PID_QueryFreeHero
 )
 
+local handle_pb_PrintPBContent = function(player, pid, msg)
+    print("handle_pb_PrintPBContent " .. pid)
+    print("table" .. serpent.block(msg))
+    print("---------------end --------- \n")
+end
+
+msg_handlers.add_handler(
+    msg_handlers.convert_pid("PID_BattleOperaReq"),
+    "NetProto.BattleOperation",
+    handle_pb_PrintPBContent
+)

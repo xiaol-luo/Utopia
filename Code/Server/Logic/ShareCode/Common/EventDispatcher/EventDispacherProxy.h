@@ -2,6 +2,7 @@
 
 #include "EventDispacher.h"
 #include <unordered_set>
+#include <vector>
 
 class EventDispacherProxy
 {
