@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,7 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
 namespace NetProto {
 class PingDefaultTypeInternal {
  public:
@@ -27,14 +27,9 @@ class PingDefaultTypeInternal {
 } _Ping_default_instance_;
 }  // namespace NetProto
 namespace protobuf_msg_2eproto {
-void InitDefaultsPingImpl() {
+static void InitDefaultsPing() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_Ping_default_instance_;
     new (ptr) ::NetProto::Ping();
@@ -43,9 +38,11 @@ void InitDefaultsPingImpl() {
   ::NetProto::Ping::InitAsDefaultInstance();
 }
 
-void InitDefaultsPing() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPingImpl);
+::google::protobuf::internal::SCCInfo<0> scc_info_Ping =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPing}, {}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_Ping.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[1];
@@ -68,17 +65,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_Ping_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
+static void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "msg.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "msg.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, NULL, NULL);
 }
 
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+static void protobuf_AssignDescriptorsOnce() {
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -87,7 +83,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
 }
 
-void AddDescriptorsImpl() {
+static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\tmsg.proto\022\010NetProto\"7\n\004Ping\022\r\n\005msgID\030\001"
@@ -101,8 +97,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -125,24 +121,22 @@ const int Ping::kUsernameFieldNumber;
 
 Ping::Ping()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_msg_2eproto::InitDefaultsPing();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_msg_2eproto::scc_info_Ping.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.Ping)
 }
 Ping::Ping(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_msg_2eproto::InitDefaultsPing();
+  ::google::protobuf::internal::InitSCC(&protobuf_msg_2eproto::scc_info_Ping.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.Ping)
 }
 Ping::Ping(const Ping& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   username_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.username().size() > 0) {
@@ -160,7 +154,6 @@ void Ping::SharedCtor() {
   ::memset(&msgid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&userid_) -
       reinterpret_cast<char*>(&msgid_)) + sizeof(userid_));
-  _cached_size_ = 0;
 }
 
 Ping::~Ping() {
@@ -177,12 +170,10 @@ void Ping::ArenaDtor(void* object) {
   Ping* _this = reinterpret_cast< Ping* >(object);
   (void)_this;
 }
-void Ping::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void Ping::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void Ping::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* Ping::descriptor() {
   ::protobuf_msg_2eproto::protobuf_AssignDescriptorsOnce();
@@ -190,7 +181,7 @@ const ::google::protobuf::Descriptor* Ping::descriptor() {
 }
 
 const Ping& Ping::default_instance() {
-  ::protobuf_msg_2eproto::InitDefaultsPing();
+  ::google::protobuf::internal::InitSCC(&protobuf_msg_2eproto::scc_info_Ping.base);
   return *internal_default_instance();
 }
 
@@ -214,7 +205,7 @@ bool Ping::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.Ping)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -382,9 +373,7 @@ size_t Ping::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -460,11 +449,11 @@ void Ping::UnsafeArenaSwap(Ping* other) {
 }
 void Ping::InternalSwap(Ping* other) {
   using std::swap;
-  username_.Swap(&other->username_);
+  username_.Swap(&other->username_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(msgid_, other->msgid_);
   swap(userid_, other->userid_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Ping::GetMetadata() const {
@@ -477,7 +466,7 @@ void Ping::InternalSwap(Ping* other) {
 }  // namespace NetProto
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::Ping* Arena::CreateMessage< ::NetProto::Ping >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::Ping* Arena::CreateMaybeMessage< ::NetProto::Ping >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::Ping >(arena);
 }
 }  // namespace protobuf

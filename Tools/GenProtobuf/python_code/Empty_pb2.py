@@ -7,7 +7,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,6 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='Empty.proto',
   package='NetProto',
   syntax='proto3',
+  serialized_options=_b('\370\001\001'),
   serialized_pb=_b('\n\x0b\x45mpty.proto\x12\x08NetProto\"\x07\n\x05\x45mptyB\x03\xf8\x01\x01\x62\x06proto3')
 )
 
@@ -38,7 +38,7 @@ _EMPTY = _descriptor.Descriptor(
   nested_types=[],
   enum_types=[
   ],
-  options=None,
+  serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
@@ -59,6 +59,5 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
 _sym_db.RegisterMessage(Empty)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\370\001\001'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

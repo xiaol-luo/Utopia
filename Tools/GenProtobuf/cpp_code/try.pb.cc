@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,10 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_try_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_try_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_TryItem;
+}  // namespace protobuf_try_2eproto
 namespace NetProto {
 class TryItemDefaultTypeInternal {
  public:
@@ -32,14 +35,9 @@ class TryMsgDefaultTypeInternal {
 } _TryMsg_default_instance_;
 }  // namespace NetProto
 namespace protobuf_try_2eproto {
-void InitDefaultsTryItemImpl() {
+static void InitDefaultsTryItem() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_TryItem_default_instance_;
     new (ptr) ::NetProto::TryItem();
@@ -48,20 +46,12 @@ void InitDefaultsTryItemImpl() {
   ::NetProto::TryItem::InitAsDefaultInstance();
 }
 
-void InitDefaultsTryItem() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsTryItemImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_TryItem =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTryItem}, {}};
 
-void InitDefaultsTryMsgImpl() {
+static void InitDefaultsTryMsg() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_try_2eproto::InitDefaultsTryItem();
   {
     void* ptr = &::NetProto::_TryMsg_default_instance_;
     new (ptr) ::NetProto::TryMsg();
@@ -70,9 +60,13 @@ void InitDefaultsTryMsgImpl() {
   ::NetProto::TryMsg::InitAsDefaultInstance();
 }
 
-void InitDefaultsTryMsg() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsTryMsgImpl);
+::google::protobuf::internal::SCCInfo<1> scc_info_TryMsg =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsTryMsg}, {
+      &protobuf_try_2eproto::scc_info_TryItem.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_TryItem.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_TryMsg.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[2];
@@ -109,17 +103,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_TryMsg_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
+static void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "try.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "try.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+static void protobuf_AssignDescriptorsOnce() {
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -128,7 +121,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 2);
 }
 
-void AddDescriptorsImpl() {
+static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\ttry.proto\022\010NetProto\"#\n\007TryItem\022\n\n\002id\030\001"
@@ -149,8 +142,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -207,24 +200,22 @@ const int TryItem::kNameFieldNumber;
 
 TryItem::TryItem()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_try_2eproto::InitDefaultsTryItem();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_try_2eproto::scc_info_TryItem.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.TryItem)
 }
 TryItem::TryItem(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_try_2eproto::InitDefaultsTryItem();
+  ::google::protobuf::internal::InitSCC(&protobuf_try_2eproto::scc_info_TryItem.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.TryItem)
 }
 TryItem::TryItem(const TryItem& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.name().size() > 0) {
@@ -238,7 +229,6 @@ TryItem::TryItem(const TryItem& from)
 void TryItem::SharedCtor() {
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_ = 0;
-  _cached_size_ = 0;
 }
 
 TryItem::~TryItem() {
@@ -255,12 +245,10 @@ void TryItem::ArenaDtor(void* object) {
   TryItem* _this = reinterpret_cast< TryItem* >(object);
   (void)_this;
 }
-void TryItem::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void TryItem::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void TryItem::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* TryItem::descriptor() {
   ::protobuf_try_2eproto::protobuf_AssignDescriptorsOnce();
@@ -268,7 +256,7 @@ const ::google::protobuf::Descriptor* TryItem::descriptor() {
 }
 
 const TryItem& TryItem::default_instance() {
-  ::protobuf_try_2eproto::InitDefaultsTryItem();
+  ::google::protobuf::internal::InitSCC(&protobuf_try_2eproto::scc_info_TryItem.base);
   return *internal_default_instance();
 }
 
@@ -290,7 +278,7 @@ bool TryItem::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.TryItem)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -427,9 +415,7 @@ size_t TryItem::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -502,10 +488,10 @@ void TryItem::UnsafeArenaSwap(TryItem* other) {
 }
 void TryItem::InternalSwap(TryItem* other) {
   using std::swap;
-  name_.Swap(&other->name_);
+  name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(id_, other->id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata TryItem::GetMetadata() const {
@@ -545,9 +531,8 @@ const int TryMsg::kNestEnumArrayFieldNumber;
 
 TryMsg::TryMsg()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_try_2eproto::InitDefaultsTryMsg();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_try_2eproto::scc_info_TryMsg.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.TryMsg)
 }
@@ -556,7 +541,7 @@ TryMsg::TryMsg(::google::protobuf::Arena* arena)
   _internal_metadata_(arena),
   msg_array_(arena),
   nest_enum_array_(arena) {
-  ::protobuf_try_2eproto::InitDefaultsTryMsg();
+  ::google::protobuf::internal::InitSCC(&protobuf_try_2eproto::scc_info_TryMsg.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.TryMsg)
@@ -565,8 +550,7 @@ TryMsg::TryMsg(const TryMsg& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       msg_array_(from.msg_array_),
-      nest_enum_array_(from.nest_enum_array_),
-      _cached_size_(0) {
+      nest_enum_array_(from.nest_enum_array_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   str_val_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.str_val().size() > 0) {
@@ -589,7 +573,6 @@ void TryMsg::SharedCtor() {
   ::memset(&msg_val_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&nest_enum_val_) -
       reinterpret_cast<char*>(&msg_val_)) + sizeof(nest_enum_val_));
-  _cached_size_ = 0;
 }
 
 TryMsg::~TryMsg() {
@@ -607,12 +590,10 @@ void TryMsg::ArenaDtor(void* object) {
   TryMsg* _this = reinterpret_cast< TryMsg* >(object);
   (void)_this;
 }
-void TryMsg::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void TryMsg::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void TryMsg::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* TryMsg::descriptor() {
   ::protobuf_try_2eproto::protobuf_AssignDescriptorsOnce();
@@ -620,7 +601,7 @@ const ::google::protobuf::Descriptor* TryMsg::descriptor() {
 }
 
 const TryMsg& TryMsg::default_instance() {
-  ::protobuf_try_2eproto::InitDefaultsTryMsg();
+  ::google::protobuf::internal::InitSCC(&protobuf_try_2eproto::scc_info_TryMsg.base);
   return *internal_default_instance();
 }
 
@@ -650,7 +631,7 @@ bool TryMsg::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.TryMsg)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -700,7 +681,7 @@ bool TryMsg::MergePartialFromCodedStream(
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -715,7 +696,7 @@ bool TryMsg::MergePartialFromCodedStream(
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -746,7 +727,7 @@ bool TryMsg::MergePartialFromCodedStream(
           DO_(input->ReadVarint32(&length));
           ::google::protobuf::io::CodedInputStream::Limit limit = input->PushLimit(static_cast<int>(length));
           while (input->BytesUntilLimit() > 0) {
-            int value;
+            int value = 0;
             DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -756,7 +737,7 @@ bool TryMsg::MergePartialFromCodedStream(
         } else if (
             static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -811,7 +792,7 @@ void TryMsg::SerializeWithCachedSizes(
   // .NetProto.TryItem msg_val = 3;
   if (this->has_msg_val()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *msg_val_, output);
+      3, this->_internal_msg_val(), output);
   }
 
   // .NetProto.TryEnum enum_val = 4;
@@ -883,7 +864,7 @@ void TryMsg::SerializeWithCachedSizes(
   if (this->has_msg_val()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *msg_val_, deterministic, target);
+        3, this->_internal_msg_val(), deterministic, target);
   }
 
   // .NetProto.TryEnum enum_val = 4;
@@ -999,9 +980,7 @@ size_t TryMsg::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1087,13 +1066,13 @@ void TryMsg::InternalSwap(TryMsg* other) {
   using std::swap;
   CastToBase(&msg_array_)->InternalSwap(CastToBase(&other->msg_array_));
   nest_enum_array_.InternalSwap(&other->nest_enum_array_);
-  str_val_.Swap(&other->str_val_);
+  str_val_.Swap(&other->str_val_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(msg_val_, other->msg_val_);
   swap(int_val_, other->int_val_);
   swap(enum_val_, other->enum_val_);
   swap(nest_enum_val_, other->nest_enum_val_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata TryMsg::GetMetadata() const {
@@ -1106,10 +1085,10 @@ void TryMsg::InternalSwap(TryMsg* other) {
 }  // namespace NetProto
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::TryItem* Arena::CreateMessage< ::NetProto::TryItem >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::TryItem* Arena::CreateMaybeMessage< ::NetProto::TryItem >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::TryItem >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::TryMsg* Arena::CreateMessage< ::NetProto::TryMsg >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::TryMsg* Arena::CreateMaybeMessage< ::NetProto::TryMsg >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::TryMsg >(arena);
 }
 }  // namespace protobuf

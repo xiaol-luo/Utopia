@@ -664,7 +664,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public MoveToPos(MoveToPos other) : this() {
-      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -802,7 +802,7 @@ namespace NetProto {
       opera_ = other.opera_;
       targetId_ = other.targetId_;
       dir_ = other.dir_;
-      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       skillSlot_ = other.skillSlot_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1046,7 +1046,7 @@ namespace NetProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ViewGrid(ViewGrid other) : this() {
-      Center = other.center_ != null ? other.Center.Clone() : null;
+      center_ = other.center_ != null ? other.center_.Clone() : null;
       gridType_ = other.gridType_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1682,7 +1682,7 @@ namespace NetProto {
       suId_ = other.suId_;
       unitType_ = other.unitType_;
       modelId_ = other.modelId_;
-      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       faceDir_ = other.faceDir_;
       parentSuId_ = other.parentSuId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -1955,7 +1955,7 @@ namespace NetProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SceneUnitTransform(SceneUnitTransform other) : this() {
       suId_ = other.suId_;
-      Pos = other.pos_ != null ? other.Pos.Clone() : null;
+      pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       faceDir_ = other.faceDir_;
       parentSuId_ = other.parentSuId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);

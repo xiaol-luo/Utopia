@@ -236,7 +236,7 @@ namespace NetProto {
     public TryMsg(TryMsg other) : this() {
       intVal_ = other.intVal_;
       strVal_ = other.strVal_;
-      MsgVal = other.msgVal_ != null ? other.MsgVal.Clone() : null;
+      msgVal_ = other.msgVal_ != null ? other.msgVal_.Clone() : null;
       enumVal_ = other.enumVal_;
       nestEnumVal_ = other.nestEnumVal_;
       msgArray_ = other.msgArray_.Clone();

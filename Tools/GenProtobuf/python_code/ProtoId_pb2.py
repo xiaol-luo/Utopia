@@ -8,7 +8,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-from google.protobuf import descriptor_pb2
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -20,6 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='ProtoId.proto',
   package='NetProto',
   syntax='proto3',
+  serialized_options=_b('\370\001\001'),
   serialized_pb=_b('\n\rProtoId.proto\x12\x08NetProto*\xf9\x03\n\x07ProtoId\x12\x0b\n\x07PID_Min\x10\x00\x12\x0c\n\x08PID_Ping\x10\x01\x12\x0c\n\x08PID_Pong\x10\x02\x12\x15\n\x11PID_QueryFreeHero\x10\x64\x12\x13\n\x0fPID_RspFreeHero\x10\x65\x12\x15\n\x11PID_SelectHeroReq\x10\x66\x12\x15\n\x11PID_SelectHeroRsp\x10g\x12\x19\n\x15PID_LoadSceneComplete\x10h\x12\x12\n\x0ePID_LeaveScene\x10i\x12\x1d\n\x18PID_SceneObjectDisappear\x10\xf2\x07\x12\x12\n\rPID_MoveToPos\x10\xfc\x07\x12\x11\n\x0cPID_StopMove\x10\x86\x08\x12\x17\n\x12PID_BattleOperaReq\x10\xcc\x08\x12\x15\n\x10PID_ViewSnapshot\x10\xd6\x08\x12\x15\n\x10PID_ViewAllGrids\x10\xd7\x08\x12\x19\n\x14PID_ViewSnapshotDiff\x10\xd8\x08\x12\x17\n\x12PID_SceneUnitState\x10\xb0\t\x12\x1b\n\x16PID_SceneUnitTransform\x10\xb1\t\x12\x16\n\x11PID_SceneUnitMove\x10\xb2\t\x12\x1d\n\x18PID_SceneUnitSkillAction\x10\xb3\t\x12\x19\n\x14PID_ReloadLuaScripts\x10\xa1\x1f\x12\x0c\n\x07PID_Max\x10\x80(B\x03\xf8\x01\x01\x62\x06proto3')
 )
 
@@ -31,95 +31,95 @@ _PROTOID = _descriptor.EnumDescriptor(
   values=[
     _descriptor.EnumValueDescriptor(
       name='PID_Min', index=0, number=0,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_Ping', index=1, number=1,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_Pong', index=2, number=2,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_QueryFreeHero', index=3, number=100,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_RspFreeHero', index=4, number=101,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SelectHeroReq', index=5, number=102,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SelectHeroRsp', index=6, number=103,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_LoadSceneComplete', index=7, number=104,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_LeaveScene', index=8, number=105,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SceneObjectDisappear', index=9, number=1010,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_MoveToPos', index=10, number=1020,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_StopMove', index=11, number=1030,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_BattleOperaReq', index=12, number=1100,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_ViewSnapshot', index=13, number=1110,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_ViewAllGrids', index=14, number=1111,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_ViewSnapshotDiff', index=15, number=1112,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SceneUnitState', index=16, number=1200,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SceneUnitTransform', index=17, number=1201,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SceneUnitMove', index=18, number=1202,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_SceneUnitSkillAction', index=19, number=1203,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_ReloadLuaScripts', index=20, number=4001,
-      options=None,
+      serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PID_Max', index=21, number=5120,
-      options=None,
+      serialized_options=None,
       type=None),
   ],
   containing_type=None,
-  options=None,
+  serialized_options=None,
   serialized_start=28,
   serialized_end=533,
 )
@@ -154,6 +154,5 @@ DESCRIPTOR.enum_types_by_name['ProtoId'] = _PROTOID
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
-DESCRIPTOR.has_options = True
-DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\370\001\001'))
+DESCRIPTOR._options = None
 # @@protoc_insertion_point(module_scope)

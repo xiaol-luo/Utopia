@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,14 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_Battle_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_Battle_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_ViewGrid;
+}  // namespace protobuf_Battle_2eproto
+namespace protobuf_Common_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_Common_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PBVector2;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_Common_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_PBVector3;
+}  // namespace protobuf_Common_2eproto
 namespace NetProto {
 class RspFreeHeroDefaultTypeInternal {
  public:
@@ -92,14 +99,9 @@ class SceneUnitSkillActionDefaultTypeInternal {
 } _SceneUnitSkillAction_default_instance_;
 }  // namespace NetProto
 namespace protobuf_Battle_2eproto {
-void InitDefaultsRspFreeHeroImpl() {
+static void InitDefaultsRspFreeHero() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_RspFreeHero_default_instance_;
     new (ptr) ::NetProto::RspFreeHero();
@@ -108,19 +110,12 @@ void InitDefaultsRspFreeHeroImpl() {
   ::NetProto::RspFreeHero::InitAsDefaultInstance();
 }
 
-void InitDefaultsRspFreeHero() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsRspFreeHeroImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_RspFreeHero =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsRspFreeHero}, {}};
 
-void InitDefaultsSelectHeroReqImpl() {
+static void InitDefaultsSelectHeroReq() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_SelectHeroReq_default_instance_;
     new (ptr) ::NetProto::SelectHeroReq();
@@ -129,19 +124,12 @@ void InitDefaultsSelectHeroReqImpl() {
   ::NetProto::SelectHeroReq::InitAsDefaultInstance();
 }
 
-void InitDefaultsSelectHeroReq() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSelectHeroReqImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_SelectHeroReq =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSelectHeroReq}, {}};
 
-void InitDefaultsSelectHeroRspImpl() {
+static void InitDefaultsSelectHeroRsp() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_SelectHeroRsp_default_instance_;
     new (ptr) ::NetProto::SelectHeroRsp();
@@ -150,19 +138,12 @@ void InitDefaultsSelectHeroRspImpl() {
   ::NetProto::SelectHeroRsp::InitAsDefaultInstance();
 }
 
-void InitDefaultsSelectHeroRsp() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSelectHeroRspImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_SelectHeroRsp =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSelectHeroRsp}, {}};
 
-void InitDefaultsSceneObjectDisappearImpl() {
+static void InitDefaultsSceneObjectDisappear() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_SceneObjectDisappear_default_instance_;
     new (ptr) ::NetProto::SceneObjectDisappear();
@@ -171,20 +152,12 @@ void InitDefaultsSceneObjectDisappearImpl() {
   ::NetProto::SceneObjectDisappear::InitAsDefaultInstance();
 }
 
-void InitDefaultsSceneObjectDisappear() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSceneObjectDisappearImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_SceneObjectDisappear =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSceneObjectDisappear}, {}};
 
-void InitDefaultsMoveToPosImpl() {
+static void InitDefaultsMoveToPos() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Common_2eproto::InitDefaultsPBVector2();
   {
     void* ptr = &::NetProto::_MoveToPos_default_instance_;
     new (ptr) ::NetProto::MoveToPos();
@@ -193,20 +166,13 @@ void InitDefaultsMoveToPosImpl() {
   ::NetProto::MoveToPos::InitAsDefaultInstance();
 }
 
-void InitDefaultsMoveToPos() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsMoveToPosImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_MoveToPos =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsMoveToPos}, {
+      &protobuf_Common_2eproto::scc_info_PBVector2.base,}};
 
-void InitDefaultsBattleOperationImpl() {
+static void InitDefaultsBattleOperation() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Common_2eproto::InitDefaultsPBVector2();
   {
     void* ptr = &::NetProto::_BattleOperation_default_instance_;
     new (ptr) ::NetProto::BattleOperation();
@@ -215,20 +181,13 @@ void InitDefaultsBattleOperationImpl() {
   ::NetProto::BattleOperation::InitAsDefaultInstance();
 }
 
-void InitDefaultsBattleOperation() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsBattleOperationImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_BattleOperation =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsBattleOperation}, {
+      &protobuf_Common_2eproto::scc_info_PBVector2.base,}};
 
-void InitDefaultsViewGridImpl() {
+static void InitDefaultsViewGrid() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Common_2eproto::InitDefaultsPBVector2();
   {
     void* ptr = &::NetProto::_ViewGrid_default_instance_;
     new (ptr) ::NetProto::ViewGrid();
@@ -237,19 +196,13 @@ void InitDefaultsViewGridImpl() {
   ::NetProto::ViewGrid::InitAsDefaultInstance();
 }
 
-void InitDefaultsViewGrid() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsViewGridImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_ViewGrid =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsViewGrid}, {
+      &protobuf_Common_2eproto::scc_info_PBVector2.base,}};
 
-void InitDefaultsViewSnapshotDiffImpl() {
+static void InitDefaultsViewSnapshotDiff() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_ViewSnapshotDiff_default_instance_;
     new (ptr) ::NetProto::ViewSnapshotDiff();
@@ -258,19 +211,12 @@ void InitDefaultsViewSnapshotDiffImpl() {
   ::NetProto::ViewSnapshotDiff::InitAsDefaultInstance();
 }
 
-void InitDefaultsViewSnapshotDiff() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsViewSnapshotDiffImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_ViewSnapshotDiff =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsViewSnapshotDiff}, {}};
 
-void InitDefaultsViewSnapshotImpl() {
+static void InitDefaultsViewSnapshot() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_ViewSnapshot_default_instance_;
     new (ptr) ::NetProto::ViewSnapshot();
@@ -279,20 +225,12 @@ void InitDefaultsViewSnapshotImpl() {
   ::NetProto::ViewSnapshot::InitAsDefaultInstance();
 }
 
-void InitDefaultsViewSnapshot() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsViewSnapshotImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_ViewSnapshot =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsViewSnapshot}, {}};
 
-void InitDefaultsViewAllGridsImpl() {
+static void InitDefaultsViewAllGrids() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Battle_2eproto::InitDefaultsViewGrid();
   {
     void* ptr = &::NetProto::_ViewAllGrids_default_instance_;
     new (ptr) ::NetProto::ViewAllGrids();
@@ -301,20 +239,13 @@ void InitDefaultsViewAllGridsImpl() {
   ::NetProto::ViewAllGrids::InitAsDefaultInstance();
 }
 
-void InitDefaultsViewAllGrids() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsViewAllGridsImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_ViewAllGrids =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsViewAllGrids}, {
+      &protobuf_Battle_2eproto::scc_info_ViewGrid.base,}};
 
-void InitDefaultsSceneUnitStateImpl() {
+static void InitDefaultsSceneUnitState() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Common_2eproto::InitDefaultsPBVector3();
   {
     void* ptr = &::NetProto::_SceneUnitState_default_instance_;
     new (ptr) ::NetProto::SceneUnitState();
@@ -323,20 +254,13 @@ void InitDefaultsSceneUnitStateImpl() {
   ::NetProto::SceneUnitState::InitAsDefaultInstance();
 }
 
-void InitDefaultsSceneUnitState() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSceneUnitStateImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_SceneUnitState =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSceneUnitState}, {
+      &protobuf_Common_2eproto::scc_info_PBVector3.base,}};
 
-void InitDefaultsSceneUnitTransformImpl() {
+static void InitDefaultsSceneUnitTransform() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Common_2eproto::InitDefaultsPBVector3();
   {
     void* ptr = &::NetProto::_SceneUnitTransform_default_instance_;
     new (ptr) ::NetProto::SceneUnitTransform();
@@ -345,19 +269,13 @@ void InitDefaultsSceneUnitTransformImpl() {
   ::NetProto::SceneUnitTransform::InitAsDefaultInstance();
 }
 
-void InitDefaultsSceneUnitTransform() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSceneUnitTransformImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_SceneUnitTransform =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsSceneUnitTransform}, {
+      &protobuf_Common_2eproto::scc_info_PBVector3.base,}};
 
-void InitDefaultsSceneUnitMoveImpl() {
+static void InitDefaultsSceneUnitMove() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_SceneUnitMove_default_instance_;
     new (ptr) ::NetProto::SceneUnitMove();
@@ -366,19 +284,12 @@ void InitDefaultsSceneUnitMoveImpl() {
   ::NetProto::SceneUnitMove::InitAsDefaultInstance();
 }
 
-void InitDefaultsSceneUnitMove() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSceneUnitMoveImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_SceneUnitMove =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSceneUnitMove}, {}};
 
-void InitDefaultsSceneUnitSkillActionImpl() {
+static void InitDefaultsSceneUnitSkillAction() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_SceneUnitSkillAction_default_instance_;
     new (ptr) ::NetProto::SceneUnitSkillAction();
@@ -387,9 +298,24 @@ void InitDefaultsSceneUnitSkillActionImpl() {
   ::NetProto::SceneUnitSkillAction::InitAsDefaultInstance();
 }
 
-void InitDefaultsSceneUnitSkillAction() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSceneUnitSkillActionImpl);
+::google::protobuf::internal::SCCInfo<0> scc_info_SceneUnitSkillAction =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsSceneUnitSkillAction}, {}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_RspFreeHero.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SelectHeroReq.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SelectHeroRsp.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SceneObjectDisappear.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_MoveToPos.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_BattleOperation.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ViewGrid.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ViewSnapshotDiff.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ViewSnapshot.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_ViewAllGrids.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SceneUnitState.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SceneUnitTransform.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SceneUnitMove.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_SceneUnitSkillAction.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[14];
@@ -537,17 +463,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_SceneUnitSkillAction_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
+static void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "Battle.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "Battle.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, NULL, NULL);
 }
 
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+static void protobuf_AssignDescriptorsOnce() {
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -556,7 +481,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 14);
 }
 
-void AddDescriptorsImpl() {
+static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\014Battle.proto\022\010NetProto\032\014Common.proto\032\020"
@@ -599,8 +524,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -622,24 +547,22 @@ const int RspFreeHero::kBlueHeroIdFieldNumber;
 
 RspFreeHero::RspFreeHero()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsRspFreeHero();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_RspFreeHero.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.RspFreeHero)
 }
 RspFreeHero::RspFreeHero(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsRspFreeHero();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_RspFreeHero.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.RspFreeHero)
 }
 RspFreeHero::RspFreeHero(const RspFreeHero& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&red_hero_id_, &from.red_hero_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&blue_hero_id_) -
@@ -651,7 +574,6 @@ void RspFreeHero::SharedCtor() {
   ::memset(&red_hero_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&blue_hero_id_) -
       reinterpret_cast<char*>(&red_hero_id_)) + sizeof(blue_hero_id_));
-  _cached_size_ = 0;
 }
 
 RspFreeHero::~RspFreeHero() {
@@ -667,12 +589,10 @@ void RspFreeHero::ArenaDtor(void* object) {
   RspFreeHero* _this = reinterpret_cast< RspFreeHero* >(object);
   (void)_this;
 }
-void RspFreeHero::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void RspFreeHero::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void RspFreeHero::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* RspFreeHero::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -680,7 +600,7 @@ const ::google::protobuf::Descriptor* RspFreeHero::descriptor() {
 }
 
 const RspFreeHero& RspFreeHero::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsRspFreeHero();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_RspFreeHero.base);
   return *internal_default_instance();
 }
 
@@ -703,7 +623,7 @@ bool RspFreeHero::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.RspFreeHero)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -827,9 +747,7 @@ size_t RspFreeHero::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -905,7 +823,6 @@ void RspFreeHero::InternalSwap(RspFreeHero* other) {
   swap(red_hero_id_, other->red_hero_id_);
   swap(blue_hero_id_, other->blue_hero_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata RspFreeHero::GetMetadata() const {
@@ -924,24 +841,22 @@ const int SelectHeroReq::kHeroIdFieldNumber;
 
 SelectHeroReq::SelectHeroReq()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSelectHeroReq();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SelectHeroReq.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SelectHeroReq)
 }
 SelectHeroReq::SelectHeroReq(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSelectHeroReq();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SelectHeroReq.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SelectHeroReq)
 }
 SelectHeroReq::SelectHeroReq(const SelectHeroReq& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   hero_id_ = from.hero_id_;
   // @@protoc_insertion_point(copy_constructor:NetProto.SelectHeroReq)
@@ -949,7 +864,6 @@ SelectHeroReq::SelectHeroReq(const SelectHeroReq& from)
 
 void SelectHeroReq::SharedCtor() {
   hero_id_ = GOOGLE_ULONGLONG(0);
-  _cached_size_ = 0;
 }
 
 SelectHeroReq::~SelectHeroReq() {
@@ -965,12 +879,10 @@ void SelectHeroReq::ArenaDtor(void* object) {
   SelectHeroReq* _this = reinterpret_cast< SelectHeroReq* >(object);
   (void)_this;
 }
-void SelectHeroReq::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SelectHeroReq::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SelectHeroReq::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SelectHeroReq::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -978,7 +890,7 @@ const ::google::protobuf::Descriptor* SelectHeroReq::descriptor() {
 }
 
 const SelectHeroReq& SelectHeroReq::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSelectHeroReq();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SelectHeroReq.base);
   return *internal_default_instance();
 }
 
@@ -999,7 +911,7 @@ bool SelectHeroReq::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SelectHeroReq)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1092,9 +1004,7 @@ size_t SelectHeroReq::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1166,7 +1076,6 @@ void SelectHeroReq::InternalSwap(SelectHeroReq* other) {
   using std::swap;
   swap(hero_id_, other->hero_id_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SelectHeroReq::GetMetadata() const {
@@ -1186,24 +1095,22 @@ const int SelectHeroRsp::kIsSuccFieldNumber;
 
 SelectHeroRsp::SelectHeroRsp()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSelectHeroRsp();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SelectHeroRsp.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SelectHeroRsp)
 }
 SelectHeroRsp::SelectHeroRsp(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSelectHeroRsp();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SelectHeroRsp.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SelectHeroRsp)
 }
 SelectHeroRsp::SelectHeroRsp(const SelectHeroRsp& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&hero_id_, &from.hero_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&is_succ_) -
@@ -1215,7 +1122,6 @@ void SelectHeroRsp::SharedCtor() {
   ::memset(&hero_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&is_succ_) -
       reinterpret_cast<char*>(&hero_id_)) + sizeof(is_succ_));
-  _cached_size_ = 0;
 }
 
 SelectHeroRsp::~SelectHeroRsp() {
@@ -1231,12 +1137,10 @@ void SelectHeroRsp::ArenaDtor(void* object) {
   SelectHeroRsp* _this = reinterpret_cast< SelectHeroRsp* >(object);
   (void)_this;
 }
-void SelectHeroRsp::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SelectHeroRsp::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SelectHeroRsp::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SelectHeroRsp::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1244,7 +1148,7 @@ const ::google::protobuf::Descriptor* SelectHeroRsp::descriptor() {
 }
 
 const SelectHeroRsp& SelectHeroRsp::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSelectHeroRsp();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SelectHeroRsp.base);
   return *internal_default_instance();
 }
 
@@ -1267,7 +1171,7 @@ bool SelectHeroRsp::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SelectHeroRsp)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1389,9 +1293,7 @@ size_t SelectHeroRsp::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1467,7 +1369,6 @@ void SelectHeroRsp::InternalSwap(SelectHeroRsp* other) {
   swap(hero_id_, other->hero_id_);
   swap(is_succ_, other->is_succ_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SelectHeroRsp::GetMetadata() const {
@@ -1486,9 +1387,8 @@ const int SceneObjectDisappear::kObjidsFieldNumber;
 
 SceneObjectDisappear::SceneObjectDisappear()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSceneObjectDisappear();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SceneObjectDisappear.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SceneObjectDisappear)
 }
@@ -1496,7 +1396,7 @@ SceneObjectDisappear::SceneObjectDisappear(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena),
   objids_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneObjectDisappear();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneObjectDisappear.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SceneObjectDisappear)
@@ -1504,14 +1404,12 @@ SceneObjectDisappear::SceneObjectDisappear(::google::protobuf::Arena* arena)
 SceneObjectDisappear::SceneObjectDisappear(const SceneObjectDisappear& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      objids_(from.objids_),
-      _cached_size_(0) {
+      objids_(from.objids_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NetProto.SceneObjectDisappear)
 }
 
 void SceneObjectDisappear::SharedCtor() {
-  _cached_size_ = 0;
 }
 
 SceneObjectDisappear::~SceneObjectDisappear() {
@@ -1527,12 +1425,10 @@ void SceneObjectDisappear::ArenaDtor(void* object) {
   SceneObjectDisappear* _this = reinterpret_cast< SceneObjectDisappear* >(object);
   (void)_this;
 }
-void SceneObjectDisappear::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SceneObjectDisappear::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SceneObjectDisappear::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SceneObjectDisappear::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1540,7 +1436,7 @@ const ::google::protobuf::Descriptor* SceneObjectDisappear::descriptor() {
 }
 
 const SceneObjectDisappear& SceneObjectDisappear::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneObjectDisappear();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneObjectDisappear.base);
   return *internal_default_instance();
 }
 
@@ -1561,7 +1457,7 @@ bool SceneObjectDisappear::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SceneObjectDisappear)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1682,9 +1578,7 @@ size_t SceneObjectDisappear::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1754,7 +1648,6 @@ void SceneObjectDisappear::InternalSwap(SceneObjectDisappear* other) {
   using std::swap;
   objids_.InternalSwap(&other->objids_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SceneObjectDisappear::GetMetadata() const {
@@ -1794,24 +1687,22 @@ const int MoveToPos::kPosFieldNumber;
 
 MoveToPos::MoveToPos()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsMoveToPos();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_MoveToPos.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.MoveToPos)
 }
 MoveToPos::MoveToPos(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsMoveToPos();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_MoveToPos.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.MoveToPos)
 }
 MoveToPos::MoveToPos(const MoveToPos& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_pos()) {
     pos_ = new ::NetProto::PBVector2(*from.pos_);
@@ -1823,7 +1714,6 @@ MoveToPos::MoveToPos(const MoveToPos& from)
 
 void MoveToPos::SharedCtor() {
   pos_ = NULL;
-  _cached_size_ = 0;
 }
 
 MoveToPos::~MoveToPos() {
@@ -1840,12 +1730,10 @@ void MoveToPos::ArenaDtor(void* object) {
   MoveToPos* _this = reinterpret_cast< MoveToPos* >(object);
   (void)_this;
 }
-void MoveToPos::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void MoveToPos::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void MoveToPos::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* MoveToPos::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -1853,7 +1741,7 @@ const ::google::protobuf::Descriptor* MoveToPos::descriptor() {
 }
 
 const MoveToPos& MoveToPos::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsMoveToPos();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_MoveToPos.base);
   return *internal_default_instance();
 }
 
@@ -1877,7 +1765,7 @@ bool MoveToPos::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.MoveToPos)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1922,7 +1810,7 @@ void MoveToPos::SerializeWithCachedSizes(
   // .NetProto.PBVector2 pos = 1;
   if (this->has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *pos_, output);
+      1, this->_internal_pos(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1943,7 +1831,7 @@ void MoveToPos::SerializeWithCachedSizes(
   if (this->has_pos()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, *pos_, deterministic, target);
+        1, this->_internal_pos(), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1971,9 +1859,7 @@ size_t MoveToPos::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -2045,7 +1931,6 @@ void MoveToPos::InternalSwap(MoveToPos* other) {
   using std::swap;
   swap(pos_, other->pos_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata MoveToPos::GetMetadata() const {
@@ -2089,24 +1974,22 @@ const int BattleOperation::kSkillSlotFieldNumber;
 
 BattleOperation::BattleOperation()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsBattleOperation();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_BattleOperation.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.BattleOperation)
 }
 BattleOperation::BattleOperation(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsBattleOperation();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_BattleOperation.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.BattleOperation)
 }
 BattleOperation::BattleOperation(const BattleOperation& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_pos()) {
     pos_ = new ::NetProto::PBVector2(*from.pos_);
@@ -2123,7 +2006,6 @@ void BattleOperation::SharedCtor() {
   ::memset(&pos_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&skill_slot_) -
       reinterpret_cast<char*>(&pos_)) + sizeof(skill_slot_));
-  _cached_size_ = 0;
 }
 
 BattleOperation::~BattleOperation() {
@@ -2140,12 +2022,10 @@ void BattleOperation::ArenaDtor(void* object) {
   BattleOperation* _this = reinterpret_cast< BattleOperation* >(object);
   (void)_this;
 }
-void BattleOperation::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void BattleOperation::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void BattleOperation::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* BattleOperation::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -2153,7 +2033,7 @@ const ::google::protobuf::Descriptor* BattleOperation::descriptor() {
 }
 
 const BattleOperation& BattleOperation::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsBattleOperation();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_BattleOperation.base);
   return *internal_default_instance();
 }
 
@@ -2180,7 +2060,7 @@ bool BattleOperation::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.BattleOperation)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -2188,7 +2068,7 @@ bool BattleOperation::MergePartialFromCodedStream(
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -2243,7 +2123,7 @@ bool BattleOperation::MergePartialFromCodedStream(
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -2299,7 +2179,7 @@ void BattleOperation::SerializeWithCachedSizes(
   // .NetProto.PBVector2 pos = 4;
   if (this->has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *pos_, output);
+      4, this->_internal_pos(), output);
   }
 
   // .NetProto.ESkillSlot skill_slot = 5;
@@ -2342,7 +2222,7 @@ void BattleOperation::SerializeWithCachedSizes(
   if (this->has_pos()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, *pos_, deterministic, target);
+        4, this->_internal_pos(), deterministic, target);
   }
 
   // .NetProto.ESkillSlot skill_slot = 5;
@@ -2400,9 +2280,7 @@ size_t BattleOperation::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -2490,7 +2368,6 @@ void BattleOperation::InternalSwap(BattleOperation* other) {
   swap(dir_, other->dir_);
   swap(skill_slot_, other->skill_slot_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata BattleOperation::GetMetadata() const {
@@ -2531,24 +2408,22 @@ const int ViewGrid::kGridTypeFieldNumber;
 
 ViewGrid::ViewGrid()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsViewGrid();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_ViewGrid.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.ViewGrid)
 }
 ViewGrid::ViewGrid(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsViewGrid();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewGrid.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.ViewGrid)
 }
 ViewGrid::ViewGrid(const ViewGrid& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_center()) {
     center_ = new ::NetProto::PBVector2(*from.center_);
@@ -2563,7 +2438,6 @@ void ViewGrid::SharedCtor() {
   ::memset(&center_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&grid_type_) -
       reinterpret_cast<char*>(&center_)) + sizeof(grid_type_));
-  _cached_size_ = 0;
 }
 
 ViewGrid::~ViewGrid() {
@@ -2580,12 +2454,10 @@ void ViewGrid::ArenaDtor(void* object) {
   ViewGrid* _this = reinterpret_cast< ViewGrid* >(object);
   (void)_this;
 }
-void ViewGrid::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void ViewGrid::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void ViewGrid::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* ViewGrid::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -2593,7 +2465,7 @@ const ::google::protobuf::Descriptor* ViewGrid::descriptor() {
 }
 
 const ViewGrid& ViewGrid::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsViewGrid();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewGrid.base);
   return *internal_default_instance();
 }
 
@@ -2618,7 +2490,7 @@ bool ViewGrid::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.ViewGrid)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -2677,7 +2549,7 @@ void ViewGrid::SerializeWithCachedSizes(
   // .NetProto.PBVector2 center = 1;
   if (this->has_center()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *center_, output);
+      1, this->_internal_center(), output);
   }
 
   // int32 grid_type = 2;
@@ -2703,7 +2575,7 @@ void ViewGrid::SerializeWithCachedSizes(
   if (this->has_center()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, *center_, deterministic, target);
+        1, this->_internal_center(), deterministic, target);
   }
 
   // int32 grid_type = 2;
@@ -2743,9 +2615,7 @@ size_t ViewGrid::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -2821,7 +2691,6 @@ void ViewGrid::InternalSwap(ViewGrid* other) {
   swap(center_, other->center_);
   swap(grid_type_, other->grid_type_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ViewGrid::GetMetadata() const {
@@ -2841,9 +2710,8 @@ const int ViewSnapshotDiff::kMissGridsFieldNumber;
 
 ViewSnapshotDiff::ViewSnapshotDiff()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsViewSnapshotDiff();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_ViewSnapshotDiff.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.ViewSnapshotDiff)
 }
@@ -2852,7 +2720,7 @@ ViewSnapshotDiff::ViewSnapshotDiff(::google::protobuf::Arena* arena)
   _internal_metadata_(arena),
   more_grids_(arena),
   miss_grids_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsViewSnapshotDiff();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewSnapshotDiff.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.ViewSnapshotDiff)
@@ -2861,14 +2729,12 @@ ViewSnapshotDiff::ViewSnapshotDiff(const ViewSnapshotDiff& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       more_grids_(from.more_grids_),
-      miss_grids_(from.miss_grids_),
-      _cached_size_(0) {
+      miss_grids_(from.miss_grids_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NetProto.ViewSnapshotDiff)
 }
 
 void ViewSnapshotDiff::SharedCtor() {
-  _cached_size_ = 0;
 }
 
 ViewSnapshotDiff::~ViewSnapshotDiff() {
@@ -2884,12 +2750,10 @@ void ViewSnapshotDiff::ArenaDtor(void* object) {
   ViewSnapshotDiff* _this = reinterpret_cast< ViewSnapshotDiff* >(object);
   (void)_this;
 }
-void ViewSnapshotDiff::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void ViewSnapshotDiff::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void ViewSnapshotDiff::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* ViewSnapshotDiff::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -2897,7 +2761,7 @@ const ::google::protobuf::Descriptor* ViewSnapshotDiff::descriptor() {
 }
 
 const ViewSnapshotDiff& ViewSnapshotDiff::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsViewSnapshotDiff();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewSnapshotDiff.base);
   return *internal_default_instance();
 }
 
@@ -2919,7 +2783,7 @@ bool ViewSnapshotDiff::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.ViewSnapshotDiff)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -3099,9 +2963,7 @@ size_t ViewSnapshotDiff::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -3173,7 +3035,6 @@ void ViewSnapshotDiff::InternalSwap(ViewSnapshotDiff* other) {
   more_grids_.InternalSwap(&other->more_grids_);
   miss_grids_.InternalSwap(&other->miss_grids_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ViewSnapshotDiff::GetMetadata() const {
@@ -3192,9 +3053,8 @@ const int ViewSnapshot::kLightGridsFieldNumber;
 
 ViewSnapshot::ViewSnapshot()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsViewSnapshot();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_ViewSnapshot.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.ViewSnapshot)
 }
@@ -3202,7 +3062,7 @@ ViewSnapshot::ViewSnapshot(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena),
   light_grids_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsViewSnapshot();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewSnapshot.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.ViewSnapshot)
@@ -3210,14 +3070,12 @@ ViewSnapshot::ViewSnapshot(::google::protobuf::Arena* arena)
 ViewSnapshot::ViewSnapshot(const ViewSnapshot& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      light_grids_(from.light_grids_),
-      _cached_size_(0) {
+      light_grids_(from.light_grids_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NetProto.ViewSnapshot)
 }
 
 void ViewSnapshot::SharedCtor() {
-  _cached_size_ = 0;
 }
 
 ViewSnapshot::~ViewSnapshot() {
@@ -3233,12 +3091,10 @@ void ViewSnapshot::ArenaDtor(void* object) {
   ViewSnapshot* _this = reinterpret_cast< ViewSnapshot* >(object);
   (void)_this;
 }
-void ViewSnapshot::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void ViewSnapshot::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void ViewSnapshot::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* ViewSnapshot::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -3246,7 +3102,7 @@ const ::google::protobuf::Descriptor* ViewSnapshot::descriptor() {
 }
 
 const ViewSnapshot& ViewSnapshot::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsViewSnapshot();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewSnapshot.base);
   return *internal_default_instance();
 }
 
@@ -3267,7 +3123,7 @@ bool ViewSnapshot::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.ViewSnapshot)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -3388,9 +3244,7 @@ size_t ViewSnapshot::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -3460,7 +3314,6 @@ void ViewSnapshot::InternalSwap(ViewSnapshot* other) {
   using std::swap;
   light_grids_.InternalSwap(&other->light_grids_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ViewSnapshot::GetMetadata() const {
@@ -3482,9 +3335,8 @@ const int ViewAllGrids::kGridsFieldNumber;
 
 ViewAllGrids::ViewAllGrids()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsViewAllGrids();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_ViewAllGrids.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.ViewAllGrids)
 }
@@ -3492,7 +3344,7 @@ ViewAllGrids::ViewAllGrids(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena),
   grids_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsViewAllGrids();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewAllGrids.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.ViewAllGrids)
@@ -3500,8 +3352,7 @@ ViewAllGrids::ViewAllGrids(::google::protobuf::Arena* arena)
 ViewAllGrids::ViewAllGrids(const ViewAllGrids& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      grids_(from.grids_),
-      _cached_size_(0) {
+      grids_(from.grids_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&grid_size_, &from.grid_size_,
     static_cast<size_t>(reinterpret_cast<char*>(&col_) -
@@ -3513,7 +3364,6 @@ void ViewAllGrids::SharedCtor() {
   ::memset(&grid_size_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&col_) -
       reinterpret_cast<char*>(&grid_size_)) + sizeof(col_));
-  _cached_size_ = 0;
 }
 
 ViewAllGrids::~ViewAllGrids() {
@@ -3529,12 +3379,10 @@ void ViewAllGrids::ArenaDtor(void* object) {
   ViewAllGrids* _this = reinterpret_cast< ViewAllGrids* >(object);
   (void)_this;
 }
-void ViewAllGrids::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void ViewAllGrids::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void ViewAllGrids::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* ViewAllGrids::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -3542,7 +3390,7 @@ const ::google::protobuf::Descriptor* ViewAllGrids::descriptor() {
 }
 
 const ViewAllGrids& ViewAllGrids::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsViewAllGrids();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_ViewAllGrids.base);
   return *internal_default_instance();
 }
 
@@ -3566,7 +3414,7 @@ bool ViewAllGrids::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.ViewAllGrids)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -3759,9 +3607,7 @@ size_t ViewAllGrids::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -3843,7 +3689,6 @@ void ViewAllGrids::InternalSwap(ViewAllGrids* other) {
   swap(row_, other->row_);
   swap(col_, other->col_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata ViewAllGrids::GetMetadata() const {
@@ -3888,24 +3733,22 @@ const int SceneUnitState::kParentSuIdFieldNumber;
 
 SceneUnitState::SceneUnitState()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSceneUnitState();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SceneUnitState.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SceneUnitState)
 }
 SceneUnitState::SceneUnitState(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitState();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitState.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SceneUnitState)
 }
 SceneUnitState::SceneUnitState(const SceneUnitState& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_pos()) {
     pos_ = new ::NetProto::PBVector3(*from.pos_);
@@ -3922,7 +3765,6 @@ void SceneUnitState::SharedCtor() {
   ::memset(&pos_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&face_dir_) -
       reinterpret_cast<char*>(&pos_)) + sizeof(face_dir_));
-  _cached_size_ = 0;
 }
 
 SceneUnitState::~SceneUnitState() {
@@ -3939,12 +3781,10 @@ void SceneUnitState::ArenaDtor(void* object) {
   SceneUnitState* _this = reinterpret_cast< SceneUnitState* >(object);
   (void)_this;
 }
-void SceneUnitState::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SceneUnitState::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SceneUnitState::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SceneUnitState::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -3952,7 +3792,7 @@ const ::google::protobuf::Descriptor* SceneUnitState::descriptor() {
 }
 
 const SceneUnitState& SceneUnitState::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitState();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitState.base);
   return *internal_default_instance();
 }
 
@@ -3979,7 +3819,7 @@ bool SceneUnitState::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SceneUnitState)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -4109,7 +3949,7 @@ void SceneUnitState::SerializeWithCachedSizes(
   // .NetProto.PBVector3 pos = 4;
   if (this->has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *pos_, output);
+      4, this->_internal_pos(), output);
   }
 
   // float face_dir = 5;
@@ -4155,7 +3995,7 @@ void SceneUnitState::SerializeWithCachedSizes(
   if (this->has_pos()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, *pos_, deterministic, target);
+        4, this->_internal_pos(), deterministic, target);
   }
 
   // float face_dir = 5;
@@ -4226,9 +4066,7 @@ size_t SceneUnitState::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -4320,7 +4158,6 @@ void SceneUnitState::InternalSwap(SceneUnitState* other) {
   swap(parent_su_id_, other->parent_su_id_);
   swap(face_dir_, other->face_dir_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SceneUnitState::GetMetadata() const {
@@ -4363,24 +4200,22 @@ const int SceneUnitTransform::kParentSuIdFieldNumber;
 
 SceneUnitTransform::SceneUnitTransform()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSceneUnitTransform();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SceneUnitTransform.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SceneUnitTransform)
 }
 SceneUnitTransform::SceneUnitTransform(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitTransform();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitTransform.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SceneUnitTransform)
 }
 SceneUnitTransform::SceneUnitTransform(const SceneUnitTransform& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_pos()) {
     pos_ = new ::NetProto::PBVector3(*from.pos_);
@@ -4397,7 +4232,6 @@ void SceneUnitTransform::SharedCtor() {
   ::memset(&pos_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&face_dir_) -
       reinterpret_cast<char*>(&pos_)) + sizeof(face_dir_));
-  _cached_size_ = 0;
 }
 
 SceneUnitTransform::~SceneUnitTransform() {
@@ -4414,12 +4248,10 @@ void SceneUnitTransform::ArenaDtor(void* object) {
   SceneUnitTransform* _this = reinterpret_cast< SceneUnitTransform* >(object);
   (void)_this;
 }
-void SceneUnitTransform::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SceneUnitTransform::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SceneUnitTransform::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SceneUnitTransform::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -4427,7 +4259,7 @@ const ::google::protobuf::Descriptor* SceneUnitTransform::descriptor() {
 }
 
 const SceneUnitTransform& SceneUnitTransform::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitTransform();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitTransform.base);
   return *internal_default_instance();
 }
 
@@ -4454,7 +4286,7 @@ bool SceneUnitTransform::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SceneUnitTransform)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -4546,7 +4378,7 @@ void SceneUnitTransform::SerializeWithCachedSizes(
   // .NetProto.PBVector3 pos = 2;
   if (this->has_pos()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *pos_, output);
+      2, this->_internal_pos(), output);
   }
 
   // float face_dir = 3;
@@ -4582,7 +4414,7 @@ void SceneUnitTransform::SerializeWithCachedSizes(
   if (this->has_pos()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, *pos_, deterministic, target);
+        2, this->_internal_pos(), deterministic, target);
   }
 
   // float face_dir = 3;
@@ -4639,9 +4471,7 @@ size_t SceneUnitTransform::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -4725,7 +4555,6 @@ void SceneUnitTransform::InternalSwap(SceneUnitTransform* other) {
   swap(parent_su_id_, other->parent_su_id_);
   swap(face_dir_, other->face_dir_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SceneUnitTransform::GetMetadata() const {
@@ -4745,24 +4574,22 @@ const int SceneUnitMove::kMoveAgentStateFieldNumber;
 
 SceneUnitMove::SceneUnitMove()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSceneUnitMove();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SceneUnitMove.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SceneUnitMove)
 }
 SceneUnitMove::SceneUnitMove(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitMove();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitMove.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SceneUnitMove)
 }
 SceneUnitMove::SceneUnitMove(const SceneUnitMove& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&su_id_, &from.su_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&move_agent_state_) -
@@ -4774,7 +4601,6 @@ void SceneUnitMove::SharedCtor() {
   ::memset(&su_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&move_agent_state_) -
       reinterpret_cast<char*>(&su_id_)) + sizeof(move_agent_state_));
-  _cached_size_ = 0;
 }
 
 SceneUnitMove::~SceneUnitMove() {
@@ -4790,12 +4616,10 @@ void SceneUnitMove::ArenaDtor(void* object) {
   SceneUnitMove* _this = reinterpret_cast< SceneUnitMove* >(object);
   (void)_this;
 }
-void SceneUnitMove::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SceneUnitMove::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SceneUnitMove::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SceneUnitMove::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -4803,7 +4627,7 @@ const ::google::protobuf::Descriptor* SceneUnitMove::descriptor() {
 }
 
 const SceneUnitMove& SceneUnitMove::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitMove();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitMove.base);
   return *internal_default_instance();
 }
 
@@ -4826,7 +4650,7 @@ bool SceneUnitMove::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SceneUnitMove)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -4848,7 +4672,7 @@ bool SceneUnitMove::MergePartialFromCodedStream(
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -4952,9 +4776,7 @@ size_t SceneUnitMove::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -5030,7 +4852,6 @@ void SceneUnitMove::InternalSwap(SceneUnitMove* other) {
   swap(su_id_, other->su_id_);
   swap(move_agent_state_, other->move_agent_state_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SceneUnitMove::GetMetadata() const {
@@ -5052,24 +4873,22 @@ const int SceneUnitSkillAction::kStageBeginMsFieldNumber;
 
 SceneUnitSkillAction::SceneUnitSkillAction()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Battle_2eproto::InitDefaultsSceneUnitSkillAction();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Battle_2eproto::scc_info_SceneUnitSkillAction.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.SceneUnitSkillAction)
 }
 SceneUnitSkillAction::SceneUnitSkillAction(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitSkillAction();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitSkillAction.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.SceneUnitSkillAction)
 }
 SceneUnitSkillAction::SceneUnitSkillAction(const SceneUnitSkillAction& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&su_id_, &from.su_id_,
     static_cast<size_t>(reinterpret_cast<char*>(&stage_begin_ms_) -
@@ -5081,7 +4900,6 @@ void SceneUnitSkillAction::SharedCtor() {
   ::memset(&su_id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&stage_begin_ms_) -
       reinterpret_cast<char*>(&su_id_)) + sizeof(stage_begin_ms_));
-  _cached_size_ = 0;
 }
 
 SceneUnitSkillAction::~SceneUnitSkillAction() {
@@ -5097,12 +4915,10 @@ void SceneUnitSkillAction::ArenaDtor(void* object) {
   SceneUnitSkillAction* _this = reinterpret_cast< SceneUnitSkillAction* >(object);
   (void)_this;
 }
-void SceneUnitSkillAction::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void SceneUnitSkillAction::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void SceneUnitSkillAction::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* SceneUnitSkillAction::descriptor() {
   ::protobuf_Battle_2eproto::protobuf_AssignDescriptorsOnce();
@@ -5110,7 +4926,7 @@ const ::google::protobuf::Descriptor* SceneUnitSkillAction::descriptor() {
 }
 
 const SceneUnitSkillAction& SceneUnitSkillAction::default_instance() {
-  ::protobuf_Battle_2eproto::InitDefaultsSceneUnitSkillAction();
+  ::google::protobuf::internal::InitSCC(&protobuf_Battle_2eproto::scc_info_SceneUnitSkillAction.base);
   return *internal_default_instance();
 }
 
@@ -5133,7 +4949,7 @@ bool SceneUnitSkillAction::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.SceneUnitSkillAction)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -5155,7 +4971,7 @@ bool SceneUnitSkillAction::MergePartialFromCodedStream(
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-          int value;
+          int value = 0;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
@@ -5321,9 +5137,7 @@ size_t SceneUnitSkillAction::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -5407,7 +5221,6 @@ void SceneUnitSkillAction::InternalSwap(SceneUnitSkillAction* other) {
   swap(skill_id_, other->skill_id_);
   swap(stage_begin_ms_, other->stage_begin_ms_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata SceneUnitSkillAction::GetMetadata() const {
@@ -5420,46 +5233,46 @@ void SceneUnitSkillAction::InternalSwap(SceneUnitSkillAction* other) {
 }  // namespace NetProto
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::RspFreeHero* Arena::CreateMessage< ::NetProto::RspFreeHero >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::RspFreeHero* Arena::CreateMaybeMessage< ::NetProto::RspFreeHero >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::RspFreeHero >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SelectHeroReq* Arena::CreateMessage< ::NetProto::SelectHeroReq >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SelectHeroReq* Arena::CreateMaybeMessage< ::NetProto::SelectHeroReq >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SelectHeroReq >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SelectHeroRsp* Arena::CreateMessage< ::NetProto::SelectHeroRsp >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SelectHeroRsp* Arena::CreateMaybeMessage< ::NetProto::SelectHeroRsp >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SelectHeroRsp >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneObjectDisappear* Arena::CreateMessage< ::NetProto::SceneObjectDisappear >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneObjectDisappear* Arena::CreateMaybeMessage< ::NetProto::SceneObjectDisappear >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SceneObjectDisappear >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::MoveToPos* Arena::CreateMessage< ::NetProto::MoveToPos >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::MoveToPos* Arena::CreateMaybeMessage< ::NetProto::MoveToPos >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::MoveToPos >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::BattleOperation* Arena::CreateMessage< ::NetProto::BattleOperation >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::BattleOperation* Arena::CreateMaybeMessage< ::NetProto::BattleOperation >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::BattleOperation >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewGrid* Arena::CreateMessage< ::NetProto::ViewGrid >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewGrid* Arena::CreateMaybeMessage< ::NetProto::ViewGrid >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::ViewGrid >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewSnapshotDiff* Arena::CreateMessage< ::NetProto::ViewSnapshotDiff >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewSnapshotDiff* Arena::CreateMaybeMessage< ::NetProto::ViewSnapshotDiff >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::ViewSnapshotDiff >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewSnapshot* Arena::CreateMessage< ::NetProto::ViewSnapshot >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewSnapshot* Arena::CreateMaybeMessage< ::NetProto::ViewSnapshot >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::ViewSnapshot >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewAllGrids* Arena::CreateMessage< ::NetProto::ViewAllGrids >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ViewAllGrids* Arena::CreateMaybeMessage< ::NetProto::ViewAllGrids >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::ViewAllGrids >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitState* Arena::CreateMessage< ::NetProto::SceneUnitState >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitState* Arena::CreateMaybeMessage< ::NetProto::SceneUnitState >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SceneUnitState >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitTransform* Arena::CreateMessage< ::NetProto::SceneUnitTransform >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitTransform* Arena::CreateMaybeMessage< ::NetProto::SceneUnitTransform >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SceneUnitTransform >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitMove* Arena::CreateMessage< ::NetProto::SceneUnitMove >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitMove* Arena::CreateMaybeMessage< ::NetProto::SceneUnitMove >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SceneUnitMove >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitSkillAction* Arena::CreateMessage< ::NetProto::SceneUnitSkillAction >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::SceneUnitSkillAction* Arena::CreateMaybeMessage< ::NetProto::SceneUnitSkillAction >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::SceneUnitSkillAction >(arena);
 }
 }  // namespace protobuf

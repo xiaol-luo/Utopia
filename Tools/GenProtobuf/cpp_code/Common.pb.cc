@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,7 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
 namespace NetProto {
 class TestCommonDefaultTypeInternal {
  public:
@@ -37,14 +37,9 @@ class PBVector2DefaultTypeInternal {
 } _PBVector2_default_instance_;
 }  // namespace NetProto
 namespace protobuf_Common_2eproto {
-void InitDefaultsTestCommonImpl() {
+static void InitDefaultsTestCommon() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_TestCommon_default_instance_;
     new (ptr) ::NetProto::TestCommon();
@@ -53,19 +48,12 @@ void InitDefaultsTestCommonImpl() {
   ::NetProto::TestCommon::InitAsDefaultInstance();
 }
 
-void InitDefaultsTestCommon() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsTestCommonImpl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_TestCommon =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsTestCommon}, {}};
 
-void InitDefaultsPBVector3Impl() {
+static void InitDefaultsPBVector3() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_PBVector3_default_instance_;
     new (ptr) ::NetProto::PBVector3();
@@ -74,19 +62,12 @@ void InitDefaultsPBVector3Impl() {
   ::NetProto::PBVector3::InitAsDefaultInstance();
 }
 
-void InitDefaultsPBVector3() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPBVector3Impl);
-}
+::google::protobuf::internal::SCCInfo<0> scc_info_PBVector3 =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPBVector3}, {}};
 
-void InitDefaultsPBVector2Impl() {
+static void InitDefaultsPBVector2() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
   {
     void* ptr = &::NetProto::_PBVector2_default_instance_;
     new (ptr) ::NetProto::PBVector2();
@@ -95,9 +76,13 @@ void InitDefaultsPBVector2Impl() {
   ::NetProto::PBVector2::InitAsDefaultInstance();
 }
 
-void InitDefaultsPBVector2() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPBVector2Impl);
+::google::protobuf::internal::SCCInfo<0> scc_info_PBVector2 =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsPBVector2}, {}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_TestCommon.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PBVector3.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_PBVector2.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[3];
@@ -136,17 +121,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_PBVector2_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
+static void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "Common.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "Common.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, NULL, NULL);
 }
 
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+static void protobuf_AssignDescriptorsOnce() {
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -155,7 +139,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 3);
 }
 
-void AddDescriptorsImpl() {
+static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\014Common.proto\022\010NetProto\"\014\n\nTestCommon\","
@@ -170,8 +154,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -191,30 +175,27 @@ void TestCommon::InitAsDefaultInstance() {
 
 TestCommon::TestCommon()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Common_2eproto::InitDefaultsTestCommon();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Common_2eproto::scc_info_TestCommon.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.TestCommon)
 }
 TestCommon::TestCommon(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Common_2eproto::InitDefaultsTestCommon();
+  ::google::protobuf::internal::InitSCC(&protobuf_Common_2eproto::scc_info_TestCommon.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.TestCommon)
 }
 TestCommon::TestCommon(const TestCommon& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:NetProto.TestCommon)
 }
 
 void TestCommon::SharedCtor() {
-  _cached_size_ = 0;
 }
 
 TestCommon::~TestCommon() {
@@ -230,12 +211,10 @@ void TestCommon::ArenaDtor(void* object) {
   TestCommon* _this = reinterpret_cast< TestCommon* >(object);
   (void)_this;
 }
-void TestCommon::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void TestCommon::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void TestCommon::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* TestCommon::descriptor() {
   ::protobuf_Common_2eproto::protobuf_AssignDescriptorsOnce();
@@ -243,7 +222,7 @@ const ::google::protobuf::Descriptor* TestCommon::descriptor() {
 }
 
 const TestCommon& TestCommon::default_instance() {
-  ::protobuf_Common_2eproto::InitDefaultsTestCommon();
+  ::google::protobuf::internal::InitSCC(&protobuf_Common_2eproto::scc_info_TestCommon.base);
   return *internal_default_instance();
 }
 
@@ -263,7 +242,7 @@ bool TestCommon::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.TestCommon)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
   handle_unusual:
@@ -320,9 +299,7 @@ size_t TestCommon::ByteSizeLong() const {
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -390,7 +367,6 @@ void TestCommon::UnsafeArenaSwap(TestCommon* other) {
 void TestCommon::InternalSwap(TestCommon* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata TestCommon::GetMetadata() const {
@@ -411,24 +387,22 @@ const int PBVector3::kZFieldNumber;
 
 PBVector3::PBVector3()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Common_2eproto::InitDefaultsPBVector3();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Common_2eproto::scc_info_PBVector3.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.PBVector3)
 }
 PBVector3::PBVector3(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Common_2eproto::InitDefaultsPBVector3();
+  ::google::protobuf::internal::InitSCC(&protobuf_Common_2eproto::scc_info_PBVector3.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.PBVector3)
 }
 PBVector3::PBVector3(const PBVector3& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
     static_cast<size_t>(reinterpret_cast<char*>(&z_) -
@@ -440,7 +414,6 @@ void PBVector3::SharedCtor() {
   ::memset(&x_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&z_) -
       reinterpret_cast<char*>(&x_)) + sizeof(z_));
-  _cached_size_ = 0;
 }
 
 PBVector3::~PBVector3() {
@@ -456,12 +429,10 @@ void PBVector3::ArenaDtor(void* object) {
   PBVector3* _this = reinterpret_cast< PBVector3* >(object);
   (void)_this;
 }
-void PBVector3::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void PBVector3::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void PBVector3::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PBVector3::descriptor() {
   ::protobuf_Common_2eproto::protobuf_AssignDescriptorsOnce();
@@ -469,7 +440,7 @@ const ::google::protobuf::Descriptor* PBVector3::descriptor() {
 }
 
 const PBVector3& PBVector3::default_instance() {
-  ::protobuf_Common_2eproto::InitDefaultsPBVector3();
+  ::google::protobuf::internal::InitSCC(&protobuf_Common_2eproto::scc_info_PBVector3.base);
   return *internal_default_instance();
 }
 
@@ -492,7 +463,7 @@ bool PBVector3::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.PBVector3)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -641,9 +612,7 @@ size_t PBVector3::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -723,7 +692,6 @@ void PBVector3::InternalSwap(PBVector3* other) {
   swap(y_, other->y_);
   swap(z_, other->z_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PBVector3::GetMetadata() const {
@@ -743,24 +711,22 @@ const int PBVector2::kYFieldNumber;
 
 PBVector2::PBVector2()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Common_2eproto::InitDefaultsPBVector2();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Common_2eproto::scc_info_PBVector2.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:NetProto.PBVector2)
 }
 PBVector2::PBVector2(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
-  ::protobuf_Common_2eproto::InitDefaultsPBVector2();
+  ::google::protobuf::internal::InitSCC(&protobuf_Common_2eproto::scc_info_PBVector2.base);
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:NetProto.PBVector2)
 }
 PBVector2::PBVector2(const PBVector2& from)
   : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
+      _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
     static_cast<size_t>(reinterpret_cast<char*>(&y_) -
@@ -772,7 +738,6 @@ void PBVector2::SharedCtor() {
   ::memset(&x_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&y_) -
       reinterpret_cast<char*>(&x_)) + sizeof(y_));
-  _cached_size_ = 0;
 }
 
 PBVector2::~PBVector2() {
@@ -788,12 +753,10 @@ void PBVector2::ArenaDtor(void* object) {
   PBVector2* _this = reinterpret_cast< PBVector2* >(object);
   (void)_this;
 }
-void PBVector2::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void PBVector2::RegisterArenaDtor(::google::protobuf::Arena*) {
 }
 void PBVector2::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* PBVector2::descriptor() {
   ::protobuf_Common_2eproto::protobuf_AssignDescriptorsOnce();
@@ -801,7 +764,7 @@ const ::google::protobuf::Descriptor* PBVector2::descriptor() {
 }
 
 const PBVector2& PBVector2::default_instance() {
-  ::protobuf_Common_2eproto::InitDefaultsPBVector2();
+  ::google::protobuf::internal::InitSCC(&protobuf_Common_2eproto::scc_info_PBVector2.base);
   return *internal_default_instance();
 }
 
@@ -824,7 +787,7 @@ bool PBVector2::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:NetProto.PBVector2)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -944,9 +907,7 @@ size_t PBVector2::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -1022,7 +983,6 @@ void PBVector2::InternalSwap(PBVector2* other) {
   swap(x_, other->x_);
   swap(y_, other->y_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata PBVector2::GetMetadata() const {
@@ -1035,13 +995,13 @@ void PBVector2::InternalSwap(PBVector2* other) {
 }  // namespace NetProto
 namespace google {
 namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::TestCommon* Arena::CreateMessage< ::NetProto::TestCommon >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::TestCommon* Arena::CreateMaybeMessage< ::NetProto::TestCommon >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::TestCommon >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::PBVector3* Arena::CreateMessage< ::NetProto::PBVector3 >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::PBVector3* Arena::CreateMaybeMessage< ::NetProto::PBVector3 >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::PBVector3 >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::PBVector2* Arena::CreateMessage< ::NetProto::PBVector2 >(Arena* arena) {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::PBVector2* Arena::CreateMaybeMessage< ::NetProto::PBVector2 >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::PBVector2 >(arena);
 }
 }  // namespace protobuf
