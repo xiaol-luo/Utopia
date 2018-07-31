@@ -47,7 +47,7 @@ namespace SolLuaBind
 						std::string var_name = "MAX_SKILL_LEVEL";
 						sol::object obj = ns_table.raw_get_or(var_name, sol::nil);
 						assert(!obj.valid());
-						ns_table.set(var_name, GameLogic::SkillConfig::MAX_SKILL_LEVEL);
+						ns_table.set(var_name, GameLogic::MAX_SKILL_LEVEL);
 					}
 				}
 			}

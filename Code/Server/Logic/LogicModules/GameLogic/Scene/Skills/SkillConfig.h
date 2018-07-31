@@ -31,10 +31,11 @@ namespace GameLogic
 		std::vector<int> release_effect_ids;
 	};
 
+	static const int MAX_SKILL_LEVEL = 5;
+
 	class SkillConfig : public SkillConfigBase
 	{
 	public:
-		static const int MAX_SKILL_LEVEL = 5;
 		~SkillConfig();
 		bool is_normal_attack = false;
 		NetProto::ESkillUseWay use_way;

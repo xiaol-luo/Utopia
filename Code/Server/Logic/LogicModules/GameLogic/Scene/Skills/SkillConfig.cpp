@@ -53,7 +53,7 @@ namespace GameLogic
 			
 			for (Config::CsvSkillLevelConfig *csv_lvl : kv_pair.second)
 			{
-				assert(csv_lvl->level <= SkillConfig::MAX_SKILL_LEVEL);
+				assert(csv_lvl->level <= MAX_SKILL_LEVEL);
 				assert(csv_lvl->level == skill_cfg->max_level + 1);
 				skill_cfg->max_level = csv_lvl->level;
 				SkillLevelConfig *lvl_cfg = new SkillLevelConfig();
