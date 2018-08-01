@@ -12,6 +12,16 @@ namespace GameLogic
 {
 	typedef bool(*FnDoSubscribeEvent)(LuaSubcribeEventRecord*, sol::table *self, EventDispacherProxy*, int, void **);
 
+	template <typename ...Args>
+	void LuaScribeEventFnDetail_FireFnHelp(LuaSubcribeEventRecord *record, sol::table *self, Args... args)
+	{
+		LuaSubcribeEventRecord::Item *item = record->head->next;
+		while (item != record->head)
+		{
+			item->fn(*self, args...);
+			item = item->next;
+		}
+	}
 	/// sol_ignore
 	class LuaScribeEventFnDetail
 	{

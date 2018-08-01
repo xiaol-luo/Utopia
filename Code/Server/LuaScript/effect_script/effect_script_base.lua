@@ -10,7 +10,24 @@ function effect_script_base.init(self, effect, param)
 
     self.scene_events = 
     {
-        OnSceneUnitFightParamChange = nil --function(std::shared_ptr<SceneUnit> su, bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
+        --function(std::shared_ptr<SceneUnit> su, bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
+        OnSceneUnitFightParamChange = nil, 
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnImmobilizedChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnBlindChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnSilenceChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnDeadChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnDizzinessChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, hp, old_hp, detal, effect)
+        OnHpChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, mp, old_mp, detal, effect)
+        OnMpChange = nil,
+
+        HodePosition = nil
     }
 end
 

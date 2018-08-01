@@ -24,4 +24,12 @@ namespace GameLogic
 		int event_id;
 		std::string lua_fn_name;
 	};
+	/// sol_ignore
+	class LuaScribeSceneEventFnDetail_OnSceneUnitHpMpChange : public LuaScribeSceneEventFnDetail
+	{
+		LuaScribeSceneEventFnDetail_ClassBody;
+		LuaScribeSceneEventFnDetail_OnSceneUnitHpMpChange(int _event_id, std::string _lua_fn_name) { event_id = _event_id; lua_fn_name = _lua_fn_name; }
+		int event_id;
+		std::string lua_fn_name;
+	};
 }

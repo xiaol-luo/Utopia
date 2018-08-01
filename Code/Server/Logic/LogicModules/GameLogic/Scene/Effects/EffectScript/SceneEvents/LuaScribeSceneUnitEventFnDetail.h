@@ -24,7 +24,15 @@ namespace GameLogic
 	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightStateChange : public LuaScribeSceneUnitEventFnDetail 
 	{
 		LuaScribeSceneUnitEventFnDetail_ClassBody;
-		LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightStateChange(int _event_id, std::string _lua_fn_name) { event_id = _event_id; }
+		LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightStateChange(int _event_id) { event_id = _event_id; }
 		int event_id;
 	};
+	/// sol_ignore
+	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitHpMpChange : public LuaScribeSceneUnitEventFnDetail
+	{
+		LuaScribeSceneUnitEventFnDetail_ClassBody;
+		LuaScribeSceneUnitEventFnDetail_OnSceneUnitHpMpChange(int _event_id) { event_id = _event_id; }
+		int event_id;
+	};
+	
 }

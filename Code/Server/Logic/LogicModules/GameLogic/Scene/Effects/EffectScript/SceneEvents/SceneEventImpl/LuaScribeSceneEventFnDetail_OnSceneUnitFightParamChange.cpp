@@ -10,12 +10,7 @@ namespace GameLogic
 		std::shared_ptr<SceneUnit> su, bool is_fix, NetProto::EFightParam efp, 
 		int new_value, int old_value)
 	{
-		LuaSubcribeEventRecord::Item *item = record->head->next;
-		while (item != record->head)
-		{
-			item->fn(*self, su, is_fix, efp, new_value, old_value);
-			item = item->next;
-		}
+		LuaScribeEventFnDetail_FireFnHelp(record, self, su, is_fix, efp, new_value, old_value);
 	}
 
 	static bool SubscribeSceneEvent_SubscribeHelpFn(LuaSubcribeEventRecord *record, sol::table *self, EventDispacherProxy *ev_proxy, int ev_id, void **param)
