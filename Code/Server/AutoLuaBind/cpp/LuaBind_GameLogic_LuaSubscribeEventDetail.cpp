@@ -1,13 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/EventDispatcher/EventDispacher.h"	
-#include "Common/EventDispatcher/EventDispacherProxy.h"	
+#include "ShareCode/Common/EventDispatcher/EventDispacher.h"	
 #include "LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScript.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
+#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace SolLuaBind
 {
-	void LuaBind_GameLogic_LuaSubscribeSceneEventDetail(lua_State *L)
+	void LuaBind_GameLogic_LuaSubscribeEventDetail(lua_State *L)
 	{
 		struct LuaBindImpl
 		{
@@ -22,15 +23,15 @@ namespace SolLuaBind
 
 			static void DoLuaBind(lua_State *L)
 			{
-                std::string name = "LuaSubscribeSceneEventDetail";
+                std::string name = "LuaSubscribeEventDetail";
 				std::string name_space = "GameLogic";
 
 				{
 					sol::usertype<GameLogic::LuaSubscribeEventDetail> meta_table(
 						sol::constructors<				
-						GameLogic::LuaSubscribeEventDetail(sol::table *, EventDispacher *)
+						GameLogic::LuaSubscribeEventDetail(sol::basic_table_core<false, sol::basic_reference<false> > *, EventDispacher *)
 						>(),
-						"__StructName__", sol::property([]() {return "LuaSubscribeSceneEventDetail"; })				
+						"__StructName__", sol::property([]() {return "LuaSubscribeEventDetail"; })				
 						,"Subscribe", &GameLogic::LuaSubscribeEventDetail::Subscribe				
 						,"Remove", &GameLogic::LuaSubscribeEventDetail::Remove				
 						,"ClearAll", &GameLogic::LuaSubscribeEventDetail::ClearAll

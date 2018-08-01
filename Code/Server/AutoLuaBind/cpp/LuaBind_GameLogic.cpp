@@ -1,20 +1,32 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
-#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
-#include "protobuf/include/google/protobuf/message.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"	
-#include "Common/Utils/Ticker.h"	
 #include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "LogicModules/GameLogic/Scene/Skills/Skill.h"
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "recastnavigation/DetourCrowd/Include/DetourCrowd.h"	
+#include "recastnavigation/Detour/Include/DetourNavMesh.h"	
+#include "recastnavigation/RecastDemo/Include/InputGeom.h"	
+#include "recastnavigation/Detour/Include/DetourNavMeshQuery.h"	
+#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"	
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "recastnavigation/Recast/Include/Recast.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "protobuf/include/google/protobuf/message.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "recastnavigation/DetourTileCache/Include/DetourTileCache.h"	
+#include "ShareCode/Common/Geometry/GeometryDefine.h"	
+#include "LogicModules/GameLogic/Scene/Navigation/NavMeshUtil.h"	
+#include "LogicModules/GameLogic/Scene/Navigation/NavMesh.h"
 
 namespace SolLuaBind
 {
@@ -33,18 +45,6 @@ namespace SolLuaBind
 				sol::state_view lua(L);
 
 				sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(lua, name_space);				
-				{
-					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
-				}				
-				{
-					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
-				}				
 				{
 					std::string name = "InvalidViewPos";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
@@ -74,6 +74,24 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set(name, GameLogic::MOVE_TO_POS_IGNORE_SQR_DISTANCE);
+				}				
+				{
+					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
+				}				
+				{
+					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
+				}				
+				{
+					std::string name = "MAX_SKILL_LEVEL";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::MAX_SKILL_LEVEL);
 				}				
 				{
 					std::string name = "GenerateEndEffectIdVec";

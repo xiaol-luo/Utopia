@@ -2,7 +2,7 @@
 #include <sol.hpp>	
 #include "protobuf/include/google/protobuf/arena.h"	
 #include "MemoryPool/MemoryPoolMgr.h"	
-#include "Common/Utils/MemoryUtil.h"
+#include "ShareCode/Common/Utils/MemoryUtil.h"
 
 namespace SolLuaBind
 {

@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
 #include "LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"	
-#include "Config/AutoCsvCode/CsvConfigSets.h"	
-#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"
 
 namespace SolLuaBind
 {
@@ -42,13 +42,7 @@ namespace SolLuaBind
 				}
             
 				{
-					sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view(L), name_space)[name];				
-					{
-						std::string var_name = "MAX_SKILL_LEVEL";
-						sol::object obj = ns_table.raw_get_or(var_name, sol::nil);
-						assert(!obj.valid());
-						ns_table.set(var_name, GameLogic::MAX_SKILL_LEVEL);
-					}
+					sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(sol::state_view(L), name_space)[name];
 				}
 			}
 		};

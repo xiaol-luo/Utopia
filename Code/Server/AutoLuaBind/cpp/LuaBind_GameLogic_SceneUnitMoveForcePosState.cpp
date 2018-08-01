@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Geometry/Vector3.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveForcePosState.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 

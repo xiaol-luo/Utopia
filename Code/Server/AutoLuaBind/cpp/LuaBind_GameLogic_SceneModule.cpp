@@ -2,7 +2,7 @@
 #include <sol.hpp>	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
 #include "LogicModules/GameLogic/Scene/NewScene.h"	
-#include "Common/EventDispatcher/EventDispacherProxy.h"
+#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace SolLuaBind
 {
