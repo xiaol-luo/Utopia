@@ -2,7 +2,7 @@
 #include <sol.hpp>	
 #include "LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"	
 #include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
-#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"
+#include "Config/AutoCsvCode/CsvConfigSets.h"
 
 namespace SolLuaBind
 {

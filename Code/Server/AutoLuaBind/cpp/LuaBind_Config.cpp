@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"
+#include "Config/AutoCsvCode/log/CsvLogConfig.h"
 
 namespace SolLuaBind
 {

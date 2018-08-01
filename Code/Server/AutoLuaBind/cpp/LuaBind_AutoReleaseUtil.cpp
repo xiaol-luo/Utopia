@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Utils/AutoReleaseUtil.h"
+#include "Common/Utils/AutoReleaseUtil.h"
 
 namespace SolLuaBind
 {

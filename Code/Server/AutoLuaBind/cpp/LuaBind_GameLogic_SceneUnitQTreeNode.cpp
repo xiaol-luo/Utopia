@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Geometry/GeometryDefine.h"	
+#include "Common/Geometry/GeometryDefine.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"
 

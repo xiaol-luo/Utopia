@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"	
-#include "LogicModules/GameLogic/Scene/Skills/Skill.h"
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 
 namespace SolLuaBind
 {

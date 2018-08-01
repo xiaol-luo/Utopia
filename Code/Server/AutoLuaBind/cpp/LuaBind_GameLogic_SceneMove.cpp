@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
 #include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneMove/SceneMove.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneMove/SceneMove.h"	
 #include "LogicModules/GameLogic/Scene/Navigation/NavMesh.h"
 
 namespace SolLuaBind
