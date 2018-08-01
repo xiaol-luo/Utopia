@@ -3,6 +3,9 @@
 
 namespace GameLogic
 {
+	static const ESUEventId EVENT_ID = ESU_FightParamChange;
+	static const char *LUA_FN_NAME = "OnSceneUnitFightParamChange";
+
 	static void OnSceneUnitFightParamChange(LuaSubcribeEventRecord *record, sol::table *self,
 		std::shared_ptr<SceneUnit> su, bool is_fix, NetProto::EFightParam efp, 
 		int new_value, int old_value)
@@ -15,16 +18,13 @@ namespace GameLogic
 		}
 	}
 
-	static bool SubscribeSceneEvent_OnSceneUnitFightParamChange(LuaSubcribeEventRecord *record, sol::table *self, EventDispacherProxy *ev_proxy, int ev_id, void **param)
+	static bool SubscribeSceneEvent_SubscribeHelpFn(LuaSubcribeEventRecord *record, sol::table *self, EventDispacherProxy *ev_proxy, int ev_id, void **param)
 	{
 		record->subscribe_id = ev_proxy->Subscribe<std::shared_ptr<SceneUnit>, bool, NetProto::EFightParam, int, int>(ev_id,
 			std::bind(OnSceneUnitFightParamChange, record, self, std::placeholders::_1, std::placeholders::_2,
 				std::placeholders::_3, std::placeholders::_4, std::placeholders::_5));
 		return record->subscribe_id > 0;
 	}
-
-	static const ESUEventId EVENT_ID = ESU_FightParamChange;
-	static const char *LUA_FN_NAME = "OnSceneUnitFightParamChange";
 
 	int LuaScribeSceneEventFnDetail_OnSceneUnitFightParamChange::GetEventId()
 	{
@@ -38,7 +38,7 @@ namespace GameLogic
 
 	FnDoSubscribeEvent LuaScribeSceneEventFnDetail_OnSceneUnitFightParamChange::GetSubscribeEventFn() 
 	{
-		return SubscribeSceneEvent_OnSceneUnitFightParamChange;
+		return SubscribeSceneEvent_SubscribeHelpFn;
 	}
 
 	int LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightParamChange::GetEventId()
@@ -46,7 +46,7 @@ namespace GameLogic
 		return EVENT_ID;
 	}
 
-	static bool SubscribeSceneUnitEvent_OnSceneUnitFightParamChange(LuaSubcribeEventRecord *record, sol::table *self, EventDispacherProxy *ev_proxy, int ev_id, void **param)
+	static bool SubscribeSceneUnitEvent__SubscribeHelpFn(LuaSubcribeEventRecord *record, sol::table *self, EventDispacherProxy *ev_proxy, int ev_id, void **param)
 	{
 		LuaScribeSceneUnitEventFnParam *fn_param = (LuaScribeSceneUnitEventFnParam *)(param);
 		record->subscribe_id = ev_proxy->Subscribe<bool, NetProto::EFightParam, int, int>(ev_id,
@@ -56,6 +56,6 @@ namespace GameLogic
 	}
 	FnDoSubscribeEvent LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightParamChange::GetSubscribeEventFn()
 	{
-		return SubscribeSceneUnitEvent_OnSceneUnitFightParamChange;
+		return SubscribeSceneUnitEvent__SubscribeHelpFn;
 	}
 }
