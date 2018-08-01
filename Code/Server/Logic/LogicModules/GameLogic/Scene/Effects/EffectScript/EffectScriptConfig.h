@@ -22,5 +22,6 @@ namespace GameLogic
 
 	protected:
 		std::string m_class_name;
+		std::string m_use_lua_cfg_name;
 	};
 }

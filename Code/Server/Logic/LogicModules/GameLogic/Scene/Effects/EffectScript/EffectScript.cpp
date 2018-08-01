@@ -43,19 +43,62 @@ namespace GameLogic
 		m_lua_subscribe_su_event_details.clear();
 	}
 
-	bool EffectScript::SubscribeSuEvent(std::shared_ptr<SceneUnit> su, int ev_id, sol::object param)
+	uint64_t EffectScript::SubscribeSuEvent(std::shared_ptr<SceneUnit> su, int ev_id, sol::protected_function lua_fn)
 	{
-		return false;
+		if (nullptr == su || !lua_fn.valid())
+			return 0;
+
+		LuaScribeEventFnDetail *hit_fn_detail = nullptr;
+		for (LuaScribeEventFnDetail *fn_detail : LuaScribeSceneUnitEventFnDetail::s_allFnDetails)
+		{
+			if (ev_id == fn_detail->GetEventId())
+			{
+				hit_fn_detail = fn_detail;
+				break;
+			}
+		}
+		if (nullptr == hit_fn_detail)
+			return 0;
+
+		LuaSubscribeEventDetail *ev_detail = nullptr;
+		{
+			auto ev_detail_it = m_lua_subscribe_su_event_details.find(su->GetId());
+			if (m_lua_subscribe_su_event_details.end() == ev_detail_it)
+			{
+				LuaSubscribeEventDetail *ev_detail = new LuaSubscribeEventDetail(
+					&m_lua_effect_script, su->GetEvDispacher());
+				auto ret_it = m_lua_subscribe_su_event_details.insert(std::make_pair(su->GetId(), ev_detail));
+				assert(ret_it.second);
+				ev_detail_it = ret_it.first;
+			}
+			ev_detail = ev_detail_it->second;
+		}
+
+		LuaScribeSceneUnitEventFnParam ev_param;
+		ev_param.su = su;
+		uint64_t ret = ev_detail->Subscribe(ev_id, lua_fn, (void**)&ev_param, LuaScribeSceneUnitEventFnDetail::s_allFnDetails);
+		return ret;
 	}
 
-	bool EffectScript::CancelSuEvent(uint64_t su_id, int ev_id)
+	void EffectScript::RemoveSuEvent(uint64_t su_id, uint64_t record_item_id)
 	{
-		return false;
+		auto ev_detail_it = m_lua_subscribe_su_event_details.find(su_id);
+		if (m_lua_subscribe_su_event_details.end() == ev_detail_it)
+			return;
+
+		LuaSubscribeEventDetail *ev_detail = ev_detail_it->second;
+		ev_detail->Remove(record_item_id);
 	}
 
-	bool EffectScript::CancelAllSuEvent(uint64_t su_id)
+	void EffectScript::CancelAllSuEvent(uint64_t su_id)
 	{
-		return false;
+		auto ev_detail_it = m_lua_subscribe_su_event_details.find(su_id);
+		if (m_lua_subscribe_su_event_details.end() == ev_detail_it)
+			return;
+
+		LuaSubscribeEventDetail *ev_detail = ev_detail_it->second;
+		m_lua_subscribe_su_event_details.erase(ev_detail_it);
+		delete ev_detail; ev_detail = nullptr;
 	}
 
 	void EffectScript::OnBegin()
@@ -63,8 +106,9 @@ namespace GameLogic
 		sol::table scene_events = m_lua_effect_script["scene_events"];
 		if (scene_events.valid())
 		{
-			for (LuaScribeEventFnDetail *fn_detail : LuaScribeSceneEventFnDetail::s_allFnDetails)
+			for (LuaScribeEventFnDetail *elem : LuaScribeSceneEventFnDetail::s_allFnDetails)
 			{
+				LuaScribeSceneEventFnDetail *fn_detail = dynamic_cast<LuaScribeSceneEventFnDetail*>(elem);
 				std::string lua_fn_name = fn_detail->GetLuaFunName();
 				int event_id = fn_detail->GetEventId();
 				sol::protected_function fn = scene_events.get<sol::protected_function>(lua_fn_name);

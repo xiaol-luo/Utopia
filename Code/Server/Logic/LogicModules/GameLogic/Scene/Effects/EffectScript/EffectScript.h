@@ -14,9 +14,9 @@ namespace GameLogic
 		virtual ~EffectScript();
 
 	public:
-		bool SubscribeSuEvent(std::shared_ptr<SceneUnit> su, int ev_id, sol::object param);
-		bool CancelSuEvent(uint64_t su_id, int ev_id);
-		bool CancelAllSuEvent(uint64_t su_id);
+		uint64_t SubscribeSuEvent(std::shared_ptr<SceneUnit> su, int ev_id, sol::protected_function lua_fn);
+		void RemoveSuEvent(uint64_t su_id, uint64_t record_item_id);
+		void CancelAllSuEvent(uint64_t su_id);
 
 	protected:
 		virtual void OnBegin() override;

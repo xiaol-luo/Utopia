@@ -8,17 +8,16 @@ namespace GameLogic
 	{
 	public:
 		virtual int GetEventId() = 0;
-		virtual std::string GetLuaFunName() = 0;
 		virtual FnDoSubscribeEvent GetSubscribeEventFn() = 0;
 		static std::vector<LuaScribeEventFnDetail *> s_allFnDetails;
 	};
 
+	/// sol_ignore
 	struct LuaScribeSceneUnitEventFnParam
 	{
 		std::shared_ptr<SceneUnit> su;
-		sol::object lua_param = sol::nil;
 	};
 
 	/// sol_ignore
-	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightParamChange : public LuaScribeSceneEventFnDetail { LuaScribeSceneEventFnDetail_ClassBody; };
+	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightParamChange : public LuaScribeSceneUnitEventFnDetail { LuaScribeSceneUnitEventFnDetail_ClassBody; };
 }
