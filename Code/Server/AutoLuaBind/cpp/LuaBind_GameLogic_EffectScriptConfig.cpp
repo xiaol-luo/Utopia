@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
 #include "Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"
 
 namespace SolLuaBind
 {
@@ -32,6 +32,9 @@ namespace SolLuaBind
 						,"CreateEffect", &GameLogic::EffectScriptConfig::CreateEffect				
 						,"InitCfg", &GameLogic::EffectScriptConfig::InitCfg				
 						,"GetClassName", &GameLogic::EffectScriptConfig::GetClassName				
+						,"GetStrParam", &GameLogic::EffectScriptConfig::GetStrParam				
+						,"GetJsonParam", &GameLogic::EffectScriptConfig::GetJsonParam				
+						,"GetIntParam", &GameLogic::EffectScriptConfig::GetIntParam				
 						, sol::base_classes, sol::bases<
 							GameLogic::EffectConfigBase 
 						>()

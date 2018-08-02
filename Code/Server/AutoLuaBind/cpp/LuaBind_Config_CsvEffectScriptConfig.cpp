@@ -27,7 +27,9 @@ namespace SolLuaBind
 						"__StructName__", sol::property([]() {return "CsvEffectScriptConfig"; })				
 						,"id", &Config::CsvEffectScriptConfig::id				
 						,"class_name", &Config::CsvEffectScriptConfig::class_name				
-						,"script_param", &Config::CsvEffectScriptConfig::script_param				
+						,"str_param", &Config::CsvEffectScriptConfig::str_param				
+						,"json_param", &Config::CsvEffectScriptConfig::json_param				
+						,"int_param", &Config::CsvEffectScriptConfig::int_param				
 						,"Init", &Config::CsvEffectScriptConfig::Init
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);

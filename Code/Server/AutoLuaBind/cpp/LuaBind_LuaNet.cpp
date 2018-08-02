@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LuaHelps/LuaNet.h"
+#include "Logic/LuaHelps/LuaNet.h"
 
 namespace SolLuaBind
 {

@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Navigation/NavMeshUtil.h"	
-#include "Libs/3rdpartLibs/recastnavigation/DetourTileCache/Include/DetourTileCache.h"	
-#include "Libs/3rdpartLibs/recastnavigation/Detour/Include/DetourNavMeshBuilder.h"	
-#include "Libs/3rdpartLibs/recastnavigation/DetourTileCache/Include/DetourTileCacheBuilder.h"	
-#include "InputGeom.h"
+#include "DetourTileCache.h"	
+#include "InputGeom.h"	
+#include "DetourNavMeshBuilder.h"	
+#include "DetourTileCacheBuilder.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Navigation/NavMeshUtil.h"
 
 namespace SolLuaBind
 {

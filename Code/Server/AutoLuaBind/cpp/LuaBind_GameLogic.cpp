@@ -1,25 +1,26 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "Common/Utils/Ticker.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
 #include "Common/Geometry/Vector3.h"	
-#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
-#include "Common/Geometry/GeometryDefine.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"	
-#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
-#include "Config/AutoCsvCode/CsvConfigSets.h"	
-#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
-#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "Common/EventDispatcher/EventDispacherProxy.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
 #include "Common/Geometry/Vector2.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
-#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"
+#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "Common/Utils/Ticker.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/ViewDefine.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "Config/AutoCsvCode/CsvConfigSets.h"	
+#include "google/protobuf/message.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 
 namespace SolLuaBind
 {
@@ -38,6 +39,18 @@ namespace SolLuaBind
 				sol::state_view lua(L);
 
 				sol::table ns_table = SolLuaBindUtils::GetOrNewLuaNameSpaceTable(lua, name_space);				
+				{
+					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
+				}				
+				{
+					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
+				}				
 				{
 					std::string name = "InvalidViewPos";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
@@ -67,18 +80,6 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set(name, GameLogic::MOVE_TO_POS_IGNORE_SQR_DISTANCE);
-				}				
-				{
-					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
-				}				
-				{
-					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
 				}				
 				{
 					std::string name = "MAX_SKILL_LEVEL";

@@ -1,18 +1,18 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Config/AutoCsvCode/effect/CsvEffectSearcherConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectForceMoveConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"	
-#include "Config/AutoCsvCode/skill/CsvSkillConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectHealConfig.h"	
 #include "Config/AutoCsvCode/skill/CsvSkillLevelConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"	
 #include "Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectScriptConfig.h"	
+#include "Config/AutoCsvCode/skill/CsvSkillConfig.h"	
 #include "Config/AutoCsvCode/log/CsvLogConfig.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectForceMoveConfig.h"	
 #include "Config/AutoCsvCode/CsvConfigSets.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"	
 #include "Config/AutoCsvCode/Scene/CsvSceneConfig.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectGroupConfig.h"
+#include "Config/AutoCsvCode/effect/CsvEffectHealConfig.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectSearcherConfig.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"
 
 namespace SolLuaBind
 {
