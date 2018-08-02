@@ -11,7 +11,9 @@ namespace Config
     {
         int id = 0 ;
         std::string class_name;
-        std::string script_param;
+        std::string str_param;
+        std::string json_param;
+        int int_param = 0 ;
 
         using ConfigCheckFunc = std::function<bool(CsvEffectScriptConfig*)>;
         // using ConfigCheckFunc = bool(*)(CsvEffectScriptConfig *item);

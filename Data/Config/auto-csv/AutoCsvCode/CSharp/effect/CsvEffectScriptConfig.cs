@@ -9,14 +9,18 @@ namespace Config
     {
         public const string Field_Name_id = "id";
         public const string Field_Name_class_name = "class_name";
-        public const string Field_Name_script_param = "script_param";
+        public const string Field_Name_str_param = "str_param";
+        public const string Field_Name_json_param = "json_param";
+        public const string Field_Name_int_param = "int_param";
     }
 
     public class CsvEffectScriptConfig
     {
         public int id;
         public string class_name = string.Empty;
-        public string script_param = string.Empty;
+        public string str_param = string.Empty;
+        public string json_param = string.Empty;
+        public int int_param;
 
         public delegate bool ConfigCheckFunc(CsvEffectScriptConfig cfg);
         public bool Init(Dictionary<string, string> kvPairs, ConfigCheckFunc func)
@@ -24,7 +28,9 @@ namespace Config
             bool all_ok = true;
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_id) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_id], ref id);
             all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_class_name) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_class_name], ref class_name);
-            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_script_param) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_script_param], ref script_param);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_str_param) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_str_param], ref str_param);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_json_param) && ConfigUtil.Str2Str (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_json_param], ref json_param);
+            all_ok = all_ok && kvPairs.ContainsKey(FieldName_CsvEffectScriptConfig.Field_Name_int_param) && ConfigUtil.Str2BaseValue (kvPairs[FieldName_CsvEffectScriptConfig.Field_Name_int_param], ref int_param);
             if (all_ok && null != func)
                 all_ok &= func(this);
             return all_ok;
@@ -52,7 +58,9 @@ namespace Config
                 {
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_id));
                     fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_class_name));
-                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_script_param));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_str_param));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_json_param));
+                    fieldIdxList.Add(csv.GetFieldIndex(FieldName_CsvEffectScriptConfig.Field_Name_int_param));
                 }
                 catch (Exception e)
                 {

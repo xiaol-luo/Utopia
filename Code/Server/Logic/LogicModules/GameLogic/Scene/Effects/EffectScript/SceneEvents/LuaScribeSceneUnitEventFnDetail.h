@@ -19,7 +19,13 @@ namespace GameLogic
 	};
 
 	/// sol_ignore
+	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitVolecityChange : public LuaScribeSceneUnitEventFnDetail { LuaScribeSceneUnitEventFnDetail_ClassBody; };
+	/// sol_ignore
+	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitMoveStateChange : public LuaScribeSceneUnitEventFnDetail { LuaScribeSceneUnitEventFnDetail_ClassBody; };
+	/// sol_ignore
 	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightParamChange : public LuaScribeSceneUnitEventFnDetail { LuaScribeSceneUnitEventFnDetail_ClassBody; };
+	/// sol_ignore
+	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitPosChange : public LuaScribeSceneUnitEventFnDetail { LuaScribeSceneUnitEventFnDetail_ClassBody; };
 	/// sol_ignore
 	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightStateChange : public LuaScribeSceneUnitEventFnDetail 
 	{
@@ -34,5 +40,11 @@ namespace GameLogic
 		LuaScribeSceneUnitEventFnDetail_OnSceneUnitHpMpChange(int _event_id) { event_id = _event_id; }
 		int event_id;
 	};
-	
+	/// sol_ignore
+	class LuaScribeSceneUnitEventFnDetail_OnSceneUnitEnterLeaveScene : public LuaScribeSceneUnitEventFnDetail
+	{
+		LuaScribeSceneUnitEventFnDetail_ClassBody;
+		LuaScribeSceneUnitEventFnDetail_OnSceneUnitEnterLeaveScene(int _event_id) { event_id = _event_id; }
+		int event_id;
+	};
 }

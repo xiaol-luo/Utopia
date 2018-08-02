@@ -11,5 +11,10 @@ namespace GameLogic
 		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitFightStateChange(ESU_DeadChange),
 		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitHpMpChange(ES_HpChange),
 		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitHpMpChange(ES_MpChange),
+		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitPosChange(),
+		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitEnterLeaveScene(ESU_EnterScene),
+		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitEnterLeaveScene(ESU_LeaveScene),
+		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitVolecityChange(),
+		new LuaScribeSceneUnitEventFnDetail_OnSceneUnitMoveStateChange(),
 	});
 }

@@ -115,7 +115,7 @@ namespace GameLogic
 
 		Vector3 old_val = m_velocity;
 		m_velocity = val;
-		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_VolecityChange, old_val, m_velocity);
+		this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_VolecityChange, m_velocity, old_val);
 	}
 	std::vector<SyncClientMsg> SceneUnitMove::CollectPBInit()
 	{
@@ -140,7 +140,7 @@ namespace GameLogic
 		m_curr_state->Enter(param);
 		this->SetPbDirty();
 		this->GetEvProxy()->Fire<NetProto::EMoveAgentState, NetProto::EMoveAgentState>(
-			ESU_MoveStateChange, old_state, new_state);
+			ESU_MoveStateChange, new_state, old_state);
 	}
 
 	NetProto::EMoveState SceneUnitMove::CalMoveState(NetProto::EMoveAgentState state)

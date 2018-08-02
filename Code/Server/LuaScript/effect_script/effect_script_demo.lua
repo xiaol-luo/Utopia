@@ -2,27 +2,60 @@
 
 effect_script.effect_script_demo = inherit_from(effect_script.effect_script_base)
 local effect_script_demo = effect_script.effect_script_demo
-effect_script_demo.__index = effect_script_demo
 
-local OnSceneUnitFightParamChange = function(self, p1, p2, p3, p4, p5, lua_param)
-    print("OnSceneUnitFightParamChange")
-    print(self, p1, p2, p3, p4, p5, lua_param)
-    print(serpent.block(lua_param)) 
+local function OnTestEventCallback(self, ...)
+    print(self, ...)
+end
+
+function effect_script_demo.init(self, effect, cfg)
+    effect_script.effect_script_base.init(self, effect, cfg)
+
+    self.loop_times = 0
+
+    self.scene_events = 
+    {
+        --function(std::shared_ptr<SceneUnit> su, bool is_fix, NetProto::EFightParam efp, int new_value, int old_value)
+        OnSceneUnitFightParamChange = OnTestEventCallback, 
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnImmobilizedChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnBlindChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnSilenceChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnDeadChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, bool is_attached)
+        OnDizzinessChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, int now_val, int old_val, int delta_val, EffectBase *effect)
+        OnHpChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, int now_val, int old_val, int delta_val, EffectBase *effect)
+        OnMpChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, Vector3 now_pos, Vector3 old_pos)
+        OnPosChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, EMoveAgentState now_state, EMoveAgentState old_state)
+        OnMoveStateChange = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su, Vector3 new_v, Vector3 old_v)
+        OnVolecityChange = OnTestEventCallback, 
+        --function(std::shared_ptr<SceneUnit> su)
+        OnEnterScene = OnTestEventCallback,
+        --function(std::shared_ptr<SceneUnit> su)
+        OnLeaveScene = OnTestEventCallback,
+
+        HodePosition = nil
+    }
 end
 
 local function CreateOnSceneUnitFightParamChange(param)
-    local function ret_fn(self, p1, p2, p3, p4, p5)
+    local OnSceneUnitFightParamChange = function(self, p1, p2, p3, p4, p5, lua_param)
+        print("OnSceneUnitFightParamChange")
+        print(self, p1, p2, p3, p4, p5, lua_param)
+        print(serpent.block(lua_param)) 
+    end
+    local ret_fn = function(self, p1, p2, p3, p4, p5)
         OnSceneUnitFightParamChange(self, p1, p2, p3, p4, p5, param)
     end
     return ret_fn
 end
-
-function effect_script_demo.init(self, effect, param)
-    effect_script.effect_script_base.init(self, effect, param)
-    self.loop_times = 0
-    self.scene_events.OnSceneUnitFightParamChange = OnSceneUnitFightParamChange
-end
-
 function effect_script_demo.on_late_begin(self)
     print("effect_script_demo.on_begin")
     local param = GameLogic.GuidedMissileParam.new()
@@ -35,9 +68,8 @@ function effect_script_demo.on_late_begin(self)
 	param.target_pos.z = param.use_effect_param.pos.y
 	local start_pos = self.effect:GetSkill():GetCaster():GetTransform():GetPos():XZ()
     local gm = GameLogic.AddGuidedMissileToScene(start_pos, param.use_effect_param.dir, param)
+
     self.effect:SubscribeSuEvent(self.effect:GetSkill():GetCaster(), ESUEventId.ESU_FightParamChange, CreateOnSceneUnitFightParamChange({12, 34}))
-    self.effect:SubscribeSuEvent(self.effect:GetSkill():GetCaster(), ESUEventId.ESU_FightParamChange, CreateOnSceneUnitFightParamChange(nil))
-    self.effect:SubscribeSuEvent(self.effect:GetSkill():GetCaster(), ESUEventId.ESU_FightParamChange, CreateOnSceneUnitFightParamChange(12345))
 end
 
 function effect_script_demo.on_late_end(self)
@@ -49,8 +81,6 @@ function effect_script_demo.on_late_loop(self, now_ms, delta_ms)
     if self.loop_times > 10 then 
         self.is_done = true
     end
-
-
 end
 
 

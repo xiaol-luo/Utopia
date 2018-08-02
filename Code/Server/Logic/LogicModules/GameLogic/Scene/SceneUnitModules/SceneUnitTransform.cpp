@@ -95,7 +95,7 @@ namespace GameLogic
 		this->SetPbDirty();
 
 		if (nullptr != m_owner->GetScene())
-			this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, old_Pos, this->GetPos());
+			this->GetEvProxy()->Fire<Vector3, Vector3>(ESU_PosChange, this->GetPos(), old_Pos);
 
 		/*
 		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
@@ -158,7 +158,7 @@ namespace GameLogic
 			this, std::placeholders::_1, std::placeholders::_2));		
 	}
 
-	void SceneUnitTransform::OnMoveVolecityChange(Vector3 old_val, Vector3 new_val)
+	void SceneUnitTransform::OnMoveVolecityChange(Vector3 new_val, Vector3 old_val)
 	{
 		auto move_state = m_owner->GetModule<SceneUnitMove>()->GetMoveState();
 		if (NetProto::EMoveState_Move == move_state)

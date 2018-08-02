@@ -1,7 +1,7 @@
-id,class_name,script_param
-int;key,string,string
-5000001,effect_script.effect_script_demo,script_param
-5000002,effect_script.effect_script_demo,script_param
-5000003,effect_script.effect_script_demo,script_param
-5000004,effect_script.effect_script_demo,script_param
-5000005,effect_script.effect_script_demo,script_param
+id,class_name,str_param,json_param,int_param
+int;key,string,string,string,int
+5000001,effect_script.effect_script_demo,str_1,{},1
+5000002,effect_script.effect_script_demo,str_2,{},2
+5000003,effect_script.effect_script_demo,str_3,{},3
+5000004,effect_script.effect_script_demo,str_4,{},4
+5000005,effect_script.effect_script_demo,str_5,{},5

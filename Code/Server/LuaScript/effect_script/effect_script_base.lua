@@ -3,9 +3,9 @@ effect_script.effect_script_base = {}
 local effect_script_base = effect_script.effect_script_base
 effect_script_base.__index = effect_script_base
 
-function effect_script_base.init(self, effect, param)
+function effect_script_base.init(self, effect, cfg)
     self.effect = effect
-    self.param = param
+    self.cfg = cfg
     self.is_done = false
 
     self.scene_events = 
@@ -22,10 +22,20 @@ function effect_script_base.init(self, effect, param)
         OnDeadChange = nil,
         --function(std::shared_ptr<SceneUnit> su, bool is_attached)
         OnDizzinessChange = nil,
-        --function(std::shared_ptr<SceneUnit> su, hp, old_hp, detal, effect)
+        --function(std::shared_ptr<SceneUnit> su, int now_val, int old_val, int delta_val, EffectBase *effect)
         OnHpChange = nil,
-        --function(std::shared_ptr<SceneUnit> su, mp, old_mp, detal, effect)
+        --function(std::shared_ptr<SceneUnit> su, int now_val, int old_val, int delta_val, EffectBase *effect)
         OnMpChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, Vector3 now_pos, Vector3 old_pos)
+        OnPosChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, EMoveAgentState now_state, EMoveAgentState old_state)
+        OnMoveStateChange = nil,
+        --function(std::shared_ptr<SceneUnit> su, Vector3 new_v, Vector3 old_v)
+        OnVolecityChange = nil, 
+        --function(std::shared_ptr<SceneUnit> su)
+        OnEnterScene = nil,
+        --function(std::shared_ptr<SceneUnit> su)
+        OnLeaveScene = nil,
 
         HodePosition = nil
     }

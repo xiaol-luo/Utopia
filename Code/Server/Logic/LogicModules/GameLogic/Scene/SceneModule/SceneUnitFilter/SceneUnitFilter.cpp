@@ -330,7 +330,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::OnSceneUnitPosChange(std::shared_ptr<SceneUnit> su, Vector3 old_pos, Vector3 new_pos)
+	void SceneUnitFilter::OnSceneUnitPosChange(std::shared_ptr<SceneUnit> su, Vector3 new_pos, Vector3 old_pos)
 	{
 		SceneUnitQTreeNodeUnit *unit_node = nullptr;
 		{

@@ -26,7 +26,7 @@ namespace GameLogic
 		sol::protected_function newFn = typeDefine["new"];
 		assert(newFn.valid());
 		newFn.error_handler = LuaUtils::ProtectFnErrorHandler();
-		m_lua_effect_script = newFn(typeDefine, this, nullptr);
+		m_lua_effect_script = newFn(typeDefine, this, m_cfg);
 		assert(m_lua_effect_script.valid());
 
 		m_lua_subscribe_scene_event_dtail = new LuaSubscribeEventDetail(&m_lua_effect_script, m_scene_event_proxy->GetEventDispacher());
