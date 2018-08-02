@@ -15,23 +15,6 @@ static const char *NET_PLAYER_HANDLER_FN = "OnPlayerMsg";
 
 namespace GameLogic
 {
-	PlayerMsgHandler::PlayerMsgHandler(GameLogicModule *logic_module)
-	{
-		m_logic_module = logic_module;
-		m_protobuf_arena = MemoryUtil::NewArena();
-	}
-
-	PlayerMsgHandler::~PlayerMsgHandler()
-	{
-		if (nullptr != m_ev_proxy)
-		{
-			delete m_ev_proxy;
-			m_ev_proxy = nullptr;
-		}
-		delete m_protobuf_arena; 
-		m_protobuf_arena = nullptr;
-	}
-
 	void PlayerMsgHandler::Init()
 	{
 		m_ev_proxy = G_Event->CreateProxy();
@@ -61,6 +44,23 @@ namespace GameLogic
 		m_lua_msg_handler_fn = lsv[NET_HANDLER_NAMESPACE][NET_PLAYER_HANDLER_FN];
 		assert(m_lua_msg_handler_fn.valid());
 		m_lua_msg_handler_fn.error_handler = LuaUtils::ProtectFnErrorHandler();
+	}
+
+	PlayerMsgHandler::PlayerMsgHandler(GameLogicModule *logic_module)
+	{
+		m_logic_module = logic_module;
+		m_protobuf_arena = MemoryUtil::NewArena();
+	}
+
+	PlayerMsgHandler::~PlayerMsgHandler()
+	{
+		if (nullptr != m_ev_proxy)
+		{
+			delete m_ev_proxy;
+			m_ev_proxy = nullptr;
+		}
+		delete m_protobuf_arena;
+		m_protobuf_arena = nullptr;
 	}
 
 	void PlayerMsgHandler::Uninit()

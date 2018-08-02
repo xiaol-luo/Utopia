@@ -5,10 +5,10 @@
 #include <google/protobuf/message.h>
 #include "Network/Protobuf/Empty.pb.h"
 #include "Common/Utils/MemoryUtil.h"
-#include "Network/Protobuf/Instruction.pb.h"
+#include "Network/Protobuf/Gm.pb.h"
 #include "Network/Protobuf/msg.pb.h"
 #include "Network/Protobuf/test.pb.h"
-#include "Network/Protobuf/ProtoId.pb.h"
+#include "Network/Protobuf/PID.pb.h"
 #include "Network/Protobuf/Common.pb.h"
 #include "Network/Protobuf/Battle.pb.h"
 

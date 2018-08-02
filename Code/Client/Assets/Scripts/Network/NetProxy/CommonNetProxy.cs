@@ -59,11 +59,11 @@ namespace Utopia.Net
         {
             return m_netAgent.Send(protocolId);
         }
-        public bool Send(NetProto.ProtoId protocolId, IMessage msg)
+        public bool Send(NetProto.PID protocolId, IMessage msg)
         {
             return m_netAgent.Send((int)protocolId, msg);
         }
-        public bool Send(NetProto.ProtoId protocolId)
+        public bool Send(NetProto.PID protocolId)
         {
             return m_netAgent.Send((int)protocolId);
         }

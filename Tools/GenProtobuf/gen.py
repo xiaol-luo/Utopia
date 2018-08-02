@@ -9,12 +9,12 @@ proto_files = [
 	"msg.proto",
 	"test.proto",
 	"Battle.proto",
-	"ProtoId.proto",
+	"PID.proto",
 	"Common.proto",
 	"Empty.proto",
 	"BattleEnum.proto",
 	"try.proto",
-	"Instruction.proto",
+	"Gm.proto",
 ]
 
 out_options = [

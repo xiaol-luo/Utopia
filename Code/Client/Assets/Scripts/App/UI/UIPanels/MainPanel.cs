@@ -42,7 +42,7 @@ namespace Utopia.UI
 
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetClosed, OnGameSrvClosed);
-            m_evProxy.Subscribe<RspFreeHero>(GameSrvNetProxy.ProtoEventName(ProtoId.PidRspFreeHero), OnRspFreeHero);
+            m_evProxy.Subscribe<RspFreeHero>(GameSrvNetProxy.ProtoEventName(PID.RspFreeHero), OnRspFreeHero);
 
             this.UpdateUI();
             netBtn.onClick.AddListener(() =>

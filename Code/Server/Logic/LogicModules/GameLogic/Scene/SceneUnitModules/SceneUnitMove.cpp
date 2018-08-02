@@ -18,7 +18,7 @@
 #include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include <cstdlib>
 #include "Network/Protobuf/Battle.pb.h"
-#include "Network/Protobuf/ProtoId.pb.h"
+#include "Network/Protobuf/PID.pb.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "ServerLogics/ServerLogic.h"
 

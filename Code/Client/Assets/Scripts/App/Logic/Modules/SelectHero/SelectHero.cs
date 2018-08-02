@@ -23,9 +23,9 @@ namespace Utopia.Logic
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
             m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetClosed, OnGameSrvClosed);
             m_evProxy.Subscribe<NetProto.RspFreeHero>(
-                GameSrvNetProxy.ProtoEventName(NetProto.ProtoId.PidRspFreeHero), OnRspFreeHero);
+                GameSrvNetProxy.ProtoEventName(NetProto.PID.RspFreeHero), OnRspFreeHero);
             m_evProxy.Subscribe<NetProto.SelectHeroRsp>(
-                GameSrvNetProxy.ProtoEventName(NetProto.ProtoId.PidSelectHeroRsp), OnRspSelectHero);
+                GameSrvNetProxy.ProtoEventName(NetProto.PID.SelectHeroRsp), OnRspSelectHero);
         }
 
         protected override void OnInit()
@@ -59,13 +59,13 @@ namespace Utopia.Logic
 
         public void QueryFreeHero()
         {
-            App.instance.net.gameSrv.Send(NetProto.ProtoId.PidQueryFreeHero);
+            App.instance.net.gameSrv.Send(NetProto.PID.QueryFreeHero);
         }
 
         public void SelectHeroReq(ulong uid)
         {
             NetProto.SelectHeroReq req = new NetProto.SelectHeroReq() { HeroId = uid };
-            App.instance.net.gameSrv.Send(NetProto.ProtoId.PidSelectHeroReq, req);
+            App.instance.net.gameSrv.Send(NetProto.PID.SelectHeroReq, req);
         }
 
         void OnRspFreeHero(string evName, NetProto.RspFreeHero msg)

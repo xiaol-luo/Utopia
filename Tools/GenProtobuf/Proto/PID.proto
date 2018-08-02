@@ -1,0 +1,38 @@
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+package NetProto;
+
+enum PID
+{
+	PID_Min = 0;
+	PID_Ping = 1;
+	PID_Pong = 2;
+	
+	PID_QueryFreeHero = 100;
+	PID_RspFreeHero = 101;
+	PID_SelectHeroReq = 102;
+	PID_SelectHeroRsp = 103;
+	PID_LoadSceneComplete = 104;
+	PID_LeaveScene = 105;
+
+	
+	PID_SceneObjectDisappear = 1010;
+	PID_MoveToPos = 1020;
+	PID_StopMove = 1030;
+	
+	PID_BattleOperaReq = 1100;
+	PID_ViewSnapshot = 1110;
+	PID_ViewAllGrids = 1111;
+	PID_ViewSnapshotDiff = 1112;
+	
+	PID_SceneUnitState = 1200;
+	PID_SceneUnitTransform = 1201;
+	PID_SceneUnitMove = 1202;
+	PID_SceneUnitSkillAction = 1203;
+	
+	
+	PID_ReloadLuaScripts = 4001;
+	
+	PID_Max = 5120;
+}

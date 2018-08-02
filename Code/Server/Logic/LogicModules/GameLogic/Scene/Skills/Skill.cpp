@@ -8,7 +8,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include "Network/Protobuf/Battle.pb.h"
-#include "Network/Protobuf/ProtoId.pb.h"
+#include "Network/Protobuf/PID.pb.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Effects/EffectBase.h"
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"

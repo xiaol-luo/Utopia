@@ -16,7 +16,7 @@
 #include "GameLogic/Scene/SceneModule/SceneView/ViewSnapshot.h"
 #include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"
 #include "Network/Protobuf/Battle.pb.h"
-#include "Network/Protobuf/ProtoId.pb.h"
+#include "Network/Protobuf/PID.pb.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
 #include "LuaHelps/LuaLoadFiles.h"

@@ -10,7 +10,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/NewScene.h"
-#include "Network/Protobuf/ProtoId.pb.h"
+#include "Network/Protobuf/PID.pb.h"
 #include "Common/Geometry/GeometryUtils.h"
 
 namespace GameLogic
