@@ -3,7 +3,7 @@
 
 namespace GameLogic
 {
-	static const ESUEventId EVENT_ID = ESU_FightParamChange;
+	static const ESceneEvent EVENT_ID = ESU_FightParamChange;
 	static const char *LUA_FN_NAME = "OnSceneUnitFightParamChange";
 
 	static void OnSceneUnitFightParamChange(LuaSubcribeEventRecord *record, sol::table *self,

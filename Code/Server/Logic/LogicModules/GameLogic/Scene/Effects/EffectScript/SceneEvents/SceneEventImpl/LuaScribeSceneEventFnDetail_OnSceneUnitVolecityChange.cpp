@@ -3,7 +3,7 @@
 
 namespace GameLogic
 {
-	static const ESUEventId EVENT_ID = ESU_VolecityChange;
+	static const ESceneEvent EVENT_ID = ESU_VolecityChange;
 	static const char *LUA_FN_NAME = "OnVolecityChange";
 
 	static void OnSceneUnitVolecityChange(LuaSubcribeEventRecord *record, sol::table *self,

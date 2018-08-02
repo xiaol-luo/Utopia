@@ -1,7 +1,7 @@
 #include "SceneMove.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"

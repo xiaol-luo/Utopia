@@ -1,7 +1,7 @@
 #pragma once
 
 // 场景单位事件
-enum ESUEventId
+enum ESceneEvent
 {
 	ESU_PosChange = 0,				// 位置改变
 	ESU_EnterScene,					// 进入场景
@@ -17,8 +17,8 @@ enum ESUEventId
 	ESU_SilenceChange,				// su沉默状态改变 true:atttach,  false:deattach
 	ESU_DeadChange,					// su死亡状态改变 true:atttach,  false:deattach
 	
-	ES_HpChange,					// 血量改变
-	ES_MpChange,					// 魔量改版
+	ESU_HpChange,					// 血量改变
+	ESU_MpChange,					// 魔量改版
 
 	ES_ReloadConfig,				// 重载了配置
 	ES_TestHeartBeat,				// 测试用

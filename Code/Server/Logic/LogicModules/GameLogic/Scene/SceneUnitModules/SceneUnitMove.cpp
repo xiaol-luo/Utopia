@@ -15,7 +15,7 @@
 #include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include <cstdlib>
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"

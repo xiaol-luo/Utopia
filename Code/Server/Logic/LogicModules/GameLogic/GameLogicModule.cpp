@@ -13,7 +13,7 @@
 #include "Common/Macro/AllMacro.h"
 #include "GameLogic/Scene/TestScene.h"
 #include "behaviac/behaviac.h"
-#include "Scene/Defines/SceneEventID.h"
+#include "Scene/Defines/ESceneEvent.h"
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "ServerLogics/ServerLogic.h"
 
@@ -50,6 +50,7 @@ EModuleRetCode GameLogicModule::Init(void *param)
 	WaitModuleState(EMoudleName_Log, EModuleState_Inited, false);
 	WaitModuleState(EMoudleName_Network, EModuleState_Inited, false);
 
+	m_ev_proxy = m_module_mgr->GetModule<EventModule>()->CreateProxy();
 	m_player_msg_handler->Init();
 	m_cfg_root_path = *(std::string *)param;
 	while ('/' == m_cfg_root_path.back() || '\\' == m_cfg_root_path.back())
@@ -94,6 +95,11 @@ EModuleRetCode GameLogicModule::Release()
 
 EModuleRetCode GameLogicModule::Destroy()
 {
+	if (nullptr != m_ev_proxy)
+	{
+		delete m_ev_proxy;
+		m_ev_proxy = nullptr;
+	}
 	if (nullptr != m_new_scene)
 		m_new_scene->Destroy();
 	m_player_msg_handler->Uninit();

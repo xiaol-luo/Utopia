@@ -22,6 +22,7 @@ class INetworkModule;
 class LogModule;
 class GameLogicModule;
 class NetworkAgent;
+class EventDispacherProxy;
 
 namespace GameLogic
 {
@@ -57,7 +58,7 @@ private:
 	GameLogic::NewScene *m_new_scene = nullptr;
 	std::string m_cfg_root_path;
 	std::vector<Config::CsvConfigSets *> m_expired_csv_cfg_sets;
-	
+	EventDispacherProxy *m_ev_proxy = nullptr;
 	GameLogic::NewScene * CreateScene(std::string scene_type);
 };
 

@@ -4,7 +4,7 @@
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"
 #include "ShareCode/Network/Protobuf/Battle.pb.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/NewScene.h"
 

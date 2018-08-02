@@ -13,7 +13,7 @@
 #include "GameLogic/Scene/SceneModule/SceneView/ViewSnapshot.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
 #include "Network/Protobuf/Battle.pb.h"

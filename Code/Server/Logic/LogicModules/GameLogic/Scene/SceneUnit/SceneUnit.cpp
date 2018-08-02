@@ -4,7 +4,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 

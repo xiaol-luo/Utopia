@@ -6,7 +6,7 @@
 #include "GameLogic/Scene/Defines/EffectUtils.h"
 #include "Utils/LuaUtils.h"
 #include "SolLuaBindUtils.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
 #include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"
 #include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeSceneEventFnDetail.h"

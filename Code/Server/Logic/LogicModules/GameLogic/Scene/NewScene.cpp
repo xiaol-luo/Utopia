@@ -3,7 +3,7 @@
 #include <assert.h>
 #include "SceneModule/SceneModule.h"
 #include "SceneUnit/SceneUnit.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"

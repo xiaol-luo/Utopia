@@ -3,7 +3,7 @@
 
 namespace GameLogic
 {
-	static const ESUEventId EVENT_ID = ESU_MoveStateChange;
+	static const ESceneEvent EVENT_ID = ESU_MoveStateChange;
 	static const char *LUA_FN_NAME = "OnMoveStateChange";
 
 	static void OnSceneUnitMoveStateChange(LuaSubcribeEventRecord *record, sol::table *self,

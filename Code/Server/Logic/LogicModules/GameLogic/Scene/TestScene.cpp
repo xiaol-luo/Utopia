@@ -10,7 +10,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 #include "Common/EventDispatcher/EventDispacher.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"

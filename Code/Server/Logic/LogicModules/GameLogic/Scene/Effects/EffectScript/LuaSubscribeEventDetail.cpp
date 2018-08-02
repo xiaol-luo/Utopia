@@ -1,7 +1,7 @@
 #include "LuaSubscribeEventDetail.h"
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
-#include "GameLogic/Scene/Defines/SceneEventID.h"
+#include "GameLogic/Scene/Defines/ESceneEvent.h"
 #include "Utils/LuaUtils.h"
 #include "EffectScript.h"
 #include "SceneEvents/LuaScribeEventFnDetail.h"

@@ -3,7 +3,7 @@
 
 namespace GameLogic
 {
-	static const ESUEventId EVENT_ID = ESU_PosChange;
+	static const ESceneEvent EVENT_ID = ESU_PosChange;
 	static const char *LUA_FN_NAME = "OnPosChange";
 
 	static void OnSceneUnitFightPosChange(LuaSubcribeEventRecord *record, sol::table *self,

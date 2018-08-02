@@ -5,10 +5,23 @@
 #include <google/protobuf/message.h>
 #include "Network/Protobuf/Empty.pb.h"
 #include "Common/Utils/MemoryUtil.h"
-#include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/Instruction.pb.h"
+#include "Network/Protobuf/msg.pb.h"
+#include "Network/Protobuf/test.pb.h"
+#include "Network/Protobuf/ProtoId.pb.h"
+#include "Network/Protobuf/Common.pb.h"
+#include "Network/Protobuf/Battle.pb.h"
 
 class GameLogicModule;
+class EventDispacherProxy;
+
+
+#define RegPlayerMsgHandler(id, msg_type, func) \
+	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
+
+#define RegPlayerHandler(id, func) \
+	msg_handle_descripts.push_back(new GameLogic::ClientEmptyMsgHandlerDescript(this, (int)id, &PlayerMsgHandler::func))
+
 
 namespace NetProto
 {
@@ -113,5 +126,8 @@ namespace GameLogic
 		void OnStopMove(int id, GameLogic::Player *player);
 		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
 		void OnReloadLuaScripts(int id, NetProto::ReloadLuaScripts *msg, GameLogic::Player *player);
+
+		EventDispacherProxy *m_ev_proxy = nullptr;
 	};
 }
+
