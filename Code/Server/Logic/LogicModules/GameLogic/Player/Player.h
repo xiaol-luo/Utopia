@@ -1,7 +1,7 @@
 #pragma  once 
 
 #include "Common/Define/NetworkDefine.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include <unordered_map>
 #include <memory>
 #include "protobuf/include/google/protobuf/message.h"

@@ -10,11 +10,12 @@
 #include "Network/Protobuf/test.pb.h"
 #include "Network/Utils/NetworkAgent.h"
 #include "Network/PlayerMsgHandler.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "GameLogic/Scene/TestScene.h"
 #include "behaviac/behaviac.h"
 #include "Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacher.h"
+#include "ServerLogics/ServerLogic.h"
 
 static const char * AI_CONFIG_RELATE_PATH = "AI";
 static const char * CSV_CONFIG_RELATE_PATH = "auto-csv/AutoCsvConfig";
@@ -24,7 +25,6 @@ GameLogicModule::GameLogicModule(ModuleMgr *module_mgr) : IGameLogicModule(modul
 	m_csv_cfg_sets = new Config::CsvConfigSets();
 	m_player_mgr = new GameLogic::PlayerMgr(this);
 	m_player_msg_handler = new GameLogic::PlayerMsgHandler(this);
-	m_new_scene = new GameLogic::TestScene(this);
 }
 
 GameLogicModule::~GameLogicModule()
@@ -38,7 +38,10 @@ GameLogicModule::~GameLogicModule()
 		delete m_player_mgr;
 		m_player_mgr = nullptr;
 	}
-	delete m_new_scene; m_new_scene = nullptr;
+	if (nullptr != m_new_scene)
+	{
+		delete m_new_scene; m_new_scene = nullptr;
+	}
 }
 
 EModuleRetCode GameLogicModule::Init(void *param)
@@ -68,15 +71,18 @@ EModuleRetCode GameLogicModule::Awake()
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
 
 	bool ret = m_player_mgr->Awake("0.0.0.0", 10240);
-	ret = ret && m_new_scene->Awake();
+	if (ret)
+	{
+		m_new_scene = this->CreateScene("TestScene");
+	}
+	ret = ret && m_new_scene;
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
 }
 
 EModuleRetCode GameLogicModule::Update()
 {
-	long long now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
+	long long now_ms = G_Timer->NowMs();
 	m_player_mgr->Update(now_ms);
-	// m_scene->Update(now_ms);
 	m_new_scene->Update();
 	return EModuleRetCode_Succ;
 }
@@ -88,7 +94,8 @@ EModuleRetCode GameLogicModule::Release()
 
 EModuleRetCode GameLogicModule::Destroy()
 {
-	m_new_scene->Destroy();
+	if (nullptr != m_new_scene)
+		m_new_scene->Destroy();
 	m_player_msg_handler->Uninit();
 	behaviac::Workspace::GetInstance()->Cleanup();
 	return EModuleRetCode_Succ;
@@ -109,8 +116,20 @@ void GameLogicModule::ReloadConfig()
 			m_expired_csv_cfg_sets.push_back(m_csv_cfg_sets);
 		m_csv_cfg_sets = new_cfg;
 
-		m_new_scene->GetEvDispacher()->Fire(ES_ReloadConfig);
+		if (nullptr != m_new_scene)
+			m_new_scene->GetEvDispacher()->Fire(ES_ReloadConfig);
 	}
-	GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "reload csv config {0}", ret ? "success" : "fail");
+	G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "reload csv config {0}", ret ? "success" : "fail");
+}
+
+GameLogic::NewScene * GameLogicModule::CreateScene(std::string scene_type)
+{
+	GameLogic::NewScene *scene = new GameLogic::TestScene(this);
+	bool ret = scene->Awake();
+	if (!ret)
+	{
+		delete scene; scene = nullptr;
+	}
+	return scene;
 }
 

@@ -7,7 +7,7 @@
 #include <mutex>
 #include "INetWorker.h"
 #include "event2/util.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 struct bufferevent;
 struct evconnlistener;

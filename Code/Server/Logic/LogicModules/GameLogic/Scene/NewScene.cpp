@@ -4,7 +4,7 @@
 #include "SceneModule/SceneModule.h"
 #include "SceneUnit/SceneUnit.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 #include "GameLogic/GameLogicModule.h"
@@ -20,6 +20,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSight.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
 #include "LuaHelps/LuaLoadFiles.h"
+#include "ServerLogics/ServerLogic.h"
 
 namespace GameLogic
 {
@@ -212,7 +213,7 @@ namespace GameLogic
 		if (!m_awaked)
 			return;
 
-		uint64_t now_ms = GlobalServerLogic->GetTimerModule()->NowMs();
+		uint64_t now_ms = G_Timer->NowMs();
 		if (0 == m_last_real_ms)
 		{
 			m_last_real_ms = now_ms;
@@ -265,7 +266,7 @@ namespace GameLogic
 
 	void NewScene::TestEvent(int ev_id, std::shared_ptr<SceneUnit> su)
 	{
-		GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "NewScene::TestEvent ev_id:{0} su_id:{1}", ev_id, su->GetId());
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "NewScene::TestEvent ev_id:{0} su_id:{1}", ev_id, su->GetId());
 	}
 
 	void NewScene::TestSubscribeEvents()

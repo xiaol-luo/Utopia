@@ -3,7 +3,7 @@
 class INetworkModule;
 #include <stdint.h>
 #include "Common/Define/NetworkDefine.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include <google/protobuf/message.h>
 
 class NetworkAgent

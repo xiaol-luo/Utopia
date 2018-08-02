@@ -4,7 +4,7 @@
 #include "IGameLogicModule.h"
 #include <functional>
 #include <vector>
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 namespace GameLogic 
 {
@@ -57,5 +57,7 @@ private:
 	GameLogic::NewScene *m_new_scene = nullptr;
 	std::string m_cfg_root_path;
 	std::vector<Config::CsvConfigSets *> m_expired_csv_cfg_sets;
+	
+	GameLogic::NewScene * CreateScene(std::string scene_type);
 };
 

@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include "CommonModules/Network/INetworkModule.h"
 #include "NetConnectTask.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "MemoryPool/StlAllocator.h"
 
 struct ConnectTaskThread;

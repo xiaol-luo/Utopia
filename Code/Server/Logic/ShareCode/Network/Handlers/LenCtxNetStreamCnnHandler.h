@@ -1,7 +1,7 @@
 #pragma once
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Utils/LenCtxStreamParserEx.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 class LenCtxNetStreamCnnHandler : public INetConnectHander
 {

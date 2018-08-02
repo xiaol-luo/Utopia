@@ -12,7 +12,7 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "GameLogic/Scene/Navigation/NavMesh.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
@@ -20,6 +20,7 @@
 #include "Network/Protobuf/Battle.pb.h"
 #include "Network/Protobuf/ProtoId.pb.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
+#include "ServerLogics/ServerLogic.h"
 
 namespace GameLogic
 {
@@ -307,7 +308,7 @@ namespace GameLogic
 		for (int i = 0; i < NetProto::EMoveAgentState_Max; ++i)
 			m_states[i]->Flash(fix_pos);
 		this->SetPos(fix_pos);
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, 
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT, 
 			"Flash [{}]:{:3.2f}, {:3.2f}, {:3.2f}",
 			this->GetMoveAgentState(), fix_pos.x, fix_pos.y, fix_pos.z);
 	}

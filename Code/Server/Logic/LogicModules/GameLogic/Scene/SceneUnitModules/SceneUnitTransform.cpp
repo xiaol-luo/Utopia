@@ -1,6 +1,7 @@
 #include "SceneUnitTransform.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
+#include "ServerLogics/ServerLogic.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/Defines/SceneEventID.h"
 #include "Common/EventDispatcher/EventDispacherProxy.h"
@@ -26,7 +27,7 @@ namespace GameLogic
 	{
 		if (this->CheckLoop(parent))
 		{
-			GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR,
+			G_Log->Error(LogModule::LOGGER_ID_STDERR,
 				"SetParent wiil Loop parent:{0}, child:{1}", parent->GetId(), this->GetId());
 			return false;
 		}

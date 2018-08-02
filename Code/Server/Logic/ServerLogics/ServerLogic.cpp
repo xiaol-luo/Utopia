@@ -6,7 +6,7 @@
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Network/INetworkModule.h"
 #include "Network/Utils/NetworkAgent.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 ServerLogic *server_logic = nullptr;
 const int TRY_MAX_TIMES = 100000;
@@ -30,8 +30,6 @@ bool ServerLogic::Init()
 
 	this->SetupModules();
 
-	m_timer_module = m_module_mgr->GetModule<ITimerModule>();
-
 	m_state = EServerLogicState_Init;
 	int loop_times = 0;
 	EModuleRetCode retCode = EModuleRetCode_Succ;
@@ -43,10 +41,14 @@ bool ServerLogic::Init()
 	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
 	bool ret = EModuleRetCode_Succ == retCode;
-	if (!ret) this->Quit();
+	if (!ret)
+	{
+		this->Quit();
+	}
 	else
 	{
-		m_network_agent = new NetworkAgent(this->GetNetworkModule());
+		m_network_agent = new NetworkAgent(this->GetNet());
+		m_ev_proxy = this->GetEvent()->CreateProxy();
 	}
 	return ret;
 }
@@ -85,7 +87,8 @@ void ServerLogic::Update()
 		if (EModuleRetCode_Failed == retCode)
 			this->Quit();
 
-		long long consume_ms = m_timer_module->RealNowMs() - m_timer_module->NowMs();
+		ITimerModule *timer_module = m_module_mgr->GetModule<ITimerModule>();
+		long long consume_ms = timer_module->RealNowMs() - timer_module->NowMs();
 		// GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "ServerLogic consume time {0} ms", consume_ms);
 		long long sleep_time = m_loop_span_ms - consume_ms;
 		if (sleep_time > 0)
@@ -118,11 +121,15 @@ void ServerLogic::Destroy()
 		retCode = m_module_mgr->Destroy();
 	} while (EModuleRetCode_Pending == retCode && loop_times++ < TRY_MAX_TIMES);
 
-	m_timer_module = nullptr;
 	if (nullptr != m_network_agent)
 	{
 		delete m_network_agent;
 		m_network_agent = nullptr;
+	}
+	if (nullptr != m_ev_proxy)
+	{
+		delete m_ev_proxy;
+		m_ev_proxy = nullptr;
 	}
 	this->ClearInitParams();
 }
@@ -146,17 +153,22 @@ void ServerLogic::Quit()
 	}
 }
 
-INetworkModule * ServerLogic::GetNetworkModule()
+INetworkModule * ServerLogic::GetNet()
 {
 	return m_module_mgr->GetModule<INetworkModule>();
 }
 
-ITimerModule * ServerLogic::GetTimerModule()
+ITimerModule * ServerLogic::GetTimer()
 {
 	return m_module_mgr->GetModule<ITimerModule>();
 }
 
-LogModule * ServerLogic::GetLogModule()
+LogModule * ServerLogic::GetLog()
 {
 	return m_module_mgr->GetModule<LogModule>();
+}
+
+EventModule * ServerLogic::GetEvent()
+{
+	return m_module_mgr->GetModule<EventModule>();
 }

@@ -7,9 +7,10 @@
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/Config/SceneAllConfig.h"
 #include "GameLogic/Scene/Effects/EffectConfigMgr.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
+#include "ServerLogics/ServerLogic.h"
 
 namespace GameLogic
 {
@@ -37,7 +38,7 @@ namespace GameLogic
 				std::shared_ptr<EffectBase> effect = m_scene_effects->CreateEffect(cfgId);
 				if (nullptr == effect)
 				{
-					GlobalLog->Debug(LogModule::LOGGER_ID_STDOUT, "create effect is fail id = {0}", cfgId);
+					G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "create effect is fail id = {0}", cfgId);
 					continue;
 				}
 				effect->Begin(user_effect_param);

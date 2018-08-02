@@ -13,7 +13,8 @@ enum ELoggerType
 	ELoggerType_Max,
 };
 
-LogModule::LogModule(ModuleMgr *module_mgr) : ILogModule(module_mgr)
+LogModule::LogModule(ModuleMgr *module_mgr) : 
+	IModule(module_mgr, LogModule::MODULE_NAME)
 {
 
 }
@@ -21,16 +22,6 @@ LogModule::LogModule(ModuleMgr *module_mgr) : ILogModule(module_mgr)
 LogModule::~LogModule() 
 {
 
-}
-
-void LogModule::Record(ELogLevel log_level, int log_id, std::string msg)
-{
-	Log(log_level, log_id, msg.c_str());
-}
-
-void LogModule::Record(ELogLevel log_level, int log_id, const char *msg)
-{
-	Log(log_level, log_id, msg);
 }
 
 EModuleRetCode LogModule::Init(void *param)

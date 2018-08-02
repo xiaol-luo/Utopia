@@ -2,7 +2,8 @@
 #include "GameLogic/Scene/Navigation/NavAgent.h"
 #include "Common/Geometry/Vector3.h"
 #include "Common/Geometry/Vector2.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
+#include "ServerLogics/ServerLogic.h"
 #include "CommonModules/Log/LogModule.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 
@@ -19,7 +20,7 @@ GameLogic::SceneUnitMoveToPosState::~SceneUnitMoveToPosState()
 void GameLogic::SceneUnitMoveToPosState::Enter(void * param)
 {
 	Vector3 from = m_move_agent->GetPos();
-	GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, 
+	G_Log->Debug(LogModule::LOGGER_ID_STDOUT, 
 		"SceneUnitMoveToPosState::Enter: from{:3.2f}, {:3.2f}, {:3.2f} to {:3.2f}, {:3.2f}, {:3.2f} #",
 		from.x, from.y, from.z,
 		m_desired_pos.x, m_desired_pos.y, m_desired_pos.z);

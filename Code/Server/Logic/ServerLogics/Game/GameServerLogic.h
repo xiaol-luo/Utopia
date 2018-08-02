@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ServerLogics/ServerLogic.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 namespace GameLogic
 {
@@ -21,6 +21,4 @@ public:
 protected:
 	virtual void SetupModules();
 	virtual void ClearInitParams();
-
-	std::shared_ptr<ITimerModule> m_timer_module = nullptr;
 };

@@ -1,10 +1,11 @@
 #include "Ticker.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Timer/ITimerModule.h"
+#include "ServerLogics/ServerLogic.h"
 
 float NowSecond()
 {
-	return GlobalServerLogic->GetTimerModule()->NowMs() *1.0f / ITimerModule::MS_PER_SEC;
+	return G_Timer->NowMs() *1.0f / ITimerModule::MS_PER_SEC;
 }
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "Common/Utils/MemoryUtil.h"
 #include "MemoryPool/StlAllocator.h"
 

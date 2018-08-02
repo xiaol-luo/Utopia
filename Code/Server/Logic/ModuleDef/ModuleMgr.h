@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "ModuleDef/IModule.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 class ServerLogic;
 

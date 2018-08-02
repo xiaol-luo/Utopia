@@ -1,10 +1,26 @@
 #pragma once
 
-#include "ILogModule.h"
+#include "ModuleDef/IModule.h"
+#include "spdlog/spdlog.h"
 #include <set>
 
-class LogModule : public ILogModule
+enum ELogLevel
 {
+	ELogLevel_Invalid = 0,
+	ELogLevel_Debug,
+	ELogLevel_Info,
+	ELogLevel_Warn,
+	ELogLevel_Err,
+	ELogLevel_Max
+};
+
+class LogModule : public IModule
+{
+public:
+	const static EMoudleName MODULE_NAME = EMoudleName_Log;
+	static const int LOGGER_ID_STDERR = 2;
+	static const int LOGGER_ID_STDOUT = 1;
+
 public:
 	LogModule(ModuleMgr *module_mgr);
 	virtual ~LogModule();
@@ -13,9 +29,6 @@ public:
 	virtual EModuleRetCode Update();
 	virtual EModuleRetCode Release();
 	virtual EModuleRetCode Destroy();
-
-	virtual void Record(ELogLevel log_level, int log_id, std::string msg);
-	virtual void Record(ELogLevel log_level, int log_id, const char *msg);
 
 public:
 	template <typename... Args>
@@ -66,10 +79,6 @@ public:
 		}
 	}
 
-public:
-	static const int LOGGER_ID_STDERR = 2;
-	static const int LOGGER_ID_STDOUT = 1;
-
 protected:
 	int m_logger_num = 0;
 	std::shared_ptr<spdlog::logger> *m_loggers = nullptr;
@@ -83,7 +92,4 @@ protected:
 
 	LogData *m_log_datas = nullptr;
 	int m_async_queue_size =  1024 * 16;
-
-private:
-
 };

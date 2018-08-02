@@ -1,6 +1,7 @@
 #include "LuaNet.h"
 
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
+#include "ServerLogics/ServerLogic.h"
 #include "Network/Utils/NetworkAgent.h"
 
 
@@ -13,7 +14,7 @@ namespace LuaNet
 		NetworkAgent *net_agent = server_logic->GetNetAgent();
 		if (nullptr == net_agent)
 			return false;
-		bool ret = GlobalServerLogic->GetNetAgent()->Send(netid, protocol_id, (char *)msg.c_str(), (uint32_t)msg.size());
+		bool ret = G_NetAgent->Send(netid, protocol_id, (char *)msg.c_str(), (uint32_t)msg.size());
 		return ret;
 	}
 }

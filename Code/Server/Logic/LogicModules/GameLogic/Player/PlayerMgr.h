@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "Common/Define/NetworkDefine.h"
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "MemoryPool/StlAllocator.h"
 
 class GameLogicModule;

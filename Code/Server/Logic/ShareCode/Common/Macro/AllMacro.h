@@ -1,3 +1,5 @@
 #pragma once
 
-#include "ServerLogicMacro.h"
+#include "MemoryPoolMacro.h"
+
+#include "GlobalMacro.h"

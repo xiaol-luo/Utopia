@@ -11,6 +11,7 @@ enum EMoudleName
 	EMoudleName_TIMER,
 	EMoudleName_Log,
 	EMoudleName_Network,
+	EModuleName_Event,
 	EMoudleName_GameLogic,
 	EMoudleName_Max,
 };

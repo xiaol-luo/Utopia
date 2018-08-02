@@ -3,11 +3,12 @@
 #include "CommonModules/Network/INetworkHandler.h"
 #include "Network/Handlers/LenCtxNetStreamCnnHandler.h"
 #include "Common/Utils/MemoryUtil.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include "Network/Utils/NetworkAgent.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "ServerLogics/ServerLogic.h"
 
 namespace GameLogic
 {
@@ -91,22 +92,22 @@ namespace GameLogic
 
 	void Player::Send(int protocol_id, char * msg, uint32_t msg_len)
 	{
-		GlobalServerLogic->GetNetAgent()->Send(this->GetNetId(), protocol_id, msg, msg_len);
+		G_NetAgent->Send(this->GetNetId(), protocol_id, msg, msg_len);
 	}
 
 	void Player::Send(int protocol_id, google::protobuf::Message * msg)
 	{
-		GlobalServerLogic->GetNetAgent()->Send(this->GetNetId(), protocol_id, msg);
+		G_NetAgent->Send(this->GetNetId(), protocol_id, msg);
 	}
 
 	void Player::Close()
 	{
-		GlobalServerLogic->GetNetAgent()->Close(this->GetNetId());
+		G_NetAgent->Close(this->GetNetId());
 	}
 
 	void Player::OnNetClose(int err_num)
 	{
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "{0} is close, errno {1}", this->m_cnn_handler->GetNetId(), err_num);
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "{0} is close, errno {1}", this->m_cnn_handler->GetNetId(), err_num);
 		if (nullptr != m_scene)
 		{
 			m_scene->OnPlayerDisconnect(this);

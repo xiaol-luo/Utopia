@@ -1,11 +1,11 @@
 #pragma once
 
 #include "ModuleDef/ModuleMgr.h"
-
-class ITimerModule;
-class INetworkModule;
-class LogModule;
-class NetworkAgent;
+#include "CommonModules/Event/EventModule.h"
+#include "CommonModules/Log/LogModule.h"
+#include "CommonModules/Timer/ITimerModule.h"
+#include "CommonModules/Network/INetworkModule.h"
+#include "ShareCode/Network/Utils/NetworkAgent.h"
 
 enum EServerLogicState
 {
@@ -31,9 +31,10 @@ public:
 	ModuleMgr * GetModuleMgr() { return m_module_mgr; }
 
 	
-	INetworkModule * GetNetworkModule();
-	ITimerModule * GetTimerModule();
-	LogModule * GetLogModule();
+	INetworkModule * GetNet();
+	ITimerModule * GetTimer();
+	LogModule * GetLog();
+	EventModule * GetEvent();
 	NetworkAgent * GetNetAgent() { return m_network_agent; }
 
 protected:
@@ -50,7 +51,7 @@ protected:
 	int m_loop_span_ms = 100;
 	void * m_init_params[EMoudleName_Max];
 
-	ITimerModule *m_timer_module;
 	NetworkAgent *m_network_agent = nullptr;
+	EventDispacherProxy *m_ev_proxy = nullptr;
 };
 

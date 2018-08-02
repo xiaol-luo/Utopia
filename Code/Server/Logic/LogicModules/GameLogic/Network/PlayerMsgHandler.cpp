@@ -9,7 +9,7 @@
 #include "Network/Utils/NetworkAgent.h"
 #include "Network/Protobuf/Battle.pb.h"
 #include "Common/Utils/AutoReleaseUtil.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 #include <memory>
 #include "Common/Geometry/Vector2.h"
@@ -22,6 +22,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "LuaHelps/LuaLoadFiles.h"
+#include "ServerLogics/ServerLogic.h"
 
 #define RegPlayerMsgHandler(id, msg_type, func) \
 	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
@@ -121,7 +122,7 @@ namespace GameLogic
 					if (!handler_descript->Msg()->ParsePartialFromArray(protobuf_data, protobuf_len))
 					{
 						is_ok = false;
-						GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR + 1, "c++ msg parse from net buffer fail for protocol id {}", protocol_id);
+						G_Log->Error(LogModule::LOGGER_ID_STDERR + 1, "c++ msg parse from net buffer fail for protocol id {}", protocol_id);
 						break;
 					}
 				}
@@ -150,21 +151,21 @@ namespace GameLogic
 			if (!is_msg_handled)
 			{
 				is_ok = false;
-				GlobalServerLogic->GetLogModule()->Error(LogModule::LOGGER_ID_STDERR + 1, "not handler function for protocol id {}", protocol_id);
+				G_Log->Error(LogModule::LOGGER_ID_STDERR + 1, "not handler function for protocol id {}", protocol_id);
 				break;
 			}
 
 		} while (false);
 		if (!is_ok)
 		{
-			GlobalServerLogic->GetNetAgent()->Close(player->GetNetId());
+			G_NetAgent->Close(player->GetNetId());
 		}
 	}
 
 	void PlayerMsgHandler::OnHandlePlayerPingMsg(int protocol_id, NetProto::Ping *msg, GameLogic::Player *player)
 	{
 		NetProto::Pong *pong = google::protobuf::Arena::CreateMessage<NetProto::Pong>(m_protobuf_arena);
-		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_Pong, pong);
+		G_NetAgent->Send(player->GetNetId(), NetProto::PID_Pong, pong);
 	}
 
 	void PlayerMsgHandler::OnHandlePlayerPongMsg(int protocol_id, NetProto::Pong *msg, GameLogic::Player *player)
@@ -207,7 +208,7 @@ namespace GameLogic
 			rsp_msg->set_red_hero_id(redCampHeros[0]->GetId());
 		if (blueCampHeros.size() > 0)
 			rsp_msg->set_blue_hero_id(blueCampHeros[0]->GetId());
-		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_RspFreeHero, rsp_msg);
+		G_NetAgent->Send(player->GetNetId(), NetProto::PID_RspFreeHero, rsp_msg);
 	}
 
 	void PlayerMsgHandler::OnSelectHeroReq(int protocol_id, NetProto::SelectHeroReq *msg, GameLogic::Player *player)
@@ -218,7 +219,7 @@ namespace GameLogic
 		rsp_msg->set_is_succ(nullptr != hero);
 		if (nullptr != hero)
 			rsp_msg->set_hero_id(hero->GetId());
-		GlobalServerLogic->GetNetAgent()->Send(player->GetNetId(), NetProto::PID_SelectHeroRsp, rsp_msg);
+		G_NetAgent->Send(player->GetNetId(), NetProto::PID_SelectHeroRsp, rsp_msg);
 	}
 
 	void PlayerMsgHandler::OnLoadSceneComplete(int id, GameLogic::Player * player)
@@ -248,7 +249,7 @@ namespace GameLogic
 		if (nullptr == su_move)
 			return;
 		su_move->TryMoveToPos(Vector3(msg->pos().x(), 0, msg->pos().y()));
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "OnMoveToPos {0}, {1}", msg->pos().x(), msg->pos().y());
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "OnMoveToPos {0}, {1}", msg->pos().x(), msg->pos().y());
 	}
 	
 	void PlayerMsgHandler::OnStopMove(int id, GameLogic::Player * player)

@@ -2,7 +2,7 @@
 
 #include "Common/Define/NetworkDefine.h"
 #include <memory>
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 
 enum ENetworkHandlerType
 {

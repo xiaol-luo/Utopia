@@ -1,7 +1,8 @@
 #include "ViewSnapshot.h"
 #include "ViewGrid.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
+#include "ServerLogics/ServerLogic.h"
 
 namespace GameLogic
 {
@@ -120,15 +121,15 @@ namespace GameLogic
 
 	void ViewSnapshotDifference::PrintLog()
 	{
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT,
 			"-----------------------------------------------------------------------------");
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT,
 			"ViewSnapshotDifference miss_scene_objs {0}", miss_su.size());
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT,
 			"ViewSnapshotDifference more_scene_objs {0}", more_su.size());
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT,
 			"ViewSnapshotDifference miss_view_grids {0}", miss_view_grids.size());
-		GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT,
+		G_Log->Debug(LogModule::LOGGER_ID_STDOUT,
 			"ViewSnapshotDifference more_view_grids {0}", more_view_grids.size());
 	}
 }

@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include "CommonModules/Event/EventModule.h"
 #include "CommonModules/Log/LogModule.h"
 #include "CommonModules/Timer/TimerModule.h"
 #include "CommonModules/Network/Impl/NetworkModule.h"
@@ -45,6 +46,7 @@ void GameServerLogic::ClearInitParams()
 void GameServerLogic::SetupModules()
 {
 	m_module_mgr->SetModule(new LogModule(m_module_mgr));
+	m_module_mgr->SetModule(new EventModule(m_module_mgr));
 	m_module_mgr->SetModule(new GameLogicModule(m_module_mgr));
 	m_module_mgr->SetModule(new TimerModule(m_module_mgr));
 	m_module_mgr->SetModule(new NetworkModule(m_module_mgr));

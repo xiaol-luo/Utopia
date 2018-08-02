@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 #include <set>
-#include "Common/Macro/MemoryPoolMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "MemoryPool/StlAllocator.h"
 
 class TimerModule : public ITimerModule

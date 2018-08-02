@@ -4,8 +4,9 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
 #include "GameLogic/Scene/NewScene.h"
 #include "GameLogic/Scene/SceneUnit/SceneUnit.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
+#include "ServerLogics/ServerLogic.h"
 
 GameLogic::SceneUnitMoveImmobilizedState::SceneUnitMoveImmobilizedState(SceneUnitMove *move_agent) : SceneUnitMoveState(move_agent, NetProto::EMoveAgentState_Immobilized)
 {
@@ -19,7 +20,7 @@ GameLogic::SceneUnitMoveImmobilizedState::~SceneUnitMoveImmobilizedState()
 
 void GameLogic::SceneUnitMoveImmobilizedState::Enter(void * param)
 {
-	GlobalServerLogic->GetLogModule()->Debug(LogModule::LOGGER_ID_STDOUT, "SceneUnitMoveImmobilizedState::Enter");
+	G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "SceneUnitMoveImmobilizedState::Enter");
 	m_is_done = false;
 	m_ticker.RestartWithEndTimestamp(m_end_timestamp_ms * 0.001);
 	m_is_done = !m_ticker.InCd();

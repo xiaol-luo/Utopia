@@ -10,7 +10,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitSkills/SceneUnitSkills.h"
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "Common/Geometry/GeometryUtils.h"
-#include "Common/Macro/ServerLogicMacro.h"
+#include "Common/Macro/AllMacro.h"
 #include "CommonModules/Log/LogModule.h"
 
 namespace GameLogic
