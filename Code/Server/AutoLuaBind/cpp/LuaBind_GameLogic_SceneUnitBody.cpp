@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneView/SceneView.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
+#include "GameLogic/Scene/SceneModule/SceneView/SceneView.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"	
 #include "Common/Geometry/GeometryDefine.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
+#include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 
 namespace SolLuaBind
 {

@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Libs/OwnLibs/MemoryPool/MemoryPoolMgr.h"	
+#include "MemoryPool/MemoryPoolMgr.h"	
 #include "Common/Utils/MemoryUtil.h"	
 #include "google/protobuf/arena.h"
 

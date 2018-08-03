@@ -1,6 +1,6 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"
+#include "GameLogic/Scene/Skills/SkillConfigBase.h"
 
 namespace SolLuaBind
 {

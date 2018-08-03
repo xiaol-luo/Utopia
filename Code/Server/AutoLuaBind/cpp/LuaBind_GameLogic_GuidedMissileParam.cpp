@@ -1,14 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
 #include "Common/Utils/Ticker.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Skills/Skill.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "GameLogic/Scene/Skills/Skill.h"	
 #include "Common/Geometry/Vector3.h"	
-#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "Common/Geometry/Vector2.h"
+#include "GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Common/Geometry/Vector2.h"	
+#include "GameLogic/Scene/Defines/EffectDefine.h"
 
 namespace SolLuaBind
 {

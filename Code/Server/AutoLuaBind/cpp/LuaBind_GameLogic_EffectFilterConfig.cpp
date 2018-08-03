@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"	
-#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectFilterConfig.h"	
-#include "Config/AutoCsvCode/CsvConfigSets.h"
+#include "CsvConfigSets.h"	
+#include "GameLogic/Scene/Effects/EffectFilterConfig.h"	
+#include "effect/CsvEffectFilterConfig.h"
 
 namespace SolLuaBind
 {
