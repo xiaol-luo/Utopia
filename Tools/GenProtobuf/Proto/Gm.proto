@@ -8,3 +8,12 @@ message ReloadLuaScripts
 	repeated string scripts = 1;
 }
 
+message RecreateSceneReq
+{
+	string scene_name = 1;
+}
+
+message RecreateSceneRsp
+{
+	bool is_succ = 1;
+}

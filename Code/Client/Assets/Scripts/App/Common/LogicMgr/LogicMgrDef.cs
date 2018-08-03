@@ -6,6 +6,7 @@ namespace Utopia.Logic
     public enum ELogicName
     {
         SelectHero,
+        GameNet,
         Count,
     }
 }

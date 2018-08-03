@@ -10,7 +10,7 @@
 
 namespace GameLogic
 {
-	const uint64_t PlayerMgr::BROADCAST_NETID = 0;
+	const NetId PlayerMgr::BROADCAST_NETID = 0;
 
 	class PlayerListenHandler : public INetListenHander
 	{

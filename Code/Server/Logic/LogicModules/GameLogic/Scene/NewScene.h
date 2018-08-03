@@ -108,7 +108,6 @@ namespace GameLogic
 		void SendViewCamp(EViewCamp view_camp, const std::vector<SyncClientMsg> &msgs, bool to_ob=true);
 
 		std::array<std::unordered_map<NetId, Player *>, EViewCamp_Observer + 1> m_player_view_camps;
-		// std::unordered_map<NetId, Player *> m_player_view_camps[EViewCamp_Observer + 1];
 		
 		template <typename T>
 		T * CreateProtobuf()

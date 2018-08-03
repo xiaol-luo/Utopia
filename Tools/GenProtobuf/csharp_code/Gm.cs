@@ -25,11 +25,15 @@ namespace NetProto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CghHbS5wcm90bxIITmV0UHJvdG8iIwoQUmVsb2FkTHVhU2NyaXB0cxIPCgdz",
-            "Y3JpcHRzGAEgAygJQgP4AQFiBnByb3RvMw=="));
+            "Y3JpcHRzGAEgAygJIiYKEFJlY3JlYXRlU2NlbmVSZXESEgoKc2NlbmVfbmFt",
+            "ZRgBIAEoCSIjChBSZWNyZWF0ZVNjZW5lUnNwEg8KB2lzX3N1Y2MYASABKAhC",
+            "A/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ReloadLuaScripts), global::NetProto.ReloadLuaScripts.Parser, new[]{ "Scripts" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ReloadLuaScripts), global::NetProto.ReloadLuaScripts.Parser, new[]{ "Scripts" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.RecreateSceneReq), global::NetProto.RecreateSceneReq.Parser, new[]{ "SceneName" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.RecreateSceneRsp), global::NetProto.RecreateSceneRsp.Parser, new[]{ "IsSucc" }, null, null, null)
           }));
     }
     #endregion
@@ -149,6 +153,264 @@ namespace NetProto {
             break;
           case 10: {
             scripts_.AddEntriesFrom(input, _repeated_scripts_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RecreateSceneReq : pb::IMessage<RecreateSceneReq> {
+    private static readonly pb::MessageParser<RecreateSceneReq> _parser = new pb::MessageParser<RecreateSceneReq>(() => new RecreateSceneReq());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecreateSceneReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.GmReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecreateSceneReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecreateSceneReq(RecreateSceneReq other) : this() {
+      sceneName_ = other.sceneName_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecreateSceneReq Clone() {
+      return new RecreateSceneReq(this);
+    }
+
+    /// <summary>Field number for the "scene_name" field.</summary>
+    public const int SceneNameFieldNumber = 1;
+    private string sceneName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SceneName {
+      get { return sceneName_; }
+      set {
+        sceneName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecreateSceneReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecreateSceneReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SceneName != other.SceneName) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SceneName.Length != 0) hash ^= SceneName.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SceneName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SceneName);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SceneName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SceneName);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecreateSceneReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SceneName.Length != 0) {
+        SceneName = other.SceneName;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            SceneName = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RecreateSceneRsp : pb::IMessage<RecreateSceneRsp> {
+    private static readonly pb::MessageParser<RecreateSceneRsp> _parser = new pb::MessageParser<RecreateSceneRsp>(() => new RecreateSceneRsp());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RecreateSceneRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.GmReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecreateSceneRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecreateSceneRsp(RecreateSceneRsp other) : this() {
+      isSucc_ = other.isSucc_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RecreateSceneRsp Clone() {
+      return new RecreateSceneRsp(this);
+    }
+
+    /// <summary>Field number for the "is_succ" field.</summary>
+    public const int IsSuccFieldNumber = 1;
+    private bool isSucc_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsSucc {
+      get { return isSucc_; }
+      set {
+        isSucc_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RecreateSceneRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RecreateSceneRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (IsSucc != other.IsSucc) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (IsSucc != false) hash ^= IsSucc.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (IsSucc != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsSucc);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (IsSucc != false) {
+        size += 1 + 1;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RecreateSceneRsp other) {
+      if (other == null) {
+        return;
+      }
+      if (other.IsSucc != false) {
+        IsSucc = other.IsSucc;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            IsSucc = input.ReadBool();
             break;
           }
         }

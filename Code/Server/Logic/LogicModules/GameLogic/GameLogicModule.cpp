@@ -16,6 +16,8 @@
 #include "Scene/Defines/ESceneEvent.h"
 #include "Common/EventDispatcher/EventDispacher.h"
 #include "ServerLogics/ServerLogic.h"
+#include "GameLogic/Defines/EGlobalEvent.h"
+#include <functional>
 
 static const char * AI_CONFIG_RELATE_PATH = "AI";
 static const char * CSV_CONFIG_RELATE_PATH = "auto-csv/AutoCsvConfig";
@@ -70,6 +72,8 @@ EModuleRetCode GameLogicModule::Init(void *param)
 EModuleRetCode GameLogicModule::Awake()
 {
 	WaitModuleState(EMoudleName_Network, EModuleState_Awaked, false);
+
+	m_ev_proxy->Subscribe<std::string>(EGE_GmRecreateScene, std::bind(&GameLogicModule::GmRecreateScene, this, std::placeholders::_1));
 
 	bool ret = m_player_mgr->Awake("0.0.0.0", 10240);
 	if (ret)

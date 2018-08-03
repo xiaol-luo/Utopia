@@ -13,6 +13,12 @@
 static const char *NET_HANDLER_NAMESPACE = "net_handler";
 static const char *NET_PLAYER_HANDLER_FN = "OnPlayerMsg";
 
+#define RegPlayerMsgHandler(id, msg_type, func) \
+	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
+
+#define RegPlayerHandler(id, func) \
+	msg_handle_descripts.push_back(new GameLogic::ClientEmptyMsgHandlerDescript(this, (int)id, &PlayerMsgHandler::func))
+
 namespace GameLogic
 {
 	void PlayerMsgHandler::Init()
@@ -25,6 +31,8 @@ namespace GameLogic
 		std::vector<GameLogic::IClientMsgHandlerDescript *> msg_handle_descripts;
 		RegPlayerMsgHandler(NetProto::PID_Ping, NetProto::Ping, OnHandlePlayerPingMsg);
 		RegPlayerMsgHandler(NetProto::PID_Pong, NetProto::Pong, OnHandlePlayerPongMsg);
+
+		// Scene
 		RegPlayerHandler(NetProto::PID_QueryFreeHero, OnQueryFreeHero);
 		RegPlayerMsgHandler(NetProto::PID_SelectHeroReq, NetProto::SelectHeroReq, OnSelectHeroReq);
 		RegPlayerHandler(NetProto::PID_LoadSceneComplete, OnLoadSceneComplete);
@@ -32,7 +40,10 @@ namespace GameLogic
 		RegPlayerMsgHandler(NetProto::PID_MoveToPos, NetProto::MoveToPos, OnMoveToPos);
 		RegPlayerHandler(NetProto::PID_StopMove, OnStopMove);
 		RegPlayerMsgHandler(NetProto::PID_BattleOperaReq, NetProto::BattleOperation, OnHandleBattleOperation);
+
+		// GM
 		RegPlayerMsgHandler(NetProto::PID_ReloadLuaScripts, NetProto::ReloadLuaScripts, OnReloadLuaScripts);
+		RegPlayerMsgHandler(NetProto::PID_RecreateSceneReq, NetProto::RecreateSceneReq, OnGmRecreateScene);
 
 		for (auto desc : msg_handle_descripts)
 		{

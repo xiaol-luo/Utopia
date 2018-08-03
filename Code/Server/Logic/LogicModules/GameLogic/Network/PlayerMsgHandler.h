@@ -15,14 +15,6 @@
 class GameLogicModule;
 class EventDispacherProxy;
 
-
-#define RegPlayerMsgHandler(id, msg_type, func) \
-	msg_handle_descripts.push_back(new GameLogic::ClientMsgHandlerDescript<msg_type>(this, (int)id, &PlayerMsgHandler::func))
-
-#define RegPlayerHandler(id, func) \
-	msg_handle_descripts.push_back(new GameLogic::ClientEmptyMsgHandlerDescript(this, (int)id, &PlayerMsgHandler::func))
-
-
 namespace NetProto
 {
 	class Ping;
@@ -114,6 +106,7 @@ namespace GameLogic
 		google::protobuf::Arena *m_protobuf_arena = nullptr;
 		std::string m_tmp_lua_msg_buf;
 		sol::protected_function m_lua_msg_handler_fn;
+		EventDispacherProxy *m_ev_proxy = nullptr;
 
 	protected:
 		void OnHandlePlayerPingMsg(int protocol_id, NetProto::Ping *msg, GameLogic::Player *player);
@@ -125,9 +118,10 @@ namespace GameLogic
 		void OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player *player);
 		void OnStopMove(int id, GameLogic::Player *player);
 		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
+		
+		// Gm
 		void OnReloadLuaScripts(int id, NetProto::ReloadLuaScripts *msg, GameLogic::Player *player);
-
-		EventDispacherProxy *m_ev_proxy = nullptr;
+		void OnGmRecreateScene(int id, NetProto::RecreateSceneReq *msg, GameLogic::Player *player);
 	};
 }
 

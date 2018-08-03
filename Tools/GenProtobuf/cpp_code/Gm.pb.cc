@@ -25,6 +25,16 @@ class ReloadLuaScriptsDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<ReloadLuaScripts>
       _instance;
 } _ReloadLuaScripts_default_instance_;
+class RecreateSceneReqDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<RecreateSceneReq>
+      _instance;
+} _RecreateSceneReq_default_instance_;
+class RecreateSceneRspDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<RecreateSceneRsp>
+      _instance;
+} _RecreateSceneRsp_default_instance_;
 }  // namespace NetProto
 namespace protobuf_Gm_2eproto {
 static void InitDefaultsReloadLuaScripts() {
@@ -41,11 +51,41 @@ static void InitDefaultsReloadLuaScripts() {
 ::google::protobuf::internal::SCCInfo<0> scc_info_ReloadLuaScripts =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsReloadLuaScripts}, {}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_ReloadLuaScripts.base);
+static void InitDefaultsRecreateSceneReq() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NetProto::_RecreateSceneReq_default_instance_;
+    new (ptr) ::NetProto::RecreateSceneReq();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NetProto::RecreateSceneReq::InitAsDefaultInstance();
 }
 
-::google::protobuf::Metadata file_level_metadata[1];
+::google::protobuf::internal::SCCInfo<0> scc_info_RecreateSceneReq =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsRecreateSceneReq}, {}};
+
+static void InitDefaultsRecreateSceneRsp() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::NetProto::_RecreateSceneRsp_default_instance_;
+    new (ptr) ::NetProto::RecreateSceneRsp();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::NetProto::RecreateSceneRsp::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_RecreateSceneRsp =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsRecreateSceneRsp}, {}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_ReloadLuaScripts.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_RecreateSceneReq.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_RecreateSceneRsp.base);
+}
+
+::google::protobuf::Metadata file_level_metadata[3];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
@@ -54,13 +94,29 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NetProto::ReloadLuaScripts, scripts_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NetProto::RecreateSceneReq, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NetProto::RecreateSceneReq, scene_name_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NetProto::RecreateSceneRsp, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::NetProto::RecreateSceneRsp, is_succ_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::NetProto::ReloadLuaScripts)},
+  { 6, -1, sizeof(::NetProto::RecreateSceneReq)},
+  { 12, -1, sizeof(::NetProto::RecreateSceneRsp)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_ReloadLuaScripts_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_RecreateSceneReq_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::NetProto::_RecreateSceneRsp_default_instance_),
 };
 
 static void protobuf_AssignDescriptors() {
@@ -78,17 +134,19 @@ static void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 3);
 }
 
 static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\010Gm.proto\022\010NetProto\"#\n\020ReloadLuaScripts"
-      "\022\017\n\007scripts\030\001 \003(\tB\003\370\001\001b\006proto3"
+      "\022\017\n\007scripts\030\001 \003(\t\"&\n\020RecreateSceneReq\022\022\n"
+      "\nscene_name\030\001 \001(\t\"#\n\020RecreateSceneRsp\022\017\n"
+      "\007is_succ\030\001 \001(\010B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 70);
+      descriptor, 147);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Gm.proto", &protobuf_RegisterTypes);
 }
@@ -371,12 +429,541 @@ void ReloadLuaScripts::InternalSwap(ReloadLuaScripts* other) {
 }
 
 
+// ===================================================================
+
+void RecreateSceneReq::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int RecreateSceneReq::kSceneNameFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+RecreateSceneReq::RecreateSceneReq()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Gm_2eproto::scc_info_RecreateSceneReq.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NetProto.RecreateSceneReq)
+}
+RecreateSceneReq::RecreateSceneReq(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  ::google::protobuf::internal::InitSCC(&protobuf_Gm_2eproto::scc_info_RecreateSceneReq.base);
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:NetProto.RecreateSceneReq)
+}
+RecreateSceneReq::RecreateSceneReq(const RecreateSceneReq& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  scene_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.scene_name().size() > 0) {
+    scene_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.scene_name(),
+      GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(copy_constructor:NetProto.RecreateSceneReq)
+}
+
+void RecreateSceneReq::SharedCtor() {
+  scene_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+RecreateSceneReq::~RecreateSceneReq() {
+  // @@protoc_insertion_point(destructor:NetProto.RecreateSceneReq)
+  SharedDtor();
+}
+
+void RecreateSceneReq::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() == NULL);
+  scene_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void RecreateSceneReq::ArenaDtor(void* object) {
+  RecreateSceneReq* _this = reinterpret_cast< RecreateSceneReq* >(object);
+  (void)_this;
+}
+void RecreateSceneReq::RegisterArenaDtor(::google::protobuf::Arena*) {
+}
+void RecreateSceneReq::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* RecreateSceneReq::descriptor() {
+  ::protobuf_Gm_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_Gm_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const RecreateSceneReq& RecreateSceneReq::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_Gm_2eproto::scc_info_RecreateSceneReq.base);
+  return *internal_default_instance();
+}
+
+
+void RecreateSceneReq::Clear() {
+// @@protoc_insertion_point(message_clear_start:NetProto.RecreateSceneReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  scene_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  _internal_metadata_.Clear();
+}
+
+bool RecreateSceneReq::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NetProto.RecreateSceneReq)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string scene_name = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_scene_name()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->scene_name().data(), static_cast<int>(this->scene_name().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "NetProto.RecreateSceneReq.scene_name"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NetProto.RecreateSceneReq)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NetProto.RecreateSceneReq)
+  return false;
+#undef DO_
+}
+
+void RecreateSceneReq::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NetProto.RecreateSceneReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string scene_name = 1;
+  if (this->scene_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->scene_name().data(), static_cast<int>(this->scene_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "NetProto.RecreateSceneReq.scene_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->scene_name(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NetProto.RecreateSceneReq)
+}
+
+::google::protobuf::uint8* RecreateSceneReq::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.RecreateSceneReq)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string scene_name = 1;
+  if (this->scene_name().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->scene_name().data(), static_cast<int>(this->scene_name().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "NetProto.RecreateSceneReq.scene_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->scene_name(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.RecreateSceneReq)
+  return target;
+}
+
+size_t RecreateSceneReq::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NetProto.RecreateSceneReq)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // string scene_name = 1;
+  if (this->scene_name().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->scene_name());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RecreateSceneReq::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.RecreateSceneReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RecreateSceneReq* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const RecreateSceneReq>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.RecreateSceneReq)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.RecreateSceneReq)
+    MergeFrom(*source);
+  }
+}
+
+void RecreateSceneReq::MergeFrom(const RecreateSceneReq& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.RecreateSceneReq)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.scene_name().size() > 0) {
+    set_scene_name(from.scene_name());
+  }
+}
+
+void RecreateSceneReq::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.RecreateSceneReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RecreateSceneReq::CopyFrom(const RecreateSceneReq& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.RecreateSceneReq)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RecreateSceneReq::IsInitialized() const {
+  return true;
+}
+
+void RecreateSceneReq::Swap(RecreateSceneReq* other) {
+  if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    RecreateSceneReq* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void RecreateSceneReq::UnsafeArenaSwap(RecreateSceneReq* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
+  InternalSwap(other);
+}
+void RecreateSceneReq::InternalSwap(RecreateSceneReq* other) {
+  using std::swap;
+  scene_name_.Swap(&other->scene_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata RecreateSceneReq::GetMetadata() const {
+  protobuf_Gm_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_Gm_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void RecreateSceneRsp::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int RecreateSceneRsp::kIsSuccFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+RecreateSceneRsp::RecreateSceneRsp()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_Gm_2eproto::scc_info_RecreateSceneRsp.base);
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:NetProto.RecreateSceneRsp)
+}
+RecreateSceneRsp::RecreateSceneRsp(::google::protobuf::Arena* arena)
+  : ::google::protobuf::Message(),
+  _internal_metadata_(arena) {
+  ::google::protobuf::internal::InitSCC(&protobuf_Gm_2eproto::scc_info_RecreateSceneRsp.base);
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:NetProto.RecreateSceneRsp)
+}
+RecreateSceneRsp::RecreateSceneRsp(const RecreateSceneRsp& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  is_succ_ = from.is_succ_;
+  // @@protoc_insertion_point(copy_constructor:NetProto.RecreateSceneRsp)
+}
+
+void RecreateSceneRsp::SharedCtor() {
+  is_succ_ = false;
+}
+
+RecreateSceneRsp::~RecreateSceneRsp() {
+  // @@protoc_insertion_point(destructor:NetProto.RecreateSceneRsp)
+  SharedDtor();
+}
+
+void RecreateSceneRsp::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() == NULL);
+}
+
+void RecreateSceneRsp::ArenaDtor(void* object) {
+  RecreateSceneRsp* _this = reinterpret_cast< RecreateSceneRsp* >(object);
+  (void)_this;
+}
+void RecreateSceneRsp::RegisterArenaDtor(::google::protobuf::Arena*) {
+}
+void RecreateSceneRsp::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ::google::protobuf::Descriptor* RecreateSceneRsp::descriptor() {
+  ::protobuf_Gm_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_Gm_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const RecreateSceneRsp& RecreateSceneRsp::default_instance() {
+  ::google::protobuf::internal::InitSCC(&protobuf_Gm_2eproto::scc_info_RecreateSceneRsp.base);
+  return *internal_default_instance();
+}
+
+
+void RecreateSceneRsp::Clear() {
+// @@protoc_insertion_point(message_clear_start:NetProto.RecreateSceneRsp)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  is_succ_ = false;
+  _internal_metadata_.Clear();
+}
+
+bool RecreateSceneRsp::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:NetProto.RecreateSceneRsp)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // bool is_succ = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &is_succ_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:NetProto.RecreateSceneRsp)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:NetProto.RecreateSceneRsp)
+  return false;
+#undef DO_
+}
+
+void RecreateSceneRsp::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:NetProto.RecreateSceneRsp)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool is_succ = 1;
+  if (this->is_succ() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->is_succ(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:NetProto.RecreateSceneRsp)
+}
+
+::google::protobuf::uint8* RecreateSceneRsp::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:NetProto.RecreateSceneRsp)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool is_succ = 1;
+  if (this->is_succ() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->is_succ(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:NetProto.RecreateSceneRsp)
+  return target;
+}
+
+size_t RecreateSceneRsp::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:NetProto.RecreateSceneRsp)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // bool is_succ = 1;
+  if (this->is_succ() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RecreateSceneRsp::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:NetProto.RecreateSceneRsp)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RecreateSceneRsp* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const RecreateSceneRsp>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:NetProto.RecreateSceneRsp)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:NetProto.RecreateSceneRsp)
+    MergeFrom(*source);
+  }
+}
+
+void RecreateSceneRsp::MergeFrom(const RecreateSceneRsp& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:NetProto.RecreateSceneRsp)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.is_succ() != 0) {
+    set_is_succ(from.is_succ());
+  }
+}
+
+void RecreateSceneRsp::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:NetProto.RecreateSceneRsp)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RecreateSceneRsp::CopyFrom(const RecreateSceneRsp& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NetProto.RecreateSceneRsp)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RecreateSceneRsp::IsInitialized() const {
+  return true;
+}
+
+void RecreateSceneRsp::Swap(RecreateSceneRsp* other) {
+  if (other == this) return;
+  if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
+    InternalSwap(other);
+  } else {
+    RecreateSceneRsp* temp = New(GetArenaNoVirtual());
+    temp->MergeFrom(*other);
+    other->CopyFrom(*this);
+    InternalSwap(temp);
+    if (GetArenaNoVirtual() == NULL) {
+      delete temp;
+    }
+  }
+}
+void RecreateSceneRsp::UnsafeArenaSwap(RecreateSceneRsp* other) {
+  if (other == this) return;
+  GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
+  InternalSwap(other);
+}
+void RecreateSceneRsp::InternalSwap(RecreateSceneRsp* other) {
+  using std::swap;
+  swap(is_succ_, other->is_succ_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+}
+
+::google::protobuf::Metadata RecreateSceneRsp::GetMetadata() const {
+  protobuf_Gm_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_Gm_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace NetProto
 namespace google {
 namespace protobuf {
 template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::ReloadLuaScripts* Arena::CreateMaybeMessage< ::NetProto::ReloadLuaScripts >(Arena* arena) {
   return Arena::CreateMessageInternal< ::NetProto::ReloadLuaScripts >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::RecreateSceneReq* Arena::CreateMaybeMessage< ::NetProto::RecreateSceneReq >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::NetProto::RecreateSceneReq >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::NetProto::RecreateSceneRsp* Arena::CreateMaybeMessage< ::NetProto::RecreateSceneRsp >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::NetProto::RecreateSceneRsp >(arena);
 }
 }  // namespace protobuf
 }  // namespace google

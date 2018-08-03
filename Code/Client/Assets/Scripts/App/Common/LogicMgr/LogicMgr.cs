@@ -13,6 +13,7 @@ namespace Utopia.Logic
         public LogicMgr()
         {
             this.AddModuleHelper<SelectHero>();
+            this.AddModuleHelper<GameNet>();
         }
 
         protected void AddModuleHelper<T>() where T : LogicBase, new()

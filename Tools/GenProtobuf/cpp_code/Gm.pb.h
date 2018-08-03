@@ -38,7 +38,7 @@ namespace protobuf_Gm_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[1];
+  static const ::google::protobuf::internal::ParseTable schema[3];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -46,12 +46,20 @@ struct TableStruct {
 void AddDescriptors();
 }  // namespace protobuf_Gm_2eproto
 namespace NetProto {
+class RecreateSceneReq;
+class RecreateSceneReqDefaultTypeInternal;
+extern RecreateSceneReqDefaultTypeInternal _RecreateSceneReq_default_instance_;
+class RecreateSceneRsp;
+class RecreateSceneRspDefaultTypeInternal;
+extern RecreateSceneRspDefaultTypeInternal _RecreateSceneRsp_default_instance_;
 class ReloadLuaScripts;
 class ReloadLuaScriptsDefaultTypeInternal;
 extern ReloadLuaScriptsDefaultTypeInternal _ReloadLuaScripts_default_instance_;
 }  // namespace NetProto
 namespace google {
 namespace protobuf {
+template<> ::NetProto::RecreateSceneReq* Arena::CreateMaybeMessage<::NetProto::RecreateSceneReq>(Arena*);
+template<> ::NetProto::RecreateSceneRsp* Arena::CreateMaybeMessage<::NetProto::RecreateSceneRsp>(Arena*);
 template<> ::NetProto::ReloadLuaScripts* Arena::CreateMaybeMessage<::NetProto::ReloadLuaScripts>(Arena*);
 }  // namespace protobuf
 }  // namespace google
@@ -191,6 +199,259 @@ class ReloadLuaScripts : public ::google::protobuf::Message /* @@protoc_insertio
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_Gm_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class RecreateSceneReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.RecreateSceneReq) */ {
+ public:
+  RecreateSceneReq();
+  virtual ~RecreateSceneReq();
+
+  RecreateSceneReq(const RecreateSceneReq& from);
+
+  inline RecreateSceneReq& operator=(const RecreateSceneReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  RecreateSceneReq(RecreateSceneReq&& from) noexcept
+    : RecreateSceneReq() {
+    *this = ::std::move(from);
+  }
+
+  inline RecreateSceneReq& operator=(RecreateSceneReq&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const final {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const final {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RecreateSceneReq& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RecreateSceneReq* internal_default_instance() {
+    return reinterpret_cast<const RecreateSceneReq*>(
+               &_RecreateSceneReq_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  void UnsafeArenaSwap(RecreateSceneReq* other);
+  void Swap(RecreateSceneReq* other);
+  friend void swap(RecreateSceneReq& a, RecreateSceneReq& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RecreateSceneReq* New() const final {
+    return CreateMaybeMessage<RecreateSceneReq>(NULL);
+  }
+
+  RecreateSceneReq* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<RecreateSceneReq>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const RecreateSceneReq& from);
+  void MergeFrom(const RecreateSceneReq& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RecreateSceneReq* other);
+  protected:
+  explicit RecreateSceneReq(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string scene_name = 1;
+  void clear_scene_name();
+  static const int kSceneNameFieldNumber = 1;
+  const ::std::string& scene_name() const;
+  void set_scene_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_scene_name(::std::string&& value);
+  #endif
+  void set_scene_name(const char* value);
+  void set_scene_name(const char* value, size_t size);
+  ::std::string* mutable_scene_name();
+  ::std::string* release_scene_name();
+  void set_allocated_scene_name(::std::string* scene_name);
+  PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  ::std::string* unsafe_arena_release_scene_name();
+  PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_scene_name(
+      ::std::string* scene_name);
+
+  // @@protoc_insertion_point(class_scope:NetProto.RecreateSceneReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::google::protobuf::internal::ArenaStringPtr scene_name_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_Gm_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class RecreateSceneRsp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.RecreateSceneRsp) */ {
+ public:
+  RecreateSceneRsp();
+  virtual ~RecreateSceneRsp();
+
+  RecreateSceneRsp(const RecreateSceneRsp& from);
+
+  inline RecreateSceneRsp& operator=(const RecreateSceneRsp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  RecreateSceneRsp(RecreateSceneRsp&& from) noexcept
+    : RecreateSceneRsp() {
+    *this = ::std::move(from);
+  }
+
+  inline RecreateSceneRsp& operator=(RecreateSceneRsp&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const final {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const final {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RecreateSceneRsp& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RecreateSceneRsp* internal_default_instance() {
+    return reinterpret_cast<const RecreateSceneRsp*>(
+               &_RecreateSceneRsp_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void UnsafeArenaSwap(RecreateSceneRsp* other);
+  void Swap(RecreateSceneRsp* other);
+  friend void swap(RecreateSceneRsp& a, RecreateSceneRsp& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RecreateSceneRsp* New() const final {
+    return CreateMaybeMessage<RecreateSceneRsp>(NULL);
+  }
+
+  RecreateSceneRsp* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<RecreateSceneRsp>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const RecreateSceneRsp& from);
+  void MergeFrom(const RecreateSceneRsp& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RecreateSceneRsp* other);
+  protected:
+  explicit RecreateSceneRsp(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bool is_succ = 1;
+  void clear_is_succ();
+  static const int kIsSuccFieldNumber = 1;
+  bool is_succ() const;
+  void set_is_succ(bool value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.RecreateSceneRsp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool is_succ_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_Gm_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -271,9 +532,110 @@ ReloadLuaScripts::mutable_scripts() {
   return &scripts_;
 }
 
+// -------------------------------------------------------------------
+
+// RecreateSceneReq
+
+// string scene_name = 1;
+inline void RecreateSceneReq::clear_scene_name() {
+  scene_name_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline const ::std::string& RecreateSceneReq::scene_name() const {
+  // @@protoc_insertion_point(field_get:NetProto.RecreateSceneReq.scene_name)
+  return scene_name_.Get();
+}
+inline void RecreateSceneReq::set_scene_name(const ::std::string& value) {
+  
+  scene_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:NetProto.RecreateSceneReq.scene_name)
+}
+#if LANG_CXX11
+inline void RecreateSceneReq::set_scene_name(::std::string&& value) {
+  
+  scene_name_.Set(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_rvalue:NetProto.RecreateSceneReq.scene_name)
+}
+#endif
+inline void RecreateSceneReq::set_scene_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  scene_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:NetProto.RecreateSceneReq.scene_name)
+}
+inline void RecreateSceneReq::set_scene_name(const char* value,
+    size_t size) {
+  
+  scene_name_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:NetProto.RecreateSceneReq.scene_name)
+}
+inline ::std::string* RecreateSceneReq::mutable_scene_name() {
+  
+  // @@protoc_insertion_point(field_mutable:NetProto.RecreateSceneReq.scene_name)
+  return scene_name_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* RecreateSceneReq::release_scene_name() {
+  // @@protoc_insertion_point(field_release:NetProto.RecreateSceneReq.scene_name)
+  
+  return scene_name_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline void RecreateSceneReq::set_allocated_scene_name(::std::string* scene_name) {
+  if (scene_name != NULL) {
+    
+  } else {
+    
+  }
+  scene_name_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), scene_name,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:NetProto.RecreateSceneReq.scene_name)
+}
+inline ::std::string* RecreateSceneReq::unsafe_arena_release_scene_name() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.RecreateSceneReq.scene_name)
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return scene_name_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+inline void RecreateSceneReq::unsafe_arena_set_allocated_scene_name(
+    ::std::string* scene_name) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (scene_name != NULL) {
+    
+  } else {
+    
+  }
+  scene_name_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      scene_name, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NetProto.RecreateSceneReq.scene_name)
+}
+
+// -------------------------------------------------------------------
+
+// RecreateSceneRsp
+
+// bool is_succ = 1;
+inline void RecreateSceneRsp::clear_is_succ() {
+  is_succ_ = false;
+}
+inline bool RecreateSceneRsp::is_succ() const {
+  // @@protoc_insertion_point(field_get:NetProto.RecreateSceneRsp.is_succ)
+  return is_succ_;
+}
+inline void RecreateSceneRsp::set_is_succ(bool value) {
+  
+  is_succ_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.RecreateSceneRsp.is_succ)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

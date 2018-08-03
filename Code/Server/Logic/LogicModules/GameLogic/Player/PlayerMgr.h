@@ -22,7 +22,7 @@ namespace GameLogic
 		friend GameLogic::PlayerListenHandler;
 		NewDelOperaDeclaration;
 	public:
-		const static uint64_t BROADCAST_NETID/* = 0*/;
+		const static NetId BROADCAST_NETID/* = 0*/;
 	public: 
 		PlayerMgr(GameLogicModule *logic_module);
 		~PlayerMgr();

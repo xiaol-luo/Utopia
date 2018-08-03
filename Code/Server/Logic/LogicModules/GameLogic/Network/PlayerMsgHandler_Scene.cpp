@@ -147,17 +147,4 @@ namespace GameLogic
 			break;
 		}
 	}
-
-	void PlayerMsgHandler::OnReloadLuaScripts(int id, NetProto::ReloadLuaScripts * msg, GameLogic::Player * player)
-	{
-		std::set<std::string> scripts;
-		for (auto item : msg->scripts())
-		{
-			std::string script = item;
-			scripts.insert(script);
-		}
-
-		LuaUtils::LoadScripts_DoLoadScript(true, scripts);
-		m_logic_module->ReloadConfig();
-	}
 }

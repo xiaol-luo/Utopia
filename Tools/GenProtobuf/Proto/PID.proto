@@ -33,6 +33,8 @@ enum PID
 	
 	
 	PID_ReloadLuaScripts = 4001;
+	PID_RecreateSceneReq = 4002;
+	PID_RecreateSceneRsp = 4003;
 	
 	PID_Max = 5120;
 }

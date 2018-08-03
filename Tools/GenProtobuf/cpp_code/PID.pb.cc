@@ -50,7 +50,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
 static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\tPID.proto\022\010NetProto*\365\003\n\003PID\022\013\n\007PID_Min"
+      "\n\tPID.proto\022\010NetProto*\253\004\n\003PID\022\013\n\007PID_Min"
       "\020\000\022\014\n\010PID_Ping\020\001\022\014\n\010PID_Pong\020\002\022\025\n\021PID_Qu"
       "eryFreeHero\020d\022\023\n\017PID_RspFreeHero\020e\022\025\n\021PI"
       "D_SelectHeroReq\020f\022\025\n\021PID_SelectHeroRsp\020g"
@@ -62,11 +62,12 @@ static void AddDescriptorsImpl() {
       "SnapshotDiff\020\330\010\022\027\n\022PID_SceneUnitState\020\260\t"
       "\022\033\n\026PID_SceneUnitTransform\020\261\t\022\026\n\021PID_Sce"
       "neUnitMove\020\262\t\022\035\n\030PID_SceneUnitSkillActio"
-      "n\020\263\t\022\031\n\024PID_ReloadLuaScripts\020\241\037\022\014\n\007PID_M"
-      "ax\020\200(B\003\370\001\001b\006proto3"
+      "n\020\263\t\022\031\n\024PID_ReloadLuaScripts\020\241\037\022\031\n\024PID_R"
+      "ecreateSceneReq\020\242\037\022\031\n\024PID_RecreateSceneR"
+      "sp\020\243\037\022\014\n\007PID_Max\020\200(B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 538);
+      descriptor, 592);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PID.proto", &protobuf_RegisterTypes);
 }
@@ -110,6 +111,8 @@ bool PID_IsValid(int value) {
     case 1202:
     case 1203:
     case 4001:
+    case 4002:
+    case 4003:
     case 5120:
       return true;
     default:
