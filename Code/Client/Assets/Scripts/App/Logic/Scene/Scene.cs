@@ -149,6 +149,7 @@ public class Scene
         App.instance.net.gameSrv.Remove((int)PID.SceneUnitTransform);
         App.instance.net.gameSrv.Remove((int)PID.SceneUnitMove);
         App.instance.net.gameSrv.Remove((int)PID.SceneObjectDisappear);
+        App.instance.net.gameSrv.Remove((int)PID.SceneUnitSkillAction);
         App.instance.net.gameSrv.Remove((int)PID.ViewAllGrids);
         App.instance.net.gameSrv.Remove((int)PID.ViewSnapshot);
         App.instance.net.gameSrv.Remove((int)PID.ViewSnapshotDiff);

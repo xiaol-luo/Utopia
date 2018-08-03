@@ -64,7 +64,7 @@ namespace Utopia
         {
             get
             {
-                bool ret = true;
+                bool ret = false;
                 switch (m_state)
                 {
                     case State.LoadingAsset:
