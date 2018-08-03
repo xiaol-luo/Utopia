@@ -83,9 +83,22 @@ public class Scene
         }
 
         sceneCamera.InitCamera();
-
         m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
-        App.instance.net.gameSrv.Send(PID.LoadSceneComplete);
+
+        {
+            // 通知服务器场景加载完了
+            App.instance.net.gameSrv.Send(PID.LoadSceneComplete);
+            m_evProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero,
+                (string evName) =>
+                {
+                    if (App.instance.logicMgr.GetModule<SelectHero>().usingHeroObjId > 0)
+                    {
+                        App.instance.net.gameSrv.Send(PID.LoadSceneComplete);
+                    }
+                });
+        }
+
+
         App.instance.net.gameSrv.Add<SceneUnitState>((int)PID.SceneUnitState, OnRecvSceneUnitState);
         App.instance.net.gameSrv.Add<SceneUnitTransform>((int)PID.SceneUnitTransform, OnRecvSceneUnitTransform);
         App.instance.net.gameSrv.Add<SceneUnitMove>((int)PID.SceneUnitMove, OnRecvceneUnitMove);
@@ -125,7 +138,9 @@ public class Scene
     public void LeaveScene()
     {
         m_isLoadSceneSucc = false;
-        
+        m_isLoadingScene = false;
+
+
         App.instance.net.gameSrv.Send(PID.LeaveScene);
         m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
@@ -139,6 +154,7 @@ public class Scene
         App.instance.net.gameSrv.Remove((int)PID.ViewSnapshotDiff);
 
         sceneCamera.ReleaseCamera();
+        m_evProxy.ClearAll();
     }
     
     SceneObjcet GetSceneObject(ulong objId)

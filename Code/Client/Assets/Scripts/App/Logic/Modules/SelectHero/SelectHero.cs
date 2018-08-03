@@ -9,6 +9,13 @@ namespace Utopia.Logic
 {
     public class SelectHero : LogicBase
     {
+        public enum SelectedSide
+        {
+            None,
+            RedSide,
+            BlueSide,
+        }
+
         public override ELogicName GetModuleName()
         {
             return ELogicName.SelectHero;
@@ -17,6 +24,8 @@ namespace Utopia.Logic
         public ulong usingHeroObjId { get; protected set; }
         public ulong redHeroId = 0;
         public ulong blueHeroId = 0;
+
+        SelectedSide m_selctedSide = SelectedSide.None;
 
         protected override void OnAwake()
         {
@@ -40,21 +49,13 @@ namespace Utopia.Logic
 
         void OnGameSrvConnected(string evName, CommonNetProxy netGameSrv)
         {
-            bool isConnected = (0 == netGameSrv.netAgent.socket.errno);
-            if (isConnected && usingHeroObjId > 0)
-            {
-                this.SelectHeroReq(usingHeroObjId);
-                App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
-            }
-            else
-            {
-                App.instance.panelMgr.ShowPanel(UIPanelId.MainPanel);
-            }
+            usingHeroObjId = 0;
+            this.QueryFreeHero();
         }
 
         void OnGameSrvClosed(string evName, CommonNetProxy evParam)
         {
-
+            App.instance.panelMgr.HidePanel(UIPanelId.SelectHeroPanel);
         }
 
         public void QueryFreeHero()
@@ -73,6 +74,36 @@ namespace Utopia.Logic
             redHeroId = msg.RedHeroId;
             blueHeroId = msg.BlueHeroId;
             m_evProxy.Fire(SelectHeroModuleDef.Event_OnRspFreeHeros);
+
+            if (usingHeroObjId <= 0)
+            {
+                bool needShowPanel = true;
+                switch (m_selctedSide)
+                {
+                    case SelectedSide.RedSide:
+                        {
+                            if (redHeroId > 0)
+                            {
+                                this.SelectHeroReq(redHeroId);
+                                needShowPanel = false;
+                            }
+                        }
+                        break;
+                    case SelectedSide.BlueSide:
+                        {
+                            if (blueHeroId > 0)
+                            {
+                                this.SelectHeroReq(blueHeroId);
+                                needShowPanel = false;
+                            }
+                        }
+                        break;
+                }
+                if (needShowPanel)
+                {
+                    App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
+                }
+            }
         }
 
         void OnRspSelectHero(string evName, NetProto.SelectHeroRsp msg)
@@ -81,13 +112,37 @@ namespace Utopia.Logic
             {
                 usingHeroObjId = msg.HeroId;
                 Core.instance.log.LogDebug("OnRspSelectHero succ");
+                App.instance.panelMgr.HidePanel(UIPanelId.SelectHeroPanel);
+                if (App.instance.stateMgr.activeId != EAppState.InBattle)
+                {
+                    App.instance.stateMgr.ChangeState(EAppState.InBattle);
+                }
             }
             else
             {
                 usingHeroObjId = 0;
+                m_selctedSide = SelectedSide.None;
+                this.QueryFreeHero();
             }
             m_evProxy.Fire(SelectHeroModuleDef.Event_OnRspSelectHero);
-            this.QueryFreeHero();
+        }
+
+        public void SelectSide(SelectedSide side)
+        {
+            if (usingHeroObjId > 0)
+            {
+                if (side != m_selctedSide)
+                {
+                    this.SelectHeroReq(0);
+                    usingHeroObjId = 0;
+                    m_selctedSide = side;
+                }
+            }
+            else
+            {
+                m_selctedSide = side;
+                this.QueryFreeHero();
+            }
         }
     }
 }

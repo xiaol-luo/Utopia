@@ -13,6 +13,9 @@ namespace Utopia.UI
         [SerializeField]
         Button hero2Btn;
 
+        [SerializeField]
+        Button refresh;
+
         protected override void OnInit()
         {
             base.OnInit();
@@ -22,25 +25,20 @@ namespace Utopia.UI
 
             hero1Btn.onClick.AddListener(()=> {
                 Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
-                module.SelectHeroReq(module.redHeroId);
+                module.SelectSide(Logic.SelectHero.SelectedSide.RedSide);
             });
             hero2Btn.onClick.AddListener(() => {
                 Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
-                module.SelectHeroReq(module.blueHeroId);
+                module.SelectSide(Logic.SelectHero.SelectedSide.BlueSide);
+            });
+            refresh.onClick.AddListener(() => {
+                App.instance.logicMgr.GetModule<Logic.SelectHero>().QueryFreeHero();
             });
         }
 
         void OnRspFreeHero(string evName)
         {
             this.UpdateUI();
-            Logic.SelectHero logicSelectHero = App.instance.logicMgr.GetModule<Logic.SelectHero>();
-            if (logicSelectHero.usingHeroObjId > 0)
-            {
-                if (App.instance.stateMgr.activeId != EAppState.InBattle)
-                {
-                    App.instance.stateMgr.ChangeState(EAppState.InBattle);
-                }
-            }
         }
         void OnRspFSelectHero(string evName)
         {

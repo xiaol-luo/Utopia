@@ -60,12 +60,12 @@ namespace Utopia.Logic
 
         void OnGameSrvConnected(string evName, CommonNetProxy netGameSrv)
         {
-
+            App.instance.panelMgr.HidePanel(UIPanelId.MainPanel);
         }
 
         void OnGameSrvClosed(string evName, CommonNetProxy evParam)
         {
-
+            App.instance.panelMgr.ShowPanel(UIPanelId.MainPanel);
         }
     }
 }

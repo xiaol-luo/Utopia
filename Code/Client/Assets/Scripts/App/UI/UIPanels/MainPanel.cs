@@ -11,9 +11,6 @@ namespace Utopia.UI
         Button netBtn;
 
         [SerializeField]
-        Button logicBtn;
-
-        [SerializeField]
         InputField ipTxt;
 
         [SerializeField]
@@ -33,6 +30,15 @@ namespace Utopia.UI
             }
         }
 
+        bool isGameSrvConnected
+        {
+            get
+            {
+                return null != App.instance.net.gameSrv.netAgent.socket &&
+                    ClientSocket.State.Connected == App.instance.net.gameSrv.netAgent.socket.state;
+            }
+        }
+
         protected override void OnInit()
         {
             base.OnInit();
@@ -40,49 +46,11 @@ namespace Utopia.UI
             ipTxt.text = "127.0.0.1";
             portTxt.text = "10240";
 
-            m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetConnected, OnGameSrvConnected);
-            m_evProxy.Subscribe<CommonNetProxy>(NetModuleEventDef.GameSrvNetClosed, OnGameSrvClosed);
-            m_evProxy.Subscribe<RspFreeHero>(GameSrvNetProxy.ProtoEventName(PID.RspFreeHero), OnRspFreeHero);
-
             this.UpdateUI();
             netBtn.onClick.AddListener(() =>
             {
-                bool isGameSrvConnected = false;
-                if (null != App.instance.net.gameSrv.netAgent.socket &&
-                    ClientSocket.State.Connected == App.instance.net.gameSrv.netAgent.socket.state)
-                {
-                    isGameSrvConnected = true;
-                }
-                if (!isGameSrvConnected)
-                    App.instance.net.gameSrv.Connect(ipTxt.text, int.Parse(portTxt.text));
-                else
-                    App.instance.net.gameSrv.Close();
+                App.instance.net.gameSrv.Connect(ipTxt.text, int.Parse(portTxt.text));
             });
-
-            logicBtn.onClick.AddListener(() =>
-            {
-                Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
-                module.QueryFreeHero();
-                App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
-                this.Hide();
-            });
-        }
-
-        void OnGameSrvConnected(string evName, CommonNetProxy evParam)
-        {
-            this.UpdateUI();
-            // for test
-            {
-                Logic.SelectHero module = App.instance.logicMgr.GetModule<Logic.SelectHero>();
-                module.QueryFreeHero();
-                App.instance.panelMgr.ShowPanel(UIPanelId.SelectHeroPanel);
-                this.Hide();
-            }
-        }
-
-        void OnGameSrvClosed(string evName, CommonNetProxy evParam)
-        {
-            this.UpdateUI();
         }
 
         void OnRspFreeHero(string evKey, RspFreeHero msg)
@@ -91,17 +59,8 @@ namespace Utopia.UI
         }
         void UpdateUI()
         {
-            bool isGameSrvConnected = false;
-            CommonNetProxy xx = App.instance.net.gameSrv;
-            if (null != App.instance.net.gameSrv.netAgent.socket &&
-                ClientSocket.State.Connected == App.instance.net.gameSrv.netAgent.socket.state)
-            {
-                isGameSrvConnected = true;
-            }
             string netBtnTxt = isGameSrvConnected ? "Disconnect" : "Connect";
             netBtn.transform.Find("Text").GetComponent<Text>().text = netBtnTxt;
-
-            logicBtn.gameObject.SetActive(isGameSrvConnected);
         }
     }
 }
