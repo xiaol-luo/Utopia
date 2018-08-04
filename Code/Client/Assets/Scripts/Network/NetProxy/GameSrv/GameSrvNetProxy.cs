@@ -41,5 +41,10 @@ namespace Utopia.Net
             string evKey = ProtoEventName((NetProto.PID)protocolId);
             m_evProxy.Fire(evKey, msg);
         }
+
+        public void Remove(NetProto.PID protocolId)
+        {
+            this.Remove((int)protocolId);
+        }
     }
 }

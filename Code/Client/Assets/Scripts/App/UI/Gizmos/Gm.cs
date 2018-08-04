@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine.UI;
 using Utopia;
 using Utopia.Logic;
+using NetProto;
 
 public class Gm : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class Gm : MonoBehaviour
         if (GUILayout.Button("断线"))
         {
             App.instance.net.gameSrv.Close();
+        }
+        if (GUILayout.Button("重新创建场景"))
+        {
+            RecreateSceneReq req = new RecreateSceneReq();
+            req.SceneName = "TestScene";
+            App.instance.net.gameSrv.Send(NetProto.PID.RecreateSceneReq, req);
         }
         EditorGUILayout.EndHorizontal();
     }

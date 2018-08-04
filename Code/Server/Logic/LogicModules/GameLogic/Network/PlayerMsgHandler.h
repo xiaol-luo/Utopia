@@ -120,6 +120,7 @@ namespace GameLogic
 		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
 		
 		// Gm
+		void OnReloadConfig(int id, GameLogic::Player *player);
 		void OnReloadLuaScripts(int id, NetProto::ReloadLuaScripts *msg, GameLogic::Player *player);
 		void OnGmRecreateScene(int id, NetProto::RecreateSceneReq *msg, GameLogic::Player *player);
 	};

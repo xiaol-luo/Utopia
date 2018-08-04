@@ -42,6 +42,7 @@ namespace GameLogic
 		RegPlayerMsgHandler(NetProto::PID_BattleOperaReq, NetProto::BattleOperation, OnHandleBattleOperation);
 
 		// GM
+		RegPlayerHandler(NetProto::PID_ReloadConfigReq, OnReloadConfig);
 		RegPlayerMsgHandler(NetProto::PID_ReloadLuaScripts, NetProto::ReloadLuaScripts, OnReloadLuaScripts);
 		RegPlayerMsgHandler(NetProto::PID_RecreateSceneReq, NetProto::RecreateSceneReq, OnGmRecreateScene);
 

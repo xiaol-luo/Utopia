@@ -134,6 +134,7 @@ namespace Utopia.Logic
                 if (side != m_selctedSide)
                 {
                     this.SelectHeroReq(0);
+                    this.QueryFreeHero();
                     usingHeroObjId = 0;
                     m_selctedSide = side;
                 }

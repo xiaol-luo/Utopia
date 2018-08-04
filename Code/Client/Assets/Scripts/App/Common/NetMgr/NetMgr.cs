@@ -4,7 +4,7 @@ using Utopia.Net;
 
 public class NetMgr 
 {
-    public CommonNetProxy gameSrv { get; protected set; }
+    public GameSrvNetProxy gameSrv { get; protected set; }
 
     public void Init()
     {

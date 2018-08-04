@@ -72,6 +72,7 @@ enum PID {
   PID_ReloadLuaScripts = 4001,
   PID_RecreateSceneReq = 4002,
   PID_RecreateSceneRsp = 4003,
+  PID_ReloadConfigReq = 4004,
   PID_Max = 5120,
   PID_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
   PID_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max

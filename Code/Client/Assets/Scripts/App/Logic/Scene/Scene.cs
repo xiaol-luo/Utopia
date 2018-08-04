@@ -99,20 +99,28 @@ public class Scene
         }
 
 
-        App.instance.net.gameSrv.Add<SceneUnitState>((int)PID.SceneUnitState, OnRecvSceneUnitState);
-        App.instance.net.gameSrv.Add<SceneUnitTransform>((int)PID.SceneUnitTransform, OnRecvSceneUnitTransform);
-        App.instance.net.gameSrv.Add<SceneUnitMove>((int)PID.SceneUnitMove, OnRecvceneUnitMove);
-        App.instance.net.gameSrv.Add<SceneObjectDisappear>((int)PID.SceneObjectDisappear, OnSceneObjectDisappear);
-        App.instance.net.gameSrv.Add<SceneUnitSkillAction>((int)PID.SceneUnitSkillAction, OnSceneUnitSkillAction);
-        App.instance.net.gameSrv.Add<ViewAllGrids>((int)PID.ViewAllGrids, (int id, ViewAllGrids msg) =>
+        App.instance.net.gameSrv.Add<SceneUnitState>(PID.SceneUnitState, OnRecvSceneUnitState);
+        App.instance.net.gameSrv.Add<SceneUnitTransform>(PID.SceneUnitTransform, OnRecvSceneUnitTransform);
+        App.instance.net.gameSrv.Add<SceneUnitMove>(PID.SceneUnitMove, OnRecvceneUnitMove);
+        App.instance.net.gameSrv.Add<SceneObjectDisappear>(PID.SceneObjectDisappear, OnSceneObjectDisappear);
+        App.instance.net.gameSrv.Add<SceneUnitSkillAction>(PID.SceneUnitSkillAction, OnSceneUnitSkillAction);
+        App.instance.net.gameSrv.Add<RecreateSceneRsp>(PID.RecreateSceneRsp, (int id, RecreateSceneRsp msg)=> {
+            if (msg.IsSucc)
+            {
+                // this.LeaveScene();
+                App.instance.stateMgr.ChangeState(EAppState.InLogic);
+            }
+        });
+
+        App.instance.net.gameSrv.Add<ViewAllGrids>(PID.ViewAllGrids, (int id, ViewAllGrids msg) =>
         {
             m_vgg.SetAllGrids(msg);
         });
-        App.instance.net.gameSrv.Add<ViewSnapshot>((int)PID.ViewSnapshot, (int id, ViewSnapshot msg) =>
+        App.instance.net.gameSrv.Add<ViewSnapshot>(PID.ViewSnapshot, (int id, ViewSnapshot msg) =>
         {
             m_vgg.SetSnapshot(msg);
         });
-        App.instance.net.gameSrv.Add<ViewSnapshotDiff>((int)PID.ViewSnapshotDiff, (int id, ViewSnapshotDiff msg) =>
+        App.instance.net.gameSrv.Add<ViewSnapshotDiff>(PID.ViewSnapshotDiff, (int id, ViewSnapshotDiff msg) =>
         {
             m_vgg.SetSnapshotDiff(msg);
         });
@@ -139,23 +147,23 @@ public class Scene
     {
         m_isLoadSceneSucc = false;
         m_isLoadingScene = false;
-
-
-        App.instance.net.gameSrv.Send(PID.LeaveScene);
         m_sceneObjects.Clear();
         rootSceneObejcts.DetachChildren();
 
-        App.instance.net.gameSrv.Remove((int)PID.SceneUnitState);
-        App.instance.net.gameSrv.Remove((int)PID.SceneUnitTransform);
-        App.instance.net.gameSrv.Remove((int)PID.SceneUnitMove);
-        App.instance.net.gameSrv.Remove((int)PID.SceneObjectDisappear);
-        App.instance.net.gameSrv.Remove((int)PID.SceneUnitSkillAction);
-        App.instance.net.gameSrv.Remove((int)PID.ViewAllGrids);
-        App.instance.net.gameSrv.Remove((int)PID.ViewSnapshot);
-        App.instance.net.gameSrv.Remove((int)PID.ViewSnapshotDiff);
+        App.instance.net.gameSrv.Remove(PID.SceneUnitState);
+        App.instance.net.gameSrv.Remove(PID.SceneUnitTransform);
+        App.instance.net.gameSrv.Remove(PID.SceneUnitMove);
+        App.instance.net.gameSrv.Remove(PID.SceneObjectDisappear);
+        App.instance.net.gameSrv.Remove(PID.SceneUnitSkillAction);
+        App.instance.net.gameSrv.Remove(PID.RecreateSceneRsp);
+        App.instance.net.gameSrv.Remove(PID.ViewAllGrids);
+        App.instance.net.gameSrv.Remove(PID.ViewSnapshot);
+        App.instance.net.gameSrv.Remove(PID.ViewSnapshotDiff);
 
         sceneCamera.ReleaseCamera();
         m_evProxy.ClearAll();
+        App.instance.net.gameSrv.Send(PID.LeaveScene);
+        App.instance.logicMgr.GetModule<SelectHero>().SelectSide(SelectHero.SelectedSide.None);
     }
     
     SceneObjcet GetSceneObject(ulong objId)
