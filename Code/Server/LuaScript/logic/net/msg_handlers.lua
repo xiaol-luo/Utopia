@@ -6,7 +6,7 @@ msg_handlers.HANDLE_FN = "HANDLE_FN"
 
 
 msg_handlers.convert_pid = function(pid_name)
-    return pb.enum("NetProto.ProtoId", pid_name)
+    return pb.enum("NetProto.PID", pid_name)
 end
 
 function msg_handlers.add_handler(pid, pb_name, fn)
@@ -15,8 +15,6 @@ function msg_handlers.add_handler(pid, pb_name, fn)
     item[msg_handlers.PB_NAME] = pb_name
     item[msg_handlers.HANDLE_FN] = fn
     msg_handlers.handler_map[pid] = item
-    print("msg_handlers.add_handler")
-    print(serpent.block(item)) 
 end
 
 local handle_pb_SelectHeroReq = function(player, pid, msg) 

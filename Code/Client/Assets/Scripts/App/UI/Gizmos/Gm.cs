@@ -27,6 +27,18 @@ public class Gm : MonoBehaviour
             req.SceneName = "TestScene";
             App.instance.net.gameSrv.Send(NetProto.PID.RecreateSceneReq, req);
         }
+        if (GUILayout.Button("重载配置"))
+        {
+            App.instance.net.gameSrv.Send(NetProto.PID.ReloadConfigReq);
+        }
+        if (GUILayout.Button("重载脚本"))
+        {
+
+            ReloadLuaScripts req = new ReloadLuaScripts();
+            req.Scripts.Add("_load_files_effect_script");
+            req.Scripts.Add("_load_files_logic_net_handler");
+            App.instance.net.gameSrv.Send(NetProto.PID.ReloadLuaScripts, req);
+        }
         EditorGUILayout.EndHorizontal();
     }
 }

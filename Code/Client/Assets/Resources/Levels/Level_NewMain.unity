@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -187,6 +187,66 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224537841405837996, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224537841405837996, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224537841405837996, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114393982874389688, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1982589508851558, guid: 6531bd98f6b82424683211c10a3ec9c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114393982874389688, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224684009578750204, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 224537841405837996, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224537841405837996, guid: 6531bd98f6b82424683211c10a3ec9c4,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6531bd98f6b82424683211c10a3ec9c4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1608317027 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1493160527028042, guid: 6531bd98f6b82424683211c10a3ec9c4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1608317026}
+--- !u!114 &1608317028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1608317027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0293793d3587f4b9fad00b64b54a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,14 +1,14 @@
 
 
-effect_script.effect_script_demo = inherit_from(effect_script.effect_script_base)
-local effect_script_demo = effect_script.effect_script_demo
+effect_script.effect_demo = inherit_from(effect_script.effect_base)
+local effect_demo = effect_script.effect_demo
 
 local function OnTestEventCallback(self, ...)
     print(self, ...)
 end
 
-function effect_script_demo.init(self, effect, cfg)
-    effect_script.effect_script_base.init(self, effect, cfg)
+function effect_demo.init(self, effect, cfg)
+    effect_script.effect_base.init(self, effect, cfg)
 
     self.loop_times = 0
 
@@ -56,8 +56,8 @@ local function CreateOnSceneUnitFightParamChange(param)
     end
     return ret_fn
 end
-function effect_script_demo.on_late_begin(self)
-    print("effect_script_demo.on_begin")
+function effect_demo.on_late_begin(self)
+    print("effect_demo.on_begin")
     local param = GameLogic.GuidedMissileParam.new()
     param.target_type = GameLogic.GuidedMissileParam.TargetType.TargetType_Pos
     param.move_speed = 5
@@ -72,11 +72,11 @@ function effect_script_demo.on_late_begin(self)
     self.effect:SubscribeSuEvent(self.effect:GetSkill():GetCaster(), ESUEventId.ESU_FightParamChange, CreateOnSceneUnitFightParamChange({12, 34}))
 end
 
-function effect_script_demo.on_late_end(self)
-    print("effect_script_demo.on_end")
+function effect_demo.on_late_end(self)
+    print("effect_demo.on_end")
 end
 
-function effect_script_demo.on_late_loop(self, now_ms, delta_ms)
+function effect_demo.on_late_loop(self, now_ms, delta_ms)
     self.loop_times = self.loop_times + 1
     if self.loop_times > 10 then 
         self.is_done = true

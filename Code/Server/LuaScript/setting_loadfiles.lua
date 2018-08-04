@@ -1,47 +1,34 @@
 
-_load_files_init =
+_load_files_load_files_init =
 {
 	"LuaScript/init.lua",
-    "LuaScript/MainTest.lua",
-	"LuaScript/HoldPlace.lua"
 }
 
-local _lib_lua_protobuf = {
+_load_files_libs = {
+    "LuaScript/libs/common/class.lua",
     "LuaScript/libs/lua_protobuf/protoc.lua",
     "LuaScript/libs/lua_protobuf/serpent.lua",
-    "LuaScript/HoldPlace.lua"
-}
-
-local _lib_net = {
     "LuaScript/libs/net/net.lua",
-    "LuaScript/HoldPlace.lua"
 }
 
-local _lib_common = {
-    "LuaScript/libs/common/class.lua",
-    "LuaScript/HoldPlace.lua"
-}
-
-_load_files_effect_script = {
-    "LuaScript/effect_script/init.lua",
-    "LuaScript/effect_script/effect_script_base.lua",
-    "LuaScript/effect_script/effect_script_demo.lua",
-    "LuaScript/HoldPlace.lua"
-}
-
-local _logic_net_handler = {
+_load_files_logic_net_handler = {
+    "LuaScript/logic/net/parse_protobuf.lua",
     "LuaScript/logic/net/net_handler.lua",
     "LuaScript/logic/net/msg_handlers.lua",
 }
 
+ _load_files_effect_script = {
+    "LuaScript/logic/effects/init.lua",
+    "LuaScript/logic/effects/effect_base.lua",
+    "LuaScript/logic/effects/effect_demo.lua",
+}
+
 _load_files_map =
 {
-    _lib_common,
-    _lib_lua_protobuf,
-    _lib_net,
-    _load_files_init,
+    _load_files_load_files_init,
+    _load_files_libs,
+    _load_files_logic_net_handler,
     _load_files_effect_script,
-    _logic_net_handler,
 }
 
 

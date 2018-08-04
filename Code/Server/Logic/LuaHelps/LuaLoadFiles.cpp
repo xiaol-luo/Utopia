@@ -21,7 +21,10 @@ namespace LuaUtils
 			return true;
 		bool loadRet = LoadScripts_LoadSettingFile();
 		if (!loadRet)
+		{
+			printf("LoadScripts_DoLoadScript error: load file %s fail \n", Load_Files_Setting_File);
 			return false;
+		}
 
 		sol::state_view lsv(LuaUtils::luaState);
 		sol::table luaFiles;
@@ -30,14 +33,14 @@ namespace LuaUtils
 			luaFiles = lsv.create_table();
 			for (std::string tbName : reloadFilter)
 			{
-				sol::table scriptTb = lsv[tbName];
+				sol::table scriptTb = lsv.get<sol::table>(tbName);
 				if (scriptTb.valid())
 					luaFiles.add(scriptTb);
 			}
 		}
 		else
 		{
-			luaFiles = lsv[Load_Files_Table_Name];
+			luaFiles = lsv.get<sol::table>(Load_Files_Table_Name);
 			if (!luaFiles.valid())
 			{
 				printf("LoadScripts_DoLoadScript error: table %s missing \n", Load_Files_Table_Name);
@@ -61,7 +64,7 @@ namespace LuaUtils
 						loadRet = false;
 						break;
 					}
-					// printf("LoadScripts_DoLoadScript load file %s \n", filePath.c_str());
+					printf("LoadScripts_DoLoadScript load file %s \n", filePath.c_str());
 				}
 			}
 		}
