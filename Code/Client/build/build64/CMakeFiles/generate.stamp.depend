@@ -1,0 +1,25 @@
+# CMake generation dependency list for this directory.
+F:/git-dir/Utopia/Code/Client/build/CMakeLists.txt
+F:/git-dir/Utopia/Code/Client/build/build64/CMakeFiles/3.9.0/CMakeSystem.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeSystemSpecificInitialize.cmake
+F:/git-dir/Utopia/Code/Client/build/build64/CMakeFiles/3.9.0/CMakeCCompiler.cmake
+F:/git-dir/Utopia/Code/Client/build/build64/CMakeFiles/3.9.0/CMakeCXXCompiler.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeSystemSpecificInformation.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeGenericSystem.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Platform/Windows.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Platform/WindowsPaths.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeCInformation.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeLanguageInformation.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Platform/Windows-MSVC-C.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Platform/Windows-MSVC.cmake
+F:/git-dir/Utopia/Code/Client/build/build64/CMakeFiles/3.9.0/CMakeRCCompiler.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeRCInformation.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeCommonLanguageInclude.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeCXXInformation.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeLanguageInformation.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Compiler/MSVC-CXX.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Platform/Windows-MSVC-CXX.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/Platform/Windows-MSVC.cmake
+D:/Program Files/CMake/share/cmake-3.9/Modules/CMakeCommonLanguageInclude.cmake
+F:/git-dir/Utopia/Code/Client/build/lua-5.3.5/src/luaconf.h.in

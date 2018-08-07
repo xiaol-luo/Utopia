@@ -1,5 +1,7 @@
 
 using System;
+using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using Utopia;
 
@@ -18,9 +20,29 @@ namespace Utopia
             if (!isInited)
             {
                 isInited = true;
-
+                App.instance.lua.AddLoader(LuaFileLoader);
                 App.instance.lua.DoString("CS.UnityEngine.Debug.Log('AppStateAwakeLua Enter')");
+                App.instance.lua.DoString("require  'main.lua'");
+                App.instance.lua.DoString("require  'dir/subdir.lua'");
             }
+        }
+
+        byte[] LuaFileLoader(ref string filePath)
+        {
+            Match m = Regex.Match(filePath, @".+\.lua");
+            if (!m.Success)
+            {
+                return null;
+            }
+
+            string luaRootDir = Path.Combine(Application.dataPath, "Res/LuaScripts");
+            string luaFile = Path.Combine(luaRootDir, filePath);
+            if (!File.Exists(luaFile))
+                return null;
+
+            filePath = luaFile;
+            byte[] bins = File.ReadAllBytes(luaFile);
+            return bins;
         }
 
         public override void Exit()

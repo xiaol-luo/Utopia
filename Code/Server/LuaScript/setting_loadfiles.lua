@@ -9,6 +9,7 @@ _load_files_libs = {
     "LuaScript/libs/lua_protobuf/protoc.lua",
     "LuaScript/libs/lua_protobuf/serpent.lua",
     "LuaScript/libs/net/net.lua",
+    "LuaScript/libs/lua_rapidjson/rapidjson.lua",
 }
 
 _load_files_logic_net_handler = {
