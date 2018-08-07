@@ -1,8 +1,4 @@
 
-_load_files_load_files_init =
-{
-	"LuaScript/init.lua",
-}
 
 _load_files_libs = {
     "LuaScript/libs/common/class.lua",
@@ -26,7 +22,6 @@ _load_files_logic_net_handler = {
 
 _load_files_map =
 {
-    _load_files_load_files_init,
     _load_files_libs,
     _load_files_logic_net_handler,
     _load_files_effect_script,

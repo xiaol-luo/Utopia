@@ -1,0 +1,2 @@
+
+rapidjson = require("rapidjson")

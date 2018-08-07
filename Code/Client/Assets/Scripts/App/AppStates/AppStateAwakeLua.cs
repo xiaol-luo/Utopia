@@ -20,10 +20,16 @@ namespace Utopia
             if (!isInited)
             {
                 isInited = true;
+
+                App.instance.lua.AddBuildin("rapidjson", XLua.LuaDLL.Lua.LoadRapidJson);
+
                 App.instance.lua.AddLoader(LuaFileLoader);
+
                 App.instance.lua.DoString("CS.UnityEngine.Debug.Log('AppStateAwakeLua Enter')");
-                App.instance.lua.DoString("require  'main.lua'");
-                App.instance.lua.DoString("require  'dir/subdir.lua'");
+
+                App.instance.lua.DoString("require  'global_def.lua'");
+                App.instance.lua.DoString("require  'setting_loadfiles.lua'");
+                App.instance.lua.DoString("require  'do_loadfiles.lua'");
             }
         }
 
@@ -35,7 +41,7 @@ namespace Utopia
                 return null;
             }
 
-            string luaRootDir = Path.Combine(Application.dataPath, "Res/LuaScripts");
+            string luaRootDir = Path.Combine(Application.dataPath, "Res/Lua");
             string luaFile = Path.Combine(luaRootDir, filePath);
             if (!File.Exists(luaFile))
                 return null;
