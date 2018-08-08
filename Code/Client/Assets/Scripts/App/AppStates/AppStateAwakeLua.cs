@@ -30,6 +30,8 @@ namespace Utopia
                 App.instance.lua.DoString("require  'global_def.lua'");
                 App.instance.lua.DoString("require  'setting_loadfiles.lua'");
                 App.instance.lua.DoString("require  'do_loadfiles.lua'");
+
+                Lua.LuaHelp.ReloadScripts("_load_files_libs");
             }
         }
 
