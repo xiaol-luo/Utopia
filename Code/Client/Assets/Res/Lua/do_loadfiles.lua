@@ -1,31 +1,43 @@
 
-function load_files(t)
-    local type_name = type(t)
-    if g_def.type_name.string == type_name then 
-        print(string.format("load file %s", t))
-        CS.Lua.LuaHelp.LoadLuaFile(t)
+
+STRING_TYPE_NAME = type("")
+TABLE_TYPE_NAME = type({})
+
+function load_files(val)
+    local type_name = type(val)
+    if STRING_TYPE_NAME == type_name then 
+        print(string.format("load file %s", val))
+        local abs_path = CS.Lua.LuaHelp.GetLuaAbsPath(val)
+        local fn, err_msg = loadfile(abs_path)
+        if nil ~= fn then 
+            fn()
+        else
+            print(string.format("load file %s:%s fail, reason : %s", val, abs_path, err_msg))
+        end
         return
     end
     
-    if g_def.type_name.table == type_name then 
-        for k, v in pairs(t) do
+    if TABLE_TYPE_NAME == type_name then 
+        for k, v in pairs(val) do
             load_files(v)
         end
     end
 end
 
 function reload_files(tb_name)
+    print(string.format("reload_files start %s", tb_name))
+
+    load_files("global_def.lua")
+    load_files("setting_loadfiles.lua")
+    tb_name = tb_name or "_load_files_map"
     local t = _G[tb_name]
-    print(tb_name)
-    print(t)
-    print("reload_files here 2")
     if nil == t then
-        print(string.format("%s is nil", tb_name))
+        print(string.format("reload_filesis nil  %s ", tb_name))
     else
         load_files(t)
-        print(string.format("%s reload succ", tb_name))
+        print(string.format("reload_files end %s", tb_name))
     end
 end
 
-load_files(_load_files_map)
+reload_files()
 

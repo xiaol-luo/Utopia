@@ -39,6 +39,10 @@ public class Gm : MonoBehaviour
             req.Scripts.Add("_load_files_logic_net_handler");
             App.instance.net.gameSrv.Send(NetProto.PID.ReloadLuaScripts, req);
         }
+        if (GUILayout.Button("重载本地脚本"))
+        {
+            Lua.LuaHelp.ReloadScripts("_load_files_map");
+        }
         EditorGUILayout.EndHorizontal();
     }
 }

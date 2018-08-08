@@ -13,6 +13,18 @@ namespace Utopia
         {
 
         }
+        public override void Exit()
+        {
+
+        }
+
+        public override void Update()
+        {
+            if (isInited)
+            {
+                m_stateMgr.ChangeState(EAppState.WaitTask, null);
+            }
+        }
 
         bool isInited = false;
         public override void Enter(object param)
@@ -21,17 +33,15 @@ namespace Utopia
             {
                 isInited = true;
 
-                App.instance.lua.AddBuildin("rapidjson", XLua.LuaDLL.Lua.LoadRapidJson);
-
-                App.instance.lua.AddLoader(LuaFileLoader);
-
-                App.instance.lua.DoString("CS.UnityEngine.Debug.Log('AppStateAwakeLua Enter')");
-
-                App.instance.lua.DoString("require  'global_def.lua'");
-                App.instance.lua.DoString("require  'setting_loadfiles.lua'");
-                App.instance.lua.DoString("require  'do_loadfiles.lua'");
-
-                Lua.LuaHelp.ReloadScripts("_load_files_libs");
+                {
+                    // lua libs
+                    App.instance.lua.AddBuildin("rapidjson", XLua.LuaDLL.Lua.LoadRapidJson);
+                }
+                {
+                    // lua files
+                    App.instance.lua.AddLoader(LuaFileLoader);
+                    App.instance.lua.DoString("require  'do_loadfiles.lua'");
+                }
             }
         }
 
@@ -43,27 +53,13 @@ namespace Utopia
                 return null;
             }
 
-            string luaRootDir = Path.Combine(Application.dataPath, "Res/Lua");
-            string luaFile = Path.Combine(luaRootDir, filePath);
+
+            string luaFile = Lua.LuaHelp.GetLuaAbsPath(filePath);
             if (!File.Exists(luaFile))
                 return null;
-
             filePath = luaFile;
             byte[] bins = File.ReadAllBytes(luaFile);
             return bins;
-        }
-
-        public override void Exit()
-        {
-            App.instance.lua.DoString("CS.UnityEngine.Debug.Log('AppStateAwakeLua Exit')");
-        }
-
-        public override void Update()
-        {
-            if (isInited)
-            {
-                m_stateMgr.ChangeState(EAppState.WaitTask, null);
-            }
         }
     }
 }
