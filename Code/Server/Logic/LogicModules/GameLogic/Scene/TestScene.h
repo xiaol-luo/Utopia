@@ -8,7 +8,7 @@ namespace GameLogic
 	class TestScene : public NewScene
 	{
 	public:
-		TestScene(GameLogicModule *logic_module);
+		TestScene(GameLogicModule *logic_module, std::string init_param);
 		virtual ~TestScene() override;
 
 	protected:

@@ -96,7 +96,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::NewScene> meta_table(
 						sol::constructors<				
-						GameLogic::NewScene(GameLogicModule *)
+						GameLogic::NewScene(GameLogicModule *, std::string)
 						>(),
 						"__StructName__", sol::property([]() {return "NewScene"; })				
 						,"m_player_view_camps", &GameLogic::NewScene::m_player_view_camps				

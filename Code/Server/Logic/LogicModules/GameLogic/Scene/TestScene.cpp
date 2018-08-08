@@ -25,7 +25,7 @@
 
 namespace GameLogic
 {
-	TestScene::TestScene(GameLogicModule * logic_module) : NewScene(logic_module)
+	TestScene::TestScene(GameLogicModule * logic_module, std::string init_param) : NewScene(logic_module, init_param)
 	{
 
 	}

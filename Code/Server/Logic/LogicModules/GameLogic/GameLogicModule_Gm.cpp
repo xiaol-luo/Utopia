@@ -4,13 +4,14 @@
 #include "ShareCode/Network/Protobuf/PID.pb.h"
 #include "GameLogic/Player/PlayerMgr.h"
 #include "Logic/LuaHelps/LuaLoadFiles.h"
+#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"
 
 void GameLogicModule::GmRecreateScene(std::string scene_type)
 {
 	this->ReloadConfig();
 	LuaUtils::LoadScripts_DoLoadScript(false, std::set<std::string>());
 
-	GameLogic::NewScene *scene = this->CreateScene(scene_type);
+	GameLogic::NewScene *scene = this->CreateScene(scene_type, "default");
 	if (nullptr != scene)
 	{
 		if (nullptr != m_new_scene)

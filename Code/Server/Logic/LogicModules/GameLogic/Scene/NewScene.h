@@ -10,6 +10,7 @@
 #include "Common/Geometry/Vector3.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include <array>
+#include <string>
 #include <functional>
  
 class EventDispacher;
@@ -31,7 +32,7 @@ namespace GameLogic
 	class NewScene
 	{
 	public:
-		NewScene(GameLogicModule *logic_module);
+		NewScene(GameLogicModule *logic_module, std::string init_param);
 		virtual ~NewScene();
 
 		void AddModule(SceneModule *module);
@@ -116,6 +117,7 @@ namespace GameLogic
 		}
 	protected:
 		google::protobuf::Arena *m_protobuf_arena = nullptr;
+		std::string m_init_param;
 
 	public:
 		void MakeSnapshot(bool syncClient);

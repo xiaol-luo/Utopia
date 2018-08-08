@@ -60,7 +60,7 @@ private:
 	std::vector<Config::CsvConfigSets *> m_expired_csv_cfg_sets;
 	EventDispacherProxy *m_ev_proxy = nullptr;
 
-	GameLogic::NewScene * CreateScene(std::string scene_type);
+	GameLogic::NewScene * CreateScene(std::string scene_type, std::string init_param);
 
 	void GmRecreateScene(std::string scene_type);
 };

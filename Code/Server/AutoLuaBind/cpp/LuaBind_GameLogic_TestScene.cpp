@@ -29,7 +29,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::TestScene> meta_table(
 						sol::constructors<				
-						GameLogic::TestScene(GameLogicModule *)
+						GameLogic::TestScene(GameLogicModule *, std::string)
 						>(),
 						"__StructName__", sol::property([]() {return "TestScene"; })				
 						, sol::base_classes, sol::bases<

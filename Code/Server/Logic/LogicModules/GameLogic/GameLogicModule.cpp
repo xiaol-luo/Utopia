@@ -78,7 +78,7 @@ EModuleRetCode GameLogicModule::Awake()
 	bool ret = m_player_mgr->Awake("0.0.0.0", 10240);
 	if (ret)
 	{
-		m_new_scene = this->CreateScene("TestScene");
+		m_new_scene = this->CreateScene("TestScene", "default");
 	}
 	ret = ret && m_new_scene;
 	return ret ? EModuleRetCode_Succ : EModuleRetCode_Failed;
@@ -132,9 +132,9 @@ void GameLogicModule::ReloadConfig()
 	G_Log->Debug(LogModule::LOGGER_ID_STDOUT, "reload csv config {0}", ret ? "success" : "fail");
 }
 
-GameLogic::NewScene * GameLogicModule::CreateScene(std::string scene_type)
+GameLogic::NewScene * GameLogicModule::CreateScene(std::string scene_type, std::string init_param)
 {
-	GameLogic::NewScene *scene = new GameLogic::TestScene(this);
+	GameLogic::NewScene *scene = new GameLogic::TestScene(this, init_param);
 	bool ret = scene->Awake();
 	if (!ret)
 	{

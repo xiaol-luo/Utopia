@@ -24,8 +24,9 @@
 
 namespace GameLogic
 {
-	NewScene::NewScene(GameLogicModule *logic_module)
+	NewScene::NewScene(GameLogicModule *logic_module, std::string init_param)
 	{
+		m_init_param = init_param;
 		m_protobuf_arena = MemoryUtil::NewArena();
 		m_game_logic = logic_module;
 		m_ev_dispacher = new EventDispacher();
