@@ -8,8 +8,16 @@ namespace Tool.Skill
         [MenuItem("Tools/SkillEditorWindow")]
         public static void OpenWindow()
         {
-            var window = EditorWindow.GetWindow<SkillEditorWindow>("SkillEditorWindow");
-            window.minSize = new Vector2(SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT);
+            var window = EditorWindow.GetWindowWithRect<SkillEditorWindow>(
+                new Rect(
+                    (Screen.width - SkillEditorWindowData.WINDOW_FIX_WIDTH) / 2,
+                    (Screen.height - SkillEditorWindowData.WINDOW_MIN_HEIGHT) / 2,
+                    SkillEditorWindowData.WINDOW_FIX_WIDTH,
+                    SkillEditorWindowData.WINDOW_MIN_HEIGHT
+                    ));
+            window.minSize = new Vector2(
+                SkillEditorWindowData.WINDOW_FIX_WIDTH, 
+                SkillEditorWindowData.WINDOW_MIN_HEIGHT);
             window.autoRepaintOnSceneChange = true;
             window.wantsMouseEnterLeaveWindow = true;
             window.wantsMouseMove = true;
@@ -42,11 +50,14 @@ namespace Tool.Skill
         private void OnEnable()
         {
             Debug.Log("SkillEditorWindow::OnEnable");
+            editorData.sceneTabData.LoadSceneConfigs();
         }
 
         private void OnDisable()
         {
             Debug.Log("SkillEditorWindow::OnDisable");
+            editorData.sceneTabData.sceneConfig.cfgs["for_test"] = new Config.SceneConfig();
+            editorData.sceneTabData.SaveSceneConfigs();
         }
         private void OnGUI()
         {
@@ -57,7 +68,7 @@ namespace Tool.Skill
         void LogicImpl()
         {
             using (new GUILayout.AreaScope(
-                new Rect(Screen.width / 2, Screen.height / 2, SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT), 
+                new Rect(0, 0, SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT), 
                 "skill editor"))
             {
                 using (new GUILayout.HorizontalScope())
@@ -66,6 +77,7 @@ namespace Tool.Skill
                 }
             }
 
+            /*
             EditorGUILayout.BeginVertical(EditorStyles.textArea);
 
             EditorGUILayout.TextArea(string.Format("EditorApplication.applicationContentsPath: {0}", EditorApplication.applicationContentsPath));
@@ -76,6 +88,7 @@ namespace Tool.Skill
             EditorGUILayout.TextArea(string.Format("Application.streamingAssetsPath: {0}", Application.streamingAssetsPath));
             EditorGUILayout.TextArea(string.Format("Application.temporaryCachePath: {0}", Application.temporaryCachePath));
             EditorGUILayout.BeginVertical();
+            */
         }
 
         void NoneLogicImpl()
