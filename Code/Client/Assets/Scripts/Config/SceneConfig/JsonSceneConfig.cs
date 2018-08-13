@@ -6,56 +6,56 @@ namespace Config
 {
     public class AllSceneConfig
     {
-        public Dictionary<string, SceneConfig> cfgs = new Dictionary<string, SceneConfig>();
+        public List<SceneConfig> cfgs = new List<SceneConfig>();
     }
 
     public class AllSceneUnitConfig
     {
-        public Dictionary<int, SceneUnitConfig> cfgs = new Dictionary<int, SceneUnitConfig>();
+        public List<SceneUnitConfig> cfgs = new List<SceneUnitConfig>();
     }
 
     public class AllSuFilterConfig
     {
-        public Dictionary<int, SuFilterConfig> cfgs = new Dictionary<int, SuFilterConfig>();
+        public List<SuFilterConfig> cfgs = new List<SuFilterConfig>();
     }
 
     public class AllSkillConfig
     {
-        public Dictionary<int, SkillConfig> cfgs = new Dictionary<int, SkillConfig>();
+        public List<SkillConfig> cfgs = new List<SkillConfig>();
     }
 
     public class AllAttrsEffectConfig
     {
-        public Dictionary<int, AllAttrsEffectConfig> cfgs = new Dictionary<int, AllAttrsEffectConfig>();
+        public List<AllAttrsEffectConfig> cfgs = new List<AllAttrsEffectConfig>();
     }
 
     public class AllEffectGroupConfig
     {
-        public Dictionary<int, EffectGroupConfig> cfgs = new Dictionary<int, EffectGroupConfig>();
+        public List<EffectGroupConfig> cfgs = new List<EffectGroupConfig>();
     }
 
     public class AllEffectScriptConfig
     {
-        public Dictionary<int, EffectScriptConfig> cfgs = new Dictionary<int, EffectScriptConfig>();
+        public List<EffectScriptConfig> cfgs = new List<EffectScriptConfig>();
     }
 
     public class AllEffectSearcherConfig
     {
-        public Dictionary<int, EffectSearcherConfig> cfgs = new Dictionary<int, EffectSearcherConfig>();
+        public List<EffectSearcherConfig> cfgs = new List<EffectSearcherConfig>();
     }
 
     public class AllForceMoveEffectConfig
     {
-        public Dictionary<int, ForceMoveEffectConfig> cfgs = new Dictionary<int, ForceMoveEffectConfig>();
+        public List<ForceMoveEffectConfig> cfgs = new List<ForceMoveEffectConfig>();
     }
     
     public class AllHealEffectConfig
     {
-        public Dictionary<int, HealEffectConfig> cfgs = new Dictionary<int, HealEffectConfig>();
+        public List<HealEffectConfig> cfgs = new List<HealEffectConfig>();
     }
 
     public class AllHurtEffectConfig
     {
-        public Dictionary<int, HurtEffectConfig> cfgs = new Dictionary<int, HurtEffectConfig>();
+        public List<HurtEffectConfig> cfgs = new List<HurtEffectConfig>();
     }
 }

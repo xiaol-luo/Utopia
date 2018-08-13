@@ -1,0 +1,32 @@
+{
+  "cfgs": [
+    {
+      "id": 1,
+      "name": "red_hero",
+      "model_res_path": "",
+      "slot_q_skill_Id": 0,
+      "slot_w_skill_id": 0,
+      "hp": 100,
+      "mp": 100,
+      "attack": 100,
+      "q_skill_id": 1,
+      "w_skill_id": 1,
+      "e_skill_id": 1,
+      "r_skill_id": 1
+    },
+    {
+      "id": 2,
+      "name": "blue_hero",
+      "model_res_path": "",
+      "slot_q_skill_Id": 0,
+      "slot_w_skill_id": 0,
+      "hp": 200,
+      "mp": 200,
+      "attack": 20,
+      "q_skill_id": 2,
+      "w_skill_id": 2,
+      "e_skill_id": 2,
+      "r_skill_id": 2
+    }
+  ]
+}

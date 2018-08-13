@@ -10,9 +10,10 @@ namespace Tool.Skill
         public const int SCENE = 0;
         public const int SCENE_UNIT = 1;
         public const int SKILL = 2;
-        public const int EFFECT = 3;
+        public const int FILTER = 3;
+        public const int EFFECT = 4;
 
-        public const int COUNT = 4;
+        public const int COUNT = 5;
     }
 
     public class SkillEditorTabSetting
@@ -27,6 +28,8 @@ namespace Tool.Skill
         public SkillEditorWindowData()
         {
             sceneTabData = new SceneTabData(this);
+            suTabData = new SceneUnitTabData(this);
+            skillTabData = new SkillTabData(this);
         }
         public const int WINDOW_FIX_WIDTH = 960;
         public const int WINDOW_MIN_HEIGHT = 640;
@@ -45,52 +48,20 @@ namespace Tool.Skill
         public SkillEditorTabSetting[] tabSettings = null;
 
         public SceneTabData sceneTabData;
-    }
+        public SceneUnitTabData suTabData;
+        public SkillTabData skillTabData;
 
-    public class SceneTabData
-    {
-        public SceneTabData(SkillEditorWindowData _editorData)
+        public void LoadAllCfg()
         {
-            editorData = _editorData;
+            sceneTabData.LoadSceneConfigs();
+            suTabData.LoadSceneUnitConfigs();
+            skillTabData.LoadSkillConfigs();
         }
-
-        SkillEditorWindowData editorData;
-        public const string SCENE_CONFIG_PATH = "skill_editor/scene_config.json";
-        public string sceneCfgPath {
-            get
-            {
-                string ret = Path.Combine(editorData.jsonCfgPath, SCENE_CONFIG_PATH);
-                return ret;
-            }
-        }
-
-        AllSceneConfig _sceneCfgs = null;
-        public AllSceneConfig sceneConfig
+        public void SaveAllCfg()
         {
-            get
-            {
-                if (null == _sceneCfgs)
-                {
-                    this.LoadSceneConfigs();
-                }
-                return _sceneCfgs;
-            }
-            set
-            {
-                _sceneCfgs = value;
-            }
-        }
-
-        public void LoadSceneConfigs()
-        {
-            _sceneCfgs = JsonHelp.LoadStruct<AllSceneConfig>(sceneCfgPath);
-        }
-
-        public bool SaveSceneConfigs()
-        {
-            var toSave = (null != _sceneCfgs ? _sceneCfgs : new AllSceneConfig());
-            bool ret = JsonHelp.SaveStruct(sceneCfgPath, toSave);
-            return ret;
+            sceneTabData.SaveSceneConfigs();
+            suTabData.SaveSceneUnitConfigs();
+            skillTabData.SaveSkillConfigs();
         }
     }
 }

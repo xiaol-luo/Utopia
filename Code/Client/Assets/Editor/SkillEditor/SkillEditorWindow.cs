@@ -26,38 +26,26 @@ namespace Tool.Skill
         }
 
         public SkillEditorWindowData editorData = null;
-        string[] topToolbarTexts = null;
-        private void Awake()
-        {
-            Debug.Log("SkillEditorWindow::Awake");
-
-            editorData = new SkillEditorWindowData();
-            editorData.tabSettings = new SkillEditorTabSetting[TopTabIdx.COUNT]
-            {
-                new SkillEditorTabSetting(){tabIdx=TopTabIdx.SCENE, tabName="scene", logicImpl=NoneLogicImpl},
-                new SkillEditorTabSetting(){tabIdx=TopTabIdx.SCENE_UNIT, tabName="su", logicImpl=NoneLogicImpl},
-                new SkillEditorTabSetting(){tabIdx=TopTabIdx.SKILL, tabName="skill", logicImpl=NoneLogicImpl},
-                new SkillEditorTabSetting(){tabIdx=TopTabIdx.EFFECT, tabName="effect", logicImpl=NoneLogicImpl},
-            };
-
-            topToolbarTexts = new string[editorData.tabSettings.Length];
-            for (int i = 0; i < editorData.tabSettings.Length; ++ i)
-            {
-                topToolbarTexts[i] = editorData.tabSettings[i].tabName;
-            }
-        }
 
         private void OnEnable()
         {
             Debug.Log("SkillEditorWindow::OnEnable");
-            editorData.sceneTabData.LoadSceneConfigs();
+            editorData = new SkillEditorWindowData();
+            editorData.tabSettings = new SkillEditorTabSetting[TopTabIdx.COUNT]
+            {
+                new SkillEditorTabSetting(){tabIdx=TopTabIdx.SCENE, tabName="scene", logicImpl=SceneTabLogicImpl},
+                new SkillEditorTabSetting(){tabIdx=TopTabIdx.SCENE_UNIT, tabName="su", logicImpl=SceneUnitTabLogicImpl},
+                new SkillEditorTabSetting(){tabIdx=TopTabIdx.SKILL, tabName="skill", logicImpl=SkillTabLogicImpl},
+                new SkillEditorTabSetting(){tabIdx=TopTabIdx.FILTER, tabName="filter", logicImpl=FilterTabLogicImpl},
+                new SkillEditorTabSetting(){tabIdx=TopTabIdx.EFFECT, tabName="effect", logicImpl=EffectTabLogicImpl},
+            };
+            editorData.LoadAllCfg();
         }
 
         private void OnDisable()
         {
             Debug.Log("SkillEditorWindow::OnDisable");
-            editorData.sceneTabData.sceneConfig.cfgs["for_test"] = new Config.SceneConfig();
-            editorData.sceneTabData.SaveSceneConfigs();
+            editorData.SaveAllCfg();
         }
         private void OnGUI()
         {
@@ -71,29 +59,39 @@ namespace Tool.Skill
                 new Rect(0, 0, SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT), 
                 "skill editor"))
             {
-                using (new GUILayout.HorizontalScope())
+                using (new GUILayout.VerticalScope())
                 {
-                    editorData.topToobardx = GUILayout.Toolbar(editorData.topToobardx, topToolbarTexts);
+                    using (new GUILayout.HorizontalScope(EditorStyles.toolbarButton))
+                    {
+                        string[] topToolbarTexts = new string[editorData.tabSettings.Length];
+                        for (int i = 0; i < editorData.tabSettings.Length; ++i)
+                        {
+                            topToolbarTexts[i] = editorData.tabSettings[i].tabName;
+                        }
+                        editorData.topToobardx = GUILayout.Toolbar(editorData.topToobardx, topToolbarTexts);
+                    }
+                    if (editorData.topToobardx >= 0 && editorData.topToobardx < editorData.tabSettings.Length)
+                    {
+                        using (new GUILayout.VerticalScope())
+                        {
+                            editorData.tabSettings[editorData.topToobardx].logicImpl();
+                        }
+                    } 
                 }
             }
-
-            /*
-            EditorGUILayout.BeginVertical(EditorStyles.textArea);
-
-            EditorGUILayout.TextArea(string.Format("EditorApplication.applicationContentsPath: {0}", EditorApplication.applicationContentsPath));
-            EditorGUILayout.TextArea(string.Format("EditorApplication.applicationPath: {0}", EditorApplication.applicationPath));
-
-            EditorGUILayout.TextArea(string.Format("Application.applicationPath: {0}", Application.dataPath));
-            EditorGUILayout.TextArea(string.Format("Application.persistentDataPath: {0}", Application.persistentDataPath));
-            EditorGUILayout.TextArea(string.Format("Application.streamingAssetsPath: {0}", Application.streamingAssetsPath));
-            EditorGUILayout.TextArea(string.Format("Application.temporaryCachePath: {0}", Application.temporaryCachePath));
-            EditorGUILayout.BeginVertical();
-            */
         }
 
         void NoneLogicImpl()
         {
 
+        }
+
+        public static bool BoolPopup(string label, bool val, params GUILayoutOption[] options)
+        {
+            int[]vals = new int[2] { 0, 1};
+            string[] strs = new string[2] { "false", "true" };
+            int ret = EditorGUILayout.IntPopup(label, val ? 1 : 0, strs, vals, options);
+            return 0 != ret;
         }
     }
 }

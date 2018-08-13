@@ -5,17 +5,17 @@ namespace Config
 {
     public class SkillConfig
     {
-        int id = 0;
-        string name = string.Empty;
-        bool is_normal_attack;
+        public int id = 0;
+        public string name = string.Empty;
+        public bool is_normal_attack;
 
         public enum UseWay
         {
-            target,
+            target = 1,
             direction,
             postion,
         }
-        UseWay use_way = UseWay.target;
+        public UseWay use_way = UseWay.target;
         public enum TargetType
         {
             hero,
@@ -24,7 +24,8 @@ namespace Config
             building,
             effect,
         }
-        HashSet<TargetType> target_types = new HashSet<TargetType>();
+        public TargetType target_type_flag = 0;
+
         
         public enum TargetRelation
         {
@@ -32,16 +33,34 @@ namespace Config
             friend, // not include self?
             enemy,
         }
-        HashSet<TargetRelation> target_relations = new HashSet<TargetRelation>();
+        public TargetRelation target_relation_flag;
 
-        List<SkillLevelConfig> level_cfgs = new List<SkillLevelConfig>();
+        public List<SkillLevelConfig> lvl_cfgs = new List<SkillLevelConfig>();
     }
 
     public class SkillLevelConfig
     {
-        int preparing_span;
-        int releasing_span;
+        public int preparing_span;
+        public int releasing_span;
+        public int lasting_span;
+        public int consume_mp;
+        public int cd;
+        public float cast_distance;
+        public bool can_move;
+        public int effect_id;
 
-        List<int> effect_ids = new List<int>();
+        public SkillLevelConfig CloneSelf()
+        {
+            SkillLevelConfig ret = new SkillLevelConfig();
+            ret.preparing_span = this.preparing_span;
+            ret.releasing_span = this.releasing_span;
+            ret.lasting_span = this.lasting_span;
+            ret.consume_mp = this.consume_mp;
+            ret.cd = this.cd;
+            ret.cast_distance = this.cast_distance;
+            ret.can_move = this.can_move;
+            ret.effect_id = this.effect_id;
+            return ret;
+        }
     }
 }

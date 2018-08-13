@@ -1,0 +1,64 @@
+{
+  "cfgs": [
+    {
+      "id": 1,
+      "name": "red hero q skill",
+      "is_normal_attack": false,
+      "use_way": 1,
+      "target_type_flag": 0,
+      "target_relation_flag": 0,
+      "lvl_cfgs": [
+        {
+          "preparing_span": 200,
+          "releasing_span": 200,
+          "lasting_span": 200,
+          "consume_mp": 200,
+          "cd": 20,
+          "cast_distance": 220.0,
+          "can_move": false,
+          "effect_id": 4000001
+        },
+        {
+          "preparing_span": 200,
+          "releasing_span": 200,
+          "lasting_span": 200,
+          "consume_mp": 200,
+          "cd": 20,
+          "cast_distance": 220.0,
+          "can_move": false,
+          "effect_id": 23
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "blue hero q skill",
+      "is_normal_attack": false,
+      "use_way": 1,
+      "target_type_flag": 1,
+      "target_relation_flag": 6,
+      "lvl_cfgs": [
+        {
+          "preparing_span": 200,
+          "releasing_span": 200,
+          "lasting_span": 200,
+          "consume_mp": 20,
+          "cd": 2,
+          "cast_distance": 200.0,
+          "can_move": false,
+          "effect_id": 4000002
+        },
+        {
+          "preparing_span": 200,
+          "releasing_span": 200,
+          "lasting_span": 200,
+          "consume_mp": 20,
+          "cd": 2,
+          "cast_distance": 200.0,
+          "can_move": false,
+          "effect_id": 4000002
+        }
+      ]
+    }
+  ]
+}
