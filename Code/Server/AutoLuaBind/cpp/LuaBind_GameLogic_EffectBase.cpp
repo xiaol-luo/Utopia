@@ -50,7 +50,7 @@ namespace SolLuaBind
 						,"Loop", &GameLogic::EffectBase::Loop				
 						,"IsGuiding", &GameLogic::EffectBase::IsGuiding				
 						,"CanCancelGuide", &GameLogic::EffectBase::CanCancelGuide				
-						,"CanCelGuide", &GameLogic::EffectBase::CanCelGuide				
+						,"CanCelGuide", &GameLogic::EffectBase::CancelGuide				
 						, sol::base_classes, sol::bases<
 							std::enable_shared_from_this<GameLogic::EffectBase> 
 						>()

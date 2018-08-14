@@ -80,7 +80,53 @@ namespace GameLogic
 		}
 		else
 		{
-			sol::table skill_json_cfg = *(sol::table *)param;
+			sol::table skill_json_tb = *(sol::table *)param;
+			for (auto kv_pair : skill_json_tb)
+			{
+				sol::object key_obj = kv_pair.first;
+				sol::object val_obj = kv_pair.second;
+
+				if (val_obj.is<sol::table>())
+				{
+					sol::table skill_json = val_obj.as<sol::table>();
+					SkillConfig *skill_cfg = new SkillConfig();
+
+					skill_cfg->id = skill_json["id"];
+					skill_cfg->name = skill_json["name"];
+					skill_cfg->is_normal_attack = skill_json["is_normal_attack"];
+					skill_cfg->use_way = skill_json["use_way"];
+					skill_cfg->target_types = skill_json["target_type_flag"];
+					skill_cfg->target_relations = skill_json["target_relation_flag"];
+					
+					sol::table lvl_jsons_tb = skill_json["lvl_cfgs"];
+					for (auto lvl_kv_pair : lvl_jsons_tb)
+					{
+						sol::object lvl_key_obj = lvl_kv_pair.first;
+						sol::object lvl_val_obj = lvl_kv_pair.second;
+						if (!lvl_val_obj.is<sol::table>())
+							continue;
+
+						sol::table lvl_json = lvl_val_obj.as<sol::table>();
+						skill_cfg->max_level += 1;
+						assert(skill_cfg->max_level <= MAX_SKILL_LEVEL);
+						SkillLevelConfig *lvl_cfg = new SkillLevelConfig();
+						skill_cfg->level_cfgs[skill_cfg->max_level] = lvl_cfg;
+						lvl_cfg->skill_id = skill_cfg->id;
+						lvl_cfg->skill_cfg = skill_cfg;
+						lvl_cfg->level = skill_cfg->max_level;
+						lvl_cfg->cast_distance = lvl_json["cast_distance"];
+						lvl_cfg->preparing_span = lvl_json["preparing_span"];
+						lvl_cfg->releasing_span = lvl_json["releasing_span"];
+						lvl_cfg->lasting_span = lvl_json["lasting_span"];
+						lvl_cfg->consume_mp = lvl_json["consume_mp"];
+						lvl_cfg->cd = lvl_json["cd"];
+						lvl_cfg->can_move = lvl_json["can_move"];
+						lvl_cfg->release_effect_ids.push_back(lvl_json["effect_id"]);
+					}
+					skills.insert(std::make_pair(skill_cfg->id, skill_cfg));
+				}
+			}
+			return true;
 		}
 	}
 

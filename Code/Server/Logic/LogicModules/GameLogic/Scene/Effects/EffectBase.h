@@ -38,7 +38,7 @@ namespace GameLogic
 
 		bool IsGuiding();
 		virtual bool CanCancelGuide();
-		virtual bool CanCelGuide(bool is_force);
+		virtual bool CancelGuide(bool is_force);
 
 	protected:
 		virtual bool NeedGuide(); // 是否需要引导

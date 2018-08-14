@@ -29,7 +29,8 @@ public:
 		auto it = m_subscribes.find(id);
 		if (m_subscribes.end() == it)
 			return;
-		it->second->ForeachFs(args...);
+		auto subscribe = it->second;
+		subscribe->ForeachFs(args...);
 	}
 
 	template <typename return_type, typename... Args>
@@ -98,7 +99,8 @@ private:
 		template <typename... Params>
 		void ForeachFs(Params... params)
 		{
-			for (auto &&kv_pair : fs_ptr)
+			std::unordered_map<uint32_t, void*> tmp(fs_ptr.begin(), fs_ptr.end());
+			for (auto &&kv_pair : tmp)
 			{
 				auto fn = (std::function<void(Params...)> *)(kv_pair.second);
 				(*fn)(params...);

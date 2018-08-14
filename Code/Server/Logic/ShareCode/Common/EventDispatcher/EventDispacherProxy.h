@@ -50,8 +50,8 @@ public:
 	{
 		if (m_subscribe_ids.count(subscribe_id) > 0)
 		{
-			m_ev_dispacher->Cancel(subscribe_id);
 			m_subscribe_ids.erase(subscribe_id);
+			m_ev_dispacher->Cancel(subscribe_id);
 		}
 	}
 

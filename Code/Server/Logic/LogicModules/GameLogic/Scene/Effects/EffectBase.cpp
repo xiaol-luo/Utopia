@@ -162,12 +162,10 @@ namespace GameLogic
 
 	bool EffectBase::CanCancelGuide()
 	{
-		if (this->CanCancelGuide())
-			return true;
 		return !this->IsGuiding();
 	}
 
-	bool EffectBase::CanCelGuide(bool is_force)
+	bool EffectBase::CancelGuide(bool is_force)
 	{
 		if (!is_force && !this->CanCancelGuide())
 			return false;

@@ -78,7 +78,7 @@ end
 
 function effect_demo.on_late_loop(self, now_ms, delta_ms)
     self.loop_times = self.loop_times + 1
-    if self.loop_times > 10 then 
+    if self.loop_times > 100 then 
         self.is_done = true
     end
 end
