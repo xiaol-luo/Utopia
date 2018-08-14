@@ -31,6 +31,8 @@ namespace LuaUtils
 			end 
 		)");
 
+		sol::protected_function::set_default_handler(luaSv["___DefaultErrorHandler"]);
+
 		luaSv.open_libraries(
 			sol::lib::debug
 			, sol::lib::base
@@ -65,12 +67,14 @@ namespace LuaUtils
 		return luaState; 
 	}
 
+	/*
 	sol::protected_function ProtectFnErrorHandler()
 	{
 		sol::state_view lsv(luaState);
 		sol::protected_function ret = lsv["___DefaultErrorHandler"];
 		return ret;
 	}
+	*/
 
 	sol::protected_function_result ErrorFn(lua_State *L, sol::protected_function_result pfr)
 	{

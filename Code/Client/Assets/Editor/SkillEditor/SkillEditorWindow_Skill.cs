@@ -54,6 +54,9 @@ namespace Tool.Skill
                 float defaultLabelWidth = EditorGUIUtility.labelWidth;
                 EditorGUIUtility.labelWidth = 120;
 
+                currSkillCfg.id = EditorGUILayout.IntField("id", currSkillCfg.id);
+                tabData.selectedSkillCfgId = currSkillCfg.id;
+
                 currSkillCfg.name = EditorGUILayout.TextField("name", currSkillCfg.name);
                 currSkillCfg.is_normal_attack = SkillEditorWindow.BoolPopup("normal attack", currSkillCfg.is_normal_attack);
                 currSkillCfg.use_way = (Config.SkillConfig.UseWay)EditorGUILayout.EnumPopup("use way", currSkillCfg.use_way);

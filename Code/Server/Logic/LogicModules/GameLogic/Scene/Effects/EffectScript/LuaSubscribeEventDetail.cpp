@@ -106,7 +106,6 @@ namespace GameLogic
 		LuaSubcribeEventRecord::Item *item = new LuaSubcribeEventRecord::Item();
 		item->id = record_item_id;
 		item->fn = lua_fn;
-		lua_fn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		record->head->next->pre = item;
 		item->next = record->head->next;
 		record->head->next = item;

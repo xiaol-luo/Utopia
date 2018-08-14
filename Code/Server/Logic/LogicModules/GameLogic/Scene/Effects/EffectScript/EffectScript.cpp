@@ -25,7 +25,6 @@ namespace GameLogic
 		assert(typeDefine.valid());
 		sol::protected_function newFn = typeDefine["new"];
 		assert(newFn.valid());
-		newFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		m_lua_effect_script = newFn(typeDefine, this, m_cfg);
 		assert(m_lua_effect_script.valid());
 
@@ -123,7 +122,6 @@ namespace GameLogic
 	void EffectScript::OnLateBegin()
 	{
 		sol::protected_function luaFn = m_lua_effect_script["on_late_begin"];
-		luaFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		luaFn(m_lua_effect_script);
 	}
 
@@ -136,14 +134,12 @@ namespace GameLogic
 	void EffectScript::OnLateLoop(int64_t now_ms, int64_t delta_ms)
 	{
 		sol::protected_function luaFn = m_lua_effect_script["on_late_loop"];
-		luaFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		luaFn(m_lua_effect_script, now_ms, delta_ms);
 	}
 
 	void EffectScript::OnLateEnd(EEffectEndCase end_case)
 	{
 		sol::protected_function luaFn = m_lua_effect_script["on_late_end"];
-		luaFn.error_handler = LuaUtils::ProtectFnErrorHandler();
 		luaFn(m_lua_effect_script);
 
 		m_lua_subscribe_scene_event_dtail->ClearAll();

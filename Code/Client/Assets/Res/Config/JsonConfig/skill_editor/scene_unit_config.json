@@ -9,10 +9,10 @@
       "hp": 100,
       "mp": 100,
       "attack": 100,
-      "q_skill_id": 1,
-      "w_skill_id": 1,
-      "e_skill_id": 1,
-      "r_skill_id": 1
+      "q_skill_id": 11,
+      "w_skill_id": 11,
+      "e_skill_id": 11,
+      "r_skill_id": 11
     },
     {
       "id": 2,
@@ -23,10 +23,10 @@
       "hp": 200,
       "mp": 200,
       "attack": 20,
-      "q_skill_id": 2,
-      "w_skill_id": 2,
-      "e_skill_id": 2,
-      "r_skill_id": 2
+      "q_skill_id": 22,
+      "w_skill_id": 22,
+      "e_skill_id": 22,
+      "r_skill_id": 22
     }
   ]
 }

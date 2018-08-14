@@ -55,7 +55,6 @@ namespace GameLogic
 		sol::state_view lsv(LuaUtils::GetState());
 		m_lua_msg_handler_fn = lsv[NET_HANDLER_NAMESPACE][NET_PLAYER_HANDLER_FN];
 		assert(m_lua_msg_handler_fn.valid());
-		m_lua_msg_handler_fn.error_handler = LuaUtils::ProtectFnErrorHandler();
 	}
 
 	PlayerMsgHandler::PlayerMsgHandler(GameLogicModule *logic_module)
