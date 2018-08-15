@@ -59,9 +59,9 @@ namespace Tool.Skill
 
                 currSkillCfg.name = EditorGUILayout.TextField("name", currSkillCfg.name);
                 currSkillCfg.is_normal_attack = SkillEditorWindow.BoolPopup("normal attack", currSkillCfg.is_normal_attack);
-                currSkillCfg.use_way = (Config.SkillConfig.UseWay)EditorGUILayout.EnumPopup("use way", currSkillCfg.use_way);
-                currSkillCfg.target_type_flag = (Config.SkillConfig.TargetType)EditorGUILayout.EnumMaskPopup("target type", currSkillCfg.target_type_flag);
-                currSkillCfg.target_relation_flag = (Config.SkillConfig.TargetRelation)EditorGUILayout.EnumMaskPopup("target relation", currSkillCfg.target_relation_flag);
+                currSkillCfg.use_way = (Config.SkillUseWay)EditorGUILayout.EnumPopup("use way", currSkillCfg.use_way);
+                currSkillCfg.target_type_flag = (Config.SceneUnitType)EditorGUILayout.EnumMaskPopup("target type", currSkillCfg.target_type_flag);
+                currSkillCfg.target_relation_flag = (Config.SceneUnitRelation)EditorGUILayout.EnumMaskPopup("target relation", currSkillCfg.target_relation_flag);
 
                 EditorGUILayout.PrefixLabel("level config");
                 using (new EditorGUILayout.HorizontalScope())

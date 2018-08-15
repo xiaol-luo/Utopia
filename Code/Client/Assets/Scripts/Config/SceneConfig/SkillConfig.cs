@@ -3,37 +3,36 @@ using System.Collections.Generic;
 
 namespace Config
 {
+    public enum SceneUnitType
+    {
+        hero,
+        soldier,
+        monster,
+        building,
+        effect,
+    }
+
+    public enum SceneUnitRelation
+    {
+        self,
+        friend, // not include self?
+        enemy,
+    }
+    public enum SkillUseWay
+    {
+        target = 1,
+        direction,
+        postion,
+    }
+
     public class SkillConfig
     {
         public int id = 0;
         public string name = string.Empty;
         public bool is_normal_attack;
-
-        public enum UseWay
-        {
-            target = 1,
-            direction,
-            postion,
-        }
-        public UseWay use_way = UseWay.target;
-        public enum TargetType
-        {
-            hero,
-            soldier,
-            monster,
-            building,
-            effect,
-        }
-        public TargetType target_type_flag = 0;
-
-        
-        public enum TargetRelation
-        {
-            self,
-            friend, // not include self?
-            enemy,
-        }
-        public TargetRelation target_relation_flag;
+        public SkillUseWay use_way = SkillUseWay.target;
+        public SceneUnitType target_type_flag = 0;
+        public SceneUnitRelation target_relation_flag;
 
         public List<SkillLevelConfig> lvl_cfgs = new List<SkillLevelConfig>();
     }

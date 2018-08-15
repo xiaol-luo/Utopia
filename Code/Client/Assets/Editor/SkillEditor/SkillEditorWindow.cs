@@ -1,3 +1,4 @@
+using Config;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Tool.Skill
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.SCENE_UNIT, tabName="su", logicImpl=SceneUnitTabLogicImpl},
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.SKILL, tabName="skill", logicImpl=SkillTabLogicImpl},
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.FILTER, tabName="filter", logicImpl=FilterTabLogicImpl},
+                new SkillEditorTabSetting(){tabIdx=TopTabIdx.EFFECT_GROUP, tabName="effect group", logicImpl=EffectGroupTabLogicImpl},
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.EFFECT, tabName="effect", logicImpl=EffectTabLogicImpl},
             };
             editorData.LoadAllCfg();
@@ -92,6 +94,13 @@ namespace Tool.Skill
             string[] strs = new string[2] { "false", "true" };
             int ret = EditorGUILayout.IntPopup(label, val ? 1 : 0, strs, vals, options);
             return 0 != ret;
+        }
+
+        public static JsonVector2 Vector2Field(string label, JsonVector2 jsonVec2, params GUILayoutOption[] options)
+        {
+            Vector2 vec2 = jsonVec2.MakeVector2();
+            vec2 = EditorGUILayout.Vector2Field("rect", vec2);
+            return new JsonVector2(vec2);
         }
     }
 }
