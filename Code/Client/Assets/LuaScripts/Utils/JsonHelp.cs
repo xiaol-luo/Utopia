@@ -36,9 +36,10 @@ public static class JsonHelp
                     Directory.CreateDirectory(dirName);
                 }
             }
+            string txt = JsonConvert.SerializeObject(val, Formatting.Indented);
             var fd = File.Create(filePath);
             fd.Close();
-            string txt = JsonConvert.SerializeObject(val, Formatting.Indented);
+            
             File.WriteAllText(filePath, txt);
             return true;
         }

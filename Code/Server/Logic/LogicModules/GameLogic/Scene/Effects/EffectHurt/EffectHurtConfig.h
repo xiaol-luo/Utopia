@@ -17,7 +17,7 @@ namespace GameLogic
 		virtual std::shared_ptr<EffectBase> CreateEffect(SceneEffects *scene_effects, uint64_t effect_key) const;
 
 	public:
-		bool InitCfg(const Config::CsvEffectHurtConfig *csv_cfg);
+		bool InitCfg(const Config::CsvEffectHurtConfig *csv_cfg, void **param);
 		int GetHurt() const { return m_hurt; }
 
 	protected:

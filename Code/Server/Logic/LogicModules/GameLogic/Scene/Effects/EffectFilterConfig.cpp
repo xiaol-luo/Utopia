@@ -4,6 +4,7 @@
 #include <assert.h>
 #include "Network/Protobuf/BattleEnum.pb.h"
 #include "Utils/ConfigUtil.h"
+#include <sol.hpp>
 
 namespace GameLogic
 {
@@ -110,15 +111,50 @@ namespace GameLogic
 		m_filter_cfgs.clear();
 	}
 
-	bool EffectFilterConfigMgr::LoadCfg(Config::CsvConfigSets * csv_cfgs, void * param)
+	bool EffectFilterConfigMgr::LoadCfg(Config::CsvConfigSets * csv_cfgs, void ** param)
 	{
-		for (Config::CsvEffectFilterConfig *item : csv_cfgs->csv_CsvEffectFilterConfigSet->cfg_vec)
+		if (nullptr == param)
 		{
-			EffectFilterConfig *cfg = new EffectFilterConfig();
-			assert(cfg->InitCfg(item));
-			auto ret = m_filter_cfgs.insert(std::make_pair(cfg->id, cfg));
-			assert(ret.second);
+			for (Config::CsvEffectFilterConfig *item : csv_cfgs->csv_CsvEffectFilterConfigSet->cfg_vec)
+			{
+				EffectFilterConfig *cfg = new EffectFilterConfig();
+				assert(cfg->InitCfg(item));
+				auto ret = m_filter_cfgs.insert(std::make_pair(cfg->id, cfg));
+				assert(ret.second);
+			}
 		}
+		else
+		{
+			sol::table su_filter_tb = *(sol::table *)param;
+			for (auto kv_pair : su_filter_tb)
+			{
+				sol::object key_obj = kv_pair.first;
+				sol::object val_obj = kv_pair.second;
+
+				if (val_obj.is<sol::table>())
+				{
+					sol::table skill_json = val_obj.as<sol::table>();
+					auto new_cfg = new EffectFilterConfig();
+
+					new_cfg->id = skill_json["id"];
+					new_cfg->name = skill_json["name"];
+					new_cfg->limit_num = skill_json["limit_num"];
+					new_cfg->limit_num_priority = skill_json["limit_num_priority"];
+					new_cfg->unit_types = skill_json["unit_type_flag"];
+					new_cfg->relations = skill_json["relation_flag"];
+					new_cfg->anchor = skill_json["anchor"];
+					new_cfg->shape = skill_json["shape_type"];
+					new_cfg->shape_param.circle.radius = skill_json["shape_circle"];
+					new_cfg->shape_param.rect.x_size = skill_json["shape_rect"]["x"];
+					new_cfg->shape_param.rect.y_size = skill_json["shape_rect"]["y"];
+					new_cfg->shape_param.sector.radius = skill_json["shape_sector"]["x"];
+					new_cfg->shape_param.sector.angle = skill_json["shape_sector"]["y"];
+					auto ret = m_filter_cfgs.insert(std::make_pair(new_cfg->id, new_cfg));
+					assert(ret.second);
+				}
+			}
+		}
+
 
 		return true;
 	}

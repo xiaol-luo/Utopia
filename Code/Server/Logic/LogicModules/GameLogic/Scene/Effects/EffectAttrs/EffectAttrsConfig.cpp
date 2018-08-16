@@ -114,7 +114,7 @@ namespace GameLogic
 		return std::make_shared<EffectAttrs>(this, scene_effects, effect_key);
 	}
 
-	bool EffectAttrsConfig::InitCfg(const Config::CsvEffectAttrsConfig * csv_cfg)
+	bool EffectAttrsConfig::InitCfg(const Config::CsvEffectAttrsConfig * csv_cfg, void **param)
 	{
 		m_id = csv_cfg->id;
 		m_unique_id = csv_cfg->unique_id;

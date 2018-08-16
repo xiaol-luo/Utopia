@@ -10,7 +10,7 @@ namespace GameLogic
 		return std::make_shared<EffectSearcher>(this, scene_effects, effect_key);
 	}
 
-	bool EffectSearcherConfig::InitCfg(const Config::CsvEffectSearcherConfig * csv_cfg)
+	bool EffectSearcherConfig::InitCfg(const Config::CsvEffectSearcherConfig * csv_cfg, void **param)
 	{
 		m_id = csv_cfg->id;
 		m_reversible = false;

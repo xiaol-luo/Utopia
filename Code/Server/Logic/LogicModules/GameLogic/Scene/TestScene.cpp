@@ -256,10 +256,12 @@ namespace GameLogic
 
 		sol::table skill_json_cfg = json_cfgs["skill"];
 		assert(skill_json_cfg.valid());
+		sol::table su_filter_json_cfg = json_cfgs["su_filter"];
+		assert(su_filter_json_cfg.valid());
 
 		ret = ret & m_cfg->skill_cfgs->LoadCfg(m_game_logic->GetCsvCfgSet(), (void **)&skill_json_cfg);
-		ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
-		ret = ret & m_cfg->effect_filter_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), nullptr);
+		ret = ret & m_cfg->effect_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), (void **)&json_cfgs);
+		ret = ret & m_cfg->effect_filter_cfg_mgr->LoadCfg(m_game_logic->GetCsvCfgSet(), (void **)&su_filter_json_cfg);
 		ret = ret & this->CheckConfigValid();
 		if (!ret)
 		{
