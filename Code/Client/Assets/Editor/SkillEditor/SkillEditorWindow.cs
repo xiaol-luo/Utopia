@@ -61,7 +61,7 @@ namespace Tool.Skill
                 new Rect(0, 0, SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT), 
                 "skill editor"))
             {
-                using (new GUILayout.VerticalScope())
+                using (new EditorGUILayout.VerticalScope())
                 {
                     using (new GUILayout.HorizontalScope(EditorStyles.toolbarButton))
                     {
@@ -72,9 +72,12 @@ namespace Tool.Skill
                         }
                         editorData.topToobardx = GUILayout.Toolbar(editorData.topToobardx, topToolbarTexts);
                     }
+
+                    EditorGUILayout.Space();
+
                     if (editorData.topToobardx >= 0 && editorData.topToobardx < editorData.tabSettings.Length)
                     {
-                        using (new GUILayout.VerticalScope())
+                        using (new EditorGUILayout.VerticalScope())
                         {
                             editorData.tabSettings[editorData.topToobardx].logicImpl();
                         }

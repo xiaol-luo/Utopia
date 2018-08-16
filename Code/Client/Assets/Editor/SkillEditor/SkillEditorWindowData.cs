@@ -33,6 +33,7 @@ namespace Tool.Skill
             skillTabData = new SkillTabData(this);
             effectGroupTabData = new EffectGroupTabData(this);
             filterTabData = new SuFilterTabData(this);
+            effectTabData = new EffectTabData(this);
         }
         public const int WINDOW_FIX_WIDTH = 960;
         public const int WINDOW_MIN_HEIGHT = 640;
@@ -55,6 +56,7 @@ namespace Tool.Skill
         public SkillTabData skillTabData;
         public EffectGroupTabData effectGroupTabData;
         public SuFilterTabData filterTabData;
+        public EffectTabData effectTabData;
 
         public void LoadAllCfg()
         {
@@ -63,6 +65,7 @@ namespace Tool.Skill
             skillTabData.LoadSkillConfigs();
             effectGroupTabData.LoadEffectGroupConfigs();
             filterTabData.LoadConfigs();
+            effectTabData.LoadCfgs();
         }
         public void SaveAllCfg()
         {
@@ -71,6 +74,7 @@ namespace Tool.Skill
             skillTabData.SaveSkillConfigs();
             effectGroupTabData.SaveSceneUnitConfigs();
             filterTabData.SaveConfigs();
+            effectTabData.SaveCfgs();
         }
     }
 }
