@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Config
 {
-    public class AttrScriptConfig
+    public class AttrsEffectConfig : EffectConfigBase
     {
-        public int id;
         public List<AttrKvStruct> base_attrs = new List<AttrKvStruct>();
         public List<AttrKvStruct> extra_attrs = new List<AttrKvStruct>();
         public List<AttrKvStruct> percent_attrs = new List<AttrKvStruct>();

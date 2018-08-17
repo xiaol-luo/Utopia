@@ -1,9 +1,8 @@
 
 namespace Config
 {
-    public class HealEffectConfig
+    public class HealEffectConfig : EffectConfigBase
     {
-        public int id;
         public int val;
     }
 }

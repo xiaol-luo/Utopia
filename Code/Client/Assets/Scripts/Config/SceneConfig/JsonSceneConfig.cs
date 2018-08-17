@@ -26,7 +26,7 @@ namespace Config
 
     public class AllAttrsEffectConfig
     {
-        public List<AllAttrsEffectConfig> cfgs = new List<AllAttrsEffectConfig>();
+        public List<AttrsEffectConfig> cfgs = new List<AttrsEffectConfig>();
     }
 
     public class AllEffectGroupConfig

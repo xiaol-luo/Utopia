@@ -1,10 +1,8 @@
 
 namespace Config
 {
-    public class HurtEffectConfig
+    public class HurtEffectConfig : EffectConfigBase
     {
-        public int id;
-        public int value;
-        public int filter_id;
+        public int val;
     }
 }

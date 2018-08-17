@@ -96,12 +96,7 @@ namespace Tool.Skill
             {
                 currCfg.id = EditorGUILayout.IntField("id", currCfg.id);
                 currCfg.name = EditorGUILayout.TextField("name", currCfg.name);
-
-                {
-                    var filterIds = tabData.editorData.filterTabData.GetCfgIds().ToArray();
-                    var filterNames = tabData.editorData.filterTabData.GetCfgNames().ToArray();
-                    currCfg.filter_id = EditorGUILayout.IntPopup("filter", currCfg.filter_id, filterNames, filterIds);
-                }
+                currCfg.val = EditorGUILayout.IntField("value", currCfg.val);
             }
         }
 

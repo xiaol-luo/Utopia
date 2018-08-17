@@ -1,0 +1,13 @@
+{
+  "cfgs": [
+    {
+      "base_attrs": [],
+      "extra_attrs": [],
+      "percent_attrs": [],
+      "hold_ms": 0,
+      "unique_id": 0,
+      "id": 2000001,
+      "name": "attrs_effect_2000001"
+    }
+  ]
+}

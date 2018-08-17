@@ -32,10 +32,10 @@ namespace Tool.Skill
             editorData = _editorData;
             effectEditors[EffectType.Group] = new EffectEditorBase(this);
             effectEditors[EffectType.Seacher] = new SearcherEffectEditor(this);
-            effectEditors[EffectType.Attrs] = new EffectEditorBase(this);
+            effectEditors[EffectType.Attrs] = new AttrsEffectEditor(this);
             effectEditors[EffectType.Hurt] = new HurtEffectEditor(this);
             effectEditors[EffectType.Heal] = new HealEffectEditor(this);
-            effectEditors[EffectType.ForceMove] = new EffectEditorBase(this);
+            effectEditors[EffectType.ForceMove] = new ForceMoveEffectEditor(this);
             effectEditors[EffectType.Script_GuideMissile] = new EffectEditorBase(this);
         }
 

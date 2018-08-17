@@ -4,7 +4,7 @@ namespace Config
 {
     public class AttrKvStruct
     {
-        public int id;
+        public NetProto.EFightParam efp;
         public int val;
     }
 }

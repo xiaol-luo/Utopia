@@ -21,7 +21,7 @@ namespace GameLogic
 		m_anchor = StrToForceMoveAnchor(csv_cfg->anchor);
 
 		{
-			int timeMs = 0;
+			int timeSec = 0;
 			float speed = 0;
 			float distance = 0;
 			ConvertibleValue cv(csv_cfg->result, ';');
@@ -32,26 +32,26 @@ namespace GameLogic
 			// 备注：t时间毫秒 s速度 d距离。知道任意2个可以推导出第三个。
 			if ("ts" == flag) 
 			{
-				timeMs = cv.GetInt(1, &tmpOk); isOk &= tmpOk;
+				timeSec = cv.GetInt(1, &tmpOk); isOk &= tmpOk;
 				speed = cv.GetFloat(2, &tmpOk); isOk &= tmpOk;
-				assert(timeMs > 0 && speed > 0);
+				assert(timeSec > 0 && speed > 0);
 			}
 			else if ("td" == flag)
 			{
-				timeMs = cv.GetInt(1, &tmpOk); isOk &= tmpOk;
+				timeSec = cv.GetInt(1, &tmpOk); isOk &= tmpOk;
 				distance = cv.GetFloat(2, &tmpOk); isOk &= tmpOk;
-				assert(timeMs > 0 && distance > 0);
-				speed = distance / timeMs;
+				assert(timeSec > 0 && distance > 0);
+				speed = distance / timeSec;
 			}
 			else if ("sd" == flag)
 			{
 				speed = cv.GetFloat(1, &tmpOk); isOk &= tmpOk;
 				distance = cv.GetFloat(2, &tmpOk); isOk &= tmpOk;
 				assert(speed > 0 && distance > 0);
-				timeMs = distance / speed;
+				timeSec = distance / speed;
 			}
-			assert(isOk && timeMs > 0 && speed > 0);
-			m_timeSec = timeMs;
+			assert(isOk && timeSec > 0 && speed > 0);
+			m_timeSec = timeSec;
 			m_speed = speed;
 		}
 		return true;

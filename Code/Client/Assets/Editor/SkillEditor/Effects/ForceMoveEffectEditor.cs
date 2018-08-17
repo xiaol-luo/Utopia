@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace Tool.Skill
 {
-    public class DemoEffectEditor : EffectEditorBase
+    public class ForceMoveEffectEditor : EffectEditorBase
     {
-        public DemoEffectEditor(EffectTabData _tabData) : base(_tabData)
+        public ForceMoveEffectEditor(EffectTabData _tabData) : base(_tabData)
         {
         }
 
-        public const string CONFIG_PATH = "skill_editor/effect/hurt_effect.json";
+        public const string CONFIG_PATH = "skill_editor/effect/force_move_effect.json";
         public string cfgPath
         {
             get
@@ -22,8 +22,8 @@ namespace Tool.Skill
             }
         }
 
-        AllHurtEffectConfig _allCfgs = null;
-        AllHurtEffectConfig allCfgs
+        AllForceMoveEffectConfig _allCfgs = null;
+        AllForceMoveEffectConfig allCfgs
         {
             get
             {
@@ -40,12 +40,12 @@ namespace Tool.Skill
         }
         public override void LoadCfgs()
         {
-            _allCfgs = JsonHelp.LoadStruct<AllHurtEffectConfig>(cfgPath);
+            _allCfgs = JsonHelp.LoadStruct<AllForceMoveEffectConfig>(cfgPath);
         }
 
         public override bool SaveCfgs()
         {
-            var toSave = (null != _allCfgs ? _allCfgs : new AllHurtEffectConfig());
+            var toSave = (null != _allCfgs ? _allCfgs : new AllForceMoveEffectConfig());
             bool ret = JsonHelp.SaveStruct(cfgPath, toSave);
             return ret;
         }
@@ -53,7 +53,7 @@ namespace Tool.Skill
         public override ConfigIdNameListStruct GetCfgIdNameList(Predicate<EffectConfigBase> filterFn)
         {
             ConfigIdNameListStruct ret = new ConfigIdNameListStruct();
-            allCfgs.cfgs.ForEach((HurtEffectConfig cfg) => { ret.ids.Add(cfg.id); ret.names.Add(cfg.name); });
+            allCfgs.cfgs.ForEach((ForceMoveEffectConfig cfg) => { ret.ids.Add(cfg.id); ret.names.Add(cfg.name); });
             return ret;
         }
 
@@ -70,10 +70,10 @@ namespace Tool.Skill
                 if (GUILayout.Button("new"))
                 {
                     int nextCfgId = this.GetNextCfgId();
-                    var newCfg = new Config.HurtEffectConfig()
+                    var newCfg = new Config.ForceMoveEffectConfig()
                     {
                         id = nextCfgId,
-                        name = string.Format("hurt_effect_{0}", nextCfgId)
+                        name = string.Format("force_move_effect_{0}", nextCfgId)
                     };
                     this.allCfgs.cfgs.Add(newCfg);
                     this.selectedCfgId = nextCfgId;
@@ -96,32 +96,57 @@ namespace Tool.Skill
             {
                 currCfg.id = EditorGUILayout.IntField("id", currCfg.id);
                 currCfg.name = EditorGUILayout.TextField("name", currCfg.name);
+                currCfg.ignore_terrian = SkillEditorWindow.BoolPopup("ignore terrian", currCfg.ignore_terrian);
 
+                using (new EditorGUILayout.HorizontalScope())
                 {
-                    var filterIds = tabData.editorData.filterTabData.GetCfgIds().ToArray();
-                    var filterNames = tabData.editorData.filterTabData.GetCfgNames().ToArray();
+                    currCfg.move_setting = (MoveSetting)EditorGUILayout.EnumPopup("move setting", currCfg.move_setting);
+                    switch (currCfg.move_setting)
+                    {
+                        case MoveSetting.TimeSpeed:
+                            {
+                                currCfg.move_sec = EditorGUILayout.FloatField("move sec", currCfg.move_sec);
+                                currCfg.move_speed = EditorGUILayout.FloatField("move speed", currCfg.move_speed);
+                            }
+                            break;
+                        case MoveSetting.TimeDistance:
+                            {
+                                currCfg.move_sec = EditorGUILayout.FloatField("move sec", currCfg.move_sec);
+                                currCfg.move_distance = EditorGUILayout.FloatField("move distance", currCfg.move_distance);
+                            }
+                            break;
+                        case MoveSetting.DistanceSpeed:
+                            {
+                                currCfg.move_distance = EditorGUILayout.FloatField("move distance", currCfg.move_distance);
+                                currCfg.move_speed = EditorGUILayout.FloatField("move speed", currCfg.move_speed);
+                            }
+                            break;
+                    }
                 }
+
+                currCfg.anchor = (EEffectFilterAnchor)EditorGUILayout.EnumPopup("anchor", currCfg.anchor);
+                currCfg.angle = EditorGUILayout.FloatField("angle", currCfg.angle);
             }
         }
 
         int AllowCalMinCfgId()
         {
-            return (int)EffectType.Hurt * EffectEditorBase.EFFECT_CONFIG_ID_GAP;
+            return (int)EffectType.ForceMove * EffectEditorBase.EFFECT_CONFIG_ID_GAP;
         }
 
         int GetNextCfgId()
         {
             int maxId = 0;
-            allCfgs.cfgs.ForEach((HurtEffectConfig cfg) => { if (maxId < cfg.id) maxId = cfg.id; });
+            allCfgs.cfgs.ForEach((ForceMoveEffectConfig cfg) => { if (maxId < cfg.id) maxId = cfg.id; });
             int allowMinCfgId = this.AllowCalMinCfgId();
             if (maxId < allowMinCfgId)
                 maxId = allowMinCfgId;
             return maxId + 1;
         }
 
-        public HurtEffectConfig GetConfig(int id)
+        public ForceMoveEffectConfig GetConfig(int id)
         {
-            var ret = allCfgs.cfgs.Find((HurtEffectConfig cfg) => { return cfg.id == id; });
+            var ret = allCfgs.cfgs.Find((ForceMoveEffectConfig cfg) => { return cfg.id == id; });
             return ret;
         }
     }
