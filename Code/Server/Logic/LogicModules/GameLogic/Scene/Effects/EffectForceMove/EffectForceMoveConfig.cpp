@@ -12,7 +12,7 @@ namespace GameLogic
 		return std::make_shared<EffectForceMove>(this, scene_effects, effect_key);
 	}
 
-	bool EffectForceMoveConfig::InitCfg(const Config::CsvEffectForceMoveConfig * csv_cfg)
+	bool EffectForceMoveConfig::InitCfg(const Config::CsvEffectForceMoveConfig * csv_cfg, void **param)
 	{
 		m_id = csv_cfg->id;
 		m_reversible = false;

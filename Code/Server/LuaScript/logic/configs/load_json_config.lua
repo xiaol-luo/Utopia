@@ -16,35 +16,13 @@ print("json config skill")
 print(serpent.block(json_configs.skill))
 
 
-function json_configs.get_scene(key)
-    local ret = nil
-    for i, v in ipairs(json_configs.scene) do
-        if v.name == key then 
-            ret = v
-            break
-        end
-    end
-    return  ret
-end
+local su_filter_json = rapidjson.load("json_config/skill_editor/filter_config.json")
+json_configs.su_filter = su_filter_json.cfgs
+print("json config su_filter_json")
+print(serpent.block(json_configs.su_filter_json))
 
-function json_configs.get_su(id)
-    local ret = nil
-    for i, v in ipairs(json_configs.scene_unit) do
-        if v.id == id then 
-            ret = v
-            break
-        end
-    end
-    return  ret
-end
 
-function json_configs.get_skill(id)
-    local ret = nil
-    for i, v in ipairs(json_configs.skill) do
-        if v.id == id then 
-            ret = v
-            break
-        end
-    end
-    return ret
-end
+local effect_group = rapidjson.load("json_config/skill_editor/effect/effect_group_config.json")
+json_configs.effect_group = effect_group.cfgs
+print("json config effect_group")
+print(serpent.block(json_configs.effect_group))

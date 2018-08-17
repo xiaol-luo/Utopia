@@ -10,7 +10,7 @@ namespace GameLogic
 		return std::make_shared<EffectScript>(this, scene_effects, effect_key);
 	}
 
-	bool EffectScriptConfig::InitCfg(const Config::CsvEffectScriptConfig * csv_cfg)
+	bool EffectScriptConfig::InitCfg(const Config::CsvEffectScriptConfig * csv_cfg, void **param)
 	{
 		m_id = csv_cfg->id;
 		m_class_name = csv_cfg->class_name;

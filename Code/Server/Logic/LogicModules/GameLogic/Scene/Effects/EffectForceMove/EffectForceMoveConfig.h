@@ -22,7 +22,7 @@ namespace GameLogic
 		EForceMoveAnchor GetAnchor() const { return m_anchor; }
 
 	public:
-		bool InitCfg(const Config::CsvEffectForceMoveConfig *csv_cfg);
+		bool InitCfg(const Config::CsvEffectForceMoveConfig *csv_cfg, void **param);
 
 	protected:
 		EForceMoveAnchor m_anchor;

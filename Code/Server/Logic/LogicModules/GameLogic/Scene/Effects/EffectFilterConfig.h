@@ -16,6 +16,7 @@ namespace GameLogic
 		bool InitCfg(Config::CsvEffectFilterConfig *csv_cfg);
 		
 		int id = 0;
+		std::string name;
 		int limit_num = 0;
 		EEffectFilterLimitNumPriority limit_num_priority = EEffectFilterLimitNumPriority_None;
 		uint64_t unit_types = 0;
@@ -37,7 +38,7 @@ namespace GameLogic
 		EffectFilterConfigMgr();
 		~EffectFilterConfigMgr();
 
-		bool LoadCfg(Config::CsvConfigSets *csv_cfgs, void *param);
+		bool LoadCfg(Config::CsvConfigSets *csv_cfgs, void **param);
 		const EffectFilterConfig * GetCfg(int id);
 
 	private:

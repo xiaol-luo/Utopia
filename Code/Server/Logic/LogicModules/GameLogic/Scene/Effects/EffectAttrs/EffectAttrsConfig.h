@@ -47,7 +47,7 @@ namespace GameLogic
 		virtual std::shared_ptr<EffectBase> CreateEffect(SceneEffects *scene_effects, uint64_t effect_key) const;
 
 	public:
-		bool InitCfg(const Config::CsvEffectAttrsConfig *csv_cfg);
+		bool InitCfg(const Config::CsvEffectAttrsConfig *csv_cfg, void **param);
 		int GetHoldTime() const { return m_hold_time_ms; }
 		int GetUniqueId() const { return m_unique_id; }
 		const FightParamKVs & GetFightParamKvs() const { return m_fight_params; }

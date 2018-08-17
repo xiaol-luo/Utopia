@@ -27,6 +27,7 @@ namespace GameLogic
 
 	protected:
 		int m_id = 0;
+		std::string m_name;
 		EffectIdVec m_begin_effect_ids;
 		EndEffectIdVec m_end_effect_ids;
 		TimeLineEffectIdsConfig m_loop_effect_cfg;

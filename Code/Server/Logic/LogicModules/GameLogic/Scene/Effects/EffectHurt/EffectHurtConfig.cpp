@@ -10,7 +10,7 @@ namespace GameLogic
 		return std::make_shared<EffectHurt>(this, scene_effects, effect_key);
 	}
 
-	bool EffectHurtConfig::InitCfg(const Config::CsvEffectHurtConfig * csv_cfg)
+	bool EffectHurtConfig::InitCfg(const Config::CsvEffectHurtConfig * csv_cfg, void **param)
 	{
 		m_id = csv_cfg->id;
 		m_reversible = false;

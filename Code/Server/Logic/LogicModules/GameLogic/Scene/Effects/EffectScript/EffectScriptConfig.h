@@ -17,7 +17,7 @@ namespace GameLogic
 		virtual std::shared_ptr<EffectBase> CreateEffect(SceneEffects *scene_effects, uint64_t effect_key) const;
 
 	public:
-		bool InitCfg(const Config::CsvEffectScriptConfig *csv_cfg);
+		bool InitCfg(const Config::CsvEffectScriptConfig *csv_cfg, void **param);
 		const std::string & GetClassName() const { return m_class_name; }
 		const std::string & GetStrParam() const { return m_str_param; }
 		const std::string & GetJsonParam() const { return m_json_param; }
