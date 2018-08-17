@@ -30,7 +30,7 @@ namespace GameLogic
 	}
 
 	template <typename OutCfgType, typename CsvCfgVec>
-	void BuildCfgHelp(CsvCfgVec &csvCfgVec, std::unordered_map<int, EffectConfigBase *> &effect_cfgs, sol::table effect_json_cfs)
+	void BuildCfgHelp(CsvCfgVec &csvCfgVec, std::unordered_map<int, EffectConfigBase *> &effect_cfgs, sol::object lua_obj)
 	{
 		/*
 		for (auto item : csvCfgVec)
@@ -42,8 +42,9 @@ namespace GameLogic
 		}
 		*/
 
-		if (effect_json_cfs.valid())
+		if (lua_obj.is<sol::table>())
 		{
+			sol::table effect_json_cfs = lua_obj.as<sol::table>();
 			for (auto kv_pair : effect_json_cfs)
 			{
 				sol::object key_obj = kv_pair.first;
@@ -64,18 +65,14 @@ namespace GameLogic
 	bool EffectConfigMgr::LoadCfg(Config::CsvConfigSets * csv_cfgs, void **param)
 	{
 		sol::table json_cfg = *(sol::table *)param;
-		BuildCfgHelp<EffectHurtConfig>(csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec, 
-			m_effect_cfgs, sol::lua_nil);
-		BuildCfgHelp<EffectAttrsConfig>(csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec, 
-			m_effect_cfgs, sol::lua_nil);
-		BuildCfgHelp<EffectGroupConfig>(csv_cfgs->csv_CsvEffectGroupConfigSet->cfg_vec, 
-			m_effect_cfgs, (json_cfg.valid() ? json_cfg["effect_group"] : sol::lua_nil));
-		BuildCfgHelp<EffectScriptConfig>(csv_cfgs->csv_CsvEffectScriptConfigSet->cfg_vec, 
-			m_effect_cfgs, sol::lua_nil);
-		BuildCfgHelp<EffectSearcherConfig>(csv_cfgs->csv_CsvEffectSearcherConfigSet->cfg_vec, 
-			m_effect_cfgs, sol::lua_nil);
-		BuildCfgHelp<EffectForceMoveConfig>(csv_cfgs->csv_CsvEffectForceMoveConfigSet->cfg_vec, 
-			m_effect_cfgs, sol::lua_nil);
+		assert(json_cfg.valid());
+
+		BuildCfgHelp<EffectGroupConfig>(csv_cfgs->csv_CsvEffectGroupConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_group"]);
+		BuildCfgHelp<EffectHurtConfig>(csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_hurt"]);
+		BuildCfgHelp<EffectAttrsConfig>(csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_attrs"]);
+		BuildCfgHelp<EffectScriptConfig>(csv_cfgs->csv_CsvEffectScriptConfigSet->cfg_vec, m_effect_cfgs, sol::lua_nil);
+		BuildCfgHelp<EffectSearcherConfig>(csv_cfgs->csv_CsvEffectSearcherConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_searcher"]);
+		BuildCfgHelp<EffectForceMoveConfig>(csv_cfgs->csv_CsvEffectForceMoveConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_force_move"]);
 
 		return true;
 	}

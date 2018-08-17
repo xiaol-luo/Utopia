@@ -26,3 +26,29 @@ local effect_group = rapidjson.load("json_config/skill_editor/effect/effect_grou
 json_configs.effect_group = effect_group.cfgs
 print("json config effect_group")
 print(serpent.block(json_configs.effect_group))
+
+local effect_hurt = rapidjson.load("json_config/skill_editor/effect/hurt_effect.json")
+json_configs.effect_hurt = effect_hurt.cfgs
+print("json config effect_hurt")
+print(serpent.block(json_configs.effect_hurt))
+
+local effect_heal = rapidjson.load("json_config/skill_editor/effect/heal_effect.json")
+json_configs.effect_heal = effect_heal.cfgs
+print("json config effect_heal")
+print(serpent.block(json_configs.effect_heal))
+
+local effect_seacher = rapidjson.load("json_config/skill_editor/effect/searcher_effect.json")
+json_configs.effect_seacher = effect_seacher.cfgs
+print("json config effect_seacher")
+print(serpent.block(json_configs.effect_seacher))
+
+local effect_attrs = rapidjson.load("json_config/skill_editor/effect/attrs_effect.json")
+json_configs.effect_attrs = effect_attrs.cfgs
+print("json config effect_attrs")
+print(serpent.block(json_configs.effect_attrs))
+
+local effect_force_move = rapidjson.load("json_config/skill_editor/effect/force_move_effect.json")
+json_configs.effect_force_move = effect_force_move.cfgs
+print("json config effect_force_move")
+print(serpent.block(json_configs.effect_force_move))
+

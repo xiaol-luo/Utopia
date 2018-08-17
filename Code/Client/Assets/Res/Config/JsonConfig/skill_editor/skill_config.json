@@ -16,7 +16,7 @@
           "cd": 20,
           "cast_distance": 220.0,
           "can_move": false,
-          "effect_id": 4000003
+          "effect_id": 1
         },
         {
           "preparing_span": 200,
@@ -46,7 +46,7 @@
           "cd": 2,
           "cast_distance": 200.0,
           "can_move": false,
-          "effect_id": 4000002
+          "effect_id": 2
         },
         {
           "preparing_span": 200,

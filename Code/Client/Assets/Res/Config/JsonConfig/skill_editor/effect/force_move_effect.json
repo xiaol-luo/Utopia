@@ -1,15 +1,3 @@
 {
-  "cfgs": [
-    {
-      "ignore_terrian": false,
-      "move_setting": 2,
-      "move_sec": 0.0,
-      "move_speed": 0.0,
-      "move_distance": 0.0,
-      "anchor": 0,
-      "angle": 0.0,
-      "id": 5000001,
-      "name": "force_move_effect_5000001"
-    }
-  ]
+  "cfgs": []
 }

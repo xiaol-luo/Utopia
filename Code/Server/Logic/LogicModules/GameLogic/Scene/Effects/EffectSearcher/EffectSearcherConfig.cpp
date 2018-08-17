@@ -2,6 +2,7 @@
 #include "EffectSearcher.h"
 #include "Config/AutoCsvCode/effect/CsvEffectSearcherConfig.h"
 #include <assert.h>
+#include <sol.hpp>
 
 namespace GameLogic
 {
@@ -12,10 +13,28 @@ namespace GameLogic
 
 	bool EffectSearcherConfig::InitCfg(const Config::CsvEffectSearcherConfig * csv_cfg, void **param)
 	{
-		m_id = csv_cfg->id;
-		m_reversible = false;
-		m_filter_id = csv_cfg->filter_id;
-		m_effect_ids = csv_cfg->effect_ids;
+		sol::table json_cfg = *(sol::table *)param;
+		if (json_cfg.valid())
+		{
+			m_id = json_cfg["id"];
+			m_name = json_cfg["name"];
+			m_filter_id = json_cfg["filter_id"];
+
+			sol::table tb = json_cfg["base_attrs"];
+			for (auto kv_pair : tb)
+			{
+				int effect_id = kv_pair.second.as<int>();
+				m_effect_ids.push_back(effect_id);
+			}
+		}
+		else if (nullptr != csv_cfg)
+		{
+			m_id = csv_cfg->id;
+			m_reversible = false;
+			m_filter_id = csv_cfg->filter_id;
+			m_effect_ids = csv_cfg->effect_ids;
+		}
+
 		return true;
 	}
 }

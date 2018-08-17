@@ -30,5 +30,12 @@ namespace GameLogic
 		float m_speed = 0;
 		bool m_ignoreTerrian = false;
 		float m_moveDeg = 0;
+
+		enum MoveSetting
+		{
+			TimeSpeed,
+			TimeDistance,
+			DistanceSpeed
+		};
 	};
 }

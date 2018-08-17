@@ -2,6 +2,7 @@
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"
 #include "Config/AutoCsvCode/effect/CsvEffectAttrsConfig.h"
 #include "EffectAttrs.h"
+#include <sol.hpp>
 
 namespace std
 {
@@ -116,37 +117,88 @@ namespace GameLogic
 
 	bool EffectAttrsConfig::InitCfg(const Config::CsvEffectAttrsConfig * csv_cfg, void **param)
 	{
-		m_id = csv_cfg->id;
-		m_unique_id = csv_cfg->unique_id;
-		m_hold_time_ms = csv_cfg->hold_time_ms;
-		m_reversible = m_hold_time_ms > 0;
+		sol::table json_cfg = *(sol::table *)param;
+		if (json_cfg.valid())
+		{
+			m_id = json_cfg["id"];
+			m_name = json_cfg["name"];
+			m_hold_time_ms = json_cfg["hold_ms"];
+			m_unique_id = json_cfg["unique_id"];
 
-		for (const std::vector<int> &attr_cfg : csv_cfg->base_attrs)
-		{
-			assert(attr_cfg.size() >= 2);
-			m_fight_params.kvs.push_back(FightParamKV(
-				FightParamAddType_Base,
-				(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
-				attr_cfg.size() > 2 ? attr_cfg[2] : 0
-			));
+			{
+				FightParamAddType fpat = FightParamAddType_Base;
+				sol::table tb = json_cfg["base_attrs"];
+				for (auto kv_pair : tb)
+				{
+					sol::table attr_pair = kv_pair.second.as<sol::table>();
+					int efp = attr_pair["efp"];
+					int val = attr_pair["val"];
+					int unique_id = attr_pair["unique_id"];
+					FightParamKV fpkv(fpat, (NetProto::EFightParam)efp, val, unique_id);
+					m_fight_params.kvs.push_back(fpkv);
+				}
+			}
+			{
+				FightParamAddType fpat = FightParamAddType_Percent;
+				sol::table tb = json_cfg["percent_attrs"];
+				for (auto kv_pair : tb)
+				{
+					sol::table attr_pair = kv_pair.second.as<sol::table>();
+					int efp = attr_pair["efp"];
+					int val = attr_pair["val"];
+					int unique_id = attr_pair["unique_id"];
+					FightParamKV fpkv(fpat, (NetProto::EFightParam)efp, val, unique_id);
+					m_fight_params.kvs.push_back(fpkv);
+				}
+			}
+			{
+				FightParamAddType fpat = FightParamAddType_Extra;
+				sol::table tb = json_cfg["extra_attrs"];
+				for (auto kv_pair : tb)
+				{
+					sol::table attr_pair = kv_pair.second.as<sol::table>();
+					int efp = attr_pair["efp"];
+					int val = attr_pair["val"];
+					int unique_id = attr_pair["unique_id"];
+					FightParamKV fpkv(fpat, (NetProto::EFightParam)efp, val, unique_id);
+					m_fight_params.kvs.push_back(fpkv);
+				}
+			}
 		}
-		for (const std::vector<int> &attr_cfg : csv_cfg->extra_attrs)
+		else if (nullptr != csv_cfg)
 		{
-			assert(attr_cfg.size() >= 2);
-			m_fight_params.kvs.push_back(FightParamKV(
-				FightParamAddType_Extra,
-				(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
-				attr_cfg.size() > 2 ? attr_cfg[2] : 0
-			));
-		}
-		for (const std::vector<int> &attr_cfg : csv_cfg->percent_attrs)
-		{
-			assert(attr_cfg.size() >= 2);
-			m_fight_params.kvs.push_back(FightParamKV(
-				FightParamAddType_Percent,
-				(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
-				attr_cfg.size() > 2 ? attr_cfg[2] : 0
-			));
+			m_id = csv_cfg->id;
+			m_unique_id = csv_cfg->unique_id;
+			m_hold_time_ms = csv_cfg->hold_time_ms;
+			m_reversible = m_hold_time_ms > 0;
+
+			for (const std::vector<int> &attr_cfg : csv_cfg->base_attrs)
+			{
+				assert(attr_cfg.size() >= 2);
+				m_fight_params.kvs.push_back(FightParamKV(
+					FightParamAddType_Base,
+					(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
+					attr_cfg.size() > 2 ? attr_cfg[2] : 0
+				));
+			}
+			for (const std::vector<int> &attr_cfg : csv_cfg->extra_attrs)
+			{
+				assert(attr_cfg.size() >= 2);
+				m_fight_params.kvs.push_back(FightParamKV(
+					FightParamAddType_Extra,
+					(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
+					attr_cfg.size() > 2 ? attr_cfg[2] : 0
+				));
+			}
+			for (const std::vector<int> &attr_cfg : csv_cfg->percent_attrs)
+			{
+				assert(attr_cfg.size() >= 2);
+				m_fight_params.kvs.push_back(FightParamKV(
+					FightParamAddType_Percent,
+					(NetProto::EFightParam)attr_cfg[0], attr_cfg[1],
+					attr_cfg.size() > 2 ? attr_cfg[2] : 0
+				));
+			}
 		}
 
 		return true;

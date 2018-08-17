@@ -4,6 +4,11 @@
       "val": 0,
       "id": 4000001,
       "name": "heal_effect_4000001"
+    },
+    {
+      "val": 0,
+      "id": 4000002,
+      "name": "heal_effect_4000002"
     }
   ]
 }

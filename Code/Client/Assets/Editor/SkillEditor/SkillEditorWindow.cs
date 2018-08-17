@@ -31,6 +31,11 @@ namespace Tool.Skill
         private void OnEnable()
         {
             Debug.Log("SkillEditorWindow::OnEnable");
+            ResetEditorData();
+        }
+
+        public void ResetEditorData()
+        {
             editorData = new SkillEditorWindowData();
             editorData.tabSettings = new SkillEditorTabSetting[TopTabIdx.COUNT]
             {
@@ -44,10 +49,17 @@ namespace Tool.Skill
             editorData.LoadAllCfg();
         }
 
+        public void SaveAllConfigs()
+        {
+            if (null != editorData)
+            {
+                editorData.SaveAllCfg();
+            }
+        }
+
         private void OnDisable()
         {
             Debug.Log("SkillEditorWindow::OnDisable");
-            editorData.SaveAllCfg();
         }
         private void OnGUI()
         {
@@ -57,31 +69,40 @@ namespace Tool.Skill
         // void Test
         void LogicImpl()
         {
-            using (new GUILayout.AreaScope(
-                new Rect(0, 0, SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT), 
-                "skill editor"))
+            // using (new GUILayout.AreaScope(new Rect(0, 0, SkillEditorWindowData.WINDOW_FIX_WIDTH, SkillEditorWindowData.WINDOW_MIN_HEIGHT)))
             {
-                using (new EditorGUILayout.VerticalScope())
+                using (new EditorGUILayout.HorizontalScope())
                 {
-                    using (new GUILayout.HorizontalScope(EditorStyles.toolbarButton))
+                    if (GUILayout.Button("reload all"))
                     {
-                        string[] topToolbarTexts = new string[editorData.tabSettings.Length];
-                        for (int i = 0; i < editorData.tabSettings.Length; ++i)
-                        {
-                            topToolbarTexts[i] = editorData.tabSettings[i].tabName;
-                        }
-                        editorData.topToobardx = GUILayout.Toolbar(editorData.topToobardx, topToolbarTexts);
+                        this.ResetEditorData();
                     }
-
-                    EditorGUILayout.Space();
-
-                    if (editorData.topToobardx >= 0 && editorData.topToobardx < editorData.tabSettings.Length)
+                    if (GUILayout.Button("save all"))
                     {
-                        using (new EditorGUILayout.VerticalScope())
-                        {
-                            editorData.tabSettings[editorData.topToobardx].logicImpl();
-                        }
-                    } 
+                        this.SaveAllConfigs();
+                    }
+                }
+                EditorGUILayout.Space();
+
+                using (new GUILayout.HorizontalScope(EditorStyles.toolbarButton))
+                {
+                    string[] topToolbarTexts = new string[editorData.tabSettings.Length];
+                    for (int i = 0; i < editorData.tabSettings.Length; ++i)
+                    {
+                        topToolbarTexts[i] = editorData.tabSettings[i].tabName;
+                    }
+                    editorData.topToobardx = GUILayout.Toolbar(editorData.topToobardx, topToolbarTexts);
+                }
+
+                EditorGUILayout.Space();
+                EditorGUILayout.Separator();
+
+                if (editorData.topToobardx >= 0 && editorData.topToobardx < editorData.tabSettings.Length)
+                {
+                    using (new EditorGUILayout.VerticalScope())
+                    {
+                        editorData.tabSettings[editorData.topToobardx].logicImpl();
+                    }
                 }
             }
         }
@@ -104,6 +125,39 @@ namespace Tool.Skill
             Vector2 vec2 = jsonVec2.MakeVector2();
             vec2 = EditorGUILayout.Vector2Field("rect", vec2);
             return new JsonVector2(vec2);
+        }
+
+        public class SelectEffectRet
+        {
+            public EffectType effect_type;
+            public int effect_id;
+        }
+
+        public static SelectEffectRet PopupSkillSelecter(SkillEditorWindowData editorData, int effectId, EffectType effectType)
+        {
+            EffectTabData.EffectConfigDetail ed = editorData.effectTabData.GetEffecCfg(effectId);
+            if (effectType >= EffectType.Count)
+            {
+                if (null != ed)
+                {
+                    effectType = ed.type;
+                }
+            }
+
+            SelectEffectRet ret = new SelectEffectRet();
+
+            float defaultLabelWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 40;
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                GUILayout.Label(null != ed.cfg ? ed.cfg.name : "None", GUILayout.Width(240));
+                ret.effect_type = (EffectType)EditorGUILayout.EnumPopup("type", effectType);
+                ConfigIdNameListStruct idNames = editorData.effectTabData.GetCfgIdNameList(effectType, null);
+                ret.effect_id = EditorGUILayout.IntPopup("id", effectId, idNames.names.ToArray(), idNames.ids.ToArray());
+            }
+            EditorGUIUtility.labelWidth = defaultLabelWidth;
+
+            return ret;
         }
     }
 }

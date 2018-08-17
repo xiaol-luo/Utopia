@@ -23,6 +23,8 @@ namespace Tool.Skill
         ForceMove,
         
         Script_GuideMissile = 200,
+
+        Count,
     }
 
     public class EffectTabData
@@ -30,13 +32,13 @@ namespace Tool.Skill
         public EffectTabData(SkillEditorWindowData _editorData)
         {
             editorData = _editorData;
-            effectEditors[EffectType.Group] = new EffectEditorBase(this);
+            effectEditors[EffectType.Group] = new GroupEffectEditor(this);
             effectEditors[EffectType.Seacher] = new SearcherEffectEditor(this);
             effectEditors[EffectType.Attrs] = new AttrsEffectEditor(this);
             effectEditors[EffectType.Hurt] = new HurtEffectEditor(this);
             effectEditors[EffectType.Heal] = new HealEffectEditor(this);
             effectEditors[EffectType.ForceMove] = new ForceMoveEffectEditor(this);
-            effectEditors[EffectType.Script_GuideMissile] = new EffectEditorBase(this);
+            // effectEditors[EffectType.Script_GuideMissile] = new EffectEditorBase(this);
         }
 
         public SkillEditorWindowData editorData;
@@ -76,6 +78,28 @@ namespace Tool.Skill
                 ret = editor.GetCfgIdNameList(filterFn);
             }
             return null != ret ? ret : new ConfigIdNameListStruct();
+        }
+
+        public class EffectConfigDetail
+        {
+            public EffectType type = EffectType.Count;
+            public EffectConfigBase cfg = null;
+        }
+
+        public EffectConfigDetail GetEffecCfg(int cfgId)
+        {
+            EffectConfigDetail ret = new EffectConfigDetail();
+            foreach (var kvPair in effectEditors)
+            {
+                var cfg = kvPair.Value.GetCfg(cfgId);
+                if (null != cfg)
+                {
+                    ret.type = kvPair.Key;
+                    ret.cfg = cfg;
+                    break;
+                }
+            }
+            return ret;
         }
 
         public void ImplEditorLogic()

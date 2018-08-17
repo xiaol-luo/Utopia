@@ -111,6 +111,7 @@ namespace Tool.Skill
                         {
                             attrs[i].efp = (NetProto.EFightParam)EditorGUILayout.EnumPopup("attr id", attrs[i].efp);
                             attrs[i].val = EditorGUILayout.IntField("value", attrs[i].val);
+                            attrs[i].unique_id = EditorGUILayout.IntField("unique_id", attrs[i].unique_id);
                             if (GUILayout.Button("delete"))
                             {
                                 attrs.RemoveAt(i);
@@ -134,6 +135,7 @@ namespace Tool.Skill
                         {
                             attrs[i].efp = (NetProto.EFightParam)EditorGUILayout.EnumPopup("attr id", attrs[i].efp);
                             attrs[i].val = EditorGUILayout.IntField("value", attrs[i].val);
+                            attrs[i].unique_id = EditorGUILayout.IntField("unique_id", attrs[i].unique_id);
                             if (GUILayout.Button("delete"))
                             {
                                 attrs.RemoveAt(i);
@@ -157,6 +159,7 @@ namespace Tool.Skill
                         {
                             attrs[i].efp = (NetProto.EFightParam)EditorGUILayout.EnumPopup("attr id", attrs[i].efp);
                             attrs[i].val = EditorGUILayout.IntField("value", attrs[i].val);
+                            attrs[i].unique_id = EditorGUILayout.IntField("unique_id", attrs[i].unique_id);
                             if (GUILayout.Button("delete"))
                             {
                                 attrs.RemoveAt(i);
@@ -187,6 +190,10 @@ namespace Tool.Skill
         {
             var ret = allCfgs.cfgs.Find((AttrsEffectConfig cfg) => { return cfg.id == id; });
             return ret;
+        }
+        public override EffectConfigBase GetCfg(int id)
+        {
+            return this.GetConfig(id);
         }
     }
 }

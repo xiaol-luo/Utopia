@@ -1,5 +1,6 @@
 using Config;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -58,13 +59,24 @@ namespace Tool.Skill
         }
 
         public int selectedCfgId = 0;
+
+        public List<EffectType> cachedSkillSelectedTypes = new List<EffectType>();
+
         public override void ImplEditorLogic()
         {
             using (new GUILayout.HorizontalScope())
             {
                 {
+                    int oldSelectedId = selectedCfgId;
                     ConfigIdNameListStruct idNameList = this.GetCfgIdNameList(null);
                     selectedCfgId = EditorGUILayout.IntPopup(selectedCfgId, idNameList.names.ToArray(), idNameList.ids.ToArray());
+                    if (oldSelectedId != selectedCfgId)
+                    {
+                        for (int i = 0; i < cachedSkillSelectedTypes.Count; ++ i)
+                        {
+                            cachedSkillSelectedTypes[i] = EffectType.Count;
+                        }
+                    }
                 }
 
                 if (GUILayout.Button("new"))
@@ -108,14 +120,24 @@ namespace Tool.Skill
                 {
                     currCfg.effect_ids.Add(0);
                 }
+
+                while (cachedSkillSelectedTypes.Count < currCfg.effect_ids.Count)
+                {
+                    cachedSkillSelectedTypes.Add(EffectType.Count);
+                }
                 for (int i = 0; i < currCfg.effect_ids.Count; ++i)
                 {
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        currCfg.effect_ids[i] = EditorGUILayout.IntField("effect id", currCfg.effect_ids[i]);
+                        // currCfg.effect_ids[i] = EditorGUILayout.IntField("effect id", currCfg.effect_ids[i]);
+
+                        var ret = SkillEditorWindow.PopupSkillSelecter(tabData.editorData, currCfg.effect_ids[i], cachedSkillSelectedTypes[i]);
+                        currCfg.effect_ids[i] = ret.effect_id;
+                        cachedSkillSelectedTypes[i] = ret.effect_type;
                         if (GUILayout.Button("delete"))
                         {
                             currCfg.effect_ids.RemoveAt(i);
+                            cachedSkillSelectedTypes.RemoveAt(i);
                             break;
                         }
                     }
@@ -142,6 +164,10 @@ namespace Tool.Skill
         {
             var ret = allCfgs.cfgs.Find((EffectSearcherConfig cfg) => { return cfg.id == id; });
             return ret;
+        }
+        public override EffectConfigBase GetCfg(int id)
+        {
+            return this.GetConfig(id);
         }
     }
 }

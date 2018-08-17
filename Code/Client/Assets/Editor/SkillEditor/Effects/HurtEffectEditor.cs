@@ -120,5 +120,9 @@ namespace Tool.Skill
             var ret = allCfgs.cfgs.Find((HurtEffectConfig cfg) => { return cfg.id == id; });
             return ret;
         }
+        public override EffectConfigBase GetCfg(int id)
+        {
+            return this.GetConfig(id);
+        }
     }
 }

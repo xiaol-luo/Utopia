@@ -12,12 +12,21 @@ namespace GameLogic
 
 	bool EffectScriptConfig::InitCfg(const Config::CsvEffectScriptConfig * csv_cfg, void **param)
 	{
-		m_id = csv_cfg->id;
-		m_class_name = csv_cfg->class_name;
-		m_str_param = csv_cfg->str_param;
-		m_json_param = csv_cfg->json_param;
-		m_int_param = csv_cfg->int_param;
-		m_reversible = true;
+		if (nullptr != param)
+		{
+
+		}
+		else if (nullptr != csv_cfg)
+		{
+
+			m_id = csv_cfg->id;
+			m_class_name = csv_cfg->class_name;
+			m_str_param = csv_cfg->str_param;
+			m_json_param = csv_cfg->json_param;
+			m_int_param = csv_cfg->int_param;
+			m_reversible = true;
+		}
+
 		return true;
 	}
 }

@@ -9,6 +9,11 @@
       "val": 0,
       "id": 3000002,
       "name": "hurt_effect_3000002"
+    },
+    {
+      "val": 0,
+      "id": 3000003,
+      "name": "hurt_effect_3000003"
     }
   ]
 }

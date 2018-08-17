@@ -14,6 +14,12 @@
       "effect_ids": [],
       "id": 1000002,
       "name": "searcher_effect_1000002"
+    },
+    {
+      "filter_id": 0,
+      "effect_ids": [],
+      "id": 1000003,
+      "name": "searcher_effect_1000003"
     }
   ]
 }

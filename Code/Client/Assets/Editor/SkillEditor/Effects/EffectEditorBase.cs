@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tool.Skill
 {
-    public class EffectEditorBase
+    public abstract class EffectEditorBase
     {
         public const int EFFECT_CONFIG_ID_GAP = 100 * 10000; // 100WµÄ¼ä¸ô
 
@@ -15,25 +15,14 @@ namespace Tool.Skill
 
         public EffectTabData tabData = null;
 
-        public virtual void ImplEditorLogic()
-        {
-            GUILayout.Label("look here");
-        }
+        public abstract void ImplEditorLogic();
 
-        public virtual void LoadCfgs()
-        {
+        public abstract void LoadCfgs();
 
-        }
+        public abstract bool SaveCfgs();
 
-        public virtual bool SaveCfgs()
-        {
-            return false;
-        }
+        public abstract ConfigIdNameListStruct GetCfgIdNameList(Predicate<EffectConfigBase> filterFn);
 
-        public virtual ConfigIdNameListStruct GetCfgIdNameList(Predicate<EffectConfigBase> filterFn)
-        {
-            ConfigIdNameListStruct ret = new ConfigIdNameListStruct();
-            return ret;
-        }
+        public abstract EffectConfigBase GetCfg(int cfgId);
     }
 }

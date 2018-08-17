@@ -39,7 +39,7 @@ namespace GameLogic
 				assert(GenerateEndEffectIdVec(m_end_effect_ids, vecs));
 			}
 			{
-				sol::table json_begin_effect_ids = json_cfg["TimeLineEffectStruct"];
+				sol::table json_begin_effect_ids = json_cfg["timeline_effect_ids"];
 				std::vector<std::vector<int>> vecs;
 				for (auto kv_pair : json_begin_effect_ids)
 				{

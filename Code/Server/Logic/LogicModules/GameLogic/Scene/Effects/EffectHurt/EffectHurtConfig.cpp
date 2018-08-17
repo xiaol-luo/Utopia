@@ -2,6 +2,7 @@
 #include "EffectHurt.h"
 #include "Config/AutoCsvCode/effect/CsvEffectHurtConfig.h"
 #include <assert.h>
+#include <sol.hpp>
 
 namespace GameLogic
 {
@@ -12,10 +13,20 @@ namespace GameLogic
 
 	bool EffectHurtConfig::InitCfg(const Config::CsvEffectHurtConfig * csv_cfg, void **param)
 	{
-		m_id = csv_cfg->id;
-		m_reversible = false;
-		assert(csv_cfg->value > 0);
-		m_hurt = csv_cfg->value;
+		sol::table json_cfg = *(sol::table *)param;
+		if (json_cfg.valid())
+		{
+			m_id = json_cfg["id"];
+			m_name = json_cfg["name"];
+			m_hurt = json_cfg["val"];
+		}
+		else if (nullptr != csv_cfg)
+		{
+			m_id = csv_cfg->id;
+			m_reversible = false;
+			m_hurt = csv_cfg->value;
+		}
+
 		return true;
 	}
 }
