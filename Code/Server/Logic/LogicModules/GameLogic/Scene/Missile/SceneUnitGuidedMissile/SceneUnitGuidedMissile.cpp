@@ -53,10 +53,12 @@ namespace GameLogic
 
 		if (GuidedMissileState_Moving == m_curr_state)
 		{
+			Vector3 target_pos = m_param.target_pos;
 			// ÒÆ¶¯
 			if (GuidedMissileParam::TargetType_SceneUnit == m_param.target_type)
 			{
-				Vector3 linkVec3 = m_param.target_su->GetTransform()->GetPos() - m_transform->GetPos();
+				target_pos = m_param.target_su->GetTransform()->GetPos();
+				Vector3 linkVec3 = target_pos - m_transform->GetPos();
 				linkVec3.y = 0;
 				m_velocity = Vector3::Normalize(linkVec3) * m_param.move_speed;
 			}
@@ -69,8 +71,8 @@ namespace GameLogic
 			Vector3 move_distance = m_velocity * time_span;
 			Vector3 ret_pos = m_transform->GetPos() + move_distance;
 
-			Vector3 nor1 = m_param.target_pos - m_transform->GetPos();
-			Vector3 nor2 = ret_pos - m_param.target_pos;
+			Vector3 nor1 = target_pos - m_transform->GetPos();
+			Vector3 nor2 = ret_pos - target_pos;
 			nor1.y = 0; nor2.y = 0;
 			bool isHitPoint = false;
 			if (nor2.SqrMagnitude() > FLT_MIN)

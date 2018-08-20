@@ -11,6 +11,8 @@
 #include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"
 #include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeSceneEventFnDetail.h"
 #include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeSceneUnitEventFnDetail.h"
+#include "GameLogic/Scene/NewScene.h"
+#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace GameLogic
 {
@@ -143,5 +145,15 @@ namespace GameLogic
 		luaFn(m_lua_effect_script);
 
 		m_lua_subscribe_scene_event_dtail->ClearAll();
+	}
+
+	std::shared_ptr<SceneUnit> EffectScript::GetSu(uint64_t su_id)
+	{
+		std::shared_ptr<SceneUnit> ret = nullptr;
+		if (nullptr != m_scene_effects && nullptr != m_scene_effects->GetScene())
+		{
+			ret = m_scene_effects->GetScene()->GetUnit(su_id);
+		}
+		return ret;
 	}
 }

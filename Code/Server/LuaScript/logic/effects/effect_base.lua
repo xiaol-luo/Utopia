@@ -4,7 +4,7 @@ local effect_base = effect_script.effect_base
 
 function effect_base.init(self, effect, cfg)
     self.effect = effect
-    self.cfg = cfg
+    self.script_cfg = cfg
     self.is_done = false
 
     self.scene_events = 

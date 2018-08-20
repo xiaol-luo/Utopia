@@ -25,6 +25,9 @@ namespace GameLogic
 		virtual void OnLateLoop(int64_t now_ms, int64_t delta_ms) override;
 		virtual void OnLateEnd(EEffectEndCase end_case) override;
 		
+	public:
+		std::shared_ptr<SceneUnit> GetSu(uint64_t);
+
 	protected:
 		const EffectScriptConfig *m_cfg = nullptr;
 		sol::table m_lua_effect_script;
