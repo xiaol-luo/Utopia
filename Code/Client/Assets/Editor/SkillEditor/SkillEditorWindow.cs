@@ -43,7 +43,6 @@ namespace Tool.Skill
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.SCENE_UNIT, tabName="su", logicImpl=SceneUnitTabLogicImpl},
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.SKILL, tabName="skill", logicImpl=SkillTabLogicImpl},
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.FILTER, tabName="filter", logicImpl=FilterTabLogicImpl},
-                new SkillEditorTabSetting(){tabIdx=TopTabIdx.EFFECT_GROUP, tabName="effect group", logicImpl=EffectGroupTabLogicImpl},
                 new SkillEditorTabSetting(){tabIdx=TopTabIdx.EFFECT, tabName="effect", logicImpl=EffectTabLogicImpl},
             };
             editorData.LoadAllCfg();
@@ -60,6 +59,7 @@ namespace Tool.Skill
         private void OnDisable()
         {
             Debug.Log("SkillEditorWindow::OnDisable");
+            // SaveAllConfigs();
         }
         private void OnGUI()
         {
@@ -150,7 +150,7 @@ namespace Tool.Skill
             EditorGUIUtility.labelWidth = 40;
             using (new EditorGUILayout.HorizontalScope())
             {
-                GUILayout.Label(null != ed.cfg ? ed.cfg.name : "None", GUILayout.Width(240));
+                GUILayout.Label(null != ed.cfg ? ed.cfg.name : "None", GUILayout.Width(200));
                 ret.effect_type = (EffectType)EditorGUILayout.EnumPopup("type", effectType);
                 ConfigIdNameListStruct idNames = editorData.effectTabData.GetCfgIdNameList(effectType, null);
                 ret.effect_id = EditorGUILayout.IntPopup("id", effectId, idNames.names.ToArray(), idNames.ids.ToArray());

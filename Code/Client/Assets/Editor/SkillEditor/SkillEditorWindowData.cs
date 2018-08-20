@@ -11,10 +11,9 @@ namespace Tool.Skill
         public const int SCENE_UNIT = 1;
         public const int SKILL = 2;
         public const int FILTER = 3;
-        public const int EFFECT_GROUP = 4;
-        public const int EFFECT = 5;
+        public const int EFFECT = 4;
 
-        public const int COUNT = 6;
+        public const int COUNT = 5;
     }
 
     public class SkillEditorTabSetting
@@ -31,7 +30,6 @@ namespace Tool.Skill
             sceneTabData = new SceneTabData(this);
             suTabData = new SceneUnitTabData(this);
             skillTabData = new SkillTabData(this);
-            effectGroupTabData = new EffectGroupTabData(this);
             filterTabData = new SuFilterTabData(this);
             effectTabData = new EffectTabData(this);
         }
@@ -54,7 +52,6 @@ namespace Tool.Skill
         public SceneTabData sceneTabData;
         public SceneUnitTabData suTabData;
         public SkillTabData skillTabData;
-        public EffectGroupTabData effectGroupTabData;
         public SuFilterTabData filterTabData;
         public EffectTabData effectTabData;
 
@@ -63,7 +60,6 @@ namespace Tool.Skill
             sceneTabData.LoadSceneConfigs();
             suTabData.LoadSceneUnitConfigs();
             skillTabData.LoadSkillConfigs();
-            effectGroupTabData.LoadEffectGroupConfigs();
             filterTabData.LoadConfigs();
             effectTabData.LoadCfgs();
         }
@@ -72,7 +68,6 @@ namespace Tool.Skill
             sceneTabData.SaveSceneConfigs();
             suTabData.SaveSceneUnitConfigs();
             skillTabData.SaveSkillConfigs();
-            effectGroupTabData.SaveSceneUnitConfigs();
             filterTabData.SaveConfigs();
             effectTabData.SaveCfgs();
         }

@@ -1,5 +1,6 @@
 using Config;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -58,10 +59,14 @@ namespace Tool.Skill
         }
 
         public int selectedCfgId = 0;
+        public List<EffectType> cachedBeginEffectSelectedTypes = new List<EffectType>();
+        public List<EffectType> cachedEndEffectSelectedTypes = new List<EffectType>();
+        public List<EffectType> cachedTimelineEffectSelectedTypes = new List<EffectType>();
         public override void ImplEditorLogic()
         {
             using (new GUILayout.HorizontalScope())
             {
+                int oldSelectedCfgId = selectedCfgId;
                 {
                     ConfigIdNameListStruct idNameList = this.GetCfgIdNameList(null);
                     selectedCfgId = EditorGUILayout.IntPopup(selectedCfgId, idNameList.names.ToArray(), idNameList.ids.ToArray());
@@ -86,6 +91,21 @@ namespace Tool.Skill
                         this.allCfgs.cfgs.Remove(toDelCfg);
                     }
                 }
+                if (oldSelectedCfgId != selectedCfgId)
+                {
+                    for (int i = 0; i < cachedBeginEffectSelectedTypes.Count; ++i)
+                    {
+                        cachedBeginEffectSelectedTypes[i] = EffectType.Count;
+                    }
+                    for (int i = 0; i < cachedEndEffectSelectedTypes.Count; ++i)
+                    {
+                        cachedEndEffectSelectedTypes[i] = EffectType.Count;
+                    }
+                    for (int i = 0; i < cachedTimelineEffectSelectedTypes.Count; ++i)
+                    {
+                        cachedTimelineEffectSelectedTypes[i] = EffectType.Count;
+                    }
+                }
             }
 
             var currCfg = this.GetConfig(selectedCfgId);
@@ -104,16 +124,32 @@ namespace Tool.Skill
                 {
                     currCfg.begin_effect_ids.Add(0);
                 }
+                while (cachedBeginEffectSelectedTypes.Count < currCfg.begin_effect_ids.Count)
+                {
+                    cachedBeginEffectSelectedTypes.Add(EffectType.Count);
+                }
                 for (int i = 0; i < currCfg.begin_effect_ids.Count; ++i)
                 {
                     using (new EditorGUILayout.HorizontalScope())
                     {
+                        List<EffectType> selectedTypes = cachedBeginEffectSelectedTypes;
+                        var ret = SkillEditorWindow.PopupSkillSelecter(tabData.editorData, currCfg.begin_effect_ids[i], selectedTypes[i]);
+                        currCfg.begin_effect_ids[i] = ret.effect_id;
+                        selectedTypes[i] = ret.effect_type;
+                        if (GUILayout.Button("delete"))
+                        {
+                            currCfg.begin_effect_ids.RemoveAt(i);
+                            selectedTypes.RemoveAt(i);
+                            break;
+                        }
+                        /*
                         currCfg.begin_effect_ids[i] = EditorGUILayout.IntField("begin effect id", currCfg.begin_effect_ids[i]);
                         if (GUILayout.Button("delete"))
                         {
                             currCfg.begin_effect_ids.RemoveAt(i);
                             break;
                         }
+                        */
                     }
                 }
 
@@ -122,15 +158,35 @@ namespace Tool.Skill
                 {
                     currCfg.end_effect_ids.Add(new EncCaseEffectStruct());
                 }
+                while (cachedEndEffectSelectedTypes.Count < currCfg.end_effect_ids.Count)
+                {
+                    cachedEndEffectSelectedTypes.Add(EffectType.Count);
+                }
                 for (int i = 0; i < currCfg.end_effect_ids.Count; ++i)
                 {
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        currCfg.end_effect_ids[i].end_case = (EffectEndCase)EditorGUILayout.EnumPopup("end case", currCfg.end_effect_ids[i].end_case);
+                        /*
                         currCfg.end_effect_ids[i].effect_id = EditorGUILayout.IntField("effect id", currCfg.end_effect_ids[i].effect_id);
                         if (GUILayout.Button("delete"))
                         {
                             currCfg.end_effect_ids.RemoveAt(i);
+                            break;
+                        }
+                        */
+
+                        List<EffectType> selectedTypes = cachedEndEffectSelectedTypes;
+                        var ret = SkillEditorWindow.PopupSkillSelecter(tabData.editorData, currCfg.end_effect_ids[i].effect_id, selectedTypes[i]);
+                        currCfg.end_effect_ids[i].effect_id = ret.effect_id;
+                        selectedTypes[i] = ret.effect_type;
+                        float defaultLabelWidth = EditorGUIUtility.labelWidth;
+                        EditorGUIUtility.labelWidth = 60;
+                        currCfg.end_effect_ids[i].end_case = (EffectEndCase)EditorGUILayout.EnumPopup("end case", currCfg.end_effect_ids[i].end_case);
+                        EditorGUIUtility.labelWidth = defaultLabelWidth;
+                        if (GUILayout.Button("delete"))
+                        {
+                            currCfg.end_effect_ids.RemoveAt(i);
+                            selectedTypes.RemoveAt(i);
                             break;
                         }
                     }
@@ -140,15 +196,34 @@ namespace Tool.Skill
                 {
                     currCfg.timeline_effect_ids.Add(new TimeLineEffectStruct());
                 }
+                while (cachedTimelineEffectSelectedTypes.Count < currCfg.timeline_effect_ids.Count)
+                {
+                    cachedTimelineEffectSelectedTypes.Add(EffectType.Count);
+                }
                 for (int i = 0; i < currCfg.timeline_effect_ids.Count; ++i)
                 {
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        currCfg.timeline_effect_ids[i].begin_ms = EditorGUILayout.IntField("begin ms", currCfg.timeline_effect_ids[i].begin_ms);
+                        /*
                         currCfg.timeline_effect_ids[i].effect_id = EditorGUILayout.IntField("effect id", currCfg.timeline_effect_ids[i].effect_id);
                         if (GUILayout.Button("delete"))
                         {
                             currCfg.timeline_effect_ids.RemoveAt(i);
+                            break;
+                        }
+                        */
+                        List<EffectType> selectedTypes = cachedTimelineEffectSelectedTypes;
+                        var ret = SkillEditorWindow.PopupSkillSelecter(tabData.editorData, currCfg.timeline_effect_ids[i].effect_id, selectedTypes[i]);
+                        currCfg.timeline_effect_ids[i].effect_id = ret.effect_id;
+                        selectedTypes[i] = ret.effect_type;
+                        float defaultLabelWidth = EditorGUIUtility.labelWidth;
+                        EditorGUIUtility.labelWidth = 60;
+                        currCfg.timeline_effect_ids[i].begin_ms = EditorGUILayout.IntField("begin ms", currCfg.timeline_effect_ids[i].begin_ms);
+                        EditorGUIUtility.labelWidth = defaultLabelWidth;
+                        if (GUILayout.Button("delete"))
+                        {
+                            currCfg.timeline_effect_ids.RemoveAt(i);
+                            selectedTypes.RemoveAt(i);
                             break;
                         }
                     }

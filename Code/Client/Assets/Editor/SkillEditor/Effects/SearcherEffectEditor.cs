@@ -66,17 +66,10 @@ namespace Tool.Skill
         {
             using (new GUILayout.HorizontalScope())
             {
+                int oldSelectedId = selectedCfgId;
                 {
-                    int oldSelectedId = selectedCfgId;
                     ConfigIdNameListStruct idNameList = this.GetCfgIdNameList(null);
                     selectedCfgId = EditorGUILayout.IntPopup(selectedCfgId, idNameList.names.ToArray(), idNameList.ids.ToArray());
-                    if (oldSelectedId != selectedCfgId)
-                    {
-                        for (int i = 0; i < cachedSkillSelectedTypes.Count; ++ i)
-                        {
-                            cachedSkillSelectedTypes[i] = EffectType.Count;
-                        }
-                    }
                 }
 
                 if (GUILayout.Button("new"))
@@ -96,6 +89,14 @@ namespace Tool.Skill
                     if (null != toDelCfg)
                     {
                         this.allCfgs.cfgs.Remove(toDelCfg);
+                    }
+                }
+
+                if (oldSelectedId != selectedCfgId)
+                {
+                    for (int i = 0; i < cachedSkillSelectedTypes.Count; ++i)
+                    {
+                        cachedSkillSelectedTypes[i] = EffectType.Count;
                     }
                 }
             }

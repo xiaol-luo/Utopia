@@ -1,11 +1,23 @@
 {
   "cfgs": [
     {
-      "begin_effect_ids": [],
-      "end_effect_ids": [],
-      "timeline_effect_ids": [],
-      "need_guide": false,
-      "can_cancel_guide": false,
+      "begin_effect_ids": [
+        1000001
+      ],
+      "end_effect_ids": [
+        {
+          "end_case": 0,
+          "effect_id": 1000002
+        }
+      ],
+      "timeline_effect_ids": [
+        {
+          "begin_ms": 30,
+          "effect_id": 3000001
+        }
+      ],
+      "need_guide": true,
+      "can_cancel_guide": true,
       "id": 1,
       "name": "effect_group_1"
     },
