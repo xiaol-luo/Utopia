@@ -2,9 +2,9 @@
 #include <sol.hpp>	
 #include "GameLogic/Scene/Config/SceneAllConfig.h"	
 #include "GameLogic/Scene/Effects/EffectFilterConfig.h"	
+#include "GameLogic/Scene/Skills/SkillConfig.h"	
 #include "Scene/CsvSceneConfig.h"	
-#include "GameLogic/Scene/Effects/EffectConfigMgr.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"
+#include "GameLogic/Scene/Effects/EffectConfigMgr.h"
 
 namespace SolLuaBind
 {

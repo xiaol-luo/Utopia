@@ -1,14 +1,14 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/EventDispatcher/EventDispacherProxy.h"	
-#include "GameLogic/Scene/Effects/EffectConfigBase.h"	
-#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
 #include "GameLogic/Scene/NewScene.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/Skills/SkillBase.h"	
+#include "GameLogic/Scene/Effects/EffectBase.h"	
+#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
+#include "Common/EventDispatcher/EventDispacherProxy.h"	
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
 #include "GameLogic/Scene/Defines/EffectDefine.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"
+#include "GameLogic/Scene/Skills/SkillBase.h"	
+#include "GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
 namespace SolLuaBind
 {
@@ -50,7 +50,7 @@ namespace SolLuaBind
 						,"Loop", &GameLogic::EffectBase::Loop				
 						,"IsGuiding", &GameLogic::EffectBase::IsGuiding				
 						,"CanCancelGuide", &GameLogic::EffectBase::CanCancelGuide				
-						,"CanCelGuide", &GameLogic::EffectBase::CancelGuide				
+						,"CancelGuide", &GameLogic::EffectBase::CancelGuide				
 						, sol::base_classes, sol::bases<
 							std::enable_shared_from_this<GameLogic::EffectBase> 
 						>()

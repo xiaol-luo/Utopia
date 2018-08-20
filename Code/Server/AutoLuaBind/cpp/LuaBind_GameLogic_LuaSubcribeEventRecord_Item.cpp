@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/EventDispatcher/EventDispacherProxy.h"	
-#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
 #include "Common/EventDispatcher/EventDispacher.h"	
+#include "Common/EventDispatcher/EventDispacherProxy.h"	
 #include "GameLogic/Scene/Effects/EffectScript/EffectScript.h"	
-#include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"
+#include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
+#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"
 
 namespace SolLuaBind
 {

@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "CsvConfigSets.h"	
+#include "GameLogic/Scene/Skills/SkillConfig.h"	
 #include "GameLogic/Scene/Skills/SkillConfigBase.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"
+#include "CsvConfigSets.h"
 
 namespace SolLuaBind
 {

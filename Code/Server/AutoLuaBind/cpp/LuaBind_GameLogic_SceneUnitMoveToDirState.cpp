@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToDirState.h"	
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToDirState.h"	
 #include "Common/Geometry/Vector3.h"
 
 namespace SolLuaBind

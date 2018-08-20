@@ -1,12 +1,12 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "GameLogic/Scene/Effects/EffectBase.h"	
 #include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
 #include "GameLogic/Scene/Effects/EffectScript/EffectScript.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
 #include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
-#include "GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"
+#include "GameLogic/Scene/Effects/EffectConfigBase.h"	
+#include "GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
 namespace SolLuaBind
 {
@@ -37,6 +37,7 @@ namespace SolLuaBind
 						,"SubscribeSuEvent", &GameLogic::EffectScript::SubscribeSuEvent				
 						,"RemoveSuEvent", &GameLogic::EffectScript::RemoveSuEvent				
 						,"CancelAllSuEvent", &GameLogic::EffectScript::CancelAllSuEvent				
+						,"GetSu", &GameLogic::EffectScript::GetSu				
 						, sol::base_classes, sol::bases<
 							GameLogic::EffectBase 
 						>()

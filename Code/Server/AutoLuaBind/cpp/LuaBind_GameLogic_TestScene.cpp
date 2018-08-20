@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Utils/Ticker.h"	
+#include "GameLogic/Scene/TestScene.h"	
+#include "GameLogic/Scene/NewScene.h"	
 #include "GameLogic/GameLogicModule.h"	
 #include "GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "GameLogic/Scene/NewScene.h"	
-#include "GameLogic/Scene/TestScene.h"
+#include "Common/Utils/Ticker.h"
 
 namespace SolLuaBind
 {
@@ -29,7 +29,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::TestScene> meta_table(
 						sol::constructors<				
-						GameLogic::TestScene(GameLogicModule *, std::string)
+						GameLogic::TestScene(GameLogicModule *, std::basic_string<char, std::char_traits<char>, std::allocator<char> >)
 						>(),
 						"__StructName__", sol::property([]() {return "TestScene"; })				
 						, sol::base_classes, sol::bases<

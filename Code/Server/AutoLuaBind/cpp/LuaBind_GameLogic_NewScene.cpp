@@ -1,16 +1,16 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/GameLogicModule.h"	
-#include "google/protobuf/arena.h"	
-#include "google/protobuf/message.h"	
-#include "GameLogic/Scene/SceneModule/SceneModule.h"	
-#include "GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "GameLogic/Player/Player.h"	
-#include "Common/EventDispatcher/EventDispacher.h"	
-#include "Scene/CsvSceneConfig.h"	
+#include "GameLogic/Scene/Defines/SceneDefine.h"	
 #include "GameLogic/Scene/NewScene.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/Defines/SceneDefine.h"
+#include "GameLogic/GameLogicModule.h"	
+#include "GameLogic/Scene/Config/SceneAllConfig.h"	
+#include "Common/EventDispatcher/EventDispacher.h"	
+#include "GameLogic/Player/Player.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/arena.h"	
+#include "GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"	
+#include "Scene/CsvSceneConfig.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
 
 namespace SolLuaBind
 {
@@ -96,7 +96,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<GameLogic::NewScene> meta_table(
 						sol::constructors<				
-						GameLogic::NewScene(GameLogicModule *, std::string)
+						GameLogic::NewScene(GameLogicModule *, std::basic_string<char, std::char_traits<char>, std::allocator<char> >)
 						>(),
 						"__StructName__", sol::property([]() {return "NewScene"; })				
 						,"m_player_view_camps", &GameLogic::NewScene::m_player_view_camps				

@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "CsvConfigSets.h"	
 #include "GameLogic/Scene/Effects/EffectFilterConfig.h"	
-#include "effect/CsvEffectFilterConfig.h"
+#include "effect/CsvEffectFilterConfig.h"	
+#include "CsvConfigSets.h"
 
 namespace SolLuaBind
 {
@@ -28,6 +28,7 @@ namespace SolLuaBind
 					sol::usertype<GameLogic::EffectFilterConfig> meta_table(
 						"__StructName__", sol::property([]() {return "EffectFilterConfig"; })				
 						,"id", &GameLogic::EffectFilterConfig::id				
+						,"name", &GameLogic::EffectFilterConfig::name				
 						,"limit_num", &GameLogic::EffectFilterConfig::limit_num				
 						,"limit_num_priority", &GameLogic::EffectFilterConfig::limit_num_priority				
 						,"unit_types", &GameLogic::EffectFilterConfig::unit_types				

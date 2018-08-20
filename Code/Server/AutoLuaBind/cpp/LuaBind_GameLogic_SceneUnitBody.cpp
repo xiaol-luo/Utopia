@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
 #include "GameLogic/Scene/SceneModule/SceneView/SceneView.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"	
 #include "Common/Geometry/GeometryDefine.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"	
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"
 
 namespace SolLuaBind
