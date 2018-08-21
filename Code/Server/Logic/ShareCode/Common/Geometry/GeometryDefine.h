@@ -35,6 +35,7 @@ struct AABB2
 	Vector2 rb;
 
 	bool IsEmpty() const { return lt == rb; }
+	void Reset() { lt = Vector2::zero; rb = Vector2::zero; }
 };
 
 struct OBB2

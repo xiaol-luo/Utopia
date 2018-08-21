@@ -67,6 +67,6 @@ namespace GameLogic
 
 	protected:
 		virtual std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();
-		bool GenFilterWayParamByCfg(EffectFilterShape &shape, ESceneUnitFilterWayParams &filter_way_param);
+		bool GenFilterWayParamByCfg(ESceneUnitFilterWayParams &filter_way_param);
 	};
 }

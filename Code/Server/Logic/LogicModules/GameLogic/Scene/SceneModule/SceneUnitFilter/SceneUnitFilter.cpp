@@ -31,67 +31,36 @@ namespace GameLogic
 		m_qtree.Release();
 	}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape)
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindSceneUnit(const ESceneUnitFilterWayParams & params)
 	{
-		ESceneUnitFilterWayParams params;
-		return std::move(this->FilterSceneUnit(shape, params));
-	}
-
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, ESceneUnitFilterWayParams & params)
-	{
-		AABB2 rect;
-		switch (shape.shape)
-		{
-		case EEffectFilterShape_Circle:
-		{
-			Circle circle;
-			circle.center = shape.pos;
-			circle.radius = shape.shape_param.circle.radius;
-			rect = GeometryUtils::BuildAABB2(circle);
-			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
-			params.shape_circle.circle = circle;
-		}
-		break;
-		case EEffectFilterShape_Rect:
-		{
-			OBB2 obb2;
-			obb2.center = shape.pos;
-			obb2.y_axis_dir = shape.dir;
-			obb2.x_half_size = shape.shape_param.rect.x_size;
-			obb2.y_half_size = shape.shape_param.rect.y_size;
-			rect = GeometryUtils::BuildAABB2(obb2);
-			params.is_active[ESceneUnitFilterWay_ShapeCircle] = true;
-		}
-		break;
-		case EEffectFilterShape_Sector:
-		{
-			Sector sector;
-			sector.center = shape.pos;
-			sector.y_axis_dir = shape.dir;
-			sector.radius = shape.shape_param.sector.radius;
-			sector.halfAngle = shape.shape_param.sector.angle / 2;
-			rect = GeometryUtils::BuildAABB2(sector);
-		}
-		break;
-		}
-
+		ESceneUnitFilterWayParams tmp_param = params;
+		tmp_param.CalShape();
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret;
-		this->FindUnits(rect, out_ret);
-		ExtraFilterProcess(params, out_ret);
-		return std::move(out_ret);
+		this->FindUnits(tmp_param.cached_shape_aabb, out_ret);
+		ExtraFilterProcess(tmp_param, out_ret);
+		return out_ret;
 	}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FilterSceneUnit(EffectFilterShape shape, std::shared_ptr<SceneUnit> caster, int relation)
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::ExtractSceneUnit(const ESceneUnitFilterWayParams &params, const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& sus)
 	{
-		ESceneUnitFilterWayParams params;
-		{
-			params.is_active[ESceneUnitFilterWay_Relation] = true;
-			params.relations.caster = caster;
-			params.relations.relations = relation;
-		}
+		ESceneUnitFilterWayParams tmp_param = params;
+		tmp_param.CalShape();
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret(sus.begin(), sus.end());
+		ExtraFilterProcess(tmp_param, out_ret);
+		return out_ret;
+	}
 
-		auto ret = this->FilterSceneUnit(shape, params);
-		return std::move(ret);
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::ExtractSceneUnit(const ESceneUnitFilterWayParams &params, const std::vector<std::shared_ptr<SceneUnit> >& sus)
+	{
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> su_map;
+		for (auto su : sus)
+		{
+			if (nullptr == su)
+				continue;
+
+			su_map.insert_or_assign(su->GetId(), su);
+		}
+		return std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
 	}
 
 	void SceneUnitFilter::ExtraFilterProcess(const ESceneUnitFilterWayParams & params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
@@ -344,5 +313,44 @@ namespace GameLogic
 		{
 			m_qtree.UpdateNodeUnit(unit_node);
 		}		
+	}
+	void ESceneUnitFilterWayParams::CalShape()
+	{
+		is_active[ESceneUnitFilterWay_ShapeCircle] = false;
+		is_active[ESceneUnitFilterWay_ShapeObb2] = false;
+		is_active[ESceneUnitFilterWay_ShapeSector] = false;
+		cached_shape_aabb.Reset();
+
+		switch (shape.shape)
+		{
+		case EEffectFilterShape_Circle:
+		{
+			is_active[ESceneUnitFilterWay_ShapeCircle] = true;
+			shape_circle.circle.center = shape.pos;
+			shape_circle.circle.radius = shape.shape_param.circle.radius;
+			cached_shape_aabb = GeometryUtils::BuildAABB2(shape_circle.circle);
+		}
+		break;
+		case EEffectFilterShape_Rect:
+		{
+			is_active[ESceneUnitFilterWay_ShapeObb2] = true;
+			shape_obb2.oob2.center = shape.pos;
+			shape_obb2.oob2.y_axis_dir = shape.dir;
+			shape_obb2.oob2.x_half_size = shape.shape_param.rect.x_size;
+			shape_obb2.oob2.y_half_size = shape.shape_param.rect.y_size;
+			cached_shape_aabb = GeometryUtils::BuildAABB2(shape_obb2.oob2);
+		}
+		break;
+		case EEffectFilterShape_Sector:
+		{
+			is_active[ESceneUnitFilterWay_ShapeSector] = true;
+			shape_sector.sector.center = shape.pos;
+			shape_sector.sector.y_axis_dir = shape.dir;
+			shape_sector.sector.radius = shape.shape_param.sector.radius;
+			shape_sector.sector.halfAngle = shape.shape_param.sector.angle / 2;
+			cached_shape_aabb = GeometryUtils::BuildAABB2(shape_sector.sector);
+		}
+		break;
+		}
 	}
 }

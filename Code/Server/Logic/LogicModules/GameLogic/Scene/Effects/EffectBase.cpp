@@ -216,12 +216,11 @@ namespace GameLogic
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::FilterSceneUnits()
 	{
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret;
-		EffectFilterShape shape;
 		ESceneUnitFilterWayParams params;
-		if (this->GenFilterWayParamByCfg(shape, params))
+		if (this->GenFilterWayParamByCfg(params))
 		{
 			SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
-			ret = su_filter->FilterSceneUnit(shape, params);
+			ret = su_filter->FindSceneUnit(params);
 		}
 		else
 		{
@@ -242,7 +241,7 @@ namespace GameLogic
 		return std::move(ret);
 	}
 
-	bool EffectBase::GenFilterWayParamByCfg(EffectFilterShape &shape, ESceneUnitFilterWayParams & filter_way_param)
+	bool EffectBase::GenFilterWayParamByCfg(ESceneUnitFilterWayParams & filter_way_param)
 	{
 		int filter_id = m_base_cfg->GetFilterId();
 		if (filter_id <= 0)
@@ -254,24 +253,24 @@ namespace GameLogic
 		std::shared_ptr<SceneUnit> caster = this->GetCaster();
 
 		// gen shape
-		shape.shape = filter_cfg->shape;
-		shape.shape_param = filter_cfg->shape_param;
+		filter_way_param.shape.shape = filter_cfg->shape;
+		filter_way_param.shape.shape_param = filter_cfg->shape_param;
 
 		switch (filter_cfg->anchor)
 		{
 		case EEffectFilterAnchor_Caster:
 		{
-			shape.pos = caster->GetTransform()->GetPos().XZ();
+			filter_way_param.shape.pos = caster->GetTransform()->GetPos().XZ();
 		}
 		break;
 		case EEffectFilterAnchor_CastPos:
 		{
-			shape.pos = m_user_effect_param.use_skill_param->cast_pos;
+			filter_way_param.shape.pos = m_user_effect_param.use_skill_param->cast_pos;
 		}
 		break;
 		case EEffectFilterAnchor_TargetPos:
 		{
-			shape.pos = m_user_effect_param.use_skill_param->pos;
+			filter_way_param.shape.pos = m_user_effect_param.use_skill_param->pos;
 		}
 		break;
 		case EEffectFilterAnchor_TargetUnit:
@@ -279,11 +278,11 @@ namespace GameLogic
 			std::shared_ptr<SceneUnit> target_su = this->GetSkillTarget();
 			if (nullptr == target_su)
 			{
-				shape.pos = m_user_effect_param.use_skill_param->pos;
+				filter_way_param.shape.pos = m_user_effect_param.use_skill_param->pos;
 			}
 			else
 			{
-				shape.pos = target_su->GetTransform()->GetPos().XZ();
+				filter_way_param.shape.pos = target_su->GetTransform()->GetPos().XZ();
 			}
 		}
 		case EEffectFilterAnchor_EffectTargetUnit:
@@ -291,23 +290,24 @@ namespace GameLogic
 			std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
 			if (nullptr == target_su)
 			{
-				shape.pos = m_user_effect_param.pos;
+				filter_way_param.shape.pos = m_user_effect_param.pos;
 			}
 			else
 			{
-				shape.pos = target_su->GetTransform()->GetPos().XZ();
+				filter_way_param.shape.pos = target_su->GetTransform()->GetPos().XZ();
 			}
 		}
 		break;
 		case EEffectFilterAnchor_EffectTargetPos:
 		{
-			shape.pos = m_user_effect_param.pos;
+			filter_way_param.shape.pos = m_user_effect_param.pos;
 		}
 		break;
 		default:
 			break;
 		}
-		shape.dir = m_user_effect_param.dir;
+		filter_way_param.shape.dir = m_user_effect_param.dir;
+		filter_way_param.CalShape();
 
 		// gen filter param
 		if (0 != filter_cfg->relations)
