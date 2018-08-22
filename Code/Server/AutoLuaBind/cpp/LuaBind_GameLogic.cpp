@@ -1,28 +1,27 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
-#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "Common/EventDispatcher/EventDispacherProxy.h"	
-#include "CsvConfigSets.h"	
-#include "GameLogic/Scene/Skills/SkillBase.h"	
-#include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "GameLogic/Scene/Skills/Skill.h"	
-#include "Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "GameLogic/Scene/Defines/ViewDefine.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
-#include "GameLogic/Scene/Defines/EffectDefine.h"	
-#include "GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
+#include "Config/AutoCsvCode/CsvConfigSets.h"	
+#include "LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillBase.h"	
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitBullet/Bullet.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
 #include "Common/Utils/Ticker.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "GameLogic/Scene/Skills/SkillConfigBase.h"	
-#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/message.h"
+#include "LogicModules/GameLogic/Scene/Skills/SkillConfigBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "Common/Geometry/Vector2.h"	
+#include "protobuf/include/google/protobuf/message.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
+#include "LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "LogicModules/GameLogic/Scene/Defines/ViewDefine.h"	
+#include "Common/EventDispatcher/EventDispacherProxy.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
+#include "Common/Geometry/Vector3.h"
 
 namespace SolLuaBind
 {
@@ -54,18 +53,6 @@ namespace SolLuaBind
 					ns_table.set(name, GameLogic::VIEW_GRID_INVALID_IDX);
 				}				
 				{
-					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
-				}				
-				{
-					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
-				}				
-				{
 					std::string name = "SCENE_UNIT_INVALID_ID";
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
@@ -82,6 +69,18 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set(name, GameLogic::MOVE_TO_POS_IGNORE_SQR_DISTANCE);
+				}				
+				{
+					std::string name = "SELECT_SELF_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_SELF_FILTER_CONFIG_ID);
+				}				
+				{
+					std::string name = "SELECT_TARGET_FILTER_CONFIG_ID";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set(name, GameLogic::SELECT_TARGET_FILTER_CONFIG_ID);
 				}				
 				{
 					std::string name = "MAX_SKILL_LEVEL";
@@ -112,6 +111,12 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set_function(name, GameLogic::CalForceMoveDir);
+				}				
+				{
+					std::string name = "AddBulletToScene";
+					sol::object obj = ns_table.raw_get_or(name, sol::nil);
+					assert(!obj.valid());
+					ns_table.set_function(name, GameLogic::AddBulletToScene);
 				}				
 				{
 					std::string name = "AddGuidedMissileToScene";

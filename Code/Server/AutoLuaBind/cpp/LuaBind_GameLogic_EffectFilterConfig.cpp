@@ -1,8 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Effects/EffectFilterConfig.h"	
-#include "effect/CsvEffectFilterConfig.h"	
-#include "CsvConfigSets.h"
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
+#include "Config/AutoCsvCode/effect/CsvEffectFilterConfig.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectFilterConfig.h"	
+#include "Config/AutoCsvCode/CsvConfigSets.h"
 
 namespace SolLuaBind
 {
@@ -36,7 +37,8 @@ namespace SolLuaBind
 						,"anchor", &GameLogic::EffectFilterConfig::anchor				
 						,"shape", &GameLogic::EffectFilterConfig::shape				
 						,"shape_param", &GameLogic::EffectFilterConfig::shape_param				
-						,"InitCfg", &GameLogic::EffectFilterConfig::InitCfg
+						,"InitCfg", &GameLogic::EffectFilterConfig::InitCfg				
+						,"GenFilterWayParams", &GameLogic::EffectFilterConfig::GenFilterWayParams
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

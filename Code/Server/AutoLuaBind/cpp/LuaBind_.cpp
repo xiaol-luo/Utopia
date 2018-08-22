@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "MemoryPool/MemoryPoolMgr.h"	
+#include "Common/Utils/MemoryUtil.h"	
+#include "protobuf/include/google/protobuf/arena.h"	
+#include "Libs/OwnLibs/MemoryPool/MemoryPoolMgr.h"	
 #include "Common/Geometry/Vector2.h"	
-#include "Libs/3rdpartLibs/protobuf/include/google/protobuf/arena.h"	
-#include "Common/Geometry/GeometryDefine.h"	
-#include "Common/Utils/MemoryUtil.h"
+#include "Common/Geometry/GeometryDefine.h"
 
 namespace SolLuaBind
 {

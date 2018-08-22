@@ -32,7 +32,8 @@ namespace SolLuaBind
 						"__StructName__", sol::property([]() {return "AABB2"; })				
 						,"lt", &AABB2::lt				
 						,"rb", &AABB2::rb				
-						,"IsEmpty", &AABB2::IsEmpty
+						,"IsEmpty", &AABB2::IsEmpty				
+						,"Reset", &AABB2::Reset
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

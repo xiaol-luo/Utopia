@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"	
 #include "Common/EventDispatcher/EventDispacher.h"	
-#include "Common/EventDispatcher/EventDispacherProxy.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnitEventProxy.h"	
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Common/EventDispatcher/EventDispacherProxy.h"
 
 namespace SolLuaBind
 {

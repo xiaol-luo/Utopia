@@ -1,11 +1,12 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
-#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
-#include "Common/Geometry/GeometryDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
+#include "LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"	
 #include "Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/SceneModule/SceneModule.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"
+#include "LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Common/Geometry/GeometryDefine.h"
 
 namespace SolLuaBind
 {
@@ -15,7 +16,20 @@ namespace SolLuaBind
 		{
 			struct ForOverloadFns
 			{
-
+				using TypeAlias_1 = const GameLogic::SceneUnitFilterWayParams &;
+				using TypeAlias_2 = const std::unordered_map<uint64_t, std::shared_ptr<GameLogic::SceneUnit>, std::hash<uint64_t>, std::equal_to<uint64_t>, std::allocator<std::pair<const uint64_t, std::shared_ptr<GameLogic::SceneUnit> > > > &;
+				using TypeAlias_3 = std::unordered_map<uint64_t, std::shared_ptr<GameLogic::SceneUnit>, std::hash<uint64_t>, std::equal_to<uint64_t>, std::allocator<std::pair<const uint64_t, std::shared_ptr<GameLogic::SceneUnit> > > >;
+				static TypeAlias_3 ExtractSceneUnit1(GameLogic::SceneUnitFilter &cls, TypeAlias_1 p1, TypeAlias_2 p2)
+				{
+					return cls.ExtractSceneUnit(p1, p2);
+				}
+				using TypeAlias_4 = const GameLogic::SceneUnitFilterWayParams &;
+				using TypeAlias_5 = const std::vector<std::shared_ptr<GameLogic::SceneUnit>, std::allocator<std::shared_ptr<GameLogic::SceneUnit> > > &;
+				using TypeAlias_6 = std::unordered_map<uint64_t, std::shared_ptr<GameLogic::SceneUnit>, std::hash<uint64_t>, std::equal_to<uint64_t>, std::allocator<std::pair<const uint64_t, std::shared_ptr<GameLogic::SceneUnit> > > >;
+				static TypeAlias_6 ExtractSceneUnit2(GameLogic::SceneUnitFilter &cls, TypeAlias_4 p1, TypeAlias_5 p2)
+				{
+					return cls.ExtractSceneUnit(p1, p2);
+				}
 			};
 			
 			struct ForPropertyField
@@ -34,6 +48,8 @@ namespace SolLuaBind
 						GameLogic::SceneUnitFilter()
 						>(),
 						"__StructName__", sol::property([]() {return "SceneUnitFilter"; })				
+						,"FindSceneUnit", &GameLogic::SceneUnitFilter::FindSceneUnit				
+						,"ExtractSceneUnit", sol::overload(ForOverloadFns::ExtractSceneUnit1, ForOverloadFns::ExtractSceneUnit2)				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneModule 
 						>()
