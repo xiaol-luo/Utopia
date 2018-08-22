@@ -23,6 +23,7 @@ _load_files_logic_net_handler = {
     "LuaScript/logic/effects/init.lua",
     "LuaScript/logic/effects/effect_base.lua",
     "LuaScript/logic/effects/effect_demo.lua",
+    "LuaScript/logic/effects/effect_bullet.lua",
 }
 
 _load_files_map =

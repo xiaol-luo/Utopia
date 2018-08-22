@@ -21,9 +21,9 @@ namespace GameLogic
 		ESceneUnitFilterWay_Count,
 	};
 
-	struct ESceneUnitFilterWayParams
+	struct SceneUnitFilterWayParams
 	{
-		ESceneUnitFilterWayParams()
+		SceneUnitFilterWayParams()
 		{
 
 		}
@@ -82,22 +82,22 @@ namespace GameLogic
 		virtual ~SceneUnitFilter() override;
 
 	public:
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindSceneUnit(const ESceneUnitFilterWayParams &params);
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit(const ESceneUnitFilterWayParams &params, const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &sus);
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit(const ESceneUnitFilterWayParams &params, const std::vector<std::shared_ptr<SceneUnit> > &sus);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindSceneUnit(const SceneUnitFilterWayParams &params);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit(const SceneUnitFilterWayParams &params, const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &sus);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit(const SceneUnitFilterWayParams &params, const std::vector<std::shared_ptr<SceneUnit> > &sus);
 
 	protected:
-		using FilterWay = void(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		using FilterWay = void(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 		std::array<FilterWay *, ESceneUnitFilterWay_Count> m_filter_way;
-		void ExtraFilterProcess(const ESceneUnitFilterWayParams &params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		void ExtraFilterProcess(const SceneUnitFilterWayParams &params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 
-		static void FilterUnitType(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		static void FilterExcludeSuids(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		static void FilterRelation(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		static void FilterShapeObb2(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		static void FilterShapeCircle(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		static void FilterShapeSector(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
-		static void FilterLimitNum(const ESceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterUnitType(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterExcludeSuids(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterRelation(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterShapeObb2(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterShapeCircle(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterShapeSector(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
+		static void FilterLimitNum(const SceneUnitFilterWayParams &param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &units);
 
 	protected:
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindUnits(AABB2 rect);

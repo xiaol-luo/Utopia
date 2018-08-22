@@ -14,13 +14,14 @@ namespace Config
 
     public enum SceneUnitRelation
     {
+        none,
         self,
         friend, // not include self?
         enemy,
     }
     public enum SkillUseWay
     {
-        target = 1,
+        target,
         direction,
         postion,
     }

@@ -21,8 +21,7 @@ namespace Tool.Skill
         Hurt,
         Heal,
         ForceMove,
-        
-        Script_GuideMissile = 200,
+        Script,
 
         Count,
     }
@@ -38,7 +37,7 @@ namespace Tool.Skill
             effectEditors[EffectType.Hurt] = new HurtEffectEditor(this);
             effectEditors[EffectType.Heal] = new HealEffectEditor(this);
             effectEditors[EffectType.ForceMove] = new ForceMoveEffectEditor(this);
-            // effectEditors[EffectType.Script_GuideMissile] = new EffectEditorBase(this);
+            effectEditors[EffectType.Script] = new ScriptEffectEditor(this);
         }
 
         public SkillEditorWindowData editorData;

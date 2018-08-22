@@ -32,9 +32,11 @@ namespace GameLogic
 				std::vector<std::vector<int>> vecs;
 				for (auto kv_pair : json_begin_effect_ids)
 				{
+					std::vector<int> vec_param;
 					sol::table tb = kv_pair.second.as<sol::table>();
-					vecs.push_back(tb["end_case"]);
-					vecs.push_back(tb["effect_id"]);
+					vec_param.push_back(tb["end_case"]);
+					vec_param.push_back(tb["effect_id"]);
+					vecs.push_back(vec_param);
 				}
 				assert(GenerateEndEffectIdVec(m_end_effect_ids, vecs));
 			}
@@ -43,9 +45,11 @@ namespace GameLogic
 				std::vector<std::vector<int>> vecs;
 				for (auto kv_pair : json_begin_effect_ids)
 				{
+					std::vector<int> vec_param;
 					sol::table tb = kv_pair.second.as<sol::table>();
-					vecs.push_back(tb["begin_ms"]);
-					vecs.push_back(tb["effect_id"]);
+					vec_param.push_back(tb["begin_ms"]);
+					vec_param.push_back(tb["effect_id"]);
+					vecs.push_back(vec_param);
 				}
 				assert(TimeLineEffectIdsConfig::Generate(m_loop_effect_cfg, vecs));
 			}

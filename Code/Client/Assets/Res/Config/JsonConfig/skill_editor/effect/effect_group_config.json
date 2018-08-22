@@ -2,30 +2,22 @@
   "cfgs": [
     {
       "begin_effect_ids": [
-        1000001
+        6000001
       ],
-      "end_effect_ids": [
-        {
-          "end_case": 0,
-          "effect_id": 1000002
-        }
-      ],
-      "timeline_effect_ids": [
-        {
-          "begin_ms": 30,
-          "effect_id": 3000001
-        }
-      ],
+      "end_effect_ids": [],
+      "timeline_effect_ids": [],
       "need_guide": true,
-      "can_cancel_guide": true,
+      "can_cancel_guide": false,
       "id": 1,
       "name": "effect_group_1"
     },
     {
-      "begin_effect_ids": [],
+      "begin_effect_ids": [
+        6000001
+      ],
       "end_effect_ids": [],
       "timeline_effect_ids": [],
-      "need_guide": false,
+      "need_guide": true,
       "can_cancel_guide": false,
       "id": 2,
       "name": "effect_group_2"

@@ -184,10 +184,12 @@ namespace GameLogic
 	{
 		return m_base_cfg->Reversible();
 	}
+	/*
 	bool EffectBase::IsDone()
 	{
 		return this->IsLoopEffectsDone();
 	}
+	*/
 
 	void EffectBase::FireLoopEffects(int64_t elapse_ms)
 	{
@@ -216,7 +218,7 @@ namespace GameLogic
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::FilterSceneUnits()
 	{
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret;
-		ESceneUnitFilterWayParams params;
+		SceneUnitFilterWayParams params;
 		if (this->GenFilterWayParamByCfg(params))
 		{
 			SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
@@ -241,7 +243,7 @@ namespace GameLogic
 		return std::move(ret);
 	}
 
-	bool EffectBase::GenFilterWayParamByCfg(ESceneUnitFilterWayParams & filter_way_param)
+	bool EffectBase::GenFilterWayParamByCfg(SceneUnitFilterWayParams & filter_way_param)
 	{
 		int filter_id = m_base_cfg->GetFilterId();
 		if (filter_id <= 0)

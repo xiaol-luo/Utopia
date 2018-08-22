@@ -7,11 +7,11 @@ namespace Tool.Skill
 {
     public struct TopTabIdx
     {
-        public const int SCENE = 0;
-        public const int SCENE_UNIT = 1;
+        public const int EFFECT = 0;
+        public const int FILTER = 1;
         public const int SKILL = 2;
-        public const int FILTER = 3;
-        public const int EFFECT = 4;
+        public const int SCENE_UNIT = 3;
+        public const int SCENE = 4;
 
         public const int COUNT = 5;
     }

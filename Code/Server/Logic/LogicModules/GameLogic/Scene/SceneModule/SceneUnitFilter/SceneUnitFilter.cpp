@@ -31,9 +31,9 @@ namespace GameLogic
 		m_qtree.Release();
 	}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindSceneUnit(const ESceneUnitFilterWayParams & params)
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindSceneUnit(const SceneUnitFilterWayParams & params)
 	{
-		ESceneUnitFilterWayParams tmp_param = params;
+		SceneUnitFilterWayParams tmp_param = params;
 		tmp_param.CalShape();
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret;
 		this->FindUnits(tmp_param.cached_shape_aabb, out_ret);
@@ -41,16 +41,16 @@ namespace GameLogic
 		return out_ret;
 	}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::ExtractSceneUnit(const ESceneUnitFilterWayParams &params, const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& sus)
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::ExtractSceneUnit(const SceneUnitFilterWayParams &params, const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& sus)
 	{
-		ESceneUnitFilterWayParams tmp_param = params;
+		SceneUnitFilterWayParams tmp_param = params;
 		tmp_param.CalShape();
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> out_ret(sus.begin(), sus.end());
 		ExtraFilterProcess(tmp_param, out_ret);
 		return out_ret;
 	}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::ExtractSceneUnit(const ESceneUnitFilterWayParams &params, const std::vector<std::shared_ptr<SceneUnit> >& sus)
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::ExtractSceneUnit(const SceneUnitFilterWayParams &params, const std::vector<std::shared_ptr<SceneUnit> >& sus)
 	{
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> su_map;
 		for (auto su : sus)
@@ -63,7 +63,7 @@ namespace GameLogic
 		return std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
 	}
 
-	void SceneUnitFilter::ExtraFilterProcess(const ESceneUnitFilterWayParams & params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::ExtraFilterProcess(const SceneUnitFilterWayParams & params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		for (int i = 0; i < ESceneUnitFilterWay_Count; ++i)
 		{
@@ -74,7 +74,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterUnitType(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterUnitType(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		int64_t allow_types = param.unit_type.allow_types;
 		for (auto it = units.begin(); it != units.end();)
@@ -87,7 +87,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterExcludeSuids(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterExcludeSuids(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		for (uint64_t suid : param.exclude_suids.excludeSuids)
 		{
@@ -95,7 +95,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterRelation(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterRelation(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		int allowRelation = param.relations.relations;
 		std::shared_ptr<SceneUnit> caster = param.relations.caster;
@@ -117,7 +117,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterShapeObb2(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterShapeObb2(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		OBB2 obb2 = param.shape_obb2.oob2;
 		for (auto it = units.begin(); it != units.end();)
@@ -148,7 +148,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterShapeCircle(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterShapeCircle(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		Circle circle = param.shape_circle.circle;
 		for (auto it = units.begin(); it != units.end();)
@@ -179,7 +179,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterShapeSector(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterShapeSector(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		Sector sector = param.shape_sector.sector;
 		for (auto it = units.begin(); it != units.end();)
@@ -210,7 +210,7 @@ namespace GameLogic
 		}
 	}
 
-	void SceneUnitFilter::FilterLimitNum(const ESceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
+	void SceneUnitFilter::FilterLimitNum(const SceneUnitFilterWayParams & param, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
 	{
 		while ((int)units.size() > param.limit_num.num)
 		{
@@ -314,7 +314,7 @@ namespace GameLogic
 			m_qtree.UpdateNodeUnit(unit_node);
 		}		
 	}
-	void ESceneUnitFilterWayParams::CalShape()
+	void SceneUnitFilterWayParams::CalShape()
 	{
 		is_active[ESceneUnitFilterWay_ShapeCircle] = false;
 		is_active[ESceneUnitFilterWay_ShapeObb2] = false;

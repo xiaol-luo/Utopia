@@ -93,8 +93,36 @@ namespace GameLogic
 			shape_param.sector.angle = csv_cfg->shape_sector[1];
 		}
 
-		assert(EEffectFilterShape_None != shape);
 		return true;
+	}
+
+	SceneUnitFilterWayParams EffectFilterConfig::GenFilterWayParams() const 
+	{
+		SceneUnitFilterWayParams ret;
+		// gen shape
+		ret.shape.shape = this->shape;
+		ret.shape.shape_param = this->shape_param;
+
+		// gen filter param
+		if (0 != this->relations)
+		{
+			ret.is_active[ESceneUnitFilterWay_Relation] = true;
+			ret.relations.caster = nullptr;
+			ret.relations.relations = this->relations;
+		}
+		if (this->limit_num > 0)
+		{
+			ret.is_active[ESceneUnitFilterWay_LimitNum] = true;
+			ret.limit_num.num = this->limit_num;
+			ret.limit_num.priority = this->limit_num_priority;
+		}
+		if (0 != this->unit_types)
+		{
+			ret.is_active[ESceneUnitFilterWay_UnitType] = true;
+			ret.unit_type.allow_types = this->unit_types;
+		}
+
+		return ret;
 	}
 
 	EffectFilterConfigMgr::EffectFilterConfigMgr()

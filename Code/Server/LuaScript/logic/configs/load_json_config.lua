@@ -52,3 +52,7 @@ json_configs.effect_force_move = effect_force_move.cfgs
 print("json config effect_force_move")
 print(serpent.block(json_configs.effect_force_move))
 
+local effect_script = rapidjson.load("json_config/skill_editor/effect/script_effect.json")
+json_configs.effect_script = effect_script.cfgs
+print("json config effect_script")
+print(serpent.block(json_configs.effect_script))

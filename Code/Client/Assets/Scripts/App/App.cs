@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace Utopia
         public AppStateMgr stateMgr { get; protected set; }
 
         public XLua.LuaEnv lua { get; protected set; }
-
+        
         public void Awake()
         {
             Core.MakeInstance(this.root);

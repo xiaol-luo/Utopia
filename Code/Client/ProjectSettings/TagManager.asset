@@ -16,7 +16,7 @@ TagManager:
   - SceneObject
   - Ground
   - Obstacle
-  - 
+  - NoCollision
   - 
   - 
   - 

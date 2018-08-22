@@ -18,6 +18,25 @@
         "x": 11.0,
         "y": 22.0
       }
+    },
+    {
+      "id": 20,
+      "name": "test_trace_bullet",
+      "limit_num": 0,
+      "limit_num_priority": 0,
+      "unit_type_flag": -17,
+      "relation_flag": 4,
+      "anchor": 5,
+      "shape_type": 2,
+      "shape_circle": 0.0,
+      "shape_rect": {
+        "x": 10.0,
+        "y": 10.0
+      },
+      "shape_sector": {
+        "x": 0.0,
+        "y": 0.0
+      }
     }
   ]
 }

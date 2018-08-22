@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include "GameLogic/Scene/Defines/EffectDefine.h"
+#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"
 
 namespace Config
 {
@@ -24,12 +25,8 @@ namespace GameLogic
 		EEffectFilterAnchor anchor = EEffectFilterAnchor_Caster;
 		EEffectFilterShape shape = EEffectFilterShape_None;
 		EffectFilterShapeParam shape_param;
-	};
 
-	struct EffectFilterParams
-	{
-		const EffectFilterConfig *cfg;
-		std::unordered_set<uint64_t> exclude_suids;
+		SceneUnitFilterWayParams GenFilterWayParams() const;
 	};
 
 	class EffectFilterConfigMgr

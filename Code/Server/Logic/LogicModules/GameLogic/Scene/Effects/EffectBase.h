@@ -14,7 +14,7 @@ namespace GameLogic
 	class SceneEffects;
 	class SceneUnit;
 	struct EffectFilterShape;
-	struct ESceneUnitFilterWayParams;
+	struct SceneUnitFilterWayParams;
 
 	class EffectBase : public std::enable_shared_from_this<EffectBase>
 	{
@@ -50,7 +50,7 @@ namespace GameLogic
 		virtual void OnLateBegin() {}
 		virtual void OnLateEnd(EEffectEndCase end_case) {}
 		virtual void OnLateLoop(int64_t now_ms, int64_t delta_ms) {}
-		virtual bool IsDone();
+		virtual bool IsDone() = 0;
 		void FireLoopEffects(int64_t elaspe_ms);
 		bool IsLoopEffectsDone();
 
@@ -67,6 +67,6 @@ namespace GameLogic
 
 	protected:
 		virtual std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();
-		bool GenFilterWayParamByCfg(ESceneUnitFilterWayParams &filter_way_param);
+		bool GenFilterWayParamByCfg(SceneUnitFilterWayParams &filter_way_param);
 	};
 }

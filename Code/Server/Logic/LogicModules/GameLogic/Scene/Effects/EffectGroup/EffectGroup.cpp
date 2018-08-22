@@ -18,4 +18,14 @@ namespace GameLogic
 	{
 
 	}
+
+	void EffectGroup::OnLateBegin()
+	{
+		m_is_began = true;
+	}
+
+	bool EffectGroup::IsDone()
+	{
+		return m_is_began && this->IsLoopEffectsDone();
+	}
 }

@@ -1,0 +1,12 @@
+{
+  "cfgs": [
+    {
+      "class_name": "effect_script.effect_bullet",
+      "string_param": "",
+      "json_param": "",
+      "int_param": 0,
+      "id": 6000001,
+      "name": "trace_bullet"
+    }
+  ]
+}

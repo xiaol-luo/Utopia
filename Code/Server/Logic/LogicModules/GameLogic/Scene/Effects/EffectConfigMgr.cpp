@@ -70,7 +70,7 @@ namespace GameLogic
 		BuildCfgHelp<EffectGroupConfig>(csv_cfgs->csv_CsvEffectGroupConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_group"]);
 		BuildCfgHelp<EffectHurtConfig>(csv_cfgs->csv_CsvEffectHurtConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_hurt"]);
 		BuildCfgHelp<EffectAttrsConfig>(csv_cfgs->csv_CsvEffectAttrsConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_attrs"]);
-		BuildCfgHelp<EffectScriptConfig>(csv_cfgs->csv_CsvEffectScriptConfigSet->cfg_vec, m_effect_cfgs, sol::lua_nil);
+		BuildCfgHelp<EffectScriptConfig>(csv_cfgs->csv_CsvEffectScriptConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_script"]);
 		BuildCfgHelp<EffectSearcherConfig>(csv_cfgs->csv_CsvEffectSearcherConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_searcher"]);
 		BuildCfgHelp<EffectForceMoveConfig>(csv_cfgs->csv_CsvEffectForceMoveConfigSet->cfg_vec, m_effect_cfgs, json_cfg["effect_force_move"]);
 
