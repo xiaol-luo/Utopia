@@ -2,8 +2,8 @@
 #include <sol.hpp>	
 #include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
 #include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "Common/Geometry/Vector3.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToDirState.h"
+#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToDirState.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"
 
 namespace SolLuaBind
 {

@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
 #include "LogicModules/GameLogic/Scene/Effects/EffectSearcher/EffectSearcherConfig.h"	
-#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
 #include "LogicModules/GameLogic/Scene/Effects/EffectConfigBase.h"	
-#include "Config/AutoCsvCode/effect/CsvEffectSearcherConfig.h"
+#include "ShareCode/Config/AutoCsvCode/effect/CsvEffectSearcherConfig.h"	
+#include "LogicModules/GameLogic/Scene/Effects/EffectBase.h"	
+#include "LogicModules/GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace SolLuaBind
 {
@@ -30,6 +30,7 @@ namespace SolLuaBind
 					sol::usertype<GameLogic::EffectSearcherConfig> meta_table(
 						"__StructName__", sol::property([]() {return "EffectSearcherConfig"; })				
 						,"m_effect_ids", &GameLogic::EffectSearcherConfig::m_effect_ids				
+						,"m_is_extract", &GameLogic::EffectSearcherConfig::m_is_extract				
 						,"CreateEffect", &GameLogic::EffectSearcherConfig::CreateEffect				
 						,"InitCfg", &GameLogic::EffectSearcherConfig::InitCfg				
 						, sol::base_classes, sol::bases<

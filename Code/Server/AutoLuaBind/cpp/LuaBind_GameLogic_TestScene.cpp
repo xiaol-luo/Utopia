@@ -1,9 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "Common/Utils/Ticker.h"	
-#include "LogicModules/GameLogic/Scene/TestScene.h"	
 #include "LogicModules/GameLogic/Scene/NewScene.h"	
-#include "LogicModules/GameLogic/GameLogicModule.h"
+#include "ShareCode/Common/Utils/Ticker.h"	
+#include "LogicModules/GameLogic/GameLogicModule.h"	
+#include "LogicModules/GameLogic/Scene/TestScene.h"	
+#include "LogicModules/GameLogic/Scene/Config/SceneAllConfig.h"
 
 namespace SolLuaBind
 {
