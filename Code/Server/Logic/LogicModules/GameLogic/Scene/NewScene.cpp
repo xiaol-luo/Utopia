@@ -36,6 +36,10 @@ namespace GameLogic
 
 	NewScene::~NewScene()
 	{
+		for (auto kv : m_scene_units)
+		{
+			kv.second->Release();
+		}
 		m_scene_units.clear();
 		for (auto &&module : m_modules)
 		{

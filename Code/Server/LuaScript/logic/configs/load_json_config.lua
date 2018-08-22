@@ -56,3 +56,8 @@ local effect_script = rapidjson.load("json_config/skill_editor/effect/script_eff
 json_configs.effect_script = effect_script.cfgs
 print("json config effect_script")
 print(serpent.block(json_configs.effect_script))
+
+for i, v in pairs(json_configs.effect_script) do
+    v.json_cfg = rapidjson.decode(v.json_param)
+    print(serpent.block(v.json_cfg))
+end

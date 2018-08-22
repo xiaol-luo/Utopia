@@ -1,15 +1,18 @@
 using Config;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 namespace Tool.Skill
 {
-    public class ScriptEffectEditor : EffectEditorBase
+    public partial class ScriptEffectEditor : EffectEditorBase
     {
+        Dictionary<EEffectScriptType, System.Action<EffectScriptConfig, SkillEditorWindowData>> m_impleEditorDetailLogic = new Dictionary<EEffectScriptType, Action<EffectScriptConfig, SkillEditorWindowData>>();
         public ScriptEffectEditor(EffectTabData _tabData) : base(_tabData)
         {
+            m_impleEditorDetailLogic[EEffectScriptType.Bullet] = ImplBulletEditorLogic;
         }
 
         public const string CONFIG_PATH = "skill_editor/effect/script_effect.json";
@@ -97,10 +100,10 @@ namespace Tool.Skill
                 currCfg.id = EditorGUILayout.IntField("id", currCfg.id);
                 selectedCfgId = currCfg.id;
                 currCfg.name = EditorGUILayout.TextField("name", currCfg.name);
-
-                currCfg.class_name = EditorGUILayout.TextField("class name", currCfg.class_name);
-                currCfg.int_param = EditorGUILayout.IntField("int param", currCfg.int_param);
-                currCfg.string_param = EditorGUILayout.TextField("str param", currCfg.string_param);
+                currCfg.script_type = (EEffectScriptType)EditorGUILayout.EnumPopup("script type", currCfg.script_type);
+                currCfg.class_name = EditorGUILayout.TextField("class name", EffectScriptSetting.s_typeLuaClassMap[currCfg.script_type]);
+                var implFn = m_impleEditorDetailLogic[currCfg.script_type];
+                implFn(currCfg, tabData.editorData);
             }
         }
 

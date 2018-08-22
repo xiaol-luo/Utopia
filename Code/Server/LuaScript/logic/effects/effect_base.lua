@@ -5,6 +5,7 @@ local effect_base = effect_script.effect_base
 function effect_base.init(self, effect, cfg)
     self.effect = effect
     self.script_cfg = cfg
+    self.json_cfg = json_configs.get_effect_script(cfg:GetId())
     self.is_done = false
 
     self.scene_events = 

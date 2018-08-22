@@ -12,8 +12,6 @@ json_configs.effect_force_move = {}
 json_configs.effect_seacher = {}
 json_configs.effect_script = {}
 
-json_configs.effect_bullet = {}
-
 local find = function (t, predit_fn, key)
     ret = nil
     for i, v in pairs(t) do
@@ -41,6 +39,6 @@ json_configs.get_su = function (id)
     return find(json_configs.scene_unit, match_id, id)
 end
 
-json_configs.get_effect_bullet = function (id)
-    return find(json_configs.effect_bullet, match_id, id) 
+json_configs.get_effect_script = function (id)
+    return find(json_configs.effect_script, match_id, id) 
 end

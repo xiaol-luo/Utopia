@@ -215,7 +215,7 @@ namespace GameLogic
 		return m_next_loop_effect_idx >= cfg.effect_ids.size();
 	}
 
-	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::FilterSceneUnits()
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::FindSceneUnits()
 	{
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret;
 		SceneUnitFilterWayParams params;
@@ -241,6 +241,55 @@ namespace GameLogic
 			}
 		}
 		return std::move(ret);
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::ExtractSceneUnit()
+	{
+		std::vector<std::shared_ptr<SceneUnit>> sus;
+		{
+			std::shared_ptr<SceneUnit> target_su = this->GetEffectTarget();
+			if (nullptr != target_su)
+			{
+				sus.push_back(target_su);
+			}
+			std::shared_ptr<SceneUnit> self_su = this->GetCaster();
+			if (nullptr != self_su)
+			{
+				sus.push_back(self_su);
+			}
+		}
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret;
+		SceneUnitFilterWayParams params;
+		if (this->GenFilterWayParamByCfg(params))
+		{
+			SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
+			ret = su_filter->ExtractSceneUnit(params, sus);
+		}
+		return ret;
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::ExtractSceneUnit(const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& sus)
+	{
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret;
+		SceneUnitFilterWayParams params;
+		if (this->GenFilterWayParamByCfg(params))
+		{
+			SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
+			ret = su_filter->ExtractSceneUnit(params, sus);
+		}
+		return ret;
+	}
+
+	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::ExtractSceneUnit(const std::vector<std::shared_ptr<SceneUnit>>& sus)
+	{
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret;
+		SceneUnitFilterWayParams params;
+		if (this->GenFilterWayParamByCfg(params))
+		{
+			SceneUnitFilter *su_filter = m_scene->GetModule<SceneUnitFilter>();
+			ret = su_filter->ExtractSceneUnit(params, sus);
+		}
+		return ret;
 	}
 
 	bool EffectBase::GenFilterWayParamByCfg(SceneUnitFilterWayParams & filter_way_param)

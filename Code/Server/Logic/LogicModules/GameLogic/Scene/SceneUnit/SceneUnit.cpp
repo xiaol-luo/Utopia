@@ -18,32 +18,7 @@ namespace GameLogic
 
 	SceneUnit::~SceneUnit()
 	{
-		if (m_inited)
-		{
-			m_inited = false;
-			for (auto &&module : m_modules)
-			{
-				if (nullptr != module)
-					module->Realse();
-			}
-			for (auto &&module : m_modules)
-			{
-				if (nullptr != module)
-					module->Destroy();
-			}
-		}
-		for (auto &&module : m_modules)
-		{
-			module = nullptr;
-		}
-
-		{
-			delete m_event_proxy;  m_event_proxy = nullptr;
-			delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
-			delete m_event_dispacher; m_event_dispacher = nullptr;
-			m_transform = nullptr;
-			m_scene = nullptr;
-		}
+		this->Release();
 	}
 
 	void SceneUnit::EnterScene(NewScene *scene, uint64_t id)
@@ -112,6 +87,37 @@ namespace GameLogic
 			}
 		}
 	}
+
+	void SceneUnit::Release()
+	{
+		if (m_inited)
+		{
+			m_inited = false;
+			for (auto &&module : m_modules)
+			{
+				if (nullptr != module)
+					module->Realse();
+			}
+			for (auto &&module : m_modules)
+			{
+				if (nullptr != module)
+					module->Destroy();
+			}
+		}
+		for (auto &&module : m_modules)
+		{
+			module = nullptr;
+		}
+
+		{
+			delete m_event_proxy;  m_event_proxy = nullptr;
+			delete m_scene_event_proxy; m_scene_event_proxy = nullptr;
+			delete m_event_dispacher; m_event_dispacher = nullptr;
+			m_transform = nullptr;
+			m_scene = nullptr;
+		}
+	}
+
 	std::shared_ptr<SceneUnitTransform> SceneUnit::GetTransform()
 	{
 		if (nullptr == m_transform->GetOwner())

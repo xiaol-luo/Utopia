@@ -19,7 +19,7 @@ namespace GameLogic
 			m_id = json_cfg["id"];
 			m_name = json_cfg["name"];
 			m_filter_id = json_cfg["filter_id"];
-
+			m_is_extract = json_cfg["is_extract"];
 			sol::table tb = json_cfg["base_attrs"];
 			for (auto kv_pair : tb)
 			{

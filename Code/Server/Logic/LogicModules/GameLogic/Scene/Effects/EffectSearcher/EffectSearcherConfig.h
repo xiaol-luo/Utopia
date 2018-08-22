@@ -19,6 +19,7 @@ namespace GameLogic
 	public:
 		bool InitCfg(const Config::CsvEffectSearcherConfig *csv_cfg, void **param);
 		std::vector<int> m_effect_ids;
+		bool m_is_extract;
 
 	protected:
 	};

@@ -1,25 +1,34 @@
 {
   "cfgs": [
     {
-      "filter_id": 0,
+      "filter_id": 1,
+      "is_extract": true,
       "effect_ids": [
-        12,
-        11
+        5000001
       ],
       "id": 1000001,
-      "name": "searcher_effect_1000001"
+      "name": "red_hero_trace_bullet_hit_effect"
     },
     {
       "filter_id": 0,
+      "is_extract": false,
       "effect_ids": [],
       "id": 1000002,
       "name": "searcher_effect_1000002"
     },
     {
       "filter_id": 0,
+      "is_extract": false,
       "effect_ids": [],
       "id": 1000003,
       "name": "searcher_effect_1000003"
+    },
+    {
+      "filter_id": 0,
+      "is_extract": false,
+      "effect_ids": [],
+      "id": 1000004,
+      "name": "searcher_effect_1000004"
     }
   ]
 }

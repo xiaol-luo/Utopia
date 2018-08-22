@@ -1,3 +1,15 @@
 {
-  "cfgs": []
+  "cfgs": [
+    {
+      "ignore_terrian": true,
+      "move_setting": 0,
+      "move_sec": 1.0,
+      "move_speed": 15.0,
+      "move_distance": 1.0,
+      "anchor": 0,
+      "angle": 0.0,
+      "id": 5000001,
+      "name": "red_hero_trace_bullet_force_move"
+    }
+  ]
 }

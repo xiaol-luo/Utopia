@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Tool.Skill
 {
-    public class SearcherEffectEditor : EffectEditorBase
+    public partial class SearcherEffectEditor : EffectEditorBase
     {
         public SearcherEffectEditor(EffectTabData _tabData) : base(_tabData)
         {
@@ -115,6 +115,7 @@ namespace Tool.Skill
                     var filterNames = tabData.editorData.filterTabData.GetCfgNames().ToArray();
                     currCfg.filter_id = EditorGUILayout.IntPopup("filter", currCfg.filter_id, filterNames, filterIds);
                 }
+                currCfg.is_extract = SkillEditorWindow.BoolPopup("is extract", currCfg.is_extract);
 
                 EditorGUILayout.LabelField("Attach Effects");
                 if (GUILayout.Button("New"))

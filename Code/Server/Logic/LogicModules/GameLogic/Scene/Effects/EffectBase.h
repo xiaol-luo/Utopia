@@ -29,6 +29,7 @@ namespace GameLogic
 		std::shared_ptr<SceneUnit> GetEffectTarget();
 		std::shared_ptr<SceneUnit> GetSkillTarget();
 		NewScene * GetScene();
+		SceneEffects * GetSceneEffects() { return m_scene_effects; }
 		std::shared_ptr<SceneUnit> GetSceneUnit(uint64_t suid);
 		UseEffectParam GetUseEffectParam() { return m_user_effect_param; }
 
@@ -66,7 +67,11 @@ namespace GameLogic
 		EventDispacherProxy *m_scene_event_proxy = nullptr;
 
 	protected:
-		virtual std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FilterSceneUnits();
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> FindSceneUnits();
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit();
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit(const std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> &sus);
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ExtractSceneUnit(const std::vector<std::shared_ptr<SceneUnit> > &sus);
+
 		bool GenFilterWayParamByCfg(SceneUnitFilterWayParams &filter_way_param);
 	};
 }

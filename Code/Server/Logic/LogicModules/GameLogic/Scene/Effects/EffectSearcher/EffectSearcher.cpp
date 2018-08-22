@@ -28,7 +28,15 @@ namespace GameLogic
 	void EffectSearcher::OnBegin()
 	{
 		UseEffectParam user_effect_param = m_user_effect_param;
-		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> effected_units = this->FilterSceneUnits();
+		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> effected_units;
+		if (m_cfg->m_is_extract)
+		{
+			effected_units = this->ExtractSceneUnit();
+		}
+		else
+		{
+			effected_units = this->FindSceneUnits();
+		}
 		for (auto kv_pair : effected_units)
 		{
 			std::shared_ptr<SceneUnit> target_su = kv_pair.second;

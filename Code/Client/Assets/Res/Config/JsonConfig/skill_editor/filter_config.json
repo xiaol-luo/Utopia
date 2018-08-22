@@ -2,13 +2,13 @@
   "cfgs": [
     {
       "id": 1,
-      "name": "filter_1",
+      "name": "self",
       "limit_num": 0,
-      "limit_num_priority": 1,
-      "unit_type_flag": -1,
-      "relation_flag": -1,
-      "anchor": 1,
-      "shape_type": 3,
+      "limit_num_priority": 0,
+      "unit_type_flag": -17,
+      "relation_flag": 2,
+      "anchor": 0,
+      "shape_type": 0,
       "shape_circle": 0.0,
       "shape_rect": {
         "x": 122.0,
@@ -32,6 +32,44 @@
       "shape_rect": {
         "x": 10.0,
         "y": 10.0
+      },
+      "shape_sector": {
+        "x": 0.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": 2,
+      "name": "friend",
+      "limit_num": 0,
+      "limit_num_priority": 0,
+      "unit_type_flag": -17,
+      "relation_flag": 4,
+      "anchor": 0,
+      "shape_type": 0,
+      "shape_circle": 0.0,
+      "shape_rect": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "shape_sector": {
+        "x": 0.0,
+        "y": 0.0
+      }
+    },
+    {
+      "id": 3,
+      "name": "enery",
+      "limit_num": 0,
+      "limit_num_priority": 0,
+      "unit_type_flag": -1,
+      "relation_flag": 8,
+      "anchor": 0,
+      "shape_type": 0,
+      "shape_circle": 0.0,
+      "shape_rect": {
+        "x": 0.0,
+        "y": 0.0
       },
       "shape_sector": {
         "x": 0.0,

@@ -36,6 +36,7 @@ namespace GameLogic
 		void EnterScene(NewScene *scene, uint64_t id);
 		void LeaveScene();
 		void Update();
+		void Release();
 
 		NewScene * GetScene() { return m_scene; }
 		EventDispacher * GetEvDispacher() { return m_event_dispacher; }
