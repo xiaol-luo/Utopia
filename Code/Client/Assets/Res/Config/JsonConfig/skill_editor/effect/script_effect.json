@@ -4,7 +4,7 @@
       "script_type": 0,
       "class_name": "effect_script.effect_bullet",
       "string_param": "",
-      "json_param": "{\"target_type\":0,\"max_alive_sec\":20.0,\"move_speed\":2.0,\"calibre\":15.0,\"hit_filter_id\":1,\"model_id\":1,\"body_radius\":1.0}",
+      "json_param": "{\"target_type\":0,\"max_alive_sec\":20.0,\"move_speed\":2.0,\"calibre\":15.0,\"hit_filter_id\":3,\"model_id\":1,\"body_radius\":1.0}",
       "int_param": 0,
       "id": 6000001,
       "name": "trace_bullet"

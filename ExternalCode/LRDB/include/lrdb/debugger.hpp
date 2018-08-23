@@ -128,7 +128,7 @@ inline json::value to_json(lua_State* L, int index, int max_recursive = 1) {
       int tt = luaL_getmetafield(L, index, "__name");
       const char* type =
           (tt == LUA_TSTRING) ? lua_tostring(L, -1) : luaL_typename(L, index);
-      char buffer[128] = {};
+      char buffer[1280] = {};
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)

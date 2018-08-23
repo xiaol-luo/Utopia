@@ -6,23 +6,27 @@ local effect_bullet = effect_script.effect_bullet
 function effect_bullet.init(self, effect, cfg)
     effect_script.effect_base.init(self, effect, cfg)
     self.cfg = self.json_cfg
+    self.hited_suids = {}
     if nil == self.cfg then
         self.is_done = true
     end
 end
 
-function effect_bullet.bullet_hit_action(self, hit_sus)
+function effect_bullet.bullet_hit_action(self, bullet, hit_sus)
     print("effect_bullet.bullet_hit_action")
     print(serpent.block(hit_sus))
 
     for k, v in pairs(hit_sus) do
-        print("xxxx" .. k .. v)
-        local hit_effect_id = 1000001
-        local use_effect_param = self.effect:GetUseEffectParam()
-        local scene_effects = self.effect:GetSceneEffects()
-        local hit_effect = scene_effects:CreateEffect(hit_effect_id)
-        use_effect_param.target_suid = k
-        hit_effect:Begin(use_effect_param)
+        if nil == self.hited_suids[k] then
+            self.hited_suids[k] = true
+            local hit_effect_id = 1000001
+            local use_effect_param = self.effect:GetUseEffectParam()
+            local scene_effects = self.effect:GetSceneEffects()
+            local hit_effect = scene_effects:CreateEffect(hit_effect_id)
+            use_effect_param.target_suid = k
+            hit_effect:Begin(use_effect_param)
+            bullet:SetDone()
+        end
     end
 end
 

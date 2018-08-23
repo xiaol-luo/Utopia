@@ -1,7 +1,7 @@
 {
   "cfgs": [
     {
-      "filter_id": 1,
+      "filter_id": 3,
       "is_extract": true,
       "effect_ids": [
         5000001

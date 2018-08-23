@@ -60,7 +60,8 @@ namespace GameLogic
 
 			su_map.insert_or_assign(su->GetId(), su);
 		}
-		return std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>();
+		this->ExtraFilterProcess(params, su_map);
+		return su_map;
 	}
 
 	void SceneUnitFilter::ExtraFilterProcess(const SceneUnitFilterWayParams & params, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& units)
