@@ -25,10 +25,6 @@ namespace Utopia
             m_scene = scene;
             m_resLoader = ResourceLoaderProxy.Create();
 
-            m_root = new GameObject();
-            m_root.name = string.Format("{0}_{1}", unitType, unitId);
-            m_root.transform.SetParent(scene.rootSceneObejcts);
-
             m_suModel = new SuModel(this);
             this.AddModule(m_suModel);
         }
@@ -37,6 +33,10 @@ namespace Utopia
         {
             unitId = msg.SuId;
             unitType = msg.UnitType;
+
+            m_root = new GameObject();
+            m_root.name = string.Format("{0}_{1}", unitType, unitId);
+            m_root.transform.SetParent(scene.rootSceneObejcts);
 
             foreach (var module in m_modules.Values)
             {

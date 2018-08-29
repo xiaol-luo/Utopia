@@ -20,17 +20,39 @@ namespace Utopia
 
         public override void InitSu(SceneUnitState msg)
         {
-            GameObject modelGo = new GameObject();
+            GameObject modelGo = null;
+            {
+                ResourceObserver resOb = null;
+                {
+                    if (5 == su.unitType)
+                    {
+                        resOb = m_su.resLoader.LoadAsset("Assets/Resources/Effect/Missile/GuidedMissile.prefab");
+                    }
+                    else
+                    {
+                        resOb = m_su.resLoader.LoadAsset("Assets/Resources/Heros/xiaoqiao_blue.prefab");
+                    }
+                }
+                if (resOb.isLoaded)
+                {
+                    modelGo = resOb.Instantiate<GameObject>();
+                }
+                else
+                {
+                    modelGo = new GameObject();
+                }
+            }
+
             modelGo.name = "model";
             modelGo.transform.SetParent(m_su.transform);
         }
-
         public enum EAniNotBreakReason
         {
             None = 0,
             Playing = 1 << 0,
             SameAni = 1 << 1,
         }
+
         public void PlayAni(string aniName, EAniNotBreakReason notBreakFlag)
         {
             PlayAni(aniName, (int)notBreakFlag);
