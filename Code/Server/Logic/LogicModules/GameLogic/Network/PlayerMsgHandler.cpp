@@ -40,6 +40,7 @@ namespace GameLogic
 		RegPlayerMsgHandler(NetProto::PID_MoveToPos, NetProto::MoveToPos, OnMoveToPos);
 		RegPlayerHandler(NetProto::PID_StopMove, OnStopMove);
 		RegPlayerMsgHandler(NetProto::PID_BattleOperaReq, NetProto::BattleOperation, OnHandleBattleOperation);
+		RegPlayerHandler(NetProto::PID_SceneTimeSynReq, OnSceneSyncTime);
 
 		// GM
 		RegPlayerHandler(NetProto::PID_ReloadConfigReq, OnReloadConfig);

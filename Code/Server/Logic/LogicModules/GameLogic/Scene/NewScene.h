@@ -97,6 +97,7 @@ namespace GameLogic
 		void TestSubscribeEvents();
 
 	public:
+		void SyncLogicTime(Player *player);
 		bool PlayerSelectHero(Player *player, uint64_t su_id);
 		void OnPlayerDisconnect(Player *player);
 		void OnPlayerQuit(Player *player);

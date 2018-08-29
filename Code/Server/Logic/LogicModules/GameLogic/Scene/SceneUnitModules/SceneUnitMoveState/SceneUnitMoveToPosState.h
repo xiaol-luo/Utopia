@@ -19,6 +19,8 @@ namespace GameLogic
 
 		void SetDesiredPos(const Vector3 &pos);
 
+		virtual void CollectMoveDetail(NetProto::SceneUnitMove *msg);
+
 	protected:
 		Vector3 m_desired_pos;
 	};

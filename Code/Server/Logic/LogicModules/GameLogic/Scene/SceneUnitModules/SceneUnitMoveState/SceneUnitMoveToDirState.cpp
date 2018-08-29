@@ -41,4 +41,10 @@ void GameLogic::SceneUnitMoveToDirState::SetDesiredDir(float dir)
 	m_desired_dir = dir;
 }
 
+void GameLogic::SceneUnitMoveToDirState::CollectMoveDetail(NetProto::SceneUnitMove * msg)
+{
+	msg->set_move_desired_dir(m_desired_dir);
+	msg->set_max_move_speed(m_move_agent->GetNavAgent()->GetMaxSpeed());
+}
+
 

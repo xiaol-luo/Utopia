@@ -29,3 +29,7 @@ void GameLogic::SceneUnitMoveIdleState::Update(int64_t deltaMs)
 
 }
 
+void GameLogic::SceneUnitMoveIdleState::CollectMoveDetail(NetProto::SceneUnitMove * msg)
+{
+}
+

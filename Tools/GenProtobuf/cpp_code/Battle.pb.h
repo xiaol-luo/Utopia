@@ -40,7 +40,7 @@ namespace protobuf_Battle_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[14];
+  static const ::google::protobuf::internal::ParseTable schema[15];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -60,6 +60,9 @@ extern RspFreeHeroDefaultTypeInternal _RspFreeHero_default_instance_;
 class SceneObjectDisappear;
 class SceneObjectDisappearDefaultTypeInternal;
 extern SceneObjectDisappearDefaultTypeInternal _SceneObjectDisappear_default_instance_;
+class SceneTimeSync;
+class SceneTimeSyncDefaultTypeInternal;
+extern SceneTimeSyncDefaultTypeInternal _SceneTimeSync_default_instance_;
 class SceneUnitMove;
 class SceneUnitMoveDefaultTypeInternal;
 extern SceneUnitMoveDefaultTypeInternal _SceneUnitMove_default_instance_;
@@ -97,6 +100,7 @@ template<> ::NetProto::BattleOperation* Arena::CreateMaybeMessage<::NetProto::Ba
 template<> ::NetProto::MoveToPos* Arena::CreateMaybeMessage<::NetProto::MoveToPos>(Arena*);
 template<> ::NetProto::RspFreeHero* Arena::CreateMaybeMessage<::NetProto::RspFreeHero>(Arena*);
 template<> ::NetProto::SceneObjectDisappear* Arena::CreateMaybeMessage<::NetProto::SceneObjectDisappear>(Arena*);
+template<> ::NetProto::SceneTimeSync* Arena::CreateMaybeMessage<::NetProto::SceneTimeSync>(Arena*);
 template<> ::NetProto::SceneUnitMove* Arena::CreateMaybeMessage<::NetProto::SceneUnitMove>(Arena*);
 template<> ::NetProto::SceneUnitSkillAction* Arena::CreateMaybeMessage<::NetProto::SceneUnitSkillAction>(Arena*);
 template<> ::NetProto::SceneUnitState* Arena::CreateMaybeMessage<::NetProto::SceneUnitState>(Arena*);
@@ -1840,6 +1844,66 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
+  // .NetProto.PBVector2 move_desired_pos = 4;
+  bool has_move_desired_pos() const;
+  void clear_move_desired_pos();
+  static const int kMoveDesiredPosFieldNumber = 4;
+  private:
+  const ::NetProto::PBVector2& _internal_move_desired_pos() const;
+  public:
+  const ::NetProto::PBVector2& move_desired_pos() const;
+  ::NetProto::PBVector2* release_move_desired_pos();
+  ::NetProto::PBVector2* mutable_move_desired_pos();
+  void set_allocated_move_desired_pos(::NetProto::PBVector2* move_desired_pos);
+  void unsafe_arena_set_allocated_move_desired_pos(
+      ::NetProto::PBVector2* move_desired_pos);
+  ::NetProto::PBVector2* unsafe_arena_release_move_desired_pos();
+
+  // .NetProto.PBVector2 force_pos_destination = 7;
+  bool has_force_pos_destination() const;
+  void clear_force_pos_destination();
+  static const int kForcePosDestinationFieldNumber = 7;
+  private:
+  const ::NetProto::PBVector2& _internal_force_pos_destination() const;
+  public:
+  const ::NetProto::PBVector2& force_pos_destination() const;
+  ::NetProto::PBVector2* release_force_pos_destination();
+  ::NetProto::PBVector2* mutable_force_pos_destination();
+  void set_allocated_force_pos_destination(::NetProto::PBVector2* force_pos_destination);
+  void unsafe_arena_set_allocated_force_pos_destination(
+      ::NetProto::PBVector2* force_pos_destination);
+  ::NetProto::PBVector2* unsafe_arena_release_force_pos_destination();
+
+  // .NetProto.PBVector2 force_line_velocity = 9;
+  bool has_force_line_velocity() const;
+  void clear_force_line_velocity();
+  static const int kForceLineVelocityFieldNumber = 9;
+  private:
+  const ::NetProto::PBVector2& _internal_force_line_velocity() const;
+  public:
+  const ::NetProto::PBVector2& force_line_velocity() const;
+  ::NetProto::PBVector2* release_force_line_velocity();
+  ::NetProto::PBVector2* mutable_force_line_velocity();
+  void set_allocated_force_line_velocity(::NetProto::PBVector2* force_line_velocity);
+  void unsafe_arena_set_allocated_force_line_velocity(
+      ::NetProto::PBVector2* force_line_velocity);
+  ::NetProto::PBVector2* unsafe_arena_release_force_line_velocity();
+
+  // .NetProto.PBVector3 unit_pos = 12;
+  bool has_unit_pos() const;
+  void clear_unit_pos();
+  static const int kUnitPosFieldNumber = 12;
+  private:
+  const ::NetProto::PBVector3& _internal_unit_pos() const;
+  public:
+  const ::NetProto::PBVector3& unit_pos() const;
+  ::NetProto::PBVector3* release_unit_pos();
+  ::NetProto::PBVector3* mutable_unit_pos();
+  void set_allocated_unit_pos(::NetProto::PBVector3* unit_pos);
+  void unsafe_arena_set_allocated_unit_pos(
+      ::NetProto::PBVector3* unit_pos);
+  ::NetProto::PBVector3* unsafe_arena_release_unit_pos();
+
   // uint64 su_id = 1;
   void clear_su_id();
   static const int kSuIdFieldNumber = 1;
@@ -1852,6 +1916,48 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::NetProto::EMoveAgentState move_agent_state() const;
   void set_move_agent_state(::NetProto::EMoveAgentState value);
 
+  // float max_move_speed = 3;
+  void clear_max_move_speed();
+  static const int kMaxMoveSpeedFieldNumber = 3;
+  float max_move_speed() const;
+  void set_max_move_speed(float value);
+
+  // int64 immobilized_end_timestamp_ms = 6;
+  void clear_immobilized_end_timestamp_ms();
+  static const int kImmobilizedEndTimestampMsFieldNumber = 6;
+  ::google::protobuf::int64 immobilized_end_timestamp_ms() const;
+  void set_immobilized_end_timestamp_ms(::google::protobuf::int64 value);
+
+  // float move_desired_dir = 5;
+  void clear_move_desired_dir();
+  static const int kMoveDesiredDirFieldNumber = 5;
+  float move_desired_dir() const;
+  void set_move_desired_dir(float value);
+
+  // float force_pos_speed = 8;
+  void clear_force_pos_speed();
+  static const int kForcePosSpeedFieldNumber = 8;
+  float force_pos_speed() const;
+  void set_force_pos_speed(float value);
+
+  // float force_line_elasped_sec = 10;
+  void clear_force_line_elasped_sec();
+  static const int kForceLineElaspedSecFieldNumber = 10;
+  float force_line_elasped_sec() const;
+  void set_force_line_elasped_sec(float value);
+
+  // float force_line_total_sec = 11;
+  void clear_force_line_total_sec();
+  static const int kForceLineTotalSecFieldNumber = 11;
+  float force_line_total_sec() const;
+  void set_force_line_total_sec(float value);
+
+  // int64 now_ms = 13;
+  void clear_now_ms();
+  static const int kNowMsFieldNumber = 13;
+  ::google::protobuf::int64 now_ms() const;
+  void set_now_ms(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:NetProto.SceneUnitMove)
  private:
 
@@ -1859,8 +1965,19 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::NetProto::PBVector2* move_desired_pos_;
+  ::NetProto::PBVector2* force_pos_destination_;
+  ::NetProto::PBVector2* force_line_velocity_;
+  ::NetProto::PBVector3* unit_pos_;
   ::google::protobuf::uint64 su_id_;
   int move_agent_state_;
+  float max_move_speed_;
+  ::google::protobuf::int64 immobilized_end_timestamp_ms_;
+  float move_desired_dir_;
+  float force_pos_speed_;
+  float force_line_elasped_sec_;
+  float force_line_total_sec_;
+  ::google::protobuf::int64 now_ms_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_Battle_2eproto::TableStruct;
 };
@@ -2000,6 +2117,131 @@ class SceneUnitSkillAction : public ::google::protobuf::Message /* @@protoc_inse
   int stage_;
   ::google::protobuf::int32 skill_id_;
   ::google::protobuf::int64 stage_begin_ms_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_Battle_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class SceneTimeSync : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:NetProto.SceneTimeSync) */ {
+ public:
+  SceneTimeSync();
+  virtual ~SceneTimeSync();
+
+  SceneTimeSync(const SceneTimeSync& from);
+
+  inline SceneTimeSync& operator=(const SceneTimeSync& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  SceneTimeSync(SceneTimeSync&& from) noexcept
+    : SceneTimeSync() {
+    *this = ::std::move(from);
+  }
+
+  inline SceneTimeSync& operator=(SceneTimeSync&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline ::google::protobuf::Arena* GetArena() const final {
+    return GetArenaNoVirtual();
+  }
+  inline void* GetMaybeArenaPointer() const final {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SceneTimeSync& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SceneTimeSync* internal_default_instance() {
+    return reinterpret_cast<const SceneTimeSync*>(
+               &_SceneTimeSync_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    14;
+
+  void UnsafeArenaSwap(SceneTimeSync* other);
+  void Swap(SceneTimeSync* other);
+  friend void swap(SceneTimeSync& a, SceneTimeSync& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SceneTimeSync* New() const final {
+    return CreateMaybeMessage<SceneTimeSync>(NULL);
+  }
+
+  SceneTimeSync* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<SceneTimeSync>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const SceneTimeSync& from);
+  void MergeFrom(const SceneTimeSync& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SceneTimeSync* other);
+  protected:
+  explicit SceneTimeSync(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // int64 ms = 1;
+  void clear_ms();
+  static const int kMsFieldNumber = 1;
+  ::google::protobuf::int64 ms() const;
+  void set_ms(::google::protobuf::int64 value);
+
+  // float sec = 2;
+  void clear_sec();
+  static const int kSecFieldNumber = 2;
+  float sec() const;
+  void set_sec(float value);
+
+  // @@protoc_insertion_point(class_scope:NetProto.SceneTimeSync)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::google::protobuf::int64 ms_;
+  float sec_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_Battle_2eproto::TableStruct;
 };
@@ -2829,6 +3071,340 @@ inline void SceneUnitMove::set_move_agent_state(::NetProto::EMoveAgentState valu
   // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.move_agent_state)
 }
 
+// float max_move_speed = 3;
+inline void SceneUnitMove::clear_max_move_speed() {
+  max_move_speed_ = 0;
+}
+inline float SceneUnitMove::max_move_speed() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.max_move_speed)
+  return max_move_speed_;
+}
+inline void SceneUnitMove::set_max_move_speed(float value) {
+  
+  max_move_speed_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.max_move_speed)
+}
+
+// .NetProto.PBVector2 move_desired_pos = 4;
+inline bool SceneUnitMove::has_move_desired_pos() const {
+  return this != internal_default_instance() && move_desired_pos_ != NULL;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::_internal_move_desired_pos() const {
+  return *move_desired_pos_;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::move_desired_pos() const {
+  const ::NetProto::PBVector2* p = move_desired_pos_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.move_desired_pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+inline ::NetProto::PBVector2* SceneUnitMove::release_move_desired_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitMove.move_desired_pos)
+  
+  ::NetProto::PBVector2* temp = move_desired_pos_;
+  if (GetArenaNoVirtual() != NULL) {
+    temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  }
+  move_desired_pos_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::unsafe_arena_release_move_desired_pos() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.SceneUnitMove.move_desired_pos)
+  
+  ::NetProto::PBVector2* temp = move_desired_pos_;
+  move_desired_pos_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::mutable_move_desired_pos() {
+  
+  if (move_desired_pos_ == NULL) {
+    auto* p = CreateMaybeMessage<::NetProto::PBVector2>(GetArenaNoVirtual());
+    move_desired_pos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitMove.move_desired_pos)
+  return move_desired_pos_;
+}
+inline void SceneUnitMove::set_allocated_move_desired_pos(::NetProto::PBVector2* move_desired_pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(move_desired_pos_);
+  }
+  if (move_desired_pos) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(move_desired_pos)->GetArena();
+    if (message_arena != submessage_arena) {
+      move_desired_pos = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, move_desired_pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  move_desired_pos_ = move_desired_pos;
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitMove.move_desired_pos)
+}
+
+// float move_desired_dir = 5;
+inline void SceneUnitMove::clear_move_desired_dir() {
+  move_desired_dir_ = 0;
+}
+inline float SceneUnitMove::move_desired_dir() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.move_desired_dir)
+  return move_desired_dir_;
+}
+inline void SceneUnitMove::set_move_desired_dir(float value) {
+  
+  move_desired_dir_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.move_desired_dir)
+}
+
+// int64 immobilized_end_timestamp_ms = 6;
+inline void SceneUnitMove::clear_immobilized_end_timestamp_ms() {
+  immobilized_end_timestamp_ms_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SceneUnitMove::immobilized_end_timestamp_ms() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.immobilized_end_timestamp_ms)
+  return immobilized_end_timestamp_ms_;
+}
+inline void SceneUnitMove::set_immobilized_end_timestamp_ms(::google::protobuf::int64 value) {
+  
+  immobilized_end_timestamp_ms_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.immobilized_end_timestamp_ms)
+}
+
+// .NetProto.PBVector2 force_pos_destination = 7;
+inline bool SceneUnitMove::has_force_pos_destination() const {
+  return this != internal_default_instance() && force_pos_destination_ != NULL;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::_internal_force_pos_destination() const {
+  return *force_pos_destination_;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::force_pos_destination() const {
+  const ::NetProto::PBVector2* p = force_pos_destination_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.force_pos_destination)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+inline ::NetProto::PBVector2* SceneUnitMove::release_force_pos_destination() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitMove.force_pos_destination)
+  
+  ::NetProto::PBVector2* temp = force_pos_destination_;
+  if (GetArenaNoVirtual() != NULL) {
+    temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  }
+  force_pos_destination_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::unsafe_arena_release_force_pos_destination() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.SceneUnitMove.force_pos_destination)
+  
+  ::NetProto::PBVector2* temp = force_pos_destination_;
+  force_pos_destination_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::mutable_force_pos_destination() {
+  
+  if (force_pos_destination_ == NULL) {
+    auto* p = CreateMaybeMessage<::NetProto::PBVector2>(GetArenaNoVirtual());
+    force_pos_destination_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitMove.force_pos_destination)
+  return force_pos_destination_;
+}
+inline void SceneUnitMove::set_allocated_force_pos_destination(::NetProto::PBVector2* force_pos_destination) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(force_pos_destination_);
+  }
+  if (force_pos_destination) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(force_pos_destination)->GetArena();
+    if (message_arena != submessage_arena) {
+      force_pos_destination = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, force_pos_destination, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  force_pos_destination_ = force_pos_destination;
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitMove.force_pos_destination)
+}
+
+// float force_pos_speed = 8;
+inline void SceneUnitMove::clear_force_pos_speed() {
+  force_pos_speed_ = 0;
+}
+inline float SceneUnitMove::force_pos_speed() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.force_pos_speed)
+  return force_pos_speed_;
+}
+inline void SceneUnitMove::set_force_pos_speed(float value) {
+  
+  force_pos_speed_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.force_pos_speed)
+}
+
+// .NetProto.PBVector2 force_line_velocity = 9;
+inline bool SceneUnitMove::has_force_line_velocity() const {
+  return this != internal_default_instance() && force_line_velocity_ != NULL;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::_internal_force_line_velocity() const {
+  return *force_line_velocity_;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::force_line_velocity() const {
+  const ::NetProto::PBVector2* p = force_line_velocity_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.force_line_velocity)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+inline ::NetProto::PBVector2* SceneUnitMove::release_force_line_velocity() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitMove.force_line_velocity)
+  
+  ::NetProto::PBVector2* temp = force_line_velocity_;
+  if (GetArenaNoVirtual() != NULL) {
+    temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  }
+  force_line_velocity_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::unsafe_arena_release_force_line_velocity() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.SceneUnitMove.force_line_velocity)
+  
+  ::NetProto::PBVector2* temp = force_line_velocity_;
+  force_line_velocity_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::mutable_force_line_velocity() {
+  
+  if (force_line_velocity_ == NULL) {
+    auto* p = CreateMaybeMessage<::NetProto::PBVector2>(GetArenaNoVirtual());
+    force_line_velocity_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitMove.force_line_velocity)
+  return force_line_velocity_;
+}
+inline void SceneUnitMove::set_allocated_force_line_velocity(::NetProto::PBVector2* force_line_velocity) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(force_line_velocity_);
+  }
+  if (force_line_velocity) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(force_line_velocity)->GetArena();
+    if (message_arena != submessage_arena) {
+      force_line_velocity = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, force_line_velocity, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  force_line_velocity_ = force_line_velocity;
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitMove.force_line_velocity)
+}
+
+// float force_line_elasped_sec = 10;
+inline void SceneUnitMove::clear_force_line_elasped_sec() {
+  force_line_elasped_sec_ = 0;
+}
+inline float SceneUnitMove::force_line_elasped_sec() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.force_line_elasped_sec)
+  return force_line_elasped_sec_;
+}
+inline void SceneUnitMove::set_force_line_elasped_sec(float value) {
+  
+  force_line_elasped_sec_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.force_line_elasped_sec)
+}
+
+// float force_line_total_sec = 11;
+inline void SceneUnitMove::clear_force_line_total_sec() {
+  force_line_total_sec_ = 0;
+}
+inline float SceneUnitMove::force_line_total_sec() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.force_line_total_sec)
+  return force_line_total_sec_;
+}
+inline void SceneUnitMove::set_force_line_total_sec(float value) {
+  
+  force_line_total_sec_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.force_line_total_sec)
+}
+
+// .NetProto.PBVector3 unit_pos = 12;
+inline bool SceneUnitMove::has_unit_pos() const {
+  return this != internal_default_instance() && unit_pos_ != NULL;
+}
+inline const ::NetProto::PBVector3& SceneUnitMove::_internal_unit_pos() const {
+  return *unit_pos_;
+}
+inline const ::NetProto::PBVector3& SceneUnitMove::unit_pos() const {
+  const ::NetProto::PBVector3* p = unit_pos_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.unit_pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector3*>(
+      &::NetProto::_PBVector3_default_instance_);
+}
+inline ::NetProto::PBVector3* SceneUnitMove::release_unit_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitMove.unit_pos)
+  
+  ::NetProto::PBVector3* temp = unit_pos_;
+  if (GetArenaNoVirtual() != NULL) {
+    temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  }
+  unit_pos_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector3* SceneUnitMove::unsafe_arena_release_unit_pos() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.SceneUnitMove.unit_pos)
+  
+  ::NetProto::PBVector3* temp = unit_pos_;
+  unit_pos_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector3* SceneUnitMove::mutable_unit_pos() {
+  
+  if (unit_pos_ == NULL) {
+    auto* p = CreateMaybeMessage<::NetProto::PBVector3>(GetArenaNoVirtual());
+    unit_pos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitMove.unit_pos)
+  return unit_pos_;
+}
+inline void SceneUnitMove::set_allocated_unit_pos(::NetProto::PBVector3* unit_pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(unit_pos_);
+  }
+  if (unit_pos) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(unit_pos)->GetArena();
+    if (message_arena != submessage_arena) {
+      unit_pos = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, unit_pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  unit_pos_ = unit_pos;
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitMove.unit_pos)
+}
+
+// int64 now_ms = 13;
+inline void SceneUnitMove::clear_now_ms() {
+  now_ms_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SceneUnitMove::now_ms() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.now_ms)
+  return now_ms_;
+}
+inline void SceneUnitMove::set_now_ms(::google::protobuf::int64 value) {
+  
+  now_ms_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.now_ms)
+}
+
 // -------------------------------------------------------------------
 
 // SceneUnitSkillAction
@@ -2889,9 +3465,43 @@ inline void SceneUnitSkillAction::set_stage_begin_ms(::google::protobuf::int64 v
   // @@protoc_insertion_point(field_set:NetProto.SceneUnitSkillAction.stage_begin_ms)
 }
 
+// -------------------------------------------------------------------
+
+// SceneTimeSync
+
+// int64 ms = 1;
+inline void SceneTimeSync::clear_ms() {
+  ms_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SceneTimeSync::ms() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneTimeSync.ms)
+  return ms_;
+}
+inline void SceneTimeSync::set_ms(::google::protobuf::int64 value) {
+  
+  ms_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneTimeSync.ms)
+}
+
+// float sec = 2;
+inline void SceneTimeSync::clear_sec() {
+  sec_ = 0;
+}
+inline float SceneTimeSync::sec() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneTimeSync.sec)
+  return sec_;
+}
+inline void SceneTimeSync::set_sec(float value) {
+  
+  sec_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneTimeSync.sec)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

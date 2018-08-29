@@ -24,7 +24,7 @@ namespace NetProto {
     static PIDReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CglQSUQucHJvdG8SCE5ldFByb3RvKsUECgNQSUQSCwoHUElEX01pbhAAEgwK",
+            "CglQSUQucHJvdG8SCE5ldFByb3RvKvkECgNQSUQSCwoHUElEX01pbhAAEgwK",
             "CFBJRF9QaW5nEAESDAoIUElEX1BvbmcQAhIVChFQSURfUXVlcnlGcmVlSGVy",
             "bxBkEhMKD1BJRF9Sc3BGcmVlSGVybxBlEhUKEVBJRF9TZWxlY3RIZXJvUmVx",
             "EGYSFQoRUElEX1NlbGVjdEhlcm9Sc3AQZxIZChVQSURfTG9hZFNjZW5lQ29t",
@@ -37,7 +37,8 @@ namespace NetProto {
             "ELIJEh0KGFBJRF9TY2VuZVVuaXRTa2lsbEFjdGlvbhCzCRIZChRQSURfUmVs",
             "b2FkTHVhU2NyaXB0cxChHxIZChRQSURfUmVjcmVhdGVTY2VuZVJlcRCiHxIZ",
             "ChRQSURfUmVjcmVhdGVTY2VuZVJzcBCjHxIYChNQSURfUmVsb2FkQ29uZmln",
-            "UmVxEKQfEgwKB1BJRF9NYXgQgChCA/gBAWIGcHJvdG8z"));
+            "UmVxEKQfEhgKE1BJRF9TY2VuZVRpbWVTeW5SZXEQpR8SGAoTUElEX1NjZW5l",
+            "VGltZVN5blJzcBCmHxIMCgdQSURfTWF4EIAoQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::NetProto.PID), }, null));
@@ -71,6 +72,8 @@ namespace NetProto {
     [pbr::OriginalName("PID_RecreateSceneReq")] RecreateSceneReq = 4002,
     [pbr::OriginalName("PID_RecreateSceneRsp")] RecreateSceneRsp = 4003,
     [pbr::OriginalName("PID_ReloadConfigReq")] ReloadConfigReq = 4004,
+    [pbr::OriginalName("PID_SceneTimeSynReq")] SceneTimeSynReq = 4005,
+    [pbr::OriginalName("PID_SceneTimeSynRsp")] SceneTimeSynRsp = 4006,
     [pbr::OriginalName("PID_Max")] Max = 5120,
   }
 

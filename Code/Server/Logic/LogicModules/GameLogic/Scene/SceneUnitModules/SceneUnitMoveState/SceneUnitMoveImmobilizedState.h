@@ -19,6 +19,8 @@ namespace GameLogic
 		long GetEndTimestampMs() { return m_end_timestamp_ms; }
 		virtual void ForceDone() { m_is_done = true; m_end_timestamp_ms = 0; }
 
+		virtual void CollectMoveDetail(NetProto::SceneUnitMove *msg);
+
 	protected:
 		bool m_is_done = true;
 		int64_t m_end_timestamp_ms = 0;

@@ -6,355 +6,150 @@ using UnityEngine.SceneManagement;
 using Utopia;
 using Utopia.Logic;
 using Utopia.UI;
+using System;
 
-public class Scene
-{
-    ViewGridGizmos m_vgg = null;
-    Transform m_rootObstacles = null;
-    public Transform rootSceneObejcts { get { return m_rootSceneObjects; } }
-    Transform m_rootSceneObjects = null;
-
-    Dictionary<ulong, SceneObjcet> m_sceneObjects = new Dictionary<ulong, SceneObjcet>();
-
-    bool m_isLoadSceneSucc = false;
-    bool m_isLoadingScene = false;
-    ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
-
-    SceneCamera sceneCamera = new SceneCamera();
-    EventProxy<string> m_evProxy = Core.instance.eventMgr.CreateEventProxy();
-
-    ulong m_mainHeroId = 0;
-    public SceneObjcet mainHero
+namespace Utopia
+{ 
+    public partial class Scene
     {
-        get
-        {
-            SceneObjcet so;
-            m_sceneObjects.TryGetValue(m_mainHeroId, out so);
-            return so;
-        }
-    }
+        bool m_isLoadSceneSucc = false;
+        bool m_isLoadingScene = false;
+        ulong m_mainHeroId = 0;
+        Transform m_rootObstacles = null;
+        public Transform rootSceneObejcts { get { return m_rootSceneObjects; } }
+        Transform m_rootSceneObjects = null;
+        SceneCamera sceneCamera = new SceneCamera();
+        ResourceLoaderProxy m_resLoader = ResourceLoaderProxy.Create();
+        EventProxy<string> m_evProxy = Core.instance.eventMgr.CreateEventProxy();
 
-    ulong targetSuid
-    {
-        get
+        float m_client_startup_sec = 0;
+        long m_srv_logic_ms = 0;
+        float m_srv_logic_sec = 0;
+        const int MsPerSec = 1000;
+        public long nowMs
         {
-            foreach (var kv_pair in m_sceneObjects)
+            get
             {
-                if (kv_pair.Key != mainHero.id && kv_pair.Value.unitType == mainHero.unitType)
-                    return kv_pair.Key;
+                float ret = nowSec * MsPerSec;
+                return (long)ret;
             }
-            return 0;
         }
-    }
-
-    public void EnterScene(string sceneName)
-    {
-        m_mainHeroId = App.instance.logicMgr.GetModule<SelectHero>().usingHeroObjId;
-
-        m_isLoadSceneSucc = false;
-        m_isLoadingScene = true;
-        m_resLoader.AsyncLoadScene("Assets/Resources/Levels/Level_Battle.unity", false, OnSceneLoaded);
-
+        public float nowSec
         {
-            UILoadingPanelData panelData = new UILoadingPanelData();
-            panelData.fnGetContent = () => { return "Loading Scene"; };
-            panelData.fnIsDone = () => { return m_isLoadSceneSucc; };
-            App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, panelData);
+            get
+            {
+                float ret = Time.realtimeSinceStartup - m_client_startup_sec + m_srv_logic_sec;
+                return ret;
+            }
         }
 
-        m_evProxy.Subscribe<Vector3>(SceneEventDef.MouseHitGround, OnMouseHitGround);
-    }
-
-    void OnMouseHitGround(string evName, Vector3 worldPos)
-    {
-        Core.instance.log.LogDebug("Scene UPdate {0} {1} {2}",
-            worldPos.x, worldPos.y, worldPos.z);
-        this.TryMoveToPos(worldPos);
-    }
-
-    void OnSceneLoaded(ResourceScene.LoadResult result, string scenePath)
-    {
-        m_isLoadingScene = false;
-        m_isLoadSceneSucc = ResourceScene.LoadResult.Succ == result;
-        if (!m_isLoadSceneSucc)
+        public void EnterScene(string sceneName)
         {
-            Core.instance.log.LogError("Scene Load Scene fail {0}", scenePath);
-            return;
+            m_mainHeroId = App.instance.logicMgr.GetModule<SelectHero>().usingHeroObjId;
+
+            m_isLoadSceneSucc = false;
+            m_isLoadingScene = true;
+            m_resLoader.AsyncLoadScene("Assets/Resources/Levels/Level_Battle.unity", false, OnSceneLoaded);
+            {
+                // show load scene loading panel
+                UILoadingPanelData panelData = new UILoadingPanelData();
+                panelData.fnGetContent = () => { return "Loading Scene"; };
+                panelData.fnIsDone = () => { return m_isLoadSceneSucc; };
+                App.instance.panelMgr.ShowPanel(UIPanelId.LoadingPanel, panelData);
+            }
         }
-
-        sceneCamera.InitCamera();
-        m_vgg = ViewGridGizmos.GetViewGridGizmosFromScene();
-
+        void OnSceneLoaded(ResourceScene.LoadResult result, string scenePath)
         {
-            // 通知服务器场景加载完了
-            App.instance.net.gameSrv.Send(PID.LoadSceneComplete);
-            m_evProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero,
-                (string evName) =>
+            m_isLoadingScene = false;
+            m_isLoadSceneSucc = ResourceScene.LoadResult.Succ == result;
+            if (!m_isLoadSceneSucc)
+            {
+                Core.instance.log.LogError("Scene Load Scene fail {0}", scenePath);
+                return;
+            }
+
+            foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (rootGo.name == "SceneObjects")
+                {
+                    m_rootSceneObjects = rootGo.transform;
+                }
+                if (rootGo.name == "Obstacles")
+                {
+                    m_rootObstacles = rootGo.transform;
+                }
+            }
+            {
+                GameObject sceneLogicMono = new GameObject();
+                sceneLogicMono.name = "SceneLogicMono";
+                sceneLogicMono.AddComponent<SceneLogicMono>();
+            }
+            sceneCamera.InitCamera();
+            App.instance.net.gameSrv.Add<RecreateSceneRsp>(PID.RecreateSceneRsp, OnRecreateScene);
+            App.instance.net.gameSrv.Add<SceneTimeSync>(PID.SceneTimeSynRsp, OnSyncTime);
+
+            Gizmos_OnSceneLoaded();
+            Su_OnSceneLoaded();
+
+            {
+                // 通知服务器场景加载完了
+                App.instance.net.gameSrv.Send(PID.LoadSceneComplete);
+                m_evProxy.Subscribe(SelectHeroModuleDef.Event_OnRspSelectHero, (string evName) => 
                 {
                     if (App.instance.logicMgr.GetModule<SelectHero>().usingHeroObjId > 0)
                     {
                         App.instance.net.gameSrv.Send(PID.LoadSceneComplete);
                     }
                 });
+            }
         }
 
+        public void LeaveScene()
+        {
+            m_isLoadSceneSucc = false;
+            m_isLoadingScene = false;
 
-        App.instance.net.gameSrv.Add<SceneUnitState>(PID.SceneUnitState, OnRecvSceneUnitState);
-        App.instance.net.gameSrv.Add<SceneUnitTransform>(PID.SceneUnitTransform, OnRecvSceneUnitTransform);
-        App.instance.net.gameSrv.Add<SceneUnitMove>(PID.SceneUnitMove, OnRecvceneUnitMove);
-        App.instance.net.gameSrv.Add<SceneObjectDisappear>(PID.SceneObjectDisappear, OnSceneObjectDisappear);
-        App.instance.net.gameSrv.Add<SceneUnitSkillAction>(PID.SceneUnitSkillAction, OnSceneUnitSkillAction);
-        App.instance.net.gameSrv.Add<RecreateSceneRsp>(PID.RecreateSceneRsp, (int id, RecreateSceneRsp msg)=> {
+            App.instance.net.gameSrv.Send(PID.LeaveScene);
+
+            App.instance.net.gameSrv.Remove(PID.SceneTimeSynRsp);
+            App.instance.net.gameSrv.Remove(PID.RecreateSceneRsp);
+
+            Gizmos_LeaveScene();
+            Su_LeaveScene();
+
+            m_evProxy.ClearAll();
+            App.instance.logicMgr.GetModule<SelectHero>().SelectSide(SelectHero.SelectedSide.None);
+            sceneCamera.ReleaseCamera();
+            m_sceneObjects.Clear();
+            rootSceneObejcts.DetachChildren();
+        }
+        void OnSyncTime(int id, SceneTimeSync msg)
+        {
+            m_client_startup_sec = Time.realtimeSinceStartup;
+            m_srv_logic_ms = msg.Ms;
+            m_srv_logic_sec = msg.Sec;
+        }
+
+        void OnRecreateScene(int id, RecreateSceneRsp msg)
+        {
             if (msg.IsSucc)
             {
-                // this.LeaveScene();
                 App.instance.stateMgr.ChangeState(EAppState.InLogic);
             }
-        });
-
-        App.instance.net.gameSrv.Add<ViewAllGrids>(PID.ViewAllGrids, (int id, ViewAllGrids msg) =>
-        {
-            m_vgg.SetAllGrids(msg);
-        });
-        App.instance.net.gameSrv.Add<ViewSnapshot>(PID.ViewSnapshot, (int id, ViewSnapshot msg) =>
-        {
-            m_vgg.SetSnapshot(msg);
-        });
-        App.instance.net.gameSrv.Add<ViewSnapshotDiff>(PID.ViewSnapshotDiff, (int id, ViewSnapshotDiff msg) =>
-        {
-            m_vgg.SetSnapshotDiff(msg);
-        });
-        foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (rootGo.name == "SceneObjects")
-            {
-                m_rootSceneObjects = rootGo.transform;
-            }
-            if (rootGo.name == "Obstacles")
-            {
-                m_rootObstacles = rootGo.transform;
-            }
         }
 
+        public void FixUpdate()
         {
-            GameObject sceneLogicMono = new GameObject();
-            sceneLogicMono.name = "SceneLogicMono";
-            sceneLogicMono.AddComponent<SceneLogicMono>();
-        }
-    }
-
-    public void LeaveScene()
-    {
-        m_isLoadSceneSucc = false;
-        m_isLoadingScene = false;
-        m_sceneObjects.Clear();
-        rootSceneObejcts.DetachChildren();
-
-        App.instance.net.gameSrv.Remove(PID.SceneUnitState);
-        App.instance.net.gameSrv.Remove(PID.SceneUnitTransform);
-        App.instance.net.gameSrv.Remove(PID.SceneUnitMove);
-        App.instance.net.gameSrv.Remove(PID.SceneObjectDisappear);
-        App.instance.net.gameSrv.Remove(PID.SceneUnitSkillAction);
-        App.instance.net.gameSrv.Remove(PID.RecreateSceneRsp);
-        App.instance.net.gameSrv.Remove(PID.ViewAllGrids);
-        App.instance.net.gameSrv.Remove(PID.ViewSnapshot);
-        App.instance.net.gameSrv.Remove(PID.ViewSnapshotDiff);
-
-        sceneCamera.ReleaseCamera();
-        m_evProxy.ClearAll();
-        App.instance.net.gameSrv.Send(PID.LeaveScene);
-        App.instance.logicMgr.GetModule<SelectHero>().SelectSide(SelectHero.SelectedSide.None);
-    }
-    
-    SceneObjcet GetSceneObject(ulong objId)
-    {
-        SceneObjcet so = null;
-        m_sceneObjects.TryGetValue(objId, out so);
-        return so;
-    }
-
-    void OnRecvSceneUnitState(int id, SceneUnitState msg)
-    {
-        SceneObjcet so = this.GetSceneObject(msg.SuId);
-        if (null == so)
-        {
-            so = new SceneObjcet(msg.SuId, msg.UnitType, msg.ModelId);
-            m_sceneObjects[so.id] = so;
-        }
-        so.SetPos(msg.Pos);
-        so.faceDir = msg.FaceDir;
-    }
-    void OnRecvSceneUnitTransform(int id, SceneUnitTransform msg)
-    {
-        SceneObjcet so = this.GetSceneObject(msg.SuId);
-        if (null == so)
-            return;
-
-        so.SetPos(msg.Pos);
-        so.faceDir = msg.FaceDir;
-    }
-    void OnRecvceneUnitMove(int id, SceneUnitMove msg)
-    {
-        SceneObjcet so = this.GetSceneObject(msg.SuId);
-        if (null == so)
-            return;
-
-        if (so.IsPlayingSkill())
-            return;
-
-        if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
-                msg.MoveAgentState == EMoveAgentState.MoveToDir)
-        {
-            Animation animation = so.modelGo.GetComponent<Animation>();
-            if (!animation.IsPlaying("run"))
-                animation.Play("run");
-        }
-        else if (msg.MoveAgentState == EMoveAgentState.ForceLine ||
-            msg.MoveAgentState == EMoveAgentState.ForcePos)
-        {
-            Animation animation = so.modelGo.GetComponent<Animation>();
-            if (!animation.IsPlaying("knockUpStill"))
-                animation.Play("knockUpStill");
-        }
-        else
-        {
-            Animation animation = so.modelGo.GetComponent<Animation>();
-            if (!animation.IsPlaying("idle"))
-                animation.Play("idle");
-        }
-    }
-
-    void OnSceneObjectDisappear(int id, SceneObjectDisappear msg)
-    {
-        foreach (ulong objid in msg.Objids)
-        {
-            SceneObjcet obj = this.GetSceneObject(objid);
-            if (null == obj)
-                continue;
-            m_sceneObjects.Remove(objid);
-            GameObject.Destroy(obj.modelGo); 
-        }
-    }
-    void OnSceneUnitSkillAction(int id, SceneUnitSkillAction msg)
-    {
-        SceneObjcet so = this.GetSceneObject(msg.SuId);
-        if (null == so) return;
-
-        so.skillId = msg.SkillId;
-        so.skillStage = msg.Stage;
-        if (ESkillState.EssPreparing == msg.Stage)
-        {
-            Animation animation = so.modelGo.GetComponent<Animation>();
-            animation.Play("skill1");
-        }
-        if (ESkillState.EssReleasing == msg.Stage)
-        {
-            Animation animation = so.modelGo.GetComponent<Animation>();
-            animation.Play("skill2");
-        }
-        if (ESkillState.EssLasting == msg.Stage)
-        {
-            Animation animation = so.modelGo.GetComponent<Animation>();
-            animation.Play("skill3");
-        }
-    }
-
-    public void TryStopMove()
-    {
-        App.instance.net.gameSrv.Send(PID.StopMove);
-    }
-    public void FixUpdate()
-    {
-        if (!m_isLoadSceneSucc)
-            return;
-    }
-
-    public void Update()
-    {
-        if (!m_isLoadSceneSucc)
-            return;
-
-        this.CheckPlayerInput();
-    }
-
-    int m_clickBtnTiems = 0;
-    void CheckPlayerInput()
-    {
-        const int Mouse_Left_Click = 0;
-        const int Mouse_Right_Click = 1;
-
-        if (Input.anyKey)
-        {
-
+            if (!m_isLoadSceneSucc)
+                return;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        public void Update()
         {
-            this.StopAction();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Vector3 hitGound = Vector3.zero;
-            bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
-            if (isOk)
-            {
-                this.CastSkill(ESkillSlot.EssQslot, targetSuid, hitGound);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            ++m_clickBtnTiems;
-            Core.instance.log.LogDebug("CheckPlayerInput {0}", m_clickBtnTiems);
+            if (!m_isLoadSceneSucc)
+                return;
 
-            Vector3 hitGound = Vector3.zero;
-            bool isOk = SceneUtils.ScreenToGround(sceneCamera.camera, Input.mousePosition, ref hitGound);
-            if (isOk)
-            {
-                this.CastSkill(ESkillSlot.EssWslot, targetSuid, hitGound);
-            }
+            this.CheckPlayerInput();
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            this.TraceUnit(targetSuid);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ReloadLuaScripts msg = new ReloadLuaScripts();
-            msg.Scripts.Add("_load_files_effect_script");
-            App.instance.net.gameSrv.Send(PID.ReloadLuaScripts, msg);
-        }
-
     }
-    void CastSkill(ESkillSlot skillSlot, ulong targetId, Vector3 pos)
-    {
-        BattleOperation msg = new BattleOperation();
-        msg.Opera = EPlayerOpera.EpoCastSkill;
-        msg.TargetId = targetId;
-        msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
-		msg.SkillSlot = skillSlot;
-        App.instance.net.gameSrv.Send(PID.BattleOperaReq, msg);
-    }
-    void TraceUnit(ulong targetId)
-    {
-        BattleOperation msg = new BattleOperation();
-        msg.Opera = EPlayerOpera.EpoTrace;
-        msg.TargetId = targetId;
-        App.instance.net.gameSrv.Send(PID.BattleOperaReq, msg);
-    }
-    void TryMoveToPos(Vector3 pos)
-    {
-        BattleOperation msg = new BattleOperation();
-        msg.Opera = EPlayerOpera.EpoMove;
-        msg.Pos = new PBVector2() { X = pos.x, Y = pos.z };
-        App.instance.net.gameSrv.Send(PID.BattleOperaReq, msg);
-    }
-    void StopAction()
-    {
-        BattleOperation msg = new BattleOperation();
-        msg.Opera = EPlayerOpera.EpoStop;
-        App.instance.net.gameSrv.Send(PID.BattleOperaReq, msg);
-    }
-
-    // void RspFreeHero(int id, RspFreeHero msg)
 }

@@ -57,3 +57,11 @@ void GameLogic::SceneUnitMoveToPosState::SetDesiredPos(const Vector3 &pos)
 	m_desired_pos = pos;
 }
 
+void GameLogic::SceneUnitMoveToPosState::CollectMoveDetail(NetProto::SceneUnitMove * msg)
+{
+	::NetProto::PBVector2* pos = msg->mutable_move_desired_pos();
+	pos->set_x(m_desired_pos.x);
+	pos->set_y(m_desired_pos.y);
+	msg->set_max_move_speed(m_move_agent->GetNavAgent()->GetMaxSpeed());
+}
+

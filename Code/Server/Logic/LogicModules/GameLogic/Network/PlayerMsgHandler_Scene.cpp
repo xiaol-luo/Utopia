@@ -18,6 +18,7 @@
 #include "GameLogic/Scene/Skills/Skill.h"
 #include "LuaHelps/LuaLoadFiles.h"
 #include "ServerLogics/ServerLogic.h"
+#include "Network/Protobuf/Battle.pb.h"
 
 namespace GameLogic
 {
@@ -145,6 +146,16 @@ namespace GameLogic
 
 		default:
 			break;
+		}
+	}
+
+	void PlayerMsgHandler::OnSceneSyncTime(int protocol_id, GameLogic::Player *player)
+	{
+		NetProto::SceneTimeSync *msg = google::protobuf::Arena::CreateMessage<NetProto::SceneTimeSync>(m_protobuf_arena);
+		NewScene *scene = player->GetScene();
+		if (nullptr != scene)
+		{
+			scene->SyncLogicTime(player);
 		}
 	}
 }

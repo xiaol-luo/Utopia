@@ -129,6 +129,16 @@ namespace GameLogic
 			NetProto::SceneUnitMove *msg = m_owner->GetScene()->CreateProtobuf<NetProto::SceneUnitMove>();
 			msg->set_su_id(this->GetId());
 			msg->set_move_agent_state(m_curr_state->GetState());
+			{
+				msg->set_now_ms(m_owner->GetScene()->GetLogicMs());
+				Vector3 pos = m_owner->GetTransform()->GetPos();
+				NetProto::PBVector3 *pb_pos = msg->mutable_unit_pos();
+				pb_pos->set_x(pos.x);
+				pb_pos->set_y(pos.y);
+				pb_pos->set_z(pos.z);
+			}
+
+			m_curr_state->CollectMoveDetail(msg);
 			msgs.push_back(SyncClientMsg(NetProto::PID_SceneUnitMove, msg));
 		}
 		return std::move(msgs);

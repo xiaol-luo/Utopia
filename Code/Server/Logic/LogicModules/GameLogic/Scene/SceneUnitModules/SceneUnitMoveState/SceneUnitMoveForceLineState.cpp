@@ -109,4 +109,13 @@ void GameLogic::SceneUnitMoveForceLineState::ForceMoveLine(const Vector2 &dir, f
 	m_ignore_terrian = ignore_terrian;
 }
 
+void GameLogic::SceneUnitMoveForceLineState::CollectMoveDetail(NetProto::SceneUnitMove * msg)
+{
+	::NetProto::PBVector2* v = msg->mutable_force_line_velocity();
+	v->set_x(m_velocity.x);
+	v->set_y(m_velocity.y);
+	msg->set_force_line_elasped_sec(m_last_elasped_time);
+	msg->set_force_line_total_sec(m_time_sec);
+}
+
 

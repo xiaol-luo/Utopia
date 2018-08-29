@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='NetProto',
   syntax='proto3',
   serialized_options=_b('\370\001\001'),
-  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"&\n\x14SceneObjectDisappear\x12\x0e\n\x06objids\x18\x01 \x03(\x04\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\"\xa4\x01\n\x0f\x42\x61ttleOperation\x12%\n\x05opera\x18\x01 \x01(\x0e\x32\x16.NetProto.EPlayerOpera\x12\x11\n\ttarget_id\x18\x02 \x01(\x04\x12\x0b\n\x03\x64ir\x18\x03 \x01(\x02\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2\x12(\n\nskill_slot\x18\x05 \x01(\x0e\x32\x14.NetProto.ESkillSlot\"B\n\x08ViewGrid\x12#\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x11\n\tgrid_type\x18\x02 \x01(\x05\":\n\x10ViewSnapshotDiff\x12\x12\n\nmore_grids\x18\x01 \x03(\x05\x12\x12\n\nmiss_grids\x18\x02 \x03(\x05\"#\n\x0cViewSnapshot\x12\x13\n\x0blight_grids\x18\x01 \x03(\x05\"^\n\x0cViewAllGrids\x12\x11\n\tgrid_size\x18\x01 \x01(\x02\x12\x0b\n\x03row\x18\x02 \x01(\x05\x12\x0b\n\x03\x63ol\x18\x03 \x01(\x05\x12!\n\x05grids\x18\x04 \x03(\x0b\x32\x12.NetProto.ViewGrid\"\x8e\x01\n\x0eSceneUnitState\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x11\n\tunit_type\x18\x02 \x01(\x05\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x05 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x06 \x01(\x04\"m\n\x12SceneUnitTransform\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12 \n\x03pos\x18\x02 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x03 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x04 \x01(\x04\"S\n\rSceneUnitMove\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentState\"u\n\x14SceneUnitSkillAction\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12$\n\x05stage\x18\x02 \x01(\x0e\x32\x15.NetProto.ESkillState\x12\x10\n\x08skill_id\x18\x03 \x01(\x05\x12\x16\n\x0estage_begin_ms\x18\x04 \x01(\x03\x42\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0c\x42\x61ttle.proto\x12\x08NetProto\x1a\x0c\x43ommon.proto\x1a\x10\x42\x61ttleEnum.proto\"8\n\x0bRspFreeHero\x12\x13\n\x0bred_hero_id\x18\x01 \x01(\x04\x12\x14\n\x0c\x62lue_hero_id\x18\x02 \x01(\x04\" \n\rSelectHeroReq\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\"1\n\rSelectHeroRsp\x12\x0f\n\x07hero_id\x18\x01 \x01(\x04\x12\x0f\n\x07is_succ\x18\x02 \x01(\x08\"&\n\x14SceneObjectDisappear\x12\x0e\n\x06objids\x18\x01 \x03(\x04\"-\n\tMoveToPos\x12 \n\x03pos\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\"\xa4\x01\n\x0f\x42\x61ttleOperation\x12%\n\x05opera\x18\x01 \x01(\x0e\x32\x16.NetProto.EPlayerOpera\x12\x11\n\ttarget_id\x18\x02 \x01(\x04\x12\x0b\n\x03\x64ir\x18\x03 \x01(\x02\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2\x12(\n\nskill_slot\x18\x05 \x01(\x0e\x32\x14.NetProto.ESkillSlot\"B\n\x08ViewGrid\x12#\n\x06\x63\x65nter\x18\x01 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x11\n\tgrid_type\x18\x02 \x01(\x05\":\n\x10ViewSnapshotDiff\x12\x12\n\nmore_grids\x18\x01 \x03(\x05\x12\x12\n\nmiss_grids\x18\x02 \x03(\x05\"#\n\x0cViewSnapshot\x12\x13\n\x0blight_grids\x18\x01 \x03(\x05\"^\n\x0cViewAllGrids\x12\x11\n\tgrid_size\x18\x01 \x01(\x02\x12\x0b\n\x03row\x18\x02 \x01(\x05\x12\x0b\n\x03\x63ol\x18\x03 \x01(\x05\x12!\n\x05grids\x18\x04 \x03(\x0b\x32\x12.NetProto.ViewGrid\"\x8e\x01\n\x0eSceneUnitState\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x11\n\tunit_type\x18\x02 \x01(\x05\x12\x10\n\x08model_id\x18\x03 \x01(\x05\x12 \n\x03pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x05 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x06 \x01(\x04\"m\n\x12SceneUnitTransform\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12 \n\x03pos\x18\x02 \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x10\n\x08\x66\x61\x63\x65_dir\x18\x03 \x01(\x02\x12\x14\n\x0cparent_su_id\x18\x04 \x01(\x04\"\xce\x03\n\rSceneUnitMove\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12\x33\n\x10move_agent_state\x18\x02 \x01(\x0e\x32\x19.NetProto.EMoveAgentState\x12\x16\n\x0emax_move_speed\x18\x03 \x01(\x02\x12-\n\x10move_desired_pos\x18\x04 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x18\n\x10move_desired_dir\x18\x05 \x01(\x02\x12$\n\x1cimmobilized_end_timestamp_ms\x18\x06 \x01(\x03\x12\x32\n\x15\x66orce_pos_destination\x18\x07 \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x17\n\x0f\x66orce_pos_speed\x18\x08 \x01(\x02\x12\x30\n\x13\x66orce_line_velocity\x18\t \x01(\x0b\x32\x13.NetProto.PBVector2\x12\x1e\n\x16\x66orce_line_elasped_sec\x18\n \x01(\x02\x12\x1c\n\x14\x66orce_line_total_sec\x18\x0b \x01(\x02\x12%\n\x08unit_pos\x18\x0c \x01(\x0b\x32\x13.NetProto.PBVector3\x12\x0e\n\x06now_ms\x18\r \x01(\x03\"u\n\x14SceneUnitSkillAction\x12\r\n\x05su_id\x18\x01 \x01(\x04\x12$\n\x05stage\x18\x02 \x01(\x0e\x32\x15.NetProto.ESkillState\x12\x10\n\x08skill_id\x18\x03 \x01(\x05\x12\x16\n\x0estage_begin_ms\x18\x04 \x01(\x03\"(\n\rSceneTimeSync\x12\n\n\x02ms\x18\x01 \x01(\x03\x12\x0b\n\x03sec\x18\x02 \x01(\x02\x42\x03\xf8\x01\x01\x62\x06proto3')
   ,
   dependencies=[Common__pb2.DESCRIPTOR,BattleEnum__pb2.DESCRIPTOR,])
 
@@ -554,6 +554,83 @@ _SCENEUNITMOVE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='max_move_speed', full_name='NetProto.SceneUnitMove.max_move_speed', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='move_desired_pos', full_name='NetProto.SceneUnitMove.move_desired_pos', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='move_desired_dir', full_name='NetProto.SceneUnitMove.move_desired_dir', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='immobilized_end_timestamp_ms', full_name='NetProto.SceneUnitMove.immobilized_end_timestamp_ms', index=5,
+      number=6, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='force_pos_destination', full_name='NetProto.SceneUnitMove.force_pos_destination', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='force_pos_speed', full_name='NetProto.SceneUnitMove.force_pos_speed', index=7,
+      number=8, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='force_line_velocity', full_name='NetProto.SceneUnitMove.force_line_velocity', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='force_line_elasped_sec', full_name='NetProto.SceneUnitMove.force_line_elasped_sec', index=9,
+      number=10, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='force_line_total_sec', full_name='NetProto.SceneUnitMove.force_line_total_sec', index=10,
+      number=11, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='unit_pos', full_name='NetProto.SceneUnitMove.unit_pos', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='now_ms', full_name='NetProto.SceneUnitMove.now_ms', index=12,
+      number=13, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -566,8 +643,8 @@ _SCENEUNITMOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=972,
-  serialized_end=1055,
+  serialized_start=973,
+  serialized_end=1435,
 )
 
 
@@ -618,8 +695,46 @@ _SCENEUNITSKILLACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1057,
-  serialized_end=1174,
+  serialized_start=1437,
+  serialized_end=1554,
+)
+
+
+_SCENETIMESYNC = _descriptor.Descriptor(
+  name='SceneTimeSync',
+  full_name='NetProto.SceneTimeSync',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ms', full_name='NetProto.SceneTimeSync.ms', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sec', full_name='NetProto.SceneTimeSync.sec', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1556,
+  serialized_end=1596,
 )
 
 _MOVETOPOS.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR2
@@ -631,6 +746,10 @@ _VIEWALLGRIDS.fields_by_name['grids'].message_type = _VIEWGRID
 _SCENEUNITSTATE.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR3
 _SCENEUNITTRANSFORM.fields_by_name['pos'].message_type = Common__pb2._PBVECTOR3
 _SCENEUNITMOVE.fields_by_name['move_agent_state'].enum_type = BattleEnum__pb2._EMOVEAGENTSTATE
+_SCENEUNITMOVE.fields_by_name['move_desired_pos'].message_type = Common__pb2._PBVECTOR2
+_SCENEUNITMOVE.fields_by_name['force_pos_destination'].message_type = Common__pb2._PBVECTOR2
+_SCENEUNITMOVE.fields_by_name['force_line_velocity'].message_type = Common__pb2._PBVECTOR2
+_SCENEUNITMOVE.fields_by_name['unit_pos'].message_type = Common__pb2._PBVECTOR3
 _SCENEUNITSKILLACTION.fields_by_name['stage'].enum_type = BattleEnum__pb2._ESKILLSTATE
 DESCRIPTOR.message_types_by_name['RspFreeHero'] = _RSPFREEHERO
 DESCRIPTOR.message_types_by_name['SelectHeroReq'] = _SELECTHEROREQ
@@ -646,6 +765,7 @@ DESCRIPTOR.message_types_by_name['SceneUnitState'] = _SCENEUNITSTATE
 DESCRIPTOR.message_types_by_name['SceneUnitTransform'] = _SCENEUNITTRANSFORM
 DESCRIPTOR.message_types_by_name['SceneUnitMove'] = _SCENEUNITMOVE
 DESCRIPTOR.message_types_by_name['SceneUnitSkillAction'] = _SCENEUNITSKILLACTION
+DESCRIPTOR.message_types_by_name['SceneTimeSync'] = _SCENETIMESYNC
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 RspFreeHero = _reflection.GeneratedProtocolMessageType('RspFreeHero', (_message.Message,), dict(
@@ -745,6 +865,13 @@ SceneUnitSkillAction = _reflection.GeneratedProtocolMessageType('SceneUnitSkillA
   # @@protoc_insertion_point(class_scope:NetProto.SceneUnitSkillAction)
   ))
 _sym_db.RegisterMessage(SceneUnitSkillAction)
+
+SceneTimeSync = _reflection.GeneratedProtocolMessageType('SceneTimeSync', (_message.Message,), dict(
+  DESCRIPTOR = _SCENETIMESYNC,
+  __module__ = 'Battle_pb2'
+  # @@protoc_insertion_point(class_scope:NetProto.SceneTimeSync)
+  ))
+_sym_db.RegisterMessage(SceneTimeSync)
 
 
 DESCRIPTOR._options = None

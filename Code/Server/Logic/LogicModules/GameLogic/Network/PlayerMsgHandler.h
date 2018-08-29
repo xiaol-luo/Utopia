@@ -118,6 +118,7 @@ namespace GameLogic
 		void OnMoveToPos(int protocol_id, NetProto::MoveToPos *msg, GameLogic::Player *player);
 		void OnStopMove(int id, GameLogic::Player *player);
 		void OnHandleBattleOperation(int protocol_id, NetProto::BattleOperation *msg, GameLogic::Player *player);
+		void OnSceneSyncTime(int protocol_id,  GameLogic::Player *player);
 		
 		// Gm
 		void OnReloadConfig(int id, GameLogic::Player *player);

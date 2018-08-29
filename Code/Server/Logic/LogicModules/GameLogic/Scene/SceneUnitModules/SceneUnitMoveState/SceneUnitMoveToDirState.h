@@ -16,6 +16,8 @@ namespace GameLogic
 		virtual void Flash(const Vector3 &val);
 		void SetDesiredDir(float dir);
 
+		virtual void CollectMoveDetail(NetProto::SceneUnitMove *msg);
+
 	protected:
 		float m_desired_dir = 0.0f;
 	};

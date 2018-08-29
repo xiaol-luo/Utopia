@@ -36,6 +36,8 @@ enum PID
 	PID_RecreateSceneReq = 4002;
 	PID_RecreateSceneRsp = 4003;
 	PID_ReloadConfigReq = 4004;
+	PID_SceneTimeSynReq = 4005;
+	PID_SceneTimeSynRsp = 4006;
 	
 	PID_Max = 5120;
 }

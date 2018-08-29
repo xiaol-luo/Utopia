@@ -84,4 +84,11 @@ const Vector3 GameLogic::SceneUnitMoveForcePosState::CalNextVolecity()
 	return next_velocity;
 }
 
+void GameLogic::SceneUnitMoveForcePosState::CollectMoveDetail(NetProto::SceneUnitMove * msg)
+{
+	NetProto::PBVector2 *pos = msg->mutable_force_pos_destination();
+	pos->set_x(m_destination.x);
+	pos->set_y(m_destination.y);
+	msg->set_force_pos_speed(m_speed);
+}
 

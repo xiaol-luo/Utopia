@@ -88,6 +88,21 @@ message SceneUnitMove
 {
 	uint64 su_id = 1;
 	EMoveAgentState move_agent_state = 2;
+
+	float max_move_speed = 3;
+	PBVector2 move_desired_pos = 4;
+	float move_desired_dir = 5;
+	int64 immobilized_end_timestamp_ms = 6;
+
+	PBVector2 force_pos_destination = 7;
+	float force_pos_speed = 8;
+	
+	PBVector2 force_line_velocity = 9;
+	float force_line_elasped_sec = 10;
+	float force_line_total_sec = 11;
+
+	PBVector3 unit_pos = 12;
+	int64 now_ms = 13;
 }
 
 message SceneUnitSkillAction
@@ -96,5 +111,11 @@ message SceneUnitSkillAction
 	ESkillState stage = 2;
 	int32 skill_id = 3;
 	int64 stage_begin_ms = 4;
+}
+
+message SceneTimeSync
+{
+	int64 ms = 1;
+	float sec = 2;
 }
 

@@ -2,6 +2,7 @@
 
 #include "Common/Geometry/Vector3.h"
 #include "Network/Protobuf/BattleEnum.pb.h"
+#include "Network/Protobuf/Battle.pb.h"
 #include <float.h>
 
 namespace GameLogic
@@ -21,6 +22,8 @@ namespace GameLogic
 		virtual void ForceDone() {}
 		virtual void Flash(const Vector3 &val) {}
 		NetProto::EMoveAgentState GetState() { return m_state; }
+
+		virtual void CollectMoveDetail(NetProto::SceneUnitMove *msg) = 0;
 
 	protected:
 		NetProto::EMoveAgentState m_state;

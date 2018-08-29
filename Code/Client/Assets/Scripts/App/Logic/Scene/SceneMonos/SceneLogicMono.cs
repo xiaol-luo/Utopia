@@ -4,8 +4,6 @@ using UnityEngine.EventSystems;
 
 namespace Utopia
 {
-
-
     public class SceneLogicMono : MonoBehaviour
     {
         

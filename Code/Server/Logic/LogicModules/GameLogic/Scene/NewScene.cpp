@@ -280,6 +280,14 @@ namespace GameLogic
 		m_ev_dispacher->Subscribe<std::shared_ptr<SceneUnit>>(ESU_LeaveScene, std::bind(&NewScene::TestEvent, this, ESU_LeaveScene, std::placeholders::_1));
 	}
 
+	void NewScene::SyncLogicTime(Player * player)
+	{
+		NetProto::SceneTimeSync *msg = this->CreateProtobuf<NetProto::SceneTimeSync>();
+		msg->set_ms(m_logic_ms);
+		msg->set_sec(this->GetLogicSec());
+		player->Send(NetProto::PID_SceneTimeSynRsp, msg);
+	}
+
 	bool NewScene::PlayerSelectHero(Player * player, uint64_t su_id)
 	{
 		if (nullptr == player)
@@ -337,6 +345,8 @@ namespace GameLogic
 	{
 		if (nullptr == player || view_camp < 0 || view_camp > EViewCamp_Observer)
 			return;
+
+		this->SyncLogicTime(player);
 
 		for (auto & m_player_view_camp : m_player_view_camps)
 		{

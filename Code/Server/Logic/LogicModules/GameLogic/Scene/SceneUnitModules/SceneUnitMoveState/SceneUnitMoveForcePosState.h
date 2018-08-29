@@ -19,6 +19,8 @@ namespace GameLogic
 		void ForcePos(const Vector3 &destination, float speed);
 		void ForcePos(const Vector3 &destination);
 
+		virtual void CollectMoveDetail(NetProto::SceneUnitMove *msg);
+
 	private:
 		Vector3 m_destination;
 		float m_speed = 0;

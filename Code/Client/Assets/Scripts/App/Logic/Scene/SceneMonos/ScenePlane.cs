@@ -20,8 +20,7 @@ namespace Utopia
                 eventData.pointerCurrentRaycast.worldPosition.y,
                 eventData.pointerCurrentRaycast.worldPosition.z);
 
-            Core.instance.eventMgr.Fire(SceneEventDef.MouseHitGround, 
-                eventData.pointerCurrentRaycast.worldPosition);
+            Core.instance.eventMgr.Fire(SceneEventDef.MouseHitGround, eventData);
         }
     }
 }

@@ -21,6 +21,8 @@ namespace GameLogic
 
 		void ForceMoveLine(const Vector2 &dir, float speed, float time_sec, bool ignore_terrian);
 
+		virtual void CollectMoveDetail(NetProto::SceneUnitMove *msg);
+
 	protected:
 		bool m_is_done = true;
 		Vector3 m_velocity = Vector3::zero;

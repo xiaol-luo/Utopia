@@ -122,7 +122,8 @@ namespace GameLogic
 					 filter_shape.shape_param.rect.x_size = m_param.calibre;
 					 filter_shape.shape_param.rect.y_size = (ret_pos - old_pos).Magnitude();
 					 std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret_sus = scene->GetModule<SceneUnitFilter>()->FindSceneUnit(filter_way_param);
-					 m_param.hit_action(this, ret_sus);
+					 std::map<uint64_t, std::shared_ptr<SceneUnit> >ret_sus2(ret_sus.begin(), ret_sus.end());
+					 m_param.hit_action(this, ret_sus2);
 				 }
 			}
 

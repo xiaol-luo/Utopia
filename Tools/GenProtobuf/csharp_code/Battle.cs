@@ -45,12 +45,21 @@ namespace NetProto {
             "UEJWZWN0b3IzEhAKCGZhY2VfZGlyGAUgASgCEhQKDHBhcmVudF9zdV9pZBgG",
             "IAEoBCJtChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASABKAQSIAoD",
             "cG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAMg",
-            "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCJTCg1TY2VuZVVuaXRNb3ZlEg0K",
-            "BXN1X2lkGAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiABKA4yGS5OZXRQ",
-            "cm90by5FTW92ZUFnZW50U3RhdGUidQoUU2NlbmVVbml0U2tpbGxBY3Rpb24S",
-            "DQoFc3VfaWQYASABKAQSJAoFc3RhZ2UYAiABKA4yFS5OZXRQcm90by5FU2tp",
-            "bGxTdGF0ZRIQCghza2lsbF9pZBgDIAEoBRIWCg5zdGFnZV9iZWdpbl9tcxgE",
-            "IAEoA0ID+AEBYgZwcm90bzM="));
+            "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCLOAwoNU2NlbmVVbml0TW92ZRIN",
+            "CgVzdV9pZBgBIAEoBBIzChBtb3ZlX2FnZW50X3N0YXRlGAIgASgOMhkuTmV0",
+            "UHJvdG8uRU1vdmVBZ2VudFN0YXRlEhYKDm1heF9tb3ZlX3NwZWVkGAMgASgC",
+            "Ei0KEG1vdmVfZGVzaXJlZF9wb3MYBCABKAsyEy5OZXRQcm90by5QQlZlY3Rv",
+            "cjISGAoQbW92ZV9kZXNpcmVkX2RpchgFIAEoAhIkChxpbW1vYmlsaXplZF9l",
+            "bmRfdGltZXN0YW1wX21zGAYgASgDEjIKFWZvcmNlX3Bvc19kZXN0aW5hdGlv",
+            "bhgHIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIXCg9mb3JjZV9wb3Nfc3Bl",
+            "ZWQYCCABKAISMAoTZm9yY2VfbGluZV92ZWxvY2l0eRgJIAEoCzITLk5ldFBy",
+            "b3RvLlBCVmVjdG9yMhIeChZmb3JjZV9saW5lX2VsYXNwZWRfc2VjGAogASgC",
+            "EhwKFGZvcmNlX2xpbmVfdG90YWxfc2VjGAsgASgCEiUKCHVuaXRfcG9zGAwg",
+            "ASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEg4KBm5vd19tcxgNIAEoAyJ1ChRT",
+            "Y2VuZVVuaXRTa2lsbEFjdGlvbhINCgVzdV9pZBgBIAEoBBIkCgVzdGFnZRgC",
+            "IAEoDjIVLk5ldFByb3RvLkVTa2lsbFN0YXRlEhAKCHNraWxsX2lkGAMgASgF",
+            "EhYKDnN0YWdlX2JlZ2luX21zGAQgASgDIigKDVNjZW5lVGltZVN5bmMSCgoC",
+            "bXMYASABKAMSCwoDc2VjGAIgASgCQgP4AQFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -66,8 +75,9 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitState), global::NetProto.SceneUnitState.Parser, new[]{ "SuId", "UnitType", "ModelId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitTransform), global::NetProto.SceneUnitTransform.Parser, new[]{ "SuId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitSkillAction), global::NetProto.SceneUnitSkillAction.Parser, new[]{ "SuId", "Stage", "SkillId", "StageBeginMs" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState", "MaxMoveSpeed", "MoveDesiredPos", "MoveDesiredDir", "ImmobilizedEndTimestampMs", "ForcePosDestination", "ForcePosSpeed", "ForceLineVelocity", "ForceLineElaspedSec", "ForceLineTotalSec", "UnitPos", "NowMs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitSkillAction), global::NetProto.SceneUnitSkillAction.Parser, new[]{ "SuId", "Stage", "SkillId", "StageBeginMs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneTimeSync), global::NetProto.SceneTimeSync.Parser, new[]{ "Ms", "Sec" }, null, null, null)
           }));
     }
     #endregion
@@ -2175,6 +2185,17 @@ namespace NetProto {
     public SceneUnitMove(SceneUnitMove other) : this() {
       suId_ = other.suId_;
       moveAgentState_ = other.moveAgentState_;
+      maxMoveSpeed_ = other.maxMoveSpeed_;
+      moveDesiredPos_ = other.moveDesiredPos_ != null ? other.moveDesiredPos_.Clone() : null;
+      moveDesiredDir_ = other.moveDesiredDir_;
+      immobilizedEndTimestampMs_ = other.immobilizedEndTimestampMs_;
+      forcePosDestination_ = other.forcePosDestination_ != null ? other.forcePosDestination_.Clone() : null;
+      forcePosSpeed_ = other.forcePosSpeed_;
+      forceLineVelocity_ = other.forceLineVelocity_ != null ? other.forceLineVelocity_.Clone() : null;
+      forceLineElaspedSec_ = other.forceLineElaspedSec_;
+      forceLineTotalSec_ = other.forceLineTotalSec_;
+      unitPos_ = other.unitPos_ != null ? other.unitPos_.Clone() : null;
+      nowMs_ = other.nowMs_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2205,6 +2226,127 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "max_move_speed" field.</summary>
+    public const int MaxMoveSpeedFieldNumber = 3;
+    private float maxMoveSpeed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float MaxMoveSpeed {
+      get { return maxMoveSpeed_; }
+      set {
+        maxMoveSpeed_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "move_desired_pos" field.</summary>
+    public const int MoveDesiredPosFieldNumber = 4;
+    private global::NetProto.PBVector2 moveDesiredPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 MoveDesiredPos {
+      get { return moveDesiredPos_; }
+      set {
+        moveDesiredPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "move_desired_dir" field.</summary>
+    public const int MoveDesiredDirFieldNumber = 5;
+    private float moveDesiredDir_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float MoveDesiredDir {
+      get { return moveDesiredDir_; }
+      set {
+        moveDesiredDir_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "immobilized_end_timestamp_ms" field.</summary>
+    public const int ImmobilizedEndTimestampMsFieldNumber = 6;
+    private long immobilizedEndTimestampMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long ImmobilizedEndTimestampMs {
+      get { return immobilizedEndTimestampMs_; }
+      set {
+        immobilizedEndTimestampMs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "force_pos_destination" field.</summary>
+    public const int ForcePosDestinationFieldNumber = 7;
+    private global::NetProto.PBVector2 forcePosDestination_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 ForcePosDestination {
+      get { return forcePosDestination_; }
+      set {
+        forcePosDestination_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "force_pos_speed" field.</summary>
+    public const int ForcePosSpeedFieldNumber = 8;
+    private float forcePosSpeed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float ForcePosSpeed {
+      get { return forcePosSpeed_; }
+      set {
+        forcePosSpeed_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "force_line_velocity" field.</summary>
+    public const int ForceLineVelocityFieldNumber = 9;
+    private global::NetProto.PBVector2 forceLineVelocity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 ForceLineVelocity {
+      get { return forceLineVelocity_; }
+      set {
+        forceLineVelocity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "force_line_elasped_sec" field.</summary>
+    public const int ForceLineElaspedSecFieldNumber = 10;
+    private float forceLineElaspedSec_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float ForceLineElaspedSec {
+      get { return forceLineElaspedSec_; }
+      set {
+        forceLineElaspedSec_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "force_line_total_sec" field.</summary>
+    public const int ForceLineTotalSecFieldNumber = 11;
+    private float forceLineTotalSec_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float ForceLineTotalSec {
+      get { return forceLineTotalSec_; }
+      set {
+        forceLineTotalSec_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "unit_pos" field.</summary>
+    public const int UnitPosFieldNumber = 12;
+    private global::NetProto.PBVector3 unitPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 UnitPos {
+      get { return unitPos_; }
+      set {
+        unitPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "now_ms" field.</summary>
+    public const int NowMsFieldNumber = 13;
+    private long nowMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long NowMs {
+      get { return nowMs_; }
+      set {
+        nowMs_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SceneUnitMove);
@@ -2220,6 +2362,17 @@ namespace NetProto {
       }
       if (SuId != other.SuId) return false;
       if (MoveAgentState != other.MoveAgentState) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MaxMoveSpeed, other.MaxMoveSpeed)) return false;
+      if (!object.Equals(MoveDesiredPos, other.MoveDesiredPos)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(MoveDesiredDir, other.MoveDesiredDir)) return false;
+      if (ImmobilizedEndTimestampMs != other.ImmobilizedEndTimestampMs) return false;
+      if (!object.Equals(ForcePosDestination, other.ForcePosDestination)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForcePosSpeed, other.ForcePosSpeed)) return false;
+      if (!object.Equals(ForceLineVelocity, other.ForceLineVelocity)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForceLineElaspedSec, other.ForceLineElaspedSec)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForceLineTotalSec, other.ForceLineTotalSec)) return false;
+      if (!object.Equals(UnitPos, other.UnitPos)) return false;
+      if (NowMs != other.NowMs) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2228,6 +2381,17 @@ namespace NetProto {
       int hash = 1;
       if (SuId != 0UL) hash ^= SuId.GetHashCode();
       if (MoveAgentState != 0) hash ^= MoveAgentState.GetHashCode();
+      if (MaxMoveSpeed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MaxMoveSpeed);
+      if (moveDesiredPos_ != null) hash ^= MoveDesiredPos.GetHashCode();
+      if (MoveDesiredDir != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(MoveDesiredDir);
+      if (ImmobilizedEndTimestampMs != 0L) hash ^= ImmobilizedEndTimestampMs.GetHashCode();
+      if (forcePosDestination_ != null) hash ^= ForcePosDestination.GetHashCode();
+      if (ForcePosSpeed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForcePosSpeed);
+      if (forceLineVelocity_ != null) hash ^= ForceLineVelocity.GetHashCode();
+      if (ForceLineElaspedSec != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForceLineElaspedSec);
+      if (ForceLineTotalSec != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForceLineTotalSec);
+      if (unitPos_ != null) hash ^= UnitPos.GetHashCode();
+      if (NowMs != 0L) hash ^= NowMs.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2249,6 +2413,50 @@ namespace NetProto {
         output.WriteRawTag(16);
         output.WriteEnum((int) MoveAgentState);
       }
+      if (MaxMoveSpeed != 0F) {
+        output.WriteRawTag(29);
+        output.WriteFloat(MaxMoveSpeed);
+      }
+      if (moveDesiredPos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(MoveDesiredPos);
+      }
+      if (MoveDesiredDir != 0F) {
+        output.WriteRawTag(45);
+        output.WriteFloat(MoveDesiredDir);
+      }
+      if (ImmobilizedEndTimestampMs != 0L) {
+        output.WriteRawTag(48);
+        output.WriteInt64(ImmobilizedEndTimestampMs);
+      }
+      if (forcePosDestination_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(ForcePosDestination);
+      }
+      if (ForcePosSpeed != 0F) {
+        output.WriteRawTag(69);
+        output.WriteFloat(ForcePosSpeed);
+      }
+      if (forceLineVelocity_ != null) {
+        output.WriteRawTag(74);
+        output.WriteMessage(ForceLineVelocity);
+      }
+      if (ForceLineElaspedSec != 0F) {
+        output.WriteRawTag(85);
+        output.WriteFloat(ForceLineElaspedSec);
+      }
+      if (ForceLineTotalSec != 0F) {
+        output.WriteRawTag(93);
+        output.WriteFloat(ForceLineTotalSec);
+      }
+      if (unitPos_ != null) {
+        output.WriteRawTag(98);
+        output.WriteMessage(UnitPos);
+      }
+      if (NowMs != 0L) {
+        output.WriteRawTag(104);
+        output.WriteInt64(NowMs);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2262,6 +2470,39 @@ namespace NetProto {
       }
       if (MoveAgentState != 0) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MoveAgentState);
+      }
+      if (MaxMoveSpeed != 0F) {
+        size += 1 + 4;
+      }
+      if (moveDesiredPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(MoveDesiredPos);
+      }
+      if (MoveDesiredDir != 0F) {
+        size += 1 + 4;
+      }
+      if (ImmobilizedEndTimestampMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ImmobilizedEndTimestampMs);
+      }
+      if (forcePosDestination_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ForcePosDestination);
+      }
+      if (ForcePosSpeed != 0F) {
+        size += 1 + 4;
+      }
+      if (forceLineVelocity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ForceLineVelocity);
+      }
+      if (ForceLineElaspedSec != 0F) {
+        size += 1 + 4;
+      }
+      if (ForceLineTotalSec != 0F) {
+        size += 1 + 4;
+      }
+      if (unitPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UnitPos);
+      }
+      if (NowMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NowMs);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2280,6 +2521,51 @@ namespace NetProto {
       if (other.MoveAgentState != 0) {
         MoveAgentState = other.MoveAgentState;
       }
+      if (other.MaxMoveSpeed != 0F) {
+        MaxMoveSpeed = other.MaxMoveSpeed;
+      }
+      if (other.moveDesiredPos_ != null) {
+        if (moveDesiredPos_ == null) {
+          moveDesiredPos_ = new global::NetProto.PBVector2();
+        }
+        MoveDesiredPos.MergeFrom(other.MoveDesiredPos);
+      }
+      if (other.MoveDesiredDir != 0F) {
+        MoveDesiredDir = other.MoveDesiredDir;
+      }
+      if (other.ImmobilizedEndTimestampMs != 0L) {
+        ImmobilizedEndTimestampMs = other.ImmobilizedEndTimestampMs;
+      }
+      if (other.forcePosDestination_ != null) {
+        if (forcePosDestination_ == null) {
+          forcePosDestination_ = new global::NetProto.PBVector2();
+        }
+        ForcePosDestination.MergeFrom(other.ForcePosDestination);
+      }
+      if (other.ForcePosSpeed != 0F) {
+        ForcePosSpeed = other.ForcePosSpeed;
+      }
+      if (other.forceLineVelocity_ != null) {
+        if (forceLineVelocity_ == null) {
+          forceLineVelocity_ = new global::NetProto.PBVector2();
+        }
+        ForceLineVelocity.MergeFrom(other.ForceLineVelocity);
+      }
+      if (other.ForceLineElaspedSec != 0F) {
+        ForceLineElaspedSec = other.ForceLineElaspedSec;
+      }
+      if (other.ForceLineTotalSec != 0F) {
+        ForceLineTotalSec = other.ForceLineTotalSec;
+      }
+      if (other.unitPos_ != null) {
+        if (unitPos_ == null) {
+          unitPos_ = new global::NetProto.PBVector3();
+        }
+        UnitPos.MergeFrom(other.UnitPos);
+      }
+      if (other.NowMs != 0L) {
+        NowMs = other.NowMs;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -2297,6 +2583,62 @@ namespace NetProto {
           }
           case 16: {
             moveAgentState_ = (global::NetProto.EMoveAgentState) input.ReadEnum();
+            break;
+          }
+          case 29: {
+            MaxMoveSpeed = input.ReadFloat();
+            break;
+          }
+          case 34: {
+            if (moveDesiredPos_ == null) {
+              moveDesiredPos_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(moveDesiredPos_);
+            break;
+          }
+          case 45: {
+            MoveDesiredDir = input.ReadFloat();
+            break;
+          }
+          case 48: {
+            ImmobilizedEndTimestampMs = input.ReadInt64();
+            break;
+          }
+          case 58: {
+            if (forcePosDestination_ == null) {
+              forcePosDestination_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(forcePosDestination_);
+            break;
+          }
+          case 69: {
+            ForcePosSpeed = input.ReadFloat();
+            break;
+          }
+          case 74: {
+            if (forceLineVelocity_ == null) {
+              forceLineVelocity_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(forceLineVelocity_);
+            break;
+          }
+          case 85: {
+            ForceLineElaspedSec = input.ReadFloat();
+            break;
+          }
+          case 93: {
+            ForceLineTotalSec = input.ReadFloat();
+            break;
+          }
+          case 98: {
+            if (unitPos_ == null) {
+              unitPos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(unitPos_);
+            break;
+          }
+          case 104: {
+            NowMs = input.ReadInt64();
             break;
           }
         }
@@ -2510,6 +2852,163 @@ namespace NetProto {
           }
           case 32: {
             StageBeginMs = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SceneTimeSync : pb::IMessage<SceneTimeSync> {
+    private static readonly pb::MessageParser<SceneTimeSync> _parser = new pb::MessageParser<SceneTimeSync>(() => new SceneTimeSync());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SceneTimeSync> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[14]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneTimeSync() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneTimeSync(SceneTimeSync other) : this() {
+      ms_ = other.ms_;
+      sec_ = other.sec_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SceneTimeSync Clone() {
+      return new SceneTimeSync(this);
+    }
+
+    /// <summary>Field number for the "ms" field.</summary>
+    public const int MsFieldNumber = 1;
+    private long ms_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Ms {
+      get { return ms_; }
+      set {
+        ms_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sec" field.</summary>
+    public const int SecFieldNumber = 2;
+    private float sec_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Sec {
+      get { return sec_; }
+      set {
+        sec_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SceneTimeSync);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SceneTimeSync other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Ms != other.Ms) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Sec, other.Sec)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Ms != 0L) hash ^= Ms.GetHashCode();
+      if (Sec != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Sec);
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Ms != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Ms);
+      }
+      if (Sec != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Sec);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Ms != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Ms);
+      }
+      if (Sec != 0F) {
+        size += 1 + 4;
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SceneTimeSync other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Ms != 0L) {
+        Ms = other.Ms;
+      }
+      if (other.Sec != 0F) {
+        Sec = other.Sec;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Ms = input.ReadInt64();
+            break;
+          }
+          case 21: {
+            Sec = input.ReadFloat();
             break;
           }
         }

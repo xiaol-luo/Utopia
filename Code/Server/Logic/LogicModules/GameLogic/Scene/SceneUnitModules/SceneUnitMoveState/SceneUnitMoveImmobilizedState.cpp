@@ -53,5 +53,10 @@ void GameLogic::SceneUnitMoveImmobilizedState::ImmobilizeEndMs(int64_t end_ms)
 	m_end_timestamp_ms = end_ms;
 }
 
+void GameLogic::SceneUnitMoveImmobilizedState::CollectMoveDetail(NetProto::SceneUnitMove * msg)
+{
+	msg->set_immobilized_end_timestamp_ms(m_end_timestamp_ms);
+}
+
 
 

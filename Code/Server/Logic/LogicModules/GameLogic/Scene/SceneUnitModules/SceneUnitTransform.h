@@ -38,6 +38,7 @@ namespace GameLogic
 
 	protected:
 		Vector3 m_local_pos;
+
 		Vector2 m_face_dir[ESUFaceDir_Count];
 
 	protected:
