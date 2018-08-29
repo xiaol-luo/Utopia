@@ -1,9 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToPosState.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "ShareCode/Network/Protobuf/Battle.pb.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToPosState.h"
 
 namespace SolLuaBind
 {
@@ -37,6 +38,7 @@ namespace SolLuaBind
 						,"Flash", &GameLogic::SceneUnitMoveToPosState::Flash				
 						,"IsDone", &GameLogic::SceneUnitMoveToPosState::IsDone				
 						,"SetDesiredPos", &GameLogic::SceneUnitMoveToPosState::SetDesiredPos				
+						,"CollectMoveDetail", &GameLogic::SceneUnitMoveToPosState::CollectMoveDetail				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitMoveState 
 						>()

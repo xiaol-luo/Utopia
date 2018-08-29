@@ -1,8 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveIdleState.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveIdleState.h"	
+#include "ShareCode/Network/Protobuf/Battle.pb.h"
 
 namespace SolLuaBind
 {
@@ -33,6 +34,7 @@ namespace SolLuaBind
 						,"Enter", &GameLogic::SceneUnitMoveIdleState::Enter				
 						,"Exit", &GameLogic::SceneUnitMoveIdleState::Exit				
 						,"Update", &GameLogic::SceneUnitMoveIdleState::Update				
+						,"CollectMoveDetail", &GameLogic::SceneUnitMoveIdleState::CollectMoveDetail				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitMoveState 
 						>()

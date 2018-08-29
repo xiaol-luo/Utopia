@@ -1,9 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveImmobilizedState.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveImmobilizedState.h"	
 #include "ShareCode/Common/Utils/Ticker.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
+#include "ShareCode/Network/Protobuf/Battle.pb.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"
 
 namespace SolLuaBind
 {
@@ -38,6 +39,7 @@ namespace SolLuaBind
 						,"ImmobilizeEndMs", &GameLogic::SceneUnitMoveImmobilizedState::ImmobilizeEndMs				
 						,"GetEndTimestampMs", &GameLogic::SceneUnitMoveImmobilizedState::GetEndTimestampMs				
 						,"ForceDone", &GameLogic::SceneUnitMoveImmobilizedState::ForceDone				
+						,"CollectMoveDetail", &GameLogic::SceneUnitMoveImmobilizedState::CollectMoveDetail				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitMoveState 
 						>()

@@ -1,7 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "ShareCode/Network/Protobuf/Battle.pb.h"	
 #include "ShareCode/Common/Geometry/Vector3.h"
 
 namespace SolLuaBind
@@ -33,7 +34,8 @@ namespace SolLuaBind
 						,"IsDone", &GameLogic::SceneUnitMoveState::IsDone				
 						,"ForceDone", &GameLogic::SceneUnitMoveState::ForceDone				
 						,"Flash", &GameLogic::SceneUnitMoveState::Flash				
-						,"GetState", &GameLogic::SceneUnitMoveState::GetState
+						,"GetState", &GameLogic::SceneUnitMoveState::GetState				
+						,"CollectMoveDetail", &GameLogic::SceneUnitMoveState::CollectMoveDetail
 					);
 					SolLuaBindUtils::BindLuaUserType(sol::state_view(L), meta_table, name, name_space);
 				}

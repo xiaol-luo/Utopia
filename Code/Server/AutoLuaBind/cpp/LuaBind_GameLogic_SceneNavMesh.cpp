@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/Navigation/NavMesh.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneNavMesh/SceneNavMesh.h"	
-#include "LogicModules/GameLogic/Scene/SceneModule/SceneModule.h"
+#include "GameLogic/Scene/SceneModule/SceneNavMesh/SceneNavMesh.h"	
+#include "GameLogic/Scene/SceneModule/SceneModule.h"	
+#include "GameLogic/Scene/Navigation/NavMesh.h"
 
 namespace SolLuaBind
 {

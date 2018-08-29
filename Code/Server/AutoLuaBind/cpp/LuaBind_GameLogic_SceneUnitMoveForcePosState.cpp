@@ -1,9 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
-#include "LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveForcePosState.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "ShareCode/Network/Protobuf/Battle.pb.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveForcePosState.h"
 
 namespace SolLuaBind
 {
@@ -49,6 +50,7 @@ namespace SolLuaBind
 						,"Update", &GameLogic::SceneUnitMoveForcePosState::Update				
 						,"IsDone", &GameLogic::SceneUnitMoveForcePosState::IsDone				
 						,"ForceDone", &GameLogic::SceneUnitMoveForcePosState::ForceDone				
+						,"CollectMoveDetail", &GameLogic::SceneUnitMoveForcePosState::CollectMoveDetail				
 						,"ForcePos", sol::overload(ForOverloadFns::ForcePos1, ForOverloadFns::ForcePos2)				
 						, sol::base_classes, sol::bases<
 							GameLogic::SceneUnitMoveState 
