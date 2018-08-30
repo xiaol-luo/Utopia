@@ -18,6 +18,7 @@ namespace Utopia
         {
         }
 
+        Animation m_ani;
         public override void InitSu(SceneUnitState msg)
         {
             GameObject modelGo = null;
@@ -45,6 +46,8 @@ namespace Utopia
 
             modelGo.name = "model";
             modelGo.transform.SetParent(m_su.transform);
+            m_ani = modelGo.GetComponent<Animation>();
+            evProxy.Subscribe<SceneUnitSkillAction>(SuEventDef.MsgSceneUnitSkillAction, OnMsgSceneUnitSkillAction);
         }
         public enum EAniNotBreakReason
         {
@@ -62,7 +65,43 @@ namespace Utopia
             bool isNotBreak = false;
             if (0 != (notBreakFlag & (int)EAniNotBreakReason.Playing))
             {
+                if (m_ani.isPlaying)
+                {
+                    isNotBreak = true;
+                }
+            }
+            if (0 != (notBreakFlag & (int)EAniNotBreakReason.SameAni))
+            {
+                if (m_ani.IsPlaying(aniName))
+                {
+                    isNotBreak = true;
+                }
+            }
+            if (!isNotBreak)
+            {
+                m_ani.Play(aniName);
+            }
+        }
 
+        void OnMsgSceneUnitSkillAction(string evName, SceneUnitSkillAction msg)
+        {
+            switch(msg.Stage)
+            {
+                case ESkillState.EssPreparing:
+                    {
+                        this.PlayAni("skill1", SuModel.EAniNotBreakReason.None);
+                    }
+                    break;
+                case ESkillState.EssReleasing:
+                    {
+                        this.PlayAni("skill2", SuModel.EAniNotBreakReason.None);
+                    }
+                    break;
+                case ESkillState.EssLasting:
+                    {
+                        this.PlayAni("skill3", SuModel.EAniNotBreakReason.None);
+                    }
+                    break;
             }
         }
     }

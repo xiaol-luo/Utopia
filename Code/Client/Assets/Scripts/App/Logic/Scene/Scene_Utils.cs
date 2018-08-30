@@ -8,7 +8,9 @@ namespace Utopia
     {
         protected SceneUnit BuildSceneUnit(SceneUnitState msg)
         {
-            return null;
+            SceneUnit so = new SceneUnit(this);
+            so.AddModule(new SuMove(so));
+            return so;
         }
     }
 }

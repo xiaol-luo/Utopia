@@ -120,7 +120,7 @@ namespace Utopia
             m_evProxy.ClearAll();
             App.instance.logicMgr.GetModule<SelectHero>().SelectSide(SelectHero.SelectedSide.None);
             sceneCamera.ReleaseCamera();
-            m_sceneObjects.Clear();
+            m_sceneUnits.Clear();
             rootSceneObejcts.DetachChildren();
         }
         void OnSyncTime(int id, SceneTimeSync msg)
@@ -150,6 +150,7 @@ namespace Utopia
                 return;
 
             this.CheckPlayerInput();
+            this.UpdateSus();
         }
     }
 }

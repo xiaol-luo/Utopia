@@ -60,7 +60,7 @@ namespace CustomEditor
 			return text;
 		}
 
-		[MenuItem("Custom/Scene/新建区域")]
+		[MenuItem("Tools/RecastNav/新建区域")]
 		static void CreateNewArea()
 		{
 			GameObject root = GameObject.Find("GeomSet");
@@ -88,19 +88,10 @@ namespace CustomEditor
             string setPath = "eos_navmesh.gset";
 			File.WriteAllText(setPath, GenerateGeomSet(objPath));
 
-            /*
-            string serverPath = "eos_navmesh.bin";
-
-            bool v = BattleExport.Interface.edCompileNavMesh(setPath, serverPath);
-
-			if (v)
-				msg += serverpath + "\n";
-				//EditorUtility.DisplayDialog("提示", "文件保存到" + serverpath, "Ok");
-                */
             return true;
 		}
 
-		[MenuItem("Custom/Export/Export Map NavMesh")]
+		[MenuItem("Tools/RecastNav/Export NavMesh")]
 		public static void ExportNavmesh()
 		{
 			string msg="";

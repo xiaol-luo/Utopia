@@ -31,14 +31,14 @@ namespace Utopia
             App.instance.net.gameSrv.Remove(PID.SceneUnitSkillAction);
         }
 
-        Dictionary<ulong, SceneUnit> m_sceneObjects = new Dictionary<ulong, SceneUnit>();
+        Dictionary<ulong, SceneUnit> m_sceneUnits = new Dictionary<ulong, SceneUnit>();
 
         public SceneUnit mainHero
         {
             get
             {
                 SceneUnit so;
-                m_sceneObjects.TryGetValue(m_mainHeroId, out so);
+                m_sceneUnits.TryGetValue(m_mainHeroId, out so);
                 return so;
             }
         }
@@ -47,7 +47,7 @@ namespace Utopia
         {
             get
             {
-                foreach (var kv_pair in m_sceneObjects)
+                foreach (var kv_pair in m_sceneUnits)
                 {
                     if (kv_pair.Key != mainHero.unitId && kv_pair.Value.unitType == mainHero.unitType)
                         return kv_pair.Key;
@@ -58,7 +58,7 @@ namespace Utopia
         SceneUnit GetSceneObject(ulong objId)
         {
             SceneUnit so = null;
-            m_sceneObjects.TryGetValue(objId, out so);
+            m_sceneUnits.TryGetValue(objId, out so);
             return so;
         }
 
@@ -68,9 +68,8 @@ namespace Utopia
             if (null == so)
             {
                 so = BuildSceneUnit(msg);
-                so = new SceneUnit(this);
                 so.Init(msg);
-                m_sceneObjects[so.unitId] = so;
+                m_sceneUnits[so.unitId] = so;
                 so.Awake();
             }
             so.SetPos(msg.Pos);
@@ -82,8 +81,7 @@ namespace Utopia
             if (null == so)
                 return;
 
-            so.SetPos(msg.Pos);
-            so.faceDir = msg.FaceDir;
+            so.evMgr.Fire(SuEventDef.MsgSceneUnitTransform, msg);
         }
         void OnRecvceneUnitMove(int id, SceneUnitMove msg)
         {
@@ -91,23 +89,7 @@ namespace Utopia
             if (null == so)
                 return;
 
-            if (so.IsPlayingSkill())
-                return;
-
-            if (msg.MoveAgentState == EMoveAgentState.MoveToPos ||
-                    msg.MoveAgentState == EMoveAgentState.MoveToDir)
-            {
-                so.model.PlayAni("run", SuModel.EAniNotBreakReason.SameAni);
-            }
-            else if (msg.MoveAgentState == EMoveAgentState.ForceLine ||
-                msg.MoveAgentState == EMoveAgentState.ForcePos)
-            {
-                so.model.PlayAni("knockUpStill", SuModel.EAniNotBreakReason.SameAni);
-            }
-            else
-            {
-                so.model.PlayAni("idle", SuModel.EAniNotBreakReason.SameAni);
-            }
+            so.evMgr.Fire(SuEventDef.MsgSceneUnitMove, msg);
         }
 
         void OnSceneObjectDisappear(int id, SceneObjectDisappear msg)
@@ -118,36 +100,24 @@ namespace Utopia
                 if (null == obj)
                     continue;
 
-                m_sceneObjects.Remove(objid);
+                m_sceneUnits.Remove(objid);
                 obj.Release();
             }
         }
         void OnSceneUnitSkillAction(int id, SceneUnitSkillAction msg)
         {
             SceneUnit so = this.GetSceneObject(msg.SuId);
-            if (null == so) return;
+            if (null == so)
+                return;
 
             so.skillId = msg.SkillId;
             so.skillStage = msg.Stage;
-            if (ESkillState.EssPreparing == msg.Stage)
-            {
-                so.model.PlayAni("skill1", SuModel.EAniNotBreakReason.None);
-            }
-            if (ESkillState.EssReleasing == msg.Stage)
-            {
-                so.model.PlayAni("skill2", SuModel.EAniNotBreakReason.None);
-            }
-            if (ESkillState.EssLasting == msg.Stage)
-            {
-                so.model.PlayAni("skill3", SuModel.EAniNotBreakReason.None);
-            }
+            so.evMgr.Fire(SuEventDef.MsgSceneUnitSkillAction, msg);
         }
-
         public void TryStopMove()
         {
             App.instance.net.gameSrv.Send(PID.StopMove);
         }
-
         void CastSkill(ESkillSlot skillSlot, ulong targetId, Vector3 pos)
         {
             BattleOperation msg = new BattleOperation();
@@ -185,6 +155,15 @@ namespace Utopia
             if (PointerEventData.InputButton.Right == evData.button)
             {
                 this.TryMoveToPos(worldPos);
+            }
+        }
+
+        void UpdateSus()
+        {
+            List<SceneUnit> sus = new List<SceneUnit>(m_sceneUnits.Values);
+            foreach (var su in sus)
+            {
+                su.Update();
             }
         }
     }

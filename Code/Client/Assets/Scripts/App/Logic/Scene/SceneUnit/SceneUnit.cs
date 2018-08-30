@@ -20,10 +20,14 @@ namespace Utopia
         ResourceLoaderProxy m_resLoader;
         public ResourceLoaderProxy resLoader { get { return m_resLoader; } }
 
+        EventMgr<string> m_evMgr;
+        public EventMgr<string> evMgr { get { return m_evMgr; } }
+
         public SceneUnit(Scene scene)
         {
             m_scene = scene;
             m_resLoader = ResourceLoaderProxy.Create();
+            m_evMgr = new EventMgr<string>();
 
             m_suModel = new SuModel(this);
             this.AddModule(m_suModel);
@@ -42,6 +46,8 @@ namespace Utopia
             {
                 module.InitSu(msg);
             }
+
+            evMgr.Subscribe<SceneUnitTransform>(SuEventDef.MsgSceneUnitTransform, OnMsgSceneUnitTransform);
         }
 
         public void Awake()
@@ -49,6 +55,14 @@ namespace Utopia
             foreach (var module in m_modules.Values)
             {
                 module.Awake();
+            }
+        }
+
+        public void Update()
+        {
+            foreach (var module in m_modules.Values)
+            {
+                module.Update();
             }
         }
 
@@ -60,21 +74,35 @@ namespace Utopia
             }
             m_modules.Clear();
             GameObject.Destroy(m_root);
+            m_resLoader.Release();
+            m_evMgr.ClearAll();
         }
 
-        bool AddModule(SceneUnitModule module)
+        public bool AddModule(SceneUnitModule module)
         {
             ESuModule moduleName = module.ModuleName();
-            SceneUnitModule ret = this.GetModule(moduleName);
+            SceneUnitModule ret = this.GetModuleByName(moduleName);
             if (null != ret)
                 return false;
             m_modules.Add(moduleName, module);
             return true;
         }
-        SceneUnitModule GetModule(ESuModule name)
+        SceneUnitModule GetModuleByName(ESuModule name)
         {
             SceneUnitModule ret = null;
             m_modules.TryGetValue(name, out ret);
+            return ret;
+        }
+
+        public T GetModule<T>() where T : SceneUnitModule 
+        {
+            T ret = null;
+            foreach (var module in m_modules.Values)
+            {
+                ret = model as T;
+                if (null != ret)
+                    break;
+            }
             return ret;
         }
 
@@ -111,38 +139,20 @@ namespace Utopia
             pos = value;
         }
 
-        /*
-
-        public GameObject modelGo { get; protected set; }
-
-        public SceneUnit(ulong _id, int _unitType, int _modelId)
+        void OnMsgSceneUnitTransform(string evName, SceneUnitTransform msg)
         {
-            unitId = _id;
-            unitType = _unitType;
-            faceDir = 0.0f;
-            pos = Vector3.zero;
-
-            this.LoadModelResource();
-        }
-
-        protected void LoadModelResource()
-        {
-            Object prefab = null;
-            if (5 == unitType)
             {
-                prefab = Resources.Load("Effect/Missile/GuidedMissile");
-            }
-            else
-            {
-                prefab = Resources.Load("Heros/xiaoqiao_blue");
+                SuMove module = this.GetModule<SuMove>();
+                if (null != module)
+                {
+                    module.HandleMsgSceneUnitTransform(msg);
+                    return;
+                }
             }
 
-            GameObject go = GameObject.Instantiate(prefab) as GameObject;
-            go.transform.SetParent(App.instance.scene.rootSceneObejcts);
-            go.SetActive(true);
-            modelGo = go;
+            this.SetPos(msg.Pos);
+            this.faceDir = msg.FaceDir;
         }
-        */
     }
 }
 

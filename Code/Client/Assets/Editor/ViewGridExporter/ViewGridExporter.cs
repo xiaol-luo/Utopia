@@ -6,7 +6,7 @@ namespace CustomEditor
 {
     class ViewGridExporter
     {
-        [MenuItem("Custom/ViewGrid/Save")]
+        [MenuItem("Tools/ViewGrid/Save")]
         static void Save()
         {
             GameObject root = GameObject.Find("ViewGridEditor");

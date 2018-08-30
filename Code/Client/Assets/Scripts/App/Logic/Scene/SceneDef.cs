@@ -13,4 +13,11 @@ namespace Utopia
     {
         public const string MouseHitGround = "MouseHitGround";
     }
+
+    public class SuEventDef
+    {
+        public const string MsgSceneUnitMove = "MsgSceneUnitMove";
+        public const string MsgSceneUnitSkillAction = "MsgSceneUnitSkillAction";
+        public const string MsgSceneUnitTransform = "MsgSceneUnitTransform";
+    }
 }

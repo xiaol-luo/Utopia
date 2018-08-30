@@ -5,7 +5,7 @@ namespace TryEditor
 {
     public class TryEditorWindow : EditorWindow
     {
-        [MenuItem("Tools/TryEditorWindow", false, 200)]
+        // [MenuItem("Tools/TryEditorWindow", false, 200)]
         public static void OpenWindow()
         {
             var window = EditorWindow.GetWindow<TryEditorWindow>("TryEditorWindow");
