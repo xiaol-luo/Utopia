@@ -43,23 +43,25 @@ namespace NetProto {
             "Y2VuZVVuaXRTdGF0ZRINCgVzdV9pZBgBIAEoBBIRCgl1bml0X3R5cGUYAiAB",
             "KAUSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
             "UEJWZWN0b3IzEhAKCGZhY2VfZGlyGAUgASgCEhQKDHBhcmVudF9zdV9pZBgG",
-            "IAEoBCJtChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASABKAQSIAoD",
+            "IAEoBCJ5ChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASABKAQSIAoD",
             "cG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAMg",
-            "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBCLOAwoNU2NlbmVVbml0TW92ZRIN",
-            "CgVzdV9pZBgBIAEoBBIzChBtb3ZlX2FnZW50X3N0YXRlGAIgASgOMhkuTmV0",
-            "UHJvdG8uRU1vdmVBZ2VudFN0YXRlEhYKDm1heF9tb3ZlX3NwZWVkGAMgASgC",
-            "Ei0KEG1vdmVfZGVzaXJlZF9wb3MYBCABKAsyEy5OZXRQcm90by5QQlZlY3Rv",
-            "cjISGAoQbW92ZV9kZXNpcmVkX2RpchgFIAEoAhIkChxpbW1vYmlsaXplZF9l",
-            "bmRfdGltZXN0YW1wX21zGAYgASgDEjIKFWZvcmNlX3Bvc19kZXN0aW5hdGlv",
-            "bhgHIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIXCg9mb3JjZV9wb3Nfc3Bl",
-            "ZWQYCCABKAISMAoTZm9yY2VfbGluZV92ZWxvY2l0eRgJIAEoCzITLk5ldFBy",
-            "b3RvLlBCVmVjdG9yMhIeChZmb3JjZV9saW5lX2VsYXNwZWRfc2VjGAogASgC",
-            "EhwKFGZvcmNlX2xpbmVfdG90YWxfc2VjGAsgASgCEiUKCHVuaXRfcG9zGAwg",
-            "ASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEg4KBm5vd19tcxgNIAEoAyJ1ChRT",
-            "Y2VuZVVuaXRTa2lsbEFjdGlvbhINCgVzdV9pZBgBIAEoBBIkCgVzdGFnZRgC",
-            "IAEoDjIVLk5ldFByb3RvLkVTa2lsbFN0YXRlEhAKCHNraWxsX2lkGAMgASgF",
-            "EhYKDnN0YWdlX2JlZ2luX21zGAQgASgDIigKDVNjZW5lVGltZVN5bmMSCgoC",
-            "bXMYASABKAMSCwoDc2VjGAIgASgCQgP4AQFiBnByb3RvMw=="));
+            "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBBIKCgJtcxgFIAEoAyL/AwoNU2Nl",
+            "bmVVbml0TW92ZRINCgVzdV9pZBgBIAEoBBIzChBtb3ZlX2FnZW50X3N0YXRl",
+            "GAIgASgOMhkuTmV0UHJvdG8uRU1vdmVBZ2VudFN0YXRlEhYKDm1heF9tb3Zl",
+            "X3NwZWVkGAMgASgCEi0KEG1vdmVfZGVzaXJlZF9wb3MYBCABKAsyEy5OZXRQ",
+            "cm90by5QQlZlY3RvcjISGAoQbW92ZV9kZXNpcmVkX2RpchgFIAEoAhIkChxp",
+            "bW1vYmlsaXplZF9lbmRfdGltZXN0YW1wX21zGAYgASgDEjIKFWZvcmNlX3Bv",
+            "c19kZXN0aW5hdGlvbhgHIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIXCg9m",
+            "b3JjZV9wb3Nfc3BlZWQYCCABKAISMAoTZm9yY2VfbGluZV92ZWxvY2l0eRgJ",
+            "IAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIeChZmb3JjZV9saW5lX2VsYXNw",
+            "ZWRfc2VjGAogASgCEhwKFGZvcmNlX2xpbmVfdG90YWxfc2VjGAsgASgCEi8K",
+            "EmZvcmNlX2xpbmVfZW5kX3BvcxgMIAEoCzITLk5ldFByb3RvLlBCVmVjdG9y",
+            "MhIlCgh1bml0X3BvcxgNIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIOCgZu",
+            "b3dfbXMYDiABKAMidQoUU2NlbmVVbml0U2tpbGxBY3Rpb24SDQoFc3VfaWQY",
+            "ASABKAQSJAoFc3RhZ2UYAiABKA4yFS5OZXRQcm90by5FU2tpbGxTdGF0ZRIQ",
+            "Cghza2lsbF9pZBgDIAEoBRIWCg5zdGFnZV9iZWdpbl9tcxgEIAEoAyIoCg1T",
+            "Y2VuZVRpbWVTeW5jEgoKAm1zGAEgASgDEgsKA3NlYxgCIAEoAkID+AEBYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -74,8 +76,8 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewSnapshot), global::NetProto.ViewSnapshot.Parser, new[]{ "LightGrids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.ViewAllGrids), global::NetProto.ViewAllGrids.Parser, new[]{ "GridSize", "Row", "Col", "Grids" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitState), global::NetProto.SceneUnitState.Parser, new[]{ "SuId", "UnitType", "ModelId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitTransform), global::NetProto.SceneUnitTransform.Parser, new[]{ "SuId", "Pos", "FaceDir", "ParentSuId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState", "MaxMoveSpeed", "MoveDesiredPos", "MoveDesiredDir", "ImmobilizedEndTimestampMs", "ForcePosDestination", "ForcePosSpeed", "ForceLineVelocity", "ForceLineElaspedSec", "ForceLineTotalSec", "UnitPos", "NowMs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitTransform), global::NetProto.SceneUnitTransform.Parser, new[]{ "SuId", "Pos", "FaceDir", "ParentSuId", "Ms" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState", "MaxMoveSpeed", "MoveDesiredPos", "MoveDesiredDir", "ImmobilizedEndTimestampMs", "ForcePosDestination", "ForcePosSpeed", "ForceLineVelocity", "ForceLineElaspedSec", "ForceLineTotalSec", "ForceLineEndPos", "UnitPos", "NowMs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitSkillAction), global::NetProto.SceneUnitSkillAction.Parser, new[]{ "SuId", "Stage", "SkillId", "StageBeginMs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneTimeSync), global::NetProto.SceneTimeSync.Parser, new[]{ "Ms", "Sec" }, null, null, null)
           }));
@@ -1968,6 +1970,7 @@ namespace NetProto {
       pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       faceDir_ = other.faceDir_;
       parentSuId_ = other.parentSuId_;
+      ms_ = other.ms_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2020,6 +2023,17 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "ms" field.</summary>
+    public const int MsFieldNumber = 5;
+    private long ms_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long Ms {
+      get { return ms_; }
+      set {
+        ms_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as SceneUnitTransform);
@@ -2037,6 +2051,7 @@ namespace NetProto {
       if (!object.Equals(Pos, other.Pos)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(FaceDir, other.FaceDir)) return false;
       if (ParentSuId != other.ParentSuId) return false;
+      if (Ms != other.Ms) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2047,6 +2062,7 @@ namespace NetProto {
       if (pos_ != null) hash ^= Pos.GetHashCode();
       if (FaceDir != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(FaceDir);
       if (ParentSuId != 0UL) hash ^= ParentSuId.GetHashCode();
+      if (Ms != 0L) hash ^= Ms.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2076,6 +2092,10 @@ namespace NetProto {
         output.WriteRawTag(32);
         output.WriteUInt64(ParentSuId);
       }
+      if (Ms != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Ms);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2095,6 +2115,9 @@ namespace NetProto {
       }
       if (ParentSuId != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(ParentSuId);
+      }
+      if (Ms != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Ms);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2121,6 +2144,9 @@ namespace NetProto {
       }
       if (other.ParentSuId != 0UL) {
         ParentSuId = other.ParentSuId;
+      }
+      if (other.Ms != 0L) {
+        Ms = other.Ms;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2150,6 +2176,10 @@ namespace NetProto {
           }
           case 32: {
             ParentSuId = input.ReadUInt64();
+            break;
+          }
+          case 40: {
+            Ms = input.ReadInt64();
             break;
           }
         }
@@ -2194,6 +2224,7 @@ namespace NetProto {
       forceLineVelocity_ = other.forceLineVelocity_ != null ? other.forceLineVelocity_.Clone() : null;
       forceLineElaspedSec_ = other.forceLineElaspedSec_;
       forceLineTotalSec_ = other.forceLineTotalSec_;
+      forceLineEndPos_ = other.forceLineEndPos_ != null ? other.forceLineEndPos_.Clone() : null;
       unitPos_ = other.unitPos_ != null ? other.unitPos_.Clone() : null;
       nowMs_ = other.nowMs_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -2325,8 +2356,19 @@ namespace NetProto {
       }
     }
 
+    /// <summary>Field number for the "force_line_end_pos" field.</summary>
+    public const int ForceLineEndPosFieldNumber = 12;
+    private global::NetProto.PBVector2 forceLineEndPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector2 ForceLineEndPos {
+      get { return forceLineEndPos_; }
+      set {
+        forceLineEndPos_ = value;
+      }
+    }
+
     /// <summary>Field number for the "unit_pos" field.</summary>
-    public const int UnitPosFieldNumber = 12;
+    public const int UnitPosFieldNumber = 13;
     private global::NetProto.PBVector3 unitPos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::NetProto.PBVector3 UnitPos {
@@ -2337,7 +2379,7 @@ namespace NetProto {
     }
 
     /// <summary>Field number for the "now_ms" field.</summary>
-    public const int NowMsFieldNumber = 13;
+    public const int NowMsFieldNumber = 14;
     private long nowMs_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long NowMs {
@@ -2371,6 +2413,7 @@ namespace NetProto {
       if (!object.Equals(ForceLineVelocity, other.ForceLineVelocity)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForceLineElaspedSec, other.ForceLineElaspedSec)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ForceLineTotalSec, other.ForceLineTotalSec)) return false;
+      if (!object.Equals(ForceLineEndPos, other.ForceLineEndPos)) return false;
       if (!object.Equals(UnitPos, other.UnitPos)) return false;
       if (NowMs != other.NowMs) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -2390,6 +2433,7 @@ namespace NetProto {
       if (forceLineVelocity_ != null) hash ^= ForceLineVelocity.GetHashCode();
       if (ForceLineElaspedSec != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForceLineElaspedSec);
       if (ForceLineTotalSec != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ForceLineTotalSec);
+      if (forceLineEndPos_ != null) hash ^= ForceLineEndPos.GetHashCode();
       if (unitPos_ != null) hash ^= UnitPos.GetHashCode();
       if (NowMs != 0L) hash ^= NowMs.GetHashCode();
       if (_unknownFields != null) {
@@ -2449,12 +2493,16 @@ namespace NetProto {
         output.WriteRawTag(93);
         output.WriteFloat(ForceLineTotalSec);
       }
-      if (unitPos_ != null) {
+      if (forceLineEndPos_ != null) {
         output.WriteRawTag(98);
+        output.WriteMessage(ForceLineEndPos);
+      }
+      if (unitPos_ != null) {
+        output.WriteRawTag(106);
         output.WriteMessage(UnitPos);
       }
       if (NowMs != 0L) {
-        output.WriteRawTag(104);
+        output.WriteRawTag(112);
         output.WriteInt64(NowMs);
       }
       if (_unknownFields != null) {
@@ -2497,6 +2545,9 @@ namespace NetProto {
       }
       if (ForceLineTotalSec != 0F) {
         size += 1 + 4;
+      }
+      if (forceLineEndPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ForceLineEndPos);
       }
       if (unitPos_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(UnitPos);
@@ -2556,6 +2607,12 @@ namespace NetProto {
       }
       if (other.ForceLineTotalSec != 0F) {
         ForceLineTotalSec = other.ForceLineTotalSec;
+      }
+      if (other.forceLineEndPos_ != null) {
+        if (forceLineEndPos_ == null) {
+          forceLineEndPos_ = new global::NetProto.PBVector2();
+        }
+        ForceLineEndPos.MergeFrom(other.ForceLineEndPos);
       }
       if (other.unitPos_ != null) {
         if (unitPos_ == null) {
@@ -2631,13 +2688,20 @@ namespace NetProto {
             break;
           }
           case 98: {
+            if (forceLineEndPos_ == null) {
+              forceLineEndPos_ = new global::NetProto.PBVector2();
+            }
+            input.ReadMessage(forceLineEndPos_);
+            break;
+          }
+          case 106: {
             if (unitPos_ == null) {
               unitPos_ = new global::NetProto.PBVector3();
             }
             input.ReadMessage(unitPos_);
             break;
           }
-          case 104: {
+          case 112: {
             NowMs = input.ReadInt64();
             break;
           }

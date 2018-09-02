@@ -37,6 +37,8 @@ namespace GameLogic
 				if (ret)
 				{
 					su_mv->ForceMoveLine(mv_dir, m_cfg->GetSpeed(), m_cfg->GetTimeSec(), m_cfg->IgnoreTerrian());
+					// Vector3 to = Vector3(mv_dir.x, 0, mv_dir.y) * m_cfg->GetSpeed() + target_su->GetTransform()->GetPos();
+					// su_mv->ForcePos(to, m_cfg->GetSpeed());
 				}
 			}
 		}

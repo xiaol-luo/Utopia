@@ -45,6 +45,16 @@ namespace GameLogic
 		{
 			delete module;
 		}
+		for (auto &&view_camp : m_player_view_camps)
+		{
+			for (auto &&player_it : view_camp)
+			{
+				auto &&player = player_it.second;
+				player->SetSu(nullptr);
+				player->SetScene(nullptr);
+			}
+			view_camp.clear();
+		}
 		memset(m_modules, 0, sizeof(m_modules));
 		delete m_ev_dispacher; m_ev_dispacher = nullptr;
 		delete m_protobuf_arena; m_protobuf_arena = nullptr;
@@ -231,7 +241,6 @@ namespace GameLogic
 			return;
 
 		m_logic_detal_ms = delta_ms;
-		m_logic_detal_ms = 100; // for test
 		m_logic_ms += m_logic_detal_ms;
 
 		this->UpdateCachedSceneUnits();
@@ -283,8 +292,11 @@ namespace GameLogic
 	void NewScene::SyncLogicTime(Player * player)
 	{
 		NetProto::SceneTimeSync *msg = this->CreateProtobuf<NetProto::SceneTimeSync>();
-		msg->set_ms(m_logic_ms);
-		msg->set_sec(this->GetLogicSec());
+		int64_t now_ms = G_Timer->NowMs();
+		int64_t delta_ms = now_ms - m_last_real_ms;
+		int64_t now_logic_ms = m_logic_ms + delta_ms;
+		msg->set_ms(now_logic_ms);
+		msg->set_sec(now_logic_ms * 1.0 / ITimerModule::MS_PER_SEC);
 		player->Send(NetProto::PID_SceneTimeSynRsp, msg);
 	}
 

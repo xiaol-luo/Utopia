@@ -336,6 +336,7 @@ namespace GameLogic
 
 	bool NavMesh::Raycast(const Vector3 &start_pos, const Vector3 &end_pos, Vector3 &hit_pos)
 	{
+		hit_pos = start_pos;
 		dtPolyRef start_poly_ref = 0; Vector3 tmp_pos;
 		if (this->FindNearestPoint(start_pos, Vector3(0.1f, 1.0f, 0.1f), &start_poly_ref, tmp_pos))
 		{
@@ -344,7 +345,7 @@ namespace GameLogic
 				end_pos.toPointer(), DefaultFilter(), DT_RAYCAST_USE_COSTS, &hit);
 			if (dtStatusSucceed(state))
 			{
-				if (hit.t >= 0 && hit.t < 1)
+				if (hit.t > 0 && hit.t < 1)
 					hit_pos = tmp_pos + (end_pos - tmp_pos) * hit.t;
 				else if (hit.t >= 1)
 					hit_pos = end_pos;

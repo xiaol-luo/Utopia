@@ -150,7 +150,7 @@ namespace Utopia
         void OnMouseHitGround(string evName, PointerEventData evData)
         {
             Vector3 worldPos = evData.pointerCurrentRaycast.worldPosition;
-            Core.instance.log.LogDebug("Scene UPdate {0} {1} {2}", worldPos.x, worldPos.y, worldPos.z);
+            // Core.instance.log.LogDebug("Scene UPdate {0} {1} {2}", worldPos.x, worldPos.y, worldPos.z);
 
             if (PointerEventData.InputButton.Right == evData.button)
             {

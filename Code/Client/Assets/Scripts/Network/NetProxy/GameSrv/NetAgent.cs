@@ -156,8 +156,14 @@ public class NetAgent
                         int protobufBegin = CONTENT_LEN_DESCRIPT_SIZE + PROTOCOL_LEN_DESCRIPT_SIZE;
                         if (null != m_handler)
                         {
-                            try { m_handler.OnRecvData(protocolId, m_parseBuffer, protobufBegin, parseBufferOffset - protobufBegin); }
-                            catch (Exception) {}
+                            try
+                            {
+                                m_handler.OnRecvData(protocolId, m_parseBuffer, protobufBegin, parseBufferOffset - protobufBegin);
+                            }
+                            catch (Exception e)
+                            {
+                                Utopia.Core.instance.log.LogException(e);
+                            }
                         }
                     }
                 }

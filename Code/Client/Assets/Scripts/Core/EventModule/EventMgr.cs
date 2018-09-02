@@ -114,7 +114,6 @@ namespace Utopia
 
     public class EventMgr<EventKeyType>
     {
-
         Dictionary<EventKeyType, EventCallbackMgr<EventKeyType> > m_eventCbMgrs = new Dictionary<EventKeyType, EventCallbackMgr<EventKeyType> >();
 
         public EventId<EventKeyType> Subscribe(EventKeyType eventKey, System.Action<EventKeyType> cb)

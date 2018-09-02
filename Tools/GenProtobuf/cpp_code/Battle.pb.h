@@ -1723,6 +1723,12 @@ class SceneUnitTransform : public ::google::protobuf::Message /* @@protoc_insert
   ::google::protobuf::uint64 parent_su_id() const;
   void set_parent_su_id(::google::protobuf::uint64 value);
 
+  // int64 ms = 5;
+  void clear_ms();
+  static const int kMsFieldNumber = 5;
+  ::google::protobuf::int64 ms() const;
+  void set_ms(::google::protobuf::int64 value);
+
   // float face_dir = 3;
   void clear_face_dir();
   static const int kFaceDirFieldNumber = 3;
@@ -1739,6 +1745,7 @@ class SceneUnitTransform : public ::google::protobuf::Message /* @@protoc_insert
   ::NetProto::PBVector3* pos_;
   ::google::protobuf::uint64 su_id_;
   ::google::protobuf::uint64 parent_su_id_;
+  ::google::protobuf::int64 ms_;
   float face_dir_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_Battle_2eproto::TableStruct;
@@ -1889,10 +1896,25 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
       ::NetProto::PBVector2* force_line_velocity);
   ::NetProto::PBVector2* unsafe_arena_release_force_line_velocity();
 
-  // .NetProto.PBVector3 unit_pos = 12;
+  // .NetProto.PBVector2 force_line_end_pos = 12;
+  bool has_force_line_end_pos() const;
+  void clear_force_line_end_pos();
+  static const int kForceLineEndPosFieldNumber = 12;
+  private:
+  const ::NetProto::PBVector2& _internal_force_line_end_pos() const;
+  public:
+  const ::NetProto::PBVector2& force_line_end_pos() const;
+  ::NetProto::PBVector2* release_force_line_end_pos();
+  ::NetProto::PBVector2* mutable_force_line_end_pos();
+  void set_allocated_force_line_end_pos(::NetProto::PBVector2* force_line_end_pos);
+  void unsafe_arena_set_allocated_force_line_end_pos(
+      ::NetProto::PBVector2* force_line_end_pos);
+  ::NetProto::PBVector2* unsafe_arena_release_force_line_end_pos();
+
+  // .NetProto.PBVector3 unit_pos = 13;
   bool has_unit_pos() const;
   void clear_unit_pos();
-  static const int kUnitPosFieldNumber = 12;
+  static const int kUnitPosFieldNumber = 13;
   private:
   const ::NetProto::PBVector3& _internal_unit_pos() const;
   public:
@@ -1952,9 +1974,9 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
   float force_line_total_sec() const;
   void set_force_line_total_sec(float value);
 
-  // int64 now_ms = 13;
+  // int64 now_ms = 14;
   void clear_now_ms();
-  static const int kNowMsFieldNumber = 13;
+  static const int kNowMsFieldNumber = 14;
   ::google::protobuf::int64 now_ms() const;
   void set_now_ms(::google::protobuf::int64 value);
 
@@ -1968,6 +1990,7 @@ class SceneUnitMove : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::NetProto::PBVector2* move_desired_pos_;
   ::NetProto::PBVector2* force_pos_destination_;
   ::NetProto::PBVector2* force_line_velocity_;
+  ::NetProto::PBVector2* force_line_end_pos_;
   ::NetProto::PBVector3* unit_pos_;
   ::google::protobuf::uint64 su_id_;
   int move_agent_state_;
@@ -3039,6 +3062,20 @@ inline void SceneUnitTransform::set_parent_su_id(::google::protobuf::uint64 valu
   // @@protoc_insertion_point(field_set:NetProto.SceneUnitTransform.parent_su_id)
 }
 
+// int64 ms = 5;
+inline void SceneUnitTransform::clear_ms() {
+  ms_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SceneUnitTransform::ms() const {
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitTransform.ms)
+  return ms_;
+}
+inline void SceneUnitTransform::set_ms(::google::protobuf::int64 value) {
+  
+  ms_ = value;
+  // @@protoc_insertion_point(field_set:NetProto.SceneUnitTransform.ms)
+}
+
 // -------------------------------------------------------------------
 
 // SceneUnitMove
@@ -3332,7 +3369,66 @@ inline void SceneUnitMove::set_force_line_total_sec(float value) {
   // @@protoc_insertion_point(field_set:NetProto.SceneUnitMove.force_line_total_sec)
 }
 
-// .NetProto.PBVector3 unit_pos = 12;
+// .NetProto.PBVector2 force_line_end_pos = 12;
+inline bool SceneUnitMove::has_force_line_end_pos() const {
+  return this != internal_default_instance() && force_line_end_pos_ != NULL;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::_internal_force_line_end_pos() const {
+  return *force_line_end_pos_;
+}
+inline const ::NetProto::PBVector2& SceneUnitMove::force_line_end_pos() const {
+  const ::NetProto::PBVector2* p = force_line_end_pos_;
+  // @@protoc_insertion_point(field_get:NetProto.SceneUnitMove.force_line_end_pos)
+  return p != NULL ? *p : *reinterpret_cast<const ::NetProto::PBVector2*>(
+      &::NetProto::_PBVector2_default_instance_);
+}
+inline ::NetProto::PBVector2* SceneUnitMove::release_force_line_end_pos() {
+  // @@protoc_insertion_point(field_release:NetProto.SceneUnitMove.force_line_end_pos)
+  
+  ::NetProto::PBVector2* temp = force_line_end_pos_;
+  if (GetArenaNoVirtual() != NULL) {
+    temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+  }
+  force_line_end_pos_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::unsafe_arena_release_force_line_end_pos() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NetProto.SceneUnitMove.force_line_end_pos)
+  
+  ::NetProto::PBVector2* temp = force_line_end_pos_;
+  force_line_end_pos_ = NULL;
+  return temp;
+}
+inline ::NetProto::PBVector2* SceneUnitMove::mutable_force_line_end_pos() {
+  
+  if (force_line_end_pos_ == NULL) {
+    auto* p = CreateMaybeMessage<::NetProto::PBVector2>(GetArenaNoVirtual());
+    force_line_end_pos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:NetProto.SceneUnitMove.force_line_end_pos)
+  return force_line_end_pos_;
+}
+inline void SceneUnitMove::set_allocated_force_line_end_pos(::NetProto::PBVector2* force_line_end_pos) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(force_line_end_pos_);
+  }
+  if (force_line_end_pos) {
+    ::google::protobuf::Arena* submessage_arena =
+      reinterpret_cast<::google::protobuf::MessageLite*>(force_line_end_pos)->GetArena();
+    if (message_arena != submessage_arena) {
+      force_line_end_pos = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, force_line_end_pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  force_line_end_pos_ = force_line_end_pos;
+  // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitMove.force_line_end_pos)
+}
+
+// .NetProto.PBVector3 unit_pos = 13;
 inline bool SceneUnitMove::has_unit_pos() const {
   return this != internal_default_instance() && unit_pos_ != NULL;
 }
@@ -3391,7 +3487,7 @@ inline void SceneUnitMove::set_allocated_unit_pos(::NetProto::PBVector3* unit_po
   // @@protoc_insertion_point(field_set_allocated:NetProto.SceneUnitMove.unit_pos)
 }
 
-// int64 now_ms = 13;
+// int64 now_ms = 14;
 inline void SceneUnitMove::clear_now_ms() {
   now_ms_ = GOOGLE_LONGLONG(0);
 }

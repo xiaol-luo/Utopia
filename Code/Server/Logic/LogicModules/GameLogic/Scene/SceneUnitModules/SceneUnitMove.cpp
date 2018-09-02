@@ -149,9 +149,9 @@ namespace GameLogic
 		m_curr_state->Exit();
 		m_curr_state = m_states[new_state];
 		m_curr_state->Enter(param);
-		this->SetPbDirty();
-		this->GetEvProxy()->Fire<NetProto::EMoveAgentState, NetProto::EMoveAgentState>(
-			ESU_MoveStateChange, new_state, old_state);
+		// this->SetPbDirty();
+		this->SendObserversEx(this->CollectPbMutable());
+		this->GetEvProxy()->Fire<NetProto::EMoveAgentState, NetProto::EMoveAgentState>(ESU_MoveStateChange, new_state, old_state);
 	}
 
 	NetProto::EMoveState SceneUnitMove::CalMoveState(NetProto::EMoveAgentState state)

@@ -113,9 +113,12 @@ void GameLogic::SceneUnitMoveForceLineState::CollectMoveDetail(NetProto::SceneUn
 {
 	::NetProto::PBVector2* v = msg->mutable_force_line_velocity();
 	v->set_x(m_velocity.x);
-	v->set_y(m_velocity.y);
+	v->set_y(m_velocity.z);
 	msg->set_force_line_elasped_sec(m_last_elasped_time);
 	msg->set_force_line_total_sec(m_time_sec);
+	::NetProto::PBVector2* p = msg->mutable_force_line_end_pos();
+	p->set_x(m_hit_pos.x);
+	p->set_y(m_hit_pos.z);
 }
 
 

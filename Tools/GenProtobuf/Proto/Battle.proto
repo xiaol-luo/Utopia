@@ -82,6 +82,7 @@ message SceneUnitTransform
 	PBVector3 pos = 2;
 	float face_dir = 3;
 	uint64 parent_su_id = 4;
+	int64 ms = 5;
 }
 
 message SceneUnitMove
@@ -100,9 +101,10 @@ message SceneUnitMove
 	PBVector2 force_line_velocity = 9;
 	float force_line_elasped_sec = 10;
 	float force_line_total_sec = 11;
+	PBVector2 force_line_end_pos = 12;
 
-	PBVector3 unit_pos = 12;
-	int64 now_ms = 13;
+	PBVector3 unit_pos = 13;
+	int64 now_ms = 14;
 }
 
 message SceneUnitSkillAction

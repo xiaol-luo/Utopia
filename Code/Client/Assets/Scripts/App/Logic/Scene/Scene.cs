@@ -25,7 +25,7 @@ namespace Utopia
         float m_client_startup_sec = 0;
         long m_srv_logic_ms = 0;
         float m_srv_logic_sec = 0;
-        const int MsPerSec = 1000;
+        public const int MsPerSec = 1000;
         public long nowMs
         {
             get
@@ -67,6 +67,8 @@ namespace Utopia
                 Core.instance.log.LogError("Scene Load Scene fail {0}", scenePath);
                 return;
             }
+
+            LoadNavMesh();
 
             foreach (GameObject rootGo in SceneManager.GetActiveScene().GetRootGameObjects())
             {

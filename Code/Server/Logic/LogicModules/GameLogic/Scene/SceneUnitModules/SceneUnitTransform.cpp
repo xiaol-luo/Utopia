@@ -201,6 +201,7 @@ namespace GameLogic
 			pb_pos->set_y(m_local_pos.y);
 			pb_pos->set_z(m_local_pos.z);
 			msg->set_face_dir(this->GetFaceAngle());
+			msg->set_ms(m_owner->GetScene()->GetLogicMs());
 			auto parent = m_parent.lock();
 			if (nullptr != parent)
 				msg->set_parent_su_id(parent->GetId());

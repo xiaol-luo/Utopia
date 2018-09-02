@@ -39,7 +39,7 @@ namespace SharpNav
 				settings.MinRegionSize = 8;
 				settings.MergedRegionSize = 20;
 				settings.MaxEdgeLength = 12;
-				settings.MaxEdgeError = 1.8f;
+				settings.MaxEdgeError = 1.3f;
 				settings.VertsPerPoly = 6;
 				settings.SampleDistance = 6;
 				settings.MaxSampleError = 1;

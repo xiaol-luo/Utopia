@@ -99,7 +99,7 @@ namespace Utopia
             T ret = null;
             foreach (var module in m_modules.Values)
             {
-                ret = model as T;
+                ret = module as T;
                 if (null != ret)
                     break;
             }
