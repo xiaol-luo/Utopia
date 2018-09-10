@@ -69,7 +69,7 @@ message ViewAllGrids
 message SceneUnitState
 {
 	uint64 su_id = 1;
-	int32 unit_type = 2;
+	ESceneUnitType unit_type = 2;
 	int32 model_id = 3;
 	PBVector3 pos = 4;
 	float face_dir = 5;
@@ -119,5 +119,24 @@ message SceneTimeSync
 {
 	int64 ms = 1;
 	float sec = 2;
+}
+
+message BulletState
+{
+	uint64 su_id = 1;
+	float speed = 2;
+	PBVector3 target_pos = 5;
+	uint64 target_suid = 6;
+	int32 curr_state = 7;
+	PBVector3 unit_pos = 10;
+	int64 now_ms = 11;
+}
+
+message BulletTargetPos
+{
+	uint64 su_id = 1;
+	PBVector3 target_pos = 2;
+	int64 now_ms = 3;
+	PBVector3 unit_pos = 4;
 }
 

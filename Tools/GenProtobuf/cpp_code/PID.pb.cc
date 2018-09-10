@@ -50,7 +50,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
 static void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\tPID.proto\022\010NetProto*\371\004\n\003PID\022\013\n\007PID_Min"
+      "\n\tPID.proto\022\010NetProto*\251\005\n\003PID\022\013\n\007PID_Min"
       "\020\000\022\014\n\010PID_Ping\020\001\022\014\n\010PID_Pong\020\002\022\025\n\021PID_Qu"
       "eryFreeHero\020d\022\023\n\017PID_RspFreeHero\020e\022\025\n\021PI"
       "D_SelectHeroReq\020f\022\025\n\021PID_SelectHeroRsp\020g"
@@ -62,14 +62,15 @@ static void AddDescriptorsImpl() {
       "SnapshotDiff\020\330\010\022\027\n\022PID_SceneUnitState\020\260\t"
       "\022\033\n\026PID_SceneUnitTransform\020\261\t\022\026\n\021PID_Sce"
       "neUnitMove\020\262\t\022\035\n\030PID_SceneUnitSkillActio"
-      "n\020\263\t\022\031\n\024PID_ReloadLuaScripts\020\241\037\022\031\n\024PID_R"
-      "ecreateSceneReq\020\242\037\022\031\n\024PID_RecreateSceneR"
-      "sp\020\243\037\022\030\n\023PID_ReloadConfigReq\020\244\037\022\030\n\023PID_S"
-      "ceneTimeSynReq\020\245\037\022\030\n\023PID_SceneTimeSynRsp"
-      "\020\246\037\022\014\n\007PID_Max\020\200(B\003\370\001\001b\006proto3"
+      "n\020\263\t\022\024\n\017PID_BulletState\020\264\t\022\030\n\023PID_Bullet"
+      "TargetPos\020\265\t\022\031\n\024PID_ReloadLuaScripts\020\241\037\022"
+      "\031\n\024PID_RecreateSceneReq\020\242\037\022\031\n\024PID_Recrea"
+      "teSceneRsp\020\243\037\022\030\n\023PID_ReloadConfigReq\020\244\037\022"
+      "\030\n\023PID_SceneTimeSynReq\020\245\037\022\030\n\023PID_SceneTi"
+      "meSynRsp\020\246\037\022\014\n\007PID_Max\020\200(B\003\370\001\001b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 670);
+      descriptor, 718);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PID.proto", &protobuf_RegisterTypes);
 }
@@ -112,6 +113,8 @@ bool PID_IsValid(int value) {
     case 1201:
     case 1202:
     case 1203:
+    case 1204:
+    case 1205:
     case 4001:
     case 4002:
     case 4003:

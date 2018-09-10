@@ -280,7 +280,6 @@ namespace Utopia
                     break;
             }
         }
-
         bool CheckResetSuPos(Vector3 dest, long ms)
         {
             bool ret = false;

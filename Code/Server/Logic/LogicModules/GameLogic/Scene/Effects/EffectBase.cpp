@@ -240,7 +240,7 @@ namespace GameLogic
 					ret[self_su->GetId()] = self_su;
 			}
 		}
-		return std::move(ret);
+		return ret;
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> EffectBase::ExtractSceneUnit()

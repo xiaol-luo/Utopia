@@ -18,6 +18,8 @@ namespace Utopia
             App.instance.net.gameSrv.Add<SceneUnitMove>(PID.SceneUnitMove, OnRecvceneUnitMove);
             App.instance.net.gameSrv.Add<SceneObjectDisappear>(PID.SceneObjectDisappear, OnSceneObjectDisappear);
             App.instance.net.gameSrv.Add<SceneUnitSkillAction>(PID.SceneUnitSkillAction, OnSceneUnitSkillAction);
+            App.instance.net.gameSrv.Add<BulletState>(PID.BulletState, OnMsgBulletState);
+            App.instance.net.gameSrv.Add<BulletTargetPos>(PID.BulletTargetPos, OnMsgBulletTargetPos);
 
             m_evProxy.Subscribe<PointerEventData>(SceneEventDef.MouseHitGround, OnMouseHitGround);
         }
@@ -29,6 +31,8 @@ namespace Utopia
             App.instance.net.gameSrv.Remove(PID.SceneUnitMove);
             App.instance.net.gameSrv.Remove(PID.SceneObjectDisappear);
             App.instance.net.gameSrv.Remove(PID.SceneUnitSkillAction);
+            App.instance.net.gameSrv.Remove(PID.BulletState);
+            App.instance.net.gameSrv.Remove(PID.BulletTargetPos);
         }
 
         Dictionary<ulong, SceneUnit> m_sceneUnits = new Dictionary<ulong, SceneUnit>();
@@ -113,6 +117,23 @@ namespace Utopia
             so.skillId = msg.SkillId;
             so.skillStage = msg.Stage;
             so.evMgr.Fire(SuEventDef.MsgSceneUnitSkillAction, msg);
+        }
+
+        void OnMsgBulletState(int id, BulletState msg)
+        {
+            SceneUnit so = this.GetSceneObject(msg.SuId);
+            if (null == so)
+                return;
+            
+            so.evMgr.Fire(SuEventDef.MsgBulletState, msg);
+        }
+        void OnMsgBulletTargetPos(int id, BulletTargetPos msg)
+        {
+            SceneUnit so = this.GetSceneObject(msg.SuId);
+            if (null == so)
+                return;
+
+            so.evMgr.Fire(SuEventDef.MsgBulletTargetPos, msg);
         }
         public void TryStopMove()
         {

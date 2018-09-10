@@ -50,15 +50,21 @@ namespace GameLogic
 		bool SetParam(const BulletParam &param);
 		void SetDone();
 
+		virtual std::vector<SyncClientMsg> CollectPBInit() override;
+		virtual std::vector<SyncClientMsg> CollectPbMutable() override;
+
 	protected:
 		void virtual OnEnterScene() override;
 		virtual void OnUpdate() override;
+
+		void SyncTargetPos();
 
 	protected:
 		BulletParam m_param;
 		std::shared_ptr<SceneUnitTransform> m_transform;
 		EBulletState m_curr_state = EBulletState_None;
 		Vector3 m_velocity;
+		Vector3 m_target_pos;
 		Ticker m_ticker;
 		float m_last_elaspe_sec = 0;
 		int m_wait_frame_for_destory = 0;

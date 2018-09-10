@@ -39,29 +39,36 @@ namespace NetProto {
             "ZhISCgptb3JlX2dyaWRzGAEgAygFEhIKCm1pc3NfZ3JpZHMYAiADKAUiIwoM",
             "Vmlld1NuYXBzaG90EhMKC2xpZ2h0X2dyaWRzGAEgAygFIl4KDFZpZXdBbGxH",
             "cmlkcxIRCglncmlkX3NpemUYASABKAISCwoDcm93GAIgASgFEgsKA2NvbBgD",
-            "IAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3RvLlZpZXdHcmlkIo4BCg5T",
-            "Y2VuZVVuaXRTdGF0ZRINCgVzdV9pZBgBIAEoBBIRCgl1bml0X3R5cGUYAiAB",
-            "KAUSEAoIbW9kZWxfaWQYAyABKAUSIAoDcG9zGAQgASgLMhMuTmV0UHJvdG8u",
-            "UEJWZWN0b3IzEhAKCGZhY2VfZGlyGAUgASgCEhQKDHBhcmVudF9zdV9pZBgG",
-            "IAEoBCJ5ChJTY2VuZVVuaXRUcmFuc2Zvcm0SDQoFc3VfaWQYASABKAQSIAoD",
-            "cG9zGAIgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IzEhAKCGZhY2VfZGlyGAMg",
-            "ASgCEhQKDHBhcmVudF9zdV9pZBgEIAEoBBIKCgJtcxgFIAEoAyL/AwoNU2Nl",
-            "bmVVbml0TW92ZRINCgVzdV9pZBgBIAEoBBIzChBtb3ZlX2FnZW50X3N0YXRl",
-            "GAIgASgOMhkuTmV0UHJvdG8uRU1vdmVBZ2VudFN0YXRlEhYKDm1heF9tb3Zl",
-            "X3NwZWVkGAMgASgCEi0KEG1vdmVfZGVzaXJlZF9wb3MYBCABKAsyEy5OZXRQ",
-            "cm90by5QQlZlY3RvcjISGAoQbW92ZV9kZXNpcmVkX2RpchgFIAEoAhIkChxp",
-            "bW1vYmlsaXplZF9lbmRfdGltZXN0YW1wX21zGAYgASgDEjIKFWZvcmNlX3Bv",
-            "c19kZXN0aW5hdGlvbhgHIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIXCg9m",
-            "b3JjZV9wb3Nfc3BlZWQYCCABKAISMAoTZm9yY2VfbGluZV92ZWxvY2l0eRgJ",
-            "IAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIeChZmb3JjZV9saW5lX2VsYXNw",
-            "ZWRfc2VjGAogASgCEhwKFGZvcmNlX2xpbmVfdG90YWxfc2VjGAsgASgCEi8K",
-            "EmZvcmNlX2xpbmVfZW5kX3BvcxgMIAEoCzITLk5ldFByb3RvLlBCVmVjdG9y",
-            "MhIlCgh1bml0X3BvcxgNIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMxIOCgZu",
-            "b3dfbXMYDiABKAMidQoUU2NlbmVVbml0U2tpbGxBY3Rpb24SDQoFc3VfaWQY",
-            "ASABKAQSJAoFc3RhZ2UYAiABKA4yFS5OZXRQcm90by5FU2tpbGxTdGF0ZRIQ",
-            "Cghza2lsbF9pZBgDIAEoBRIWCg5zdGFnZV9iZWdpbl9tcxgEIAEoAyIoCg1T",
-            "Y2VuZVRpbWVTeW5jEgoKAm1zGAEgASgDEgsKA3NlYxgCIAEoAkID+AEBYgZw",
-            "cm90bzM="));
+            "IAEoBRIhCgVncmlkcxgEIAMoCzISLk5ldFByb3RvLlZpZXdHcmlkIqgBCg5T",
+            "Y2VuZVVuaXRTdGF0ZRINCgVzdV9pZBgBIAEoBBIrCgl1bml0X3R5cGUYAiAB",
+            "KA4yGC5OZXRQcm90by5FU2NlbmVVbml0VHlwZRIQCghtb2RlbF9pZBgDIAEo",
+            "BRIgCgNwb3MYBCABKAsyEy5OZXRQcm90by5QQlZlY3RvcjMSEAoIZmFjZV9k",
+            "aXIYBSABKAISFAoMcGFyZW50X3N1X2lkGAYgASgEInkKElNjZW5lVW5pdFRy",
+            "YW5zZm9ybRINCgVzdV9pZBgBIAEoBBIgCgNwb3MYAiABKAsyEy5OZXRQcm90",
+            "by5QQlZlY3RvcjMSEAoIZmFjZV9kaXIYAyABKAISFAoMcGFyZW50X3N1X2lk",
+            "GAQgASgEEgoKAm1zGAUgASgDIv8DCg1TY2VuZVVuaXRNb3ZlEg0KBXN1X2lk",
+            "GAEgASgEEjMKEG1vdmVfYWdlbnRfc3RhdGUYAiABKA4yGS5OZXRQcm90by5F",
+            "TW92ZUFnZW50U3RhdGUSFgoObWF4X21vdmVfc3BlZWQYAyABKAISLQoQbW92",
+            "ZV9kZXNpcmVkX3BvcxgEIAEoCzITLk5ldFByb3RvLlBCVmVjdG9yMhIYChBt",
+            "b3ZlX2Rlc2lyZWRfZGlyGAUgASgCEiQKHGltbW9iaWxpemVkX2VuZF90aW1l",
+            "c3RhbXBfbXMYBiABKAMSMgoVZm9yY2VfcG9zX2Rlc3RpbmF0aW9uGAcgASgL",
+            "MhMuTmV0UHJvdG8uUEJWZWN0b3IyEhcKD2ZvcmNlX3Bvc19zcGVlZBgIIAEo",
+            "AhIwChNmb3JjZV9saW5lX3ZlbG9jaXR5GAkgASgLMhMuTmV0UHJvdG8uUEJW",
+            "ZWN0b3IyEh4KFmZvcmNlX2xpbmVfZWxhc3BlZF9zZWMYCiABKAISHAoUZm9y",
+            "Y2VfbGluZV90b3RhbF9zZWMYCyABKAISLwoSZm9yY2VfbGluZV9lbmRfcG9z",
+            "GAwgASgLMhMuTmV0UHJvdG8uUEJWZWN0b3IyEiUKCHVuaXRfcG9zGA0gASgL",
+            "MhMuTmV0UHJvdG8uUEJWZWN0b3IzEg4KBm5vd19tcxgOIAEoAyJ1ChRTY2Vu",
+            "ZVVuaXRTa2lsbEFjdGlvbhINCgVzdV9pZBgBIAEoBBIkCgVzdGFnZRgCIAEo",
+            "DjIVLk5ldFByb3RvLkVTa2lsbFN0YXRlEhAKCHNraWxsX2lkGAMgASgFEhYK",
+            "DnN0YWdlX2JlZ2luX21zGAQgASgDIigKDVNjZW5lVGltZVN5bmMSCgoCbXMY",
+            "ASABKAMSCwoDc2VjGAIgASgCIrQBCgtCdWxsZXRTdGF0ZRINCgVzdV9pZBgB",
+            "IAEoBBINCgVzcGVlZBgCIAEoAhInCgp0YXJnZXRfcG9zGAUgASgLMhMuTmV0",
+            "UHJvdG8uUEJWZWN0b3IzEhMKC3RhcmdldF9zdWlkGAYgASgEEhIKCmN1cnJf",
+            "c3RhdGUYByABKAUSJQoIdW5pdF9wb3MYCiABKAsyEy5OZXRQcm90by5QQlZl",
+            "Y3RvcjMSDgoGbm93X21zGAsgASgDIoABCg9CdWxsZXRUYXJnZXRQb3MSDQoF",
+            "c3VfaWQYASABKAQSJwoKdGFyZ2V0X3BvcxgCIAEoCzITLk5ldFByb3RvLlBC",
+            "VmVjdG9yMxIOCgZub3dfbXMYAyABKAMSJQoIdW5pdF9wb3MYBCABKAsyEy5O",
+            "ZXRQcm90by5QQlZlY3RvcjNCA/gBAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::NetProto.CommonReflection.Descriptor, global::NetProto.BattleEnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -79,7 +86,9 @@ namespace NetProto {
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitTransform), global::NetProto.SceneUnitTransform.Parser, new[]{ "SuId", "Pos", "FaceDir", "ParentSuId", "Ms" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitMove), global::NetProto.SceneUnitMove.Parser, new[]{ "SuId", "MoveAgentState", "MaxMoveSpeed", "MoveDesiredPos", "MoveDesiredDir", "ImmobilizedEndTimestampMs", "ForcePosDestination", "ForcePosSpeed", "ForceLineVelocity", "ForceLineElaspedSec", "ForceLineTotalSec", "ForceLineEndPos", "UnitPos", "NowMs" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneUnitSkillAction), global::NetProto.SceneUnitSkillAction.Parser, new[]{ "SuId", "Stage", "SkillId", "StageBeginMs" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneTimeSync), global::NetProto.SceneTimeSync.Parser, new[]{ "Ms", "Sec" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.SceneTimeSync), global::NetProto.SceneTimeSync.Parser, new[]{ "Ms", "Sec" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BulletState), global::NetProto.BulletState.Parser, new[]{ "SuId", "Speed", "TargetPos", "TargetSuid", "CurrState", "UnitPos", "NowMs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::NetProto.BulletTargetPos), global::NetProto.BulletTargetPos.Parser, new[]{ "SuId", "TargetPos", "NowMs", "UnitPos" }, null, null, null)
           }));
     }
     #endregion
@@ -1718,9 +1727,9 @@ namespace NetProto {
 
     /// <summary>Field number for the "unit_type" field.</summary>
     public const int UnitTypeFieldNumber = 2;
-    private int unitType_;
+    private global::NetProto.ESceneUnitType unitType_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int UnitType {
+    public global::NetProto.ESceneUnitType UnitType {
       get { return unitType_; }
       set {
         unitType_ = value;
@@ -1821,7 +1830,7 @@ namespace NetProto {
       }
       if (UnitType != 0) {
         output.WriteRawTag(16);
-        output.WriteInt32(UnitType);
+        output.WriteEnum((int) UnitType);
       }
       if (ModelId != 0) {
         output.WriteRawTag(24);
@@ -1851,7 +1860,7 @@ namespace NetProto {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
       }
       if (UnitType != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(UnitType);
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) UnitType);
       }
       if (ModelId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(ModelId);
@@ -1913,7 +1922,7 @@ namespace NetProto {
             break;
           }
           case 16: {
-            UnitType = input.ReadInt32();
+            unitType_ = (global::NetProto.ESceneUnitType) input.ReadEnum();
             break;
           }
           case 24: {
@@ -3073,6 +3082,540 @@ namespace NetProto {
           }
           case 21: {
             Sec = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BulletState : pb::IMessage<BulletState> {
+    private static readonly pb::MessageParser<BulletState> _parser = new pb::MessageParser<BulletState>(() => new BulletState());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BulletState> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BulletState() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BulletState(BulletState other) : this() {
+      suId_ = other.suId_;
+      speed_ = other.speed_;
+      targetPos_ = other.targetPos_ != null ? other.targetPos_.Clone() : null;
+      targetSuid_ = other.targetSuid_;
+      currState_ = other.currState_;
+      unitPos_ = other.unitPos_ != null ? other.unitPos_.Clone() : null;
+      nowMs_ = other.nowMs_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BulletState Clone() {
+      return new BulletState(this);
+    }
+
+    /// <summary>Field number for the "su_id" field.</summary>
+    public const int SuIdFieldNumber = 1;
+    private ulong suId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SuId {
+      get { return suId_; }
+      set {
+        suId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "speed" field.</summary>
+    public const int SpeedFieldNumber = 2;
+    private float speed_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Speed {
+      get { return speed_; }
+      set {
+        speed_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_pos" field.</summary>
+    public const int TargetPosFieldNumber = 5;
+    private global::NetProto.PBVector3 targetPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 TargetPos {
+      get { return targetPos_; }
+      set {
+        targetPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_suid" field.</summary>
+    public const int TargetSuidFieldNumber = 6;
+    private ulong targetSuid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong TargetSuid {
+      get { return targetSuid_; }
+      set {
+        targetSuid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "curr_state" field.</summary>
+    public const int CurrStateFieldNumber = 7;
+    private int currState_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CurrState {
+      get { return currState_; }
+      set {
+        currState_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "unit_pos" field.</summary>
+    public const int UnitPosFieldNumber = 10;
+    private global::NetProto.PBVector3 unitPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 UnitPos {
+      get { return unitPos_; }
+      set {
+        unitPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "now_ms" field.</summary>
+    public const int NowMsFieldNumber = 11;
+    private long nowMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long NowMs {
+      get { return nowMs_; }
+      set {
+        nowMs_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BulletState);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BulletState other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SuId != other.SuId) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
+      if (!object.Equals(TargetPos, other.TargetPos)) return false;
+      if (TargetSuid != other.TargetSuid) return false;
+      if (CurrState != other.CurrState) return false;
+      if (!object.Equals(UnitPos, other.UnitPos)) return false;
+      if (NowMs != other.NowMs) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SuId != 0UL) hash ^= SuId.GetHashCode();
+      if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
+      if (targetPos_ != null) hash ^= TargetPos.GetHashCode();
+      if (TargetSuid != 0UL) hash ^= TargetSuid.GetHashCode();
+      if (CurrState != 0) hash ^= CurrState.GetHashCode();
+      if (unitPos_ != null) hash ^= UnitPos.GetHashCode();
+      if (NowMs != 0L) hash ^= NowMs.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SuId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SuId);
+      }
+      if (Speed != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Speed);
+      }
+      if (targetPos_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(TargetPos);
+      }
+      if (TargetSuid != 0UL) {
+        output.WriteRawTag(48);
+        output.WriteUInt64(TargetSuid);
+      }
+      if (CurrState != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(CurrState);
+      }
+      if (unitPos_ != null) {
+        output.WriteRawTag(82);
+        output.WriteMessage(UnitPos);
+      }
+      if (NowMs != 0L) {
+        output.WriteRawTag(88);
+        output.WriteInt64(NowMs);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
+      }
+      if (Speed != 0F) {
+        size += 1 + 4;
+      }
+      if (targetPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetPos);
+      }
+      if (TargetSuid != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(TargetSuid);
+      }
+      if (CurrState != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrState);
+      }
+      if (unitPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UnitPos);
+      }
+      if (NowMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NowMs);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BulletState other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SuId != 0UL) {
+        SuId = other.SuId;
+      }
+      if (other.Speed != 0F) {
+        Speed = other.Speed;
+      }
+      if (other.targetPos_ != null) {
+        if (targetPos_ == null) {
+          targetPos_ = new global::NetProto.PBVector3();
+        }
+        TargetPos.MergeFrom(other.TargetPos);
+      }
+      if (other.TargetSuid != 0UL) {
+        TargetSuid = other.TargetSuid;
+      }
+      if (other.CurrState != 0) {
+        CurrState = other.CurrState;
+      }
+      if (other.unitPos_ != null) {
+        if (unitPos_ == null) {
+          unitPos_ = new global::NetProto.PBVector3();
+        }
+        UnitPos.MergeFrom(other.UnitPos);
+      }
+      if (other.NowMs != 0L) {
+        NowMs = other.NowMs;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            SuId = input.ReadUInt64();
+            break;
+          }
+          case 21: {
+            Speed = input.ReadFloat();
+            break;
+          }
+          case 42: {
+            if (targetPos_ == null) {
+              targetPos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(targetPos_);
+            break;
+          }
+          case 48: {
+            TargetSuid = input.ReadUInt64();
+            break;
+          }
+          case 56: {
+            CurrState = input.ReadInt32();
+            break;
+          }
+          case 82: {
+            if (unitPos_ == null) {
+              unitPos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(unitPos_);
+            break;
+          }
+          case 88: {
+            NowMs = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class BulletTargetPos : pb::IMessage<BulletTargetPos> {
+    private static readonly pb::MessageParser<BulletTargetPos> _parser = new pb::MessageParser<BulletTargetPos>(() => new BulletTargetPos());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<BulletTargetPos> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::NetProto.BattleReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BulletTargetPos() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BulletTargetPos(BulletTargetPos other) : this() {
+      suId_ = other.suId_;
+      targetPos_ = other.targetPos_ != null ? other.targetPos_.Clone() : null;
+      nowMs_ = other.nowMs_;
+      unitPos_ = other.unitPos_ != null ? other.unitPos_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public BulletTargetPos Clone() {
+      return new BulletTargetPos(this);
+    }
+
+    /// <summary>Field number for the "su_id" field.</summary>
+    public const int SuIdFieldNumber = 1;
+    private ulong suId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong SuId {
+      get { return suId_; }
+      set {
+        suId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "target_pos" field.</summary>
+    public const int TargetPosFieldNumber = 2;
+    private global::NetProto.PBVector3 targetPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 TargetPos {
+      get { return targetPos_; }
+      set {
+        targetPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "now_ms" field.</summary>
+    public const int NowMsFieldNumber = 3;
+    private long nowMs_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long NowMs {
+      get { return nowMs_; }
+      set {
+        nowMs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "unit_pos" field.</summary>
+    public const int UnitPosFieldNumber = 4;
+    private global::NetProto.PBVector3 unitPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::NetProto.PBVector3 UnitPos {
+      get { return unitPos_; }
+      set {
+        unitPos_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as BulletTargetPos);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(BulletTargetPos other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SuId != other.SuId) return false;
+      if (!object.Equals(TargetPos, other.TargetPos)) return false;
+      if (NowMs != other.NowMs) return false;
+      if (!object.Equals(UnitPos, other.UnitPos)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SuId != 0UL) hash ^= SuId.GetHashCode();
+      if (targetPos_ != null) hash ^= TargetPos.GetHashCode();
+      if (NowMs != 0L) hash ^= NowMs.GetHashCode();
+      if (unitPos_ != null) hash ^= UnitPos.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (SuId != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(SuId);
+      }
+      if (targetPos_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TargetPos);
+      }
+      if (NowMs != 0L) {
+        output.WriteRawTag(24);
+        output.WriteInt64(NowMs);
+      }
+      if (unitPos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(UnitPos);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (SuId != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(SuId);
+      }
+      if (targetPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TargetPos);
+      }
+      if (NowMs != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(NowMs);
+      }
+      if (unitPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(UnitPos);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(BulletTargetPos other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SuId != 0UL) {
+        SuId = other.SuId;
+      }
+      if (other.targetPos_ != null) {
+        if (targetPos_ == null) {
+          targetPos_ = new global::NetProto.PBVector3();
+        }
+        TargetPos.MergeFrom(other.TargetPos);
+      }
+      if (other.NowMs != 0L) {
+        NowMs = other.NowMs;
+      }
+      if (other.unitPos_ != null) {
+        if (unitPos_ == null) {
+          unitPos_ = new global::NetProto.PBVector3();
+        }
+        UnitPos.MergeFrom(other.UnitPos);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            SuId = input.ReadUInt64();
+            break;
+          }
+          case 18: {
+            if (targetPos_ == null) {
+              targetPos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(targetPos_);
+            break;
+          }
+          case 24: {
+            NowMs = input.ReadInt64();
+            break;
+          }
+          case 34: {
+            if (unitPos_ == null) {
+              unitPos_ = new global::NetProto.PBVector3();
+            }
+            input.ReadMessage(unitPos_);
             break;
           }
         }

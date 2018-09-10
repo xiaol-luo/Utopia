@@ -107,7 +107,7 @@ namespace Utopia
         }
 
         public ulong unitId { get; protected set; }
-        public int unitType { get; protected set; }
+        public ESceneUnitType unitType { get; protected set; }
         public int skillId { get; set; }
         public ESkillState skillStage { get; set; }
 
@@ -146,6 +146,13 @@ namespace Utopia
                 if (null != module)
                 {
                     module.HandleMsgSceneUnitTransform(msg);
+                    return;
+                }
+            }
+            {
+                SuMissile module = this.GetModule<SuMissile>();
+                if (null != module)
+                {
                     return;
                 }
             }

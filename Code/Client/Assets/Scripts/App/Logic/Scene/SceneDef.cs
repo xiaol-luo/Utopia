@@ -19,5 +19,8 @@ namespace Utopia
         public const string MsgSceneUnitMove = "MsgSceneUnitMove";
         public const string MsgSceneUnitSkillAction = "MsgSceneUnitSkillAction";
         public const string MsgSceneUnitTransform = "MsgSceneUnitTransform";
+
+        public const string MsgBulletState = "MsgBulletTargetPos";
+        public const string MsgBulletTargetPos = "MsgBulletTargetPos";
     }
 }

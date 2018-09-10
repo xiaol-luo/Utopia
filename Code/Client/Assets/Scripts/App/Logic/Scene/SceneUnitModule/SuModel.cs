@@ -25,7 +25,7 @@ namespace Utopia
             {
                 ResourceObserver resOb = null;
                 {
-                    if (5 == su.unitType)
+                    if (ESceneUnitType.Effect == su.unitType)
                     {
                         resOb = m_su.resLoader.LoadAsset("Assets/Resources/Effect/Missile/GuidedMissile.prefab");
                     }

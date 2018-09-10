@@ -135,7 +135,7 @@ namespace GameLogic
 					msgs.push_back(msg);
 			}
 		}
-		return std::move(msgs);
+		return msgs;
 	}
 	std::vector<SyncClientMsg> SceneUnit::CollectPbMutable()
 	{
@@ -148,7 +148,7 @@ namespace GameLogic
 					msgs.push_back(msg);
 			}
 		}
-		return std::move(msgs);
+		return msgs;
 	}
 	void SceneUnit::SendSelf(int protocol_id, google::protobuf::Message * msg)
 	{

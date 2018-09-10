@@ -13,7 +13,7 @@ namespace Utopia
     {
         Model, // 模型
         Move, // 移动 
-
+        Missile, // 飞出物
         Count,
     }
 

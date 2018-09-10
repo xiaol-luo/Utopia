@@ -69,6 +69,8 @@ enum PID {
   PID_SceneUnitTransform = 1201,
   PID_SceneUnitMove = 1202,
   PID_SceneUnitSkillAction = 1203,
+  PID_BulletState = 1204,
+  PID_BulletTargetPos = 1205,
   PID_ReloadLuaScripts = 4001,
   PID_RecreateSceneReq = 4002,
   PID_RecreateSceneRsp = 4003,

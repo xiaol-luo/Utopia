@@ -9,7 +9,22 @@ namespace Utopia
         protected SceneUnit BuildSceneUnit(SceneUnitState msg)
         {
             SceneUnit so = new SceneUnit(this);
-            so.AddModule(new SuMove(so));
+            switch (msg.UnitType)
+            {
+                case ESceneUnitType.Hero:
+                case ESceneUnitType.Monster:
+                case ESceneUnitType.Soldier:
+                    {
+                        so.AddModule(new SuMove(so));
+                    }
+                    break;
+                case ESceneUnitType.Effect: // 暂且这么写
+                    {
+                        so.AddModule(new SuBullet(so));
+                    }
+                    break;
+            }
+            
             return so;
         }
     }

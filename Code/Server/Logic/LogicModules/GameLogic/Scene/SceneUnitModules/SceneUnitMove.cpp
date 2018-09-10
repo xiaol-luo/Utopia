@@ -141,7 +141,7 @@ namespace GameLogic
 			m_curr_state->CollectMoveDetail(msg);
 			msgs.push_back(SyncClientMsg(NetProto::PID_SceneUnitMove, msg));
 		}
-		return std::move(msgs);
+		return msgs;
 	}
 	void SceneUnitMove::EnterState(NetProto::EMoveAgentState new_state, void * param)
 	{

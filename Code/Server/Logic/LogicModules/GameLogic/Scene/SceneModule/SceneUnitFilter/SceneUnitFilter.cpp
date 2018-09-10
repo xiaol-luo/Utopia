@@ -223,25 +223,25 @@ namespace GameLogic
 	{
 		std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> ret_sus;
 		this->FindUnits(rect, ret_sus);
-		return std::move(ret_sus);
+		return ret_sus;
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(OBB2 obb)
 	{
 		AABB2 rect = GeometryUtils::BuildAABB2(obb);
-		return std::move(this->FindUnits(rect));
+		return this->FindUnits(rect);
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(Circle circle)
 	{
 		AABB2 rect = GeometryUtils::BuildAABB2(circle);
-		return std::move(this->FindUnits(rect));
+		return this->FindUnits(rect);
 	}
 
 	std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>> SceneUnitFilter::FindUnits(Sector sector)
 	{
 		AABB2 rect = GeometryUtils::BuildAABB2(sector);
-		return std::move(this->FindUnits(rect));
+		return this->FindUnits(rect);
 	}
 
 	void SceneUnitFilter::FindUnits(AABB2 rect, std::unordered_map<uint64_t, std::shared_ptr<SceneUnit>>& out_ret)
