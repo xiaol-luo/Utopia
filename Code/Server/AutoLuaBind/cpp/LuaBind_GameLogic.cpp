@@ -1,27 +1,26 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
-#include "ShareCode/Common/Utils/Ticker.h"	
-#include "GameLogic/Scene/Skills/SkillConfigBase.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"	
-#include "GameLogic/Scene/Missile/SceneUnitGuidedMissile/SceneUnitGuidedMissile.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
 #include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
-#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
-#include "GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "GameLogic/Scene/Missile/SceneUnitBullet/Bullet.h"	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "ShareCode/Config/AutoCsvCode/CsvConfigSets.h"	
 #include "GameLogic/Scene/Skills/Skill.h"	
-#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
-#include "GameLogic/Scene/Defines/EffectDefine.h"	
+#include "GameLogic/Scene/Missile/SceneUnitBullet/Bullet.h"	
+#include "GameLogic/Scene/Defines/ViewDefine.h"	
 #include "GameLogic/Scene/Skills/SkillBase.h"	
-#include "protobuf/include/google/protobuf/message.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "ShareCode/Common/Geometry/Vector2.h"	
+#include "GameLogic/Scene/Defines/EffectDefine.h"	
+#include "ShareCode/Common/Utils/Ticker.h"	
 #include "GameLogic/Scene/Effects/EffectBase.h"	
-#include "GameLogic/Scene/Defines/ViewDefine.h"
+#include "GameLogic/Scene/Defines/SceneDefine.h"	
+#include "GameLogic/Scene/Effects/EffectScript/SceneEvents/LuaScribeEventFnDetail.h"	
+#include "GameLogic/Scene/Skills/SkillConfig.h"	
+#include "ShareCode/Common/EventDispatcher/EventDispacherProxy.h"	
+#include "ShareCode/Common/Geometry/Vector3.h"	
+#include "CsvConfigSets.h"	
+#include "GameLogic/Scene/SceneModule/SceneView/ViewGrid.h"	
+#include "google/protobuf/message.h"	
+#include "GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "GameLogic/Scene/Skills/SkillConfigBase.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 
 namespace SolLuaBind
 {
@@ -111,12 +110,6 @@ namespace SolLuaBind
 					sol::object obj = ns_table.raw_get_or(name, sol::nil);
 					assert(!obj.valid());
 					ns_table.set_function(name, GameLogic::CalForceMoveDir);
-				}				
-				{
-					std::string name = "AddGuidedMissileToScene";
-					sol::object obj = ns_table.raw_get_or(name, sol::nil);
-					assert(!obj.valid());
-					ns_table.set_function(name, GameLogic::AddGuidedMissileToScene);
 				}				
 				{
 					std::string name = "AddBulletToScene";

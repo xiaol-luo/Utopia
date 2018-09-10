@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"	
 #include "GameLogic/Scene/SceneUnit/SceneUnitModule.h"	
-#include "GameLogic/Scene/SceneUnitModules/FightParam.h"
+#include "GameLogic/Scene/SceneUnitModules/FightParam.h"	
+#include "GameLogic/Scene/SceneUnitModules/SceneUnitFightParam.h"	
+#include "GameLogic/Scene/Effects/EffectBase.h"
 
 namespace SolLuaBind
 {

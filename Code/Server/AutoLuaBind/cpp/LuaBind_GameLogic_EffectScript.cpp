@@ -3,10 +3,10 @@
 #include "GameLogic/Scene/Effects/EffectConfigBase.h"	
 #include "GameLogic/Scene/Effects/EffectScript/LuaSubscribeEventDetail.h"	
 #include "GameLogic/Scene/Effects/EffectScript/EffectScriptConfig.h"	
-#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
 #include "GameLogic/Scene/Effects/EffectScript/EffectScript.h"	
-#include "GameLogic/Scene/Effects/EffectBase.h"
+#include "GameLogic/Scene/Effects/EffectBase.h"	
+#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "GameLogic/Scene/SceneModule/SceneEffects/SceneEffects.h"
 
 namespace SolLuaBind
 {
