@@ -9,6 +9,8 @@
 #include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitFilter.h"
 #include "GameLogic/Scene/SceneUnitModules/SceneUnitBody.h"
 #include "GameLogic/Scene/SceneModule/SceneView/SceneView.h"
+#include "Network/Protobuf/Battle.pb.h"
+#include "Network/Protobuf/PID.pb.h"
 
 namespace GameLogic
 {
@@ -36,6 +38,44 @@ namespace GameLogic
 			m_curr_state = EBulletState_Done;
 	}
 
+	std::vector<SyncClientMsg> Bullet::CollectPBInit()
+	{
+		return this->CollectPbMutable();
+	}
+
+	std::vector<SyncClientMsg> Bullet::CollectPbMutable()
+	{
+		std::vector<SyncClientMsg> msgs;
+		{
+			NetProto::BulletState *msg = m_owner->GetScene()->CreateProtobuf<NetProto::BulletState>();
+			msg->set_su_id(m_owner->GetId());
+			msg->set_speed(m_param.move_speed);
+			msg->set_curr_state(m_curr_state);
+			msg->set_now_ms(m_owner->GetScene()->GetLogicMs());
+			{
+				NetProto::PBVector3 *pb_unit_pos = msg->mutable_unit_pos();
+				Vector3 unit_pos = m_transform->GetPos();
+				pb_unit_pos->set_x(unit_pos.x);
+				pb_unit_pos->set_y(unit_pos.y);
+				pb_unit_pos->set_z(unit_pos.z);
+			}
+			{
+				uint64_t target_suid = 0;
+				if (nullptr != m_param.target_su)
+					target_suid = m_param.target_su->GetId();
+				msg->set_target_suid(target_suid);
+			}
+			{
+				NetProto::PBVector3 *pb_target_pos = msg->mutable_target_pos();
+				pb_target_pos->set_x(m_target_pos.x);
+				pb_target_pos->set_y(m_target_pos.y);
+				pb_target_pos->set_z(m_target_pos.z);
+			}
+			msgs.push_back(SyncClientMsg(NetProto::PID_BulletState, msg));
+		}
+		return msgs;
+	}
+
 	void Bullet::OnEnterScene()
 	{
 		m_transform = this->GetModule<SceneUnitTransform>();
@@ -51,28 +91,28 @@ namespace GameLogic
 			m_ticker.SetTimeFunc(std::bind(&NewScene::GetLogicSec, this->GetScene()));
 			m_ticker.Restart(m_param.max_alive_sec);
 
+			m_curr_state = EBulletState_Moving;
 			if (EBulletTarget_Pos == m_param.target_type)
 			{
-				Vector3 link_vec3 = m_param.target_pos - m_transform->GetPos();
+				m_target_pos = m_param.target_pos;
+				Vector3 link_vec3 = m_target_pos - m_transform->GetPos();
 				link_vec3.y = 0;
 				m_velocity = Vector3::Normalize(link_vec3) * m_param.move_speed;
+				this->SendObserversEx(this->CollectPbMutable());
 			}
-
-			m_curr_state = EBulletState_Moving;
 		}
 
 		if (EBulletState_Moving == m_curr_state)
 		{
+			Vector3 old_target_pos = m_target_pos;
 			// 移动
-			Vector3 target_pos = m_param.target_pos;
 			if (EBulletTarget_SceneUnit == m_param.target_type)
 			{
-				target_pos = m_param.target_su->GetTransform()->GetPos();
-				Vector3 linkVec3 = target_pos - m_transform->GetPos();
+				m_target_pos = m_param.target_su->GetTransform()->GetPos();
+				Vector3 linkVec3 = m_target_pos - m_transform->GetPos();
 				linkVec3.y = 0;
 				m_velocity = Vector3::Normalize(linkVec3) * m_param.move_speed;
 			}
-
 			float time_span = m_ticker.ElaspeTime() - m_last_elaspe_sec;
 			if (!m_ticker.InCd())
 				time_span = m_ticker.GetCd() - m_last_elaspe_sec;
@@ -83,8 +123,8 @@ namespace GameLogic
 			
 			bool isDone = false;
 			{
-				Vector3 nor1 = target_pos - m_transform->GetPos();
-				Vector3 nor2 = ret_pos - target_pos;
+				Vector3 nor1 = m_target_pos - m_transform->GetPos();
+				Vector3 nor2 = ret_pos - m_target_pos;
 				nor1.y = 0; nor2.y = 0;
 				if (nor2.SqrMagnitude() > FLT_MIN)
 				{
@@ -101,7 +141,7 @@ namespace GameLogic
 			}
 			if (isDone)
 			{
-				ret_pos = target_pos;
+				ret_pos = m_target_pos;
 			}
 
 			Vector3 old_pos = m_transform->GetPos();
@@ -131,6 +171,14 @@ namespace GameLogic
 			{
 				m_curr_state = EBulletState_Done;
 			}
+			if (old_target_pos != m_target_pos)
+			{
+				this->SyncTargetPos();
+			}
+			if (isDone || old_target_pos != m_target_pos)
+			{
+				this->SendObserversEx(this->CollectPbMutable());
+			}
 		}
 
 		if (EBulletState_Done == m_curr_state)
@@ -140,22 +188,47 @@ namespace GameLogic
 				m_param.done_action(this);
 			}
 			m_curr_state = EBulletState_Destroying;
+
+			this->SendObserversEx(this->CollectPbMutable());
 		}
 
 		if (m_curr_state < EBulletState_Destroying && !m_ticker.InCd())
 		{
 			// 存活时间超过最大限制了，让它结束
 			m_curr_state = EBulletState_Destroying;
+			this->SendObserversEx(this->CollectPbMutable());
 		}
 		if (EBulletState_Destroying == m_curr_state)
 		{
 			++m_wait_frame_for_destory;
-			if (m_wait_frame_for_destory > 1)
+			if (m_wait_frame_for_destory > 0)
 			{
 				m_curr_state = EBulletState_AllFinish;
+				this->SendObserversEx(this->CollectPbMutable());
 				this->GetScene()->RemoveUnit(m_owner->GetId());
 			}
 		}
+	}
+
+	void Bullet::SyncTargetPos()
+	{
+		NetProto::BulletTargetPos *msg = m_owner->GetScene()->CreateProtobuf<NetProto::BulletTargetPos>();
+		msg->set_su_id(m_owner->GetId());
+		msg->set_now_ms(m_owner->GetScene()->GetLogicMs());
+		{
+			NetProto::PBVector3 *pb_unit_pos = msg->mutable_unit_pos();
+			Vector3 unit_pos = m_transform->GetPos();
+			pb_unit_pos->set_x(unit_pos.x);
+			pb_unit_pos->set_y(unit_pos.y);
+			pb_unit_pos->set_z(unit_pos.z);
+		}
+		{
+			NetProto::PBVector3 *pb_target_pos = msg->mutable_target_pos();
+			pb_target_pos->set_x(m_target_pos.x);
+			pb_target_pos->set_y(m_target_pos.y);
+			pb_target_pos->set_z(m_target_pos.z);
+		}
+		this->SendObservers(NetProto::PID_BulletTargetPos, msg);
 	}
 	
 
