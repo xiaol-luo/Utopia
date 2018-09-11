@@ -128,7 +128,11 @@ namespace Utopia
         public Vector3 pos
         {
             get { return this.transform.localPosition; }
-            set { this.transform.localPosition = value; }
+            set
+            {
+                this.transform.localPosition = value;
+                Core.instance.log.LogWarning("scene unit pos {0}, {1}, {2}", pos.x, pos.y, pos.z);
+            }
         }
         public void SetPos(NetProto.PBVector3 value)
         {

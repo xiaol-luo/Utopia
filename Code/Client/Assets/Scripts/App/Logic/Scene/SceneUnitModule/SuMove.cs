@@ -274,7 +274,9 @@ namespace Utopia
                     break;
                 default:
                     {
-                        m_su.SetPos(msg.Pos);
+
+                        // m_su.SetPos(msg.Pos);
+                        this.CheckResetSuPos(msgPos, msg.Ms);
                         m_su.faceDir = msg.FaceDir;
                     }
                     break;
