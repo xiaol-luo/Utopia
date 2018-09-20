@@ -16,11 +16,14 @@ namespace Utopia
                 case ESceneUnitType.Soldier:
                     {
                         so.AddModule(new SuMove(so));
+                        so.AddModule(new HeroActions(so));
+                        so.AddModule(new SuSkill(so));
                     }
                     break;
                 case ESceneUnitType.Effect: // 暂且这么写
                     {
                         so.AddModule(new SuBullet(so));
+                        so.AddModule(new BulletActions(so));
                     }
                     break;
             }

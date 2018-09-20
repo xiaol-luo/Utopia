@@ -362,6 +362,9 @@ bool GeometryUtils::IsIntersectSector(const Sector & s1, const Sector & s2)
 
 bool GeometryUtils::IsIntersectCircleOBB2(const Circle & circle, const OBB2 & obb2)
 {
+	if (obb2.x_half_size <= 0 || obb2.y_half_size <= 0 || circle.radius <= 0)
+		return false;
+
 	Vector2 object_point;
 	if (!WorldAxisToObjectAxis(obb2.GetAxis(), circle.center, object_point))
 		return false;

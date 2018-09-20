@@ -20,8 +20,11 @@ namespace Utopia
 
         }
 
+        SuActions m_suActions;
+
         public override void InitSu(SceneUnitState msg)
         {
+            m_suActions = m_su.GetModule<SuActions>();
             m_evProxy.Subscribe<SceneUnitMove>(SuEventDef.MsgSceneUnitMove, OnMsgSceneUnitMove);
         }
 
@@ -61,12 +64,12 @@ namespace Utopia
             m_moveState = msg.MoveAgentState;
             m_moveSpeed = msg.MaxMoveSpeed;
 
-            string aniName = "idle";
+            EHeroAction aniName = EHeroAction.Idle;
             switch (msg.MoveAgentState)
             {
                 case EMoveAgentState.MoveToPos:
                     {
-                        aniName = "run";
+                        aniName = EHeroAction.Run;
                         Vector3 end = new Vector3(msg.MoveDesiredPos.X, 0, msg.MoveDesiredPos.Y);
                         this.MakeMoveToPosPlan(start, end, msg.NowMs);
                         m_moveLastSec = nowSec;
@@ -74,12 +77,12 @@ namespace Utopia
                     break;
                 case EMoveAgentState.MoveToDir:
                     {
-                        aniName = "run";
+                        aniName = EHeroAction.Run;
                     }
                     break;
                 case EMoveAgentState.ForceLine:
                     {
-                        aniName = "knockUpStill";
+                        aniName = EHeroAction.ForceMove;
                         Vector3 end = new Vector3(msg.ForceLineEndPos.X, 0, msg.ForceLineEndPos.Y);
                         Vector2 v = new Vector2(msg.ForceLineVelocity.X, msg.ForceLineVelocity.Y);
                         MakeForceLinePlan(start, end, v, msg.ForceLineTotalSec, msg.ForceLineElaspedSec, msg.NowMs);
@@ -95,14 +98,12 @@ namespace Utopia
                         Vector3 end = new Vector3(msg.ForcePosDestination.X, 0, msg.ForcePosDestination.Y);
                         MakeForcePosPlan(start, end, msg.ForcePosSpeed, msg.NowMs);
                         m_forcePosLastSec = nowSec;
-                        aniName = "knockUpStill";
+                        aniName = EHeroAction.ForceMove;
                     }
                     break;
             }
-            if (!m_su.IsPlayingSkill())
-            {
-                m_su.model.PlayAni(aniName, SuModel.EAniNotBreakReason.SameAni);
-            }
+
+            m_suActions.PlayAni((int)aniName, -1, 1, EAniNotBreakReason.SameAni, HeroActions.MOVE_EXCLUSIVE_GROUP_FLAG);
         }
 
         void MakeMoveToPosPlan(Vector3 start, Vector3 end, long srvMs)

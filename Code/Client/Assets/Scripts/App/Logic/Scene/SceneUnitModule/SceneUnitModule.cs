@@ -12,6 +12,8 @@ namespace Utopia
     public enum ESuModule
     {
         Model, // 模型
+        Actions, // 动作
+        Skill, // 技能
         Move, // 移动 
         Missile, // 飞出物
         Count,

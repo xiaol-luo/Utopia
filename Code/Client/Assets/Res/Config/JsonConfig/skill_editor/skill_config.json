@@ -9,9 +9,9 @@
       "target_relation_flag": 8,
       "lvl_cfgs": [
         {
-          "preparing_span": 200,
-          "releasing_span": 200,
-          "lasting_span": 200,
+          "preparing_span": 50,
+          "releasing_span": 50,
+          "lasting_span": 50,
           "consume_mp": 200,
           "cd": 20,
           "cast_distance": 220.0,
@@ -29,9 +29,9 @@
       "target_relation_flag": 8,
       "lvl_cfgs": [
         {
-          "preparing_span": 200,
-          "releasing_span": 200,
-          "lasting_span": 200,
+          "preparing_span": 50,
+          "releasing_span": 50,
+          "lasting_span": 50,
           "consume_mp": 20,
           "cd": 2,
           "cast_distance": 200.0,
