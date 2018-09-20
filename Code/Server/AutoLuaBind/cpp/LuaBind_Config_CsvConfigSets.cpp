@@ -1,18 +1,18 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
+#include "effect/CsvEffectSearcherConfig.h"	
+#include "CsvConfigSets.h"	
+#include "Scene/CsvSceneConfig.h"	
 #include "skill/CsvSkillLevelConfig.h"	
+#include "skill/CsvSkillConfig.h"	
+#include "log/CsvLogConfig.h"	
+#include "effect/CsvEffectFilterConfig.h"	
+#include "effect/CsvEffectScriptConfig.h"	
+#include "effect/CsvEffectHurtConfig.h"	
+#include "effect/CsvEffectGroupConfig.h"	
 #include "effect/CsvEffectForceMoveConfig.h"	
 #include "effect/CsvEffectAttrsConfig.h"	
-#include "effect/CsvEffectGroupConfig.h"	
-#include "effect/CsvEffectScriptConfig.h"	
-#include "effect/CsvEffectHealConfig.h"	
-#include "effect/CsvEffectHurtConfig.h"	
-#include "CsvConfigSets.h"	
-#include "effect/CsvEffectFilterConfig.h"	
-#include "effect/CsvEffectSearcherConfig.h"	
-#include "log/CsvLogConfig.h"	
-#include "skill/CsvSkillConfig.h"	
-#include "Scene/CsvSceneConfig.h"
+#include "effect/CsvEffectHealConfig.h"
 
 namespace SolLuaBind
 {

@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "InputGeom.h"	
-#include "DetourTileCache.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Navigation/NavMeshUtil.h"	
 #include "DetourNavMeshBuilder.h"	
-#include "GameLogic/Scene/Navigation/NavMeshUtil.h"	
-#include "DetourTileCacheBuilder.h"
+#include "recastnavigation/RecastDemo/Include/InputGeom.h"	
+#include "recastnavigation/DetourTileCache/Include/DetourTileCacheBuilder.h"	
+#include "recastnavigation/DetourTileCache/Include/DetourTileCache.h"
 
 namespace SolLuaBind
 {
@@ -29,7 +29,7 @@ namespace SolLuaBind
 				{
 					sol::usertype<LinearAllocator> meta_table(
 						sol::constructors<				
-						LinearAllocator(const unsigned int)
+						LinearAllocator(const uint64_t)
 						>(),
 						"__StructName__", sol::property([]() {return "LinearAllocator"; })				
 						,"buffer", &LinearAllocator::buffer				

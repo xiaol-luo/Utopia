@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToPosState.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "ShareCode/Network/Protobuf/Battle.pb.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
+#include "Logic/ShareCode/Common/Geometry/Vector3.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveToPosState.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "Logic/ShareCode/Network/Protobuf/Battle.pb.h"
 
 namespace SolLuaBind
 {

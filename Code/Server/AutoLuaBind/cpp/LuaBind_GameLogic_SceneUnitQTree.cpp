@@ -1,8 +1,8 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
-#include "ShareCode/Common/Geometry/GeometryDefine.h"
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneModule/SceneUnitFilter/SceneUnitQTree.h"	
+#include "Logic/ShareCode/Common/Geometry/GeometryDefine.h"
 
 namespace SolLuaBind
 {

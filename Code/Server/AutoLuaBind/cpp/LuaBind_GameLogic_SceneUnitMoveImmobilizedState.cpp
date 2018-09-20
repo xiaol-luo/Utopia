@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Utils/Ticker.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveImmobilizedState.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
-#include "ShareCode/Network/Protobuf/Battle.pb.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"
+#include "Logic/ShareCode/Common/Utils/Ticker.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMove.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveState.h"	
+#include "Logic/ShareCode/Network/Protobuf/Battle.pb.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitMoveState/SceneUnitMoveImmobilizedState.h"
 
 namespace SolLuaBind
 {

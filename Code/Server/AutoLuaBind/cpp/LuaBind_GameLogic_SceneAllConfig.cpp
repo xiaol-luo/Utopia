@@ -1,10 +1,10 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Effects/EffectFilterConfig.h"	
-#include "GameLogic/Scene/Effects/EffectConfigMgr.h"	
-#include "GameLogic/Scene/Config/SceneAllConfig.h"	
-#include "GameLogic/Scene/Skills/SkillConfig.h"	
-#include "Scene/CsvSceneConfig.h"
+#include "Logic/LogicModules/GameLogic/Scene/Skills/SkillConfig.h"	
+#include "Scene/CsvSceneConfig.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectConfigMgr.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Config/SceneAllConfig.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Effects/EffectFilterConfig.h"
 
 namespace SolLuaBind
 {

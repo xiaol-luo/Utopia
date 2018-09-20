@@ -1,9 +1,9 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Geometry/Vector2.h"	
-#include "ShareCode/Common/Geometry/GeometryUtils.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"	
-#include "ShareCode/Common/Geometry/GeometryDefine.h"
+#include "Logic/ShareCode/Common/Geometry/Vector3.h"	
+#include "Logic/ShareCode/Common/Geometry/GeometryUtils.h"	
+#include "Logic/ShareCode/Common/Geometry/GeometryDefine.h"	
+#include "Logic/ShareCode/Common/Geometry/Vector2.h"
 
 namespace SolLuaBind
 {
@@ -98,9 +98,9 @@ namespace SolLuaBind
 				using TypeAlias_39 = const Axis2 &;
 				using TypeAlias_40 = const Axis2 &;
 				using TypeAlias_41 = const Vector2 *;
-				using TypeAlias_42 = unsigned int;
+				using TypeAlias_42 = unsigned long long;
 				using TypeAlias_43 = Vector2 **;
-				using TypeAlias_44 = unsigned int;
+				using TypeAlias_44 = unsigned long long;
 				using TypeAlias_45 = bool;
 				static TypeAlias_45 AxisPointMoveRotate1(TypeAlias_39 p1, TypeAlias_40 p2, TypeAlias_41 p3, TypeAlias_42 p4, TypeAlias_43 p5, TypeAlias_44 p6)
 				{
@@ -118,9 +118,9 @@ namespace SolLuaBind
 				using TypeAlias_51 = const Axis2 &;
 				using TypeAlias_52 = const Axis2 &;
 				using TypeAlias_53 = const Vector2 *;
-				using TypeAlias_54 = unsigned int;
+				using TypeAlias_54 = unsigned long long;
 				using TypeAlias_55 = Vector2 **;
-				using TypeAlias_56 = unsigned int;
+				using TypeAlias_56 = unsigned long long;
 				using TypeAlias_57 = bool;
 				static TypeAlias_57 AxisPointRotateMove1(TypeAlias_51 p1, TypeAlias_52 p2, TypeAlias_53 p3, TypeAlias_54 p4, TypeAlias_55 p5, TypeAlias_56 p6)
 				{

@@ -1,14 +1,15 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "ShareCode/Common/Utils/Ticker.h"	
-#include "GameLogic/Scene/Defines/EffectDefine.h"	
-#include "ShareCode/Common/Geometry/Vector2.h"	
-#include "GameLogic/Scene/Skills/Skill.h"	
-#include "GameLogic/Scene/SceneUnit/SceneUnit.h"	
-#include "GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"	
-#include "GameLogic/Scene/Missile/SceneUnitBullet/Bullet.h"	
-#include "GameLogic/Scene/Missile/SceneUnitMissile.h"	
-#include "ShareCode/Common/Geometry/Vector3.h"
+#include "Logic/ShareCode/Common/Geometry/Vector3.h"	
+#include "Logic/ShareCode/Common/Utils/Ticker.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/EffectDefine.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Skills/Skill.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "Logic/ShareCode/Common/Geometry/Vector2.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitMissile.h"	
+#include "Logic/LogicModules/GameLogic/Scene/Missile/SceneUnitBullet/Bullet.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnit/SceneUnit.h"	
+#include "Logic/LogicModules/GameLogic/Scene/SceneUnitModules/SceneUnitTransform.h"
 
 namespace SolLuaBind
 {

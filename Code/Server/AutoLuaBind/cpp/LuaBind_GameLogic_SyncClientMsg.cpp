@@ -1,7 +1,7 @@
 #include "SolLuaBindUtils.h"
 #include <sol.hpp>	
-#include "GameLogic/Scene/Defines/SceneDefine.h"	
-#include "google/protobuf/message.h"
+#include "Logic/LogicModules/GameLogic/Scene/Defines/SceneDefine.h"	
+#include "protobuf/include/google/protobuf/message.h"
 
 namespace SolLuaBind
 {
