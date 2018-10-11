@@ -1,0 +1,1239 @@
+{
+  "meta": {
+    "version": {
+      "snj": 3,
+      "sharpnav": "1.0.0-alpha.2"
+    }
+  },
+  "origin": {
+    "X": 0.3,
+    "Y": -5.3,
+    "Z": 0.3
+  },
+  "tileWidth": 99.6000061,
+  "tileHeight": 99.6000061,
+  "maxTiles": 1.0,
+  "maxPolys": 13.0,
+  "tiles": [
+    {
+      "polyId": 16,
+      "location": {
+        "X": 0,
+        "Y": 0
+      },
+      "layer": 0,
+      "salt": 1,
+      "bounds": {
+        "Min": {
+          "X": 0.3,
+          "Y": -5.3,
+          "Z": 0.3
+        },
+        "Max": {
+          "X": 99.90001,
+          "Y": 5.5,
+          "Z": 99.90001
+        }
+      },
+      "polys": [
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 17,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 25,
+              "Edge": 0,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            0,
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            10,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 18,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 16,
+              "Edge": 0,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            0,
+            2,
+            3,
+            5,
+            6,
+            0
+          ],
+          "Neis": [
+            1,
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 5,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 17,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 19,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            3,
+            4,
+            5,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            4,
+            2,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 22,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 18,
+              "Edge": 0,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            5,
+            4,
+            7,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            3,
+            0,
+            7,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 21,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 28,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            10,
+            11,
+            12,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            13,
+            6,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 23,
+              "Edge": 3,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 20,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            9,
+            10,
+            12,
+            13,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            5,
+            0,
+            8,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 4,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 19,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 24,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            7,
+            8,
+            5,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            9,
+            4,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 24,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 21,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            8,
+            9,
+            13,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            6,
+            9,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 23,
+              "Edge": 3,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 22,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            13,
+            14,
+            5,
+            8,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            0,
+            7,
+            8,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 4,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 16,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 26,
+              "Edge": 0,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            15,
+            16,
+            1,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            11,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 4,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 27,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 25,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            19,
+            16,
+            15,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            0,
+            10,
+            12,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 28,
+              "Edge": 4,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 26,
+              "Edge": 1,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            18,
+            19,
+            15,
+            17,
+            12,
+            0
+          ],
+          "Neis": [
+            0,
+            11,
+            0,
+            0,
+            13,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 5,
+          "Area": 255
+        },
+        {
+          "PolyType": 0,
+          "Links": [
+            {
+              "Reference": 27,
+              "Edge": 2,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            },
+            {
+              "Reference": 20,
+              "Edge": 0,
+              "Side": 255,
+              "BMin": 0,
+              "BMax": 0
+            }
+          ],
+          "Verts": [
+            12,
+            11,
+            18,
+            0,
+            0,
+            0
+          ],
+          "Neis": [
+            5,
+            0,
+            12,
+            0,
+            0,
+            0
+          ],
+          "Tag": null,
+          "VertCount": 3,
+          "Area": 255
+        }
+      ],
+      "verts": [
+        {
+          "X": 1.2,
+          "Y": 0.09999989,
+          "Z": 30.9000015
+        },
+        {
+          "X": 27.9000015,
+          "Y": 0.09999989,
+          "Z": 31.2
+        },
+        {
+          "X": 27.9000015,
+          "Y": 0.09999989,
+          "Z": 29.4000015
+        },
+        {
+          "X": 28.5000019,
+          "Y": 0.09999989,
+          "Z": 28.8000011
+        },
+        {
+          "X": 30.0000019,
+          "Y": 0.09999989,
+          "Z": 28.8000011
+        },
+        {
+          "X": 30.0000019,
+          "Y": 0.09999989,
+          "Z": 1.2
+        },
+        {
+          "X": 1.2,
+          "Y": 0.09999989,
+          "Z": 1.2
+        },
+        {
+          "X": 31.5000019,
+          "Y": 0.09999989,
+          "Z": 28.8000011
+        },
+        {
+          "X": 32.1000023,
+          "Y": 0.09999989,
+          "Z": 29.4000015
+        },
+        {
+          "X": 32.1000023,
+          "Y": 0.09999989,
+          "Z": 70.5
+        },
+        {
+          "X": 31.5000019,
+          "Y": 0.09999989,
+          "Z": 71.1000061
+        },
+        {
+          "X": 30.0000019,
+          "Y": 0.09999989,
+          "Z": 71.1000061
+        },
+        {
+          "X": 30.0000019,
+          "Y": 0.09999989,
+          "Z": 99.00001
+        },
+        {
+          "X": 99.00001,
+          "Y": 0.09999989,
+          "Z": 99.00001
+        },
+        {
+          "X": 99.00001,
+          "Y": 0.09999989,
+          "Z": 1.2
+        },
+        {
+          "X": 1.2,
+          "Y": 0.09999989,
+          "Z": 69.0
+        },
+        {
+          "X": 27.9000015,
+          "Y": 0.09999989,
+          "Z": 68.7000046
+        },
+        {
+          "X": 1.2,
+          "Y": 0.09999989,
+          "Z": 99.00001
+        },
+        {
+          "X": 28.5000019,
+          "Y": 0.09999989,
+          "Z": 71.1000061
+        },
+        {
+          "X": 27.9000015,
+          "Y": 0.09999989,
+          "Z": 70.5
+        }
+      ],
+      "detailMeshes": [
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 0,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 1,
+          "TriangleCount": 3
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 4,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 5,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 6,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 7,
+          "TriangleCount": 2
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 9,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 10,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 11,
+          "TriangleCount": 2
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 13,
+          "TriangleCount": 2
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 15,
+          "TriangleCount": 1
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 16,
+          "TriangleCount": 3
+        },
+        {
+          "VertexIndex": 0,
+          "VertexCount": 0,
+          "TriangleIndex": 19,
+          "TriangleCount": 1
+        }
+      ],
+      "detailVerts": [],
+      "detailTris": [
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 4,
+          "VertexHash1": 0,
+          "VertexHash2": 3,
+          "Flags": 17
+        },
+        {
+          "VertexHash0": 0,
+          "VertexHash1": 1,
+          "VertexHash2": 3,
+          "Flags": 1
+        },
+        {
+          "VertexHash0": 1,
+          "VertexHash1": 2,
+          "VertexHash2": 3,
+          "Flags": 5
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 3,
+          "VertexHash1": 0,
+          "VertexHash2": 2,
+          "Flags": 17
+        },
+        {
+          "VertexHash0": 0,
+          "VertexHash1": 1,
+          "VertexHash2": 2,
+          "Flags": 5
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 3,
+          "VertexHash1": 0,
+          "VertexHash2": 2,
+          "Flags": 17
+        },
+        {
+          "VertexHash0": 0,
+          "VertexHash1": 1,
+          "VertexHash2": 2,
+          "Flags": 5
+        },
+        {
+          "VertexHash0": 3,
+          "VertexHash1": 0,
+          "VertexHash2": 2,
+          "Flags": 17
+        },
+        {
+          "VertexHash0": 0,
+          "VertexHash1": 1,
+          "VertexHash2": 2,
+          "Flags": 5
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        },
+        {
+          "VertexHash0": 4,
+          "VertexHash1": 0,
+          "VertexHash2": 3,
+          "Flags": 17
+        },
+        {
+          "VertexHash0": 0,
+          "VertexHash1": 1,
+          "VertexHash2": 3,
+          "Flags": 1
+        },
+        {
+          "VertexHash0": 1,
+          "VertexHash1": 2,
+          "VertexHash2": 3,
+          "Flags": 5
+        },
+        {
+          "VertexHash0": 2,
+          "VertexHash1": 0,
+          "VertexHash2": 1,
+          "Flags": 21
+        }
+      ],
+      "offMeshConnections": [],
+      "bvTree": {
+        "nodes": [
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -25
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -11
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 229
+              }
+            },
+            "Index": -5
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 102
+              }
+            },
+            "Index": 1
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 97
+              },
+              "Max": {
+                "X": 92,
+                "Y": 18,
+                "Z": 229
+              }
+            },
+            "Index": -3
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 97
+              },
+              "Max": {
+                "X": 92,
+                "Y": 18,
+                "Z": 103
+              }
+            },
+            "Index": 0
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 102
+              },
+              "Max": {
+                "X": 92,
+                "Y": 18,
+                "Z": 229
+              }
+            },
+            "Index": 9
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 228
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -5
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 228
+              },
+              "Max": {
+                "X": 92,
+                "Y": 18,
+                "Z": 234
+              }
+            },
+            "Index": 10
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 229
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -3
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 3,
+                "Y": 17,
+                "Z": 229
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": 11
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 94,
+                "Y": 17,
+                "Z": 236
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": 12
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 94,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -13
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 94,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -5
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 94,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 99,
+                "Y": 18,
+                "Z": 95
+              }
+            },
+            "Index": 2
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -3
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 104,
+                "Y": 18,
+                "Z": 95
+              }
+            },
+            "Index": 3
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": 8
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -7
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -3
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 3
+              },
+              "Max": {
+                "X": 106,
+                "Y": 18,
+                "Z": 97
+              }
+            },
+            "Index": 6
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 106,
+                "Y": 17,
+                "Z": 97
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": 7
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 234
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": -3
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 234
+              },
+              "Max": {
+                "X": 329,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": 5
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 99,
+                "Y": 17,
+                "Z": 236
+              },
+              "Max": {
+                "X": 104,
+                "Y": 18,
+                "Z": 329
+              }
+            },
+            "Index": 4
+          },
+          {
+            "Bounds": {
+              "Min": {
+                "X": 0,
+                "Y": 0,
+                "Z": 0
+              },
+              "Max": {
+                "X": 0,
+                "Y": 0,
+                "Z": 0
+              }
+            },
+            "Index": 0
+          }
+        ]
+      },
+      "bvQuantFactor": 3.33333325,
+      "bvNodeCount": 26,
+      "walkableClimb": 0.9
+    }
+  ]
+}
