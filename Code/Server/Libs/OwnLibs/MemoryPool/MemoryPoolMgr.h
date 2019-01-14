@@ -13,7 +13,9 @@ public:
 
 	const static uint32_t BLOCK_SIZE_DESCRIPT_LEN = sizeof(uint32_t);
 	void * Malloc(uint32_t malloc_size);
+	void * Realloc(void *ptr, uint32_t new_size);
 	void Free(void *ptr);
+
 private:
 	struct MemoryPoolData
 	{
@@ -27,4 +29,6 @@ private:
 	MemoryPoolData **m_memory_pool_fast_idx = nullptr;
 
 	const static int BLOCK_SIZE_MULTI_BASE = 8; // block must be times of 8
+
+	static uint32_t CalPoolIndex(uint32_t malloc_size);
 };
